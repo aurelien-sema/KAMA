@@ -1,0 +1,64 @@
+{"src": "Votre solde est de 25 000 FCFA.", "ref": "", "hyp": "Votre solde est de 25 000 FCFA."}
+{"src": "Le solde disponible sur votre compte est de 3 750 FCFA.", "ref": "", "hyp": "Le solde disponible sur votre compte est de 3 750 FCFA."}
+{"src": "Voulez-vous consulter votre solde ?", "ref": "", "hyp": "Vous voulez consulter votre solde ?."}
+{"src": "Votre solde est insuffisant pour effectuer cette opération.", "ref": "", "hyp": "Le solde n’est pas suffisant pour l’exécution de cette opération."}
+{"src": "Après cette opération, votre nouveau solde sera de 112 500 FCFA.", "ref": "", "hyp": "Après cette opération votre nouveau solde sera de 112 500 FCFA."}
+{"src": "Dernière mise à jour du solde le 12/11/2026.", "ref": "", "hyp": "Dernière mise à jour du solde le 12/11/2026."}
+{"src": "Les frais de cette opération sont de 150 FCFA.", "ref": "", "hyp": "Le coût de cette opération est de 150 FCFA."}
+{"src": "Cette opération est gratuite.", "ref": "", "hyp": "Cette opération est gratuite."}
+{"src": "Vous paierez 500 FCFA de frais pour ce transfert.", "ref": "", "hyp": "Vous payerez 500 FCFA de frais pour ce transfert."}
+{"src": "Les frais de retrait sont de 2% du montant.", "ref": "", "hyp": "Les dépenses de retrait sont de 2 % du montant."}
+{"src": "Le montant total à débiter, frais inclus, est de 10 150 FCFA.", "ref": "", "hyp": "Le montant total de débiteurs compris au Fcfa est de 10 150 Fcfa."}
+{"src": "Aucun frais ne sera appliqué si vous annulez maintenant.", "ref": "", "hyp": "Aucun frais sera appliqué si vous annulez maintenant."}
+{"src": "Les frais ne sont pas remboursables.", "ref": "", "hyp": "Les prix ne sont pas remboursables."}
+{"src": "Entrez le montant à envoyer.", "ref": "", "hyp": "Entrez le montant à envoyer."}
+{"src": "Entrez le numéro du bénéficiaire.", "ref": "", "hyp": "Entrez le numéro du bénéficiaire."}
+{"src": "Vous allez envoyer 10 000 FCFA à Jean Kamga.", "ref": "", "hyp": "Vous devez envoyer 10 000 FCFA à Jean Kamga."}
+{"src": "Le bénéficiaire est Marie Tchoupo, numéro 677 12 34 56.", "ref": "", "hyp": "Le bénéficiaire est Marie Tchoupo n° 677 12 34 56."}
+{"src": "Le montant minimum d'un transfert est de 100 FCFA.", "ref": "", "hyp": "Le montant minimum d’un transfert est de 100 FCFA."}
+{"src": "Le montant maximum par jour est de 500 000 FCFA.", "ref": "", "hyp": "Le montant maximum par jour est de 500 000 FCFA."}
+{"src": "Choisissez le compte à débiter.", "ref": "", "hyp": "Choisissez le compte à débiter."}
+{"src": "Votre transfert de 75 000 FCFA a réussi.", "ref": "", "hyp": "Le transfert de 75 000 Fcfa est réussi."}
+{"src": "Vous avez reçu 5 000 FCFA de Paul Ngassa.", "ref": "", "hyp": "Vous avez reçu 5 000 FCFA de Paul Ngassa."}
+{"src": "Vous avez retiré 20 000 FCFA au point de service.", "ref": "", "hyp": "Vous avez retracé 20 000 FCFA au point de service."}
+{"src": "Vérifiez les informations avant de confirmer.", "ref": "", "hyp": "Vérification de l’information avant de confirmer."}
+{"src": "Montant : 15 000 FCFA. Frais : 200 FCFA. Bénéficiaire : Awa Bello.", "ref": "", "hyp": "Montant: 15 000 FCFA. Frères: 200 FCFA. Officier: Awa Bello."}
+{"src": "Total à payer : 15 200 FCFA.", "ref": "", "hyp": "Total à payer: 15 200 FCFA."}
+{"src": "Appuyez sur Confirmer pour valider le transfert.", "ref": "", "hyp": "Appuyez sur Confirmer pour valider le transfert."}
+{"src": "Appuyez sur Annuler pour arrêter l'opération.", "ref": "", "hyp": "Appuyez sur Annuler pour interrompre l’opération."}
+{"src": "Une fois confirmé, ce transfert ne peut pas être annulé.", "ref": "", "hyp": "Une fois confirmé ce transfert n’est pas possible d’annuler."}
+{"src": "Le bénéficiaire recevra 14 800 FCFA.", "ref": "", "hyp": "Le bénéficiaire recevra 14 800 FCFA."}
+{"src": "Date de l'opération : 09/11/2026 à 14:32.", "ref": "", "hyp": "Date d’opération: 09/11/2026 à 14:32."}
+{"src": "Le code saisi est incorrect.", "ref": "", "hyp": "Le code saisi est incorrect."}
+{"src": "Il vous reste 2 essais.", "ref": "", "hyp": "Il vous reste 2 épreuves."}
+{"src": "Votre compte est bloqué pour 24 heures.", "ref": "", "hyp": "Votre compte est bloqué pendant 24 heures."}
+{"src": "L'opération a échoué. Votre argent n'a pas été débité.", "ref": "", "hyp": "L'opération a échoué. Le Votre argent n'a pas été payé."}
+{"src": "Le numéro saisi n'existe pas.", "ref": "", "hyp": "Le numéro saisi n’existe pas."}
+{"src": "Le service est momentanément indisponible. Réessayez plus tard.", "ref": "", "hyp": "Le service est momentanément indisponible. Reprise tardivement."}
+{"src": "Le délai est dépassé. Recommencez l'opération.", "ref": "", "hyp": "Le délai est passé. Révolution de l’opération."}
+{"src": "Ne partagez jamais votre code secret.", "ref": "", "hyp": "N’interpelle jamais votre code secret."}
+{"src": "Ne donnez votre code à personne, même à un agent.", "ref": "", "hyp": "Donnez votre code à personne et même à un agent."}
+{"src": "Attention : personne ne doit vous demander votre mot de passe.", "ref": "", "hyp": "Attention: Personne ne doit demander votre passeport."}
+{"src": "Si vous n'êtes pas à l'origine de cette opération, appelez le 8000.", "ref": "", "hyp": "Si vous ne commencez pas cette opération, appelez le 8000."}
+{"src": "Méfiez-vous des messages qui vous promettent de l'argent.", "ref": "", "hyp": "Garde -toi des messages qui vous promettent de l’argent."}
+{"src": "Votre code de confirmation est 483920.", "ref": "", "hyp": "Votre code de confirmation est 483920."}
+{"src": "Ce code expire dans 5 minutes.", "ref": "", "hyp": "Ce code expire en 5 minutes."}
+{"src": "Ne cliquez pas sur les liens reçus par message.", "ref": "", "hyp": "Ne pas cliquer sur les liens recevables par message."}
+{"src": "Vérifiez le nom du bénéficiaire avant d'envoyer l'argent.", "ref": "", "hyp": "Vérification du nom du bénéficiaire avant d’envoyer l’argent."}
+{"src": "Votre argent peut être perdu si vous donnez votre code.", "ref": "", "hyp": "Votre argent peut se perdre si vous donnez votre code."}
+{"src": "Votre facture d'électricité de 18 450 FCFA doit être payée avant le 30/11/2026.", "ref": "", "hyp": "Votre facture de 18 450 FCFA doit être paye avant le 30/11/2026."}
+{"src": "Votre demande de prêt de 200 000 FCFA est en cours d'examen.", "ref": "", "hyp": "Votre demande de crédit de 200 000 FCFA est en cours d’examen."}
+{"src": "Le taux d'intérêt annuel est de 12%.", "ref": "", "hyp": "Le taux d’intérêt annuel est de 12%."}
+{"src": "Votre épargne a augmenté de 3 000 FCFA ce mois-ci.", "ref": "", "hyp": "Votre épargne a augmenté de 3 000 FCFA ce mois -ci."}
+{"src": "Votre carte expire le 31/12/2027.", "ref": "", "hyp": "Votre carte expire le 31/12/2027."}
+{"src": "Vous n'avez pas assez d'argent pour payer cette facture.", "ref": "", "hyp": "Vous n’avez pas assez d’argent pour payer cette facture."}
+{"src": "Le paiement sera prélevé automatiquement chaque mois.", "ref": "", "hyp": "Le paiement est effectué automatiquement chaque mois."}
+{"src": "Merci d'avoir utilisé notre service.", "ref": "", "hyp": "Merci pour l’application de notre Service."}
+{"src": "Solde", "ref": "", "hyp": "le soldat"}
+{"src": "Frais", "ref": "", "hyp": "Frères."}
+{"src": "Confirmer", "ref": "", "hyp": "Confirmeur"}
+{"src": "Annuler", "ref": "", "hyp": "de l’annuler"}
+{"src": "Bénéficiaire", "ref": "", "hyp": "le Bénéfice"}
+{"src": "Montant", "ref": "", "hyp": "Montant"}
+{"src": "Transfert d'argent", "ref": "", "hyp": "le transfert d’argent."}
+{"src": "Retrait", "ref": "", "hyp": "le Retrait"}

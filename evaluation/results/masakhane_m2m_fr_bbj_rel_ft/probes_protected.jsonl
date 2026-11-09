@@ -1,0 +1,64 @@
+{"src": "Votre solde est de ZZ1ZZ.", "ref": "", "hyp": "Votre solde est de ZZ1ZZ."}
+{"src": "Le solde disponible sur votre compte est de ZZ1ZZ.", "ref": "", "hyp": "Le solde disponible sur votre compte est de ZZ1ZZ."}
+{"src": "Voulez-vous consulter votre solde ?", "ref": "", "hyp": "Vous voulez consulter votre solde ?."}
+{"src": "Votre solde est insuffisant pour effectuer cette opération.", "ref": "", "hyp": "Le solde n’est pas suffisant pour l’exécution de cette opération."}
+{"src": "Après cette opération, votre nouveau solde sera de ZZ1ZZ.", "ref": "", "hyp": "Après cette opération votre nouveau soldat sera de la ZZ1ZZ."}
+{"src": "Dernière mise à jour du solde le ZZ1ZZ.", "ref": "", "hyp": "Dernière mise à jour du solde le ZZ1ZZ."}
+{"src": "Les frais de cette opération sont de ZZ1ZZ.", "ref": "", "hyp": "Les prix de cette opération sont de ZZ1ZZ."}
+{"src": "Cette opération est gratuite.", "ref": "", "hyp": "Cette opération est gratuite."}
+{"src": "Vous paierez ZZ1ZZ de frais pour ce transfert.", "ref": "", "hyp": "Vous payerez la ZZ1ZZ pour ce transfert."}
+{"src": "Les frais de retrait sont de ZZ1ZZ du montant.", "ref": "", "hyp": "Les dépenses de retrait sont de la ZZ1ZZ du montant."}
+{"src": "Le montant total à débiter, frais inclus, est de ZZ1ZZ.", "ref": "", "hyp": "Le montant total à débiter est le ZZ1ZZ."}
+{"src": "Aucun frais ne sera appliqué si vous annulez maintenant.", "ref": "", "hyp": "Aucun frais sera appliqué si vous annulez maintenant."}
+{"src": "Les frais ne sont pas remboursables.", "ref": "", "hyp": "Les prix ne sont pas remboursables."}
+{"src": "Entrez le montant à envoyer.", "ref": "", "hyp": "Entrez le montant à envoyer."}
+{"src": "Entrez le numéro du bénéficiaire.", "ref": "", "hyp": "Entrez le numéro du bénéficiaire."}
+{"src": "Vous allez envoyer ZZ1ZZ à ZZ2ZZ.", "ref": "", "hyp": "Vous devez envoyer ZZ1ZZ à ZZ2ZZ."}
+{"src": "Le bénéficiaire est ZZ1ZZ, numéro ZZ2ZZ.", "ref": "", "hyp": "Le bénéficiaire est le ZZ1ZZ numéro ZZ2ZZ."}
+{"src": "Le montant minimum d'un transfert est de ZZ1ZZ.", "ref": "", "hyp": "Le montant minimum d’un transfert est de ZZ1ZZ."}
+{"src": "Le montant maximum par jour est de ZZ1ZZ.", "ref": "", "hyp": "Le montant maximum par jour est de ZZ1ZZ."}
+{"src": "Choisissez le compte à débiter.", "ref": "", "hyp": "Choisissez le compte à débiter."}
+{"src": "Votre transfert de ZZ1ZZ a réussi.", "ref": "", "hyp": "Votre transfert de ZZ1ZZ est bien réussi."}
+{"src": "Vous avez reçu ZZ1ZZ de ZZ2ZZ.", "ref": "", "hyp": "Vous avez reçu ZZ1ZZ de ZZ2ZZ."}
+{"src": "Vous avez retiré ZZ1ZZ au point de service.", "ref": "", "hyp": "Vous avez retracé ZZ1ZZ au point de service."}
+{"src": "Vérifiez les informations avant de confirmer.", "ref": "", "hyp": "Vérification de l’information avant de confirmer."}
+{"src": "Montant : ZZ1ZZ. Frais : ZZ2ZZ. Bénéficiaire : ZZ3ZZ.", "ref": "", "hyp": "Montant: ZZ1ZZ Frère: ZZ2ZZ Officier: ZZ3ZZ."}
+{"src": "Total à payer : ZZ1ZZ.", "ref": "", "hyp": "Total à payer: ZZ1ZZ."}
+{"src": "Appuyez sur Confirmer pour valider le transfert.", "ref": "", "hyp": "Appuyez sur Confirmer pour valider le transfert."}
+{"src": "Appuyez sur Annuler pour arrêter l'opération.", "ref": "", "hyp": "Appuyez sur Annuler pour interrompre l’opération."}
+{"src": "Une fois confirmé, ce transfert ne peut pas être annulé.", "ref": "", "hyp": "Une fois confirmé ce transfert n’est pas possible d’annuler."}
+{"src": "Le bénéficiaire recevra ZZ1ZZ.", "ref": "", "hyp": "Le bénéficiaire recevra ZZ1ZZ."}
+{"src": "Date de l'opération : ZZ1ZZ à ZZ2ZZ.", "ref": "", "hyp": "Date d’exploitation: ZZ1ZZ à ZZ2ZZ."}
+{"src": "Le code saisi est incorrect.", "ref": "", "hyp": "Le code saisi est incorrect."}
+{"src": "Il vous reste ZZ1ZZ essais.", "ref": "", "hyp": "Vous êtes restés à ZZ1Z Test."}
+{"src": "Votre compte est bloqué pour ZZ1ZZ heures.", "ref": "", "hyp": "Votre compte est bloqué pour ZZ1ZZ Hours."}
+{"src": "L'opération a échoué. Votre argent n'a pas été débité.", "ref": "", "hyp": "L'opération a échoué. Le Votre argent n'a pas été payé."}
+{"src": "Le numéro saisi n'existe pas.", "ref": "", "hyp": "Le numéro saisi n’existe pas."}
+{"src": "Le service est momentanément indisponible. Réessayez plus tard.", "ref": "", "hyp": "Le service est momentanément indisponible. Reprise tardivement."}
+{"src": "Le délai est dépassé. Recommencez l'opération.", "ref": "", "hyp": "Le délai est passé. Révolution de l’opération."}
+{"src": "Ne partagez jamais votre code secret.", "ref": "", "hyp": "N’interpelle jamais votre code secret."}
+{"src": "Ne donnez votre code à personne, même à un agent.", "ref": "", "hyp": "Donnez votre code à personne et même à un agent."}
+{"src": "Attention : personne ne doit vous demander votre mot de passe.", "ref": "", "hyp": "Attention: Personne ne doit demander votre passeport."}
+{"src": "Si vous n'êtes pas à l'origine de cette opération, appelez le ZZ1ZZ.", "ref": "", "hyp": "Si vous ne commencez pas cette opération, appelez le ZZ1ZZ."}
+{"src": "Méfiez-vous des messages qui vous promettent de l'argent.", "ref": "", "hyp": "Garde -toi des messages qui vous promettent de l’argent."}
+{"src": "Votre code de confirmation est ZZ1ZZ.", "ref": "", "hyp": "Votre code de confirmation est ZZ1ZZ."}
+{"src": "Ce code expire dans ZZ1ZZ minutes.", "ref": "", "hyp": "Ce code expire en ZZ1Z minutes."}
+{"src": "Ne cliquez pas sur les liens reçus par message.", "ref": "", "hyp": "Ne pas cliquer sur les liens recevables par message."}
+{"src": "Vérifiez le nom du bénéficiaire avant d'envoyer l'argent.", "ref": "", "hyp": "Vérification du nom du bénéficiaire avant d’envoyer l’argent."}
+{"src": "Votre argent peut être perdu si vous donnez votre code.", "ref": "", "hyp": "Votre argent peut se perdre si vous donnez votre code."}
+{"src": "Votre facture d'électricité de ZZ1ZZ doit être payée avant le ZZ2ZZ.", "ref": "", "hyp": "Votre billet d’électricité de ZZ1ZZ doit être paye avant le ZZ2ZZ."}
+{"src": "Votre demande de prêt de ZZ1ZZ est en cours d'examen.", "ref": "", "hyp": "Votre demande de prêt de ZZ1ZZ est en cours d’examen."}
+{"src": "Le taux d'intérêt annuel est de ZZ1ZZ.", "ref": "", "hyp": "Le taux d’intérêt annuel est de ZZ1ZZ."}
+{"src": "Votre épargne a augmenté de ZZ1ZZ ce mois-ci.", "ref": "", "hyp": "Votre épargne a augmenté de ZZ1ZZ ce mois -ci."}
+{"src": "Votre carte expire le ZZ1ZZ.", "ref": "", "hyp": "Votre carte expire le ZZ1ZZ."}
+{"src": "Vous n'avez pas assez d'argent pour payer cette facture.", "ref": "", "hyp": "Vous n’avez pas assez d’argent pour payer cette facture."}
+{"src": "Le paiement sera prélevé automatiquement chaque mois.", "ref": "", "hyp": "Le paiement est effectué automatiquement chaque mois."}
+{"src": "Merci d'avoir utilisé notre service.", "ref": "", "hyp": "Merci pour l’application de notre Service."}
+{"src": "Solde", "ref": "", "hyp": "le soldat"}
+{"src": "Frais", "ref": "", "hyp": "Frères."}
+{"src": "Confirmer", "ref": "", "hyp": "Confirmeur"}
+{"src": "Annuler", "ref": "", "hyp": "de l’annuler"}
+{"src": "Bénéficiaire", "ref": "", "hyp": "le Bénéfice"}
+{"src": "Montant", "ref": "", "hyp": "Montant"}
+{"src": "Transfert d'argent", "ref": "", "hyp": "le transfert d’argent."}
+{"src": "Retrait", "ref": "", "hyp": "le Retrait"}

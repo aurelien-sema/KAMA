@@ -11,3 +11,14 @@ node_modules/
 dist/
 .output/
 .wxt/
+
+# Evaluation : outils locaux et extraits de corpus dont les droits interdisent ou limitent la diffusion
+evaluation/venv/
+evaluation/tools/
+evaluation/tmp/
+evaluation/logs/
+evaluation/testsets/bbj_mafand_*
+evaluation/testsets/bible_sample100.jsonl
+evaluation/results/*/mafand*
+evaluation/results/*/bible*
+evaluation/results/*/wes_heldout*

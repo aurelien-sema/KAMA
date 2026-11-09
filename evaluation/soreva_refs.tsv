@@ -1,0 +1,151 @@
+id	cat	en	fr
+1	salut	Good morning	Bonjour
+2	salut	Hello	Salut
+3	salut	How are you?	Comment allez-vous ?
+4	salut	Any news?	Quoi de neuf ?
+5	presentation	My name is Paul	Je m'appelle Paul
+6	presentation	I am from Berlin	Je viens de Berlin
+7	presentation	I live in Yaoundé	J'habite à Yaoundé
+8	presentation	I am a teacher	Je suis enseignant
+9	presentation	I work at the Goethe-Institut	Je travaille au Goethe-Institut
+10	presentation	Pleased to meet you	Enchanté de vous connaître
+11	salut	See you later	À bientôt
+12	salut	See you tomorrow	À demain
+13	question	What is this?	Qu'est-ce que c'est ?
+14	question	Who is that?	Qui est-ce ?
+15	phrase	Let us meet this evening or tomorrow	Retrouvons-nous ce soir ou demain
+16	phrase	I would like you to come	Je voudrais que tu viennes
+17	phrase	I will come to see you in the afternoon	Je viendrai te voir dans l'après-midi
+18	nombre	zero	zéro
+19	nombre	one	un
+20	nombre	two	deux
+21	nombre	three	trois
+22	nombre	four	quatre
+23	nombre	five	cinq
+24	nombre	six	six
+25	nombre	seven	sept
+26	nombre	eight	huit
+27	nombre	nine	neuf
+28	nombre	ten	dix
+29	nombre	eleven	onze
+30	nombre	twelve	douze
+31	nombre	thirteen	treize
+32	nombre	fourteen	quatorze
+33	nombre	fifteen	quinze
+34	nombre	sixteen	seize
+35	nombre	seventeen	dix-sept
+36	nombre	eighteen	dix-huit
+37	nombre	nineteen	dix-neuf
+38	nombre	twenty	vingt
+39	nombre	twenty-one	vingt et un
+40	nombre	thirty	trente
+41	nombre	forty	quarante
+42	nombre	fifty	cinquante
+43	nombre	sixty	soixante
+44	nombre	seventy	soixante-dix
+45	nombre	eighty	quatre-vingts
+46	nombre	ninety	quatre-vingt-dix
+47	nombre	one hundred	cent
+48	nombre	two hundred	deux cents
+49	nombre	one thousand	mille
+50	nombre	one million	un million
+51	date	Monday	lundi
+52	date	Tuesday	mardi
+53	date	Wednesday	mercredi
+54	date	Thursday	jeudi
+55	date	Friday	vendredi
+56	date	Saturday	samedi
+57	date	Sunday	dimanche
+58	date	January	janvier
+59	date	February	février
+60	date	March	mars
+61	date	April	avril
+62	date	May	mai
+63	date	June	juin
+64	date	July	juillet
+65	date	August	août
+66	date	September	septembre
+67	date	October	octobre
+68	date	November	novembre
+69	date	December	décembre
+70	heure	What time is it?	Quelle heure est-il ?
+71	heure	It is one o'clock	Il est une heure
+72	heure	It is half past six	Il est six heures et demie
+73	heure	It is a quarter past five	Il est cinq heures et quart
+74	heure	It is a quarter to five	Il est cinq heures moins le quart
+75	heure	At what time?	À quelle heure ?
+76	heure	In a moment	Dans un instant
+77	phrase	It is hot	Il fait chaud
+78	phrase	It is cold	Il fait froid
+79	phrase	The weather is fine	Il fait beau
+80	phrase	It is raining	Il pleut
+81	phrase	The sun is shining	Le soleil brille
+82	phrase	It is already dark	Il fait déjà nuit
+83	politesse	Please	S'il vous plaît
+84	politesse	Thank you	Merci
+85	politesse	Thank you too	Merci à vous aussi
+86	politesse	No, it is I who should thank you	Non, c'est moi qui dois vous remercier
+87	politesse	Sorry	Désolé
+88	politesse	Excuse me	Excusez-moi
+89	question	Where is the house?	Où est la maison ?
+90	question	Where is the road to the market?	Où est le chemin du marché ?
+91	question	How far is it from here to the motor park?	À quelle distance d'ici se trouve la gare routière ?
+92	question	Does this road go to Douala?	Cette route va-t-elle à Douala ?
+93	direction	on the right	à droite
+94	direction	on the left	à gauche
+95	direction	straight ahead	tout droit
+96	mot	clando taxi	clando
+97	mot	neighbourhood	quartier
+98	phrase	Please take me to the town centre	Emmenez-moi au centre-ville, s'il vous plaît
+99	phrase	I would like to eat something	Je voudrais manger quelque chose
+100	phrase	I would like to drink something	Je voudrais boire quelque chose
+101	question	Is this table free?	Cette table est-elle libre ?
+102	phrase	Breakfast, please	Le petit déjeuner, s'il vous plaît
+103	phrase	A beer, please	Une bière, s'il vous plaît
+104	phrase	Tea, please	Du thé, s'il vous plaît
+105	question	What do you want?	Que voulez-vous ?
+106	question	What do you have here?	Qu'est-ce que vous avez ici ?
+107	question	Do you have food for vegetarians?	Avez-vous de la nourriture pour végétariens ?
+108	argent	How much do I owe?	Combien est-ce que je dois ?
+109	mot	fish	poisson
+110	mot	beef	viande de bœuf
+111	mot	pork	viande de porc
+112	mot	vegetables	légumes
+113	mot	egg	œuf
+114	mot	banana	banane
+115	mot	fufu	couscous
+116	mot	yam	igname
+117	mot	cassava	manioc
+118	mot	potato	pomme de terre
+119	mot	water	eau
+120	mot	fruit juice	jus de fruit
+121	mot	lemon juice	jus de citron
+122	mot	wine	vin
+123	mot	doughnut	beignet
+124	mot	cake	gâteau
+125	mot	peanuts	arachides
+126	mot	porridge	bouillie
+127	mot	beans	haricots
+128	argent	Where can one buy bread?	Où peut-on acheter du pain ?
+129	argent	How much is it?	C'est combien ?
+130	argent	It is too expensive	C'est trop cher
+131	argent	Can you lower the price?	Pouvez-vous baisser le prix ?
+132	argent	Give me a receipt	Donnez-moi un reçu
+133	argent	Do you have change?	Avez-vous de la monnaie ?
+134	sante	I have a headache	J'ai mal à la tête
+135	sante	stomach ache	mal de ventre
+136	sante	My throat hurts	J'ai mal à la gorge
+137	sante	fever	fièvre
+138	sante	This tooth hurts	Cette dent me fait mal
+139	sante	I have cut myself	Je me suis coupé
+140	sante	An ant bit me	Une fourmi m'a piqué
+141	sante	Do you have medicine for pain?	Avez-vous un médicament contre la douleur ?
+142	sante	She is pregnant	Elle est enceinte
+143	sante	I do not feel well	Je ne me sens pas bien
+144	phrase	I do not have time for that	Je n'ai pas de temps pour ça
+145	phrase	It is a good thing	C'est une bonne chose
+146	phrase	It is ugly	C'est laid
+147	phrase	I am happy	Je suis content
+148	question	Can I take your photo?	Puis-je prendre votre photo ?
+149	phrase	It is difficult	C'est difficile
+150	phrase	I love you	Je t'aime
