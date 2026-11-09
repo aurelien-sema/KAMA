@@ -1,0 +1,150 @@
+{"src": "Good morning", "ref": "wuna morning oh", "hyp": "Good morning"}
+{"src": "Hello", "ref": "i salut oh", "hyp": "Hey, wait, wait, wait, wait."}
+{"src": "How are you?", "ref": "na how wuna dey?", "hyp": "How are you? How are you?"}
+{"src": "Any news?", "ref": "some tin dey?", "hyp": "Any news?"}
+{"src": "My name is Paul", "ref": "ma name na Paul", "hyp": "Mi name be Paul"}
+{"src": "I am from Berlin", "ref": "i be Berlin pikin", "hyp": "I'm from Berlin"}
+{"src": "I live in Yaoundé", "ref": "i di stay for Yaoundé", "hyp": "I live in Yaoundé"}
+{"src": "I am a teacher", "ref": "ma work na teacher", "hyp": "I'm a teacher"}
+{"src": "I work at the Goethe-Institut", "ref": "i di work for Goethe institut", "hyp": "I work for the Goethe-Institut"}
+{"src": "Pleased to meet you", "ref": "i glad for sabi you", "hyp": "Pleased to meet you"}
+{"src": "See you later", "ref": "we go see oh", "hyp": "See you later. See you later. See you later."}
+{"src": "See you tomorrow", "ref": "tomorrow noh", "hyp": "See you tomorrow. See you tomorrow. See you tomorrow. See you tomorrow."}
+{"src": "What is this?", "ref": "na weti dis?", "hyp": "What's this thing?"}
+{"src": "Who is that?", "ref": "na wu dat?", "hyp": "Who's that?"}
+{"src": "Let us meet this evening or tomorrow", "ref": "make we meet up time way sun dong go down or tomorrow sef", "hyp": "Let us meet this evening or tomorrow"}
+{"src": "I would like you to come", "ref": "i be want make you come", "hyp": "I want you to come"}
+{"src": "I will come to see you in the afternoon", "ref": "i go come check you for sun time", "hyp": "I'll come see you in the afternoon"}
+{"src": "zero", "ref": "nought", "hyp": "no"}
+{"src": "one", "ref": "one", "hyp": "one thing"}
+{"src": "two", "ref": "two", "hyp": "two"}
+{"src": "three", "ref": "three", "hyp": "three"}
+{"src": "four", "ref": "four", "hyp": "four"}
+{"src": "five", "ref": "five", "hyp": "five"}
+{"src": "six", "ref": "six", "hyp": "6"}
+{"src": "seven", "ref": "seven", "hyp": "seven"}
+{"src": "eight", "ref": "eight", "hyp": "eight"}
+{"src": "nine", "ref": "nine", "hyp": "nine"}
+{"src": "ten", "ref": "ten", "hyp": "ten"}
+{"src": "eleven", "ref": "eleven", "hyp": "eleven"}
+{"src": "twelve", "ref": "twelve", "hyp": "twelve"}
+{"src": "thirteen", "ref": "thirteen", "hyp": "thirteen"}
+{"src": "fourteen", "ref": "fourteen", "hyp": "fourteen"}
+{"src": "fifteen", "ref": "fifteen", "hyp": "fifteen"}
+{"src": "sixteen", "ref": "sixteen", "hyp": "sixteen"}
+{"src": "seventeen", "ref": "seventeen", "hyp": "seventeen"}
+{"src": "eighteen", "ref": "eighteen", "hyp": "eighteen"}
+{"src": "nineteen", "ref": "nineteen", "hyp": "19"}
+{"src": "twenty", "ref": "twenty", "hyp": "twenty"}
+{"src": "twenty-one", "ref": "twenty one", "hyp": "twenty-one"}
+{"src": "thirty", "ref": "thirty", "hyp": "thirty"}
+{"src": "forty", "ref": "forty", "hyp": "forty"}
+{"src": "fifty", "ref": "fifty", "hyp": "fifty"}
+{"src": "sixty", "ref": "sixty", "hyp": "sixty"}
+{"src": "seventy", "ref": "seventy", "hyp": "70 man"}
+{"src": "eighty", "ref": "eighty", "hyp": "eighty eighty eighty eighty eighty eighty eighty eighty eighty eighty eighty eighty eighty eighty eighty eighty eighty eight"}
+{"src": "ninety", "ref": "ninety", "hyp": "naif"}
+{"src": "one hundred", "ref": "one  hundred", "hyp": "one hundred"}
+{"src": "two hundred", "ref": "two hundred", "hyp": "two hundred"}
+{"src": "one thousand", "ref": "one thousand", "hyp": "one thousand"}
+{"src": "one million", "ref": "one million", "hyp": "one million"}
+{"src": "Monday", "ref": "monday", "hyp": "Monday"}
+{"src": "Tuesday", "ref": "tuesday", "hyp": "Tuesday"}
+{"src": "Wednesday", "ref": "wednesday", "hyp": "Wednesday"}
+{"src": "Thursday", "ref": "thursday", "hyp": "Thursday"}
+{"src": "Friday", "ref": "friday", "hyp": "Friday"}
+{"src": "Saturday", "ref": "saturday", "hyp": "Saturday"}
+{"src": "Sunday", "ref": "sunday", "hyp": "Sunday"}
+{"src": "January", "ref": "january", "hyp": "January"}
+{"src": "February", "ref": "ferbruary", "hyp": "February"}
+{"src": "March", "ref": "march", "hyp": "March"}
+{"src": "April", "ref": "april", "hyp": "April"}
+{"src": "May", "ref": "may", "hyp": "May"}
+{"src": "June", "ref": "june", "hyp": "June"}
+{"src": "July", "ref": "july", "hyp": "July"}
+{"src": "August", "ref": "august", "hyp": "August"}
+{"src": "September", "ref": "september", "hyp": "September"}
+{"src": "October", "ref": "october", "hyp": "October"}
+{"src": "November", "ref": "november", "hyp": "November"}
+{"src": "December", "ref": "december", "hyp": "December"}
+{"src": "What time is it?", "ref": "na weti be time eh?", "hyp": "What time be it?"}
+{"src": "It is one o'clock", "ref": "time na 1 o'clock", "hyp": "It's one o'clock"}
+{"src": "It is half past six", "ref": "time na half past six", "hyp": "It be half past six"}
+{"src": "It is a quarter past five", "ref": "time na quarter past five", "hyp": "It's a quarter past five."}
+{"src": "It is a quarter to five", "ref": "time na three quarter past four", "hyp": "It's a quarter to five"}
+{"src": "At what time?", "ref": "for which time", "hyp": "What time?"}
+{"src": "In a moment", "ref": "small time", "hyp": "In a moment"}
+{"src": "It is hot", "ref": "place di hot", "hyp": "It's hot"}
+{"src": "It is cold", "ref": "place di cold", "hyp": "It's cold."}
+{"src": "The weather is fine", "ref": "place just dey", "hyp": "The weather be fine"}
+{"src": "It is raining", "ref": "rain di fall", "hyp": "It's raining"}
+{"src": "The sun is shining", "ref": "sun dey up", "hyp": "The sun be shining"}
+{"src": "It is already dark", "ref": "place dong already dark", "hyp": "It be dark already."}
+{"src": "Please", "ref": "i beg ya", "hyp": "Please."}
+{"src": "Thank you", "ref": "thank you ya", "hyp": "Thank you."}
+{"src": "Thank you too", "ref": "thank you too", "hyp": "Thank you too"}
+{"src": "No, it is I who should thank you", "ref": "no, na me i get for thank you sef", "hyp": "No, no, no. No, no. No, no. No, no. No, no. No, no. No, no. No, no. No, no. No, no. No, no. No, no. No, no. No."}
+{"src": "Sorry", "ref": "ashia ya", "hyp": "Sorry for that."}
+{"src": "Excuse me", "ref": "choose me", "hyp": "Forgive me."}
+{"src": "Where is the house?", "ref": "wusai the house dey?", "hyp": "Where is the house?"}
+{"src": "Where is the road to the market?", "ref": "wusai road for go market?", "hyp": "Where is the way for the market?"}
+{"src": "How far is it from here to the motor park?", "ref": "how far idey from here to go reach motor park?", "hyp": "How far be it from here for the car park?"}
+{"src": "Does this road go to Douala?", "ref": "di road di go Douala?", "hyp": "Is this road go to Douala?"}
+{"src": "on the right", "ref": "for right", "hyp": "on the right"}
+{"src": "on the left", "ref": "for left", "hyp": "on the left"}
+{"src": "straight ahead", "ref": "straight so", "hyp": "straight ahead"}
+{"src": "clando taxi", "ref": "clando", "hyp": "Clando taxi"}
+{"src": "neighbourhood", "ref": "quarter", "hyp": "neighbourhood"}
+{"src": "Please take me to the town centre", "ref": "i beg carry me we go central town", "hyp": "Please take me to the town centre"}
+{"src": "I would like to eat something", "ref": "i want chop some tin", "hyp": "I wanna eat something"}
+{"src": "I would like to drink something", "ref": "i want drink some tin", "hyp": "I want to drink something"}
+{"src": "Is this table free?", "ref": "we fit still use di table so", "hyp": "Is this table free?"}
+{"src": "Breakfast, please", "ref": "i beg gimme breafast ya", "hyp": "Breakfast, please"}
+{"src": "A beer, please", "ref": "i beg gimme beer ya", "hyp": "A beer, please"}
+{"src": "Tea, please", "ref": "i beg gimme tea ya", "hyp": "Tea, please"}
+{"src": "What do you want?", "ref": "you want weti?", "hyp": "You want what?"}
+{"src": "What do you have here?", "ref": "na which kind tin dem wuna getam for here?", "hyp": "What you have here?"}
+{"src": "Do you have food for vegetarians?", "ref": "wuna get chop for pipo dem way dem di chop na only njamanjama?", "hyp": "You have food for vegetarians?"}
+{"src": "How much do I owe?", "ref": "ma money na how much?", "hyp": "How much I owe?"}
+{"src": "fish", "ref": "fish", "hyp": "fish"}
+{"src": "beef", "ref": "cow meat", "hyp": "beef"}
+{"src": "pork", "ref": "meat for swine", "hyp": "pork"}
+{"src": "vegetables", "ref": "njamanjama", "hyp": "vegetables"}
+{"src": "egg", "ref": "egg", "hyp": "egg"}
+{"src": "banana", "ref": "banana", "hyp": "banana"}
+{"src": "fufu", "ref": "fufu", "hyp": "fufu"}
+{"src": "yam", "ref": "yam", "hyp": "yam"}
+{"src": "cassava", "ref": "cassava", "hyp": "cassava"}
+{"src": "potato", "ref": "irish potato", "hyp": "potato"}
+{"src": "water", "ref": "wata", "hyp": "water"}
+{"src": "fruit juice", "ref": "wata for fruit dem", "hyp": "fruit juice"}
+{"src": "lemon juice", "ref": "wata for lemon fruit", "hyp": "lemon juice"}
+{"src": "wine", "ref": "mimbo", "hyp": "wine"}
+{"src": "doughnut", "ref": "puffpuff", "hyp": "donut"}
+{"src": "cake", "ref": "cake", "hyp": "cake"}
+{"src": "peanuts", "ref": "granut", "hyp": "peanut"}
+{"src": "porridge", "ref": "pap", "hyp": "porridge"}
+{"src": "beans", "ref": "beans", "hyp": "beans"}
+{"src": "Where can one buy bread?", "ref": "wusai man fit buy bread eh?", "hyp": "We can buy bread?"}
+{"src": "How much is it?", "ref": "na how much?", "hyp": "How much for it?"}
+{"src": "It is too expensive", "ref": "ye over dear", "hyp": "It's too expensive."}
+{"src": "Can you lower the price?", "ref": "man fit beat price?", "hyp": "Can you lower the price?"}
+{"src": "Give me a receipt", "ref": "gimme receipt", "hyp": "Give me a receipt"}
+{"src": "Do you have change?", "ref": "you get change?", "hyp": "You have change?"}
+{"src": "I have a headache", "ref": "ma head di hot me", "hyp": "Mi get headache"}
+{"src": "stomach ache", "ref": "belle bite", "hyp": "stomach pain"}
+{"src": "My throat hurts", "ref": "ma neck di hot", "hyp": "My throat be pain"}
+{"src": "fever", "ref": "fever", "hyp": "fever"}
+{"src": "This tooth hurts", "ref": "di teeth di hot eh", "hyp": "This tooth hurts"}
+{"src": "I have cut myself", "ref": "i dong get cut", "hyp": "I cut myself"}
+{"src": "An ant bit me", "ref": "ant dong bite me", "hyp": "A ant bit me"}
+{"src": "Do you have medicine for pain?", "ref": "you get merecine for skin way ye di hot?", "hyp": "You have pain medicine?"}
+{"src": "She is pregnant", "ref": "ye dey wit belle", "hyp": "She's pregnant"}
+{"src": "I do not feel well", "ref": "i no di hear ma head", "hyp": "I no feel well"}
+{"src": "I do not have time for that", "ref": "i no get time for dat one", "hyp": "I don't have time for that."}
+{"src": "It is a good thing", "ref": "na fine tin", "hyp": "It's a good thing"}
+{"src": "It is ugly", "ref": "ye wowo'o", "hyp": "It's ugly."}
+{"src": "I am happy", "ref": "ma heart di sweet me", "hyp": "I be happy"}
+{"src": "Can I take your photo?", "ref": "i fit take you photo ?", "hyp": "Can I take a picture for you?"}
+{"src": "It is difficult", "ref": "the tin hard eh", "hyp": "It's hard"}
+{"src": "I love you", "ref": "i like you", "hyp": "Mi laikim yu"}

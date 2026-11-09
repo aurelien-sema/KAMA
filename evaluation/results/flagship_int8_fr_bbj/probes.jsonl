@@ -1,0 +1,64 @@
+{"src": "Votre solde est de 25 000 FCFA.", "ref": "", "hyp": "Ywə yə o gɔ sɔ' pɑ ŋkhap nthəm a, a pɑ ywə yə o gɔ sɔ' pɑ ŋkhap nə a."}
+{"src": "Le solde disponible sur votre compte est de 3 750 FCFA.", "ref": "", "hyp": "Tsyə a bɑ nthəm nə tsyə a bɑ ǎ ywə yə a bɑ nthəm nə a, a bɑ ǎ ghə kwitə́ yɔ a, a bɑ ǎ ywə yə a gɔ ghə ŋkhəm a."}
+{"src": "Voulez-vous consulter votre solde ?", "ref": "", "hyp": "Po shəŋ nə yɔ ywə bɔ a?"}
+{"src": "Votre solde est insuffisant pour effectuer cette opération.", "ref": "", "hyp": "Ywə yə a bɑ a tsə tsyə a bɑ ǎ ku'nyə nə ghə po a."}
+{"src": "Après cette opération, votre nouveau solde sera de 112 500 FCFA.", "ref": "", "hyp": "Cwə yə po gɔ sɔ' pɑ nə ghəm a, a gɔ sɔ' pɑ nə mcwɔ'fa' nə mcwɔ'fa' nə mcwɔ'fa'."}
+{"src": "Dernière mise à jour du solde le 12/11/2026.", "ref": "", "hyp": "Yə nə tyɛ'dzʉ yə nə tyɛ'dzʉ nə tuŋ yə nə tuŋ ywə yə tuŋ a."}
+{"src": "Les frais de cette opération sont de 150 FCFA.", "ref": "", "hyp": "Mnwə bɔ gɔ ghɔm gɑ́ ŋkhəm nə ghɔm gɑ́ ŋkhəm pfʉ́."}
+{"src": "Cette opération est gratuite.", "ref": "", "hyp": "Ywə yə a gɔ sɔ' kwitə a pɑ́."}
+{"src": "Vous paierez 500 FCFA de frais pour ce transfert.", "ref": "", "hyp": "Pǒ gɔ sɔ' ghə ŋkhəm nə tsə tsyə́ nə tsə tsyə a sɔ' a."}
+{"src": "Les frais de retrait sont de 2% du montant.", "ref": "", "hyp": "Mnwə cwəpuŋ bɔ gɔ pəmtə́ pɑ́ pɑ́ da'tə."}
+{"src": "Le montant total à débiter, frais inclus, est de 10 150 FCFA.", "ref": "", "hyp": "A ŋa'nɑ́ tsə́ tsyə a bɑ ǎ ghə ŋkhəm a, ba tsyə a bɑ ǎ ghə ŋkhəm a, ba tsyə a bɑ ǎ ghə ŋkhəm a, ba tsyə a gɔ ghə ŋkhəm a."}
+{"src": "Aucun frais ne sera appliqué si vous annulez maintenant.", "ref": "", "hyp": "Sɔm tsɔ tə gɔ sɔ' pɑ́ nə cwəlɔ po'o tə po tak a pɑ́."}
+{"src": "Les frais ne sont pas remboursables.", "ref": "", "hyp": "Mcwɔ'fa' tə ŋkwitə pɑ."}
+{"src": "Entrez le montant à envoyer.", "ref": "", "hyp": "Po nyəŋ ywə yə pu gɔ sɔ' təm a."}
+{"src": "Entrez le numéro du bénéficiaire.", "ref": "", "hyp": "Po kwi' ŋkwi' ŋkwi' nə e."}
+{"src": "Vous allez envoyer 10 000 FCFA à Jean Kamga.", "ref": "", "hyp": "Po gɔ sɔ' təm ŋkwɔ' ŋkwɔ' bi Yohane Kamga."}
+{"src": "Le bénéficiaire est Marie Tchoupo, numéro 677 12 34 56.", "ref": "", "hyp": "Mo yə e gɔ sɔ' pɑ́ Maria Tkoupo, nə tsyə́ pɑ tsə́ tsyə́ pɑ́ tsyə́ nə́ a, nə pa' a bɑ pu lě ŋkho nə a."}
+{"src": "Le montant minimum d'un transfert est de 100 FCFA.", "ref": "", "hyp": "A shəŋtə́ ŋkwi' ŋkwi' ŋkwi' ŋkwi ŋkwi ŋkwi ŋkwi ŋkwi ŋkwi ŋkwi."}
+{"src": "Le montant maximum par jour est de 500 000 FCFA.", "ref": "", "hyp": "A cap nə tyɛ'dzʉ bɔ bɑ ŋkwi ŋkwi ŋkwi ŋkwi ŋkwi ŋkwi ŋkwi."}
+{"src": "Choisissez le compte à débiter.", "ref": "", "hyp": "Po ghə ywə yə a gɔ tsə a."}
+{"src": "Votre transfert de 75 000 FCFA a réussi.", "ref": "", "hyp": "Nə pa' a bɑ ǒ tsə nə tsyə́ ŋkwyəpnyə nə ŋkwyəpnyə nə ŋkwyəpnyə nə ŋkwyəpnyə nə ŋkwyəpnyə."}
+{"src": "Vous avez reçu 5 000 FCFA de Paul Ngassa.", "ref": "", "hyp": "Polo Ngasa bɑ ě hɑ ŋkwi ŋkwi ŋkwi ŋkwi ŋkwi ŋkwi ŋkwi ŋkwi ŋkwi ŋkwi ŋkwi ŋkwi ŋkwi ŋkwi ŋkwi."}
+{"src": "Vous avez retiré 20 000 FCFA au point de service.", "ref": "", "hyp": "Pǒ lə təm ŋkhəm ŋkhəm nə fa' tsʉ' nə fa'."}
+{"src": "Vérifiez les informations avant de confirmer.", "ref": "", "hyp": "Po yɔ nwə nthʉm zhyə́ tə́ nə ŋkwinthɛ̌."}
+{"src": "Montant : 15 000 FCFA. Frais : 200 FCFA. Bénéficiaire : Awa Bello.", "ref": "", "hyp": "Nə pa' a bɑ ǎ ku' nə ghə ghə ghə ghə ghə ghə ghə ghə ghə ghə ghə ghə ghə Si."}
+{"src": "Total à payer : 15 200 FCFA.", "ref": "", "hyp": "A gɔ sɔ' pɑ́ tsə́ mcwəpuŋ nə mcwɔ'fa' tsyə a bɑ ǎ ku'nyə nə mcwə a."}
+{"src": "Appuyez sur Confirmer pour valider le transfert.", "ref": "", "hyp": "Tap Confirm nə nə nyəŋ nə tsə tsyə a gɔ nə tsyə a."}
+{"src": "Appuyez sur Annuler pour arrêter l'opération.", "ref": "", "hyp": "Po cəŋtə bya nə nə nə nə ghə po'o."}
+{"src": "Une fois confirmé, ce transfert ne peut pas être annulé.", "ref": "", "hyp": "Cwə yə pu lə kwi' ŋkwi' gɔm a, a tə́ gɔ piŋ pɑ́ nə tsə tsyə a pɑ́."}
+{"src": "Le bénéficiaire recevra 14 800 FCFA.", "ref": "", "hyp": "Mo yə e gɔ sɔ' ghə kwitə́ pfʉ́ shwɔppfʉə mgham."}
+{"src": "Date de l'opération : 09/11/2026 à 14:32.", "ref": "", "hyp": "Tyɛ'dzʉ ghɔm gɑ: Ŋkhəm nthəm nə tuŋ gɑ: Ŋkhəm nə tuŋ gwyəgwyə."}
+{"src": "Le code saisi est incorrect.", "ref": "", "hyp": "Cyəpɔ bɑ ǎ ku'nyə ywə yə a bɑ a ka ku'nyə."}
+{"src": "Il vous reste 2 essais.", "ref": "", "hyp": "Po piŋ bɑwə shwə́ pɑpʉə."}
+{"src": "Votre compte est bloqué pour 24 heures.", "ref": "", "hyp": "A gɔ sɔ' cwə nə guŋ mtsʉ' awɛ nə guŋ mtsʉ' awɛ."}
+{"src": "L'opération a échoué. Votre argent n'a pas été débité.", "ref": "", "hyp": "Mnwə cwəpuŋ bɑ a cyə m nə ŋkhap a. Pu lə yo' ŋkhap yɔ."}
+{"src": "Le numéro saisi n'existe pas.", "ref": "", "hyp": "Tsyə a bɑ pu lě tə́ bɑwə gɔm a pɑ́."}
+{"src": "Le service est momentanément indisponible. Réessayez plus tard.", "ref": "", "hyp": "Ywə fa' bɔ tə bɑ ǎ cwəlɔ. Po cʉ'nyə nə cwə yə po cʉ'nyə."}
+{"src": "Le délai est dépassé. Recommencez l'opération.", "ref": "", "hyp": "Nə pa' a bɑ pu lě bya. Po piŋ nthəm nə́."}
+{"src": "Ne partagez jamais votre code secret.", "ref": "", "hyp": "Ka po pɑ́ ŋkwi' ŋkwinthɛ̌ nə cyəpɔ."}
+{"src": "Ne donnez votre code à personne, même à un agent.", "ref": "", "hyp": "Ka po hɑ ywə bi sɔmmo, ba m bi ta' gɛfa'."}
+{"src": "Attention : personne ne doit vous demander votre mot de passe.", "ref": "", "hyp": "Po zhyə: Sɔmmo tə́ gɔ həŋtə́ o gɑ́ o zhyə́ mcʉ̌m o."}
+{"src": "Si vous n'êtes pas à l'origine de cette opération, appelez le 8000.", "ref": "", "hyp": "A pɑ gɑ́ po tə́ gə po'o, po ŋkhe e ŋkhəm nə ŋkhəm nə ŋkhəm nə ŋkhə."}
+{"src": "Méfiez-vous des messages qui vous promettent de l'argent.", "ref": "", "hyp": "Po pwɔk nə mtiŋ myə a bɑwə gɔm ŋkhap a."}
+{"src": "Votre code de confirmation est 483920.", "ref": "", "hyp": "Kwa' wɔ kwa' pa' a bɑ́ ywə yə a bɑwə shəŋ a, a bɑ yə́ shwyɛ'nyə wɔ."}
+{"src": "Ce code expire dans 5 minutes.", "ref": "", "hyp": "Cyəpɔ piŋ gɔ cwə nə mnam tá."}
+{"src": "Ne cliquez pas sur les liens reçus par message.", "ref": "", "hyp": "Ka po cə́ŋ nə́ nthʉ́m nthʉm nthʉm tʉm tsyə a shyə a."}
+{"src": "Vérifiez le nom du bénéficiaire avant d'envoyer l'argent.", "ref": "", "hyp": "Po yɔ tsyə pu gɔ sɔ' ghə ŋkhap a, nə təm tsyə pu gɔ sɔ' ghə a."}
+{"src": "Votre argent peut être perdu si vous donnez votre code.", "ref": "", "hyp": "Ŋkhap bɔ bi a pɑ po hɑ bi po pa' po hɑ bi po a."}
+{"src": "Votre facture d'électricité de 18 450 FCFA doit être payée avant le 30/11/2026.", "ref": "", "hyp": "Nə pa' a bɑ pu gɔ sɔ' pa' ŋwa'nyə nə ŋkhəm nə nə ŋkhəm nə nə ŋkhəm nə nthʉm kənu' gwyə nə guŋ mcwə awɛ nthəm nthəm nthəm nthəm nə vʉ̌."}
+{"src": "Votre demande de prêt de 200 000 FCFA est en cours d'examen.", "ref": "", "hyp": "Yɔ nə nə lə́ nə lə́ nə tsə́ nthəm nthəm nthəm nthəm nthəm nə ŋkwyəpnyə."}
+{"src": "Le taux d'intérêt annuel est de 12%.", "ref": "", "hyp": "Ywə yə a bɑ ǎ ghə tsʉ' a bɑ ǎ ghə tsyə a bɑ ǎ ghə tsʉ' a, a ghə tsʉ' yə a bɑ ǎ ghə tsʉ' a."}
+{"src": "Votre épargne a augmenté de 3 000 FCFA ce mois-ci.", "ref": "", "hyp": "Ywə yə a bɑ ǎ kwyəpnyə a ŋkwyəpnyə ŋkwyəpnyə a ŋkwyəpnyə nə ŋkwyəpnyə a ŋkwyəpnyə."}
+{"src": "Votre carte expire le 31/12/2027.", "ref": "", "hyp": "Map yɔ nthəm nə ta' nthəm nə́ guŋ ywə awɛ yə a bɑ nthəm nə́ guŋ ywə awɛ a."}
+{"src": "Vous n'avez pas assez d'argent pour payer cette facture.", "ref": "", "hyp": "Pǒ tə́ ghə ŋkhap yɔgo' a pɑ́."}
+{"src": "Le paiement sera prélevé automatiquement chaque mois.", "ref": "", "hyp": "A gɔ sɔ' ghə po'o nə mŋwə́ ŋkwi mcwə awɛ."}
+{"src": "Merci d'avoir utilisé notre service.", "ref": "", "hyp": "Pɑpúŋ gɑ́ pyə gɑ́ pyə nə fa' tsɔk."}
+{"src": "Solde", "ref": "", "hyp": "Yə̌ŋ bɑ nthʉɔtʉɔ yə a bɑ nthɔm tsyə́ a bɑ nthʉm o a."}
+{"src": "Frais", "ref": "", "hyp": "Mnwə cwəpuŋ"}
+{"src": "Confirmer", "ref": "", "hyp": "Kwa' nyənyɔ gɑ: Gɛ̌, gɑ̌ gɑ̌ gɔm gɑ̌ ghɔm gɑ: Gɛ̌! Gɑ̌ gɔm gɑ̌ gɑ̌ gɔm gɑ̌ gɑ̌ gɑ̌ gɔm gɑ̌ gɑ̌ gɔm gɑ̌ gɑ̌ gɑ̌ gɑ̌ gɑ̌ gɔm gɑ̌ gɑ̌ gɑ̌ gɔm gɑ̌ gɑ̌ gɑ̌ gɑ̌ gɔm gɑ̌ gɑ̌ gɑ̌"}
+{"src": "Annuler", "ref": "", "hyp": "Nə pa' a bɑ pu nyəŋ shɛ thə́ e a, nə pa' a bɑ pu nyəŋ shɛ thə́ e a, bɑ pu nyəŋ shɛ thə e."}
+{"src": "Bénéficiaire", "ref": "", "hyp": "Beneficiŋ:"}
+{"src": "Montant", "ref": "", "hyp": "Amount"}
+{"src": "Transfert d'argent", "ref": "", "hyp": "Ŋkwyəpnyə ŋkhap nə́ nthʉm tsyə a bɑ ǎ kwyəpnyə a."}
+{"src": "Retrait", "ref": "", "hyp": "Nə pa' a bɑ pu lě shyə m̀ nə pa' a bɑ pu lě shyə m̀ nə́ gwya ywə yə a bɑ pu lě shyə m̀ nə a."}

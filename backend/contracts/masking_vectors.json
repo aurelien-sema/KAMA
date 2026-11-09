@@ -1,0 +1,27 @@
+{
+  "_note": "Exemples de reference du masquage. L'extension doit produire exactement ces sorties avant tout envoi au serveur.",
+  "vectors": [
+    { "input": "Transfert de 25 500 FCFA à Paul Mbarga", "expected": "Transfert de {x1} à {x2}" },
+    { "input": "Votre solde est de 25 000 FCFA.", "expected": "Votre solde est de {x1}." },
+    { "input": "Votre solde est de 25 000 FCFA.", "expected": "Votre solde est de {x1}." },
+    { "input": "Your balance is 25,000 FCFA.", "expected": "Your balance is {x1}." },
+    { "input": "Le bénéficiaire est Marie Tchoupo, numéro 677 12 34 56.", "expected": "Le bénéficiaire est {x1}, numéro {x2}." },
+    { "input": "Numéro +237 677 12 34 56", "expected": "Numéro {x1}" },
+    { "input": "Date de l'opération : 09/11/2026 à 14:32.", "expected": "Date de l'opération : {x1} à {x2}." },
+    { "input": "Votre code de confirmation est 483920.", "expected": "Votre code de confirmation est {x1}." },
+    { "input": "Les frais de retrait sont de 2% du montant.", "expected": "Les frais de retrait sont de {x1} du montant." },
+    { "input": "Contactez jean.kamga@example.com", "expected": "Contactez {x1}" },
+    { "input": "Référence TXN-88213 enregistrée", "expected": "Référence {x1} enregistrée" },
+    { "input": "Vous avez reçu 5 000 FCFA de Paul.", "expected": "Vous avez reçu {x1} de {x2}." },
+    { "input": "Bénéficiaire : Awa", "expected": "Bénéficiaire : {x1}" },
+    { "input": "Envoi à PAUL MBARGA", "expected": "Envoi à {x1}" },
+    { "input": "Voir https://banque.example/compte/123", "expected": "Voir {x1}" },
+    { "input": "Appuyez sur Confirmer pour valider le transfert.", "expected": "Appuyez sur Confirmer pour valider le transfert." },
+    { "input": "Press Confirm to approve the transfer.", "expected": "Press Confirm to approve the transfer." },
+    { "input": "Solde Disponible", "expected": "Solde Disponible" },
+    { "input": "SOLDE INSUFFISANT", "expected": "SOLDE INSUFFISANT" },
+    { "input": "Mobile Money", "expected": "Mobile Money" },
+    { "input": "Ne partagez jamais votre code secret.", "expected": "Ne partagez jamais votre code secret." },
+    { "input": "Vous allez envoyer {x1} à {x2}.", "expected": "Vous allez envoyer {x1} à {x2}." }
+  ]
+}

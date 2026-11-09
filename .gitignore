@@ -1,10 +1,37 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.env
+models/*
+!models/README.md
+!models/fetch_models.py
+*.safetensors
+*.gguf
+*.bin
+node_modules/
+dist/
+.output/
+.wxt/
+
+# Evaluation : outils locaux et extraits de corpus dont les droits interdisent ou limitent la diffusion
+evaluation/venv/
+evaluation/tools/
+evaluation/tmp/
+evaluation/logs/
+evaluation/testsets/bbj_mafand_*
+evaluation/testsets/bible_sample100.jsonl
+evaluation/results/*/mafand*
+evaluation/results/*/bible*
+evaluation/results/*/wes_heldout*
+
+# Donnees trop lourdes ou dont les droits interdisent la publication
+datasets/ghomala/spoken_bible/
+datasets/pidgin/oxford_spoken_corpus_2563/
+.cache/
+
 # Fichier d instructions local pour Claude Code (non partage)
 CLAUDE.md
 
-# Code exporte des projets Lovable (reference visuelle locale, non livree)
+# Frontend : code exporte des projets Lovable (reference visuelle locale, non livree)
 kama_frontend/reference/
-
-# Frontend : dependances et fichiers generes
-kama_frontend/node_modules/
-kama_frontend/.output/
-kama_frontend/.wxt/

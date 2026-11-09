@@ -1,0 +1,568 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Kama backend",
+    "version": "1"
+  },
+  "paths": {
+    "/healthz": {
+      "get": {
+        "tags": [
+          "service"
+        ],
+        "summary": "Healthz",
+        "operationId": "healthz_healthz_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "type": "object",
+                  "title": "Response Healthz Healthz Get"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/capabilities": {
+      "get": {
+        "tags": [
+          "service"
+        ],
+        "summary": "Capabilities",
+        "operationId": "capabilities_v1_capabilities_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Capabilities"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/translate": {
+      "post": {
+        "tags": [
+          "langue"
+        ],
+        "summary": "Translate",
+        "operationId": "translate_v1_translate_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TranslateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TranslateResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/tts": {
+      "post": {
+        "tags": [
+          "voix"
+        ],
+        "summary": "Tts",
+        "operationId": "tts_v1_tts_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TtsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TtsResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/voice/intent": {
+      "post": {
+        "tags": [
+          "voix"
+        ],
+        "summary": "Voice Intent",
+        "operationId": "voice_intent_v1_voice_intent_post",
+        "parameters": [
+          {
+            "name": "x-kama-lang",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 8,
+              "title": "X-Kama-Lang"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IntentResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "audio/wav": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AudioSegment": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "audio",
+            "title": "Type",
+            "default": "audio"
+          },
+          "format": {
+            "type": "string",
+            "const": "wav",
+            "title": "Format",
+            "default": "wav"
+          },
+          "data": {
+            "type": "string",
+            "title": "Data",
+            "description": "WAV encode en base64."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "AudioSegment"
+      },
+      "Capabilities": {
+        "properties": {
+          "api_version": {
+            "type": "string",
+            "title": "Api Version"
+          },
+          "languages": {
+            "items": {
+              "$ref": "#/components/schemas/LanguageInfo"
+            },
+            "type": "array",
+            "title": "Languages"
+          },
+          "limits": {
+            "$ref": "#/components/schemas/Limits"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "api_version",
+          "languages",
+          "limits"
+        ],
+        "title": "Capabilities"
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "IntentResponse": {
+        "properties": {
+          "intent": {
+            "type": "string",
+            "enum": [
+              "ask_balance",
+              "ask_fees",
+              "ask_total",
+              "what_to_do",
+              "explain_error",
+              "summarize_transactions",
+              "repeat",
+              "unknown"
+            ],
+            "title": "Intent"
+          },
+          "confidence": {
+            "type": "number",
+            "maximum": 1.0,
+            "minimum": 0.0,
+            "title": "Confidence"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "intent",
+          "confidence"
+        ],
+        "title": "IntentResponse"
+      },
+      "LanguageInfo": {
+        "properties": {
+          "code": {
+            "type": "string",
+            "title": "Code"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "translation_from": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Translation From"
+          },
+          "asr": {
+            "type": "boolean",
+            "title": "Asr"
+          },
+          "tts": {
+            "type": "boolean",
+            "title": "Tts"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "code",
+          "name",
+          "translation_from",
+          "asr",
+          "tts"
+        ],
+        "title": "LanguageInfo"
+      },
+      "Limits": {
+        "properties": {
+          "max_text_chars": {
+            "type": "integer",
+            "title": "Max Text Chars"
+          },
+          "max_audio_seconds": {
+            "type": "integer",
+            "title": "Max Audio Seconds"
+          },
+          "audio_format": {
+            "type": "string",
+            "title": "Audio Format"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "max_text_chars",
+          "max_audio_seconds",
+          "audio_format"
+        ],
+        "title": "Limits"
+      },
+      "SlotSegment": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "const": "slot",
+            "title": "Type",
+            "default": "slot"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "Ex. x1 : l'extension joue ici le nombre avec ses audios locaux."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "title": "SlotSegment"
+      },
+      "TranslateRequest": {
+        "properties": {
+          "text": {
+            "type": "string",
+            "maxLength": 500,
+            "minLength": 1,
+            "title": "Text",
+            "description": "Texte DEJA masque : {x1}, {x2}... de gauche a droite."
+          },
+          "source_lang": {
+            "type": "string",
+            "enum": [
+              "fr",
+              "en"
+            ],
+            "title": "Source Lang"
+          },
+          "target_lang": {
+            "type": "string",
+            "maxLength": 8,
+            "minLength": 2,
+            "title": "Target Lang"
+          },
+          "element": {
+            "type": "string",
+            "enum": [
+              "text",
+              "balance",
+              "amount",
+              "fee",
+              "total",
+              "confirm",
+              "error",
+              "warning"
+            ],
+            "title": "Element",
+            "description": "Nature de l'element dans la page ; tout sauf 'text' est critique.",
+            "default": "text"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "text",
+          "source_lang",
+          "target_lang"
+        ],
+        "title": "TranslateRequest"
+      },
+      "TranslateResponse": {
+        "properties": {
+          "text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Text",
+            "description": "Traduction avec ses {xN}, ou null : l'extension montre alors l'original."
+          },
+          "badge": {
+            "type": "string",
+            "enum": [
+              "verified",
+              "machine",
+              "untranslated"
+            ],
+            "title": "Badge",
+            "description": "verified = Verifie, machine = Traduction automatique, untranslated = Pas encore traduit"
+          },
+          "origin": {
+            "type": "string",
+            "enum": [
+              "memory",
+              "near_memory",
+              "model",
+              "none"
+            ],
+            "title": "Origin"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason",
+            "description": "Motif technique quand badge vaut untranslated."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "text",
+          "badge",
+          "origin"
+        ],
+        "title": "TranslateResponse"
+      },
+      "TtsRequest": {
+        "properties": {
+          "text": {
+            "type": "string",
+            "maxLength": 500,
+            "minLength": 1,
+            "title": "Text",
+            "description": "Texte en langue nationale, avec ses {xN}."
+          },
+          "lang": {
+            "type": "string",
+            "maxLength": 8,
+            "minLength": 2,
+            "title": "Lang"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "text",
+          "lang"
+        ],
+        "title": "TtsRequest"
+      },
+      "TtsResponse": {
+        "properties": {
+          "segments": {
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/AudioSegment"
+                },
+                {
+                  "$ref": "#/components/schemas/SlotSegment"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Segments"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "segments"
+        ],
+        "title": "TtsResponse"
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          },
+          "input": {
+            "title": "Input"
+          },
+          "ctx": {
+            "type": "object",
+            "title": "Context"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}

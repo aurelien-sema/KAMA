@@ -1,0 +1,64 @@
+{"src": "Your balance is 25,000 FCFA.", "ref": "", "hyp": "Your balance na 25.000 FCFA."}
+{"src": "The available balance on your account is 3,750 FCFA.", "ref": "", "hyp": "Di balance for your account na 3750 FCFA."}
+{"src": "Do you want to check your balance?", "ref": "", "hyp": "You wan check your balance?"}
+{"src": "Your balance is not enough to complete this operation.", "ref": "", "hyp": "Your balance no dey enough to complete dis operation."}
+{"src": "After this operation, your new balance will be 112,500 FCFA.", "ref": "", "hyp": "After dis operation, your new balance go reach 112.500 FCFA."}
+{"src": "Balance last updated on 12/11/2026.", "ref": "", "hyp": "Last actually on 12/11/2026."}
+{"src": "The fee for this operation is 150 FCFA.", "ref": "", "hyp": "Di fee for dis operation na 150 FCFA."}
+{"src": "This operation is free.", "ref": "", "hyp": "Dis operation is free."}
+{"src": "You will pay a fee of 500 FCFA for this transfer.", "ref": "", "hyp": "You go pay 500 FCFA for dis transfer."}
+{"src": "The withdrawal fee is 2% of the amount.", "ref": "", "hyp": "Di collect fee na 2% of di money."}
+{"src": "The total amount to be debited, including fees, is 10,150 FCFA.", "ref": "", "hyp": "Di total money wey dem dey put including fees, na 10,150 FCFA."}
+{"src": "No fee will be charged if you cancel now.", "ref": "", "hyp": "No fee go dey charge if you don storn now."}
+{"src": "Fees are not refundable.", "ref": "", "hyp": "Fee no dey refundable."}
+{"src": "Enter the amount to send.", "ref": "", "hyp": "Enter di money wey you go send."}
+{"src": "Enter the recipient's number.", "ref": "", "hyp": "Enter di recease number."}
+{"src": "You are about to send 10,000 FCFA to Jean Kamga.", "ref": "", "hyp": "You don write to send ehn ten, ehn ehn ehn ehn ehn ehn ehn ehn ehn ehn ehn ehn ehn ehn ehn ehn ehn ehn ehn ehn ehn ehn ehn ehn ehn"}
+{"src": "The recipient is Marie Tchoupo, number 677 12 34 56.", "ref": "", "hyp": "Receive na Marie Tchoupo, number 677 12 34 56."}
+{"src": "The minimum transfer amount is 100 FCFA.", "ref": "", "hyp": "Di minimum transfer amount is 100 FCFA."}
+{"src": "The maximum amount per day is 500,000 FCFA.", "ref": "", "hyp": "Di limit of pro day, na 500,000 FCFA."}
+{"src": "Choose the account to debit.", "ref": "", "hyp": "Choose di account to debit."}
+{"src": "Your transfer of 75,000 FCFA was successful.", "ref": "", "hyp": "Your transfer of 75.000 FCFA well, well, well."}
+{"src": "You received 5,000 FCFA from Paul Ngassa.", "ref": "", "hyp": "You collect dose dose dose dose dose dose dose dose dose dose dose dose dose dose dose dose dose dose dose dose dose dose dose dose dose dose dose dose dose dose"}
+{"src": "You withdrew 20,000 FCFA at the service point.", "ref": "", "hyp": "You comot above above above above above abeg."}
+{"src": "Check the details before confirming.", "ref": "", "hyp": "Check di tins before confirm."}
+{"src": "Amount: 15,000 FCFA. Fee: 200 FCFA. Recipient: Awa Bello.", "ref": "", "hyp": "Amount: 15.000 FCFA. Fee: 200 FCFA. E get Awa Bello."}
+{"src": "Total to pay: 15,200 FCFA.", "ref": "", "hyp": "Total to pay am: 15,200 FCFA."}
+{"src": "Press Confirm to approve the transfer.", "ref": "", "hyp": "Press Confirm to admit di transfer."}
+{"src": "Press Cancel to stop the operation.", "ref": "", "hyp": "Press Cancele to stop di operation."}
+{"src": "Once confirmed, this transfer cannot be cancelled.", "ref": "", "hyp": "Once confirm, dis transfer no dey fit storn."}
+{"src": "The recipient will receive 14,800 FCFA.", "ref": "", "hyp": "E go receive 14,800 FCFA."}
+{"src": "Date of the operation: 09/11/2026 at 14:32.", "ref": "", "hyp": "Date of di operation: 09/11/2026 at 14 in32."}
+{"src": "The code you entered is incorrect.", "ref": "", "hyp": "Di code wey you enter, de dey inkorrect."}
+{"src": "You have 2 attempts left.", "ref": "", "hyp": "You get two temptation wey dey left."}
+{"src": "Your account is blocked for 24 hours.", "ref": "", "hyp": "Your account dey lock for 24  hours."}
+{"src": "The operation failed. Your money was not debited.", "ref": "", "hyp": "Di operation fail, de no dey put your money."}
+{"src": "The number you entered does not exist.", "ref": "", "hyp": "Di number wey you enter no dey exist."}
+{"src": "The service is temporarily unavailable. Try again later.", "ref": "", "hyp": "Di service for time dey notisba, try later again."}
+{"src": "The time has run out. Start the operation again.", "ref": "", "hyp": "Di time don run out, start di operation again."}
+{"src": "Never share your secret code.", "ref": "", "hyp": "Dey never share your sesecret code."}
+{"src": "Do not give your code to anyone, not even an agent.", "ref": "", "hyp": "No give your code to anybody, no even agent."}
+{"src": "Warning: nobody should ask you for your password.", "ref": "", "hyp": "Warning, nobody go ask you for your password."}
+{"src": "If you did not make this operation, call 8000.", "ref": "", "hyp": "If you no do dis operation, call 8000."}
+{"src": "Beware of messages that promise you money.", "ref": "", "hyp": "Make una keep message wey dey promise una money."}
+{"src": "Your confirmation code is 483920.", "ref": "", "hyp": "Your confirmation code na 483920."}
+{"src": "This code expires in 5 minutes.", "ref": "", "hyp": "Dis code dey reduce for inside 5 minutes."}
+{"src": "Do not click on links received by message.", "ref": "", "hyp": "No just click on di ting wey e receive by message."}
+{"src": "Check the recipient's name before sending the money.", "ref": "", "hyp": "Check di name of suppose before dey send money."}
+{"src": "Your money can be lost if you give your code.", "ref": "", "hyp": "Your money fit lost if you give your code."}
+{"src": "Your electricity bill of 18,450 FCFA must be paid before 30/11/2026.", "ref": "", "hyp": "Your electricity bill of 18,450 FCFA must dey pay before 30/11/2026."}
+{"src": "Your loan request of 200,000 FCFA is under review.", "ref": "", "hyp": "Your loan request of igage big, big, big, big, big, big, big, big, big, big, big, big, big, big, big, big, big, big, big, big, big,"}
+{"src": "The annual interest rate is 12%.", "ref": "", "hyp": "Di anyual intrest rate na closed."}
+{"src": "Your savings increased by 3,000 FCFA this month.", "ref": "", "hyp": "Your save come out of three FCFA inside inside dat month."}
+{"src": "Your card expires on 31/12/2027.", "ref": "", "hyp": "Your card dey reduce on di 31/12/2027."}
+{"src": "You do not have enough money to pay this bill.", "ref": "", "hyp": "You no get money to pay dis bill."}
+{"src": "The payment will be taken automatically every month.", "ref": "", "hyp": "Di payment go dey collect every month."}
+{"src": "Thank you for using our service.", "ref": "", "hyp": "Thank you for use our service."}
+{"src": "Balance", "ref": "", "hyp": "Balance"}
+{"src": "Fee", "ref": "", "hyp": "Fee"}
+{"src": "Confirm", "ref": "", "hyp": "Confirm"}
+{"src": "Cancel", "ref": "", "hyp": "Cancel"}
+{"src": "Recipient", "ref": "", "hyp": "Person wey be sey e be sey e be sey e be sey e be sey e be sey e be sey e be"}
+{"src": "Amount", "ref": "", "hyp": "Amount"}
+{"src": "Money transfer", "ref": "", "hyp": "Money transfer"}
+{"src": "Withdrawal", "ref": "", "hyp": "Abeg Abeg Abeg Abeg Abeg Abeg Abeg Abeg"}

@@ -1,0 +1,64 @@
+{"src": "Your balance is 25,000 FCFA.", "ref": "", "hyp": "Your balance is 25,000 FCFA."}
+{"src": "The available balance on your account is 3,750 FCFA.", "ref": "", "hyp": "The available balance on your account is 3,750 FCFA."}
+{"src": "Do you want to check your balance?", "ref": "", "hyp": "You want check for your balance?"}
+{"src": "Your balance is not enough to complete this operation.", "ref": "", "hyp": "Your balance won't be enough to complete this operation."}
+{"src": "After this operation, your new balance will be 112,500 FCFA.", "ref": "", "hyp": "After this operation, your new balance will be 112,500 FCFA."}
+{"src": "Balance last updated on 12/11/2026.", "ref": "", "hyp": "Balance last updated on 12/11/2026."}
+{"src": "The fee for this operation is 150 FCFA.", "ref": "", "hyp": "The fee for this operation is 150 FCFA."}
+{"src": "This operation is free.", "ref": "", "hyp": "This operation is free."}
+{"src": "You will pay a fee of 500 FCFA for this transfer.", "ref": "", "hyp": "You will pay a fee of 500 FCFA for this transfer."}
+{"src": "The withdrawal fee is 2% of the amount.", "ref": "", "hyp": "The withdrawal fee is 2% of the amount."}
+{"src": "The total amount to be debited, including fees, is 10,150 FCFA.", "ref": "", "hyp": "The total amount to be debited, including fees, is 10,150 FCFA."}
+{"src": "No fee will be charged if you cancel now.", "ref": "", "hyp": "No fee will be charged if you cancel now."}
+{"src": "Fees are not refundable.", "ref": "", "hyp": "The fees are not refundable."}
+{"src": "Enter the amount to send.", "ref": "", "hyp": "Enter the amount for send."}
+{"src": "Enter the recipient's number.", "ref": "", "hyp": "Enter the recipient's number."}
+{"src": "You are about to send 10,000 FCFA to Jean Kamga.", "ref": "", "hyp": "You're about to send 10,000 FCFA for Jean Kamga."}
+{"src": "The recipient is Marie Tchoupo, number 677 12 34 56.", "ref": "", "hyp": "The recipient is Marie Tchoupo, number 677 12 34 56."}
+{"src": "The minimum transfer amount is 100 FCFA.", "ref": "", "hyp": "The minimum amount for transfer is 100 FCFA."}
+{"src": "The maximum amount per day is 500,000 FCFA.", "ref": "", "hyp": "The maximum amount per day is 500,000 FCFA."}
+{"src": "Choose the account to debit.", "ref": "", "hyp": "Choose the account to debit."}
+{"src": "Your transfer of 75,000 FCFA was successful.", "ref": "", "hyp": "Your transfer of 75,000 FCFA was successful."}
+{"src": "You received 5,000 FCFA from Paul Ngassa.", "ref": "", "hyp": "You get 5,000 FCFA from Paul Ngassa."}
+{"src": "You withdrew 20,000 FCFA at the service point.", "ref": "", "hyp": "You withdraw 20,000 FCFA at the service point."}
+{"src": "Check the details before confirming.", "ref": "", "hyp": "Check the details before confirming."}
+{"src": "Amount: 15,000 FCFA. Fee: 200 FCFA. Recipient: Awa Bello.", "ref": "", "hyp": "Amount: 15,000 FCFA. Fee: 200 FCFA. Recipient: Awa Bello."}
+{"src": "Total to pay: 15,200 FCFA.", "ref": "", "hyp": "Total amount to be paid: 15,200 FCFA."}
+{"src": "Press Confirm to approve the transfer.", "ref": "", "hyp": "Press Confirm for approve the transfer."}
+{"src": "Press Cancel to stop the operation.", "ref": "", "hyp": "Press Cancel for stop the operation."}
+{"src": "Once confirmed, this transfer cannot be cancelled.", "ref": "", "hyp": "Once confirmed, this transfer can't be cancelled."}
+{"src": "The recipient will receive 14,800 FCFA.", "ref": "", "hyp": "The recipient will get 14,800 FCFA."}
+{"src": "Date of the operation: 09/11/2026 at 14:32.", "ref": "", "hyp": "Date of operation: 09/11/2026 at 14:32."}
+{"src": "The code you entered is incorrect.", "ref": "", "hyp": "The code you enter is wrong."}
+{"src": "You have 2 attempts left.", "ref": "", "hyp": "You got 2 try left."}
+{"src": "Your account is blocked for 24 hours.", "ref": "", "hyp": "Your account is blocked for 24 hours."}
+{"src": "The operation failed. Your money was not debited.", "ref": "", "hyp": "The operation failed. Your money no be debited."}
+{"src": "The number you entered does not exist.", "ref": "", "hyp": "The number you enter no be."}
+{"src": "The service is temporarily unavailable. Try again later.", "ref": "", "hyp": "The service is temporarily no available. Try again later."}
+{"src": "The time has run out. Start the operation again.", "ref": "", "hyp": "The time has run out. Start the operation again."}
+{"src": "Never share your secret code.", "ref": "", "hyp": "Never share your secret code."}
+{"src": "Do not give your code to anyone, not even an agent.", "ref": "", "hyp": "Don't give your code to anyone, not even an agent."}
+{"src": "Warning: nobody should ask you for your password.", "ref": "", "hyp": "Warning: no one should ask you for your password."}
+{"src": "If you did not make this operation, call 8000.", "ref": "", "hyp": "If you don't do this operation, call 8000."}
+{"src": "Beware of messages that promise you money.", "ref": "", "hyp": "Beware of messages that promise you money."}
+{"src": "Your confirmation code is 483920.", "ref": "", "hyp": "Your confirmation code is 483920."}
+{"src": "This code expires in 5 minutes.", "ref": "", "hyp": "This code expires in 5 minutes."}
+{"src": "Do not click on links received by message.", "ref": "", "hyp": "Don't click on links you get for message."}
+{"src": "Check the recipient's name before sending the money.", "ref": "", "hyp": "Check the name of the recipient before you send the money."}
+{"src": "Your money can be lost if you give your code.", "ref": "", "hyp": "Your money can be lost if you give your code."}
+{"src": "Your electricity bill of 18,450 FCFA must be paid before 30/11/2026.", "ref": "", "hyp": "Your electric bill of 18,450 FCFA must be paid before 30/11/2026."}
+{"src": "Your loan request of 200,000 FCFA is under review.", "ref": "", "hyp": "Your loan request for 200,000 FCFA is being reviewed."}
+{"src": "The annual interest rate is 12%.", "ref": "", "hyp": "The annual interest rate is 12%."}
+{"src": "Your savings increased by 3,000 FCFA this month.", "ref": "", "hyp": "Your savings increase by 3,000 FCFA this month."}
+{"src": "Your card expires on 31/12/2027.", "ref": "", "hyp": "Your card expires on 31/12/2027."}
+{"src": "You do not have enough money to pay this bill.", "ref": "", "hyp": "You don't have enough money to pay this bill."}
+{"src": "The payment will be taken automatically every month.", "ref": "", "hyp": "The payment will be taken automatically every month."}
+{"src": "Thank you for using our service.", "ref": "", "hyp": "Thank you for use our service."}
+{"src": "Balance", "ref": "", "hyp": "Balance"}
+{"src": "Fee", "ref": "", "hyp": "Fee"}
+{"src": "Confirm", "ref": "", "hyp": "Confirm"}
+{"src": "Cancel", "ref": "", "hyp": "Cancel"}
+{"src": "Recipient", "ref": "", "hyp": "Receiver"}
+{"src": "Amount", "ref": "", "hyp": "Amount"}
+{"src": "Money transfer", "ref": "", "hyp": "Transfer money"}
+{"src": "Withdrawal", "ref": "", "hyp": "Withdrawal"}

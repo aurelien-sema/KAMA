@@ -1,0 +1,64 @@
+{"src": "Your balance is ZZ1ZZ.", "ref": "", "hyp": "Púŋ bə́ŋnyə́ nə́ŋnyə́ nə́ŋnyə́ nə́ŋny�"}
+{"src": "The available balance on your account is ZZ1ZZ.", "ref": "", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə�"}
+{"src": "Do you want to check your balance?", "ref": "", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́"}
+{"src": "Your balance is not enough to complete this operation.", "ref": "", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́�"}
+{"src": "After this operation, your new balance will be ZZ1ZZ.", "ref": "", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́�"}
+{"src": "Balance last updated on ZZ1ZZ.", "ref": "", "hyp": "Púŋ bə́ŋnyə́ nə́ŋnyə́ nə́ŋnyə́ nə́ŋnyə́ nə́�"}
+{"src": "The fee for this operation is ZZ1ZZ.", "ref": "", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋ"}
+{"src": "This operation is free.", "ref": "", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə"}
+{"src": "You will pay a fee of ZZ1ZZ for this transfer.", "ref": "", "hyp": "Pú nə́ nə́ nə́ nə́ nə́ nə́ nə́ nə́ nə́ nə́ n"}
+{"src": "The withdrawal fee is ZZ1ZZ of the amount.", "ref": "", "hyp": "Pú nə́ nə́ nə́ nə́ nə́ nə́ nə́ nə́ nə́ nə́ nə̂ nə̂ nə̂ nə̂ n"}
+{"src": "The total amount to be debited, including fees, is ZZ1ZZ.", "ref": "", "hyp": "Púŋnyə́ nə́ nə́ nə́ nə́ nə́ nə́ nə́ nə́ nə́ nə́ nə"}
+{"src": "No fee will be charged if you cancel now.", "ref": "", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋ"}
+{"src": "Fees are not refundable.", "ref": "", "hyp": "Púŋnyə́ ntʉ́m ntʉ́m ntʉ́m ntʉ́m ntʉ́m ntʉ�"}
+{"src": "Enter the amount to send.", "ref": "", "hyp": "Pú nə́ nə́ nə́ nə́ nə́ nə́ pə́ pə�"}
+{"src": "Enter the recipient's number.", "ref": "", "hyp": "Púŋnyə́ ntʉ́m ntʉ́m ntʉ́m ntʉ́m ntʉ́m ntʉ�"}
+{"src": "You are about to send ZZ1ZZ to ZZ2ZZ.", "ref": "", "hyp": "Pú lə́ nə́ ŋkə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə�"}
+{"src": "The recipient is ZZ1ZZ, number ZZ2ZZ.", "ref": "", "hyp": "Pú lə́ŋdzə́ nə́ ŋkə́ŋdzə́ nə́ ŋkə́ŋdzə́ nə́ ŋkə́"}
+{"src": "The minimum transfer amount is ZZ1ZZ.", "ref": "", "hyp": "Púŋ bə́ŋnyə́ ntʉ́m ntʉ́m ŋkwíŋnyə́ ntʉ́m ŋkwíŋnyə́ ntʉ"}
+{"src": "The maximum amount per day is ZZ1ZZ.", "ref": "", "hyp": "Púŋnyə̂ŋnyə̂ŋnyə̂ŋnyə̂ŋnyə̂ŋnyə̂ŋnyə̂ŋnyə̂ŋnyə̂ŋ"}
+{"src": "Choose the account to debit.", "ref": "", "hyp": "Pú nə́ nə́ nə́ nə́ nə́ nə́ pə́ pə�"}
+{"src": "Your transfer of ZZ1ZZ was successful.", "ref": "", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋ"}
+{"src": "You received ZZ1ZZ from ZZ2ZZ.", "ref": "", "hyp": "Pú lə́ŋdzə́ nə́ ŋkə́ŋdzə́ nə́ ŋkə́ŋdzə́ nə"}
+{"src": "You withdrew ZZ1ZZ at the service point.", "ref": "", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋ"}
+{"src": "Check the details before confirming.", "ref": "", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋ"}
+{"src": "Amount: ZZ1ZZ. Fee: ZZ2ZZ. Recipient: ZZ3ZZ.", "ref": "", "hyp": "Pú lə́ nə́ ŋkwɔ́p nə́ ŋkwɔ́p nə́ ŋkwɔ́p nə́ ŋkwɔ́p nə́ ŋkwɔ́p nə́ ŋkwɔ́p nə"}
+{"src": "Total to pay: ZZ1ZZ.", "ref": "", "hyp": "Púŋnyə́ nə́ŋnyə́ nə́ŋnyə́ nə́ŋnyə́ nə�"}
+{"src": "Press Confirm to approve the transfer.", "ref": "", "hyp": "Pútə́ ŋkə́ŋdzə́ ŋkə́ŋdzə́ ŋkə́ŋdzə́ ŋkə́ŋdzə́"}
+{"src": "Press Cancel to stop the operation.", "ref": "", "hyp": "Púŋtə́ nə́ nə́ nə́ nə́ nə́ nə́ nə́ pə́ pə́ pə"}
+{"src": "Once confirmed, this transfer cannot be cancelled.", "ref": "", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə�"}
+{"src": "The recipient will receive ZZ1ZZ.", "ref": "", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́"}
+{"src": "Date of the operation: ZZ1ZZ at ZZ2ZZ.", "ref": "", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋ"}
+{"src": "The code you entered is incorrect.", "ref": "", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋ"}
+{"src": "You have ZZ1ZZ attempts left.", "ref": "", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́"}
+{"src": "Your account is blocked for ZZ1ZZ hours.", "ref": "", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋ"}
+{"src": "The operation failed. Your money was not debited.", "ref": "", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə�"}
+{"src": "The number you entered does not exist.", "ref": "", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋ"}
+{"src": "The service is temporarily unavailable. Try again later.", "ref": "", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́�"}
+{"src": "The time has run out. Start the operation again.", "ref": "", "hyp": "Pú lə́ bə́ŋnyə́ nə́ ŋkə́ŋnyə́ nə́ ŋkə́ŋnyə́ nə́ ŋ"}
+{"src": "Never share your secret code.", "ref": "", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́"}
+{"src": "Do not give your code to anyone, not even an agent.", "ref": "", "hyp": "Púŋnyə̂ŋnyə̂ŋnyə̂ŋnyə̂ŋnyə̂ŋnyə̂ŋnyə̂ŋnyə̂ŋnyə̂ŋnyə̂�"}
+{"src": "Warning: nobody should ask you for your password.", "ref": "", "hyp": "Púŋnyə́ ntʉ́m ntʉ́m ntʉ́m ntʉ́m ntʉ́m ntʉ́m ntʉ́m ntʉ́"}
+{"src": "If you did not make this operation, call ZZ1ZZ.", "ref": "", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə�"}
+{"src": "Beware of messages that promise you money.", "ref": "", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋ"}
+{"src": "Your confirmation code is ZZ1ZZ.", "ref": "", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́"}
+{"src": "This code expires in ZZ1ZZ minutes.", "ref": "", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋ"}
+{"src": "Do not click on links received by message.", "ref": "", "hyp": "Pútə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋny�"}
+{"src": "Check the recipient's name before sending the money.", "ref": "", "hyp": "Pú ŋkə́ ŋkə́ ŋkə́ ŋkə́ ŋkwɔ́ ŋkə́ ŋkwɔ́ ŋkwɔ́ ŋkwɔ�"}
+{"src": "Your money can be lost if you give your code.", "ref": "", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋ"}
+{"src": "Your electricity bill of ZZ1ZZ must be paid before ZZ2ZZ.", "ref": "", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́�"}
+{"src": "Your loan request of ZZ1ZZ is under review.", "ref": "", "hyp": "Púŋ bə́ŋnyə́ ntʉ́m nə́ ŋkə́ŋnyə́ nə́ ŋkə́ŋnyə́ nə́ ŋkə́ŋnyə́ nə́ ŋk"}
+{"src": "The annual interest rate is ZZ1ZZ.", "ref": "", "hyp": "Púŋ bə́ŋnyə́ ntʉ́m ntʉ́m ntʉ́m ntʉ́m ntʉ́m ntʉ́m ntʉ́m nt"}
+{"src": "Your savings increased by ZZ1ZZ this month.", "ref": "", "hyp": "Púŋ bə́ ntʉ́m ntʉ́m ntʉ́m ntʉ́m ntʉ́m ntʉ́m ntʉ́m ntʉ́m ntʉ́m ntʉ́m ntʉ́m nt"}
+{"src": "Your card expires on ZZ1ZZ.", "ref": "", "hyp": "Púŋ bə́ŋnyə́ nə́ŋnyə́ nə́ŋnyə́ nə́ŋny�"}
+{"src": "You do not have enough money to pay this bill.", "ref": "", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə�"}
+{"src": "The payment will be taken automatically every month.", "ref": "", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́�"}
+{"src": "Thank you for using our service.", "ref": "", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́"}
+{"src": "Balance", "ref": "", "hyp": "Pə́ŋnyə́nyə́ lə́ bə́ŋnyə�"}
+{"src": "Fee", "ref": "", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́�"}
+{"src": "Confirm", "ref": "", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́�"}
+{"src": "Cancel", "ref": "", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́�"}
+{"src": "Recipient", "ref": "", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́�"}
+{"src": "Amount", "ref": "", "hyp": "Pə́ŋnyə́nyə́ lə́ bə́ŋnyə�"}
+{"src": "Money transfer", "ref": "", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́�"}
+{"src": "Withdrawal", "ref": "", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́�"}

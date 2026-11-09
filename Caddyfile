@@ -1,0 +1,9 @@
+kama.example.com {
+    reverse_proxy backend:8000
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains"
+    }
+    log {
+        output discard
+    }
+}

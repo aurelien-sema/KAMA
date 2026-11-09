@@ -1,0 +1,64 @@
+{"src": "Your balance is ZZ1ZZ.", "ref": "", "hyp": "Bʉ' o bə ZZ1ZZ."}
+{"src": "The available balance on your account is ZZ1ZZ.", "ref": "", "hyp": "Ndá' yə a wə nə tsə o a bəŋ ZZ1ZZ."}
+{"src": "Do you want to check your balance?", "ref": "", "hyp": "O wə shə́ŋ nə yɔ tsə́ o a?"}
+{"src": "Your balance is not enough to complete this operation.", "ref": "", "hyp": "Yə o bələŋ a ka ku' po'o ghamtə yəŋ."}
+{"src": "After this operation, your new balance will be ZZ1ZZ.", "ref": "", "hyp": "Cwə yəŋ gʉ' yəŋ gʉ' yə o gɔ sɔ' ghə a ghə ZZ1ZZ."}
+{"src": "Balance last updated on ZZ1ZZ.", "ref": "", "hyp": "Bilansi yə a jəmtə nə ZZ1ZZ"}
+{"src": "The fee for this operation is ZZ1ZZ.", "ref": "", "hyp": "Mfʉ̌ yə a gə po'o bəŋ ZZ1ZZ."}
+{"src": "This operation is free.", "ref": "", "hyp": "Wɔkpe' yəŋ bə́ŋ."}
+{"src": "You will pay a fee of ZZ1ZZ for this transfer.", "ref": "", "hyp": "Wə gɔ sɔ' kwà tsə́ ZZ1ZZ nə tsə́ tsə́ yəŋ."}
+{"src": "The withdrawal fee is ZZ1ZZ of the amount.", "ref": "", "hyp": "Mfɑ́ kəŋnyə lə bɑ́ ZZ1ZZ lə́ məbʉə."}
+{"src": "The total amount to be debited, including fees, is ZZ1ZZ.", "ref": "", "hyp": "Mfʉ́m yə pu gɔ sɔ' kwi'tə nə a; shyə́ mkwitə́ bɑ́ ZZ1ZZ."}
+{"src": "No fee will be charged if you cancel now.", "ref": "", "hyp": "Wə tə́ gɔ sɔ' kwi mfà mʉ̀ tə́ o tsʉ́ cwəlɔ."}
+{"src": "Fees are not refundable.", "ref": "", "hyp": "Pʉə tə́ pu kwyatə."}
+{"src": "Enter the amount to send.", "ref": "", "hyp": "Po tsə nùŋ yə po gɔ təm a."}
+{"src": "Enter the recipient's number.", "ref": "", "hyp": "Pʉ nùmbʉ́ yə a tsə́ é a."}
+{"src": "You are about to send ZZ1ZZ to ZZ2ZZ.", "ref": "", "hyp": "Pǒ bə́ŋ nthəm ZZ1ZZ bi ZZ2ZZ."}
+{"src": "The recipient is ZZ1ZZ, number ZZ2ZZ.", "ref": "", "hyp": "Wà yə a wuŋ a bɑ ZZ1ZZ; nùmbʉə ZZ2ZZ."}
+{"src": "The minimum transfer amount is ZZ1ZZ.", "ref": "", "hyp": "Mfʉ́m tsə́ tsə́ lə bɑ ZZ1ZZ."}
+{"src": "The maximum amount per day is ZZ1ZZ.", "ref": "", "hyp": "Mfʉ́mtsʉ' nə tyɛ'dzʉ bəŋ ZZ1ZZ."}
+{"src": "Choose the account to debit.", "ref": "", "hyp": "Pon tsə tsə tsə tsə tsə tsə"}
+{"src": "Your transfer of ZZ1ZZ was successful.", "ref": "", "hyp": "Gho ZZ1ZZ a lə ghə sɔmywə."}
+{"src": "You received ZZ1ZZ from ZZ2ZZ.", "ref": "", "hyp": "Pǒ kwi ZZ1ZZ fɑ ZZ2ZZ."}
+{"src": "You withdrew ZZ1ZZ at the service point.", "ref": "", "hyp": "O lə ŋkwi ZZ1ZZ nà tsə tsə tsə tsə."}
+{"src": "Check the details before confirming.", "ref": "", "hyp": "Kwa tsə́ tsə́ dzə́ nə kwinthɛ́."}
+{"src": "Amount: ZZ1ZZ. Fee: ZZ2ZZ. Recipient: ZZ3ZZ.", "ref": "", "hyp": "Kwə: ZZ1ZZ. Fee: ZZ2ZZ."}
+{"src": "Total to pay: ZZ1ZZ.", "ref": "", "hyp": "Bʉ' yə a gɔ sɔ' fʉ' a: ZZ1ZZ."}
+{"src": "Press Confirm to approve the transfer.", "ref": "", "hyp": "Kaktʉtə Shyə́ mco' nə kwə́ nə nthəm."}
+{"src": "Press Cancel to stop the operation.", "ref": "", "hyp": "Push Cance' po'o gham kə̀m."}
+{"src": "Once confirmed, this transfer cannot be cancelled.", "ref": "", "hyp": "Pʉ' yə a wuŋ nyəŋ gʉ' a; pu tə́ wa'tə yəŋ gʉ' yə a."}
+{"src": "The recipient will receive ZZ1ZZ.", "ref": "", "hyp": "Wà yə a kwi a gɔ kwi ZZ1ZZ."}
+{"src": "Date of the operation: ZZ1ZZ at ZZ2ZZ.", "ref": "", "hyp": "Tàm tsə́: ZZ1ZZ na ZZ2ZZ."}
+{"src": "The code you entered is incorrect.", "ref": "", "hyp": "Kode yə o tsə́ a ka bə́ŋ."}
+{"src": "You have ZZ1ZZ attempts left.", "ref": "", "hyp": "Wə lə ghə zʉ̌ ZZ1ZZ."}
+{"src": "Your account is blocked for ZZ1ZZ hours.", "ref": "", "hyp": "Pʉ tʉ́m tsə́ o ghə tʉ́m ZZ1ZZ."}
+{"src": "The operation failed. Your money was not debited.", "ref": "", "hyp": "Wà lə kwi' jʉ̌m. Pu lə kwi' jʉ̌m o."}
+{"src": "The number you entered does not exist.", "ref": "", "hyp": "Tshu yə o tsə́ a tə́ bɑ́ tsə́."}
+{"src": "The service is temporarily unavailable. Try again later.", "ref": "", "hyp": "Wə nthi nthi nthi nthi nthi nthi nthi nthi nthi nthi nthi nthi nthi nthi nthi nthi nthi nthi nthi nthi nthi nthi nthi nthi nthi nthi nthi nthi nthi nthi nthi nthi nthi nthi nthi nthi nthi nthi nthi nthi nt"}
+{"src": "The time has run out. Start the operation again.", "ref": "", "hyp": "Wà lə wuŋ. Po to yə́ tə́m."}
+{"src": "Never share your secret code.", "ref": "", "hyp": "Ka o pʉə tsə́ tsə́ tsə́ tsə́ o."}
+{"src": "Do not give your code to anyone, not even an agent.", "ref": "", "hyp": "Kɑ́ hɑ kódə o bi sɔmmo; ba gɛfa' pɑ́."}
+{"src": "Warning: nobody should ask you for your password.", "ref": "", "hyp": "Mbɔ́kcɔ́k: Sɔmmo kɑ́ həŋtə o tso tsə́ o."}
+{"src": "If you did not make this operation, call ZZ1ZZ.", "ref": "", "hyp": "A pɑ́ gɑ́ o ka ghə yəŋ shu'tə a; ŋkhe ZZ1ZZ."}
+{"src": "Beware of messages that promise you money.", "ref": "", "hyp": "Ghe mghɔm myə a ghamtə tsə́ o a."}
+{"src": "Your confirmation code is ZZ1ZZ.", "ref": "", "hyp": "Kode tsə́ tsə́ tsə́ tsə́ tsə́ tsə́ tsə́ tsə́ tsə́ tsə́ tsə́ tsə́ tsə́ tsə́ tsə́ tsə́ tsə́ tsə́ tsə́ tsə́ tsə́"}
+{"src": "This code expires in ZZ1ZZ minutes.", "ref": "", "hyp": "Codi yəŋ gɑ́ a wuŋ nthəm nə mco' ZZ1ZZ."}
+{"src": "Do not click on links received by message.", "ref": "", "hyp": "Klə́k m̀ nə tsʉ' yə msɛ̌ lə kwi a."}
+{"src": "Check the recipient's name before sending the money.", "ref": "", "hyp": "Ghe tso tsǒ mo yə a wə nthəm tsə́ a."}
+{"src": "Your money can be lost if you give your code.", "ref": "", "hyp": "Pʉ́ o lə wuŋ gɑ́ o hɑ kódzə o."}
+{"src": "Your electricity bill of ZZ1ZZ must be paid before ZZ2ZZ.", "ref": "", "hyp": "O ghə fʉ́ tʉm tʉm tsə ZZ1ZZ lə́ ghə fʉ́ dzə ZZ2ZZ."}
+{"src": "Your loan request of ZZ1ZZ is under review.", "ref": "", "hyp": "Wà bə́ŋ kwǐnthɛ tsə́ tsə́ tsə́ tsə́ tsə́ tsə́ tsə́ tsə́ tsə́ tsə́ tsə́ tsə́ tsə́ tsə́ tsə́ tsə́ tsə́ tsə́ tsə́ tsə́ tsə́ tsə́ tsə́ tsə́ tsə́ tsə́ tsə́ tsə́ tsə́ tsə́ tsə́ tsə"}
+{"src": "The annual interest rate is ZZ1ZZ.", "ref": "", "hyp": "Mfa' mviŋ mviŋ mviŋ mviŋ mviŋ mviŋ mviŋ mviŋ mviŋ mviŋ mviŋ mviŋ mviŋ mviŋ mviŋ mviŋ mviŋ mviŋ mviŋ mviŋ mviŋ mviŋ mviŋ mvi"}
+{"src": "Your savings increased by ZZ1ZZ this month.", "ref": "", "hyp": "Wà tsə tsə tsə́ lə kwi byə ZZ1ZZ yəŋ mwə́ yəŋ."}
+{"src": "Your card expires on ZZ1ZZ.", "ref": "", "hyp": "Ka'tə tsə́ o ghə̀ nà ZZ1ZZ."}
+{"src": "You do not have enough money to pay this bill.", "ref": "", "hyp": "O tə́ bɑ o ghə tsə́ pɑ́ ywə yə o gɔ kwi' shwɔ' yəŋ a."}
+{"src": "The payment will be taken automatically every month.", "ref": "", "hyp": "Pʉ' a gɔ sɔ' kwi mʉ́tə́ mŋwə tə́."}
+{"src": "Thank you for using our service.", "ref": "", "hyp": "Wɔ kəŋnyə gɑ́ pǒ lɑ́ tsə́ wɔk."}
+{"src": "Balance", "ref": "", "hyp": "Kwisi"}
+{"src": "Fee", "ref": "", "hyp": "Fee"}
+{"src": "Confirm", "ref": "", "hyp": "Shyə"}
+{"src": "Cancel", "ref": "", "hyp": "Gho"}
+{"src": "Recipient", "ref": "", "hyp": "Gho"}
+{"src": "Amount", "ref": "", "hyp": "Kwə"}
+{"src": "Money transfer", "ref": "", "hyp": "Tsa' tsə"}
+{"src": "Withdrawal", "ref": "", "hyp": "Kwitə"}

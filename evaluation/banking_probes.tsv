@@ -1,0 +1,65 @@
+journey	fr	en
+solde	Votre solde est de {25 000 FCFA}.	Your balance is {25,000 FCFA}.
+solde	Le solde disponible sur votre compte est de {3 750 FCFA}.	The available balance on your account is {3,750 FCFA}.
+solde	Voulez-vous consulter votre solde ?	Do you want to check your balance?
+solde	Votre solde est insuffisant pour effectuer cette opération.	Your balance is not enough to complete this operation.
+solde	Après cette opération, votre nouveau solde sera de {112 500 FCFA}.	After this operation, your new balance will be {112,500 FCFA}.
+solde	Dernière mise à jour du solde le {12/11/2026}.	Balance last updated on {12/11/2026}.
+frais	Les frais de cette opération sont de {150 FCFA}.	The fee for this operation is {150 FCFA}.
+frais	Cette opération est gratuite.	This operation is free.
+frais	Vous paierez {500 FCFA} de frais pour ce transfert.	You will pay a fee of {500 FCFA} for this transfer.
+frais	Les frais de retrait sont de {2%} du montant.	The withdrawal fee is {2%} of the amount.
+frais	Le montant total à débiter, frais inclus, est de {10 150 FCFA}.	The total amount to be debited, including fees, is {10,150 FCFA}.
+frais	Aucun frais ne sera appliqué si vous annulez maintenant.	No fee will be charged if you cancel now.
+frais	Les frais ne sont pas remboursables.	Fees are not refundable.
+transfert	Entrez le montant à envoyer.	Enter the amount to send.
+transfert	Entrez le numéro du bénéficiaire.	Enter the recipient's number.
+transfert	Vous allez envoyer {10 000 FCFA} à {Jean Kamga}.	You are about to send {10,000 FCFA} to {Jean Kamga}.
+transfert	Le bénéficiaire est {Marie Tchoupo}, numéro {677 12 34 56}.	The recipient is {Marie Tchoupo}, number {677 12 34 56}.
+transfert	Le montant minimum d'un transfert est de {100 FCFA}.	The minimum transfer amount is {100 FCFA}.
+transfert	Le montant maximum par jour est de {500 000 FCFA}.	The maximum amount per day is {500,000 FCFA}.
+transfert	Choisissez le compte à débiter.	Choose the account to debit.
+transfert	Votre transfert de {75 000 FCFA} a réussi.	Your transfer of {75,000 FCFA} was successful.
+transfert	Vous avez reçu {5 000 FCFA} de {Paul Ngassa}.	You received {5,000 FCFA} from {Paul Ngassa}.
+transfert	Vous avez retiré {20 000 FCFA} au point de service.	You withdrew {20,000 FCFA} at the service point.
+recapitulatif	Vérifiez les informations avant de confirmer.	Check the details before confirming.
+recapitulatif	Montant : {15 000 FCFA}. Frais : {200 FCFA}. Bénéficiaire : {Awa Bello}.	Amount: {15,000 FCFA}. Fee: {200 FCFA}. Recipient: {Awa Bello}.
+recapitulatif	Total à payer : {15 200 FCFA}.	Total to pay: {15,200 FCFA}.
+recapitulatif	Appuyez sur Confirmer pour valider le transfert.	Press Confirm to approve the transfer.
+recapitulatif	Appuyez sur Annuler pour arrêter l'opération.	Press Cancel to stop the operation.
+recapitulatif	Une fois confirmé, ce transfert ne peut pas être annulé.	Once confirmed, this transfer cannot be cancelled.
+recapitulatif	Le bénéficiaire recevra {14 800 FCFA}.	The recipient will receive {14,800 FCFA}.
+recapitulatif	Date de l'opération : {09/11/2026} à {14:32}.	Date of the operation: {09/11/2026} at {14:32}.
+erreur	Le code saisi est incorrect.	The code you entered is incorrect.
+erreur	Il vous reste {2} essais.	You have {2} attempts left.
+erreur	Votre compte est bloqué pour {24} heures.	Your account is blocked for {24} hours.
+erreur	L'opération a échoué. Votre argent n'a pas été débité.	The operation failed. Your money was not debited.
+erreur	Le numéro saisi n'existe pas.	The number you entered does not exist.
+erreur	Le service est momentanément indisponible. Réessayez plus tard.	The service is temporarily unavailable. Try again later.
+erreur	Le délai est dépassé. Recommencez l'opération.	The time has run out. Start the operation again.
+securite	Ne partagez jamais votre code secret.	Never share your secret code.
+securite	Ne donnez votre code à personne, même à un agent.	Do not give your code to anyone, not even an agent.
+securite	Attention : personne ne doit vous demander votre mot de passe.	Warning: nobody should ask you for your password.
+securite	Si vous n'êtes pas à l'origine de cette opération, appelez le {8000}.	If you did not make this operation, call {8000}.
+securite	Méfiez-vous des messages qui vous promettent de l'argent.	Beware of messages that promise you money.
+securite	Votre code de confirmation est {483920}.	Your confirmation code is {483920}.
+securite	Ce code expire dans {5} minutes.	This code expires in {5} minutes.
+securite	Ne cliquez pas sur les liens reçus par message.	Do not click on links received by message.
+securite	Vérifiez le nom du bénéficiaire avant d'envoyer l'argent.	Check the recipient's name before sending the money.
+securite	Votre argent peut être perdu si vous donnez votre code.	Your money can be lost if you give your code.
+inedit	Votre facture d'électricité de {18 450 FCFA} doit être payée avant le {30/11/2026}.	Your electricity bill of {18,450 FCFA} must be paid before {30/11/2026}.
+inedit	Votre demande de prêt de {200 000 FCFA} est en cours d'examen.	Your loan request of {200,000 FCFA} is under review.
+inedit	Le taux d'intérêt annuel est de {12%}.	The annual interest rate is {12%}.
+inedit	Votre épargne a augmenté de {3 000 FCFA} ce mois-ci.	Your savings increased by {3,000 FCFA} this month.
+inedit	Votre carte expire le {31/12/2027}.	Your card expires on {31/12/2027}.
+inedit	Vous n'avez pas assez d'argent pour payer cette facture.	You do not have enough money to pay this bill.
+inedit	Le paiement sera prélevé automatiquement chaque mois.	The payment will be taken automatically every month.
+inedit	Merci d'avoir utilisé notre service.	Thank you for using our service.
+court	Solde	Balance
+court	Frais	Fee
+court	Confirmer	Confirm
+court	Annuler	Cancel
+court	Bénéficiaire	Recipient
+court	Montant	Amount
+court	Transfert d'argent	Money transfer
+court	Retrait	Withdrawal
