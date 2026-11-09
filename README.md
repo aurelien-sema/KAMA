@@ -6,6 +6,7 @@ Extension de navigateur (Chrome / Edge) qui explique une interface bancaire en l
 
 - `backend/` — serveur intermédiaire sans état (Python / FastAPI) : traduction contrôlée, commandes vocales, synthèse vocale. Porte les modèles et les clés ; ne stocke aucune donnée bancaire.
 - `content-data/` — phrases bancaires sources (`templates.json`) et grammaire vocale (`intents.json`).
+- `evaluation/` — banc d'évaluation des modèles de traduction.
 - `documentation/` — `CLARIFICATIONS.md`, `JOURNAL.md`.
 
 ## Principes de sécurité
