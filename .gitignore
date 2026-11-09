@@ -1,0 +1,10 @@
+# Fichier d instructions local pour Claude Code (non partage)
+CLAUDE.md
+
+# Code exporte des projets Lovable (reference visuelle locale, non livree)
+kama_frontend/reference/
+
+# Frontend : dependances et fichiers generes
+kama_frontend/node_modules/
+kama_frontend/.output/
+kama_frontend/.wxt/
