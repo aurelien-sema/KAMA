@@ -151,7 +151,7 @@ class SpeechService:
         """
         if lang not in self.engines.languages:
             raise unsupported_language()
-        if has_hard_pii(text):
+        if not is_masked(text) or has_hard_pii(text):
             raise unmasked()
         synth = self.engines.tts.get(lang)
         if synth is None:

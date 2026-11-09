@@ -26,9 +26,9 @@ EMAIL_RE = re.compile(r"[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}")
 URL_RE = re.compile(r"(?:https?://|www\.)[^\s]+")
 TOKEN_RE = re.compile(f"[{WORD}\\-]+")
 LETTER_RE = re.compile(f"[{CAP}{LOW}]")
-DIGIT_RE = re.compile(r"[0-9]")
+DIGIT_RE = re.compile(r"\d")
 NUMBER_RE = re.compile(
-    rf"\+?[0-9](?:[{SEP}.,:/\-]?[0-9])*(?:[{SEP}]?(?:FCFA|F CFA|XAF|CFA|F|%|€|\$)(?![{WORD}]))?"
+    rf"\+?\d(?:[{SEP}.,:/\-]?\d)*(?:[{SEP}]?(?:FCFA|F CFA|XAF|CFA|F|%|€|\$)(?![{WORD}]))?"
 )
 
 _CAPWORD = rf"[{CAP}][{CAP}{LOW}{APOS}\-]*"
