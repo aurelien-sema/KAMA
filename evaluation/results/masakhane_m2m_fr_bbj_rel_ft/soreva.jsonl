@@ -1,0 +1,150 @@
+{"src": "Bonjour", "ref": "ǒ tí a?", "hyp": "Bonjour."}
+{"src": "Salut", "ref": "caʼtə", "hyp": "salutations"}
+{"src": "Comment allez-vous ?", "ref": "ǎ m gaə̂kə̀?", "hyp": "Comment vous conduisez ?."}
+{"src": "Quoi de neuf ?", "ref": "ywə́ sə́ sí a?", "hyp": "Quoi de nouveau ?."}
+{"src": "Je m'appelle Paul", "ref": "tsó tsaə̌ bə pol", "hyp": "J’appelle Paul."}
+{"src": "Je viens de Berlin", "ref": "gaə̂ bə yə bɛlin", "hyp": "Je viens de Berlin."}
+{"src": "J'habite à Yaoundé", "ref": "gaə̂ cwə́ yawùdè", "hyp": "J'habite à Yaoundé"}
+{"src": "Je suis enseignant", "ref": "gaə̂ bə́ gɛlaʼtə", "hyp": "Je suis l’enseignant"}
+{"src": "Je travaille au Goethe-Institut", "ref": "gaə̂ faʼ goətə institʉt", "hyp": "Je travaille au Goethe-Institut."}
+{"src": "Enchanté de vous connaître", "ref": "â púŋ a paʼ gaə́ zhyə́ ó a", "hyp": "Heureux de vous connaître."}
+{"src": "À bientôt", "ref": "â lɔ̂ bə o", "hyp": "C’est bientôt"}
+{"src": "À demain", "ref": "tə fɔ̂kdzǔ", "hyp": "A l’avenir"}
+{"src": "Qu'est-ce que c'est ?", "ref": "yə̌ŋ a kə?", "hyp": "Qu’est- ce qui est arrivé ?."}
+{"src": "Qui est-ce ?", "ref": "â waə?", "hyp": "Qui est- ce ?."}
+{"src": "Retrouvons-nous ce soir ou demain", "ref": "pə yɔ́tə́ bwâdzú / tə yó", "hyp": "Retrouvons-nous ce soir ou demain"}
+{"src": "Je voudrais que tu viennes", "ref": "gaə̂ wə́ cə́ŋ nə́ tə́m pú a wu", "hyp": "Je veux que tu viennes."}
+{"src": "Je viendrai te voir dans l'après-midi", "ref": "gaə̂ gɔ́ sɔʼ cəŋ ó mɔkcú", "hyp": "Je t’en vais voir dans l’après -midi"}
+{"src": "zéro", "ref": "ywə̂ně", "hyp": "Nullement"}
+{"src": "un", "ref": "yaə̂ muʼ", "hyp": "un"}
+{"src": "deux", "ref": "yaə́ pʉə́ə́", "hyp": "deux"}
+{"src": "trois", "ref": "yaə́ tá", "hyp": "Trois"}
+{"src": "quatre", "ref": "yá pfʉə́", "hyp": "Les quatre"}
+{"src": "cinq", "ref": "yaə́ tɔ̂", "hyp": "Cinq"}
+{"src": "six", "ref": "ntɔkɔ́", "hyp": "Six"}
+{"src": "sept", "ref": "sɔmbʉə́ə́", "hyp": "sept."}
+{"src": "huit", "ref": "hɔ̌m", "hyp": "à Hout"}
+{"src": "neuf", "ref": "vʉʼʉ́", "hyp": "La Nouvelle"}
+{"src": "dix", "ref": "ghǎm", "hyp": "Le dix"}
+{"src": "onze", "ref": "shwǎ muʼ", "hyp": "les onze."}
+{"src": "douze", "ref": "shwop pʉə́ m ghǎm", "hyp": "Douze."}
+{"src": "treize", "ref": "shwop tá m ghǎm", "hyp": "Les trois"}
+{"src": "quatorze", "ref": "shwop pfʉə́ m ghǎm", "hyp": "Quatorze."}
+{"src": "quinze", "ref": "shwop tɔ́ m ghǎm", "hyp": "Le quinze"}
+{"src": "seize", "ref": "shwop ntɔkɔ́ m ghǎm", "hyp": "Le Seize"}
+{"src": "dix-sept", "ref": "shwop sɔmbʉə́ m ghǎm", "hyp": "Le dix- sept"}
+{"src": "dix-huit", "ref": "shwop hɔ̂m m ghǎm", "hyp": "Le dix-huit"}
+{"src": "dix-neuf", "ref": "shwop vʉ̂ʼ m ghǎm", "hyp": "Le dix- neuf"}
+{"src": "vingt", "ref": "mghǎm mə́bʉə́ə́", "hyp": "Le décès"}
+{"src": "vingt et un", "ref": "shwâ muʼ m̌bʉə́ə́", "hyp": "Le décès et l’un"}
+{"src": "trente", "ref": "mghǎm m̌ntá", "hyp": "Trente."}
+{"src": "quarante", "ref": "mghâp pfʉə́", "hyp": "Quarantaine."}
+{"src": "cinquante", "ref": "m̌ntɔ̂", "hyp": "Cinquantaine."}
+{"src": "soixante", "ref": "mghǎm ntɔkɔ́", "hyp": "Soixante."}
+{"src": "soixante-dix", "ref": "m̂sɔ̀m", "hyp": "Soixanta-dix"}
+{"src": "quatre-vingts", "ref": "mghâm hɔ̌m", "hyp": "Les quatre-vingts"}
+{"src": "quatre-vingt-dix", "ref": "mghâm vʉʼʉ́", "hyp": "Les quatre-vingt-dix"}
+{"src": "cent", "ref": "ŋkhə", "hyp": "Cent."}
+{"src": "deux cents", "ref": "ŋkhə pʉə́ə́", "hyp": "Deux Cent."}
+{"src": "mille", "ref": "shaʼá", "hyp": "mille"}
+{"src": "un million", "ref": "shǔʼ", "hyp": "Un million"}
+{"src": "lundi", "ref": "sɛ̂sǔ", "hyp": "Lundi"}
+{"src": "mardi", "ref": "gɔ̂suɔ̌", "hyp": "Mardi"}
+{"src": "mercredi", "ref": "dzə̂mtɔ̌", "hyp": "le mercredi"}
+{"src": "jeudi", "ref": "ntâmgǒ", "hyp": "Jeudi"}
+{"src": "vendredi", "ref": "tyə́ʼpfô", "hyp": "Le vendredi"}
+{"src": "samedi", "ref": "shyə̂ŋkǔʼ", "hyp": "le samedi"}
+{"src": "dimanche", "ref": "dzə̂dzə", "hyp": "le dimanche"}
+{"src": "janvier", "ref": "ŋkə̂mmghě", "hyp": "janvier"}
+{"src": "février", "ref": "sɔ̂gwǐŋ", "hyp": "Février"}
+{"src": "mars", "ref": "dzə̂tsə́", "hyp": "Marseille"}
+{"src": "avril", "ref": "dzə̂biyɛ́", "hyp": "l’Afrique"}
+{"src": "mai", "ref": "sûnè", "hyp": "mai"}
+{"src": "juin", "ref": "dzûʼ bvù", "hyp": "Juin"}
+{"src": "juillet", "ref": "fə̀fə̀", "hyp": "Juifs"}
+{"src": "août", "ref": "shwâgə̀fə̀", "hyp": "à Auguste"}
+{"src": "septembre", "ref": "ŋkə̂mbiyɛ́", "hyp": "Septembre"}
+{"src": "octobre", "ref": "dzûʼ mkǒ", "hyp": "octobre"}
+{"src": "novembre", "ref": "fə̂nàm", "hyp": "novembre"}
+{"src": "décembre", "ref": "fûʼ bvù", "hyp": "Décembre"}
+{"src": "Quelle heure est-il ?", "ref": "â nam sʉ́ʉ́?", "hyp": "Quelle heure est- ce ?."}
+{"src": "Il est une heure", "ref": "â taʼ nàm", "hyp": "C’est une heure."}
+{"src": "Il est six heures et demie", "ref": "â nam ntɔkɔ́ ghap", "hyp": "Il y a six heures et demi."}
+{"src": "Il est cinq heures et quart", "ref": "nam tɔ́ jáp shwop tɔ́ m ghǎm", "hyp": "Il y a 5 heures et 4 heures."}
+{"src": "Il est cinq heures moins le quart", "ref": "nam pfʉə́ jáp shwop tɔ́ m ghap pfʉə́", "hyp": "Il y a 5 heures moins de quarante."}
+{"src": "À quelle heure ?", "ref": "sǒ?", "hyp": "à quelle heure ?."}
+{"src": "Dans un instant", "ref": "nə́ ghâp tám", "hyp": "Dans un instant"}
+{"src": "Il fait chaud", "ref": "tsʉ́ʉ́ wə́ hwé", "hyp": "Il fait chaud."}
+{"src": "Il fait froid", "ref": "fɔk wə́ khú", "hyp": "Il fait froid."}
+{"src": "Il fait beau", "ref": "tsʉ́ʉ́ wə́ dzaə́ə́", "hyp": "Il fait belle."}
+{"src": "Il pleut", "ref": "bəŋ wə́ dú", "hyp": "Il pleure."}
+{"src": "Le soleil brille", "ref": "nam wə́ cyə́", "hyp": "Le soleil brille."}
+{"src": "Il fait déjà nuit", "ref": "dzǔ dó só", "hyp": "Il est déjà nuit."}
+{"src": "S'il vous plaît", "ref": "sûsó", "hyp": "Si vous voulez bien"}
+{"src": "Merci", "ref": "gaə̂ piŋ", "hyp": "La grâce"}
+{"src": "Merci à vous aussi", "ref": "gaə̂ piŋ ó", "hyp": "Grâce à vous aussi."}
+{"src": "Non, c'est moi qui dois vous remercier", "ref": "gɛ̌; gaə̂ ghɔ́tə́ wɔ́", "hyp": "Oui c’est moi qui vous remercie."}
+{"src": "Désolé", "ref": "cusí ǎ", "hyp": "desolé"}
+{"src": "Excusez-moi", "ref": "gaə̂ o cusi a", "hyp": "Excusez-moi"}
+{"src": "Où est la maison ?", "ref": "paʼ bə́ m hə́?", "hyp": "C’est ici la maison ?."}
+{"src": "Où est le chemin du marché ?", "ref": "bə́ ghə lǎ tə́ ŋwak sim?", "hyp": "Est- ce là le chemin du marché ?."}
+{"src": "À quelle distance d'ici se trouve la gare routière ?", "ref": "tsʉʼ nə́ də́ mə̂twa bə́ a sak nə́ sok á?", "hyp": "A quelle distance est- ce la gare routière ?."}
+{"src": "Cette route va-t-elle à Douala ?", "ref": "yə̌ŋ mə̂jyə duala á?", "hyp": "Qu’a fait cette route à Douala ?."}
+{"src": "à droite", "ref": "tʉɔ̀", "hyp": "à droite."}
+{"src": "à gauche", "ref": "kwyap", "hyp": "à gauche."}
+{"src": "tout droit", "ref": "dəŋdəŋ", "hyp": "Tout droit"}
+{"src": "clando", "ref": "mə̂twa busí", "hyp": "Le clando"}
+{"src": "quartier", "ref": "láʼ", "hyp": "le quartier"}
+{"src": "Emmenez-moi au centre-ville, s'il vous plaît", "ref": "nə́ gɔ́ tisuŋ sûsó", "hyp": "Emmenez-moi au centre ville si vous le voulez."}
+{"src": "Je voudrais manger quelque chose", "ref": "gaə̂ wə́ cəŋ nə́ pfaə́ ywə́", "hyp": "Je voulais manger quelque chose."}
+{"src": "Je voudrais boire quelque chose", "ref": "gaə̂ wə́ cəŋ nə́ nwə́ ywə́", "hyp": "Je voudrais boire quelque chose."}
+{"src": "Cette table est-elle libre ?", "ref": "tə́pe sí a?", "hyp": "Est- ce table libre ?."}
+{"src": "Le petit déjeuner, s'il vous plaît", "ref": "ywə́ nə́ cwa pak; sûsó", "hyp": "Le petit déjeuner si vous voulez."}
+{"src": "Une bière, s'il vous plaît", "ref": "shəŋ mluʼ zəzə sûsó", "hyp": "Une bière si vous le voulez."}
+{"src": "Du thé, s'il vous plaît", "ref": "taʼ tuʼ kafɛ sûsó", "hyp": "Du thé si vous voulez."}
+{"src": "Que voulez-vous ?", "ref": "pǒ wə́ shəŋ kə́?", "hyp": "Que voulez vous ?."}
+{"src": "Qu'est-ce que vous avez ici ?", "ref": "pǒ nɛ́ kə sɔʼ?", "hyp": "Qu’y a- t- il ici ?."}
+{"src": "Avez-vous de la nourriture pour végétariens ?", "ref": "pǒ ghə ywə́tsú tə sɔm bap á?", "hyp": "Avez-vous mangé pour les vegetables ?."}
+{"src": "Combien est-ce que je dois ?", "ref": "sûsó pó há dəŋ e", "hyp": "Combien est- ce que je dois ?."}
+{"src": "poisson", "ref": "bapgù", "hyp": "des poissons"}
+{"src": "viande de bœuf", "ref": "bap naʼ", "hyp": "La viande de bœuf"}
+{"src": "viande de porc", "ref": "bap gə́nɔ̀m", "hyp": "La viande de porc."}
+{"src": "légumes", "ref": "jap", "hyp": "Les légumes"}
+{"src": "œuf", "ref": "pəm", "hyp": "le œuf"}
+{"src": "banane", "ref": "kə̀lùŋ", "hyp": "La banane"}
+{"src": "couscous", "ref": "bap gwɔʼɔ", "hyp": "à la couscous"}
+{"src": "igname", "ref": "loʼ", "hyp": "l’Ignaïe"}
+{"src": "manioc", "ref": "cyəsə̀m", "hyp": "du manioc"}
+{"src": "pomme de terre", "ref": "tɔ̌m", "hyp": "des pommes de terre."}
+{"src": "eau", "ref": "shyə", "hyp": "Eau"}
+{"src": "jus de fruit", "ref": "mluʼ dʉ̂mtʉ́m", "hyp": "Le jus de fruit"}
+{"src": "jus de citron", "ref": "mluʼ", "hyp": "du jus de citron."}
+{"src": "vin", "ref": "mluʼ phə́phə́", "hyp": "Le vin"}
+{"src": "beignet", "ref": "mə̂kə́láʼ", "hyp": "Beignette."}
+{"src": "gâteau", "ref": "blək", "hyp": "du gendarme"}
+{"src": "arachides", "ref": "biyɛ́", "hyp": "les arachides."}
+{"src": "bouillie", "ref": "kukulú", "hyp": "La bouillée"}
+{"src": "haricots", "ref": "mkǒ", "hyp": "Les Haricots"}
+{"src": "Où peut-on acheter du pain ?", "ref": "bə́ jó blək hə́?", "hyp": "Est- ce possible d’acheter du pain ?."}
+{"src": "C'est combien ?", "ref": "â lǎ?", "hyp": "Combien c’est ?."}
+{"src": "C'est trop cher", "ref": "dəŋ e tʉɔ teʼ", "hyp": "C’est trop cher"}
+{"src": "Pouvez-vous baisser le prix ?", "ref": "pǒ fi dəŋ é a?", "hyp": "Pouvez-vous baisser le prix ?."}
+{"src": "Donnez-moi un reçu", "ref": "gaə̂ wə́ shəŋ pipa nə́ jó", "hyp": "Donez-moi un recevoir"}
+{"src": "Avez-vous de la monnaie ?", "ref": "ǒ ghə kwə́pnyə́ a?", "hyp": "Avez-vous sur la démocratie ?."}
+{"src": "J'ai mal à la tête", "ref": "thə̂ a wə́ búʼ a", "hyp": "J’ai mal de tête"}
+{"src": "mal de ventre", "ref": "vam də̂mlə̌m", "hyp": "Mal de mort"}
+{"src": "J'ai mal à la gorge", "ref": "tuŋ jɛ́jɛ́", "hyp": "J’ai malade à la gorge"}
+{"src": "fièvre", "ref": "fípa", "hyp": "la fièvre"}
+{"src": "Cette dent me fait mal", "ref": "súŋ yə̌ŋ wə́ jɛ́ a", "hyp": "Ce dent m’a fait mal."}
+{"src": "Je me suis coupé", "ref": "gaə̂ pyə́p nə́ a", "hyp": "J’ai été coupé."}
+{"src": "Une fourmi m'a piqué", "ref": "títyə́ kə̌ də́m a", "hyp": "Une fourmique a disparu."}
+{"src": "Avez-vous un médicament contre la douleur ?", "ref": "ur?   pǒ ghə ywə́ nə́ tsʉʼ jɛ̂jɛ̌ a?", "hyp": "Avez-vous des médicaments contre la douleur ?."}
+{"src": "Elle est enceinte", "ref": "ě bə́ tsʉ́m", "hyp": "Elle est enceinte."}
+{"src": "Je ne me sens pas bien", "ref": "n tə̌ wə́ júʼ pə", "hyp": "Je ne me sens pas bien"}
+{"src": "Je n'ai pas de temps pour ça", "ref": "â tə́  wə́ tə́ŋ a pə", "hyp": "Je n’ai pas le temps pour cela."}
+{"src": "C'est une bonne chose", "ref": "â ywə́ pəpúŋ", "hyp": "C’est une bonne chose."}
+{"src": "C'est laid", "ref": "yə̌ pɔk", "hyp": "C’est laïd."}
+{"src": "Je suis content", "ref": "gaə̂ wə́ júʼ pəpʉ́ŋ", "hyp": "Je suis content"}
+{"src": "Puis-je prendre votre photo ?", "ref": "bə́ də́ fǒtó nə́ a?", "hyp": "Je peux prendre votre photo ?."}
+{"src": "C'est difficile", "ref": "yə́ bə́ a tʉɔ̀", "hyp": "C’est difficile"}
+{"src": "Je t'aime", "ref": "gaə̂ ŋkuŋ ó", "hyp": "J’ai commencé à aimer"}

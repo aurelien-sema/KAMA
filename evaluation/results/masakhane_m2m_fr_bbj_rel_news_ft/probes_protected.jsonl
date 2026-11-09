@@ -1,0 +1,64 @@
+{"src": "Votre solde est de ZZ1ZZ.", "ref": "", "hyp": "Tsʼfaʼ yɔ́ bə́ ZZ1ZZ"}
+{"src": "Le solde disponible sur votre compte est de ZZ1ZZ.", "ref": "", "hyp": "ŋkâp yə ǎ bə́ nə́ ŋkâp mɔ á bə́ ZZ1ZZ"}
+{"src": "Voulez-vous consulter votre solde ?", "ref": "", "hyp": "Pǒ cə́ŋ nə́ yɔ́ pəpúŋ yɔ́?"}
+{"src": "Votre solde est insuffisant pour effectuer cette opération.", "ref": "", "hyp": "Bǎwə́ yɔ́ katə ghə ywə́ yə pû gɔ ghə áá"}
+{"src": "Après cette opération, votre nouveau solde sera de ZZ1ZZ.", "ref": "", "hyp": "A cyə́ m nə́ ts' bɔ́ɔ, dəŋdzə sə́ yɔ gɔ pə́ ZZ1ZZ."}
+{"src": "Dernière mise à jour du solde le ZZ1ZZ.", "ref": "", "hyp": "Cú'tə̀ gùŋ ZZ1ZZ."}
+{"src": "Les frais de cette opération sont de ZZ1ZZ.", "ref": "", "hyp": "ŋkâp yəŋ bə́ ZZ1ZZ"}
+{"src": "Cette opération est gratuite.", "ref": "", "hyp": "nwə yəŋ bə́ pə́ tə́ŋkə́lə́"}
+{"src": "Vous paierez ZZ1ZZ de frais pour ce transfert.", "ref": "", "hyp": "Pǒ gɔ pîŋ ZZ1ZZ ŋkâp nə́ nə́ cya ywə́ bɔ́ɔ."}
+{"src": "Les frais de retrait sont de ZZ1ZZ du montant.", "ref": "", "hyp": "ŋkâp nə ŋkùŋkâp bə́ ZZ1ZZ nə́ ŋkâp"}
+{"src": "Le montant total à débiter, frais inclus, est de ZZ1ZZ.", "ref": "", "hyp": "Guŋ ŋkáp yə pú gɔ ŋkáp ŋkáp á bə́ ZZ1ZZ."}
+{"src": "Aucun frais ne sera appliqué si vous annulez maintenant.", "ref": "", "hyp": "pô tə gɔ há sɔm ŋkâp pə́ tə pǒ cwəlɔ ták ŋkâp áá"}
+{"src": "Les frais ne sont pas remboursables.", "ref": "", "hyp": "ŋkâp tə̂ bə́ pə́púŋ"}
+{"src": "Entrez le montant à envoyer.", "ref": "", "hyp": "Po kó ŋkâp yə pú gɔ tə́m áá"}
+{"src": "Entrez le numéro du bénéficiaire.", "ref": "", "hyp": "Po kó ntúŋkâpə́ mo yə ê gɔ kwítə́ ǎ."}
+{"src": "Vous allez envoyer ZZ1ZZ à ZZ2ZZ.", "ref": "", "hyp": "Pǒ gɔ tə́m ZZ1ZZ bi ZZ2ZZ"}
+{"src": "Le bénéficiaire est ZZ1ZZ, numéro ZZ2ZZ.", "ref": "", "hyp": "Gɛfa' bə ZZ1ZZ, batə ZZ2ZZ"}
+{"src": "Le montant minimum d'un transfert est de ZZ1ZZ.", "ref": "", "hyp": "ŋkâp hâ ta' cya bə́ ZZ1ZZ"}
+{"src": "Le montant maximum par jour est de ZZ1ZZ.", "ref": "", "hyp": "ŋkâp màmà nə́ tyə̂' bə́ ZZ1ZZ"}
+{"src": "Choisissez le compte à débiter.", "ref": "", "hyp": "Po yɔ́ ywə́ yə pû gɔ ŋkáp áá"}
+{"src": "Votre transfert de ZZ1ZZ a réussi.", "ref": "", "hyp": "ZZ1ZZZ cyə́ mǔ ghə̂ŋtə̀"}
+{"src": "Vous avez reçu ZZ1ZZ de ZZ2ZZ.", "ref": "", "hyp": "Pǒ kə̂ kwì ZZ1ZZ ZZ2ZZ"}
+{"src": "Vous avez retiré ZZ1ZZ au point de service.", "ref": "", "hyp": "Pǒ kə́ nté ZZ1ZZ ts' fa'"}
+{"src": "Vérifiez les informations avant de confirmer.", "ref": "", "hyp": "Po yɔ́ mcuŋ tə́ bɔnyə́."}
+{"src": "Montant : ZZ1ZZ. Frais : ZZ2ZZ. Bénéficiaire : ZZ3ZZ.", "ref": "", "hyp": "ŋkáp: ZZ1ZZ. ŋkáp: ZZ2ZZ. ŋkáp: ZZ3ZZ."}
+{"src": "Total à payer : ZZ1ZZ.", "ref": "", "hyp": "Pú gɔ ŋkáp: ZZ1ZZ"}
+{"src": "Appuyez sur Confirmer pour valider le transfert.", "ref": "", "hyp": "Po t̂m nə́ Gɔm gaə́ ŋkâp nə́ nyáptə́ gɔ́pna'."}
+{"src": "Appuyez sur Annuler pour arrêter l'opération.", "ref": "", "hyp": "Po t̂m nə́ Anwɛ́ nə́ miŋ nwə̀."}
+{"src": "Une fois confirmé, ce transfert ne peut pas être annulé.", "ref": "", "hyp": "A pə́ pó'o tə' pú tɔnyə̀, bǎ nə́ŋ cyanyə bɔ́ɔ lə pə́."}
+{"src": "Le bénéficiaire recevra ZZ1ZZ.", "ref": "", "hyp": "Mo yə ě wə́ ŋkâp á gɔ kwi ZZ1ZZ."}
+{"src": "Date de l'opération : ZZ1ZZ à ZZ2ZZ.", "ref": "", "hyp": "Dəŋdzə tyə̂: ZZ1ZZ bí ZZ2ZZ"}
+{"src": "Le code saisi est incorrect.", "ref": "", "hyp": "mcò' myə pú nt́m á bə ǎ hɔ̀."}
+{"src": "Il vous reste ZZ1ZZ essais.", "ref": "", "hyp": "Pə́mtə́ mlə́ŋtə ZZ1ZZ bɔ́ɔ."}
+{"src": "Votre compte est bloqué pour ZZ1ZZ heures.", "ref": "", "hyp": "Pú kə̂ bə ǎ t̂m ŋkâp mzhəŋ ZZ1ZZ."}
+{"src": "L'opération a échoué. Votre argent n'a pas été débité.", "ref": "", "hyp": "Nwə̂ fa' cyə́. Pú lə nə́ŋ ŋkáp mɔ́"}
+{"src": "Le numéro saisi n'existe pas.", "ref": "", "hyp": "Nwə yə pú ghəm ŋbà' lə pə́."}
+{"src": "Le service est momentanément indisponible. Réessayez plus tard.", "ref": "", "hyp": "bə́ cwəlɔ tə yɔ́ fa' pə́. Pó piŋ ntə́ŋtə́."}
+{"src": "Le délai est dépassé. Recommencez l'opération.", "ref": "", "hyp": "Cwə wə́ cyə́. Po pə́mtə́ mfa' myə́."}
+{"src": "Ne partagez jamais votre code secret.", "ref": "", "hyp": "Ka po ghaptə kódyə́ mcàm mɔ́"}
+{"src": "Ne donnez votre code à personne, même à un agent.", "ref": "", "hyp": "ka po há mcò' mɔ bi sɔm mo ba m bi ta' gɛfa'"}
+{"src": "Attention : personne ne doit vous demander votre mot de passe.", "ref": "", "hyp": "Nwə kɔ: Sɔmmo tə̂ gɔ hə́ŋtə́ wɔ́ pasə ó pə́."}
+{"src": "Si vous n'êtes pas à l'origine de cette opération, appelez le ZZ1ZZ.", "ref": "", "hyp": "Po pə́ tə́ tsə́ tsə́ tsɔ́ pə́, po ké ZZ1ZZ."}
+{"src": "Méfiez-vous des messages qui vous promettent de l'argent.", "ref": "", "hyp": "Po tɔnyə̀ nə́ mŋkhɔ myə ǎ wə́ ŋkáp wɔ́ áá"}
+{"src": "Votre code de confirmation est ZZ1ZZ.", "ref": "", "hyp": "Kɔp nə nté ŋwa'nyə yɔ́ bə ZZ1ZZ"}
+{"src": "Ce code expire dans ZZ1ZZ minutes.", "ref": "", "hyp": "Kô bɔ́ɔ gɔ tí pf́ nə́ ZZ1ZZ mnwə myə́."}
+{"src": "Ne cliquez pas sur les liens reçus par message.", "ref": "", "hyp": "ka pó'o nə́ mŋkhɔ myə ŋkhɔ lə cyə áá"}
+{"src": "Vérifiez le nom du bénéficiaire avant d'envoyer l'argent.", "ref": "", "hyp": "Po tə́ŋtə tso gɛfaʼ tə́ nthəm ŋkáp"}
+{"src": "Votre argent peut être perdu si vous donnez votre code.", "ref": "", "hyp": "Pú fíŋ nə há mcò' ó fíŋ nə há ŋkáp yɔ́."}
+{"src": "Votre facture d'électricité de ZZ1ZZ doit être payée avant le ZZ2ZZ.", "ref": "", "hyp": "Pú gɔ tíŋnyə ŋkâp mɔ́ nə́ ZZ1ZZ tə́ dzə́ ZZ2ZZ"}
+{"src": "Votre demande de prêt de ZZ1ZZ est en cours d'examen.", "ref": "", "hyp": "Pú wə́ tə́ŋtə́ hə́ŋtə́ ŋkâp ZZ1ZZ."}
+{"src": "Le taux d'intérêt annuel est de ZZ1ZZ.", "ref": "", "hyp": "dəŋ ŋkâp gu' lə̂ bə́ ZZ1ZZ"}
+{"src": "Votre épargne a augmenté de ZZ1ZZ ce mois-ci.", "ref": "", "hyp": "Pú lə̂ ŋkáp ts' ZZ1ZZ nə́ ŋwə́ bɔ́ɔ."}
+{"src": "Votre carte expire le ZZ1ZZ.", "ref": "", "hyp": "ZZ1ZZ ŋkáp yɔ́ wə́ gɔ́ptə́"}
+{"src": "Vous n'avez pas assez d'argent pour payer cette facture.", "ref": "", "hyp": "Pǒ ka ghə ŋkáp yə á ku' nə́ nə́ ŋkâp bǎkə́lə́."}
+{"src": "Le paiement sera prélevé automatiquement chaque mois.", "ref": "", "hyp": "Pú gɔ tíŋ ŋkáp nə́ gùŋ mŋwə́ awɛ́."}
+{"src": "Merci d'avoir utilisé notre service.", "ref": "", "hyp": "Gho'tə̀ gaə́ pǒ fa' tsɔ́k"}
+{"src": "Solde", "ref": "", "hyp": "ŋkǎp"}
+{"src": "Frais", "ref": "", "hyp": "ŋkáp"}
+{"src": "Confirmer", "ref": "", "hyp": "Gɔm gaə́"}
+{"src": "Annuler", "ref": "", "hyp": "Nə́ táknyə́"}
+{"src": "Bénéficiaire", "ref": "", "hyp": "ŋwɛ́nyə́"}
+{"src": "Montant", "ref": "", "hyp": "ŋkǎp"}
+{"src": "Transfert d'argent", "ref": "", "hyp": "Nə́ cya ŋkáp"}
+{"src": "Retrait", "ref": "", "hyp": "Nə́ kh"}

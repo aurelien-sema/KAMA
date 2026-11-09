@@ -1,0 +1,150 @@
+{"src": "Good morning", "ref": "ǒ tí a?", "hyp": "Púŋnyə́ nə́ŋnyə́ nə́ŋnyə́."}
+{"src": "Hello", "ref": "caʼtə", "hyp": "Pə́ŋnyə́nyə́ lə́ bə́ŋnyə�"}
+{"src": "How are you?", "ref": "ǎ m gaə̂kə̀?", "hyp": "Púŋnyə́ nə́ŋnyə́ nə́ŋnyə́."}
+{"src": "Any news?", "ref": "ywə́ sə́ sí a?", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋny�"}
+{"src": "My name is Paul", "ref": "tsó tsaə̌ bə pol", "hyp": "Pú lə́ bɑwə ŋkhùŋnyə̀ nə́ Cyəpɔ"}
+{"src": "I am from Berlin", "ref": "gaə̂ bə yə bɛlin", "hyp": "Pú lə́ bə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́"}
+{"src": "I live in Yaoundé", "ref": "gaə̂ cwə́ yawùdè", "hyp": "Púŋnyàŋnyàŋnyàŋnyàŋnyàŋnyàŋnyàŋnyàŋnyàŋ"}
+{"src": "I am a teacher", "ref": "gaə̂ bə́ gɛlaʼtə", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́"}
+{"src": "I work at the Goethe-Institut", "ref": "gaə̂ faʼ goətə institʉt", "hyp": "Púŋtə́ nə́ nə́ nə́ nə́ nə́ nə́ nə́"}
+{"src": "Pleased to meet you", "ref": "â púŋ a paʼ gaə́ zhyə́ ó a", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋny"}
+{"src": "See you later", "ref": "â lɔ̂ bə o", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋny�"}
+{"src": "See you tomorrow", "ref": "tə fɔ̂kdzǔ", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋny"}
+{"src": "What is this?", "ref": "yə̌ŋ a kə?", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋny�"}
+{"src": "Who is that?", "ref": "â waə?", "hyp": "Púŋ bə́ŋnyə́ nə́ŋnyə́ nə́�"}
+{"src": "Let us meet this evening or tomorrow", "ref": "pə yɔ́tə́ bwâdzú / tə yó", "hyp": "A lə pɑ̌ po'o ŋkhamsi gwyə́. A lə pɑ̌ po'o ŋkhamsi gwyə́. A lə pɑ̌"}
+{"src": "I would like you to come", "ref": "gaə̂ wə́ cə́ŋ nə́ tə́m pú a wu", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋny"}
+{"src": "I will come to see you in the afternoon", "ref": "gaə̂ gɔ́ sɔʼ cəŋ ó mɔkcú", "hyp": "Púŋtə́ ŋkhə́m nə́ ŋkhə́m nə́ ŋkhə́m nə́ ŋkhə́"}
+{"src": "zero", "ref": "ywə̂ně", "hyp": "Pə́ŋnyə́nyə́ lə́ bə́ŋny"}
+{"src": "one", "ref": "yaə̂ muʼ", "hyp": "Pə́ŋnyə́nyə́ lə́ bə́ŋny"}
+{"src": "two", "ref": "yaə́ pʉə́ə́", "hyp": "Pə́ŋnyə́nyə́ lə́ bə́ŋny"}
+{"src": "three", "ref": "yaə́ tá", "hyp": "Pə́ŋnyə́nyə́ lə́ bə́ŋnyə�"}
+{"src": "four", "ref": "yá pfʉə́", "hyp": "Pə́ŋnyə́nyə́ lə́ bə́ŋny"}
+{"src": "five", "ref": "yaə́ tɔ̂", "hyp": "Pə́ŋnyə́nyə́ lə́ bə́ŋny"}
+{"src": "six", "ref": "ntɔkɔ́", "hyp": "Pə́ŋnyə́nyə́ lə́ bə́ŋny"}
+{"src": "seven", "ref": "sɔmbʉə́ə́", "hyp": "Pə́ŋnyə́nyə́ lə́ bə́ŋnyə�"}
+{"src": "eight", "ref": "hɔ̌m", "hyp": "Pə́ŋnyə́nyə́ lə́ bə́ŋnyə�"}
+{"src": "nine", "ref": "vʉʼʉ́", "hyp": "Pə́ŋnyə́nyə́ lə́ bə́ŋny"}
+{"src": "ten", "ref": "ghǎm", "hyp": "Pə́ŋnyə́nyə́ lə́ bə́ŋny"}
+{"src": "eleven", "ref": "shwǎ muʼ", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə"}
+{"src": "twelve", "ref": "shwop pʉə́ m ghǎm", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə"}
+{"src": "thirteen", "ref": "shwop tá m ghǎm", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́�"}
+{"src": "fourteen", "ref": "shwop pfʉə́ m ghǎm", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́�"}
+{"src": "fifteen", "ref": "shwop tɔ́ m ghǎm", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́�"}
+{"src": "sixteen", "ref": "shwop ntɔkɔ́ m ghǎm", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́�"}
+{"src": "seventeen", "ref": "shwop sɔmbʉə́ m ghǎm", "hyp": "Púŋnyə́ nə́ŋnyə́ nə́ŋnyə́."}
+{"src": "eighteen", "ref": "shwop hɔ̂m m ghǎm", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́�"}
+{"src": "nineteen", "ref": "shwop vʉ̂ʼ m ghǎm", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́�"}
+{"src": "twenty", "ref": "mghǎm mə́bʉə́ə́", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə"}
+{"src": "twenty-one", "ref": "shwâ muʼ m̌bʉə́ə́", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋny�"}
+{"src": "thirty", "ref": "mghǎm m̌ntá", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə"}
+{"src": "forty", "ref": "mghâp pfʉə́", "hyp": "Pú lə́ŋdzə́ŋ bə́ŋnyə́ŋ"}
+{"src": "fifty", "ref": "m̌ntɔ̂", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə"}
+{"src": "sixty", "ref": "mghǎm ntɔkɔ́", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə"}
+{"src": "seventy", "ref": "m̂sɔ̀m", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́�"}
+{"src": "eighty", "ref": "mghâm hɔ̌m", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə"}
+{"src": "ninety", "ref": "mghâm vʉʼʉ́", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə"}
+{"src": "one hundred", "ref": "ŋkhə", "hyp": "Pú lə́ bə́ŋnyə́ nə́ŋ bə́"}
+{"src": "two hundred", "ref": "ŋkhə pʉə́ə́", "hyp": "Pú lə́ bə́ŋnyə́ŋnyə́ŋnyə"}
+{"src": "one thousand", "ref": "shaʼá", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋny�"}
+{"src": "one million", "ref": "shǔʼ", "hyp": "Pə́ŋnyə́nyə́ lə́ bə́ŋnyə�"}
+{"src": "Monday", "ref": "sɛ̂sǔ", "hyp": "Pə́ŋnyə́nyə́ lə́ bə́ŋny"}
+{"src": "Tuesday", "ref": "gɔ̂suɔ̌", "hyp": "Pə́ŋnyə́nyə́ lə́ bə́ŋnyə�"}
+{"src": "Wednesday", "ref": "dzə̂mtɔ̌", "hyp": "Pə́ŋnyə́ nə́ŋnyə́ nə́ŋnyə́"}
+{"src": "Thursday", "ref": "ntâmgǒ", "hyp": "Pə́ŋnyə́nyə́ lə́ bə́ŋnyə�"}
+{"src": "Friday", "ref": "tyə́ʼpfô", "hyp": "Pə́ŋnyə́nyə́ lə́ bə́ŋny"}
+{"src": "Saturday", "ref": "shyə̂ŋkǔʼ", "hyp": "Pə́ŋnyə́nyə́ lə́ bə́ŋnyə�"}
+{"src": "Sunday", "ref": "dzə̂dzə", "hyp": "Pə́ŋnyə́nyə́ lə́ bə́ŋnyə�"}
+{"src": "January", "ref": "ŋkə̂mmghě", "hyp": "Pə́ŋnyə́nyə́ lə́ bə́ŋnyə�"}
+{"src": "February", "ref": "sɔ̂gwǐŋ", "hyp": "Pə́ŋnyə́nyə́ lə́ bə́ŋnyə�"}
+{"src": "March", "ref": "dzə̂tsə́", "hyp": "Pə́ŋnyə́nyə́ lə́ bə́ŋny"}
+{"src": "April", "ref": "dzə̂biyɛ́", "hyp": "Pə́ŋnyə́nyə́ lə́ bə́ŋny"}
+{"src": "May", "ref": "sûnè", "hyp": "Pə́ŋnyə́nyə́ lə́ bə́ŋny"}
+{"src": "June", "ref": "dzûʼ bvù", "hyp": "Pə́ŋnyə́nyə́ lə́ bə́ŋny"}
+{"src": "July", "ref": "fə̀fə̀", "hyp": "Pə́ŋnyə́nyə́ lə́ bə́ŋny"}
+{"src": "August", "ref": "shwâgə̀fə̀", "hyp": "Pə́ŋnyə́nyə́ lə́ bə́ŋnyə�"}
+{"src": "September", "ref": "ŋkə̂mbiyɛ́", "hyp": "Pə́ŋnyə́ nə́ŋnyə́ nə́ŋnyə́"}
+{"src": "October", "ref": "dzûʼ mkǒ", "hyp": "Pə́ŋnyə́nyə́ lə́ bə́ŋnyə�"}
+{"src": "November", "ref": "fə̂nàm", "hyp": "Pə́ŋnyə́nyə́ lə́ bə́ŋnyə�"}
+{"src": "December", "ref": "fûʼ bvù", "hyp": "Pə́ŋnyə́nyə́ lə́ bə́ŋnyə�"}
+{"src": "What time is it?", "ref": "â nam sʉ́ʉ́?", "hyp": "Púŋtə́ ŋkhə́nyə́ Nə́ŋkhə́nyə́ N�"}
+{"src": "It is one o'clock", "ref": "â taʼ nàm", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋny"}
+{"src": "It is half past six", "ref": "â nam ntɔkɔ́ ghap", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋny"}
+{"src": "It is a quarter past five", "ref": "nam tɔ́ jáp shwop tɔ́ m ghǎm", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́�"}
+{"src": "It is a quarter to five", "ref": "nam pfʉə́ jáp shwop tɔ́ m ghap pfʉə́", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋny"}
+{"src": "At what time?", "ref": "sǒ?", "hyp": "Pú lə́ŋdzə́ ŋwányə́ nə́ ŋwa�"}
+{"src": "In a moment", "ref": "nə́ ghâp tám", "hyp": "Pú nə́ nə́ nə́ nə́ nə́ n"}
+{"src": "It is hot", "ref": "tsʉ́ʉ́ wə́ hwé", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋny�"}
+{"src": "It is cold", "ref": "fɔk wə́ khú", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́�"}
+{"src": "The weather is fine", "ref": "tsʉ́ʉ́ wə́ dzaə́ə́", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋny"}
+{"src": "It is raining", "ref": "bəŋ wə́ dú", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋny�"}
+{"src": "The sun is shining", "ref": "nam wə́ cyə́", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋny"}
+{"src": "It is already dark", "ref": "dzǔ dó só", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋny"}
+{"src": "Please", "ref": "sûsó", "hyp": "Pə́ŋnyə́nyə́ lə́ bə́ŋnyə�"}
+{"src": "Thank you", "ref": "gaə̂ piŋ", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋny�"}
+{"src": "Thank you too", "ref": "gaə̂ piŋ ó", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́"}
+{"src": "No, it is I who should thank you", "ref": "gɛ̌; gaə̂ ghɔ́tə́ wɔ́", "hyp": "Pú ŋkə́ŋnyə́ ŋkə́ŋnyə́ ŋkə́ŋnyə́ ŋk�"}
+{"src": "Sorry", "ref": "cusí ǎ", "hyp": "Pə́ŋnyə́nyə́ lə́ bə́ŋny"}
+{"src": "Excuse me", "ref": "gaə̂ o cusi a", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋny�"}
+{"src": "Where is the house?", "ref": "paʼ bə́ m hə́?", "hyp": "A lə́ nə́ŋ bə́ tyɛ̂ʼsɛ́nyə́ nə́ŋ"}
+{"src": "Where is the road to the market?", "ref": "bə́ ghə lǎ tə́ ŋwak sim?", "hyp": "Pútə́ ŋwányə́ Ntʉ̂mnyə́ Ntʉ̂mnyə́ Ntʉ̂mnyə́ Nt"}
+{"src": "How far is it from here to the motor park?", "ref": "tsʉʼ nə́ də́ mə̂twa bə́ a sak nə́ sok á?", "hyp": "Pú lə́ŋdzə́ bə́ŋnyə́ nə́ ŋkhə́ŋnyə́ nə́ ŋkh�"}
+{"src": "Does this road go to Douala?", "ref": "yə̌ŋ mə̂jyə duala á?", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́�"}
+{"src": "on the right", "ref": "tʉɔ̀", "hyp": "Pú ŋkə́ŋnyə́ ŋkə́ŋnyə́ �"}
+{"src": "on the left", "ref": "kwyap", "hyp": "Pú ŋkwîŋnyə́ nə́ ŋkwîŋnyə́ n"}
+{"src": "straight ahead", "ref": "dəŋdəŋ", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́"}
+{"src": "clando taxi", "ref": "mə̂twa busí", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋny�"}
+{"src": "neighbourhood", "ref": "láʼ", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́"}
+{"src": "Please take me to the town centre", "ref": "nə́ gɔ́ tisuŋ sûsó", "hyp": "Púŋnyə́ ntʉ́m ntʉ́m ntʉ́m ntʉ́m ntʉ́m ntʉ́m ntʉ"}
+{"src": "I would like to eat something", "ref": "gaə̂ wə́ cəŋ nə́ pfaə́ ywə́", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́�"}
+{"src": "I would like to drink something", "ref": "gaə̂ wə́ cəŋ nə́ nwə́ ywə́", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́�"}
+{"src": "Is this table free?", "ref": "tə́pe sí a?", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋny"}
+{"src": "Breakfast, please", "ref": "ywə́ nə́ cwa pak; sûsó", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋny"}
+{"src": "A beer, please", "ref": "shəŋ mluʼ zəzə sûsó", "hyp": "Pútə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋ"}
+{"src": "Tea, please", "ref": "taʼ tuʼ kafɛ sûsó", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋny�"}
+{"src": "What do you want?", "ref": "pǒ wə́ shəŋ kə́?", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋny"}
+{"src": "What do you have here?", "ref": "pǒ nɛ́ kə sɔʼ?", "hyp": "Pú lə́ bə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́"}
+{"src": "Do you have food for vegetarians?", "ref": "pǒ ghə ywə́tsú tə sɔm bap á?", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋny�"}
+{"src": "How much do I owe?", "ref": "sûsó pó há dəŋ e", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋny"}
+{"src": "fish", "ref": "bapgù", "hyp": "Pə́ŋnyə́nyə́ lə́ bə́ŋny"}
+{"src": "beef", "ref": "bap naʼ", "hyp": "Pú lə́ bə́ŋnyə́ŋnyə́ŋ"}
+{"src": "pork", "ref": "bap gə́nɔ̀m", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə"}
+{"src": "vegetables", "ref": "jap", "hyp": "Púŋ bə́ pə́ŋnyə́ ntʉ́m nə"}
+{"src": "egg", "ref": "pəm", "hyp": "Pə́ŋnyə́nyə́ lə́ bə́ŋny"}
+{"src": "banana", "ref": "kə̀lùŋ", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́�"}
+{"src": "fufu", "ref": "bap gwɔʼɔ", "hyp": "Pú nə́ nə́ nə́ nə́ nə�"}
+{"src": "yam", "ref": "loʼ", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə"}
+{"src": "cassava", "ref": "cyəsə̀m", "hyp": "Pútə́ ŋkə́ŋdzə́ ŋkə́ŋ"}
+{"src": "potato", "ref": "tɔ̌m", "hyp": "Pú lə́ŋdzə́ ŋkə́ŋdzə́."}
+{"src": "water", "ref": "shyə", "hyp": "Pə́ŋnyə́nyə́ lə́ bə́ŋny"}
+{"src": "fruit juice", "ref": "mluʼ dʉ̂mtʉ́m", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋny�"}
+{"src": "lemon juice", "ref": "mluʼ", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋny�"}
+{"src": "wine", "ref": "mluʼ phə́phə́", "hyp": "Pə́ŋnyə́nyə́ lə́ bə́ŋnyə�"}
+{"src": "doughnut", "ref": "mə̂kə́láʼ", "hyp": "Pútə́ ŋkə́ŋnyə́ ntʉ́m ŋk"}
+{"src": "cake", "ref": "blək", "hyp": "Pə́ŋnyə́nyə́ lə́ bə́ŋnyə�"}
+{"src": "peanuts", "ref": "biyɛ́", "hyp": "Púŋnyə́ nə́ŋnyə́ nə́ŋnyə"}
+{"src": "porridge", "ref": "kukulú", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́�"}
+{"src": "beans", "ref": "mkǒ", "hyp": "Pə́ŋnyə́nyə́ lə́ bə́ŋny"}
+{"src": "Where can one buy bread?", "ref": "bə́ jó blək hə́?", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋny"}
+{"src": "How much is it?", "ref": "â lǎ?", "hyp": "Pútə́ ŋwányə́ ŋwányə́ ŋwányə́"}
+{"src": "It is too expensive", "ref": "dəŋ e tʉɔ teʼ", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋny"}
+{"src": "Can you lower the price?", "ref": "pǒ fi dəŋ é a?", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋny"}
+{"src": "Give me a receipt", "ref": "gaə̂ wə́ shəŋ pipa nə́ jó", "hyp": "Púŋnyə́ nə́ŋnyə́ nə́ŋnyə́ nə́ŋ"}
+{"src": "Do you have change?", "ref": "ǒ ghə kwə́pnyə́ a?", "hyp": "Pú lə́ŋdzə́ŋnyə́ŋnyə́ŋnyə́ŋny�"}
+{"src": "I have a headache", "ref": "thə̂ a wə́ búʼ a", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋny"}
+{"src": "stomach ache", "ref": "vam də̂mlə̌m", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋny�"}
+{"src": "My throat hurts", "ref": "tuŋ jɛ́jɛ́", "hyp": "Pə́ŋnyə́ kə́ŋnyə́ kə́ŋnyə́ kə́�"}
+{"src": "fever", "ref": "fípa", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə"}
+{"src": "This tooth hurts", "ref": "súŋ yə̌ŋ wə́ jɛ́ a", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋny"}
+{"src": "I have cut myself", "ref": "gaə̂ pyə́p nə́ a", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋny"}
+{"src": "An ant bit me", "ref": "títyə́ kə̌ də́m a", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́"}
+{"src": "Do you have medicine for pain?", "ref": "ur?   pǒ ghə ywə́ nə́ tsʉʼ jɛ̂jɛ̌ a?", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́�"}
+{"src": "She is pregnant", "ref": "ě bə́ tsʉ́m", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋny"}
+{"src": "I do not feel well", "ref": "n tə̌ wə́ júʼ pə", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋny"}
+{"src": "I do not have time for that", "ref": "â tə́  wə́ tə́ŋ a pə", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́�"}
+{"src": "It is a good thing", "ref": "â ywə́ pəpúŋ", "hyp": "Púŋnyə́ nə́ nə́ nə́ nə́ nə́"}
+{"src": "It is ugly", "ref": "yə̌ pɔk", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́�"}
+{"src": "I am happy", "ref": "gaə̂ wə́ júʼ pəpʉ́ŋ", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́�"}
+{"src": "Can I take your photo?", "ref": "bə́ də́ fǒtó nə́ a?", "hyp": "Púŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋnyə́ŋny"}
+{"src": "It is difficult", "ref": "yə́ bə́ a tʉɔ̀", "hyp": "Púŋnyə́ ntʉ́m ntʉ́m ŋkə́ŋnyə́ nt�"}
+{"src": "I love you", "ref": "gaə̂ ŋkuŋ ó", "hyp": "Pútə́ŋnyə́ŋnyə́ŋnyə́ŋny"}

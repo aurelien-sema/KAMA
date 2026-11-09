@@ -1,0 +1,64 @@
+{"src": "Your balance is 25,000 FCFA.", "ref": "", "hyp": "Nə pa' o bɑ ŋkwɔ' ŋkwɔ' ŋkwɔ' nə ŋkwɔ' nə ŋkwɔ' nə ŋkwɔ' nə ŋkwɔ"}
+{"src": "The available balance on your account is 3,750 FCFA.", "ref": "", "hyp": "A shyə m nə ywə yə a bɑ ě ghə ghə ghə ghə ghə ghəm ghə ghə ywə yə a bɑ ŋkho nə o."}
+{"src": "Do you want to check your balance?", "ref": "", "hyp": "Po ghə ywə yə po ghə ywə yə a bɑwə shəŋ a?"}
+{"src": "Your balance is not enough to complete this operation.", "ref": "", "hyp": "Nə pa' o bɑwə yə o bɑ ě khəm nə ghə ywə yə o gɔ sɔ' ghə ywə yə o gɔ sɔ' ghə ywə yə o gɔ sɔ' ghə ywə yə o gɔ sɔ' ghə a."}
+{"src": "After this operation, your new balance will be 112,500 FCFA.", "ref": "", "hyp": "A lə pɑ́ po'o tə́ gɔ sɔ' m nə ghə ywə yə a gɔ sɔ' sɔ' m nə ghə pfka a."}
+{"src": "Balance last updated on 12/11/2026.", "ref": "", "hyp": "Bi a pɑ́ po'o ŋkwa'nyə nə ŋwa'nyə nə ŋwa'nyə nə ŋwa'nyə nə ŋwa'nyə nə ŋwa'nyə n"}
+{"src": "The fee for this operation is 150 FCFA.", "ref": "", "hyp": "Nə pa' tsʉ' yə a bɑ ǎ ghə ghə mghɔm shwɔ'."}
+{"src": "This operation is free.", "ref": "", "hyp": "Nə pa' a bɑ gɔ sɔ' ŋkwi'nyə."}
+{"src": "You will pay a fee of 500 FCFA for this transfer.", "ref": "", "hyp": "Po gɔ sɔ' hɑ ghə mghɔm nə ghə mghɔm nə ghə mghɔm."}
+{"src": "The withdrawal fee is 2% of the amount.", "ref": "", "hyp": "Nə pa' tsʉ' ywə yə a bɑ ŋkwɔ' nə ŋkwɔ' nə ŋkwɔ' nə ŋkwɔ' nə ŋkwɔ'."}
+{"src": "The total amount to be debited, including fees, is 10,150 FCFA.", "ref": "", "hyp": "Nə pa' a bɑ ě ghə ghə mghɔm, bap nə mghɔm a, bɑ mghɔm a, bɑ mghɔm a."}
+{"src": "No fee will be charged if you cancel now.", "ref": "", "hyp": "A shyə m po'o gɔ sɔ' sɔ' pɑ́ nə pa' o gɔ sɔ' cwəlɔ."}
+{"src": "Fees are not refundable.", "ref": "", "hyp": "Nə pa' msəŋwə nə pa' a bɑ pu lə ŋkhamtə."}
+{"src": "Enter the amount to send.", "ref": "", "hyp": "Po ghɔm nə ywə yə e gɔ sɔ' a."}
+{"src": "Enter the recipient's number.", "ref": "", "hyp": "Po ŋkwi' nə tsyə́ nə ŋkwi' nə ŋkwi'."}
+{"src": "You are about to send 10,000 FCFA to Jean Kamga.", "ref": "", "hyp": "O gɔ sɔ' pɑ́ sɔ' ghɔm tsʉ' mghɔm tsʉ' mghɔm tsʉ' mghɔm tsʉ' mghɔm tsʉ' mghɔm tsʉ' mghɔm t"}
+{"src": "The recipient is Marie Tchoupo, number 677 12 34 56.", "ref": "", "hyp": "A pɑ́ po'o bɑ Maria Tkoupo, bɑ ŋkhamtə nthʉm nə msə́ mghɔm mghɔm mghɔm mghɔm mghɔm mghɔm mghɔm mghɔm mghɔm mghɔm mg"}
+{"src": "The minimum transfer amount is 100 FCFA.", "ref": "", "hyp": "Nə pa' mghɔm tsʉ' mghɔm tsyə a bɑ mghɔm tsyə a."}
+{"src": "The maximum amount per day is 500,000 FCFA.", "ref": "", "hyp": "Nə pa' a bɑ ǎ ghə ghə mghɔm tyɛ'dzʉ a bɑ ǎ ghə mghɔm ghə mghɔm."}
+{"src": "Choose the account to debit.", "ref": "", "hyp": "Sɔ' m nə ywə yə e gɔ ghə ywə yə e gɔ ghə a."}
+{"src": "Your transfer of 75,000 FCFA was successful.", "ref": "", "hyp": "A lə pɑ́ po'o tə ŋkho nə ŋkho nə ŋkho nə ŋkho nə ŋkho nə ŋkho nə ŋkho nə ŋkho nə ŋkho nə"}
+{"src": "You received 5,000 FCFA from Paul Ngassa.", "ref": "", "hyp": "A lə pɑ́ po'o lə ŋkwi ŋkwi ŋkwi ŋkwi ŋkwi ŋkwi ŋkwi ŋkwi ŋkwi ŋkwi ŋkwi ŋkwi ŋkwi ŋkwi"}
+{"src": "You withdrew 20,000 FCFA at the service point.", "ref": "", "hyp": "A lə pɑ́ po'o lə ghə mghɔm mghɔm mghɔm mghɔm mghɔm mghɔm mghɔm mghɔm mghɔm mghɔm mghɔm mghɔm mghɔ"}
+{"src": "Check the details before confirming.", "ref": "", "hyp": "Po'o tə́ ŋkwi'nyə nə ŋkwi'nyə nə ŋkwi'nyə."}
+{"src": "Amount: 15,000 FCFA. Fee: 200 FCFA. Recipient: Awa Bello.", "ref": "", "hyp": "Nə pa' mghɔm ghɔm ghɔm ghɔm ghə mghɔm ghɔm ghɔm ghɔm ghɔm ghɔm ghɔm ghɔm ghɔm ghɔm ghɔm ghɔm ghɔm ghɔm ghɔm"}
+{"src": "Total to pay: 15,200 FCFA.", "ref": "", "hyp": "A shyə m nə pa' tsʉ'u a: mghappfʉə nthʉm tsʉ'u."}
+{"src": "Press Confirm to approve the transfer.", "ref": "", "hyp": "Po'o tə́ ŋkwi' nə ŋkwishyə nə ŋkwishyə."}
+{"src": "Press Cancel to stop the operation.", "ref": "", "hyp": "A po'o tə́ po'o tə́ ŋkwɔ'nyə cwəlɔ nə ghə nə ghə."}
+{"src": "Once confirmed, this transfer cannot be cancelled.", "ref": "", "hyp": "Nə pa' a bɑ pu ghə ywə yə a bɑ pu ghə ywə yə a bɑ pu ghə ywə yə a bɑ pu ghə ywə a."}
+{"src": "The recipient will receive 14,800 FCFA.", "ref": "", "hyp": "A pɑ́ po'o tə ŋkwa' pɑ ŋkwa' nə ŋkwa' nə ŋkwa' nə ŋkwa' nə ŋkwa' nə ŋkwa' nə ŋkwa' nə ŋk"}
+{"src": "Date of the operation: 09/11/2026 at 14:32.", "ref": "", "hyp": "A lə pɑ́ po'o nə ghɔm ghɔm ghɔm ghɔm ghɔm ghɔm ghɔm ghɔm ghɔm ghɔm ghɔm ghɔm ghɔm ghɔm"}
+{"src": "The code you entered is incorrect.", "ref": "", "hyp": "Nə pa' ywə yə po lə ŋkwi'nyə a bɑ nə ŋkwi'nyə."}
+{"src": "You have 2 attempts left.", "ref": "", "hyp": "A po'o tə́ gɔ sɔ' m nə shwɔppfʉə mghɔm."}
+{"src": "Your account is blocked for 24 hours.", "ref": "", "hyp": "Nə pa' o bɑ ŋkwɔ' ŋkwɔppfʉə mghɔm."}
+{"src": "The operation failed. Your money was not debited.", "ref": "", "hyp": "A lə pɑ̌ po'o tə́ gɔ sɔ' pɑ́, nə pa' a lə bɑ pu lə ghə ywə yə pu lə ghə ywə yə pu lə ghə ywə yə pu lə ghə ywə yə"}
+{"src": "The number you entered does not exist.", "ref": "", "hyp": "Nə pa' yə po lə ŋkho'nyə tə́ sɔ' pɑ́."}
+{"src": "The service is temporarily unavailable. Try again later.", "ref": "", "hyp": "Nə pa' a bɑ pu lə ŋkwɔ'nyə nə ŋkwɔ'nyə. Po'o gɑ po'o tə́ ŋkwɔ'nyə nə tyɛ'dzʉ́."}
+{"src": "The time has run out. Start the operation again.", "ref": "", "hyp": "Nə pa' cwə yə a bɑwə shyə m nə cwəlɔ, po'o gɑ ŋkwɔ'nyə."}
+{"src": "Never share your secret code.", "ref": "", "hyp": "Nə pa' tsʉ' yə ŋkho tsʉ' o."}
+{"src": "Do not give your code to anyone, not even an agent.", "ref": "", "hyp": "Ka po ghə ywə yə o bɑ mo yə e kɑ mo yə e tə́ gɔm a."}
+{"src": "Warning: nobody should ask you for your password.", "ref": "", "hyp": "A po'o tə́ gɑ́ sɔmmo kɑ́ wɔ nə ghə ywə yə o ghə ŋwa'nyə o."}
+{"src": "If you did not make this operation, call 8000.", "ref": "", "hyp": "A pɑ́ po'o tə́ gɑ́ po ghə ghə ghə ghə mghɔm."}
+{"src": "Beware of messages that promise you money.", "ref": "", "hyp": "Po pɑmtə́ nə ghɔm tsʉ' yə pu lə ghɔm bi po a."}
+{"src": "Your confirmation code is 483920.", "ref": "", "hyp": "Nə pa' o bɑ ŋkwishyə o bɑ ŋkwishyə bɑ ŋkwishyə bɑ ŋkwishyə bɑ ŋkwishyə pɑ"}
+{"src": "This code expires in 5 minutes.", "ref": "", "hyp": "Nə pa' ywə yə e gɔ sɔ' nə mnwə mghɔm."}
+{"src": "Do not click on links received by message.", "ref": "", "hyp": "Ka po kɑ cwəlɔ nə msəŋwi nə ywə yə pu lə ghɔm a."}
+{"src": "Check the recipient's name before sending the money.", "ref": "", "hyp": "Po kwa' nə tsyə́ tsyə́ tsyə́ tsyə́ tsyə́ tsyə́ tsyə tsyə tsyə tsyə tsyə tsyə tsyə tsyə tsyə tsyə tsyə tsy"}
+{"src": "Your money can be lost if you give your code.", "ref": "", "hyp": "Po'o gɔ sɔ' ghə ywə yə o ghə ywə yə o ghə yə o."}
+{"src": "Your electricity bill of 18,450 FCFA must be paid before 30/11/2026.", "ref": "", "hyp": "Po'o tə́ ŋkwɔ' ŋkwɔ' ŋkwɔ' ŋkwɔ' ŋkwɔ' ŋkwɔ' nə ŋkwɔ' nə tyɛ'dzʉ nə tyɛ'dzʉ́ mghɔm."}
+{"src": "Your loan request of 200,000 FCFA is under review.", "ref": "", "hyp": "Po'o tə́ gɔ sɔ' pɑ́ nə ghə ghə ghə ghə ghə ghə mghɔm ghə mghɔm a."}
+{"src": "The annual interest rate is 12%.", "ref": "", "hyp": "Nə pa' a bɑ ǎ ŋkwɔ'nyə nə ŋkwɔ'nyə nə ŋkwɔ' nə ŋkwɔ' nə ŋkwɔ'nyə"}
+{"src": "Your savings increased by 3,000 FCFA this month.", "ref": "", "hyp": "A lə pɑ́ po'o tə ŋkwɔ' ŋkwɔ' ŋkwɔ'nyə ŋkwɔ' ŋkwɔ' ŋkwɔ'nyə nə ŋkwɔ' ŋkwɔ'"}
+{"src": "Your card expires on 31/12/2027.", "ref": "", "hyp": "Nə pa' o tsʉ' o tsʉ'u nə ŋkho nə ŋkho nə ŋkho nə ŋkho nə ŋkho nə ŋkho nə"}
+{"src": "You do not have enough money to pay this bill.", "ref": "", "hyp": "Po ka ghə tsʉ' ywə yə pu lə ghə tsʉ' ywə yə pu lə ŋkwyə a."}
+{"src": "The payment will be taken automatically every month.", "ref": "", "hyp": "A shyə m nə m nə mtyɛ'dzʉ́ a gɔ sɔ' ŋkwɔ'nyə nə tyɛ'dzʉ́."}
+{"src": "Thank you for using our service.", "ref": "", "hyp": "A po'o tə́ po'o gɑ́ wɔ nə pa' a pɑ́ po'o."}
+{"src": "Balance", "ref": "", "hyp": "Biŋ"}
+{"src": "Fee", "ref": "", "hyp": "Ta'"}
+{"src": "Confirm", "ref": "", "hyp": "ŋkwi'nyə"}
+{"src": "Cancel", "ref": "", "hyp": "Bi a bɑ ŋkwɛnyə"}
+{"src": "Recipient", "ref": "", "hyp": "Nə pa'"}
+{"src": "Amount", "ref": "", "hyp": "Nə pa'"}
+{"src": "Money transfer", "ref": "", "hyp": "Tə́ ŋkwi ŋkwi ŋkwi ŋkwi ŋkwi ŋkwi ŋkwi ŋkwi"}
+{"src": "Withdrawal", "ref": "", "hyp": "A lə pɑ́ po'o"}

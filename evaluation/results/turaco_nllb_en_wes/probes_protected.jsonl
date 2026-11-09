@@ -1,0 +1,64 @@
+{"src": "Your balance is ZZ1ZZ.", "ref": "", "hyp": "Your balance is ZZ1ZZ."}
+{"src": "The available balance on your account is ZZ1ZZ.", "ref": "", "hyp": "The available balance on your account is ZZ1ZZ."}
+{"src": "Do you want to check your balance?", "ref": "", "hyp": "You want check for your balance?"}
+{"src": "Your balance is not enough to complete this operation.", "ref": "", "hyp": "Your balance won't be enough to complete this operation."}
+{"src": "After this operation, your new balance will be ZZ1ZZ.", "ref": "", "hyp": "After this operation, your new balance will be ZZ1ZZ."}
+{"src": "Balance last updated on ZZ1ZZ.", "ref": "", "hyp": "Balance last update for ZZ1ZZ."}
+{"src": "The fee for this operation is ZZ1ZZ.", "ref": "", "hyp": "The fee for this operation is ZZ1ZZ."}
+{"src": "This operation is free.", "ref": "", "hyp": "This operation is free."}
+{"src": "You will pay a fee of ZZ1ZZ for this transfer.", "ref": "", "hyp": "You will pay a fee of ZZ1ZZ for this transfer."}
+{"src": "The withdrawal fee is ZZ1ZZ of the amount.", "ref": "", "hyp": "The withdrawal fee is ZZ1ZZ of the amount."}
+{"src": "The total amount to be debited, including fees, is ZZ1ZZ.", "ref": "", "hyp": "The total amount to be debited, including fees, is ZZ1ZZ."}
+{"src": "No fee will be charged if you cancel now.", "ref": "", "hyp": "No fee will be charged if you cancel now."}
+{"src": "Fees are not refundable.", "ref": "", "hyp": "The fees are not refundable."}
+{"src": "Enter the amount to send.", "ref": "", "hyp": "Enter the amount for send."}
+{"src": "Enter the recipient's number.", "ref": "", "hyp": "Enter the recipient's number."}
+{"src": "You are about to send ZZ1ZZ to ZZ2ZZ.", "ref": "", "hyp": "You're about to send ZZ1ZZ to ZZ2ZZ."}
+{"src": "The recipient is ZZ1ZZ, number ZZ2ZZ.", "ref": "", "hyp": "The recipient is ZZ1ZZ, number ZZ2ZZ."}
+{"src": "The minimum transfer amount is ZZ1ZZ.", "ref": "", "hyp": "The minimum amount for transfer is ZZ1ZZ."}
+{"src": "The maximum amount per day is ZZ1ZZ.", "ref": "", "hyp": "The maximum amount per day is ZZ1ZZ."}
+{"src": "Choose the account to debit.", "ref": "", "hyp": "Choose the account to debit."}
+{"src": "Your transfer of ZZ1ZZ was successful.", "ref": "", "hyp": "Your transfer of ZZ1ZZ was successful."}
+{"src": "You received ZZ1ZZ from ZZ2ZZ.", "ref": "", "hyp": "You get ZZ1ZZ from ZZ2ZZ."}
+{"src": "You withdrew ZZ1ZZ at the service point.", "ref": "", "hyp": "You withdraw ZZ1ZZ at the service point."}
+{"src": "Check the details before confirming.", "ref": "", "hyp": "Check the details before confirming."}
+{"src": "Amount: ZZ1ZZ. Fee: ZZ2ZZ. Recipient: ZZ3ZZ.", "ref": "", "hyp": "Amount: ZZ1ZZ. Fee: ZZ2ZZ. Recipient: ZZ3ZZ."}
+{"src": "Total to pay: ZZ1ZZ.", "ref": "", "hyp": "Total to be paid: ZZ1ZZ."}
+{"src": "Press Confirm to approve the transfer.", "ref": "", "hyp": "Press Confirm for approve the transfer."}
+{"src": "Press Cancel to stop the operation.", "ref": "", "hyp": "Press Cancel for stop the operation."}
+{"src": "Once confirmed, this transfer cannot be cancelled.", "ref": "", "hyp": "Once confirmed, this transfer can't be cancelled."}
+{"src": "The recipient will receive ZZ1ZZ.", "ref": "", "hyp": "The recipient will get ZZ1ZZ."}
+{"src": "Date of the operation: ZZ1ZZ at ZZ2ZZ.", "ref": "", "hyp": "Date of operation: ZZ1ZZ at ZZ2ZZ."}
+{"src": "The code you entered is incorrect.", "ref": "", "hyp": "The code you enter is wrong."}
+{"src": "You have ZZ1ZZ attempts left.", "ref": "", "hyp": "You have ZZ1ZZ attempt left."}
+{"src": "Your account is blocked for ZZ1ZZ hours.", "ref": "", "hyp": "Your account is blocked for ZZ1ZZ hours."}
+{"src": "The operation failed. Your money was not debited.", "ref": "", "hyp": "The operation failed. Your money no be debited."}
+{"src": "The number you entered does not exist.", "ref": "", "hyp": "The number you enter no be."}
+{"src": "The service is temporarily unavailable. Try again later.", "ref": "", "hyp": "The service is temporarily no available. Try again later."}
+{"src": "The time has run out. Start the operation again.", "ref": "", "hyp": "The time has run out. Start the operation again."}
+{"src": "Never share your secret code.", "ref": "", "hyp": "Never share your secret code."}
+{"src": "Do not give your code to anyone, not even an agent.", "ref": "", "hyp": "Don't give your code to anyone, not even an agent."}
+{"src": "Warning: nobody should ask you for your password.", "ref": "", "hyp": "Warning: no one should ask you for your password."}
+{"src": "If you did not make this operation, call ZZ1ZZ.", "ref": "", "hyp": "If you didn't do this operation, call ZZ1ZZ."}
+{"src": "Beware of messages that promise you money.", "ref": "", "hyp": "Beware of messages that promise you money."}
+{"src": "Your confirmation code is ZZ1ZZ.", "ref": "", "hyp": "Your confirmation code is ZZ1ZZ."}
+{"src": "This code expires in ZZ1ZZ minutes.", "ref": "", "hyp": "This code expires in ZZ1ZZ minutes."}
+{"src": "Do not click on links received by message.", "ref": "", "hyp": "Don't click on links you get for message."}
+{"src": "Check the recipient's name before sending the money.", "ref": "", "hyp": "Check the name of the recipient before you send the money."}
+{"src": "Your money can be lost if you give your code.", "ref": "", "hyp": "Your money can be lost if you give your code."}
+{"src": "Your electricity bill of ZZ1ZZ must be paid before ZZ2ZZ.", "ref": "", "hyp": "Your electric bill for ZZ1ZZ must be paid before ZZ2ZZ."}
+{"src": "Your loan request of ZZ1ZZ is under review.", "ref": "", "hyp": "Your loan request for ZZ1ZZ is being reviewed."}
+{"src": "The annual interest rate is ZZ1ZZ.", "ref": "", "hyp": "The annual interest rate is ZZ1ZZ."}
+{"src": "Your savings increased by ZZ1ZZ this month.", "ref": "", "hyp": "Your savings increase by ZZ1ZZ this month."}
+{"src": "Your card expires on ZZ1ZZ.", "ref": "", "hyp": "Your card expires on ZZ1ZZ."}
+{"src": "You do not have enough money to pay this bill.", "ref": "", "hyp": "You don't have enough money to pay this bill."}
+{"src": "The payment will be taken automatically every month.", "ref": "", "hyp": "The payment will be taken automatically every month."}
+{"src": "Thank you for using our service.", "ref": "", "hyp": "Thank you for use our service."}
+{"src": "Balance", "ref": "", "hyp": "Balance"}
+{"src": "Fee", "ref": "", "hyp": "Fee"}
+{"src": "Confirm", "ref": "", "hyp": "Confirm"}
+{"src": "Cancel", "ref": "", "hyp": "Cancel"}
+{"src": "Recipient", "ref": "", "hyp": "Receiver"}
+{"src": "Amount", "ref": "", "hyp": "Amount"}
+{"src": "Money transfer", "ref": "", "hyp": "Transfer money"}
+{"src": "Withdrawal", "ref": "", "hyp": "Withdrawal"}
