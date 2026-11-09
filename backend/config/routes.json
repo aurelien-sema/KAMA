@@ -1,0 +1,22 @@
+{
+  "languages": {
+    "bbj": { "name": "Ghomálá'" },
+    "wes": { "name": "Pidgin camerounais" }
+  },
+  "translation": {
+    "fr>bbj": {
+      "enabled": false,
+      "engine": "marian_ct2",
+      "path": "flagship-ai__cameroon-int8/francais-ghomala",
+      "backtranslate": "bbj>fr",
+      "min_backtranslation": 0.5
+    },
+    "bbj>fr": {
+      "enabled": false,
+      "engine": "marian_ct2",
+      "path": "flagship-ai__cameroon-int8/ghomala-francais"
+    }
+  },
+  "asr": {},
+  "tts": {}
+}

@@ -1,0 +1,453 @@
+{
+  "_note": "Phrases sources des parcours bancaires. Ajouter une traduction sous la forme \"translations\": {\"bbj\": {\"text\": \"...{x1}...\", \"validated_by\": \"nom du locuteur\"}}. Sans validated_by, la traduction n'est jamais servie.",
+  "templates": [
+    {
+      "id": "solde_01",
+      "journey": "solde",
+      "fr": "Votre solde est de {x1}.",
+      "en": "Your balance is {x1}.",
+      "translations": {}
+    },
+    {
+      "id": "solde_02",
+      "journey": "solde",
+      "fr": "Le solde disponible sur votre compte est de {x1}.",
+      "en": "The available balance on your account is {x1}.",
+      "translations": {}
+    },
+    {
+      "id": "solde_03",
+      "journey": "solde",
+      "fr": "Voulez-vous consulter votre solde ?",
+      "en": "Do you want to check your balance?",
+      "translations": {}
+    },
+    {
+      "id": "solde_04",
+      "journey": "solde",
+      "fr": "Votre solde est insuffisant pour effectuer cette opération.",
+      "en": "Your balance is not enough to complete this operation.",
+      "translations": {}
+    },
+    {
+      "id": "solde_05",
+      "journey": "solde",
+      "fr": "Après cette opération, votre nouveau solde sera de {x1}.",
+      "en": "After this operation, your new balance will be {x1}.",
+      "translations": {}
+    },
+    {
+      "id": "solde_06",
+      "journey": "solde",
+      "fr": "Dernière mise à jour du solde le {x1}.",
+      "en": "Balance last updated on {x1}.",
+      "translations": {}
+    },
+    {
+      "id": "frais_01",
+      "journey": "frais",
+      "fr": "Les frais de cette opération sont de {x1}.",
+      "en": "The fee for this operation is {x1}.",
+      "translations": {}
+    },
+    {
+      "id": "frais_02",
+      "journey": "frais",
+      "fr": "Cette opération est gratuite.",
+      "en": "This operation is free.",
+      "translations": {}
+    },
+    {
+      "id": "frais_03",
+      "journey": "frais",
+      "fr": "Vous paierez {x1} de frais pour ce transfert.",
+      "en": "You will pay a fee of {x1} for this transfer.",
+      "translations": {}
+    },
+    {
+      "id": "frais_04",
+      "journey": "frais",
+      "fr": "Les frais de retrait sont de {x1} du montant.",
+      "en": "The withdrawal fee is {x1} of the amount.",
+      "translations": {}
+    },
+    {
+      "id": "frais_05",
+      "journey": "frais",
+      "fr": "Le montant total à débiter, frais inclus, est de {x1}.",
+      "en": "The total amount to be debited, including fees, is {x1}.",
+      "translations": {}
+    },
+    {
+      "id": "frais_06",
+      "journey": "frais",
+      "fr": "Aucun frais ne sera appliqué si vous annulez maintenant.",
+      "en": "No fee will be charged if you cancel now.",
+      "translations": {}
+    },
+    {
+      "id": "frais_07",
+      "journey": "frais",
+      "fr": "Les frais ne sont pas remboursables.",
+      "en": "Fees are not refundable.",
+      "translations": {}
+    },
+    {
+      "id": "transfert_01",
+      "journey": "transfert",
+      "fr": "Entrez le montant à envoyer.",
+      "en": "Enter the amount to send.",
+      "translations": {}
+    },
+    {
+      "id": "transfert_02",
+      "journey": "transfert",
+      "fr": "Entrez le numéro du bénéficiaire.",
+      "en": "Enter the recipient's number.",
+      "translations": {}
+    },
+    {
+      "id": "transfert_03",
+      "journey": "transfert",
+      "fr": "Vous allez envoyer {x1} à {x2}.",
+      "en": "You are about to send {x1} to {x2}.",
+      "translations": {}
+    },
+    {
+      "id": "transfert_04",
+      "journey": "transfert",
+      "fr": "Le bénéficiaire est {x1}, numéro {x2}.",
+      "en": "The recipient is {x1}, number {x2}.",
+      "translations": {}
+    },
+    {
+      "id": "transfert_05",
+      "journey": "transfert",
+      "fr": "Le montant minimum d'un transfert est de {x1}.",
+      "en": "The minimum transfer amount is {x1}.",
+      "translations": {}
+    },
+    {
+      "id": "transfert_06",
+      "journey": "transfert",
+      "fr": "Le montant maximum par jour est de {x1}.",
+      "en": "The maximum amount per day is {x1}.",
+      "translations": {}
+    },
+    {
+      "id": "transfert_07",
+      "journey": "transfert",
+      "fr": "Choisissez le compte à débiter.",
+      "en": "Choose the account to debit.",
+      "translations": {}
+    },
+    {
+      "id": "transfert_08",
+      "journey": "transfert",
+      "fr": "Votre transfert de {x1} a réussi.",
+      "en": "Your transfer of {x1} was successful.",
+      "translations": {}
+    },
+    {
+      "id": "transfert_09",
+      "journey": "transfert",
+      "fr": "Vous avez reçu {x1} de {x2}.",
+      "en": "You received {x1} from {x2}.",
+      "translations": {}
+    },
+    {
+      "id": "transfert_10",
+      "journey": "transfert",
+      "fr": "Vous avez retiré {x1} au point de service.",
+      "en": "You withdrew {x1} at the service point.",
+      "translations": {}
+    },
+    {
+      "id": "recapitulatif_01",
+      "journey": "recapitulatif",
+      "fr": "Vérifiez les informations avant de confirmer.",
+      "en": "Check the details before confirming.",
+      "translations": {}
+    },
+    {
+      "id": "recapitulatif_02",
+      "journey": "recapitulatif",
+      "fr": "Montant : {x1}. Frais : {x2}. Bénéficiaire : {x3}.",
+      "en": "Amount: {x1}. Fee: {x2}. Recipient: {x3}.",
+      "translations": {}
+    },
+    {
+      "id": "recapitulatif_03",
+      "journey": "recapitulatif",
+      "fr": "Total à payer : {x1}.",
+      "en": "Total to pay: {x1}.",
+      "translations": {}
+    },
+    {
+      "id": "recapitulatif_04",
+      "journey": "recapitulatif",
+      "fr": "Appuyez sur Confirmer pour valider le transfert.",
+      "en": "Press Confirm to approve the transfer.",
+      "translations": {}
+    },
+    {
+      "id": "recapitulatif_05",
+      "journey": "recapitulatif",
+      "fr": "Appuyez sur Annuler pour arrêter l'opération.",
+      "en": "Press Cancel to stop the operation.",
+      "translations": {}
+    },
+    {
+      "id": "recapitulatif_06",
+      "journey": "recapitulatif",
+      "fr": "Une fois confirmé, ce transfert ne peut pas être annulé.",
+      "en": "Once confirmed, this transfer cannot be cancelled.",
+      "translations": {}
+    },
+    {
+      "id": "recapitulatif_07",
+      "journey": "recapitulatif",
+      "fr": "Le bénéficiaire recevra {x1}.",
+      "en": "The recipient will receive {x1}.",
+      "translations": {}
+    },
+    {
+      "id": "recapitulatif_08",
+      "journey": "recapitulatif",
+      "fr": "Date de l'opération : {x1} à {x2}.",
+      "en": "Date of the operation: {x1} at {x2}.",
+      "translations": {}
+    },
+    {
+      "id": "erreur_01",
+      "journey": "erreur",
+      "fr": "Le code saisi est incorrect.",
+      "en": "The code you entered is incorrect.",
+      "translations": {}
+    },
+    {
+      "id": "erreur_02",
+      "journey": "erreur",
+      "fr": "Il vous reste {x1} essais.",
+      "en": "You have {x1} attempts left.",
+      "translations": {}
+    },
+    {
+      "id": "erreur_03",
+      "journey": "erreur",
+      "fr": "Votre compte est bloqué pour {x1} heures.",
+      "en": "Your account is blocked for {x1} hours.",
+      "translations": {}
+    },
+    {
+      "id": "erreur_04",
+      "journey": "erreur",
+      "fr": "L'opération a échoué. Votre argent n'a pas été débité.",
+      "en": "The operation failed. Your money was not debited.",
+      "translations": {}
+    },
+    {
+      "id": "erreur_05",
+      "journey": "erreur",
+      "fr": "Le numéro saisi n'existe pas.",
+      "en": "The number you entered does not exist.",
+      "translations": {}
+    },
+    {
+      "id": "erreur_06",
+      "journey": "erreur",
+      "fr": "Le service est momentanément indisponible. Réessayez plus tard.",
+      "en": "The service is temporarily unavailable. Try again later.",
+      "translations": {}
+    },
+    {
+      "id": "erreur_07",
+      "journey": "erreur",
+      "fr": "Le délai est dépassé. Recommencez l'opération.",
+      "en": "The time has run out. Start the operation again.",
+      "translations": {}
+    },
+    {
+      "id": "securite_01",
+      "journey": "securite",
+      "fr": "Ne partagez jamais votre code secret.",
+      "en": "Never share your secret code.",
+      "translations": {}
+    },
+    {
+      "id": "securite_02",
+      "journey": "securite",
+      "fr": "Ne donnez votre code à personne, même à un agent.",
+      "en": "Do not give your code to anyone, not even an agent.",
+      "translations": {}
+    },
+    {
+      "id": "securite_03",
+      "journey": "securite",
+      "fr": "Attention : personne ne doit vous demander votre mot de passe.",
+      "en": "Warning: nobody should ask you for your password.",
+      "translations": {}
+    },
+    {
+      "id": "securite_04",
+      "journey": "securite",
+      "fr": "Si vous n'êtes pas à l'origine de cette opération, appelez le {x1}.",
+      "en": "If you did not make this operation, call {x1}.",
+      "translations": {}
+    },
+    {
+      "id": "securite_05",
+      "journey": "securite",
+      "fr": "Méfiez-vous des messages qui vous promettent de l'argent.",
+      "en": "Beware of messages that promise you money.",
+      "translations": {}
+    },
+    {
+      "id": "securite_06",
+      "journey": "securite",
+      "fr": "Votre code de confirmation est {x1}.",
+      "en": "Your confirmation code is {x1}.",
+      "translations": {}
+    },
+    {
+      "id": "securite_07",
+      "journey": "securite",
+      "fr": "Ce code expire dans {x1} minutes.",
+      "en": "This code expires in {x1} minutes.",
+      "translations": {}
+    },
+    {
+      "id": "securite_08",
+      "journey": "securite",
+      "fr": "Ne cliquez pas sur les liens reçus par message.",
+      "en": "Do not click on links received by message.",
+      "translations": {}
+    },
+    {
+      "id": "securite_09",
+      "journey": "securite",
+      "fr": "Vérifiez le nom du bénéficiaire avant d'envoyer l'argent.",
+      "en": "Check the recipient's name before sending the money.",
+      "translations": {}
+    },
+    {
+      "id": "securite_10",
+      "journey": "securite",
+      "fr": "Votre argent peut être perdu si vous donnez votre code.",
+      "en": "Your money can be lost if you give your code.",
+      "translations": {}
+    },
+    {
+      "id": "inedit_01",
+      "journey": "inedit",
+      "fr": "Votre facture d'électricité de {x1} doit être payée avant le {x2}.",
+      "en": "Your electricity bill of {x1} must be paid before {x2}.",
+      "translations": {}
+    },
+    {
+      "id": "inedit_02",
+      "journey": "inedit",
+      "fr": "Votre demande de prêt de {x1} est en cours d'examen.",
+      "en": "Your loan request of {x1} is under review.",
+      "translations": {}
+    },
+    {
+      "id": "inedit_03",
+      "journey": "inedit",
+      "fr": "Le taux d'intérêt annuel est de {x1}.",
+      "en": "The annual interest rate is {x1}.",
+      "translations": {}
+    },
+    {
+      "id": "inedit_04",
+      "journey": "inedit",
+      "fr": "Votre épargne a augmenté de {x1} ce mois-ci.",
+      "en": "Your savings increased by {x1} this month.",
+      "translations": {}
+    },
+    {
+      "id": "inedit_05",
+      "journey": "inedit",
+      "fr": "Votre carte expire le {x1}.",
+      "en": "Your card expires on {x1}.",
+      "translations": {}
+    },
+    {
+      "id": "inedit_06",
+      "journey": "inedit",
+      "fr": "Vous n'avez pas assez d'argent pour payer cette facture.",
+      "en": "You do not have enough money to pay this bill.",
+      "translations": {}
+    },
+    {
+      "id": "inedit_07",
+      "journey": "inedit",
+      "fr": "Le paiement sera prélevé automatiquement chaque mois.",
+      "en": "The payment will be taken automatically every month.",
+      "translations": {}
+    },
+    {
+      "id": "inedit_08",
+      "journey": "inedit",
+      "fr": "Merci d'avoir utilisé notre service.",
+      "en": "Thank you for using our service.",
+      "translations": {}
+    },
+    {
+      "id": "court_01",
+      "journey": "court",
+      "fr": "Solde",
+      "en": "Balance",
+      "translations": {}
+    },
+    {
+      "id": "court_02",
+      "journey": "court",
+      "fr": "Frais",
+      "en": "Fee",
+      "translations": {}
+    },
+    {
+      "id": "court_03",
+      "journey": "court",
+      "fr": "Confirmer",
+      "en": "Confirm",
+      "translations": {}
+    },
+    {
+      "id": "court_04",
+      "journey": "court",
+      "fr": "Annuler",
+      "en": "Cancel",
+      "translations": {}
+    },
+    {
+      "id": "court_05",
+      "journey": "court",
+      "fr": "Bénéficiaire",
+      "en": "Recipient",
+      "translations": {}
+    },
+    {
+      "id": "court_06",
+      "journey": "court",
+      "fr": "Montant",
+      "en": "Amount",
+      "translations": {}
+    },
+    {
+      "id": "court_07",
+      "journey": "court",
+      "fr": "Transfert d'argent",
+      "en": "Money transfer",
+      "translations": {}
+    },
+    {
+      "id": "court_08",
+      "journey": "court",
+      "fr": "Retrait",
+      "en": "Withdrawal",
+      "translations": {}
+    }
+  ]
+}

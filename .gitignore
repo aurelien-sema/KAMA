@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.env
+models/
+*.safetensors
+*.gguf
+*.bin
+node_modules/
+dist/
+.output/
+.wxt/

@@ -1,0 +1,47 @@
+{
+  "_note": "Grammaire fermee des commandes vocales. Les listes bbj et wes sont a remplir avec des locuteurs natifs.",
+  "intents": {
+    "ask_balance": {
+      "fr": ["mon solde", "combien j'ai", "combien il me reste", "combien sur mon compte"],
+      "en": ["my balance", "how much do i have", "how much is left", "how much is in my account"],
+      "bbj": [],
+      "wes": []
+    },
+    "ask_fees": {
+      "fr": ["les frais", "combien ça coûte", "combien je paie en plus"],
+      "en": ["the fee", "the fees", "how much does it cost"],
+      "bbj": [],
+      "wes": []
+    },
+    "ask_total": {
+      "fr": ["le total", "combien va sortir", "combien au total"],
+      "en": ["the total", "how much in total", "how much will leave"],
+      "bbj": [],
+      "wes": []
+    },
+    "what_to_do": {
+      "fr": ["que dois-je faire", "qu'est-ce que je dois faire", "je fais quoi", "aide-moi"],
+      "en": ["what should i do", "what do i do", "help me"],
+      "bbj": [],
+      "wes": []
+    },
+    "explain_error": {
+      "fr": ["pourquoi ça ne marche pas", "pourquoi c'est refusé", "quelle erreur", "ça veut dire quoi"],
+      "en": ["why is it not working", "why was it refused", "what is the error", "what does it mean"],
+      "bbj": [],
+      "wes": []
+    },
+    "summarize_transactions": {
+      "fr": ["mes transactions", "mes opérations", "ce qui est entré", "ce qui est sorti"],
+      "en": ["my transactions", "what came in", "what went out"],
+      "bbj": [],
+      "wes": []
+    },
+    "repeat": {
+      "fr": ["répète", "encore une fois"],
+      "en": ["repeat", "say it again"],
+      "bbj": [],
+      "wes": []
+    }
+  }
+}
