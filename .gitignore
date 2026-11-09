@@ -29,3 +29,9 @@ evaluation/results/*/wes_heldout*
 datasets/ghomala/spoken_bible/
 datasets/pidgin/oxford_spoken_corpus_2563/
 .cache/
+
+# Fichier d instructions local pour Claude Code (non partage)
+CLAUDE.md
+
+# Frontend : code exporte des projets Lovable (reference visuelle locale, non livree)
+kama_frontend/reference/

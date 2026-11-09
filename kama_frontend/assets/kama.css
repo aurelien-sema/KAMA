@@ -1,0 +1,75 @@
+/*
+ * Charte graphique Kama (reprise des maquettes Lovable) + Tailwind v4.
+ * Partagée par le popup et par les éléments injectés dans la page (Shadow DOM).
+ */
+@import "tailwindcss" source(none);
+@source "../entrypoints";
+@source "../components";
+
+@theme {
+  --color-kama-orange: #ff5209;
+  --color-kama-ink: #030102;
+  --color-kama-white: #ffffff;
+  --color-kama-cream: #fff1e0;
+  --color-bank-line: #d1d5db;
+  --color-kama-error: #b42318;
+  --color-kama-error-bg: #fee4e2;
+  --color-kama-muted: #6b6b6b;
+  --color-kama-success: oklch(0.5 0.12 150);
+
+  /* Rappel neutre d'un élément de la banque (« Message de la banque », « Élément choisi »). */
+  --color-bank-bg: oklch(0.967 0.0029 264.54);
+  --color-bank-border: oklch(0.8717 0.0093 258.34);
+  --color-bank-text: oklch(0.3729 0.0306 259.73);
+  --color-bank-muted: oklch(0.551 0.0234 264.36);
+
+  /* « Kama … » : polices embarquées dans l'extension, pour ne pas dépendre de la page. */
+  --font-display: "Kama Krona One", "Krona One", sans-serif;
+  --font-sans: "Kama DM Sans", "DM Sans", system-ui, sans-serif;
+
+  /* Badges de fiabilité (icône + texte, jamais la couleur seule). */
+  --color-status-verified: oklch(0.94 0.06 150);
+  --color-status-verified-foreground: oklch(0.36 0.1 150);
+  --color-status-auto: oklch(0.93 0.004 264);
+  --color-status-auto-foreground: oklch(0.37 0.03 260);
+  --color-status-untranslated: oklch(0.37 0.03 260);
+  --color-status-untranslated-foreground: oklch(1 0 0);
+
+  --shadow-kama: 0 12px 32px -12px color-mix(in oklab, #030102 35%, transparent);
+
+  --animate-kama-appear: kama-appear 180ms ease-out 1 both;
+  @keyframes kama-appear {
+    from { opacity: 0; transform: translateY(6px) scale(0.98); }
+    to { opacity: 1; transform: none; }
+  }
+}
+
+/* Zone cliquable minimale de 44 × 44 px (règle d'or d'accessibilité). */
+@utility hit-44 {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+@layer base {
+  /*
+   * Typographie de base de Kama.
+   * Dans la page bancaire, WXT remet à zéro l'hôte du Shadow DOM (`:host { all: initial !important }`)
+   * pour couper l'héritage des styles de la banque : la police doit donc être posée sur
+   * le premier élément de Kama (`.kama-racine`), pas sur `:host`. `html` sert pour le popup.
+   */
+  html, .kama-racine {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--color-kama-ink);
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Règle d'or : aucune animation imposée à qui a demandé moins de mouvement. */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
