@@ -27,6 +27,6 @@ Le serveur écoute sur `http://127.0.0.1:8000`. La documentation interactive est
 
 ## Configuration
 
-Les variables sont listées dans [.env.example](.env.example). En production, `KAMA_ENV=prod` et `KAMA_ALLOWED_ORIGINS` sont obligatoires, et le serveur doit rester derrière un proxy HTTPS.
+Les variables sont listées dans [.env.example](.env.example). Le serveur ne lit pas de fichier `.env` tout seul : il faut les exporter dans l'environnement, par exemple avec `EnvironmentFile=` dans un service systemd. Sans `KAMA_ENV=prod`, le serveur démarre en mode développement. En production, `KAMA_ENV=prod` et `KAMA_ALLOWED_ORIGINS` sont obligatoires, et le serveur doit rester derrière un proxy HTTPS.
 
 Les poids des modèles ne sont pas dans ce dépôt : `KAMA_MODELS_DIR` indique leur dossier.

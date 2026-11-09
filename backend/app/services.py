@@ -136,7 +136,11 @@ class SpeechService:
         if self.gate.locked():
             raise busy()
         async with self.gate:
-            transcript = await asyncio.to_thread(recognizer.transcribe, pcm)
+            try:
+                transcript = await asyncio.to_thread(recognizer.transcribe, pcm)
+            except Exception as exc:  # le message pourrait citer ce qui a ete dit
+                log.warning("reconnaissance en echec (%s)", type(exc).__name__)
+                raise KamaError(503, "asr_unavailable", "La reconnaissance vocale a échoué.") from None
         return self.intents.match(transcript, lang)
 
     async def synthesize(self, text: str, lang: str) -> TtsResponse:
@@ -160,7 +164,11 @@ class SpeechService:
             for m in list(SLOT_RE.finditer(text)) + [None]:
                 piece = text[cursor : m.start() if m else len(text)].strip()
                 if piece:
-                    wav = await asyncio.to_thread(synth.synthesize, piece)
+                    try:
+                        wav = await asyncio.to_thread(synth.synthesize, piece)
+                    except Exception as exc:
+                        log.warning("synthese en echec (%s)", type(exc).__name__)
+                        raise KamaError(503, "tts_unavailable", "La synthèse vocale a échoué.") from None
                     segments.append(AudioSegment(data=base64.b64encode(wav).decode("ascii")))
                 if m:
                     segments.append(SlotSegment(name=m.group()[1:-1]))

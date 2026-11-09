@@ -1,9 +1,11 @@
 import logging
+import sys
 from pathlib import Path
 
 import pytest
 
 from app.engines import MarianCT2Translator, load_engines
+from app.security.middleware import NoTraceback
 from app.settings import Settings
 from conftest import FakeRecognizer, engines_with, route, wav_bytes
 
@@ -93,6 +95,38 @@ def test_nothing_sensitive_reaches_the_logs(make_client, caplog):
     client.post(f"/{SENTINEL}", json=BODY)
     assert SENTINEL not in caplog.text
     assert "Bienvenue" not in caplog.text
+
+
+def test_speech_engine_crash_stays_out_of_the_logs(make_client, caplog):
+    caplog.set_level(logging.DEBUG)
+    logging.getLogger("httpx").setLevel(logging.WARNING)
+
+    class Crash:
+        def transcribe(self, pcm16):
+            raise RuntimeError(SENTINEL)
+
+        def synthesize(self, text):
+            raise RuntimeError(SENTINEL)
+
+    client = make_client(engines_with(asr={"bbj": Crash()}, tts={"bbj": Crash()}))
+    voice = client.post("/v1/voice/intent", content=wav_bytes(), headers={"X-Kama-Lang": "bbj", "Content-Type": "audio/wav"})
+    tts = client.post("/v1/tts", json={"text": "ywə", "lang": "bbj"})
+    assert (voice.status_code, tts.status_code) == (503, 503)
+    assert SENTINEL not in caplog.text and SENTINEL not in voice.text + tts.text
+
+
+def test_uvicorn_filter_removes_the_traceback():
+    try:
+        raise RuntimeError(SENTINEL)
+    except RuntimeError:
+        record = logging.LogRecord("uvicorn.error", logging.ERROR, __file__, 1, "Exception", (), sys.exc_info())
+    assert NoTraceback().filter(record) and record.exc_info is None
+    assert SENTINEL not in logging.Formatter().format(record)
+
+
+def test_odd_content_length_is_refused(client):
+    r = client.post("/v1/translate", content=b"{}", headers={"Content-Length": "²".encode("latin-1"), "Content-Type": "application/json"})
+    assert r.status_code == 413
 
 
 def test_prod_requires_origins(monkeypatch):

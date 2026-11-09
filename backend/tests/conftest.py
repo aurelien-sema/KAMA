@@ -31,6 +31,12 @@ TEMPLATES = {
             "translations": {"bbj": {"text": "BBJ {x2} BBJ {x1}", "validated_by": "locuteur de test"}},
         },
         {
+            "id": "minimum",
+            "fr": "Le montant minimum d'un transfert est de {x1}.",
+            "en": "The minimum transfer amount is {x1}.",
+            "translations": {"bbj": {"text": "BBJ-MINIMUM {x1}", "validated_by": "locuteur de test"}},
+        },
+        {
             "id": "brouillon",
             "fr": "Votre carte expire bientôt.",
             "en": "Your card expires soon.",

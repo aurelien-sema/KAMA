@@ -37,6 +37,24 @@ def negations(text: str) -> bool:
     return _NEGATION_RE.search(_fold(text)) is not None
 
 
+_WORD_RE = re.compile(f"[{WORD}]+")
+# Seuls ces mots peuvent differer entre deux phrases sans changer ce qu'elles veulent dire.
+_NEUTRAL_WORDS = frozenset(
+    "le la les l un une des du de ce cet cette ces votre vos ton ta tes the a an this that these those your".split()
+)
+
+
+def same_meaning_words(a: str, b: str) -> bool:
+    """Refuse par defaut : tout mot different hors de la liste bloque le rapprochement.
+
+    Une liste de contraires serait forcement incomplete (minimum/maximum, avant/apres,
+    hausse/baisse...) : c'est la liste des differences permises qui doit rester courte.
+    """
+    words_a = collections.Counter(_WORD_RE.findall(SLOT_RE.sub(" ", canonical(a))))
+    words_b = collections.Counter(_WORD_RE.findall(SLOT_RE.sub(" ", canonical(b))))
+    return all(word in _NEUTRAL_WORDS for word in (words_a - words_b) + (words_b - words_a))
+
+
 def is_critical(text: str, element: str = "text") -> bool:
     """Un texte critique porte sur l'argent, une condition, une alerte ou un montant."""
     return element in CRITICAL_ELEMENTS or bool(slots_of(text)) or bool(key_terms(text)) or negations(text)

@@ -5,8 +5,11 @@ import os
 import uvicorn
 
 from .main import create_app
+from .security.middleware import NoTraceback
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s %(message)s")
+# Starlette relance toute exception apres son gestionnaire, et uvicorn en journalise la trace.
+logging.getLogger("uvicorn.error").addFilter(NoTraceback())
 
 uvicorn.run(
     create_app(),

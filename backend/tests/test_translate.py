@@ -30,8 +30,18 @@ def test_unmasked_name_is_refused(client):
 
 
 def test_near_memory_is_not_labelled_verified(client):
-    r = post(client, "Les frais de cette opération seront de {x1}.").json()
+    r = post(client, "Les frais de votre opération sont de {x1}.").json()
     assert (r["badge"], r["origin"]) == ("machine", "near_memory")
+
+
+def test_near_memory_refuses_maximum_for_minimum(client):
+    r = post(client, "Le montant maximum d'un transfert est de {x1}.").json()
+    assert r["text"] is None and r["reason"] == "critical_content"
+
+
+def test_near_memory_refuses_change_of_tense(client):
+    r = post(client, "Les frais de cette opération seront de {x1}.").json()
+    assert r["text"] is None
 
 
 def test_near_memory_refuses_opposite_meaning(client):

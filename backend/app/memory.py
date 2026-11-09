@@ -5,7 +5,7 @@ import json
 from dataclasses import dataclass
 from pathlib import Path
 
-from .security.guards import canonical, key_terms, negations, similarity
+from .security.guards import canonical, key_terms, negations, same_meaning_words, similarity
 from .security.masking import is_masked, slots_of
 
 SOURCES = ("fr", "en")
@@ -63,8 +63,9 @@ class TranslationMemory:
     def find_near(self, text: str, source: str, target: str) -> str | None:
         """Phrase validee presque identique et de meme portee.
 
-        Memes balises, meme negation et memes termes financiers : « Les frais sont
-        remboursables » ne peut donc jamais recevoir la traduction de la phrase negative.
+        Memes balises, meme negation, memes termes financiers, et seuls des mots neutres
+        peuvent differer : « Les frais sont remboursables » ne recoit jamais la traduction
+        de la phrase negative, ni « maximum » celle de « minimum ».
         """
         best, best_score = None, self.near_threshold
         for t in self.templates:
@@ -73,7 +74,7 @@ class TranslationMemory:
                 continue
             if slots_of(candidate) != slots_of(text) or negations(candidate) != negations(text):
                 continue
-            if key_terms(candidate) != key_terms(text):
+            if key_terms(candidate) != key_terms(text) or not same_meaning_words(candidate, text):
                 continue
             score = similarity(candidate, text)
             if score >= best_score:

@@ -25,6 +25,16 @@ def _reject(status: int, code: str, message: str, headers: dict[str, str] | None
     return JSONResponse(error_body(code, message), status_code=status, headers=headers)
 
 
+class NoTraceback(logging.Filter):
+    """Retire la trace des exceptions : son message peut citer le texte traite."""
+
+    def filter(self, record: logging.LogRecord) -> bool:
+        record.exc_info = None
+        record.exc_text = None
+        record.stack_info = None
+        return True
+
+
 class ContentFreeLog:
     """Journalise uniquement methode, route connue, statut et duree."""
 
@@ -170,7 +180,7 @@ class BodyLimit:
         limit = self.settings.max_audio_bytes if scope["path"] == VOICE_PATH else self.settings.max_json_bytes
         too_large = _reject(413, "payload_too_large", "Requête trop volumineuse.")
         declared = Headers(scope=scope).get("content-length")
-        if declared and (not declared.isdigit() or int(declared) > limit):
+        if declared and (not (declared.isascii() and declared.isdigit()) or int(declared) > limit):
             return await too_large(scope, receive, send)
         chunks: list[bytes] = []
         total = 0
