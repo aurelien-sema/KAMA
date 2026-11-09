@@ -8,6 +8,7 @@ import time
 ROOT = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "models")
 os.environ["HF_HOME"] = os.path.join(ROOT, ".hf_cache")
 os.environ["HF_HUB_DISABLE_TELEMETRY"] = "1"
+os.environ["HF_HUB_DISABLE_XET"] = "1"  # le transfert Xet a echoue plusieurs fois sur cette connexion
 
 from huggingface_hub import HfApi, snapshot_download  # noqa: E402
 
