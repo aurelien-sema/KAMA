@@ -144,7 +144,7 @@ def load(s):
         tok.src_lang = NLLB[s["src"]]
         gen["forced_bos_token_id"] = tok.convert_tokens_to_ids(NLLB[s["tgt"]])
     elif k in ("m2m", "mbart"):
-        fb = cfg.forced_bos_token_id
+        fb = 128088 if k == "m2m" and s["tgt"] == "bbj" else cfg.forced_bos_token_id  # rel_ft est livre avec le code du francais
         code = tok.convert_ids_to_tokens(fb)
         if s["src"] == "fr":
             tok.src_lang = "fr" if k == "m2m" else MBART["fr"]

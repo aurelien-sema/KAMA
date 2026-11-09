@@ -302,7 +302,7 @@ Exemples réels :
 - « Votre solde est de 25 000 FCFA. » donne une phrase sans aucun montant.
 - « Jean Kamga » devient « Yohane Kamga » : le modèle, entraîné sur la Bible, remplace un prénom par sa forme biblique.
 
-**Ce que ça veut dire :** même en cachant les montants derrière des balises, ces modèles détruisent les balises. On ne peut donc pas leur confier une phrase contenant un montant. Notre serveur rejette ces réponses, et c'est bien ce qu'il doit faire.
+**Ce que ça veut dire :** même en cachant les montants derrière des balises, ces 2 modèles détruisent les balises. On ne peut donc pas leur confier une phrase contenant un montant. Notre serveur rejette ces réponses, et c'est bien ce qu'il doit faire. *(Correction : ce constat ne vaut que pour ces 2 modèles. D'autres conservent les balises, voir l'entrée suivante.)*
 
 **Limite de ce résultat :** les références françaises et anglaises de SOREVA ont été rédigées à partir du pidgin et restent à relire. Seul un locuteur peut juger la qualité réelle du Ghomala.
 
@@ -317,3 +317,210 @@ Exemples réels :
 ### Composants tiers utilisés
 
 Aucun nouveau composant depuis l'entrée précédente.
+
+## 2026-11-09 — Résultats de 13 modèles, coupure internet et évaluation dans le dépôt
+
+**Auteur :** Dimitri
+
+### En bref
+
+Nous avons maintenant les notes de 13 modèles de traduction sur les 20 choisis. **Aucun n'est assez fiable pour traduire seul une phrase bancaire.** Le meilleur pour le Ghomala est Masakhane `rel_news_ft`, mais sa note reste faible. Cela confirme que les phrases importantes doivent être traduites par nos locuteurs.
+
+Une coupure internet a stoppé une partie des téléchargements pendant trois heures. Tout a été relancé, et les travaux savent maintenant se relancer seuls.
+
+Le banc de test est maintenant dans le dépôt, pour que toute l'équipe puisse le consulter.
+
+### Ce qui a été implémenté, expliqué simplement
+
+#### 1. Le banc de test dans le dépôt (dossier `evaluation/`)
+
+Le banc de test, c'est l'examen que l'on fait passer aux modèles : les questions, la correction et les copies rendues.
+
+| Dans le dépôt | Resté en dehors, et pourquoi |
+|---|---|
+| Les programmes de test et de notation | Les modèles : beaucoup trop lourds |
+| Les 64 phrases bancaires | Les corpus complets : trop lourds |
+| Les 150 phrases de SOREVA | Les extraits de la Bible : les textes appartiennent aux éditeurs |
+| Les réponses des modèles à ces phrases, et le tableau des notes | Les extraits de MAFAND : leur licence limite la diffusion |
+
+Les extraits laissés de côté se recréent avec le programme `build_testset.py`.
+
+#### 2. La reprise automatique
+
+Un petit programme, `supervise.py`, joue le rôle d'un gardien : toutes les minutes, il vérifie que les téléchargements et les tests tournent, et il relance ce qui s'est arrêté. En cas de coupure, le téléchargement attend simplement le retour d'internet.
+
+#### 3. Un seul gros modèle à la fois
+
+Notre ordinateur a peu de mémoire libre. Si deux gros modèles tournent en même temps, tout ralentit fortement. Nous avons donc ajouté un verrou : c'est comme une pièce avec une seule clé, un modèle ne peut entrer que si le précédent est sorti.
+
+#### 4. La liste des 27 autres modèles
+
+Nous n'en testons que 20 pour l'instant. Une page liste les 27 autres, avec leur lien, leur taille, leur licence et la commande pour les télécharger, afin qu'un autre membre de l'équipe puisse s'en occuper : <https://claude.ai/artifact/KhjBcvvdksmHz8yhDLjW7S>. Elle doit être partagée pour que les autres puissent l'ouvrir.
+
+#### 5. Le renforcement du masquage (commit de eunicefelixtine)
+
+- Le serveur reconnaît maintenant les chiffres de toutes les écritures, par exemple arabes. Cela règle un point laissé de côté lors du contrôle de sécurité.
+- La lecture à voix haute refuse désormais les textes qui contiennent encore des données à masquer.
+- Un fichier `README.md` présente le projet à la racine du dépôt.
+
+Les 97 tests du serveur réussissent toujours avec ces changements.
+
+**À savoir pour le front :** en JavaScript, l'écriture `\d` ne reconnaît que les chiffres 0 à 9. Pour reproduire le même masquage, il faut y utiliser `\p{Nd}` avec l'option `u`.
+
+### Démarche utilisée
+
+Chaque modèle a passé les mêmes épreuves :
+
+1. **Traduire des phrases de la vie courante** (SOREVA), qu'il n'a presque jamais vues.
+2. **Traduire 64 phrases bancaires**, pour voir s'il garde les montants et les noms.
+3. **Traduire les mêmes phrases avec les montants cachés** derrière des balises, pour voir s'il les conserve.
+4. **Traduire des phrases de MAFAND ou de la Bible**, pour comparer avec les scores publiés.
+
+### Résultats et limites connues
+
+**Comment lire le tableau :** la note compare la traduction à la bonne réponse, sur 100. Plus elle est haute, mieux c'est. Un tiret veut dire que l'épreuve ne concerne pas ce modèle.
+
+| Modèle | Traduit | Note SOREVA | Note MAFAND | Montants gardés | Balises gardées |
+|---|---|---|---|---|---|
+| **Masakhane rel_news_ft** | français → Ghomala | **18,4** | **23,2** | 90,6 % | 100 % |
+| Masakhane news | français → Ghomala | 13,3 | 22,1 | 93,8 % | 96,6 % |
+| Flagship compressé | français → Ghomala | 7,4 | 11,7 | 0 % | 0 % |
+| Turaco | français → Ghomala | 4,6 | 14,3 | 78,1 % | 96,6 % |
+| Masakhane rel_ft | français → Ghomala | 3,0 | 9,0 | 100 % (recopie 34 %) | 93,1 % |
+| stfotso T5 | français → Ghomala | 1,7 | 7,5 | 100 % (recopie 56 %) | 93,1 % |
+| linguo | anglais → Ghomala | 6,3 | – | 0 % | 0 % |
+| joseph | anglais → Ghomala | 5,9 | – | 62,5 % | 86,2 % |
+| DS4H | anglais → Ghomala | 4,2 | – | 0 % | 0 % |
+| Flagship compressé | Ghomala → français | 11,4 | 16,2 | – | – |
+| linguo | Ghomala → anglais | 8,4 | – | – | – |
+| jamm55 (pidgin nigérian) | anglais → pidgin | 37,0 | – | 75 % | 72,4 % |
+| Turaco NLLB | anglais → pidgin | 30,2 | – | 100 % (recopie 52 %) | 100 % |
+
+**Ce que ça nous apprend :**
+
+- **Garder un montant ne veut pas dire traduire.** Un modèle qui recopie la phrase française garde forcément le montant. C'est pour ça que le tableau indique aussi les recopies.
+- **Les balises fonctionnent avec certains modèles.** Masakhane et Turaco les conservent presque toujours. Nous pouvons donc cacher les montants, mais la phrase autour peut quand même être fausse.
+- **Un bon score sur la Bible ne prouve rien pour la banque.** Le modèle joseph obtient 36,8 sur 100 sur des versets de la Bible, mais 5,9 sur des phrases de la vie courante.
+- **Le pidgin paraît plus facile**, car il ressemble à l'anglais. Les nombres et beaucoup de mots simples sont identiques, ce qui gonfle les notes. Sur les vraies phrases, seuls 3 à 4 % des réponses sont exactes.
+
+**Turaco E2B, premier résultat partiel :** sur les 64 phrases bancaires, il garde 43,8 % des montants. Il répond parfois comme un assistant au lieu de traduire. Par exemple, « Your balance is 25,000 FCFA » devient « I go understand. I go translate everything… ».
+
+**Ce qui nous a retardés.** Vers 12 h 45, une coupure internet a fait échouer 7 téléchargements. La surveillance mise en place s'était arrêtée à 12 h 44, et rien n'a pu réagir avant 15 h 38. Les tests des modèles déjà téléchargés ont continué normalement. C'est pour éviter que cela se reproduise que la reprise automatique a été ajoutée.
+
+**Ce qui reste à faire dans cette campagne :** 7 modèles sur 20, soit 3 modèles Masakhane Ghomala → français et 4 modèles de langue compressés.
+
+**Limite :** les références françaises et anglaises de SOREVA ont été rédigées à partir du pidgin et restent à relire. Seul un locuteur peut juger la qualité réelle du Ghomala.
+
+### Ce que l'équipe doit faire ensuite
+
+| Qui | Quoi |
+|---|---|
+| Locuteurs Ghomala et pidgin | Traduire et valider les 64 phrases : c'est la voie fiable pour les parcours bancaires |
+| Locuteurs Ghomala et pidgin | Relire les réponses du meilleur modèle, dans `evaluation/results/`, pour juger leur sens réel |
+| Membre de l'équipe désigné | Télécharger les 27 autres modèles si nous décidons de les tester |
+| Équipe front | Masquer les chiffres de toutes les écritures, comme le serveur |
+| Back | Finir les 7 derniers tests, puis proposer les méthodes pour le texte et la voix |
+| Back | Si la traduction automatique est activée un jour, remplacer Flagship par Masakhane `rel_news_ft` dans `backend/config/routes.json` |
+
+### Composants tiers utilisés
+
+Nouveau composant : **huggingface_hub** (Apache 2.0), l'outil qui télécharge les modèles. Les modèles et données testés sont ceux déjà listés plus haut.
+
+## 2026-11-09 — Page officielle de test, répartition du travail et branche `dimitri`
+
+**Auteur :** Dimitri
+
+### En bref
+
+Nous savons maintenant sur quelle page le jury testera Kama. Le travail est réparti : **Dimitri s'occupe du pidgin, un collaborateur s'occupe du Ghomala.** Pour travailler ensemble, nous avons créé la branche `dimitri` et ajouté au dépôt les données et les modèles utiles.
+
+### Ce qui a été implémenté, expliqué simplement
+
+#### 1. La branche `dimitri`
+
+Une branche est une copie de travail du projet. On peut y avancer sans déranger la version principale (`main`), puis réunir les deux quand c'est prêt.
+
+#### 2. Les données dans le dépôt (dossier `datasets/`)
+
+| Données | Sur GitHub ? | Pourquoi |
+|---|---|---|
+| Phrases français-Ghomala (Bandjoun, MAFAND) | Oui | Petites, et leur licence permet de les partager |
+| Phrases anglais-pidgin (MT560) | Oui | Petites, et leur licence permet de les partager |
+| SOREVA (transcriptions) | Oui | Petites, et leur licence permet de les partager |
+| Bible parlée en Ghomala | Non | Le dépôt est public et les textes bibliques appartiennent aux éditeurs |
+| Corpus oral d'Oxford en pidgin | Non | 2,4 Go, et les droits restent à clarifier |
+
+Les données qui ne sont pas sur GitHub restent sur le poste de Dimitri.
+
+#### 3. Les modèles dans le dépôt (dossier `models/`)
+
+Une copie des meilleurs modèles est dans ce dossier, mais seulement sur le poste de Dimitri. GitHub refuse les fichiers de plus de 100 Mo, et ces modèles pèsent jusqu'à 2,3 Go.
+
+Pour que le collaborateur ait exactement les mêmes modèles, une seule commande suffit :
+
+```bash
+python models/fetch_models.py ghomala
+```
+
+#### 4. La page officielle de test
+
+Il s'agit de <https://safinum.cm/hackathon-test>. Son protocole officiel est plus précis que le règlement PDF :
+
+| Règle du protocole | Ce que ça change pour nous |
+|---|---|
+| L'extension ne doit pas collecter, stocker ou transmettre les données affichées | Tous les textes connus doivent être embarqués dans l'extension |
+| Les données saisies par l'utilisateur ne sont jamais traduites | Kama ignore les champs remplis, les noms et les numéros |
+| Aucun repère technique n'est fourni dans la page | Kama reconnaît les éléments à partir de leur texte |
+| Le jury peut ajouter du texte après le chargement | Kama doit le détecter sans recharger la page |
+
+**Le barème du protocole, sur 100 points :**
+
+| Critère | Points |
+|---|---|
+| Fonctionnement du prototype | 25 |
+| Fidélité des traductions | 20 |
+| Sécurité et intégrité financière | 20 |
+| Intégration aux services existants | 15 |
+| Accessibilité et expérience utilisateur | 10 |
+| Innovation et pertinence | 10 |
+
+La qualité linguistique est vérifiée à part. Une erreur sur envoyer/confirmer/annuler, un montant changé, une alerte affaiblie ou un nom traduit compte comme défaut majeur.
+
+Le code public de la page contient aussi les libellés d'un panneau réservé au jury. Nous ne l'utilisons pas.
+
+### Démarche utilisée
+
+Nous avons décidé de :
+
+1. Travailler sur trois volets pour le pidgin : texte vers texte, puis texte vers voix, puis voix vers texte.
+2. Ne plus construire de traduction directe voix vers voix : elle se fera naturellement en enchaînant la voix vers texte, puis le texte vers voix.
+3. Commencer par rassembler tous les textes de la page de test, avec des règles fixes qui disent quel texte afficher et à quel endroit.
+4. Préparer ensuite des modèles capables de résister à du contenu inédit.
+
+Pour le chatbot « Parler à Kama », un LLM peut comprendre la question et choisir la bonne réponse. Il ne rédige pas la réponse et ne voit jamais les montants : c'est l'extension qui les lit sur la page.
+
+### Résultats et limites connues
+
+**Une erreur de réglage corrigée.** Le modèle Masakhane `rel_ft` français → Ghomala avait une note de 3,0 sur 100 et recopiait souvent le français. Sa configuration lui demandait en réalité de répondre en français. Sa note précédente ne valait donc rien : le test est relancé avec le bon réglage.
+
+**Turaco E2B, test terminé :** 28,7 sur 100 sur les phrases de la vie courante, 43,8 % des montants conservés, 44,8 % des balises conservées. Il répond parfois comme un assistant au lieu de traduire.
+
+**Un nouvel arrêt des travaux.** Le redémarrage de la session a coupé les téléchargements et les tests. Le gardien automatique a aussi planté, car l'ordinateur était trop chargé pour répondre à temps. Il est corrigé et relancé.
+
+**Ce qui reste à faire :**
+
+- le catalogue des textes de la page de test, en cours ;
+- la fin des tests : 2 modèles restent à télécharger (Llama 1B et DeepSeek) ;
+- la question au comité sur l'envoi de texte masqué et de la voix vers un serveur.
+
+### Ce que l'équipe doit faire ensuite
+
+| Qui | Quoi |
+|---|---|
+| Dimitri | Pidgin : texte, puis voix |
+| Collaborateur Ghomala | Récupérer la branche `dimitri`, lancer `python models/fetch_models.py ghomala` |
+| Représentant de l'équipe | Demander au comité si l'envoi de texte masqué et de la voix est permis, et si Kama peut expliquer dans sa propre fenêtre |
+
+### Composants tiers utilisés
+
+Nouveau composant : **Playwright** (Apache 2.0), hors dépôt, pour parcourir la page de test comme un navigateur.
