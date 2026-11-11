@@ -31,9 +31,14 @@ class Settings:
     max_concurrent_models: int = 2
     near_match_threshold: float = 0.86
     mt_allow_critical: bool = False
-    models_dir: Path = REPO_DIR.parent / "models"
+    models_dir: Path = REPO_DIR / "models"  # monte en lecture seule sur /models par docker-compose
     content_dir: Path = REPO_DIR / "content-data"
     routes_file: Path = BACKEND_DIR / "config" / "routes.json"
+    clips_dir: Path | None = None  # enregistrements valides ; par defaut models_dir/poids/audio
+
+    @property
+    def clips_path(self) -> Path:
+        return self.clips_dir or self.models_dir / "poids" / "audio"
 
     @property
     def is_prod(self) -> bool:
@@ -68,6 +73,7 @@ def load_settings() -> Settings:
         models_dir=Path(os.environ.get("KAMA_MODELS_DIR", d.models_dir)),
         content_dir=Path(os.environ.get("KAMA_CONTENT_DIR", d.content_dir)),
         routes_file=Path(os.environ.get("KAMA_ROUTES_FILE", d.routes_file)),
+        clips_dir=Path(os.environ["KAMA_CLIPS_DIR"]) if os.environ.get("KAMA_CLIPS_DIR") else None,
     )
     if settings.is_prod and not settings.allowed_origins and not settings.allow_firefox:
         raise RuntimeError("KAMA_ALLOWED_ORIGINS est obligatoire en production.")

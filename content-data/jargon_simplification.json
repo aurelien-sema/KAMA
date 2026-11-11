@@ -1,0 +1,33 @@
+{
+  "_note": "Termes bancaires a expliquer simplement AVANT la traduction, quand le pidgin n'a pas d'equivalent exact. Si un locuteur valide un equivalent, le mettre dans equivalent_wes : le terme n'est alors plus reformule. Du plus long au plus court : l'ordre compte.",
+  "termes": [
+    { "fr": "nom du bénéficiaire", "en": "beneficiary name", "simple_fr": "le nom de la personne qui reçoit l'argent", "simple_en": "the name of the person who will receive the money", "equivalent_wes": null },
+    { "fr": "numéro du bénéficiaire", "en": "beneficiary phone number", "simple_fr": "le numéro de la personne qui reçoit l'argent", "simple_en": "the number of the person who will receive the money", "equivalent_wes": null },
+    { "fr": "frais de retrait", "en": "withdrawal fees", "simple_fr": "l'argent pris quand vous sortez de l'argent", "simple_en": "the money taken when you take out money", "equivalent_wes": null },
+    { "fr": "solde insuffisant", "en": "insufficient balance", "simple_fr": "vous n'avez pas assez d'argent", "simple_en": "you do not have enough money", "equivalent_wes": null },
+    { "fr": "solde disponible", "en": "available balance", "simple_fr": "l'argent que vous pouvez utiliser", "simple_en": "the money you can use", "equivalent_wes": null },
+    { "fr": "solde après opération", "en": "balance after transfer", "simple_fr": "l'argent qui va rester", "simple_en": "the money that will remain", "equivalent_wes": null },
+    { "fr": "total à débiter", "en": "total to debit", "simple_fr": "tout l'argent qui va sortir de votre compte", "simple_en": "all the money that will leave your account", "equivalent_wes": null },
+    { "fr": "total débité", "en": "total debited", "simple_fr": "tout l'argent qui est sorti de votre compte", "simple_en": "all the money that left your account", "equivalent_wes": null },
+    { "fr": "compte courant", "en": "current account", "simple_fr": "le compte de tous les jours", "simple_en": "the account for every day", "equivalent_wes": null },
+    { "fr": "taux d'intérêt", "en": "interest rate", "simple_fr": "l'argent en plus à rembourser", "simple_en": "the extra money you must pay back", "equivalent_wes": null },
+    { "fr": "code secret", "en": "secret code", "simple_fr": "votre code que personne ne doit connaître", "simple_en": "your code that nobody must know", "equivalent_wes": null },
+    { "fr": "mot de passe", "en": "password", "simple_fr": "votre code que personne ne doit connaître", "simple_en": "your code that nobody must know", "equivalent_wes": null },
+    { "fr": "bénéficiaire", "en": "beneficiary", "simple_fr": "la personne qui reçoit l'argent", "simple_en": "the person who will receive the money", "equivalent_wes": null },
+    { "fr": "destinataire", "en": "recipient", "simple_fr": "la personne qui reçoit l'argent", "simple_en": "the person who will receive the money", "equivalent_wes": null },
+    { "fr": "récapitulatif", "en": "summary", "simple_fr": "toutes les informations à vérifier", "simple_en": "all the details to check", "equivalent_wes": null },
+    { "fr": "virement", "en": "bank transfer", "simple_fr": "l'envoi d'argent", "simple_en": "the sending of money", "equivalent_wes": null },
+    { "fr": "transfert", "en": "transfer", "simple_fr": "l'envoi d'argent", "simple_en": "the sending of money", "equivalent_wes": null },
+    { "fr": "retrait", "en": "withdrawal", "simple_fr": "l'argent que vous sortez", "simple_en": "the money you take out", "equivalent_wes": null },
+    { "fr": "débiter", "en": "debit", "simple_fr": "prendre sur votre compte", "simple_en": "take from your account", "equivalent_wes": null },
+    { "fr": "créditer", "en": "credit", "simple_fr": "mettre sur votre compte", "simple_en": "put in your account", "equivalent_wes": null },
+    { "fr": "frais", "en": "fees", "simple_fr": "l'argent pris pour cette opération", "simple_en": "the money taken for this operation", "equivalent_wes": null },
+    { "fr": "commission", "en": "fee", "simple_fr": "l'argent pris pour cette opération", "simple_en": "the money taken for this operation", "equivalent_wes": null },
+    { "fr": "solde", "en": "balance", "simple_fr": "l'argent sur votre compte", "simple_en": "the money in your account", "equivalent_wes": null },
+    { "fr": "montant", "en": "amount", "simple_fr": "la somme d'argent", "simple_en": "the sum of money", "equivalent_wes": null },
+    { "fr": "prêt", "en": "loan", "simple_fr": "l'argent emprunté", "simple_en": "the money you borrow", "equivalent_wes": null },
+    { "fr": "épargne", "en": "savings", "simple_fr": "l'argent mis de côté", "simple_en": "the money you keep", "equivalent_wes": null },
+    { "fr": "référence", "en": "reference", "simple_fr": "le numéro de cette opération", "simple_en": "the number of this operation", "equivalent_wes": null },
+    { "fr": "motif", "en": "reason", "simple_fr": "la raison", "simple_en": "the reason", "equivalent_wes": null }
+  ]
+}

@@ -886,3 +886,272 @@ Pour le chatbot « Parler à Kama », un LLM peut comprendre la question et choi
 ### Composants tiers utilisés
 
 Nouveau composant : **Playwright** (Apache 2.0), hors dépôt, pour parcourir la page de test comme un navigateur.
+
+## 2026-11-11 — Pidgin : textes de la page, entraînement du modèle, dictionnaire et premiers pas vers la voix
+
+**Auteur :** Dimitri
+
+### En bref
+
+Nous avons travaillé uniquement sur le pidgin, sur deux jours (10 et 11 novembre). Kama connaît maintenant tous les textes de la page de test. Nous avons un modèle de traduction pidgin ajusté par nos soins, un dictionnaire pidgin appuyé sur de vrais textes, et une première voix de synthèse en pidgin à écouter. **Rien n'est encore affiché aux utilisateurs :** les traductions pidgin restent coupées tant que des locuteurs natifs ne les ont pas validées.
+
+### Les mots à connaître
+
+| Mot | Ce que ça veut dire |
+|---|---|
+| Brouillon | Une traduction écrite par nous ou par une machine, pas encore vérifiée par un natif. Kama ne l'affiche jamais comme « Vérifié ». |
+| Ajuster un modèle | Reprendre un modèle qui sait déjà traduire et lui faire réviser nos propres exemples, pour qu'il s'adapte à notre sujet (la banque) et à notre langue (le pidgin camerounais). |
+| Colab | Un service gratuit de Google qui prête une carte graphique (GPU) pour entraîner un modèle. Nos données y sont lues depuis Google Drive. |
+| chrF | Une note de 0 à 100 qui compare la traduction du modèle à une traduction humaine, lettre par lettre. Plus c'est haut, mieux c'est. |
+| Synthèse vocale (TTS) | Transformer un texte en voix. |
+| Attesté | Un mot qu'on a vraiment trouvé dans des textes écrits par des locuteurs, avec le même sens. |
+
+### Ce qui a été implémenté, expliqué simplement
+
+#### 1. Tous les textes de la page de test, avec des règles fixes
+
+Le fichier `content-data/safinum_test_page.json` contient les **70 textes** de la page de test (boutons, titres, alertes, messages d'erreur) en français et en anglais, avec un brouillon en pidgin. Il contient aussi **3 modèles de phrase** pour les textes qui changent, par exemple « Bonjour, {nom} ».
+
+Les montants et les noms sont remplacés par des cases `{x1}`, `{x2}` : le pidgin ne les touche jamais. Si un brouillon change un nombre (par exemple 500 devient 5 000), il est refusé au chargement.
+
+#### 2. Un fichier Word pour les locuteurs natifs
+
+`Validation_pidgin_page_test.docx`, à la racine du projet, liste les 73 expressions de la page. À côté de chacune, une case vide attend la traduction en pidgin. C'est ce fichier qu'on envoie aux natifs.
+
+#### 3. Simplifier le jargon bancaire avant de traduire
+
+Un mot comme « bénéficiaire » n'a pas d'équivalent en pidgin. Avant de traduire, Kama le remplace par une expression simple : « la personne qui reçoit l'argent ». Le fichier `content-data/jargon_simplification.json` contient 28 termes de ce type.
+
+#### 4. Le chemin de traduction vers le pidgin
+
+Français → anglais (modèle Helsinki opus-mt) → simplification du jargon → pidgin (notre modèle). Chaque phrase passe ensuite des contrôles. La traduction est refusée si :
+
+- un montant ou un nom a disparu ou changé ;
+- le modèle a inventé un chiffre ;
+- il répète en boucle ;
+- il recopie l'anglais ;
+- plus d'un mot sur quatre est inconnu du lexique pidgin (`content-data/lexique_pidgin.txt`, 7 235 mots réels).
+
+#### 5. Ajuster le modèle pidgin sur Colab
+
+Le dossier `training/pidgin/` contient tout le nécessaire :
+
+| Fichier | Rôle |
+|---|---|
+| `01_nettoyer_donnees.py` | Nettoie et assemble les données d'entraînement |
+| `02_entrainer.py` | Ajuste le modèle (lancé sur Colab) |
+| `entrainement_colab.ipynb` | Le cahier Colab à ouvrir depuis Google Drive |
+| `exporter_drive.py` | Fabrique `KAMA_pidgin_drive.zip`, à déposer tel quel dans Google Drive |
+| `03_tester_inedit.py` | Teste le modèle sur 60 messages qu'il n'a jamais vus |
+
+Les données de la **version 2** sont dans `datasets/pidgin/kama_pidgin_v2/` :
+
+- 16 517 phrases du corpus MT560, nettoyées. Nous avons retiré les doublons, les paires mal alignées, les phrases dont les nombres diffèrent entre l'anglais et le pidgin, et une grande partie des phrases religieuses.
+- 862 phrases qui apprennent au modèle à recopier les cases `{x1}`.
+- Les 112 phrases bancaires de la page, répétées 8 fois pour peser davantage. Elles compteront 20 fois une fois validées par les natifs.
+
+Le modèle ajusté est converti dans un format rapide sur processeur (CTranslate2) et rangé dans `models/poids/ct2/`. Ce dossier n'est pas envoyé sur GitHub.
+
+#### 6. Un dictionnaire pidgin appuyé sur de vrais textes
+
+Le fichier `content-data/dictionnaire_pidgin.json` donne, pour **61 termes** de l'interface, la forme pidgin trouvée dans des textes réels. Pour chaque terme, il indique combien de fois elle apparaît et dans quelle source :
+
+- le corpus MT560, 28 000 phrases ;
+- le manuel Peace Corps de 1983 sur le pidgin camerounais ;
+- SOREVA, des phrases de la vie courante.
+
+Le script `training/pidgin/07_attester_termes.py` refait cette recherche automatiquement.
+
+Ce que le dictionnaire nous a appris :
+
+| On écrivait | Les textes réels disent | Nombre d'attestations |
+|---|---|---|
+| Make you careful | **Lukot** | 312 |
+| Always | **All time** | 68 (always : 8) |
+| Person weh e go receive | **Person weh go get di money** | 32 (receive n'est presque jamais employé) |
+| E don work | **E don waka fine** | 88 |
+| informations | **information** (toujours au singulier) | 9 |
+
+**6 mots n'ont été trouvés nulle part avec le bon sens :** charge (frais), free (gratuit), salary, close (fermer une fenêtre), validate et reference. Ce sont les premiers à faire confirmer par les natifs. Le dictionnaire propose aussi 18 phrases corrigées. Elles ne sont pas encore reportées dans le catalogue ni dans le fichier Word.
+
+#### 7. Première voix en pidgin
+
+Le modèle **MMS-TTS pcm** de Meta, une voix de pidgin nigérian, est téléchargé dans `models/poids/tts/mms-tts-pcm`. Il a lu les 73 phrases de la page. On peut les écouter dans `evaluation/tts_ecoute/index.html` et les noter dans `notes.csv`.
+
+Dans KAMA, la voix ne lira jamais les montants : un bip les remplace ici. Plus tard, ce seront des enregistrements humains joués directement par l'extension.
+
+### Démarche utilisée
+
+1. Rassembler d'abord tous les textes de la page de test, avec des règles fixes. Le modèle ne sert qu'aux textes imprévus.
+2. Ajuster le modèle jamm55 (pidgin nigérian) vers le pidgin camerounais avec nos données, sur Colab.
+3. Mesurer chaque version sur les mêmes 60 messages inédits, pour comparer honnêtement.
+4. Chercher dans de vrais textes comment le pidgin dit chaque mot, au lieu d'inventer.
+5. Pour la voix : écouter d'abord un modèle existant, avant d'enregistrer une voix camerounaise.
+
+### Résultats et limites connues
+
+**Traduction pidgin, test sur 60 messages jamais vus :**
+
+| Modèle | Sans problème | Montants perdus | Cases cassées | Répétitions |
+|---|---|---|---|---|
+| jamm55, d'origine | 18 | 3 | 4 | 3 |
+| Notre version 1, ajustée | **39** | **0** | **0** | **0** |
+
+La version 1 ne casse plus les montants, mais elle fait encore des **contresens graves**. Par exemple, « Présentez ce code à l'agent » est devenu une phrase qui parle d'envoyer de l'argent. **Les routes pidgin restent donc coupées.**
+
+**Traduction français ↔ anglais :** notes de 72,8 à 81 sur 100, sans aucun montant perdu. C'est une bonne base pour le passage par l'anglais.
+
+**Un incident sur Colab.** Le deuxième entraînement a réutilisé sans le dire les anciennes données et l'ancien modèle. Deux causes :
+
+- le cahier ne décompressait pas le nouveau zip quand d'anciennes données existaient déjà ;
+- l'entraînement reprenait automatiquement le dernier point sauvegardé.
+
+Nous l'avons vu à trois indices : 19 849 exemples au lieu de 18 275, 4 minutes d'entraînement au lieu de 30, et l'absence du test SOREVA. La version 2 tourne maintenant dans un dossier neuf (`KAMA/pidgin_v3` sur Drive), avec une vérification qui bloque si ce ne sont pas les bonnes données ou si un ancien modèle est présent.
+
+**Voix MMS :**
+
+- **Voix :** l'accent est nigérian, sans ajustement.
+- **Vitesse :** 181 secondes d'audio produites en 395 secondes. La mesure a été faite pendant que l'ordinateur compressait un autre modèle : elle sera refaite.
+- **Licence :** non commerciale (CC-BY-NC 4.0), à déclarer au jury.
+
+**Données vocales en pidgin camerounais :**
+
+- Environ 11 heures sont utilisables, surtout dans Common Voice (18 voix). Il faut demander l'accès sur le site de Mozilla.
+- Le corpus d'Oxford n'a pas de transcription.
+- Pour une voix de synthèse de qualité, il faudra enregistrer 1 à 2 heures d'**un seul** locuteur camerounais.
+
+**Tests des modèles restants, en pause à la demande de Dimitri :**
+
+- Turaco Gem (anglais → pidgin, 4 milliards de paramètres) : la compression était à mi-chemin.
+- Llama 1B et DeepSeek 1,5B (français → Ghomala) : pas encore testés.
+- Versions non compressées de flagship : pas encore testées.
+
+Relancer `evaluation/run_gguf.py` et `evaluation/run_nmt.py` reprend là où ça s'est arrêté. Seule la compression de Turaco Gem repart de zéro.
+
+### Ce que l'équipe doit faire ensuite
+
+| Qui | Quoi |
+|---|---|
+| Dimitri | Envoyer `Validation_pidgin_page_test.docx` aux locuteurs natifs, en commençant par les 6 mots non attestés |
+| Dimitri | Demander l'accès à Common Voice `wes` sur Mozilla Data Collective |
+| Dimitri | Écouter `evaluation/tts_ecoute/index.html` et remplir `notes.csv` |
+| Équipe | Trouver un locuteur camerounais prêt à enregistrer 1 à 2 heures, avec un accord écrit pour l'usage de sa voix |
+| Dimitri | Récupérer le modèle version 2 sur Colab et le comparer à la version 1 et à jamm55 |
+
+### Composants tiers utilisés
+
+| Composant | Licence | Usage |
+|---|---|---|
+| MMS-TTS pcm (Meta) | CC-BY-NC 4.0, non commercial | Voix de synthèse en pidgin, en test |
+| Helsinki-NLP opus-mt fr-en et en-fr | CC-BY 4.0 | Passage par l'anglais |
+| jamm55 autotrain pidgin | Licence non précisée | Base de notre modèle pidgin |
+| CTranslate2 | MIT | Exécution rapide des modèles sur processeur |
+| Google Colab | Service gratuit de Google | Entraînement sur GPU, hors dépôt |
+| MT560 anglais-pidgin camerounais | CC BY 4.0 | Données d'entraînement et dictionnaire |
+| Manuel Peace Corps 1983 (ERIC ED255041) | Document public | Dictionnaire, hors dépôt |
+| SOREVA (Goethe-Institut) | CC BY 4.0 | Test et dictionnaire |
+
+## 2026-11-11 — Bilan des trois modèles pidgin : traduction, voix, reconnaissance, et phrases de Kama
+
+### En bref
+
+- **Traduction (TTT)** : le dictionnaire passe d'abord, puis le modèle v2 pour les textes non critiques. Les textes critiques qui ne sont pas dans le dictionnaire sont refusés. Quatre autres modèles ont été essayés ou écartés : aucun ne fait mieux que v2.
+- **Voix (TTS)** : la voix MMS pcm est branchée et **activée** dans le serveur. Les 73 textes validés sortent par leurs extraits ; la voix du modèle ne parle que pour ce qui n'a pas d'extrait. Dimitri a écouté l'essai sur de l'inédit : c'est accepté pour ce premier essai.
+- **Reconnaissance (STT)** : trois modèles mesurés, aucun n'est assez bon pour une dictée libre (plus de la moitié des mots sont faux). On garde l'idée de reconnaître une intention parmi 7 phrases. Tout est prêt pour entraîner un meilleur modèle sur Common Voice (Colab).
+- **Phrases de Kama** : 40 phrases que Kama dit lui-même (menus, boutons, badges, explications, réponses avec montants) sont écrites en brouillon pidgin. Elles ne seront servies comme « Vérifié » qu'après validation par un locuteur.
+- Les tests automatiques du serveur passent : 155 réussis, 1 ignoré.
+
+### Les mots à connaître
+
+| Mot | Sens simple |
+|---|---|
+| TTT, TTS, STT | Texte vers texte (traduction), texte vers voix, voix vers texte |
+| Intention | Ce que la personne veut (ex. connaître son solde), choisi dans une liste fermée de 7 |
+| WER, CER | Part des mots (WER) ou des lettres (CER) qui sont faux. Plus c'est bas, mieux c'est |
+| chrF | Note de ressemblance d'une traduction avec la bonne. Plus c'est haut, mieux c'est |
+| Emprunt | Mot anglais utilisé tel quel en pidgin (application, code, charge) |
+
+### Ce qui a été implémenté, expliqué simplement
+
+**Traduction.** L'ordre est : dictionnaire, puis phrases proches, puis modèle v2 (seulement si le texte n'est pas critique), sinon « Pas encore traduit ». Les montants ne passent jamais par un modèle. Le dictionnaire peut maintenant venir de plusieurs fichiers : la page de test et les phrases de Kama (`content-data/kama_interface.json`).
+
+**Phrases de Kama.** Le document de l'expérience utilisateur décrit des phrases que Kama dit lui-même, différentes des textes de la banque. Elles sont écrites avec des montants d'exemple qui seront remplacés par les vrais montants de la page. Un fichier Word, `Validation_pidgin_phrases_kama.docx`, permet à un locuteur de les corriger.
+
+**Lecteur de nombres.** `backend/app/numbers.py` transforme un montant en suite de mots (25 500 FCFA devient « twenty five thousand five hundred franc »). C'est un calcul, pas un modèle. Un montant illisible n'est pas lu. Les mots du pidgin restent à valider.
+
+**Voix.** La route de voix est activée. Un script, `models/telecharger_voix.py`, permet à un collaborateur de télécharger le modèle (145 Mo), qui n'est pas dans Git. Dans Docker, `--build-arg WITH_VOICE=1` installe les bibliothèques de voix.
+
+**Reconnaissance.** Un nouveau moteur, `hf_ctc`, permet de brancher un modèle entraîné sur Common Voice. Le dossier `training/stt_pidgin/` contient la préparation des données (`01_preparer_donnees.py`), l'entraînement (`entrainer_stt.py`, trois modèles au choix) et un notebook Colab. Les phrases de test et de contrôle de Common Voice ne sont jamais dans l'entraînement.
+
+**Outils de mesure.** Mesure du lexique sur des corpus du web (`09_lexique_web.py`), des termes critiques (`10_termes_critiques.py`), de la voix sur de l'inédit (`evaluation/tts_inedit.py`), de la reconnaissance (`evaluation/stt_eval.py`) et téléchargement des modèles candidats (`evaluation/download_candidats.py`).
+
+### Démarche utilisée
+
+1. Comparer tous les modèles de traduction avec le même décodage, sur des phrases que le modèle n'a jamais vues.
+2. Chercher des modèles et des corpus pidgin sur Hugging Face et sur le web, puis ne retenir que ce qui se teste en pidgin.
+3. Mesurer la voix avec la reconnaissance : on fait relire la voix de synthèse par un modèle de reconnaissance, l'écart avec le texte voulu dit si la voix est claire.
+4. Ne rien servir en « Vérifié » sans validation d'un locuteur.
+
+### Résultats et limites connues
+
+**Traduction anglais vers pidgin** (77 phrases SOREVA, pidgin camerounais, jamais vues) :
+
+| Modèle | chrF | BLEU |
+|---|---|---|
+| jamm55 (base) | 33,4 | 9,1 |
+| **v2 (notre modèle)** | 33,0 | 8,5 |
+| NITHUB marian BBC | 33,0 | 8,1 |
+| v1 | 30,7 | 6,8 |
+| Enutrof marian | 21,1 | 3,2 |
+
+Sur 60 messages bancaires inédits : v2 et v1 sont sans problème dans 38 cas, jamm55 dans 16, NITHUB dans 4 (il casse les balises des montants dans 19 cas, il est donc inutilisable avec notre masquage). Aucun montant n'est perdu avec v2.
+
+- **Le vrai défaut de v2** est le sens des termes critiques (« annuler » devient « close »). Le filtre de lexique, lui, refuse surtout des emprunts valides : 21 des 22 mots « inconnus » de v2 existent dans le pidgin du web (application, charge, code, validate).
+- Le corpus web bancaire nigérian est généré par gabarits (117 mots différents) : inutilisable pour le lexique. Le corpus de presse nigérian apporte 20 899 mots vus au moins 5 fois qui manquent à notre lexique. Ce sont des mots nigérians, à faire valider avant tout usage.
+
+**Voix sur l'inédit** (reconnaissance qui relit la voix de synthèse) :
+
+| Groupe | Phrases | Erreur de lettres moyenne |
+|---|---|---|
+| Banque inédite | 30 | 26 % (21 % pour les phrases d'au moins 2 secondes) |
+| Vie courante SOREVA (très courtes) | 40 | 61 % |
+
+Les très courts énoncés sont le point faible. La vitesse est d'environ le temps réel.
+
+**Reconnaissance** (mots faux / lettres fausses) :
+
+| Modèle | SOREVA (150 phrases) | Common Voice (322 clips) |
+|---|---|---|
+| Omnilingual 300M | 61,6 % / 26,5 % | 54,9 % / 23,9 % |
+| wav2vec2 pidgin | 56,7 % / 29,3 % | 52,7 % / 24,3 % |
+| Whisper small | 68,5 % / 39,9 % | 78,0 % / 47,9 % |
+
+Omnilingual reste branché (désactivé dans `routes.json`).
+
+**Limites.** L'intention n'a pas encore été testée sur de l'audio réel. Le test local du script d'entraînement n'était pas fini au moment d'écrire ces lignes. La licence de MMS-TTS est non commerciale. Les données d'entraînement `train.jsonl` et `dev.jsonl` ne sont pas dans Git (elles contiennent des textes religieux de MT560) et se recréent avec `01_nettoyer_donnees.py`.
+
+### Ce que l'équipe doit faire ensuite
+
+| Qui | Quoi |
+|---|---|
+| Dimitri | Envoyer `KAMA_pidgin_stt_drive.zip` sur le Drive (`KAMA/Dataset/`) et lancer le notebook `entrainement_stt_colab.ipynb` |
+| Locuteur natif | Corriger `Validation_pidgin_phrases_kama.docx` (40 phrases) puis `Validation_pidgin_messages_inedits.docx` (30 messages) |
+| Locuteur natif | Valider les mots de nombres et les phrases d'intention |
+| Équipe | Décider d'ajouter 6 intentions (`ask_recipient`, `ask_amount`, `ask_delay`, `is_it_safe`, `help`, `stop`) : cela modifie le contrat avec l'extension |
+| Omar | Appliquer les phrases de Kama selon la langue choisie ; gérer la voix lente dans l'extension |
+| Équipe | Poser au comité les questions sur la licence de MMS-TTS et l'envoi d'audio ou de texte à un serveur |
+| Équipe | Trouver un locuteur pour enregistrer une voix humaine, avec un accord écrit |
+
+### Composants tiers utilisés
+
+| Composant | Licence | Usage |
+|---|---|---|
+| MMS-TTS pcm (Meta) | CC-BY-NC 4.0, non commercial | Voix de synthèse |
+| Omnilingual ASR CTC 300M | Apache 2.0 | Reconnaissance vocale |
+| KhayaAI w2v-bert-pcm, wav2vec2 pidgin | Apache 2.0 | Candidats à l'ajustement |
+| NITHUB marian BBC, Enutrof marian | Licence à vérifier | Essais, rejetés |
+| Common Voice wes 27.0 | CC0 (ne pas republier, ne pas identifier les locuteurs) | Entraînement et test de la reconnaissance, hors dépôt |
+| Corpus pidgin du web (presse, lexiques, Wikipédia pidgin) | Variables | Mesure du lexique, hors dépôt |
+| onnxruntime, PyTorch, transformers | MIT, BSD, Apache 2.0 | Moteurs de voix |
+
+Signé : Dimitri, 2026-11-11

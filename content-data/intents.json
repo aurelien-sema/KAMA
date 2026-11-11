@@ -1,47 +1,141 @@
 {
-  "_note": "Grammaire fermee des commandes vocales. Les listes bbj et wes sont a remplir avec des locuteurs natifs.",
+  "_note": "Grammaire fermee des commandes vocales. Les listes wes sont des PROPOSITIONS construites avec le dictionnaire (content-data/dictionnaire_pidgin.json) : elles servent seulement a reconnaitre une demande, jamais a afficher un texte. A confirmer avec des locuteurs natifs. La liste bbj reste a remplir.",
   "intents": {
     "ask_balance": {
-      "fr": ["mon solde", "combien j'ai", "combien il me reste", "combien sur mon compte"],
-      "en": ["my balance", "how much do i have", "how much is left", "how much is in my account"],
+      "fr": [
+        "mon solde",
+        "combien j'ai",
+        "combien il me reste",
+        "combien sur mon compte"
+      ],
+      "en": [
+        "my balance",
+        "how much do i have",
+        "how much is left",
+        "how much is in my account"
+      ],
       "bbj": [],
-      "wes": []
+      "wes": [
+        "how much money i get",
+        "how much i get for my account",
+        "money weh i get na how much",
+        "my money na how much"
+      ]
     },
     "ask_fees": {
-      "fr": ["les frais", "combien ça coûte", "combien je paie en plus"],
-      "en": ["the fee", "the fees", "how much does it cost"],
+      "fr": [
+        "les frais",
+        "combien ça coûte",
+        "combien je paie en plus"
+      ],
+      "en": [
+        "the fee",
+        "the fees",
+        "how much does it cost"
+      ],
       "bbj": [],
-      "wes": []
+      "wes": [
+        "na how much dem go take",
+        "how much charge",
+        "how much i go pay for charge",
+        "di charge na how much"
+      ]
     },
     "ask_total": {
-      "fr": ["le total", "combien va sortir", "combien au total"],
-      "en": ["the total", "how much in total", "how much will leave"],
+      "fr": [
+        "le total",
+        "combien va sortir",
+        "combien au total"
+      ],
+      "en": [
+        "the total",
+        "how much in total",
+        "how much will leave"
+      ],
       "bbj": [],
-      "wes": []
+      "wes": [
+        "all money weh go comot",
+        "how much go comot",
+        "di total na how much",
+        "na how much for total"
+      ]
     },
     "what_to_do": {
-      "fr": ["que dois-je faire", "qu'est-ce que je dois faire", "je fais quoi", "aide-moi"],
-      "en": ["what should i do", "what do i do", "help me"],
+      "fr": [
+        "que dois-je faire",
+        "qu'est-ce que je dois faire",
+        "je fais quoi",
+        "aide-moi"
+      ],
+      "en": [
+        "what should i do",
+        "what do i do",
+        "help me"
+      ],
       "bbj": [],
-      "wes": []
+      "wes": [
+        "wetin i go do",
+        "wetin i must do",
+        "abeg help me",
+        "help me abeg"
+      ]
     },
     "explain_error": {
-      "fr": ["pourquoi ça ne marche pas", "pourquoi c'est refusé", "quelle erreur", "ça veut dire quoi"],
-      "en": ["why is it not working", "why was it refused", "what is the error", "what does it mean"],
+      "fr": [
+        "pourquoi ça ne marche pas",
+        "pourquoi c'est refusé",
+        "quelle erreur",
+        "ça veut dire quoi"
+      ],
+      "en": [
+        "why is it not working",
+        "why was it refused",
+        "what is the error",
+        "what does it mean"
+      ],
       "bbj": [],
-      "wes": []
+      "wes": [
+        "wetin dis problem mean",
+        "why e no work",
+        "why dem no gri",
+        "wetin dis mistake mean"
+      ]
     },
     "summarize_transactions": {
-      "fr": ["mes transactions", "mes opérations", "ce qui est entré", "ce qui est sorti"],
-      "en": ["my transactions", "what came in", "what went out"],
+      "fr": [
+        "mes transactions",
+        "mes opérations",
+        "ce qui est entré",
+        "ce qui est sorti"
+      ],
+      "en": [
+        "my transactions",
+        "what came in",
+        "what went out"
+      ],
       "bbj": [],
-      "wes": []
+      "wes": [
+        "di money weh enter",
+        "di money weh comot",
+        "my transactions",
+        "which money don enter or comot"
+      ]
     },
     "repeat": {
-      "fr": ["répète", "encore une fois"],
-      "en": ["repeat", "say it again"],
+      "fr": [
+        "répète",
+        "encore une fois"
+      ],
+      "en": [
+        "repeat",
+        "say it again"
+      ],
       "bbj": [],
-      "wes": []
+      "wes": [
+        "talk am again",
+        "say am again",
+        "abeg talk am again"
+      ]
     }
   }
 }

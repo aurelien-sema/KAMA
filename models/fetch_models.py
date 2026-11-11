@@ -8,7 +8,7 @@ import sys
 
 from huggingface_hub import snapshot_download
 
-HERE = pathlib.Path(__file__).resolve().parent
+HERE = pathlib.Path(__file__).resolve().parent / "poids"
 EXCLUDE = ["*.onnx", "training_args.bin", "optimizer*", "scheduler*", "rng_state*"]
 MODELS = {
     "ghomala": [

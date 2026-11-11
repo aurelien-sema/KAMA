@@ -1,9 +1,48 @@
 {
+  "_note": "Pidgin : un texte du catalogue valide est traduit par le dictionnaire (memoire de traduction), sinon le modele ajuste v2 prend le relais sous controle ; un texte critique (argent, alerte, confirmation) ne passe jamais par le modele. Pour changer de modele : scripts/convertir_modele.py puis modifier le chemin de en>wes_modele. Chemins relatifs a KAMA_MODELS_DIR. Voix : asr et tts suivent le meme principe (enabled false tant que le modele n'est pas teste). Les enregistrements humains valides (KAMA_CLIPS_DIR, par defaut poids/audio) passent avant le modele de synthese.",
   "languages": {
-    "bbj": { "name": "Ghomálá'" },
-    "wes": { "name": "Pidgin camerounais" }
+    "bbj": {
+      "name": "Ghomálá'"
+    },
+    "wes": {
+      "name": "Pidgin camerounais"
+    }
   },
   "translation": {
+    "fr>en": {
+      "enabled": true,
+      "internal": true,
+      "engine": "marian_ct2",
+      "path": "poids/ct2/opus-mt-fr-en"
+    },
+    "en>wes_modele": {
+      "enabled": true,
+      "internal": true,
+      "engine": "marian_ct2",
+      "path": "poids/ct2/pidgin_en_wes_ajuste_v2"
+    },
+    "en>wes": {
+      "enabled": true,
+      "engine": "pipeline",
+      "steps": [
+        "simplify:en",
+        "en>wes_modele"
+      ],
+      "lexicon": "lexique_pidgin.txt",
+      "max_unknown_ratio": 0.25
+    },
+    "fr>wes": {
+      "enabled": true,
+      "engine": "pipeline",
+      "steps": [
+        "simplify:fr",
+        "fr>en",
+        "simplify:en",
+        "en>wes_modele"
+      ],
+      "lexicon": "lexique_pidgin.txt",
+      "max_unknown_ratio": 0.25
+    },
     "fr>bbj": {
       "enabled": false,
       "engine": "marian_ct2",
@@ -17,6 +56,32 @@
       "path": "flagship-ai__cameroon-int8/ghomala-francais"
     }
   },
-  "asr": {},
-  "tts": {}
+  "asr": {
+    "wes": {
+      "enabled": false,
+      "engine": "omnilingual_ctc",
+      "path": "poids/asr/omnilingual-ctc-300m-onnx",
+      "options": {
+        "threads": 2
+      }
+    },
+    "bbj": {
+      "enabled": false,
+      "engine": "omnilingual_ctc",
+      "path": "poids/asr/omnilingual-ctc-300m-onnx",
+      "options": {
+        "threads": 2
+      }
+    }
+  },
+  "tts": {
+    "wes": {
+      "enabled": true,
+      "engine": "mms_vits",
+      "path": "poids/tts/mms-tts-pcm",
+      "options": {
+        "threads": 2
+      }
+    }
+  }
 }

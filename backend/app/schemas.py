@@ -41,6 +41,9 @@ class AudioSegment(Strict):
     type: Literal["audio"] = "audio"
     format: Literal["wav"] = "wav"
     data: str = Field(description="WAV encode en base64.")
+    origin: Literal["recorded", "synthetic"] = Field(
+        "synthetic", description="recorded = voix humaine validee ; synthetic = voix generee par le modele (a signaler comme automatique)."
+    )
 
 
 class SlotSegment(Strict):
