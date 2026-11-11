@@ -88,3 +88,14 @@ def test_demo_routes_differ_from_default_routes_only_by_the_microphone():
     assert demo["asr"]["wes"]["enabled"] is True
     demo["asr"]["wes"]["enabled"] = default["asr"]["wes"]["enabled"]
     assert demo == default
+
+
+def test_default_kama_texts_are_embedded_and_drafts_stay_in_interface_zones():
+    """kama_frontend/config/interface.json = textes par defaut de Kama ; un brouillon n'y figure que s'il s'agit d'un libelle d'interface."""
+    from app.export_glossary import ZONES_LIBELLES, build_interface
+
+    entries = json.loads((CONTENT / "kama_interface.json").read_text(encoding="utf-8"))["entries"]
+    embedded = json.loads((REPO_DIR / "kama_frontend" / "config" / "interface.json").read_text(encoding="utf-8"))
+    assert embedded["fr"] == build_interface(entries)["fr"], "interface.json perime : python -m app.export_glossary"
+    for item in embedded["fr"]["wes"].values():
+        assert item["statut"] == "valide" or item["zone"] in ZONES_LIBELLES

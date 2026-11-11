@@ -9,10 +9,12 @@
  */
 import type { Ligne } from '@/config/gabarits';
 import glossaire from '@/config/glossaire.json';
+import interfaceJson from '@/config/interface.json';
 import type { Langue } from '@/config/langues';
 import { ErreurApi, traduireTexte, type ElementApi } from './api';
 import { chercherGlossaire, type Glossaire } from './glossaire';
 import { masquerLigne } from './lignes';
+import { chercherInterface, type DonneesInterface } from './interface';
 import { balisesDe, demasquer, estMasque, masquer } from './masquage';
 
 /** Une phrase à traduire : une ligne du gabarit (texte fixe + montants lus dans la page) et sa nature. */
@@ -40,6 +42,12 @@ async function traduireMasque(texte: string, valeurs: Record<string, string>, el
 
   const local = chercherGlossaire(glossaire as Glossaire, langue.code, texte);
   if (local) return fabriquer(local, 'verified'); // jamais de réseau pour une phrase déjà validée
+
+  // Texte par défaut de Kama (libellé d'interface, jamais un montant ni un avertissement) : le brouillon s'affiche, étiqueté « automatique ».
+  if (element === 'text') {
+    const defaut = chercherInterface(interfaceJson as unknown as DonneesInterface, langue.code, texte);
+    if (defaut) return fabriquer(defaut.texte, defaut.statut === 'valide' ? 'verified' : 'auto');
+  }
 
   if (!estMasque(texte)) return { statut: 'original', raison: 'non_masque' }; // le serveur refuserait : on n'envoie pas
 

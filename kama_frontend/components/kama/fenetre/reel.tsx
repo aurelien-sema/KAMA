@@ -9,7 +9,6 @@
 import { useMemo } from 'react';
 import type { ElementApi } from '@/lib/api';
 import type { IdElement } from '@/config/page-test';
-import { ERREURS } from '@/config/page-test';
 import { GABARITS, texteAEcouter, type Ligne } from '@/config/gabarits';
 import { bilanTransactions, listeOperations, PHRASES } from '@/config/phrases';
 import {
@@ -24,6 +23,7 @@ import {
 import { useLangueCourante } from '@/lib/langue-courante';
 import { aplatir, useReponse } from '@/lib/use-reponse';
 import { useTraductionTexte } from '@/lib/use-traduction';
+import { traduireLibelle } from '@/lib/use-texte';
 import {
   BandeauHorsLigne,
   BankErrorContent,
@@ -203,17 +203,17 @@ function ReponseErreur({ e }: { e: ElementTrouve }) {
   const lignes: Ligne[] = [[explication.titre], [explication.conseil]];
   const r = useReponse(lignes, 'error');
 
-  // Message inconnu de Kama (ex. « Message important » ajouté par le jury) : on tente aussi de le traduire. S'il est critique,
-  // le serveur ne le traduit que s'il est validé ; sinon le texte original reste seul affiché.
+  // Le message de la banque lui-même : traduit s'il figure dans le glossaire de la page de test (validé par un locuteur), ou s'il est
+  // inconnu de Kama (ex. « Message important » ajouté par le jury). S'il est critique, le serveur ne le traduit que validé ; sinon
+  // le texte original reste seul affiché.
   const langue = useLangueCourante();
-  const inconnu = !(e.code && ERREURS[e.code]) && !!e.message;
   const nature = normaliser(e.libelleTexte);
   const element: ElementApi = /alerte de sécurité|security warning/.test(nature)
     ? 'warning'
     : /erreur est survenue|error occurred/.test(nature)
       ? 'error'
       : 'text';
-  const [m] = useTraductionTexte(inconnu ? e.message! : null, element, langue);
+  const [m] = useTraductionTexte(e.message ?? null, element, langue);
 
   if (r.chargement) return <Reflexion />;
   const messageTraduit =
@@ -253,6 +253,9 @@ function ReponseGabarit({
 }) {
   const gabarit = GABARITS[id];
   const base = gabarit ? gabarit({ libelle: e.libelleTexte, valeur: e.valeur, total }) : null;
+  const langue = useLangueCourante();
+  const nomTraduit = traduireLibelle(langue?.code, e.libelleTexte);
+  const nom = nomTraduit !== e.libelleTexte ? nomTraduit : e.def.nom; // « Charge » (validé) à la place de « Frais », sinon le nom français
   const r = useReponse(base ? base.lignes : null, ELEMENT_API[id] ?? 'text');
   if (!base) return null;
   if (r.chargement) return <Reflexion />;
@@ -266,7 +269,7 @@ function ReponseGabarit({
   return (
     <div className="flex flex-col gap-3">
       <span className="self-start rounded-md border border-bank-border bg-bank-bg px-2 py-1 text-xs text-bank-text">
-        Élément choisi : <strong>{e.def.nom}</strong>
+        Élément choisi : <strong>{nom}</strong>
       </span>
       {r.horsLigne && <BandeauHorsLigne onRetry={r.reessayer} />}
       <KamaResponse status={r.status} paroles={r.paroles} speech={texteAEcouter(base.lignes)}>

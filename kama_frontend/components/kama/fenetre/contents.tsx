@@ -10,6 +10,7 @@ import { AlertTriangle, Eye, Mic, ShieldCheck, Volume2, WifiOff } from 'lucide-r
 import { TranslationBadge } from '@/components/kama/primitives';
 import { lireEnFrancais } from '@/lib/voix';
 import type { Parole } from '@/lib/traduction';
+import { useTexte } from '@/lib/use-texte';
 import { Amount, KamaLine, KamaResponse, StatusBadge, UserBubble, WindowButton, type TranslationStatus } from './parts';
 
 export type Etape = { cible: string; texte: string };
@@ -17,9 +18,10 @@ export type Operation = { date: string; libelle: string; montant: string; sens: 
 
 /** Bouton « Montre-moi » : fait défiler jusqu'à l'élément et le surligne (étape suivante). */
 export function MontreMoi({ onClick }: { onClick?: () => void }) {
+  const libelle = useTexte('Montre-moi');
   return (
     <WindowButton onClick={onClick}>
-      <Eye className="size-4" aria-hidden /> Montre-moi
+      <Eye className="size-4" aria-hidden /> {libelle}
     </WindowButton>
   );
 }
@@ -62,11 +64,12 @@ export function TalkListeningContent() {
 
 /* 3 — Parler : réflexion */
 export function TalkThinkingContent({ question }: { question?: string }) {
+  const reflechit = useTexte('Kama réfléchit…').replace(/…$/, '');
   return (
     <div className="flex h-full flex-col justify-end gap-4">
       {question && <UserBubble>{question}</UserBubble>}
       <div className="flex items-center gap-3 rounded-2xl rounded-bl-md bg-kama-cream px-4 py-3" role="status">
-        <span className="text-[15px] font-semibold text-kama-ink">Kama réfléchit</span>
+        <span className="text-[15px] font-semibold text-kama-ink">{reflechit}</span>
         <span className="flex gap-1" aria-hidden>
           {[0, 1, 2].map((i) => (
             <span
@@ -274,6 +277,7 @@ export function BankErrorContent({
 
 /* 10 — Pas de connexion */
 export function OfflineContent({ onRetry }: { onRetry?: () => void }) {
+  const reessayer = useTexte('Réessayer');
   return (
     <div className="flex h-full flex-col items-center justify-center gap-4 text-center" role="alert">
       <span className="grid size-14 place-items-center rounded-full bg-kama-cream text-kama-ink">
@@ -290,7 +294,7 @@ export function OfflineContent({ onRetry }: { onRetry?: () => void }) {
         </KamaLine>
       </div>
       <WindowButton variant="solid" onClick={onRetry}>
-        Réessayer
+        {reessayer}
       </WindowButton>
     </div>
   );
@@ -324,17 +328,19 @@ export function Reflexion() {
 
 /* 13 — Pas de connexion au serveur : la réponse reste affichée en français, avec une icône, une phrase et « Réessayer » (UX 3.8) */
 export function BandeauHorsLigne({ onRetry }: { onRetry?: () => void }) {
+  const reessayer = useTexte('Réessayer');
+  const pasInternet = useTexte('Pas de connexion internet.');
   return (
     <div className="mb-3 flex flex-col gap-2 rounded-xl border-2 border-kama-ink p-3" role="alert">
       <p className="m-0 flex items-start gap-2 text-sm text-kama-ink">
         <WifiOff className="mt-0.5 size-4 shrink-0" aria-hidden />
         <span>
-          <span className="font-semibold">Pas de connexion internet.</span> Kama montre la réponse en français.
+          <span className="font-semibold">{pasInternet}</span> Kama montre la réponse en français.
         </span>
       </p>
       <div>
         <WindowButton variant="solid" onClick={onRetry}>
-          Réessayer
+          {reessayer}
         </WindowButton>
       </div>
     </div>

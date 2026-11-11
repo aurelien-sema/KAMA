@@ -8,6 +8,7 @@ import { BadgeCheck, CircleSlash, Languages, Pause, Play, Volume2 } from 'lucide
 import { TranslationBadge } from '@/components/kama/primitives';
 import { arreterLecture, lireEnFrancais } from '@/lib/voix';
 import { useLectureAuto } from '@/lib/langue-courante';
+import { useTexte } from '@/lib/use-texte';
 import { jouerParoles } from '@/lib/audio';
 import type { Parole } from '@/lib/traduction';
 
@@ -25,7 +26,8 @@ const STATUS = {
 
 /** Badge en tête de chaque réponse. Icône + texte, jamais la couleur seule. */
 export function StatusBadge({ status }: { status: TranslationStatus }) {
-  const { label, Icon, cls } = STATUS[status];
+  const { label: labelFr, Icon, cls } = STATUS[status];
+  const label = useTexte(labelFr);
   return (
     <span className={`inline-flex items-center gap-1 rounded-full px-1.5 py-0.5 text-[11px] font-semibold ${cls}`}>
       <Icon className="size-3.5" aria-hidden />

@@ -10,6 +10,8 @@
 import { useEffect, useState } from 'react';
 import { MessageCircleQuestion, Volume2 } from 'lucide-react';
 import { KamaLogo } from '@/components/kama/primitives';
+import { useLangueCourante } from '@/lib/langue-courante';
+import { traduireLibelle } from '@/lib/use-texte';
 import { lireEnFrancais } from '@/lib/voix';
 
 const HAUTEUR = 52;
@@ -20,6 +22,7 @@ const LONGUEUR_MAX = 500;
 type Props = { dansKama: (e: Event) => boolean; onExpliquer: (texte: string) => void };
 
 export function BarreSelection({ dansKama, onExpliquer }: Props) {
+  const langue = useLangueCourante();
   const [barre, setBarre] = useState<{ texte: string; top: number; left: number } | null>(null);
 
   useEffect(() => {
@@ -86,10 +89,10 @@ export function BarreSelection({ dansKama, onExpliquer }: Props) {
           setBarre(null);
         }}
       >
-        <MessageCircleQuestion className="size-4" aria-hidden /> Expliquer
+        <MessageCircleQuestion className="size-4" aria-hidden /> {traduireLibelle(langue?.code, 'Expliquer')}
       </button>
       <button type="button" className={bouton} onClick={() => lireEnFrancais(barre.texte)}>
-        <Volume2 className="size-4" aria-hidden /> Écouter
+        <Volume2 className="size-4" aria-hidden /> {traduireLibelle(langue?.code, 'Écouter')}
       </button>
     </div>
   );

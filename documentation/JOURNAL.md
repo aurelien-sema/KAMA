@@ -1407,3 +1407,27 @@ Les trois documents de l'équipe (UX, sécurité, règlement) et `backend/ARCHIT
 Aucun nouveau composant : seulement ceux déjà déclarés (React, WXT, Tailwind, lucide côté extension ; FastAPI et les modèles déjà listés côté serveur).
 
 Signé : Dimitri, 2026-11-11
+
+
+## 2026-11-11 — Les textes par défaut de Kama et ceux de la page de test sont dans l'extension
+
+### En bref
+
+- Les **40 textes par défaut de Kama** (`content-data/kama_interface.json`) et les **70 textes de la page de test** (`safinum_test_page.json`) sont maintenant embarqués dans l'extension. Ils s'affichent sans appel au serveur.
+- **Textes par défaut** : 24 sont des libellés d'interface (menu, boutons, badges, messages d'état). Ils s'affichent en pidgin **même en brouillon**. Les 16 autres (explications, réponses avec montants, catégories d'opérations) restent hors de l'extension tant qu'un locuteur ne les a pas validés.
+- **Page de test** : les libellés validés servent dans la fenêtre (« Frais » devient « Charge » dans « Élément choisi »), et le message de la banque est traduit s'il est dans le catalogue.
+- Tests : 73 pour l'extension, tous réussis ; le contrat serveur (14 tests) réussit aussi.
+
+### Ce qui a été fait
+
+- `python -m app.export_glossary` écrit maintenant `kama_frontend/config/interface.json` (24 libellés, tous en brouillon) en plus de `glossaire.json` (70 phrases validées). Chaque libellé porte son `statut` ; une validation (`validated_by`) le fait passer à « valide » sans toucher au code.
+- Nouveaux fichiers : `lib/interface.ts`, `lib/use-texte.ts`. Ajouts seulement dans le menu de l'onglet, la barre de sélection, le popup (Activé, Texte, Audio, Expliquer cette page), les badges, « Montre-moi », « Réessayer », « Pas de connexion internet ».
+- Ordre de recherche d'un texte : phrase validée, puis libellé d'interface, sinon le français.
+
+### Limites connues
+
+- Les 83 phrases d'explication de la fenêtre n'ont toujours pas de pidgin validé : seules 5 ressemblent aux textes par défaut. L'audio pidgin des explications attend leur validation.
+- Les libellés en brouillon ont été écrits par l'équipe sans locuteur natif : ils doivent passer par `Validation_pidgin_phrases_kama.docx`.
+- Le badge « Vérifié » n'apparaît que pour les phrases réellement validées.
+
+Signé : Dimitri, 2026-11-11

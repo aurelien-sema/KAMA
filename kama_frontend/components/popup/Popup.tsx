@@ -16,6 +16,7 @@ import { ChoixLangue } from '@/components/kama/ChoixLangue';
 import { KamaLogo, SpeakButton, TranslationBadge } from '@/components/kama/primitives';
 import { LANGUES, trouverLangue, type IdLangue } from '@/config/langues';
 import { LangueCourante } from '@/lib/langue-courante';
+import { useTexte } from '@/lib/use-texte';
 import { envoyerAOngletActif } from '@/lib/messages';
 import { reglageActif, reglageLangue, reglageMode, useReglage } from '@/lib/reglages';
 
@@ -122,6 +123,8 @@ export function PopupVue(p: PropsVue) {
 /* -------------------------------------------------------------------------------------- */
 
 function Interrupteur({ actif, onChange }: { actif: boolean; onChange: (v: boolean) => void }) {
+  const texteActif = useTexte('Activé');
+  const texteInactif = useTexte('Désactivé');
   return (
     <button
       type="button"
@@ -131,7 +134,7 @@ function Interrupteur({ actif, onChange }: { actif: boolean; onChange: (v: boole
       onClick={() => onChange(!actif)}
       className="ml-auto flex min-h-11 cursor-pointer items-center gap-2 rounded-full border-0 bg-transparent px-1 text-sm font-medium text-kama-ink focus-visible:outline-2 focus-visible:outline-kama-ink"
     >
-      {actif ? 'Activé' : 'Désactivé'}
+      {actif ? texteActif : texteInactif}
       <span className={`relative h-7 w-12 rounded-full ${actif ? 'bg-kama-ink' : 'bg-bank-line'}`}>
         <span
           className={`absolute top-1 size-5 rounded-full bg-kama-white transition-[left] ${actif ? 'left-6' : 'left-1'}`}
@@ -179,6 +182,9 @@ function Reglages({
 }: PropsReglages) {
   const [listeOuverte, setListeOuverte] = useState(listeOuverteInitiale);
   const langue = trouverLangue(idLangue)!;
+  const texteTexte = useTexte('Texte');
+  const texteAudio = useTexte('Audio');
+  const texteExpliquer = useTexte('Expliquer cette page');
   const desactive = !actif;
 
   return (
@@ -227,7 +233,7 @@ function Reglages({
                 }`}
               >
                 <Icone className="size-5" aria-hidden />
-                {m === 'texte' ? 'Texte' : 'Audio'}
+                {m === 'texte' ? texteTexte : texteAudio}
               </button>
             );
           })}
@@ -241,7 +247,7 @@ function Reglages({
           disabled={!pageReconnue}
           className="min-h-14 flex-1 cursor-pointer rounded-lg border-0 bg-kama-orange text-[18px] font-bold text-kama-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-kama-ink disabled:cursor-not-allowed disabled:opacity-50"
         >
-          Expliquer cette page
+          {texteExpliquer}
         </button>
         <SpeakButton texte="Expliquer cette page" label="Écouter : Expliquer cette page" />
       </div>

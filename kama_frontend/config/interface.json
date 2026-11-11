@@ -1,0 +1,127 @@
+{
+ "_note": "Genere par `python -m app.export_glossary` depuis content-data/kama_interface.json. statut brouillon = pas encore valide par un locuteur. Ne pas modifier a la main.",
+ "fr": {
+  "wes": {
+   "activé": {
+    "texte": "On",
+    "statut": "brouillon",
+    "zone": "popup"
+   },
+   "audio": {
+    "texte": "Audio",
+    "statut": "brouillon",
+    "zone": "popup"
+   },
+   "bienvenue ! choisis ta langue": {
+    "texte": "Welcome! Make you choose your language.",
+    "statut": "brouillon",
+    "zone": "popup"
+   },
+   "désactivé": {
+    "texte": "Off",
+    "statut": "brouillon",
+    "zone": "popup"
+   },
+   "expliquer": {
+    "texte": "Explain",
+    "statut": "brouillon",
+    "zone": "selection"
+   },
+   "expliquer cette page": {
+    "texte": "Explain dis page",
+    "statut": "brouillon",
+    "zone": "menu"
+   },
+   "je n'ai pas compris. redis-le, s'il te plaît": {
+    "texte": "I no understand. Abeg talk am again.",
+    "statut": "brouillon",
+    "zone": "voix"
+   },
+   "je t'écoute": {
+    "texte": "I dey hear you.",
+    "statut": "brouillon",
+    "zone": "voix"
+   },
+   "kama réfléchit…": {
+    "texte": "Kama dey think…",
+    "statut": "brouillon",
+    "zone": "fenetre"
+   },
+   "montre-moi": {
+    "texte": "Show me",
+    "statut": "brouillon",
+    "zone": "fenetre"
+   },
+   "normale": {
+    "texte": "Normal",
+    "statut": "brouillon",
+    "zone": "fenetre"
+   },
+   "paramètres": {
+    "texte": "Settings",
+    "statut": "brouillon",
+    "zone": "popup"
+   },
+   "parler à kama": {
+    "texte": "Talk to Kama",
+    "statut": "brouillon",
+    "zone": "menu"
+   },
+   "pas de connexion internet": {
+    "texte": "Internet no dey.",
+    "statut": "brouillon",
+    "zone": "etat"
+   },
+   "pas encore traduit": {
+    "texte": "Dem never translate dis one",
+    "statut": "brouillon",
+    "zone": "badge"
+   },
+   "ralentie": {
+    "texte": "Slow",
+    "statut": "brouillon",
+    "zone": "fenetre"
+   },
+   "réessayer": {
+    "texte": "Try again",
+    "statut": "brouillon",
+    "zone": "fenetre"
+   },
+   "résumer mes transactions": {
+    "texte": "Di money weh enter and weh comot",
+    "statut": "brouillon",
+    "zone": "menu"
+   },
+   "texte": {
+    "texte": "Text",
+    "statut": "brouillon",
+    "zone": "popup"
+   },
+   "traduction automatique": {
+    "texte": "Computer translate dis one",
+    "statut": "brouillon",
+    "zone": "badge"
+   },
+   "traduction indisponible. voici le texte original": {
+    "texte": "Translation no dey. See di original text.",
+    "statut": "brouillon",
+    "zone": "etat"
+   },
+   "tu peux l'écouter en français": {
+    "texte": "You fit hear am for French.",
+    "statut": "brouillon",
+    "zone": "etat"
+   },
+   "vérifié": {
+    "texte": "Dem don check am",
+    "statut": "brouillon",
+    "zone": "badge"
+   },
+   "écouter": {
+    "texte": "Listen",
+    "statut": "brouillon",
+    "zone": "selection"
+   }
+  }
+ }
+}

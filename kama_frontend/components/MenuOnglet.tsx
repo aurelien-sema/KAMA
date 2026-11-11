@@ -7,7 +7,9 @@
 import { forwardRef } from 'react';
 import { Banknote, FileText, Mic, type LucideIcon } from 'lucide-react';
 import { SpeakButton, TranslationBadge } from '@/components/kama/primitives';
+import { useLangueCourante } from '@/lib/langue-courante';
 import { topBorne } from '@/lib/position-onglet';
+import { traduireLibelle } from '@/lib/use-texte';
 
 export type ModeKama = 'parler' | 'expliquer' | 'resumer';
 
@@ -23,6 +25,7 @@ const HAUTEUR_MENU = 250;
 type Props = { position: number; onChoisir: (mode: ModeKama) => void };
 
 export const MenuOnglet = forwardRef<HTMLDivElement, Props>(function MenuOnglet({ position, onChoisir }, ref) {
+  const langue = useLangueCourante();
   return (
     <div
       ref={ref}
@@ -40,7 +43,7 @@ export const MenuOnglet = forwardRef<HTMLDivElement, Props>(function MenuOnglet(
             className="flex min-h-14 flex-1 cursor-pointer items-center gap-2.5 rounded-xl border-0 bg-kama-cream px-3 text-left text-base font-bold text-kama-ink hover:bg-kama-orange focus-visible:outline-2 focus-visible:outline-kama-ink"
           >
             <Icone className="size-6 shrink-0" strokeWidth={2.25} aria-hidden />
-            {libelle}
+            {traduireLibelle(langue?.code, libelle)}
           </button>
           <SpeakButton texte={libelle} label={`Écouter : ${libelle}`} />
         </div>
