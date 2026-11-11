@@ -32,7 +32,10 @@ export const EXEMPLE_RESUME: { entrees: string; sorties: string; operations: Ope
 
 export const EXEMPLE_ELEMENT = { libelle: 'Frais', frais: '500 FCFA', total: '25 500 FCFA' };
 
-export const EXEMPLE_ERREUR = { messageBanque: 'Solde insuffisant', manque: '3 000 FCFA' };
+export const EXEMPLE_ERREUR = {
+  messageBanque: 'Solde insuffisant',
+  titre: "Tu n'as pas assez d'argent pour ce transfert.",
+};
 
 export const EXEMPLE_NON_TRADUIT =
   'Ce bouton bloque ta carte. Utilise-le seulement si tu as perdu ta carte.';

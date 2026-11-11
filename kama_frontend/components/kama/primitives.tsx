@@ -4,6 +4,7 @@
  */
 import { Volume2 } from 'lucide-react';
 import { lireEnFrancais } from '@/lib/voix';
+import { useLangueCourante } from '@/lib/langue-courante';
 
 /**
  * Adresse du logo, calculée une seule fois au chargement du script.
@@ -27,11 +28,15 @@ export function KamaLogo({ taille = 32 }: { taille?: number }) {
   );
 }
 
-/** Marque obligatoire sur chaque texte en langue nationale tant que la traduction n'est pas fournie. */
-export function TranslationBadge({ language = 'EWO' }: { language?: string }) {
+/**
+ * Marque obligatoire sur chaque texte en langue nationale tant que la traduction n'est pas fournie
+ * (règle d'or n° 4). Affiche la langue choisie, ou un texte général si aucune ne l'est encore.
+ */
+export function TranslationBadge() {
+  const langue = useLangueCourante();
   return (
-    <span className="inline-flex items-center rounded-full border border-kama-ink/20 bg-kama-cream px-1.5 py-0.5 text-[11px] font-semibold text-kama-ink">
-      {language} – traduction à fournir
+    <span className="inline-flex items-center self-start rounded-full border border-kama-ink/20 bg-kama-cream px-1.5 py-0.5 text-[11px] font-semibold text-kama-ink">
+      {langue ? `${langue.nom} – traduction à fournir` : 'Traduction à fournir'}
     </span>
   );
 }

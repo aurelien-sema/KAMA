@@ -3,6 +3,8 @@
  * Un seul endroit décide quel contenu montrer et dans quel état est le micro.
  */
 import type { MicMode } from './KamaWindow';
+import type { IdLangue } from '@/config/langues';
+import { ChoixLangue } from '@/components/kama/ChoixLangue';
 import {
   BankErrorContent,
   ElementExplainContent,
@@ -26,6 +28,7 @@ import {
 } from './exemples';
 
 export const ETATS = [
+  { id: 'choix-langue', titre: '0. Choix de la langue' },
   { id: 'parler-attente', titre: '1. Parler — attente' },
   { id: 'parler-ecoute', titre: '2. Parler — écoute' },
   { id: 'parler-reflexion', titre: '3. Parler — réflexion' },
@@ -48,6 +51,11 @@ export function utiliseDesExemples(etat: EtatFenetre) {
   return AVEC_EXEMPLES.includes(etat);
 }
 
+/** Le choix de la langue n'a pas de micro : on ne peut pas encore parler à Kama. */
+export function avecMicro(etat: EtatFenetre) {
+  return etat !== 'choix-langue';
+}
+
 export function micPour(etat: EtatFenetre): MicMode {
   if (etat === 'parler-ecoute') return 'listening';
   if (etat === 'parler-reflexion') return 'thinking';
@@ -55,10 +63,23 @@ export function micPour(etat: EtatFenetre): MicMode {
   return 'idle';
 }
 
-type Actions = { onShowMe?: (cible: string) => void; onRetry?: () => void };
+type Actions = {
+  onShowMe?: (cible: string) => void;
+  onRetry?: () => void;
+  onChoisirLangue?: (id: IdLangue) => void;
+  onPasMaintenant?: () => void;
+};
 
-export function ContenuFenetre({ etat, onShowMe, onRetry }: { etat: EtatFenetre } & Actions) {
+export function ContenuFenetre({
+  etat,
+  onShowMe,
+  onRetry,
+  onChoisirLangue,
+  onPasMaintenant,
+}: { etat: EtatFenetre } & Actions) {
   switch (etat) {
+    case 'choix-langue':
+      return <ChoixLangue onChoisir={(id) => onChoisirLangue?.(id)} onPasMaintenant={() => onPasMaintenant?.()} />;
     case 'parler-attente':
       return <TalkIdleContent />;
     case 'parler-ecoute':

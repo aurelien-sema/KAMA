@@ -6,6 +6,7 @@
 import { forwardRef, type ReactNode } from 'react';
 import { Mic, Square, X } from 'lucide-react';
 import { KamaLogo } from '@/components/kama/primitives';
+import { useLangueCourante } from '@/lib/langue-courante';
 
 export const KAMA_WINDOW_WIDTH = 360;
 export const KAMA_WINDOW_HEIGHT = 520;
@@ -20,8 +21,9 @@ const MIC_LABEL: Record<MicMode, string> = {
 };
 
 type Props = {
-  language?: string;
   mic?: MicMode;
+  /** false : pas de micro en bas (ex. écran de choix de la langue). */
+  avecMicro?: boolean;
   onClose?: () => void;
   onMic?: () => void;
   className?: string;
@@ -30,9 +32,10 @@ type Props = {
 };
 
 export const KamaWindow = forwardRef<HTMLElement, Props>(function KamaWindow(
-  { language = 'Ewondo', mic = 'idle', onClose, onMic, className = '', style, children },
+  { mic = 'idle', avecMicro = true, onClose, onMic, className = '', style, children },
   ref,
 ) {
+  const langue = useLangueCourante();
   const micDisabled = mic === 'thinking' || mic === 'offline';
 
   return (
@@ -46,9 +49,13 @@ export const KamaWindow = forwardRef<HTMLElement, Props>(function KamaWindow(
       <header className="flex h-14 shrink-0 items-center gap-2 border-b border-kama-ink/10 pl-4 pr-1.5">
         <KamaLogo taille={32} />
         <span className="font-display text-base leading-none text-kama-ink">Kama</span>
-        <span className="ml-auto rounded-full bg-kama-cream px-3 py-1 text-xs font-semibold text-kama-ink">
-          {language}
-        </span>
+        {langue ? (
+          <span className="ml-auto rounded-full bg-kama-cream px-3 py-1 text-xs font-semibold text-kama-ink">
+            {langue.nom}
+          </span>
+        ) : (
+          <span className="ml-auto" />
+        )}
         <button
           type="button"
           onClick={onClose}
@@ -61,6 +68,7 @@ export const KamaWindow = forwardRef<HTMLElement, Props>(function KamaWindow(
 
       <div className="min-h-0 flex-1 overflow-y-auto px-4 py-3">{children}</div>
 
+      {avecMicro && (
       <footer className="flex h-[104px] shrink-0 flex-col items-center justify-center gap-1 border-t border-kama-ink/10 bg-kama-white">
         <button
           type="button"
@@ -84,6 +92,7 @@ export const KamaWindow = forwardRef<HTMLElement, Props>(function KamaWindow(
         </button>
         <span className="text-sm font-medium text-kama-ink">{MIC_LABEL[mic]}</span>
       </footer>
+      )}
     </section>
   );
 });
