@@ -7,6 +7,7 @@ import { useEffect, useState, type ReactNode } from 'react';
 import { BadgeCheck, CircleSlash, Languages, Pause, Play, Volume2 } from 'lucide-react';
 import { TranslationBadge } from '@/components/kama/primitives';
 import { arreterLecture, lireEnFrancais } from '@/lib/voix';
+import { useLectureAuto } from '@/lib/langue-courante';
 
 export type TranslationStatus = 'verified' | 'auto' | 'untranslated';
 
@@ -43,9 +44,18 @@ export function Amount({ children, className = '' }: { children: ReactNode; clas
 export function AudioPlayer({ text }: { text: string }) {
   const [rate, setRate] = useState<1 | 0.75>(1);
   const [playing, setPlaying] = useState(false);
+  const lectureAuto = useLectureAuto();
 
-  // Arrête la lecture si le contenu de la fenêtre change ou si elle se ferme.
-  useEffect(() => () => arreterLecture(), []);
+  // Préférence « Audio » : lecture automatique à l'ouverture.
+  // Dans tous les cas, la lecture s'arrête si le contenu change ou si la fenêtre se ferme.
+  useEffect(() => {
+    if (lectureAuto) {
+      setPlaying(true);
+      lireEnFrancais(text, 1, () => setPlaying(false));
+    }
+    return () => arreterLecture();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   function toggle() {
     if (playing) {

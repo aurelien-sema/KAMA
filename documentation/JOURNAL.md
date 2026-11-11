@@ -1027,6 +1027,157 @@ Nous l'avons vu à trois indices : 19 849 exemples au lieu de 18 275, 4 minutes 
 - Versions non compressées de flagship : pas encore testées.
 
 Relancer `evaluation/run_gguf.py` et `evaluation/run_nmt.py` reprend là où ça s'est arrêté. Seule la compression de Turaco Gem repart de zéro.
+## 2026-11-11 — Branche `omar`, choix des langues et mise à jour de CLARIFICATIONS.md
+
+**Auteur :** Omar
+
+### En bref
+
+Le travail frontend est maintenant sur sa propre branche, `omar`, réunie avec le travail de l'équipe. Kama proposera deux langues, le **ghomálá'** et le **pidgin**, et **ne choisira jamais la langue à la place de l'utilisateur** : tant qu'elle n'est pas choisie, Kama la demande en premier.
+
+### Ce qui a été implémenté, expliqué simplement
+
+- **Branche `omar`** : c'est la copie de travail du frontend. On y a réuni le travail d'Omar et celui de l'équipe (données, modèles, évaluation, venus de la branche `dimitri`). Deux fichiers avaient été modifiés des deux côtés, et on a gardé les deux versions de chacun :
+  - `.gitignore` : la liste des fichiers que git ne doit pas enregistrer ;
+  - `JOURNAL.md`.
+- **Correction d'auteur** : les 8 premières entrées frontend de ce journal indiquaient par erreur « Dimitri ». Elles indiquent maintenant « Omar ».
+- **`documentation/CLARIFICATIONS.md` mis à jour** :
+  - langues : ghomálá' et pidgin, à la place de « ewondo d'abord » ;
+  - nouvelle section « Choix de la langue » (détails ci-dessous) ;
+  - règle « jamais d'emoji, des icônes lucide » ajoutée à la charte ;
+  - libellés du menu de l'onglet décrits avec leurs icônes ;
+  - persona signalé à revoir (voir plus bas).
+
+### Démarche utilisée
+
+**Comment on choisit la langue** (décisions d'Omar) :
+
+- **Pas de langue par défaut.** Si Kama choisissait une langue d'office, une personne qui parle l'autre langue pourrait ne jamais comprendre qu'elle peut en changer. Kama lui parlerait alors dans une langue qu'elle ne comprend pas.
+- **La question apparaît là où la personne se trouve**, à 3 endroits :
+  1. la page de bienvenue ouverte à l'installation ;
+  2. le popup, l'icône Kama dans la barre de Chrome ;
+  3. l'onglet de bord dans la page de la banque.
+
+  Le 3ᵉ endroit est le plus important : Mama Ngono ne cliquera peut-être jamais sur l'icône de Chrome, mais elle verra l'onglet.
+- **Reconnaître sa langue sans avoir à lire** : chaque langue a un gros bouton et un bouton d'écoute qui dit son nom *dans la langue elle-même*, avec un indice de région simple :
+  - Ghomálá' — Ouest ;
+  - Pidgin — Nord-Ouest, Sud-Ouest.
+- **Pas d'option « Français »** dans la liste : Kama est fait pour les langues nationales. Pour fermer sans choisir, un bouton « Pas maintenant » (la question reviendra). Dans le popup, quand une langue est déjà choisie, « Ne rien changer » ferme la liste sans rien modifier.
+- **Orthographe** : on écrit « Ghomálá' », comme dans CLARIFICATIONS.md. La forme « Ghɔmálá' » contient la lettre ɔ, que la police DM Sans embarquée ne sait pas afficher.
+
+### Résultats et limites connues
+
+- La fusion des branches est prête. Omar fait lui-même le commit et l'envoi sur GitHub.
+- Les noms des langues lus à voix haute n'existent pas encore. Le bouton d'écoute affichera le badge « traduction à fournir » en attendant les enregistrements (règle d'or n° 4).
+
+### Ce que l'équipe doit faire ensuite
+
+- **Dimitri (pidgin) et le collaborateur ghomálá'** :
+  - faire enregistrer par un locuteur natif le nom de chaque langue, dit dans cette langue ;
+  - vérifier l'orthographe à afficher ;
+  - vérifier les indices de région.
+- **Toute l'équipe** : revoir le persona. « Mama Ngono » porte un nom plutôt beti/ewondo, alors que les langues sont maintenant le ghomálá' et le pidgin.
+- **Dimitri** : vérifier les deux retouches faites dans sa partie du journal pendant la fusion :
+  - l'en-tête dit maintenant « chaque membre consigne son travail » ;
+  - le modèle d'entrée dit « Auteur : Prénom ».
+
+### Composants tiers utilisés
+
+Aucun nouveau.
+
+## 2026-11-11 — Popup complet, lecture de la page, pastilles, « Montre-moi » et barre de sélection
+
+**Auteur :** Omar (réalisé par Claude Code en son absence, avec la consigne « prends les meilleures décisions »)
+
+### En bref
+
+Kama lit maintenant la **vraie page de test** et explique ce qu'elle affiche. Il pose des **pastilles** à côté du solde, des frais, du total, du bouton Confirmer et des erreurs. « **Montre-moi** » entoure l'élément en orange. Une **barre** apparaît quand on surligne un texte. Le **popup** a tous ses réglages, dont le choix de la langue.
+
+Les deux scénarios du hackathon fonctionnent sur le vrai site :
+- **Scénario 1** : la pastille des frais dit « Frais : 375 FCFA. … Au total, 25 375 FCFA vont sortir de ton compte. »
+- **Scénario 2** : pour un transfert refusé, Kama dit « Tu n'as pas assez d'argent pour ce transfert. Il te manque 50 000 FCFA. »
+
+### Ce qui a été implémenté, expliqué simplement
+
+**1. Popup complet** (`components/popup/Popup.tsx`), avec les 5 états de la maquette :
+- **premier lancement** : « Bienvenue ! Choisis ta langue », Ghomálá' (Ouest) ou Pidgin (Nord-Ouest, Sud-Ouest), et « Pas maintenant » ;
+- **activé** : Ma langue, Je préfère (Texte / Audio), Expliquer cette page ;
+- **liste des langues ouverte**, avec « Ne rien changer » ;
+- **désactivé** : tout est grisé, et Kama n'ajoute plus rien dans les pages ;
+- **page non reconnue** : « Kama ne reconnaît pas cette page… Si elle est déjà ouverte, recharge-la. »
+
+Les réglages sont mémorisés dans le navigateur (`lib/reglages.ts`) et s'appliquent **tout de suite** dans la page.
+
+**2. Choix de la langue aux 3 endroits décidés.** Le popup et l'onglet de la page sont faits ; la page de bienvenue est à faire. Si on clique sur une pastille avant d'avoir choisi, Kama demande la langue, puis affiche ce qui avait été demandé.
+
+**3. Lecture de la page** (`lib/lecture-page.ts`). La page n'a aucun repère technique, alors Kama la lit **par ses textes**.
+- Tous les libellés sont dans **un seul fichier**, `config/page-test.ts`, en français et en anglais (bouton EN de la page).
+- Kama reconnaît les 5 étapes du parcours (Solde, Frais, Bénéficiaire, Récapitulatif, Confirmation) et les 7 codes d'erreur de la banque.
+- Il relit la page dès qu'elle change, sans rechargement. C'est aussi ce qui lui permet de voir le texte que le jury ajoute.
+
+**4. Pastilles** (`components/Pastilles.tsx`) à côté de :
+- solde, montant, frais, total ;
+- bouton « Confirmer le transfert » ;
+- message d'erreur.
+
+Infobulle « Kama t'explique » au survol. Au clic, la fenêtre explique l'élément.
+
+**5. « Montre-moi »** (`components/Surlignage.tsx`) : la page défile jusqu'à l'élément, entouré d'un contour orange (2 pulsations puis fixe). Le contour disparaît au clic, avec Échap, après 8 s, ou si l'élément disparaît.
+
+**6. Barre de sélection** (`components/BarreSelection.tsx`) : [Expliquer] [Écouter] au-dessus du texte surligné.
+- Si le texte est un élément connu (ex. « Frais »), Kama l'explique.
+- Sinon, il affiche « Ce texte n'existe pas encore en Ghomálá' » et propose de l'écouter en français.
+
+**7. Vrais contenus de la fenêtre** (`components/kama/fenetre/reel.tsx`) : « Expliquer cette page » selon l'étape en cours, « Résumer mes transactions » à partir de la liste de la page, explication d'un élément, et erreur expliquée.
+
+**8. Préférence « Audio »** : la réponse est lue automatiquement à l'ouverture. Avec « Texte », on appuie sur ▶.
+
+**9. Catalogue** : il montre aussi les 5 états du popup, à côté des 12 états de la fenêtre (dont le nouveau « Choix de la langue »).
+
+### Démarche utilisée
+
+**Étude du site**
+- La page a été ouverte et parcourue automatiquement avec Chrome sans interface, pour relever les textes de chaque étape.
+- Le dictionnaire français/anglais des libellés et les 7 codes d'erreur ont été relevés dans le code public de la page. Le panneau réservé au jury n'a pas été utilisé.
+
+**Décisions prises (à valider par Omar)**
+
+1. **Sécurité des montants (règle d'or n° 1).**
+   - Un montant est recopié tel quel, y compris l'espace fine insécable de « 250 000 FCFA ».
+   - Il n'est rattaché à un libellé que si ce libellé est le plus proche avant lui. Sinon, le mot « Frais » de la barre d'étapes aurait pu récupérer le montant du solde.
+2. **Montant manquant calculé par Kama** (scénario 2) : total à débiter − solde disponible.
+   - Ce chiffre n'est pas écrit dans la page. Il est calculé par le code (jamais par un modèle de langue) et écrit dans le même format que la page.
+   - Si un des deux montants n'est pas un nombre entier clair, Kama n'affiche rien.
+   - Résultat identique au « Solde après opération » affiché par la banque (−52 500 FCFA → « Il te manque 52 500 FCFA »).
+3. **Badge « Pas encore traduit » sur tous les vrais contenus.** Les explications sont des gabarits en français (`config/gabarits.ts`), et le badge « Vérifié » est réservé au glossaire validé.
+4. **Résumé** : « Sur cette page : 2 entrées, 2 sorties » au lieu de « Ce mois-ci », car la page ne montre que les dernières opérations.
+5. **Les 7 erreurs de la banque ont chacune une explication franche** (ex. `SECURITY_002` : « Attention : tu n'as jamais envoyé d'argent à cette personne… Si tu as un doute, n'envoie pas l'argent »). Un code inconnu renvoie au message de la banque, sans rien inventer.
+6. **Données saisies jamais lues.** Ni la barre de sélection ni les pastilles ne lisent ce que l'utilisateur tape. Rien n'est stocké ni transmis.
+7. **Écarts avec les maquettes Lovable**, pour la simplicité et l'accessibilité :
+   - choix de la langue sur une colonne : il y a 2 langues, contre 6 dans la maquette ;
+   - pas de lien « Paramètres » dans le popup : aucun réglage n'est prévu derrière ;
+   - liste des langues ouverte dans le popup et non par-dessus, pour ne pas être coupée ;
+   - pas de bouton haut-parleur dans l'infobulle de la pastille : un bouton visible seulement au survol n'est pas utilisable au clavier.
+
+**Vérification**
+- **Test de lecture** sur tout le parcours réel. On injecte seulement le module de lecture et on affiche, à chaque étape, ce que Kama lit et ce qu'il dirait.
+- **Test visuel** avec l'extension chargée dans « Chrome for Testing » : 10 captures (onglet, choix de la langue, menu, expliquer, Montre-moi, pastilles, scénario 1, sélection, scénario 2, popup).
+- Deux défauts ont été trouvés et corrigés grâce à ces tests :
+  - libellé lu « Frais Gratuit » au lieu de « Frais » ;
+  - contour orange resté dans le coin de l'écran après un changement d'étape.
+
+### Résultats et limites connues
+
+- La compilation Chrome et Edge réussit, sans erreur TypeScript. La page ne produit aucune erreur pendant les tests automatiques.
+- **Pas encore fait** :
+  - page de bienvenue à l'installation ;
+  - micro (« Parler à Kama » affiche seulement « Pose ta question ») ;
+  - bouton « Réessayer » ;
+  - audios enregistrés ;
+  - textes en ghomálá' et en pidgin.
+- **Page en anglais (bouton EN)** : Kama reconnaît les éléments, mais ses explications restent en français, avec les libellés anglais de la page.
+- **Comportement de la page remarqué** : en « Autre banque », 249 000 FCFA plus 5 000 FCFA de frais font 254 000 FCFA, plus que le solde, et pourtant la page laisse continuer. Kama n'ajoute pas d'alerte de lui-même pour l'instant.
+- **À retirer avant le zip du jury** : la page catalogue et son lien dans le popup.
 
 ### Ce que l'équipe doit faire ensuite
 
@@ -1129,6 +1280,42 @@ Les très courts énoncés sont le point faible. La vitesse est d'environ le tem
 Omnilingual reste branché (désactivé dans `routes.json`).
 
 **Limites.** L'intention n'a pas encore été testée sur de l'audio réel. Le test local du script d'entraînement n'était pas fini au moment d'écrire ces lignes. La licence de MMS-TTS est non commerciale. Les données d'entraînement `train.jsonl` et `dev.jsonl` ne sont pas dans Git (elles contiennent des textes religieux de MT560) et se recréent avec `01_nettoyer_donnees.py`.
+| Omar | Tester dans Chrome (liste de tests fournie) et valider les décisions ci-dessus, surtout le montant manquant calculé |
+| Équipe langues (Dimitri, collaborateur ghomálá') | Traduire et faire valider les gabarits de `config/gabarits.ts` et les explications d'erreurs de `config/page-test.ts` ; enregistrer les audios |
+| Équipe | Relire les 7 explications d'erreurs (ton, exactitude) |
+
+### Composants tiers utilisés
+
+| Composant | Usage | Licence |
+|---|---|---|
+| puppeteer-core | Pilotage de Chrome pour les tests (outil de test, non livré, installé hors du projet) | Apache 2.0 |
+| Chrome for Testing (Google) | Navigateur de test qui accepte une extension chargée par script (non livré) | Conditions de Google / Chromium (BSD) |
+| WXT `storage` | Mémorisation des réglages (déjà inclus dans WXT) | MIT |
+
+## 2026-11-11 — Kama ne calcule plus aucun montant
+
+**Auteur :** Omar
+
+### En bref
+
+Décision d'Omar : **Kama ne calcule rien**, même par le code. La phrase « Il te manque … » du scénario 2 est retirée.
+
+### Ce qui a été implémenté, expliqué simplement
+
+- Erreur « Solde insuffisant » : Kama montre le message de la banque et explique la cause (« Tu n'as pas assez d'argent pour ce transfert. ») avec le conseil. Il n'affiche plus de montant manquant.
+- Le calcul (`montantManquant`) est supprimé de `lib/lecture-page.ts`. La ligne « Il te manque » est retirée de la fenêtre et de l'exemple du catalogue.
+- `CLARIFICATIONS.md` est mis à jour :
+  - règle d'or n° 1 : « le code de Kama n'en calcule aucun (ni différence, ni somme) » ;
+  - critère du scénario 2 : sans montant manquant.
+
+### Démarche utilisée
+
+Le montant manquant n'est écrit nulle part sur la page. Même calculé par le code, il devient un chiffre produit par Kama, donc un risque. Omar a préféré s'en tenir à la règle stricte : **tout montant affiché par Kama est recopié de la page**.
+
+### Résultats et limites connues
+
+- La compilation et TypeScript passent.
+- Le scénario 2 explique la cause sans donner l'écart.
 
 ### Ce que l'équipe doit faire ensuite
 
@@ -1155,3 +1342,4 @@ Omnilingual reste branché (désactivé dans `routes.json`).
 | onnxruntime, PyTorch, transformers | MIT, BSD, Apache 2.0 | Moteurs de voix |
 
 Signé : Dimitri, 2026-11-11
+| Équipe langues | Ne pas prévoir de phrase « Il te manque {montant} » dans les traductions |

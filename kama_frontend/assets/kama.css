@@ -44,6 +44,16 @@
   }
 }
 
+/* « Montre-moi » : contour orange 3 px + halo, 2 pulsations (2 × 600 ms) puis fixe. */
+.kama-surlignage {
+  outline: 3px solid var(--color-kama-orange);
+  box-shadow: 0 0 0 6px color-mix(in oklab, var(--color-kama-orange) 25%, transparent);
+  animation: kama-pulsation 600ms ease-in-out 2;
+}
+@keyframes kama-pulsation {
+  50% { box-shadow: 0 0 0 12px color-mix(in oklab, var(--color-kama-orange) 12%, transparent); }
+}
+
 /* Zone cliquable minimale de 44 × 44 px (règle d'or d'accessibilité). */
 @utility hit-44 {
   min-width: 44px;
