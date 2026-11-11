@@ -15,6 +15,12 @@ export const reglageMode = storage.defineItem<'texte' | 'audio'>('local:kama.mod
 /** Kama activé ou désactivé. Désactivé : Kama n'ajoute plus rien dans les pages. */
 export const reglageActif = storage.defineItem<boolean>('local:kama.actif', { fallback: true });
 
+/** Consentement donné au premier usage : aucune fonction ne démarre avant. Jamais envoyé nulle part. */
+export const reglageConsentement = storage.defineItem<boolean>('local:kama.consentement', { fallback: false });
+
+/** Consentement séparé pour le micro (la voix est envoyée au serveur, le temps de comprendre la demande). */
+export const reglageConsentementMicro = storage.defineItem<boolean>('local:kama.consentement-micro', { fallback: false });
+
 /**
  * Lit un réglage, suit ses changements (venus du popup ou de la page) et permet de le modifier.
  * Renvoie [valeur, modifier, chargé].

@@ -28,7 +28,9 @@ def contient(sequence, motif):
 
 def main():
     termes = json.loads(DICO.read_text(encoding="utf-8"))["termes"]
-    for chemin in sys.argv[1:]:
+    if "--avec-ajouts" in sys.argv:  # termes proposes par 13_candidats_banque.py (a valider par un locuteur)
+        termes += json.loads((ICI / "dictionnaire_pidgin_ajouts.json").read_text(encoding="utf-8"))["termes"]
+    for chemin in [a for a in sys.argv[1:] if not a.startswith("--")]:
         lignes = list(csv.DictReader(open(chemin, encoding="utf-8-sig", newline=""), delimiter=";"))
         applicables = bons = 0
         rates = []

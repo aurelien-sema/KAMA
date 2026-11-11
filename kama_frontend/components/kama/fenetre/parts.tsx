@@ -8,6 +8,8 @@ import { BadgeCheck, CircleSlash, Languages, Pause, Play, Volume2 } from 'lucide
 import { TranslationBadge } from '@/components/kama/primitives';
 import { arreterLecture, lireEnFrancais } from '@/lib/voix';
 import { useLectureAuto } from '@/lib/langue-courante';
+import { jouerParoles } from '@/lib/audio';
+import type { Parole } from '@/lib/traduction';
 
 export type TranslationStatus = 'verified' | 'auto' | 'untranslated';
 
@@ -40,19 +42,36 @@ export function Amount({ children, className = '' }: { children: ReactNode; clas
   return <strong className={`whitespace-nowrap font-bold tabular-nums ${className}`}>{children}</strong>;
 }
 
-/** ▶ + barre de progression + vitesse 1x / 0,75x. Hauteur 44 px. */
-export function AudioPlayer({ text }: { text: string }) {
+/**
+ * ▶ + barre de progression + vitesse 1x / 0,75x. Hauteur 44 px.
+ * `paroles` : la réponse dans la langue choisie, lue par le serveur. Sans elles (ou si le serveur ne peut pas parler),
+ * `text` est lu en français avec la voix du navigateur et la ligne d'état le dit.
+ */
+export function AudioPlayer({ text, paroles }: { text: string; paroles?: Parole[] }) {
   const [rate, setRate] = useState<1 | 0.75>(1);
   const [playing, setPlaying] = useState(false);
+  const [note, setNote] = useState<string | null>(null);
   const lectureAuto = useLectureAuto();
+
+  async function demarrer(vitesse: number) {
+    setPlaying(true);
+    if (paroles?.length) {
+      try {
+        const voix = await jouerParoles(paroles, vitesse);
+        setNote(voix === 'automatique' ? 'Voix automatique' : null);
+        setPlaying(false);
+        return;
+      } catch {
+        setNote('Lecture en français'); // le serveur ne peut pas parler : on le dit au lieu de se taire
+      }
+    }
+    lireEnFrancais(text, vitesse, () => setPlaying(false));
+  }
 
   // Préférence « Audio » : lecture automatique à l'ouverture.
   // Dans tous les cas, la lecture s'arrête si le contenu change ou si la fenêtre se ferme.
   useEffect(() => {
-    if (lectureAuto) {
-      setPlaying(true);
-      lireEnFrancais(text, 1, () => setPlaying(false));
-    }
+    if (lectureAuto) void demarrer(1);
     return () => arreterLecture();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -63,8 +82,7 @@ export function AudioPlayer({ text }: { text: string }) {
       setPlaying(false);
       return;
     }
-    setPlaying(true);
-    lireEnFrancais(text, rate, () => setPlaying(false));
+    void demarrer(rate);
   }
 
   return (
@@ -82,7 +100,7 @@ export function AudioPlayer({ text }: { text: string }) {
         <div className="h-1.5 w-full overflow-hidden rounded-full bg-kama-ink/15" aria-hidden>
           <div className="h-full w-0 rounded-full bg-kama-ink" />
         </div>
-        <span className="text-[11px] text-kama-ink/70">{playing ? 'Lecture…' : 'Prêt à lire'}</span>
+        <span className="text-[11px] text-kama-ink/70">{playing ? 'Lecture…' : (note ?? 'Prêt à lire')}</span>
       </div>
       <div className="flex shrink-0 rounded-full bg-kama-white p-0.5" role="group" aria-label="Vitesse de lecture">
         {([1, 0.75] as const).map((r) => (
@@ -107,10 +125,13 @@ export function AudioPlayer({ text }: { text: string }) {
 export function KamaResponse({
   status,
   speech,
+  paroles,
   children,
 }: {
   status: TranslationStatus;
   speech: string;
+  /** Réponse dans la langue choisie, à lire avec la voix du serveur (sinon `speech` est lu en français). */
+  paroles?: Parole[];
   children: ReactNode;
 }) {
   return (
@@ -119,7 +140,7 @@ export function KamaResponse({
         <StatusBadge status={status} />
         <TranslationBadge />
       </div>
-      <AudioPlayer text={speech} />
+      <AudioPlayer text={speech} paroles={paroles} />
       <div className="flex flex-col gap-2 text-[15px] leading-snug text-kama-ink">{children}</div>
     </article>
   );

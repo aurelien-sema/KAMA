@@ -6,6 +6,7 @@ __pycache__/
 models/*
 !models/README.md
 !models/fetch_models.py
+!models/telecharger_voix.py
 *.safetensors
 *.gguf
 *.bin

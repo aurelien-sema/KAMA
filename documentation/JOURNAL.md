@@ -1343,3 +1343,67 @@ Le montant manquant n'est écrit nulle part sur la page. Même calculé par le c
 
 Signé : Dimitri, 2026-11-11
 | Équipe langues | Ne pas prévoir de phrase « Il te manque {montant} » dans les traductions |
+
+
+## 2026-11-11 — Intégration complète : l'extension parle au serveur
+
+### En bref
+
+- L'extension (le front d'Omar) est maintenant branchée au serveur : traduction, voix, micro. Avant, elle affichait seulement du français avec « Pas encore traduit ».
+- Chemin d'une phrase : l'extension cache les montants (`{x1}`), cherche d'abord dans un **glossaire embarqué** (phrases validées), puis demande au serveur. Les montants ne partent jamais ; ils sont remis tels quels (caractère pour caractère) à l'arrivée.
+- Tant qu'une phrase n'est pas validée par un locuteur, Kama garde le français avec le badge « Pas encore traduit ». **Il n'invente rien.** Le plus souvent, c'est ce que l'on verra aujourd'hui.
+- Les tests passent : 69 tests pour l'extension, 104 pour le serveur (1 ignoré). Le build de l'extension réussit.
+- **Rien n'a encore été essayé dans un vrai navigateur.** Dimitri le fera.
+
+### Ce qui a été fait
+
+**Extension (`kama_frontend/`)**
+- `entrypoints/background.ts` : le service worker est le seul à parler au serveur. Il ne répond qu'à notre extension, depuis la page de test, et ne connaît que 4 routes.
+- `lib/masquage.ts` : copie du masquage du serveur, vérifiée sur 24 exemples communs.
+- `lib/traduction.ts`, `lib/glossaire.ts`, `config/glossaire.json` : glossaire d'abord, serveur ensuite. Une traduction qui change une balise est refusée.
+- `lib/audio.ts`, `lib/nombres.ts` : la réponse est lue avec la voix du serveur. Le montant, lui, est lu par le navigateur (il ne quitte jamais l'extension).
+- `lib/micro.ts`, `lib/wav.ts`, `lib/use-parler.ts` : le micro n'est ouvert qu'entre deux appuis. Le serveur ne renvoie que l'intention, jamais le texte reconnu.
+- Consentement au premier usage, puis un consentement séparé pour le micro. Rien ne démarre avant.
+- La fenêtre se vide quand la page change d'étape.
+- États prévus par le document UX : pas de connexion + « Réessayer », traduction indisponible + « Écouter en français », voix en français si le serveur ne peut pas parler.
+- `wxt.config.ts` : identifiant d'extension fixé par une clé (`bbgkmjbkhecafcpladgdbecpgmpcelho`) et accès réseau limité au serveur.
+- Les fichiers d'Omar ont reçu des ajouts, rien n'a été retiré : `parts.tsx`, `contents.tsx`, `reel.tsx`, `KamaApp.tsx`, `voix.ts`, `reglages.ts`. Ses gabarits, ses textes et sa règle « aucun montant calculé » sont gardés.
+
+**Serveur (`backend/`)**
+- `content-data/kama_fenetre.json` : 83 phrases de la fenêtre, à faire valider (généré par `kama_frontend/scripts/phrases-fenetre.mjs`).
+- `app/export_glossary.py` : écrit le glossaire embarqué depuis les phrases validées (70 pour le pidgin aujourd'hui, toutes de la page de test).
+- `config/routes.demo.json`, `scripts/lancer_demo.ps1`, `scripts/verifier_demo.py` : lancer le serveur comme pour le jury (mode production, origine limitée à l'extension) et vérifier qu'il répond comme l'extension l'attend.
+- « Kama » est ajouté aux mots d'interface du masquage (sinon « Parler à Kama » aurait été pris pour un nom de personne et refusé).
+- Fichier de référence des montants lus à voix haute : `contracts/numbers_vectors.json`.
+
+**Documentation** : `documentation/SECURITE.md` (où va chaque donnée, ce qui est prouvé, ce qui ne l'est pas encore).
+
+### Démarche utilisée
+
+Les trois documents de l'équipe (UX, sécurité, règlement) et `backend/ARCHITECTURE.md` ont servi de cahier des charges. Chaque règle a été traduite en test quand c'était possible : les phrases du code et le catalogue à valider doivent rester identiques, aucun chiffre ne part sur le réseau, un brouillon n'est jamais « Vérifié », un élément critique n'appelle jamais le modèle.
+
+### Résultats et limites connues
+
+- La plupart des réponses restent en français avec « Pas encore traduit » : il manque la validation des 83 phrases par un locuteur.
+- **Le micro demande l'autorisation au nom du site bancaire**, pas au nom de Kama. Le document de sécurité demande l'inverse ; cela demande un essai avec un document hors-écran dans le navigateur.
+- Le micro reste peu fiable en pidgin (le reconnaisseur déforme les mots) et il est coupé dans la configuration par défaut (`routes.json`). `lancer_demo.ps1` l'active pour les essais.
+- Les montants sont lus avec la voix du navigateur, en anglais pour le pidgin, tant que les chiffres ne sont pas enregistrés par un locuteur.
+- Ghomálá' : le serveur n'a pas de modèle activé pour cette langue ; l'extension affiche donc le français.
+- Pas encore faits : test de fuite dans l'onglet Réseau, test d'injection, règle ESLint contre `innerHTML`, `npm audit`.
+
+### Ce que l'équipe doit faire ensuite
+
+| Qui | Quoi |
+|---|---|
+| Dimitri | Essayer l'extension dans Chrome et Edge sur la page de test (serveur : `backend\scripts\lancer_demo.ps1`, puis `python scripts\verifier_demo.py`) |
+| Locuteurs natifs | Valider les 83 phrases de `content-data/kama_fenetre.json` (champs `wes` et `validated_by`) |
+| Dimitri | Après validation : `python -m app.export_glossary`, puis `npm run build` dans `kama_frontend` |
+| Omar | Relire les ajouts dans ses fichiers ; tester le micro dans un document hors-écran pour que l'autorisation soit au nom de Kama |
+| Équipe | Héberger le serveur en HTTPS et reconstruire l'extension avec `WXT_KAMA_API=https://...` |
+| Équipe | Décider si le micro reste coupé par défaut |
+
+### Composants tiers utilisés
+
+Aucun nouveau composant : seulement ceux déjà déclarés (React, WXT, Tailwind, lucide côté extension ; FastAPI et les modèles déjà listés côté serveur).
+
+Signé : Dimitri, 2026-11-11

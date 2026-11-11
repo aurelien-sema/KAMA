@@ -5,9 +5,11 @@
  *  - textes et montants passés en paramètres : ils viendront de la page bancaire (DOM),
  *    jamais d'un modèle de langue (règle d'or n° 1). Les données d'exemple sont dans `exemples.ts`.
  */
-import { AlertTriangle, Eye, Mic, Volume2, WifiOff } from 'lucide-react';
+import type { ReactNode } from 'react';
+import { AlertTriangle, Eye, Mic, ShieldCheck, Volume2, WifiOff } from 'lucide-react';
 import { TranslationBadge } from '@/components/kama/primitives';
 import { lireEnFrancais } from '@/lib/voix';
+import type { Parole } from '@/lib/traduction';
 import { Amount, KamaLine, KamaResponse, StatusBadge, UserBubble, WindowButton, type TranslationStatus } from './parts';
 
 export type Etape = { cible: string; texte: string };
@@ -59,10 +61,10 @@ export function TalkListeningContent() {
 }
 
 /* 3 — Parler : réflexion */
-export function TalkThinkingContent({ question }: { question: string }) {
+export function TalkThinkingContent({ question }: { question?: string }) {
   return (
     <div className="flex h-full flex-col justify-end gap-4">
-      <UserBubble>{question}</UserBubble>
+      {question && <UserBubble>{question}</UserBubble>}
       <div className="flex items-center gap-3 rounded-2xl rounded-bl-md bg-kama-cream px-4 py-3" role="status">
         <span className="text-[15px] font-semibold text-kama-ink">Kama réfléchit</span>
         <span className="flex gap-1" aria-hidden>
@@ -103,14 +105,16 @@ export function ExplainPageContent({
   etapes,
   onShowMe,
   status = 'auto',
+  paroles,
 }: {
   phrase: string;
   etapes: Etape[];
   onShowMe?: (cible: string) => void;
   status?: TranslationStatus;
+  paroles?: Parole[];
 }) {
   return (
-    <KamaResponse status={status} speech={`${phrase} ${etapes.map((s, i) => `${i + 1}. ${s.texte}`).join(' ')}`}>
+    <KamaResponse status={status} paroles={paroles} speech={`${phrase} ${etapes.map((s, i) => `${i + 1}. ${s.texte}`).join(' ')}`}>
       <p className="m-0 font-semibold">{phrase}</p>
       <ol className="m-0 flex list-none flex-col gap-1.5 p-0">
         {etapes.map((s, i) => (
@@ -133,23 +137,35 @@ export function SummaryContent({
   sorties,
   operations,
   status = 'verified',
+  bilan,
+  introListe,
+  paroles,
 }: {
   entrees: string;
   sorties: string;
   operations: Operation[];
   status?: TranslationStatus;
+  /** Phrase du bilan dans la langue choisie (montants de la page déjà remis). Par défaut : le français ci-dessous. */
+  bilan?: ReactNode;
+  introListe?: string;
+  paroles?: Parole[];
 }) {
   return (
     <KamaResponse
       status={status}
+      paroles={paroles}
       speech={`Sur cette page : ${entrees} entrées, ${sorties} sorties. ${operations
         .map((o) => `${o.date}, ${o.libelle}, ${o.montant}`)
         .join('. ')}`}
     >
       <p className="m-0 font-semibold">
-        Sur cette page : <Amount>{entrees}</Amount> entrées, <Amount>{sorties}</Amount> sorties.
+        {bilan ?? (
+          <>
+            Sur cette page : <Amount>{entrees}</Amount> entrées, <Amount>{sorties}</Amount> sorties.
+          </>
+        )}
       </p>
-      <p className="m-0 text-sm text-kama-ink/70">Les {operations.length} dernières opérations :</p>
+      <p className="m-0 text-sm text-kama-ink/70">{introListe ?? `Les ${operations.length} dernières opérations :`}</p>
       <ul className="m-0 flex list-none flex-col divide-y divide-kama-ink/10 rounded-xl border border-kama-ink/10 p-0">
         {operations.map((o) => (
           <li key={o.date + o.libelle} className="flex items-center gap-3 px-3 py-2.5">
@@ -170,14 +186,18 @@ export function NoTransactionsContent({
   destination = 'Va sur la page Historique.',
   onShowMe,
   status = 'auto',
+  phrase = "Cette page n'a pas tes transactions.",
+  paroles,
 }: {
   destination?: string;
   onShowMe?: (cible: string) => void;
   status?: TranslationStatus;
+  phrase?: string;
+  paroles?: Parole[];
 }) {
   return (
-    <KamaResponse status={status} speech={`Cette page n'a pas tes transactions. ${destination}`}>
-      <p className="m-0">Cette page n'a pas tes transactions.</p>
+    <KamaResponse status={status} paroles={paroles} speech={`${phrase} ${destination}`}>
+      <p className="m-0">{phrase}</p>
       <p className="m-0 font-semibold">{destination}</p>
       {onShowMe && (
         <div>
@@ -218,12 +238,17 @@ export function BankErrorContent({
   titre,
   conseil,
   status = 'verified',
+  paroles,
+  messageTraduit,
 }: {
   messageBanque: string;
   code?: string;
   titre: string;
   conseil?: string;
   status?: TranslationStatus;
+  paroles?: Parole[];
+  /** Message de la banque dans la langue choisie, avec son propre badge, sous le message original. */
+  messageTraduit?: ReactNode;
 }) {
   const speech = [titre, conseil ?? ''].filter(Boolean).join(' ');
   return (
@@ -233,7 +258,8 @@ export function BankErrorContent({
         <p className="m-0 mt-1 text-sm font-medium text-bank-text">{messageBanque}</p>
         {code && <p className="m-0 mt-1 font-mono text-[11px] text-bank-muted">{code}</p>}
       </div>
-      <KamaResponse status={status} speech={speech}>
+      {messageTraduit}
+      <KamaResponse status={status} speech={speech} paroles={paroles}>
         <div className="flex gap-2.5 rounded-xl border-2 border-kama-error p-3" role="alert">
           <AlertTriangle className="mt-0.5 size-5 shrink-0 text-kama-error" aria-hidden />
           <div className="flex flex-col gap-1">
@@ -288,5 +314,124 @@ export function UntranslatedContent({ texte, langue }: { texte: string; langue?:
         </WindowButton>
       </div>
     </article>
+  );
+}
+
+/* 12 — Réflexion en attendant la traduction ou le serveur (court : le glossaire local répond tout de suite) */
+export function Reflexion() {
+  return <TalkThinkingContent />;
+}
+
+/* 13 — Pas de connexion au serveur : la réponse reste affichée en français, avec une icône, une phrase et « Réessayer » (UX 3.8) */
+export function BandeauHorsLigne({ onRetry }: { onRetry?: () => void }) {
+  return (
+    <div className="mb-3 flex flex-col gap-2 rounded-xl border-2 border-kama-ink p-3" role="alert">
+      <p className="m-0 flex items-start gap-2 text-sm text-kama-ink">
+        <WifiOff className="mt-0.5 size-4 shrink-0" aria-hidden />
+        <span>
+          <span className="font-semibold">Pas de connexion internet.</span> Kama montre la réponse en français.
+        </span>
+      </p>
+      <div>
+        <WindowButton variant="solid" onClick={onRetry}>
+          Réessayer
+        </WindowButton>
+      </div>
+    </div>
+  );
+}
+
+/* 14 — Parler : message simple (je n'ai pas compris, voix indisponible, micro refusé…) avec une action possible */
+export function ParlerMessageContent({
+  texte,
+  detail,
+  actionLabel,
+  onAction,
+}: {
+  texte: string;
+  detail?: string;
+  actionLabel?: string;
+  onAction?: () => void;
+}) {
+  return (
+    <div className="flex h-full flex-col justify-end gap-3" role="status">
+      <KamaLine speech={detail ? `${texte} ${detail}` : texte}>
+        <p className="m-0 flex items-start gap-2">
+          <AlertTriangle className="mt-0.5 size-5 shrink-0" aria-hidden />
+          <span className="font-semibold">{texte}</span>
+        </p>
+        {detail && <p className="m-0 mt-1 text-kama-ink/80">{detail}</p>}
+      </KamaLine>
+      {actionLabel && (
+        <div>
+          <WindowButton variant="solid" onClick={onAction}>
+            {actionLabel}
+          </WindowButton>
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* 15 — Consentement (premier usage, et séparément pour le micro) : aucune fonction ne démarre avant l'accord */
+export function ConsentementContent({
+  titre,
+  points,
+  accepter,
+  refuser,
+  status = 'untranslated',
+  paroles,
+  onAccepter,
+  onRefuser,
+}: {
+  titre: string;
+  points: string[];
+  accepter: string;
+  refuser: string;
+  status?: TranslationStatus;
+  paroles?: Parole[];
+  onAccepter: () => void;
+  onRefuser: () => void;
+}) {
+  return (
+    <KamaResponse status={status} paroles={paroles} speech={[titre, ...points].join(' ')}>
+      <p className="m-0 flex items-start gap-2 font-semibold">
+        <ShieldCheck className="mt-0.5 size-5 shrink-0" aria-hidden />
+        <span>{titre}</span>
+      </p>
+      <ul className="m-0 flex list-disc flex-col gap-1.5 pl-5 text-sm">
+        {points.map((p) => (
+          <li key={p}>{p}</li>
+        ))}
+      </ul>
+      <div className="mt-1 flex flex-wrap gap-2">
+        <WindowButton variant="solid" onClick={onAccepter}>
+          {accepter}
+        </WindowButton>
+        <WindowButton onClick={onRefuser}>{refuser}</WindowButton>
+      </div>
+    </KamaResponse>
+  );
+}
+
+/* 16 — Texte sélectionné, traduit : la traduction avec son badge, puis le texte original de la page */
+export function SelectionTraduiteContent({
+  original,
+  traduction,
+  status,
+  paroles,
+}: {
+  original: string;
+  traduction: ReactNode;
+  status: TranslationStatus;
+  paroles?: Parole[];
+}) {
+  return (
+    <KamaResponse status={status} paroles={paroles} speech={original}>
+      <p className="m-0 text-[15px] leading-snug">{traduction}</p>
+      <p className="m-0 border-t border-kama-ink/10 pt-2 text-sm text-kama-ink/70">
+        Texte de la page : <span className="text-kama-ink">{original}</span>
+      </p>
+    </KamaResponse>
   );
 }

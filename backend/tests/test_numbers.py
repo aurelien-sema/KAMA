@@ -35,3 +35,16 @@ def test_every_word_is_in_the_vocabulary():
 def test_unreadable_amounts_raise_instead_of_guessing(texte):
     with pytest.raises(ValueError):
         say_amount(texte)
+
+
+def test_extension_reference_vectors_match():
+    """kama_frontend/lib/nombres.ts doit donner les memes mots : sa reference est ce fichier (npm test cote extension)."""
+    import json
+    from pathlib import Path
+
+    ref = json.loads((Path(__file__).resolve().parent.parent / "contracts" / "numbers_vectors.json").read_text(encoding="utf-8"))
+    for v in ref["vectors"]:
+        assert say_amount(v["input"]) == v["words"]
+    for bad in ref["unreadable"]:
+        with pytest.raises(ValueError):
+            say_amount(bad)

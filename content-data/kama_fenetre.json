@@ -1,0 +1,420 @@
+{
+ "_note": "Phrases fixes de la fenetre Kama (generees par kama_frontend/scripts/phrases-fenetre.mjs : ne pas changer le champ fr a la main). Meme format que safinum_test_page.json. Les montants sont les balises {x1}... remplacees par les valeurs exactes de la page. Un champ wes ou bbj sans validated_by (ou validated_by_bbj) n'est jamais servi : il faut qu'un locuteur valide chaque phrase.",
+ "entries": [
+  {
+   "id": "fen_f8d73fcf",
+   "zone": "explication",
+   "fr": "Solde disponible : {x1}."
+  },
+  {
+   "id": "fen_1821796e",
+   "zone": "explication",
+   "fr": "C'est l'argent que tu as maintenant sur ton compte."
+  },
+  {
+   "id": "fen_8650420c",
+   "zone": "explication",
+   "fr": "Ici, tu écris combien d'argent tu veux envoyer."
+  },
+  {
+   "id": "fen_a96d30ad",
+   "zone": "explication",
+   "fr": "Écris seulement des chiffres. Vérifie bien avant de continuer."
+  },
+  {
+   "id": "fen_390e922f",
+   "zone": "explication",
+   "fr": "Au total, {x1} vont sortir de ton compte."
+  },
+  {
+   "id": "fen_ab398751",
+   "zone": "explication",
+   "fr": "Montant : {x1}."
+  },
+  {
+   "id": "fen_85753756",
+   "zone": "explication",
+   "fr": "C'est l'argent que la personne va recevoir."
+  },
+  {
+   "id": "fen_3dc12188",
+   "zone": "explication",
+   "fr": "Frais : {x1}."
+  },
+  {
+   "id": "fen_e1ceecc3",
+   "zone": "explication",
+   "fr": "C'est ce que la banque prend pour faire le transfert."
+  },
+  {
+   "id": "fen_6f86ef38",
+   "zone": "explication",
+   "fr": "Total à débiter : {x1}."
+  },
+  {
+   "id": "fen_67f36441",
+   "zone": "explication",
+   "fr": "C'est tout l'argent qui va sortir de ton compte : le montant plus les frais."
+  },
+  {
+   "id": "fen_cc362fa8",
+   "zone": "explication",
+   "fr": "Total débité : {x1}."
+  },
+  {
+   "id": "fen_ff136ca2",
+   "zone": "explication",
+   "fr": "Ce bouton envoie l'argent pour de vrai."
+  },
+  {
+   "id": "fen_cfe90848",
+   "zone": "explication",
+   "fr": "Avant d'appuyer, vérifie le nom et le numéro de la personne."
+  },
+  {
+   "id": "fen_f7ea40d3",
+   "zone": "explication",
+   "fr": "C'est toi qui appuies. Kama n'appuie jamais à ta place."
+  },
+  {
+   "id": "fen_3bafdcd6",
+   "zone": "expliquer",
+   "fr": "Ton transfert est parti."
+  },
+  {
+   "id": "fen_2736a0fb",
+   "zone": "expliquer",
+   "fr": "Regarde le total qui est sorti de ton compte."
+  },
+  {
+   "id": "fen_aa50a34e",
+   "zone": "expliquer",
+   "fr": "Garde la référence : elle prouve ton transfert."
+  },
+  {
+   "id": "fen_d1b1a949",
+   "zone": "expliquer",
+   "fr": "Ici, tu vérifies tout avant d'envoyer l'argent."
+  },
+  {
+   "id": "fen_80902b90",
+   "zone": "expliquer",
+   "fr": "Vérifie le montant."
+  },
+  {
+   "id": "fen_1b6a72a7",
+   "zone": "expliquer",
+   "fr": "Vérifie les frais."
+  },
+  {
+   "id": "fen_ee2ef258",
+   "zone": "expliquer",
+   "fr": "Vérifie le total qui va sortir de ton compte."
+  },
+  {
+   "id": "fen_eb0cec93",
+   "zone": "expliquer",
+   "fr": "Coche la case si tout est juste."
+  },
+  {
+   "id": "fen_2c9f2e14",
+   "zone": "expliquer",
+   "fr": "Appuie toi-même sur « Confirmer le transfert »."
+  },
+  {
+   "id": "fen_41432cef",
+   "zone": "expliquer",
+   "fr": "Ici, tu dis à qui tu envoies l'argent."
+  },
+  {
+   "id": "fen_a869292b",
+   "zone": "expliquer",
+   "fr": "Écris le nom de la personne."
+  },
+  {
+   "id": "fen_c5bef03b",
+   "zone": "expliquer",
+   "fr": "Écris son numéro. Vérifie-le bien."
+  },
+  {
+   "id": "fen_217aee5e",
+   "zone": "expliquer",
+   "fr": "Coche la case quand tu as tout vérifié."
+  },
+  {
+   "id": "fen_1e6f0233",
+   "zone": "expliquer",
+   "fr": "Appuie toi-même sur « Continuer »."
+  },
+  {
+   "id": "fen_cce28a45",
+   "zone": "expliquer",
+   "fr": "Ici, tu choisis comment envoyer l'argent, et combien."
+  },
+  {
+   "id": "fen_cef1ff9f",
+   "zone": "expliquer",
+   "fr": "Choisis le type d'envoi."
+  },
+  {
+   "id": "fen_6e25c12e",
+   "zone": "expliquer",
+   "fr": "Écris le montant à envoyer."
+  },
+  {
+   "id": "fen_d63a88d4",
+   "zone": "expliquer",
+   "fr": "Regarde les frais."
+  },
+  {
+   "id": "fen_d6193f25",
+   "zone": "expliquer",
+   "fr": "Regarde le total qui va sortir de ton compte."
+  },
+  {
+   "id": "fen_1dd30b8f",
+   "zone": "expliquer",
+   "fr": "Ici, tu vois l'argent qui est sur ton compte."
+  },
+  {
+   "id": "fen_9e143373",
+   "zone": "expliquer",
+   "fr": "Regarde ton solde : c'est l'argent que tu as."
+  },
+  {
+   "id": "fen_347ee064",
+   "zone": "expliquer",
+   "fr": "Regarde tes dernières opérations."
+  },
+  {
+   "id": "fen_3d245194",
+   "zone": "expliquer",
+   "fr": "Pour envoyer de l'argent, appuie toi-même sur « Effectuer un transfert »."
+  },
+  {
+   "id": "fen_3a74e061",
+   "zone": "erreur",
+   "fr": "Le montant n'est pas bon."
+  },
+  {
+   "id": "fen_555bb7a9",
+   "zone": "erreur",
+   "fr": "Écris un montant plus grand que zéro, puis appuie toi-même sur « Continuer »."
+  },
+  {
+   "id": "fen_ce9048f8",
+   "zone": "erreur",
+   "fr": "Tu n'as pas assez d'argent pour ce transfert."
+  },
+  {
+   "id": "fen_97611b56",
+   "zone": "erreur",
+   "fr": "Envoie un montant plus petit, ou mets de l’argent sur ton compte avant."
+  },
+  {
+   "id": "fen_be452bfb",
+   "zone": "erreur",
+   "fr": "Il manque le nom ou le numéro de la personne."
+  },
+  {
+   "id": "fen_67ecc5bb",
+   "zone": "erreur",
+   "fr": "Écris le nom et le numéro de la personne qui reçoit l’argent."
+  },
+  {
+   "id": "fen_03128569",
+   "zone": "erreur",
+   "fr": "Attention : vérifie le numéro de la personne."
+  },
+  {
+   "id": "fen_d96fcea9",
+   "zone": "erreur",
+   "fr": "Si tu n'es pas sûr du numéro, n'envoie pas l'argent. Demande d'abord à la personne."
+  },
+  {
+   "id": "fen_d2c25937",
+   "zone": "erreur",
+   "fr": "Attention : tu n'as jamais envoyé d'argent à cette personne."
+  },
+  {
+   "id": "fen_5364f349",
+   "zone": "erreur",
+   "fr": "Vérifie bien le nom et le numéro. Si tu as un doute, n'envoie pas l'argent."
+  },
+  {
+   "id": "fen_bfeee7a8",
+   "zone": "erreur",
+   "fr": "La banque ne répond pas pour le moment."
+  },
+  {
+   "id": "fen_60e48419",
+   "zone": "erreur",
+   "fr": "La banque demande de réessayer. Attends un peu, puis réessaie toi-même."
+  },
+  {
+   "id": "fen_ebf473c8",
+   "zone": "erreur",
+   "fr": "Tu n'as pas coché la case de confirmation."
+  },
+  {
+   "id": "fen_60b0d392",
+   "zone": "erreur",
+   "fr": "Vérifie les informations, coche la case, puis appuie toi-même sur « Confirmer le transfert »."
+  },
+  {
+   "id": "fen_1b2f141e",
+   "zone": "erreur",
+   "fr": "La banque a affiché un message important."
+  },
+  {
+   "id": "fen_42bf63f9",
+   "zone": "erreur",
+   "fr": "Lis le message de la banque ci-dessus. Kama ne le connaît pas encore."
+  },
+  {
+   "id": "fen_887dae89",
+   "zone": "expliquer",
+   "fr": "Kama ne reconnaît pas encore cette partie de la page."
+  },
+  {
+   "id": "fen_75df836c",
+   "zone": "expliquer",
+   "fr": "Touche une pastille Kama à côté d'un montant ou d'un bouton."
+  },
+  {
+   "id": "fen_7414a1c1",
+   "zone": "explication",
+   "fr": "Kama ne trouve plus cet élément sur la page."
+  },
+  {
+   "id": "fen_37ee901a",
+   "zone": "resume",
+   "fr": "Cette page n'a pas tes transactions."
+  },
+  {
+   "id": "fen_6239c29c",
+   "zone": "resume",
+   "fr": "Va sur la première page : « Solde »."
+  },
+  {
+   "id": "fen_0076ac63",
+   "zone": "resume",
+   "fr": "Sur cette page : {x1} entrées, {x2} sorties."
+  },
+  {
+   "id": "fen_8079070e",
+   "zone": "resume",
+   "fr": "Les {x1} dernières opérations :"
+  },
+  {
+   "id": "fen_fabf35d8",
+   "zone": "voix",
+   "fr": "Je n'ai pas compris."
+  },
+  {
+   "id": "fen_896853d1",
+   "zone": "voix",
+   "fr": "Redis-le, s'il te plaît."
+  },
+  {
+   "id": "fen_895d416b",
+   "zone": "voix",
+   "fr": "Réessayer"
+  },
+  {
+   "id": "fen_9d0307af",
+   "zone": "voix",
+   "fr": "La voix ne marche pas encore pour cette langue."
+  },
+  {
+   "id": "fen_85190d5b",
+   "zone": "voix",
+   "fr": "Touche une pastille Kama ou utilise le menu de l'onglet."
+  },
+  {
+   "id": "fen_b3adf7d3",
+   "zone": "voix",
+   "fr": "Kama n'a pas accès au micro."
+  },
+  {
+   "id": "fen_f2c9c5fb",
+   "zone": "voix",
+   "fr": "Autorise le micro dans le navigateur, puis réessaie. Tu peux aussi utiliser le menu de l'onglet."
+  },
+  {
+   "id": "fen_cc1e0f63",
+   "zone": "voix",
+   "fr": "Aucun micro trouvé."
+  },
+  {
+   "id": "fen_4eae719f",
+   "zone": "voix",
+   "fr": "Branche un micro, ou utilise le menu de l'onglet."
+  },
+  {
+   "id": "fen_f3164b09",
+   "zone": "voix",
+   "fr": "Pas de connexion internet."
+  },
+  {
+   "id": "fen_9416aff8",
+   "zone": "voix",
+   "fr": "Kama ne peut pas comprendre ta voix pour le moment."
+  },
+  {
+   "id": "fen_907f14a3",
+   "zone": "consentement",
+   "fr": "Avant de commencer"
+  },
+  {
+   "id": "fen_382e2f08",
+   "zone": "consentement",
+   "fr": "Kama lit la page de ta banque sur ton écran, puis l'oublie. Il ne garde rien."
+  },
+  {
+   "id": "fen_4efb77d9",
+   "zone": "consentement",
+   "fr": "Tes montants, ton solde et les noms ne sont jamais envoyés."
+  },
+  {
+   "id": "fen_b6ac76d2",
+   "zone": "consentement",
+   "fr": "Pour traduire, Kama envoie seulement des phrases sans chiffres ni noms."
+  },
+  {
+   "id": "fen_378a9e70",
+   "zone": "consentement",
+   "fr": "Tu peux arrêter Kama quand tu veux, dans le menu de l’extension."
+  },
+  {
+   "id": "fen_b22011d1",
+   "zone": "consentement",
+   "fr": "J'accepte"
+  },
+  {
+   "id": "fen_cf96b79c",
+   "zone": "consentement",
+   "fr": "Pas maintenant"
+  },
+  {
+   "id": "fen_b72f4751",
+   "zone": "consentement",
+   "fr": "Parler à Kama"
+  },
+  {
+   "id": "fen_22c44e83",
+   "zone": "consentement",
+   "fr": "Le micro est ouvert seulement entre deux appuis sur le bouton. Kama ne garde aucun enregistrement."
+  },
+  {
+   "id": "fen_606b3d59",
+   "zone": "consentement",
+   "fr": "Ta voix est envoyée au serveur de Kama pour comprendre ta demande, puis oubliée."
+  },
+  {
+   "id": "fen_1a17763c",
+   "zone": "consentement",
+   "fr": "Ne dis pas ton solde, ton numéro ni un nom : parle seulement de la page."
+  }
+ ]
+}

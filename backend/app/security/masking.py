@@ -59,7 +59,7 @@ INTERFACE_WORDS = frozenset(
     approve send receive continue back next home history error warning alert password bank
     card savings loan customer hello thank thanks
     press tap click appuyez cliquez touchez
-    safinum pay
+    safinum pay kama
     """.split()
 )
 

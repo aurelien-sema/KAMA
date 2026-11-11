@@ -10,7 +10,9 @@
     "build": "wxt build",
     "build:edge": "wxt build -b edge",
     "compile": "tsc --noEmit",
-    "postinstall": "wxt prepare"
+    "postinstall": "wxt prepare",
+    "test": "node --test tests/*.test.mjs",
+    "phrases": "node scripts/phrases-fenetre.mjs"
   },
   "dependencies": {
     "lucide-react": "^1.70.0",

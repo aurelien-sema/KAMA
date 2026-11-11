@@ -44,6 +44,18 @@ def unknown_ratio(text: str, lexicon: frozenset[str]) -> float:
     return sum(w not in lexicon for w in words) / len(words) if words else 1.0
 
 
+# Le corpus d'entrainement du pidgin contient des textes religieux : un modele peut en glisser des mots dans un message bancaire
+# (mesure : « God no be charge money » pour « Votre paiement a ete refuse »). Ces mots n'ont rien a faire dans une sortie bancaire,
+# sauf si la source en parle elle-meme.
+RELIGIOUS = frozenset("god lord jehovah jesus christ holy spirit prayer pray doctrine bible heaven angel church faith blessed saviour salvation "
+                      "gospel dieu seigneur jésus christ bible prière église".split())
+
+
+def religious_drift(source: str, output: str) -> bool:
+    found = set(_WORD.findall(output.lower())) & RELIGIOUS
+    return bool(found) and not (found & set(_WORD.findall(source.lower()))) and not (RELIGIOUS & set(_WORD.findall(source.lower())))
+
+
 class TranslationService:
     """Ordre impose : memoire validee, memoire proche, modele sous controle, sinon rien."""
 
@@ -77,7 +89,7 @@ class TranslationService:
 
     def _run_model(self, req: TranslateRequest, route: TranslationRoute) -> TranslateResponse:
         output = route.translator.translate(req.text)
-        if output_problem(req.text, output):
+        if output_problem(req.text, output) or religious_drift(req.text, output):
             return untranslated("guard_failed")
         if route.lexicon is not None and unknown_ratio(output, route.lexicon) > route.max_unknown_ratio:
             return untranslated("guard_failed")  # trop de mots absents des corpus : probablement invente
@@ -236,7 +248,7 @@ def build_services(settings: Settings, engines: EngineSet | None = None) -> Serv
     memory = TranslationMemory.from_file(
         settings.content_dir / "templates.json",
         settings.near_match_threshold,
-        [settings.content_dir / "safinum_test_page.json", settings.content_dir / "kama_interface.json"],
+        [settings.content_dir / "safinum_test_page.json", settings.content_dir / "kama_interface.json", settings.content_dir / "kama_fenetre.json"],
     )
     intents = IntentMatcher.from_file(settings.content_dir / "intents.json")
     gate = asyncio.Semaphore(settings.max_concurrent_models)

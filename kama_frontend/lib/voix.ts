@@ -16,6 +16,13 @@ export function lireEnFrancais(texte: string, vitesse = 1, aLaFin?: () => void) 
   window.speechSynthesis.speak(phrase);
 }
 
+/** Autres lectures à couper en même temps (la lecture en langue nationale de `audio.ts` s'y inscrit). */
+const arretsSupplementaires: Array<() => void> = [];
+export function enregistrerArret(arret: () => void) {
+  arretsSupplementaires.push(arret);
+}
+
 export function arreterLecture() {
   if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+  arretsSupplementaires.forEach((arret) => arret());
 }

@@ -114,7 +114,7 @@ class HfCtcRecognizer:
 class MmsVitsSynthesizer:
     """Voix VITS de Meta (MMS-TTS) ou une version ajustee : un modele charge avec transformers et torch."""
 
-    def __init__(self, path: Path, threads: int = 2, seed: int = 0) -> None:
+    def __init__(self, path: Path, threads: int = 2, seed: int = 0, speaker_id: int | None = None) -> None:
         import torch
         from transformers import AutoTokenizer, VitsModel
 
@@ -122,6 +122,13 @@ class MmsVitsSynthesizer:
         self._torch = torch
         self._tokenizer = AutoTokenizer.from_pretrained(path)
         self._model = VitsModel.from_pretrained(path).eval()
+        # Un modele ajuste sur plusieurs voix demande laquelle utiliser (options.speaker_id de routes.json) ; la voix de base n'en a qu'une.
+        n_voices = int(getattr(self._model.config, "num_speakers", 1) or 1)
+        if n_voices > 1 and speaker_id is None:
+            raise ValueError(f"ce modele a {n_voices} voix : indiquer options.speaker_id dans routes.json")
+        if speaker_id is not None and not 0 <= speaker_id < max(n_voices, 1):
+            raise ValueError(f"speaker_id {speaker_id} hors des {n_voices} voix du modele")
+        self._speaker = speaker_id if n_voices > 1 else None
         self._rate = int(self._model.config.sampling_rate)
         self._vocab = frozenset(json.loads((path / "vocab.json").read_text(encoding="utf-8")))
         self._seed = seed
@@ -132,7 +139,8 @@ class MmsVitsSynthesizer:
         if not clean:
             return None
         with self._torch.inference_mode():
-            return self._model(**self._tokenizer(clean, return_tensors="pt")).waveform[0]
+            extra = {"speaker_id": self._speaker} if self._speaker is not None else {}
+            return self._model(**self._tokenizer(clean, return_tensors="pt"), **extra).waveform[0]
 
     def synthesize(self, text: str) -> bytes:
         import numpy as np
