@@ -21,6 +21,7 @@ import { estMessageKama } from '@/lib/messages';
 import { enregistrerPositionOnglet, lirePositionOnglet, POSITION_PAR_DEFAUT, topBorne } from '@/lib/position-onglet';
 import { reglageActif, reglageConsentement, reglageConsentementMicro, reglageLangue, reglageMode, useReglage } from '@/lib/reglages';
 import { useLecturePage } from '@/lib/use-lecture-page';
+import { traduireKama } from '@/lib/use-texte';
 import { arreterLecture } from '@/lib/voix';
 import { peutRepeter, rejouerDerniere } from '@/lib/audio';
 import { useParler, VUE_PAR_INTENTION } from '@/lib/use-parler';
@@ -56,6 +57,8 @@ export function KamaApp() {
   const [surligne, setSurligne] = useState<{ zone: Element; nom: string } | null>(null);
   /** La réponse vient d'une question posée à voix haute : elle est lue tout de suite (UX 3.3). */
   const [reponseVocale, setReponseVocale] = useState(false);
+  const annoncePrefixe = traduireKama(langue?.code, 'Kama te montre :');
+  const nomSurligne = surligne ? traduireKama(langue?.code, surligne.nom) : '';
 
   const lecture = useLecturePage(actif);
 
@@ -325,7 +328,7 @@ export function KamaApp() {
 
           {/* Annonce pour les lecteurs d'écran quand « Montre-moi » surligne un élément. */}
           <p className="sr-only" aria-live="polite">
-            {surligne ? `Kama te montre : ${surligne.nom}` : ''}
+            {surligne ? `${annoncePrefixe} ${nomSurligne}` : ''}
           </p>
         </div>
       </LectureAuto.Provider>

@@ -78,7 +78,7 @@ def test_the_embedded_glossary_matches_what_the_server_serves():
     )
     generated = build_glossary(memory)
     embedded = json.loads((REPO_DIR / "kama_frontend" / "config" / "glossaire.json").read_text(encoding="utf-8"))
-    assert embedded["fr"] == generated["fr"], "glossaire embarque perime : python -m app.export_glossary"
+    assert embedded["fr"] == generated["fr"] and embedded["en"] == generated["en"], "glossaire embarque perime : python -m app.export_glossary"
 
 
 def test_demo_routes_differ_from_default_routes_only_by_the_microphone():
@@ -90,12 +90,26 @@ def test_demo_routes_differ_from_default_routes_only_by_the_microphone():
     assert demo == default
 
 
-def test_default_kama_texts_are_embedded_and_drafts_stay_in_interface_zones():
-    """kama_frontend/config/interface.json = textes par defaut de Kama ; un brouillon n'y figure que s'il s'agit d'un libelle d'interface."""
-    from app.export_glossary import ZONES_LIBELLES, build_interface
+def test_every_kama_text_has_a_pidgin_version_and_drafts_are_marked():
+    """Decision de l'equipe : avec le pidgin choisi, toute l'interface de Kama est en pidgin. Un brouillon reste marque comme tel."""
+    from app.export_glossary import build_interface
 
-    entries = json.loads((CONTENT / "kama_interface.json").read_text(encoding="utf-8"))["entries"]
+    entries = [e for nom in ("kama_interface.json", "kama_fenetre.json") for e in json.loads((CONTENT / nom).read_text(encoding="utf-8"))["entries"]]
     embedded = json.loads((REPO_DIR / "kama_frontend" / "config" / "interface.json").read_text(encoding="utf-8"))
     assert embedded["fr"] == build_interface(entries)["fr"], "interface.json perime : python -m app.export_glossary"
-    for item in embedded["fr"]["wes"].values():
-        assert item["statut"] == "valide" or item["zone"] in ZONES_LIBELLES
+    fenetre = json.loads((CONTENT / "kama_fenetre.json").read_text(encoding="utf-8"))["entries"]
+    assert [e["fr"] for e in fenetre if not e.get("wes")] == [], "phrase de la fenetre sans pidgin"
+    for e in entries:
+        item = embedded["fr"]["wes"].get(__import__("app.export_glossary", fromlist=["normalize"]).normalize(e["fr"]))
+        if item and not e.get("validated_by") and item["texte"] == e.get("wes"):
+            assert item["statut"] == "brouillon"
+
+
+def test_embedded_patterns_and_english_sources_match_the_server():
+    """Modeles a valeur variable (« Bonjour, {x1} ») et textes anglais de la page : l'extension les applique en local, valides seulement."""
+    from app.export_glossary import build_patterns
+
+    page = json.loads((CONTENT / "safinum_test_page.json").read_text(encoding="utf-8"))
+    embedded = json.loads((REPO_DIR / "kama_frontend" / "config" / "glossaire.json").read_text(encoding="utf-8"))
+    assert embedded["patterns"] == build_patterns(page), "glossaire perime : python -m app.export_glossary"
+    assert embedded["en"]["wes"], "les textes anglais de la page (bouton EN) doivent etre embarques"

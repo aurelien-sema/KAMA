@@ -23,7 +23,7 @@ import {
 import { useLangueCourante } from '@/lib/langue-courante';
 import { aplatir, useReponse } from '@/lib/use-reponse';
 import { useTraductionTexte } from '@/lib/use-traduction';
-import { traduireLibelle } from '@/lib/use-texte';
+import { traduireKama, traduireLibelle } from '@/lib/use-texte';
 import {
   BandeauHorsLigne,
   BankErrorContent,
@@ -122,6 +122,7 @@ function ExpliquerPage({ lecture, onShowMe }: { lecture: LecturePage; onShowMe: 
         paroles={r.paroles}
         phrase={aplatir(r.lignes[0]!)}
         etapes={etapes.map((e, i) => ({ cible: e.cible, texte: aplatir(r.lignes[i + 1]!) }))}
+        speechFr={texteAEcouter(lignes)}
         onShowMe={(cible) => onShowMe(cible as IdElement)}
       />
     </>
@@ -129,7 +130,11 @@ function ExpliquerPage({ lecture, onShowMe }: { lecture: LecturePage; onShowMe: 
 }
 
 function ResumerTransactions({ lecture }: { lecture: LecturePage }) {
-  const operations = lireTransactions(lecture);
+  const langue = useLangueCourante();
+  const operations = lireTransactions(lecture).map((o) => ({
+    ...o,
+    libelleTraduit: traduireLibelle(langue?.code, o.libelle),
+  }));
   const entrees = operations.filter((o) => o.sens === 'entree').length;
   const sorties = operations.length - entrees;
   const lignes: Ligne[] = operations.length
@@ -144,11 +149,17 @@ function ResumerTransactions({ lecture }: { lecture: LecturePage }) {
     return (
       <>
         {retour}
-        <NoTransactionsContent status={r.status} paroles={r.paroles} phrase={aplatir(r.lignes[0]!)} destination={aplatir(r.lignes[1]!)} />
+        <NoTransactionsContent
+          status={r.status}
+          paroles={r.paroles}
+          phrase={aplatir(r.lignes[0]!)}
+          destination={aplatir(r.lignes[1]!)}
+          speechFr={texteAEcouter(lignes)}
+        />
       </>
     );
   }
-  // Les libellés et montants des opérations restent affichés tels quels et ne sont jamais envoyés (sécurité).
+  // Les libellés viennent du glossaire local ; les montants restent ceux de la page et ne sont jamais envoyés (sécurité).
   return (
     <>
       {retour}
@@ -235,6 +246,7 @@ function ReponseErreur({ e }: { e: ElementTrouve }) {
         titre={aplatir(r.lignes[0]!)}
         conseil={aplatir(r.lignes[1]!)}
         messageTraduit={messageTraduit}
+        speechFr={texteAEcouter(lignes)}
       />
     </>
   );
@@ -252,10 +264,11 @@ function ReponseGabarit({
   onShowMe: (id: IdElement) => void;
 }) {
   const gabarit = GABARITS[id];
-  const base = gabarit ? gabarit({ libelle: e.libelleTexte, valeur: e.valeur, total }) : null;
+  const base = gabarit ? gabarit({ libelle: e.def.libelles[0] ?? e.libelleTexte, valeur: e.valeur, total }) : null;
   const langue = useLangueCourante();
   const nomTraduit = traduireLibelle(langue?.code, e.libelleTexte);
-  const nom = nomTraduit !== e.libelleTexte ? nomTraduit : e.def.nom; // « Charge » (validé) à la place de « Frais », sinon le nom français
+  const nom = nomTraduit !== e.libelleTexte ? nomTraduit : traduireKama(langue?.code, e.def.nom);
+  const elementChoisi = traduireKama(langue?.code, 'Élément choisi :');
   const r = useReponse(base ? base.lignes : null, ELEMENT_API[id] ?? 'text');
   if (!base) return null;
   if (r.chargement) return <Reflexion />;
@@ -269,7 +282,7 @@ function ReponseGabarit({
   return (
     <div className="flex flex-col gap-3">
       <span className="self-start rounded-md border border-bank-border bg-bank-bg px-2 py-1 text-xs text-bank-text">
-        Élément choisi : <strong>{nom}</strong>
+        {elementChoisi} <strong>{nom}</strong>
       </span>
       {r.horsLigne && <BandeauHorsLigne onRetry={r.reessayer} />}
       <KamaResponse status={r.status} paroles={r.paroles} speech={texteAEcouter(base.lignes)}>

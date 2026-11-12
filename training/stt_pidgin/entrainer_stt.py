@@ -19,6 +19,7 @@ from pathlib import Path
 import jiwer
 import soundfile as sf
 import torch
+import transformers
 from transformers import (AutoModelForCTC, AutoProcessor, Trainer, TrainingArguments, Wav2Vec2CTCTokenizer, Wav2Vec2FeatureExtractor,
                           Wav2Vec2ForCTC, Wav2Vec2Processor)
 
@@ -29,6 +30,8 @@ MODELES = {
     "mms": dict(base="facebook/mms-1b-all", lr=1e-3, epoques=20, lot=8, cumul=2),
 }
 DUREE_MAX = 20.0  # secondes ; plus long = memoire GPU
+# transformers v5 a supprime warmup_ratio ; warmup_steps y accepte un float (meme sens).
+CHAUFFAGE = {"warmup_steps": 0.1} if int(transformers.__version__.split(".")[0]) >= 5 else {"warmup_ratio": 0.1}
 
 
 def normaliser(t):
@@ -150,7 +153,7 @@ def main():
     args = TrainingArguments(
         output_dir=str(sortie / "points"), per_device_train_batch_size=cfg["lot"], per_device_eval_batch_size=cfg["lot"],
         gradient_accumulation_steps=cfg["cumul"], learning_rate=a.lr or cfg["lr"], num_train_epochs=a.epoques or cfg["epoques"],
-        warmup_ratio=0.1, eval_strategy="epoch", save_strategy="epoch", save_total_limit=1, load_best_model_at_end=True,
+        **CHAUFFAGE, eval_strategy="epoch", save_strategy="epoch", save_total_limit=1, load_best_model_at_end=True,
         metric_for_best_model="wer", greater_is_better=False, fp16=gpu, use_cpu=not gpu, logging_steps=25, report_to="none",
         remove_unused_columns=False, label_names=["labels"], gradient_checkpointing=(a.modele != "mms" and gpu), dataloader_num_workers=2 if gpu else 0,
     )

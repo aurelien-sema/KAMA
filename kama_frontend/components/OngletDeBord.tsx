@@ -10,6 +10,7 @@
 import { forwardRef, useRef, useState } from 'react';
 import { KamaLogo } from '@/components/kama/primitives';
 import { topBorne } from '@/lib/position-onglet';
+import { useTexte } from '@/lib/use-texte';
 
 const HAUTEUR = 44;
 const SEUIL_GLISSER = 4;
@@ -29,6 +30,7 @@ export const OngletDeBord = forwardRef<HTMLButtonElement, Props>(function Onglet
   const [glisse, setGlisse] = useState(false);
   const depart = useRef<{ y: number; position: number } | null>(null);
   const aGlisse = useRef(false);
+  const ouvrir = useTexte('Ouvrir Kama');
 
   function positionDepuis(clientY: number) {
     const marge = 16 + HAUTEUR / 2;
@@ -75,7 +77,7 @@ export const OngletDeBord = forwardRef<HTMLButtonElement, Props>(function Onglet
     <button
       ref={ref}
       type="button"
-      aria-label="Ouvrir Kama"
+      aria-label={ouvrir}
       aria-haspopup="true"
       aria-expanded={menuOuvert}
       aria-controls="kama-menu"

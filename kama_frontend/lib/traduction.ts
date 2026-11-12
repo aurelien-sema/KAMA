@@ -12,7 +12,7 @@ import glossaire from '@/config/glossaire.json';
 import interfaceJson from '@/config/interface.json';
 import type { Langue } from '@/config/langues';
 import { ErreurApi, traduireTexte, type ElementApi } from './api';
-import { chercherGlossaire, type Glossaire } from './glossaire';
+import { chercherGlossaire, chercherModele, type Glossaire } from './glossaire';
 import { masquerLigne } from './lignes';
 import { chercherInterface, type DonneesInterface } from './interface';
 import { balisesDe, demasquer, estMasque, masquer } from './masquage';
@@ -43,11 +43,11 @@ async function traduireMasque(texte: string, valeurs: Record<string, string>, el
   const local = chercherGlossaire(glossaire as Glossaire, langue.code, texte);
   if (local) return fabriquer(local, 'verified'); // jamais de réseau pour une phrase déjà validée
 
-  // Texte par défaut de Kama (libellé d'interface, jamais un montant ni un avertissement) : le brouillon s'affiche, étiqueté « automatique ».
-  if (element === 'text') {
-    const defaut = chercherInterface(interfaceJson as unknown as DonneesInterface, langue.code, texte);
-    if (defaut) return fabriquer(defaut.texte, defaut.statut === 'valide' ? 'verified' : 'auto');
-  }
+  // Phrase de Kama (interface, explication de la fenêtre) : toute l'interface passe dans la langue choisie (décision de l'équipe,
+  // 2026-11-12). Un brouillon non validé s'affiche avec le badge « Traduction automatique », jamais « Vérifié ». Les montants restent
+  // ceux de la page : fabriquer() refuse une traduction qui change les balises.
+  const defaut = chercherInterface(interfaceJson as unknown as DonneesInterface, langue.code, texte);
+  if (defaut) return fabriquer(defaut.texte, defaut.statut === 'valide' ? 'verified' : 'auto');
 
   if (!estMasque(texte)) return { statut: 'original', raison: 'non_masque' }; // le serveur refuserait : on n'envoie pas
 
@@ -93,12 +93,22 @@ export async function traduireLignes(requetes: Requete[], langue: Langue): Promi
   return combiner(resultats);
 }
 
+/** Traduction locale d'un modèle à valeur variable : les valeurs lues dans la page sont remises telles quelles, sans réseau. */
+function depuisModele(modele: { texte: string; valeurs: Record<string, string> }, langue: Langue): Une {
+  const morceaux = demasquer(modele.texte, modele.valeurs);
+  if (!morceaux) return { statut: 'original', raison: 'modele_invalide' };
+  return { statut: 'ok', morceaux, parole: { texte: modele.texte, valeurs: modele.valeurs, langue: langue.code }, badge: 'verified' };
+}
+
 /**
  * Traduit un texte libre (texte sélectionné, message de la banque). Le masquage cherche les montants, numéros, e-mails
  * et noms ; `connues` : valeurs de la page à masquer en plus. Un texte presque entièrement masqué n'est pas envoyé.
  */
 export async function traduireTexteLibre(texte: string, element: ElementApi, langue: Langue, connues: string[] = []): Promise<Resultat> {
   if (texte.length > 500) return { statut: 'original', raison: 'trop_long' };
+  // « Bonjour, Amina », « Numéro de compte : 0123… » : modèle validé appliqué ici, la valeur ne quitte pas le navigateur.
+  const modele = chercherModele(glossaire as Glossaire, langue.code, texte);
+  if (modele) return combiner([depuisModele(modele, langue)]);
   const m = masquer(texte, connues);
   const mots = m.texte.split(/\s+/).filter(Boolean);
   const libres = mots.filter((w) => !/^\{x\d+\}\W*$/.test(w));

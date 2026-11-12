@@ -1431,3 +1431,87 @@ Signé : Dimitri, 2026-11-11
 - Le badge « Vérifié » n'apparaît que pour les phrases réellement validées.
 
 Signé : Dimitri, 2026-11-11
+
+
+## 2026-11-12 — Kama entièrement en pidgin, comparaison des modèles de traduction, entraînements Colab corrigés
+
+### En bref
+
+- Quand le pidgin est choisi, **toute l'interface de Kama passe en pidgin**, à l'écrit et à l'oral : menu, boutons, badges, messages d'état, explications de la fenêtre, popup. Les textes sans phrase validée s'affichent en **brouillon**, avec le badge « Traduction automatique », jamais « Vérifié ».
+- **Écouter** (barre de sélection) et les boutons haut-parleur passent maintenant par la traduction puis la voix pidgin du serveur, au lieu de lire directement le français.
+- La langue du texte source (français ou anglais) est détectée dans l'extension, sans réseau ni modèle.
+- **Six modèles de traduction ont été comparés.** On garde la v2 sur le serveur pour l'instant. m2m100 de Masakhane garde mieux le sens et devient la base du prochain ajustement : `training/pidgin_m2m/` est prêt.
+- **Carnets Colab corrigés** : voix (TTS) et reconnaissance (STT). L'entraînement complet de la voix pidgin est lancé sur Colab.
+- Tests : 83 réussis pour l'extension ; 186 réussis et 1 sauté pour le serveur.
+
+### Ce qui a été fait
+
+**Extension (`kama_frontend`)**
+- `content-data/kama_fenetre.json` : brouillon pidgin (`wes`) pour les 83 phrases de la fenêtre. `content-data/kama_interface.json` : 31 nouveaux libellés, soit 71 au total. Le tout est exporté dans `config/interface.json` par `python -m app.export_glossary`, et aucun n'est marqué validé.
+- Nouveau `lib/ecouter.ts` : lecture d'un texte dans la langue choisie (traduction, voix du serveur, montants lus localement).
+- `lib/api.ts` : `detecterLangueSource` (fr/en) ; `source_lang` est envoyé au serveur.
+- En mode développement, la console signale `[kama:fr]` pour tout texte de Kama resté en français.
+- Délai de la voix porté à 45 s (synthèse sur processeur) ; l'audio des réponses est préparé à l'avance et mis en cache.
+- Nouveaux tests : `tests/langue-source.test.mjs`, `tests/modeles.test.mjs`.
+
+**Serveur (`backend`)**
+- `app/export_glossary.py` exporte aussi les phrases de la fenêtre, avec leur statut. Le test de contrat de l'extension a été mis à jour.
+- Testé en session de démo seulement, rien n'est changé dans les fichiers : la variable `KAMA_MT_ALLOW_CRITICAL=1` laisse le modèle traduire les messages critiques. Les montants, noms et numéros restent masqués. Sur 8 messages critiques inédits, les 8 sortent en pidgin en 1 à 4 s, mais avec deux contresens (voir Limites).
+
+**Traduction : comparaison des modèles** (77 phrases SOREVA ; 30 messages inédits en fr et en anglais)
+
+| Modèle | chrF / BLEU | Inédit sans problème | Termes critiques | Décision |
+|---|---|---|---|---|
+| v2 (Marian, serveur actuel) | 33,8 / 10,6 | 38/60 | 60/70 | gardé pour l'instant |
+| finance_propre | 33,0 / 7,0 | 41/60 | 61/70 | écarté |
+| m2m100 Masakhane | 32,8 / 8,2 | 10/60 (mots absents du lexique) | 57/70 | **meilleur sens**, base du prochain ajustement |
+| jamm55 mix | 25,3 / 6,6 | — | — | écarté |
+| mt5 Davlan | 28,1 / 5,9 | — | — | écarté (recopie l'anglais) |
+| Marian Enutrof | 21,1 / 3,2 | — | — | écarté (invente du sens) |
+
+Les chiffres automatiques avantagent la v2, mais à la lecture, la v2 fait des contresens qui passent les contrôles. Par exemple, « unusual login » devient « special doctrine », et « Request a new one » devient « Ask some new person ». m2m100 garde le sens, avec une orthographe nigériane et des mots anglais. La décision finale doit venir d'un test à l'aveugle par le locuteur.
+
+**Entraînement**
+- `training/pidgin/pipeline.py` lit aussi les modèles mT5 et M2M100, ainsi que M2M100 converti en CTranslate2 (sortie forcée par le jeton `__fr__`).
+- Nouveau `training/pidgin_m2m/` (préparation des données, export Drive, carnet Colab, README) pour ajuster m2m100. Il réduit le religieux à 15 %, exclut les phrases de test, et prévoit une table d'orthographe et l'ajout de la post-édition.
+- `training/tts_pidgin/entrainement_tts_colab.ipynb` :
+  - vérification de Python 3.12 ;
+  - zip cherché dans la session, puis sur le Drive, puis envoi manuel ;
+  - essai rapide sur 6 enregistrements par locuteur ;
+  - colonne du locuteur renommée `locuteur` : le nom `speaker_id` cachait la colonne et faisait planter l'entraînement ;
+  - correctif matplotlib pour les graphiques de validation.
+  
+  L'essai rapide est réussi : 12 locuteurs, plus la voix mélange n° 12.
+- `training/stt_pidgin` : compatible avec transformers v5 (`warmup_ratio` supprimé).
+
+**Données publiques recherchées** : il n'existe aucun corpus parallèle bancaire en pidgin camerounais.
+- Le MT560 anglais–pidgin camerounais (28 159 paires, CC BY 4.0) est religieux.
+- Le corpus oral de pidgin camerounais d'Oxford (240 000 mots, déjà téléchargé) est la meilleure source de pidgin camerounais, à condition de vérifier sa licence avant toute rétro-traduction.
+- Common Voice ne contient qu'environ 1 000 phrases de texte.
+- `Ephraimmm/pidgin_bank_dataset` est écarté : licence inconnue.
+
+### Limites connues
+
+- **Retour au français** : si la traduction dépasse 8 s ou si la voix échoue, l'extension lit encore le français. Un prompt est prêt pour la file d'attente de la voix, le délai de 20 s et des annonces pidgin à la place du français.
+- **Messages critiques traduits par le modèle** : deux contresens passent les contrôles actuels, « Annulez ce transfert… » qui donne « Close di money… » et « compte suspendu » qui donne « don di wait ». Deux contrôles sont à ajouter avant toute démo : termes critiques attestés et négations.
+- Seules **112 phrases bancaires** sont uniques dans les données d'entraînement, et elles sont en brouillon : la post-édition par le locuteur est indispensable.
+- Les 83 phrases de la fenêtre et les 71 libellés sont des brouillons écrits sans locuteur natif.
+- Le masquage des noms seuls reste à corriger (valeurs protégées selon leur position).
+
+### Ce que l'équipe doit faire ensuite
+
+| Qui | Quoi |
+|---|---|
+| Dimitri | Finir l'entraînement complet de la voix sur Colab, écouter `ecoute.zip`, puis brancher la voix mélange (numéro 12) au serveur |
+| Dimitri | Faire passer à un agent le prompt « plus de français » (contrôles des termes critiques et des négations, annonces pidgin, file d'attente de la voix) |
+| Locuteurs natifs | Test à l'aveugle v2 / m2m100 sur 30 paires ; valider les brouillons de la fenêtre et de l'interface ; post-éditer des messages bancaires |
+| Équipe | Voie 3 : types de messages bancaires et explications validées pour le contenu inédit |
+| Équipe | Vérifier la licence du corpus d'Oxford avant la rétro-traduction |
+
+### Composants tiers utilisés
+
+- `masakhane/m2m100_418M_en_pcm_rel_news_ft` (AFL-3.0), évalué et préparé pour l'ajustement, hors Git.
+- L'outil d'entraînement `ylacombe/finetune-hf-vits` était déjà utilisé.
+- Aucune nouvelle dépendance dans l'extension ni dans le serveur.
+
+Signé : Dimitri, 2026-11-12

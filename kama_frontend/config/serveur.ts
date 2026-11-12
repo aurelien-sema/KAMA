@@ -9,4 +9,5 @@ export const ADRESSE_PAR_DEFAUT = 'http://127.0.0.1:8000';
 export const URL_SERVEUR: string = (import.meta.env.WXT_KAMA_API as string | undefined) ?? ADRESSE_PAR_DEFAUT;
 
 /** Délais maximaux avant de dire « pas de connexion » (millisecondes). */
-export const DELAIS = { traduction: 8000, voix: 20000, reconnaissance: 15000, capacites: 4000 } as const;
+// La voix de synthèse tourne sur processeur : une phrase longue peut prendre plus de 10 s sur une petite machine.
+export const DELAIS = { traduction: 8000, voix: 45000, reconnaissance: 15000, capacites: 4000 } as const;

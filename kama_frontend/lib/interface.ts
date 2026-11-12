@@ -19,8 +19,25 @@ export function chercherInterface(donnees: DonneesInterface, langue: string, fr:
   return parLangue[langue]?.[cleGlossaire(fr)] ?? null;
 }
 
+const avertissements = new Set<string>();
+
+function enDeveloppement() {
+  return (import.meta as { env?: { DEV?: boolean } }).env?.DEV === true;
+}
+
 /** Le texte à afficher : traduction validée, sinon libellé d'interface, sinon le français tel quel. */
-export function libelle(glossaire: Glossaire, donnees: DonneesInterface, langue: string | undefined, fr: string): string {
+export function libelle(
+  glossaire: Glossaire,
+  donnees: DonneesInterface,
+  langue: string | undefined,
+  fr: string,
+  options: { avertir?: boolean } = {},
+): string {
   if (!langue) return fr;
-  return chercherGlossaire(glossaire, langue, fr) ?? chercherInterface(donnees, langue, fr)?.texte ?? fr;
+  const traduction = chercherGlossaire(glossaire, langue, fr) ?? chercherInterface(donnees, langue, fr)?.texte;
+  if (!traduction && options.avertir && langue === 'wes' && enDeveloppement() && !avertissements.has(fr)) {
+    avertissements.add(fr);
+    console.warn(`[kama:fr] ${fr}`);
+  }
+  return traduction ?? fr;
 }

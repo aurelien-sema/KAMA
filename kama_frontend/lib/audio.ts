@@ -20,6 +20,30 @@ let jeton = 0;
 let sourceCourante: AudioBufferSourceNode | null = null;
 let derniere: { paroles: Parole[]; vitesse: number } | null = null;
 
+/**
+ * Audios déjà demandés au serveur, en mémoire seulement (texte masqué → segments : aucun montant, aucun nom). Une réponse rouverte
+ * ou relue part tout de suite, et `prechargerParoles` les demande dès l'ouverture de la réponse, avant l'appui sur ▶.
+ */
+const cacheVoix = new Map<string, Promise<SegmentAudio[]>>();
+const TAILLE_CACHE = 80;
+
+function segmentsDe(p: Parole): Promise<SegmentAudio[]> {
+  const cle = `${p.langue}|${p.texte}`;
+  let promesse = cacheVoix.get(cle);
+  if (!promesse) {
+    promesse = synthetiser(p.texte, p.langue).then((r) => r.segments);
+    promesse.catch(() => cacheVoix.delete(cle)); // un échec sera redemandé
+    cacheVoix.set(cle, promesse);
+    if (cacheVoix.size > TAILLE_CACHE) cacheVoix.delete(cacheVoix.keys().next().value!);
+  }
+  return promesse;
+}
+
+/** Demande les audios d'une réponse dès qu'elle s'affiche : quand la personne appuie sur ▶, ils sont souvent déjà prêts. */
+export function prechargerParoles(paroles: Parole[] | undefined) {
+  for (const p of paroles ?? []) void segmentsDe(p).catch(() => undefined);
+}
+
 function arreter() {
   jeton += 1;
   try {
@@ -69,11 +93,21 @@ export async function jouerParoles(paroles: Parole[], vitesse = 1): Promise<Voix
   arreter();
   const mon = jeton;
   derniere = { paroles, vitesse };
-  const reponses = await Promise.all(paroles.map((p) => synthetiser(p.texte, p.langue))); // tout d'abord : pas de trou entre deux phrases
-  if (mon !== jeton) return 'enregistree';
+  // Toutes les phrases sont demandées en même temps, mais jouées dans l'ordre dès que chacune est prête : la première phrase
+  // part sans attendre les suivantes.
+  const demandes = paroles.map((p) => segmentsDe(p));
+  demandes.forEach((d) => d.catch(() => undefined));
   let voix: VoixUtilisee = 'enregistree';
   for (let i = 0; i < paroles.length; i++) {
-    for (const segment of reponses[i]!.segments as SegmentAudio[]) {
+    let segments: SegmentAudio[];
+    try {
+      segments = await demandes[i]!;
+    } catch (e) {
+      if (i === 0) throw e; // rien n'a été joué : l'appelant lit en français
+      return voix; // une phrase suivante manque : on s'arrête là plutôt que de mélanger deux langues
+    }
+    if (mon !== jeton) return voix;
+    for (const segment of segments) {
       if (mon !== jeton) return voix;
       if (segment.type === 'audio') {
         if (segment.origin === 'synthetic') voix = 'automatique';

@@ -15,8 +15,8 @@ import { Check, ChevronDown, TriangleAlert, Type, Volume2 } from 'lucide-react';
 import { ChoixLangue } from '@/components/kama/ChoixLangue';
 import { KamaLogo, SpeakButton, TranslationBadge } from '@/components/kama/primitives';
 import { LANGUES, trouverLangue, type IdLangue } from '@/config/langues';
-import { LangueCourante } from '@/lib/langue-courante';
-import { useTexte } from '@/lib/use-texte';
+import { LangueCourante, useLangueCourante } from '@/lib/langue-courante';
+import { traduireKama, useTexte } from '@/lib/use-texte';
 import { envoyerAOngletActif } from '@/lib/messages';
 import { reglageActif, reglageLangue, reglageMode, useReglage } from '@/lib/reglages';
 
@@ -70,6 +70,7 @@ type PropsVue = {
 /** Affichage du popup, sans accès au stockage : réutilisé tel quel par le catalogue des états. */
 export function PopupVue(p: PropsVue) {
   const langue = trouverLangue(p.idLangue);
+  const catalogue = traduireKama(langue?.code, 'Catalogue des états (développement)');
   return (
     <LangueCourante.Provider value={langue}>
       <main className="flex w-[340px] flex-col bg-kama-white p-4 text-kama-ink">
@@ -112,7 +113,7 @@ export function PopupVue(p: PropsVue) {
             onClick={p.onCatalogue}
             className="mt-3 min-h-11 cursor-pointer self-start border-0 bg-transparent px-1 text-xs text-kama-muted underline underline-offset-4"
           >
-            Catalogue des états (développement)
+            {catalogue}
           </button>
         )}
       </main>
@@ -125,12 +126,13 @@ export function PopupVue(p: PropsVue) {
 function Interrupteur({ actif, onChange }: { actif: boolean; onChange: (v: boolean) => void }) {
   const texteActif = useTexte('Activé');
   const texteInactif = useTexte('Désactivé');
+  const etiquette = useTexte('Kama activé');
   return (
     <button
       type="button"
       role="switch"
       aria-checked={actif}
-      aria-label="Kama activé"
+      aria-label={etiquette}
       onClick={() => onChange(!actif)}
       className="ml-auto flex min-h-11 cursor-pointer items-center gap-2 rounded-full border-0 bg-transparent px-1 text-sm font-medium text-kama-ink focus-visible:outline-2 focus-visible:outline-kama-ink"
     >
@@ -145,8 +147,9 @@ function Interrupteur({ actif, onChange }: { actif: boolean; onChange: (v: boole
 }
 
 function PageInconnue() {
-  const t1 = 'Kama ne reconnaît pas cette page. Ouvre la page de ta banque.';
-  const t2 = 'Si elle est déjà ouverte, recharge-la.';
+  const t1 = useTexte('Kama ne reconnaît pas cette page. Ouvre la page de ta banque.');
+  const t2 = useTexte('Si elle est déjà ouverte, recharge-la.');
+  const ecouterMessage = useTexte('Écouter le message');
   return (
     <div role="alert" className="mt-4 flex items-start gap-3 rounded-lg border-2 border-kama-error bg-kama-error-bg p-3">
       <TriangleAlert className="mt-0.5 size-6 shrink-0 text-kama-error" aria-hidden />
@@ -154,7 +157,7 @@ function PageInconnue() {
         <p className="m-0">{t1}</p>
         <p className="m-0 mt-1 text-sm font-normal">{t2}</p>
       </div>
-      <SpeakButton texte={`${t1} ${t2}`} label="Écouter le message" />
+      <SpeakButton texte="Kama ne reconnaît pas cette page. Ouvre la page de ta banque." label={ecouterMessage} />
     </div>
   );
 }
@@ -185,6 +188,9 @@ function Reglages({
   const texteTexte = useTexte('Texte');
   const texteAudio = useTexte('Audio');
   const texteExpliquer = useTexte('Expliquer cette page');
+  const maLangue = useTexte('Ma langue');
+  const jePrefere = useTexte('Je préfère');
+  const ecouterPrefixe = useTexte('Écouter :');
   const desactive = !actif;
 
   return (
@@ -194,7 +200,7 @@ function Reglages({
       inert={desactive || undefined}
     >
       <section>
-        <p className="m-0 mb-1 text-sm font-bold">Ma langue</p>
+        <p className="m-0 mb-1 text-sm font-bold">{maLangue}</p>
         <button
           type="button"
           aria-expanded={listeOuverte}
@@ -218,8 +224,8 @@ function Reglages({
       </section>
 
       <section>
-        <p className="m-0 mb-1 text-sm font-bold">Je préfère</p>
-        <div className="grid grid-cols-2 gap-2" role="group" aria-label="Je préfère">
+        <p className="m-0 mb-1 text-sm font-bold">{jePrefere}</p>
+        <div className="grid grid-cols-2 gap-2" role="group" aria-label={jePrefere}>
           {(['texte', 'audio'] as const).map((m) => {
             const Icone = m === 'texte' ? Type : Volume2;
             return (
@@ -249,7 +255,7 @@ function Reglages({
         >
           {texteExpliquer}
         </button>
-        <SpeakButton texte="Expliquer cette page" label="Écouter : Expliquer cette page" />
+        <SpeakButton texte="Expliquer cette page" label={`${ecouterPrefixe} ${texteExpliquer}`} />
       </div>
     </div>
   );
@@ -265,6 +271,10 @@ function ListeLangues({
   onFermer: () => void;
 }) {
   const liste = useRef<HTMLDivElement>(null);
+  const langue = useLangueCourante();
+  const choisir = useTexte('Choisir ma langue');
+  const rienChanger = useTexte('Ne rien changer');
+  const ecouterPrefixe = useTexte('Écouter :');
 
   // Clavier : focus sur la langue actuelle ; Échap ferme la liste.
   useEffect(() => {
@@ -279,7 +289,7 @@ function ListeLangues({
       ref={liste}
       id="kama-liste-langues"
       role="group"
-      aria-label="Choisir ma langue"
+      aria-label={choisir}
       className="animate-kama-appear mt-1 flex flex-col gap-1 rounded-lg border border-bank-line bg-kama-white p-1 shadow-lg"
     >
       {LANGUES.map((l) => (
@@ -293,10 +303,10 @@ function ListeLangues({
             <span className="w-4 shrink-0">{l.id === actuelle && <Check className="size-4" aria-hidden />}</span>
             <span className="flex flex-col">
               <span className="text-base font-medium leading-tight">{l.nom}</span>
-              <span className="text-xs leading-tight text-kama-ink/70">{l.region}</span>
+              <span className="text-xs leading-tight text-kama-ink/70">{traduireKama(langue?.code, l.region)}</span>
             </span>
           </button>
-          <SpeakButton texte={l.nom} label={`Écouter : ${l.nom}`} />
+          <SpeakButton texte={l.nom} label={`${ecouterPrefixe} ${l.nom}`} />
         </div>
       ))}
       <button
@@ -304,7 +314,7 @@ function ListeLangues({
         onClick={onFermer}
         className="hit-44 cursor-pointer rounded-md border-0 bg-transparent px-3 text-left text-sm font-semibold text-kama-ink underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-kama-ink"
       >
-        Ne rien changer
+        {rienChanger}
       </button>
     </div>
   );

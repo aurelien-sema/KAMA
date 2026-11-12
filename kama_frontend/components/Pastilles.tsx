@@ -7,6 +7,8 @@
  *  - au clic : la fenêtre Kama s'ouvre sur l'explication de cet élément.
  * Les pastilles vivent dans le Shadow DOM de Kama, par-dessus la page : la page n'est pas modifiée.
  */
+import { traduireKama, useTexte } from '@/lib/use-texte';
+import { useLangueCourante } from '@/lib/langue-courante';
 import { useEffect, useReducer } from 'react';
 import type { IdElement } from '@/config/page-test';
 import type { ElementTrouve, LecturePage } from '@/lib/lecture-page';
@@ -45,6 +47,9 @@ export function Pastilles({ lecture, onOuvrir }: { lecture: LecturePage; onOuvri
 }
 
 function Pastille({ element, onClick }: { element: ElementTrouve; onClick: () => void }) {
+  const langue = useLangueCourante();
+  const explique = useTexte("Kama t'explique");
+  const nom = traduireKama(langue?.code, element.def.nom);
   const r = rectangleDuTexte(element.ancre);
   if (!r || r.bottom < 0 || r.top > window.innerHeight) return null;
 
@@ -58,7 +63,7 @@ function Pastille({ element, onClick }: { element: ElementTrouve; onClick: () =>
     <button
       type="button"
       onClick={onClick}
-      aria-label={`Kama t'explique : ${element.def.nom}`}
+      aria-label={`${explique} : ${nom}`}
       style={{ left, top }}
       className="group fixed z-[2147483646] grid size-11 cursor-pointer place-items-center rounded-full border-0 bg-transparent p-0 focus-visible:outline-2 focus-visible:outline-kama-ink"
     >
@@ -69,7 +74,7 @@ function Pastille({ element, onClick }: { element: ElementTrouve; onClick: () =>
         aria-hidden
         className="pointer-events-none absolute bottom-full left-1/2 mb-1 -translate-x-1/2 whitespace-nowrap rounded-lg bg-kama-ink px-3 py-1 text-sm font-medium text-kama-white opacity-0 transition-opacity delay-300 duration-150 group-hover:opacity-100 group-focus-visible:opacity-100"
       >
-        Kama t'explique
+        {explique}
       </span>
     </button>
   );

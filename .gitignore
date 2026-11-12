@@ -40,6 +40,8 @@ kama_frontend/reference/
 # Entrainement pidgin : donnees generees et export Drive
 training/pidgin/data/
 training/pidgin/export_drive/
+training/pidgin_m2m/data/
+training/pidgin_m2m/export_drive/
 
 # Voix et mesures vocales : voix d'une personne, jeux Common Voice (conditions : ne pas republier)
 evaluation/tts_ecoute/

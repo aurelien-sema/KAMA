@@ -8,10 +8,15 @@ import type { Glossaire } from './glossaire';
 import { libelle, type DonneesInterface } from './interface';
 import { useLangueCourante } from './langue-courante';
 
-export function traduireLibelle(code: string | undefined, fr: string) {
-  return libelle(glossaire as Glossaire, interfaceJson as unknown as DonneesInterface, code, fr);
+export function traduireLibelle(code: string | undefined, fr: string, avertir = false) {
+  return libelle(glossaire as Glossaire, interfaceJson as unknown as DonneesInterface, code, fr, { avertir });
+}
+
+/** Texte fixe de Kama (hors libellé de la banque) : signale en développement s'il n'a pas de traduction. */
+export function traduireKama(code: string | undefined, fr: string) {
+  return traduireLibelle(code, fr, true);
 }
 
 export function useTexte(fr: string) {
-  return traduireLibelle(useLangueCourante()?.code, fr);
+  return traduireKama(useLangueCourante()?.code, fr);
 }

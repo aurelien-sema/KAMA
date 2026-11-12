@@ -30,6 +30,7 @@ export function Consentement({ micro, onAccepter, onRefuser }: { micro?: boolean
       points={textes.slice(1, 1 + c.points.length)}
       accepter={textes[1 + c.points.length]!}
       refuser={textes[2 + c.points.length]!}
+      speechFr={[c.titre, ...c.points].join(' ')}
       onAccepter={onAccepter}
       onRefuser={onRefuser}
     />
@@ -54,7 +55,14 @@ function Message({ cle, onRetry }: { cle: CleMessage; onRetry: () => void }) {
   const t = r.lignes.map(aplatir);
   const action = AVEC_ACTION.includes(cle);
   return (
-    <ParlerMessageContent texte={t[0]!} detail={t[1]} actionLabel={action ? t[t.length - 1] : undefined} onAction={onRetry} />
+    <ParlerMessageContent
+      texte={t[0]!}
+      detail={t[1]}
+      actionLabel={action ? t[t.length - 1] : undefined}
+      onAction={onRetry}
+      paroles={r.paroles?.slice(0, action ? -1 : undefined)}
+      speechFr={textes.slice(0, action ? -1 : undefined).join(' ')}
+    />
   );
 }
 
