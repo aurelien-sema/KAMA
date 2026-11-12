@@ -7,6 +7,8 @@ Ce fichier raconte ce qui a été fait dans le projet, pourquoi, et comment ça 
 ## Format d'une entrée
 
 ```markdown
+
+
 ## AAAA-MM-JJ — Sujet
 
 **Auteur :** Prénom
@@ -26,7 +28,9 @@ Ce fichier raconte ce qui a été fait dans le projet, pourquoi, et comment ça 
 
 La section « Composants tiers utilisés » est obligatoire : le règlement du SAFINUM Innovate Challenge impose de déclarer tout ce qu'on utilise et qui ne vient pas de nous.
 
+
 ## Entrées
+
 
 ## 2026-11-09 — Cadrage du projet et méthode de travail
 
@@ -97,6 +101,7 @@ Omar est responsable du frontend (branche `omar`). La priorité est de terminer 
 | Lovable | Conception des maquettes et de la démo cliquable | Service commercial, conditions d'utilisation de Lovable (licence du code généré à vérifier) |
 | Claude Code (modèle Claude, Anthropic) | Assistant de programmation pour écrire le code | Service commercial, conditions d'utilisation d'Anthropic |
 
+
 ## 2026-11-09 — Choix techniques et squelette de l'extension
 
 **Auteur :** Omar
@@ -163,6 +168,7 @@ Omar est responsable du frontend (branche `omar`). La priorité est de terminer 
 | Krona One (via Fontsource) | Police des titres et du nom « Kama » | SIL Open Font License 1.1 |
 | Pillow (Python) | Redimensionnement du logo en icônes (outil ponctuel, non livré) | MIT-CMU (HPND) |
 
+
 ## 2026-11-09 — Menu de l'onglet, déplacement et fenêtre Kama
 
 **Auteur :** Omar
@@ -217,6 +223,7 @@ Omar est responsable du frontend (branche `omar`). La priorité est de terminer 
 | lucide-react | Icônes : micro, fermer, lecture, badges | ISC |
 | Web Speech API (`speechSynthesis`) | Lecture vocale provisoire en français, avec les voix du navigateur et du système | API standard du navigateur, sans licence à déclarer (voix fournies par le système) |
 
+
 ## 2026-11-09 — Correctif : chargement refusé par Chrome
 
 **Auteur :** Omar
@@ -238,6 +245,7 @@ Pour `web_accessible_resources`, Chrome exige des adresses dont le chemin est ex
 ### Composants tiers utilisés
 
 Aucun nouveau.
+
 
 ## 2026-11-09 — Premier test réel dans Chrome, icônes à la place des emojis
 
@@ -282,6 +290,7 @@ Aucun nouveau.
 
 Aucun nouveau. Les icônes viennent de lucide-react, déjà déclaré.
 
+
 ## 2026-11-09 — Correctif police DM Sans, icône « transactions », aucune balise ajoutée à la page
 
 **Auteur :** Omar
@@ -312,6 +321,7 @@ Aucun nouveau. Les icônes viennent de lucide-react, déjà déclaré.
 
 Aucun nouveau.
 
+
 ## 2026-11-09 — Erreur « Extension context invalidated »
 
 **Auteur :** Omar
@@ -338,6 +348,7 @@ Aucun nouveau.
 ### Composants tiers utilisés
 
 Aucun nouveau.
+
 
 ## 2026-11-09 — Les 11 contenus de la fenêtre Kama et page catalogue
 
@@ -389,6 +400,7 @@ Aucun nouveau.
 ### Composants tiers utilisés
 
 Aucun nouveau.
+
 
 ## 2026-11-09 — Données, tests des modèles et serveur de Kama
 
@@ -572,6 +584,7 @@ Une licence indique ce qu'on a le droit de faire avec un composant. **« NC » v
 | fotiecodes/Turaco-gem-mt-en-wes | anglais → pidgin | Conditions Gemma |
 | jamm55/autotrain-improved-pidgin-model-2837583189 | anglais → pidgin nigérian (pour comparer) | Non indiquée |
 
+
 ## 2026-11-09 — Contrôle de sécurité du serveur et premiers résultats des modèles
 
 **Auteur :** Dimitri
@@ -679,6 +692,7 @@ Exemples réels :
 ### Composants tiers utilisés
 
 Aucun nouveau composant depuis l'entrée précédente.
+
 
 ## 2026-11-09 — Résultats de 13 modèles, coupure internet et évaluation dans le dépôt
 
@@ -788,6 +802,7 @@ Chaque modèle a passé les mêmes épreuves :
 
 Nouveau composant : **huggingface_hub** (Apache 2.0), l'outil qui télécharge les modèles. Les modèles et données testés sont ceux déjà listés plus haut.
 
+
 ## 2026-11-09 — Page officielle de test, répartition du travail et branche `dimitri`
 
 **Auteur :** Dimitri
@@ -886,6 +901,237 @@ Pour le chatbot « Parler à Kama », un LLM peut comprendre la question et choi
 ### Composants tiers utilisés
 
 Nouveau composant : **Playwright** (Apache 2.0), hors dépôt, pour parcourir la page de test comme un navigateur.
+
+
+## 2026-11-11 — Branche `omar`, choix des langues et mise à jour de CLARIFICATIONS.md
+
+**Auteur :** Omar
+
+### En bref
+
+Le travail frontend est maintenant sur sa propre branche, `omar`, réunie avec le travail de l'équipe. Kama proposera deux langues, le **ghomálá'** et le **pidgin**, et **ne choisira jamais la langue à la place de l'utilisateur** : tant qu'elle n'est pas choisie, Kama la demande en premier.
+
+### Ce qui a été implémenté, expliqué simplement
+
+- **Branche `omar`** : c'est la copie de travail du frontend. On y a réuni le travail d'Omar et celui de l'équipe (données, modèles, évaluation, venus de la branche `dimitri`). Deux fichiers avaient été modifiés des deux côtés, et on a gardé les deux versions de chacun :
+  - `.gitignore` : la liste des fichiers que git ne doit pas enregistrer ;
+  - `JOURNAL.md`.
+- **Correction d'auteur** : les 8 premières entrées frontend de ce journal indiquaient par erreur « Dimitri ». Elles indiquent maintenant « Omar ».
+- **`documentation/CLARIFICATIONS.md` mis à jour** :
+  - langues : ghomálá' et pidgin, à la place de « ewondo d'abord » ;
+  - nouvelle section « Choix de la langue » (détails ci-dessous) ;
+  - règle « jamais d'emoji, des icônes lucide » ajoutée à la charte ;
+  - libellés du menu de l'onglet décrits avec leurs icônes ;
+  - persona signalé à revoir (voir plus bas).
+
+### Démarche utilisée
+
+**Comment on choisit la langue** (décisions d'Omar) :
+
+- **Pas de langue par défaut.** Si Kama choisissait une langue d'office, une personne qui parle l'autre langue pourrait ne jamais comprendre qu'elle peut en changer. Kama lui parlerait alors dans une langue qu'elle ne comprend pas.
+- **La question apparaît là où la personne se trouve**, à 3 endroits :
+  1. la page de bienvenue ouverte à l'installation ;
+  2. le popup, l'icône Kama dans la barre de Chrome ;
+  3. l'onglet de bord dans la page de la banque.
+
+  Le 3ᵉ endroit est le plus important : Mama Ngono ne cliquera peut-être jamais sur l'icône de Chrome, mais elle verra l'onglet.
+- **Reconnaître sa langue sans avoir à lire** : chaque langue a un gros bouton et un bouton d'écoute qui dit son nom *dans la langue elle-même*, avec un indice de région simple :
+  - Ghomálá' — Ouest ;
+  - Pidgin — Nord-Ouest, Sud-Ouest.
+- **Pas d'option « Français »** dans la liste : Kama est fait pour les langues nationales. Pour fermer sans choisir, un bouton « Pas maintenant » (la question reviendra). Dans le popup, quand une langue est déjà choisie, « Ne rien changer » ferme la liste sans rien modifier.
+- **Orthographe** : on écrit « Ghomálá' », comme dans CLARIFICATIONS.md. La forme « Ghɔmálá' » contient la lettre ɔ, que la police DM Sans embarquée ne sait pas afficher.
+
+### Résultats et limites connues
+
+- La fusion des branches est prête. Omar fait lui-même le commit et l'envoi sur GitHub.
+- Les noms des langues lus à voix haute n'existent pas encore. Le bouton d'écoute affichera le badge « traduction à fournir » en attendant les enregistrements (règle d'or n° 4).
+
+### Ce que l'équipe doit faire ensuite
+
+- **Dimitri (pidgin) et le collaborateur ghomálá'** :
+  - faire enregistrer par un locuteur natif le nom de chaque langue, dit dans cette langue ;
+  - vérifier l'orthographe à afficher ;
+  - vérifier les indices de région.
+- **Toute l'équipe** : revoir le persona. « Mama Ngono » porte un nom plutôt beti/ewondo, alors que les langues sont maintenant le ghomálá' et le pidgin.
+- **Dimitri** : vérifier les deux retouches faites dans sa partie du journal pendant la fusion :
+  - l'en-tête dit maintenant « chaque membre consigne son travail » ;
+  - le modèle d'entrée dit « Auteur : Prénom ».
+
+### Composants tiers utilisés
+
+Aucun nouveau.
+
+
+## 2026-11-11 — Popup complet, lecture de la page, pastilles, « Montre-moi » et barre de sélection
+
+**Auteur :** Omar (réalisé par Claude Code en son absence, avec la consigne « prends les meilleures décisions »)
+
+### En bref
+
+Kama lit maintenant la **vraie page de test** et explique ce qu'elle affiche. Il pose des **pastilles** à côté du solde, des frais, du total, du bouton Confirmer et des erreurs. « **Montre-moi** » entoure l'élément en orange. Une **barre** apparaît quand on surligne un texte. Le **popup** a tous ses réglages, dont le choix de la langue.
+
+Les deux scénarios du hackathon fonctionnent sur le vrai site :
+- **Scénario 1** : la pastille des frais dit « Frais : 375 FCFA. … Au total, 25 375 FCFA vont sortir de ton compte. »
+- **Scénario 2** : pour un transfert refusé, Kama dit « Tu n'as pas assez d'argent pour ce transfert. Il te manque 50 000 FCFA. »
+
+### Ce qui a été implémenté, expliqué simplement
+
+**1. Popup complet** (`components/popup/Popup.tsx`), avec les 5 états de la maquette :
+- **premier lancement** : « Bienvenue ! Choisis ta langue », Ghomálá' (Ouest) ou Pidgin (Nord-Ouest, Sud-Ouest), et « Pas maintenant » ;
+- **activé** : Ma langue, Je préfère (Texte / Audio), Expliquer cette page ;
+- **liste des langues ouverte**, avec « Ne rien changer » ;
+- **désactivé** : tout est grisé, et Kama n'ajoute plus rien dans les pages ;
+- **page non reconnue** : « Kama ne reconnaît pas cette page… Si elle est déjà ouverte, recharge-la. »
+
+Les réglages sont mémorisés dans le navigateur (`lib/reglages.ts`) et s'appliquent **tout de suite** dans la page.
+
+**2. Choix de la langue aux 3 endroits décidés.** Le popup et l'onglet de la page sont faits ; la page de bienvenue est à faire. Si on clique sur une pastille avant d'avoir choisi, Kama demande la langue, puis affiche ce qui avait été demandé.
+
+**3. Lecture de la page** (`lib/lecture-page.ts`). La page n'a aucun repère technique, alors Kama la lit **par ses textes**.
+- Tous les libellés sont dans **un seul fichier**, `config/page-test.ts`, en français et en anglais (bouton EN de la page).
+- Kama reconnaît les 5 étapes du parcours (Solde, Frais, Bénéficiaire, Récapitulatif, Confirmation) et les 7 codes d'erreur de la banque.
+- Il relit la page dès qu'elle change, sans rechargement. C'est aussi ce qui lui permet de voir le texte que le jury ajoute.
+
+**4. Pastilles** (`components/Pastilles.tsx`) à côté de :
+- solde, montant, frais, total ;
+- bouton « Confirmer le transfert » ;
+- message d'erreur.
+
+Infobulle « Kama t'explique » au survol. Au clic, la fenêtre explique l'élément.
+
+**5. « Montre-moi »** (`components/Surlignage.tsx`) : la page défile jusqu'à l'élément, entouré d'un contour orange (2 pulsations puis fixe). Le contour disparaît au clic, avec Échap, après 8 s, ou si l'élément disparaît.
+
+**6. Barre de sélection** (`components/BarreSelection.tsx`) : [Expliquer] [Écouter] au-dessus du texte surligné.
+- Si le texte est un élément connu (ex. « Frais »), Kama l'explique.
+- Sinon, il affiche « Ce texte n'existe pas encore en Ghomálá' » et propose de l'écouter en français.
+
+**7. Vrais contenus de la fenêtre** (`components/kama/fenetre/reel.tsx`) : « Expliquer cette page » selon l'étape en cours, « Résumer mes transactions » à partir de la liste de la page, explication d'un élément, et erreur expliquée.
+
+**8. Préférence « Audio »** : la réponse est lue automatiquement à l'ouverture. Avec « Texte », on appuie sur ▶.
+
+**9. Catalogue** : il montre aussi les 5 états du popup, à côté des 12 états de la fenêtre (dont le nouveau « Choix de la langue »).
+
+### Démarche utilisée
+
+**Étude du site**
+- La page a été ouverte et parcourue automatiquement avec Chrome sans interface, pour relever les textes de chaque étape.
+- Le dictionnaire français/anglais des libellés et les 7 codes d'erreur ont été relevés dans le code public de la page. Le panneau réservé au jury n'a pas été utilisé.
+
+**Décisions prises (à valider par Omar)**
+
+1. **Sécurité des montants (règle d'or n° 1).**
+   - Un montant est recopié tel quel, y compris l'espace fine insécable de « 250 000 FCFA ».
+   - Il n'est rattaché à un libellé que si ce libellé est le plus proche avant lui. Sinon, le mot « Frais » de la barre d'étapes aurait pu récupérer le montant du solde.
+2. **Montant manquant calculé par Kama** (scénario 2) : total à débiter − solde disponible.
+   - Ce chiffre n'est pas écrit dans la page. Il est calculé par le code (jamais par un modèle de langue) et écrit dans le même format que la page.
+   - Si un des deux montants n'est pas un nombre entier clair, Kama n'affiche rien.
+   - Résultat identique au « Solde après opération » affiché par la banque (−52 500 FCFA → « Il te manque 52 500 FCFA »).
+3. **Badge « Pas encore traduit » sur tous les vrais contenus.** Les explications sont des gabarits en français (`config/gabarits.ts`), et le badge « Vérifié » est réservé au glossaire validé.
+4. **Résumé** : « Sur cette page : 2 entrées, 2 sorties » au lieu de « Ce mois-ci », car la page ne montre que les dernières opérations.
+5. **Les 7 erreurs de la banque ont chacune une explication franche** (ex. `SECURITY_002` : « Attention : tu n'as jamais envoyé d'argent à cette personne… Si tu as un doute, n'envoie pas l'argent »). Un code inconnu renvoie au message de la banque, sans rien inventer.
+6. **Données saisies jamais lues.** Ni la barre de sélection ni les pastilles ne lisent ce que l'utilisateur tape. Rien n'est stocké ni transmis.
+7. **Écarts avec les maquettes Lovable**, pour la simplicité et l'accessibilité :
+   - choix de la langue sur une colonne : il y a 2 langues, contre 6 dans la maquette ;
+   - pas de lien « Paramètres » dans le popup : aucun réglage n'est prévu derrière ;
+   - liste des langues ouverte dans le popup et non par-dessus, pour ne pas être coupée ;
+   - pas de bouton haut-parleur dans l'infobulle de la pastille : un bouton visible seulement au survol n'est pas utilisable au clavier.
+
+**Vérification**
+- **Test de lecture** sur tout le parcours réel. On injecte seulement le module de lecture et on affiche, à chaque étape, ce que Kama lit et ce qu'il dirait.
+- **Test visuel** avec l'extension chargée dans « Chrome for Testing » : 10 captures (onglet, choix de la langue, menu, expliquer, Montre-moi, pastilles, scénario 1, sélection, scénario 2, popup).
+- Deux défauts ont été trouvés et corrigés grâce à ces tests :
+  - libellé lu « Frais Gratuit » au lieu de « Frais » ;
+  - contour orange resté dans le coin de l'écran après un changement d'étape.
+
+### Résultats et limites connues
+
+- La compilation Chrome et Edge réussit, sans erreur TypeScript. La page ne produit aucune erreur pendant les tests automatiques.
+- **Pas encore fait** :
+  - page de bienvenue à l'installation ;
+  - micro (« Parler à Kama » affiche seulement « Pose ta question ») ;
+  - bouton « Réessayer » ;
+  - audios enregistrés ;
+  - textes en ghomálá' et en pidgin.
+- **Page en anglais (bouton EN)** : Kama reconnaît les éléments, mais ses explications restent en français, avec les libellés anglais de la page.
+- **Comportement de la page remarqué** : en « Autre banque », 249 000 FCFA plus 5 000 FCFA de frais font 254 000 FCFA, plus que le solde, et pourtant la page laisse continuer. Kama n'ajoute pas d'alerte de lui-même pour l'instant.
+- **À retirer avant le zip du jury** : la page catalogue et son lien dans le popup.
+
+### Ce que l'équipe doit faire ensuite
+
+| Qui | Quoi |
+|---|---|
+| Dimitri | Envoyer `Validation_pidgin_page_test.docx` aux locuteurs natifs, en commençant par les 6 mots non attestés |
+| Dimitri | Demander l'accès à Common Voice `wes` sur Mozilla Data Collective |
+| Dimitri | Écouter `evaluation/tts_ecoute/index.html` et remplir `notes.csv` |
+| Équipe | Trouver un locuteur camerounais prêt à enregistrer 1 à 2 heures, avec un accord écrit pour l'usage de sa voix |
+| Dimitri | Récupérer le modèle version 2 sur Colab et le comparer à la version 1 et à jamm55 |
+
+### Composants tiers utilisés
+
+| Composant | Licence | Usage |
+|---|---|---|
+| MMS-TTS pcm (Meta) | CC-BY-NC 4.0, non commercial | Voix de synthèse en pidgin, en test |
+| Helsinki-NLP opus-mt fr-en et en-fr | CC-BY 4.0 | Passage par l'anglais |
+| jamm55 autotrain pidgin | Licence non précisée | Base de notre modèle pidgin |
+| CTranslate2 | MIT | Exécution rapide des modèles sur processeur |
+| Google Colab | Service gratuit de Google | Entraînement sur GPU, hors dépôt |
+| MT560 anglais-pidgin camerounais | CC BY 4.0 | Données d'entraînement et dictionnaire |
+| Manuel Peace Corps 1983 (ERIC ED255041) | Document public | Dictionnaire, hors dépôt |
+| SOREVA (Goethe-Institut) | CC BY 4.0 | Test et dictionnaire |
+
+
+## 2026-11-11 — Kama ne calcule plus aucun montant
+
+**Auteur :** Omar
+
+### En bref
+
+Décision d'Omar : **Kama ne calcule rien**, même par le code. La phrase « Il te manque … » du scénario 2 est retirée.
+
+### Ce qui a été implémenté, expliqué simplement
+
+- Erreur « Solde insuffisant » : Kama montre le message de la banque et explique la cause (« Tu n'as pas assez d'argent pour ce transfert. ») avec le conseil. Il n'affiche plus de montant manquant.
+- Le calcul (`montantManquant`) est supprimé de `lib/lecture-page.ts`. La ligne « Il te manque » est retirée de la fenêtre et de l'exemple du catalogue.
+- `CLARIFICATIONS.md` est mis à jour :
+  - règle d'or n° 1 : « le code de Kama n'en calcule aucun (ni différence, ni somme) » ;
+  - critère du scénario 2 : sans montant manquant.
+
+### Démarche utilisée
+
+Le montant manquant n'est écrit nulle part sur la page. Même calculé par le code, il devient un chiffre produit par Kama, donc un risque. Omar a préféré s'en tenir à la règle stricte : **tout montant affiché par Kama est recopié de la page**.
+
+### Résultats et limites connues
+
+- La compilation et TypeScript passent.
+- Le scénario 2 explique la cause sans donner l'écart.
+
+### Ce que l'équipe doit faire ensuite
+
+| Qui | Quoi |
+|---|---|
+| Dimitri | Envoyer `KAMA_pidgin_stt_drive.zip` sur le Drive (`KAMA/Dataset/`) et lancer le notebook `entrainement_stt_colab.ipynb` |
+| Locuteur natif | Corriger `Validation_pidgin_phrases_kama.docx` (40 phrases) puis `Validation_pidgin_messages_inedits.docx` (30 messages) |
+| Locuteur natif | Valider les mots de nombres et les phrases d'intention |
+| Équipe | Décider d'ajouter 6 intentions (`ask_recipient`, `ask_amount`, `ask_delay`, `is_it_safe`, `help`, `stop`) : cela modifie le contrat avec l'extension |
+| Omar | Appliquer les phrases de Kama selon la langue choisie ; gérer la voix lente dans l'extension |
+| Équipe | Poser au comité les questions sur la licence de MMS-TTS et l'envoi d'audio ou de texte à un serveur |
+| Équipe | Trouver un locuteur pour enregistrer une voix humaine, avec un accord écrit |
+
+### Composants tiers utilisés
+
+| Composant | Licence | Usage |
+|---|---|---|
+| MMS-TTS pcm (Meta) | CC-BY-NC 4.0, non commercial | Voix de synthèse |
+| Omnilingual ASR CTC 300M | Apache 2.0 | Reconnaissance vocale |
+| KhayaAI w2v-bert-pcm, wav2vec2 pidgin | Apache 2.0 | Candidats à l'ajustement |
+| NITHUB marian BBC, Enutrof marian | Licence à vérifier | Essais, rejetés |
+| Common Voice wes 27.0 | CC0 (ne pas republier, ne pas identifier les locuteurs) | Entraînement et test de la reconnaissance, hors dépôt |
+| Corpus pidgin du web (presse, lexiques, Wikipédia pidgin) | Variables | Mesure du lexique, hors dépôt |
+| onnxruntime, PyTorch, transformers | MIT, BSD, Apache 2.0 | Moteurs de voix |
+
+Signé : Dimitri, 2026-11-11
+| Équipe langues | Ne pas prévoir de phrase « Il te manque {montant} » dans les traductions |
+
 
 ## 2026-11-11 — Pidgin : textes de la page, entraînement du modèle, dictionnaire et premiers pas vers la voix
 
@@ -1027,180 +1273,7 @@ Nous l'avons vu à trois indices : 19 849 exemples au lieu de 18 275, 4 minutes 
 - Versions non compressées de flagship : pas encore testées.
 
 Relancer `evaluation/run_gguf.py` et `evaluation/run_nmt.py` reprend là où ça s'est arrêté. Seule la compression de Turaco Gem repart de zéro.
-## 2026-11-11 — Branche `omar`, choix des langues et mise à jour de CLARIFICATIONS.md
 
-**Auteur :** Omar
-
-### En bref
-
-Le travail frontend est maintenant sur sa propre branche, `omar`, réunie avec le travail de l'équipe. Kama proposera deux langues, le **ghomálá'** et le **pidgin**, et **ne choisira jamais la langue à la place de l'utilisateur** : tant qu'elle n'est pas choisie, Kama la demande en premier.
-
-### Ce qui a été implémenté, expliqué simplement
-
-- **Branche `omar`** : c'est la copie de travail du frontend. On y a réuni le travail d'Omar et celui de l'équipe (données, modèles, évaluation, venus de la branche `dimitri`). Deux fichiers avaient été modifiés des deux côtés, et on a gardé les deux versions de chacun :
-  - `.gitignore` : la liste des fichiers que git ne doit pas enregistrer ;
-  - `JOURNAL.md`.
-- **Correction d'auteur** : les 8 premières entrées frontend de ce journal indiquaient par erreur « Dimitri ». Elles indiquent maintenant « Omar ».
-- **`documentation/CLARIFICATIONS.md` mis à jour** :
-  - langues : ghomálá' et pidgin, à la place de « ewondo d'abord » ;
-  - nouvelle section « Choix de la langue » (détails ci-dessous) ;
-  - règle « jamais d'emoji, des icônes lucide » ajoutée à la charte ;
-  - libellés du menu de l'onglet décrits avec leurs icônes ;
-  - persona signalé à revoir (voir plus bas).
-
-### Démarche utilisée
-
-**Comment on choisit la langue** (décisions d'Omar) :
-
-- **Pas de langue par défaut.** Si Kama choisissait une langue d'office, une personne qui parle l'autre langue pourrait ne jamais comprendre qu'elle peut en changer. Kama lui parlerait alors dans une langue qu'elle ne comprend pas.
-- **La question apparaît là où la personne se trouve**, à 3 endroits :
-  1. la page de bienvenue ouverte à l'installation ;
-  2. le popup, l'icône Kama dans la barre de Chrome ;
-  3. l'onglet de bord dans la page de la banque.
-
-  Le 3ᵉ endroit est le plus important : Mama Ngono ne cliquera peut-être jamais sur l'icône de Chrome, mais elle verra l'onglet.
-- **Reconnaître sa langue sans avoir à lire** : chaque langue a un gros bouton et un bouton d'écoute qui dit son nom *dans la langue elle-même*, avec un indice de région simple :
-  - Ghomálá' — Ouest ;
-  - Pidgin — Nord-Ouest, Sud-Ouest.
-- **Pas d'option « Français »** dans la liste : Kama est fait pour les langues nationales. Pour fermer sans choisir, un bouton « Pas maintenant » (la question reviendra). Dans le popup, quand une langue est déjà choisie, « Ne rien changer » ferme la liste sans rien modifier.
-- **Orthographe** : on écrit « Ghomálá' », comme dans CLARIFICATIONS.md. La forme « Ghɔmálá' » contient la lettre ɔ, que la police DM Sans embarquée ne sait pas afficher.
-
-### Résultats et limites connues
-
-- La fusion des branches est prête. Omar fait lui-même le commit et l'envoi sur GitHub.
-- Les noms des langues lus à voix haute n'existent pas encore. Le bouton d'écoute affichera le badge « traduction à fournir » en attendant les enregistrements (règle d'or n° 4).
-
-### Ce que l'équipe doit faire ensuite
-
-- **Dimitri (pidgin) et le collaborateur ghomálá'** :
-  - faire enregistrer par un locuteur natif le nom de chaque langue, dit dans cette langue ;
-  - vérifier l'orthographe à afficher ;
-  - vérifier les indices de région.
-- **Toute l'équipe** : revoir le persona. « Mama Ngono » porte un nom plutôt beti/ewondo, alors que les langues sont maintenant le ghomálá' et le pidgin.
-- **Dimitri** : vérifier les deux retouches faites dans sa partie du journal pendant la fusion :
-  - l'en-tête dit maintenant « chaque membre consigne son travail » ;
-  - le modèle d'entrée dit « Auteur : Prénom ».
-
-### Composants tiers utilisés
-
-Aucun nouveau.
-
-## 2026-11-11 — Popup complet, lecture de la page, pastilles, « Montre-moi » et barre de sélection
-
-**Auteur :** Omar (réalisé par Claude Code en son absence, avec la consigne « prends les meilleures décisions »)
-
-### En bref
-
-Kama lit maintenant la **vraie page de test** et explique ce qu'elle affiche. Il pose des **pastilles** à côté du solde, des frais, du total, du bouton Confirmer et des erreurs. « **Montre-moi** » entoure l'élément en orange. Une **barre** apparaît quand on surligne un texte. Le **popup** a tous ses réglages, dont le choix de la langue.
-
-Les deux scénarios du hackathon fonctionnent sur le vrai site :
-- **Scénario 1** : la pastille des frais dit « Frais : 375 FCFA. … Au total, 25 375 FCFA vont sortir de ton compte. »
-- **Scénario 2** : pour un transfert refusé, Kama dit « Tu n'as pas assez d'argent pour ce transfert. Il te manque 50 000 FCFA. »
-
-### Ce qui a été implémenté, expliqué simplement
-
-**1. Popup complet** (`components/popup/Popup.tsx`), avec les 5 états de la maquette :
-- **premier lancement** : « Bienvenue ! Choisis ta langue », Ghomálá' (Ouest) ou Pidgin (Nord-Ouest, Sud-Ouest), et « Pas maintenant » ;
-- **activé** : Ma langue, Je préfère (Texte / Audio), Expliquer cette page ;
-- **liste des langues ouverte**, avec « Ne rien changer » ;
-- **désactivé** : tout est grisé, et Kama n'ajoute plus rien dans les pages ;
-- **page non reconnue** : « Kama ne reconnaît pas cette page… Si elle est déjà ouverte, recharge-la. »
-
-Les réglages sont mémorisés dans le navigateur (`lib/reglages.ts`) et s'appliquent **tout de suite** dans la page.
-
-**2. Choix de la langue aux 3 endroits décidés.** Le popup et l'onglet de la page sont faits ; la page de bienvenue est à faire. Si on clique sur une pastille avant d'avoir choisi, Kama demande la langue, puis affiche ce qui avait été demandé.
-
-**3. Lecture de la page** (`lib/lecture-page.ts`). La page n'a aucun repère technique, alors Kama la lit **par ses textes**.
-- Tous les libellés sont dans **un seul fichier**, `config/page-test.ts`, en français et en anglais (bouton EN de la page).
-- Kama reconnaît les 5 étapes du parcours (Solde, Frais, Bénéficiaire, Récapitulatif, Confirmation) et les 7 codes d'erreur de la banque.
-- Il relit la page dès qu'elle change, sans rechargement. C'est aussi ce qui lui permet de voir le texte que le jury ajoute.
-
-**4. Pastilles** (`components/Pastilles.tsx`) à côté de :
-- solde, montant, frais, total ;
-- bouton « Confirmer le transfert » ;
-- message d'erreur.
-
-Infobulle « Kama t'explique » au survol. Au clic, la fenêtre explique l'élément.
-
-**5. « Montre-moi »** (`components/Surlignage.tsx`) : la page défile jusqu'à l'élément, entouré d'un contour orange (2 pulsations puis fixe). Le contour disparaît au clic, avec Échap, après 8 s, ou si l'élément disparaît.
-
-**6. Barre de sélection** (`components/BarreSelection.tsx`) : [Expliquer] [Écouter] au-dessus du texte surligné.
-- Si le texte est un élément connu (ex. « Frais »), Kama l'explique.
-- Sinon, il affiche « Ce texte n'existe pas encore en Ghomálá' » et propose de l'écouter en français.
-
-**7. Vrais contenus de la fenêtre** (`components/kama/fenetre/reel.tsx`) : « Expliquer cette page » selon l'étape en cours, « Résumer mes transactions » à partir de la liste de la page, explication d'un élément, et erreur expliquée.
-
-**8. Préférence « Audio »** : la réponse est lue automatiquement à l'ouverture. Avec « Texte », on appuie sur ▶.
-
-**9. Catalogue** : il montre aussi les 5 états du popup, à côté des 12 états de la fenêtre (dont le nouveau « Choix de la langue »).
-
-### Démarche utilisée
-
-**Étude du site**
-- La page a été ouverte et parcourue automatiquement avec Chrome sans interface, pour relever les textes de chaque étape.
-- Le dictionnaire français/anglais des libellés et les 7 codes d'erreur ont été relevés dans le code public de la page. Le panneau réservé au jury n'a pas été utilisé.
-
-**Décisions prises (à valider par Omar)**
-
-1. **Sécurité des montants (règle d'or n° 1).**
-   - Un montant est recopié tel quel, y compris l'espace fine insécable de « 250 000 FCFA ».
-   - Il n'est rattaché à un libellé que si ce libellé est le plus proche avant lui. Sinon, le mot « Frais » de la barre d'étapes aurait pu récupérer le montant du solde.
-2. **Montant manquant calculé par Kama** (scénario 2) : total à débiter − solde disponible.
-   - Ce chiffre n'est pas écrit dans la page. Il est calculé par le code (jamais par un modèle de langue) et écrit dans le même format que la page.
-   - Si un des deux montants n'est pas un nombre entier clair, Kama n'affiche rien.
-   - Résultat identique au « Solde après opération » affiché par la banque (−52 500 FCFA → « Il te manque 52 500 FCFA »).
-3. **Badge « Pas encore traduit » sur tous les vrais contenus.** Les explications sont des gabarits en français (`config/gabarits.ts`), et le badge « Vérifié » est réservé au glossaire validé.
-4. **Résumé** : « Sur cette page : 2 entrées, 2 sorties » au lieu de « Ce mois-ci », car la page ne montre que les dernières opérations.
-5. **Les 7 erreurs de la banque ont chacune une explication franche** (ex. `SECURITY_002` : « Attention : tu n'as jamais envoyé d'argent à cette personne… Si tu as un doute, n'envoie pas l'argent »). Un code inconnu renvoie au message de la banque, sans rien inventer.
-6. **Données saisies jamais lues.** Ni la barre de sélection ni les pastilles ne lisent ce que l'utilisateur tape. Rien n'est stocké ni transmis.
-7. **Écarts avec les maquettes Lovable**, pour la simplicité et l'accessibilité :
-   - choix de la langue sur une colonne : il y a 2 langues, contre 6 dans la maquette ;
-   - pas de lien « Paramètres » dans le popup : aucun réglage n'est prévu derrière ;
-   - liste des langues ouverte dans le popup et non par-dessus, pour ne pas être coupée ;
-   - pas de bouton haut-parleur dans l'infobulle de la pastille : un bouton visible seulement au survol n'est pas utilisable au clavier.
-
-**Vérification**
-- **Test de lecture** sur tout le parcours réel. On injecte seulement le module de lecture et on affiche, à chaque étape, ce que Kama lit et ce qu'il dirait.
-- **Test visuel** avec l'extension chargée dans « Chrome for Testing » : 10 captures (onglet, choix de la langue, menu, expliquer, Montre-moi, pastilles, scénario 1, sélection, scénario 2, popup).
-- Deux défauts ont été trouvés et corrigés grâce à ces tests :
-  - libellé lu « Frais Gratuit » au lieu de « Frais » ;
-  - contour orange resté dans le coin de l'écran après un changement d'étape.
-
-### Résultats et limites connues
-
-- La compilation Chrome et Edge réussit, sans erreur TypeScript. La page ne produit aucune erreur pendant les tests automatiques.
-- **Pas encore fait** :
-  - page de bienvenue à l'installation ;
-  - micro (« Parler à Kama » affiche seulement « Pose ta question ») ;
-  - bouton « Réessayer » ;
-  - audios enregistrés ;
-  - textes en ghomálá' et en pidgin.
-- **Page en anglais (bouton EN)** : Kama reconnaît les éléments, mais ses explications restent en français, avec les libellés anglais de la page.
-- **Comportement de la page remarqué** : en « Autre banque », 249 000 FCFA plus 5 000 FCFA de frais font 254 000 FCFA, plus que le solde, et pourtant la page laisse continuer. Kama n'ajoute pas d'alerte de lui-même pour l'instant.
-- **À retirer avant le zip du jury** : la page catalogue et son lien dans le popup.
-
-### Ce que l'équipe doit faire ensuite
-
-| Qui | Quoi |
-|---|---|
-| Dimitri | Envoyer `Validation_pidgin_page_test.docx` aux locuteurs natifs, en commençant par les 6 mots non attestés |
-| Dimitri | Demander l'accès à Common Voice `wes` sur Mozilla Data Collective |
-| Dimitri | Écouter `evaluation/tts_ecoute/index.html` et remplir `notes.csv` |
-| Équipe | Trouver un locuteur camerounais prêt à enregistrer 1 à 2 heures, avec un accord écrit pour l'usage de sa voix |
-| Dimitri | Récupérer le modèle version 2 sur Colab et le comparer à la version 1 et à jamm55 |
-
-### Composants tiers utilisés
-
-| Composant | Licence | Usage |
-|---|---|---|
-| MMS-TTS pcm (Meta) | CC-BY-NC 4.0, non commercial | Voix de synthèse en pidgin, en test |
-| Helsinki-NLP opus-mt fr-en et en-fr | CC-BY 4.0 | Passage par l'anglais |
-| jamm55 autotrain pidgin | Licence non précisée | Base de notre modèle pidgin |
-| CTranslate2 | MIT | Exécution rapide des modèles sur processeur |
-| Google Colab | Service gratuit de Google | Entraînement sur GPU, hors dépôt |
-| MT560 anglais-pidgin camerounais | CC BY 4.0 | Données d'entraînement et dictionnaire |
-| Manuel Peace Corps 1983 (ERIC ED255041) | Document public | Dictionnaire, hors dépôt |
-| SOREVA (Goethe-Institut) | CC BY 4.0 | Test et dictionnaire |
 
 ## 2026-11-11 — Bilan des trois modèles pidgin : traduction, voix, reconnaissance, et phrases de Kama
 
@@ -1292,58 +1365,6 @@ Omnilingual reste branché (désactivé dans `routes.json`).
 | Chrome for Testing (Google) | Navigateur de test qui accepte une extension chargée par script (non livré) | Conditions de Google / Chromium (BSD) |
 | WXT `storage` | Mémorisation des réglages (déjà inclus dans WXT) | MIT |
 
-## 2026-11-11 — Kama ne calcule plus aucun montant
-
-**Auteur :** Omar
-
-### En bref
-
-Décision d'Omar : **Kama ne calcule rien**, même par le code. La phrase « Il te manque … » du scénario 2 est retirée.
-
-### Ce qui a été implémenté, expliqué simplement
-
-- Erreur « Solde insuffisant » : Kama montre le message de la banque et explique la cause (« Tu n'as pas assez d'argent pour ce transfert. ») avec le conseil. Il n'affiche plus de montant manquant.
-- Le calcul (`montantManquant`) est supprimé de `lib/lecture-page.ts`. La ligne « Il te manque » est retirée de la fenêtre et de l'exemple du catalogue.
-- `CLARIFICATIONS.md` est mis à jour :
-  - règle d'or n° 1 : « le code de Kama n'en calcule aucun (ni différence, ni somme) » ;
-  - critère du scénario 2 : sans montant manquant.
-
-### Démarche utilisée
-
-Le montant manquant n'est écrit nulle part sur la page. Même calculé par le code, il devient un chiffre produit par Kama, donc un risque. Omar a préféré s'en tenir à la règle stricte : **tout montant affiché par Kama est recopié de la page**.
-
-### Résultats et limites connues
-
-- La compilation et TypeScript passent.
-- Le scénario 2 explique la cause sans donner l'écart.
-
-### Ce que l'équipe doit faire ensuite
-
-| Qui | Quoi |
-|---|---|
-| Dimitri | Envoyer `KAMA_pidgin_stt_drive.zip` sur le Drive (`KAMA/Dataset/`) et lancer le notebook `entrainement_stt_colab.ipynb` |
-| Locuteur natif | Corriger `Validation_pidgin_phrases_kama.docx` (40 phrases) puis `Validation_pidgin_messages_inedits.docx` (30 messages) |
-| Locuteur natif | Valider les mots de nombres et les phrases d'intention |
-| Équipe | Décider d'ajouter 6 intentions (`ask_recipient`, `ask_amount`, `ask_delay`, `is_it_safe`, `help`, `stop`) : cela modifie le contrat avec l'extension |
-| Omar | Appliquer les phrases de Kama selon la langue choisie ; gérer la voix lente dans l'extension |
-| Équipe | Poser au comité les questions sur la licence de MMS-TTS et l'envoi d'audio ou de texte à un serveur |
-| Équipe | Trouver un locuteur pour enregistrer une voix humaine, avec un accord écrit |
-
-### Composants tiers utilisés
-
-| Composant | Licence | Usage |
-|---|---|---|
-| MMS-TTS pcm (Meta) | CC-BY-NC 4.0, non commercial | Voix de synthèse |
-| Omnilingual ASR CTC 300M | Apache 2.0 | Reconnaissance vocale |
-| KhayaAI w2v-bert-pcm, wav2vec2 pidgin | Apache 2.0 | Candidats à l'ajustement |
-| NITHUB marian BBC, Enutrof marian | Licence à vérifier | Essais, rejetés |
-| Common Voice wes 27.0 | CC0 (ne pas republier, ne pas identifier les locuteurs) | Entraînement et test de la reconnaissance, hors dépôt |
-| Corpus pidgin du web (presse, lexiques, Wikipédia pidgin) | Variables | Mesure du lexique, hors dépôt |
-| onnxruntime, PyTorch, transformers | MIT, BSD, Apache 2.0 | Moteurs de voix |
-
-Signé : Dimitri, 2026-11-11
-| Équipe langues | Ne pas prévoir de phrase « Il te manque {montant} » dans les traductions |
-
 
 ## 2026-11-11 — Intégration complète : l'extension parle au serveur
 
@@ -1433,6 +1454,122 @@ Signé : Dimitri, 2026-11-11
 Signé : Dimitri, 2026-11-11
 
 
+## 2026-11-11 — Contenu inédit : montants, alertes et messages inconnus, écran inconnu, test avec le panneau du jury
+
+**Auteur :** Omar
+
+### En bref
+
+Kama ne s'appuie plus seulement sur sa liste de libellés. Il repère tout seul :
+- les **montants** qu'il ne connaît pas ;
+- les **messages d'alerte** ;
+- les **textes ajoutés** dans la page après son affichage.
+
+Sur un **écran qu'il ne connaît pas**, « Expliquer cette page » dit ce qu'il voit. Le tout a été testé avec le **panneau du jury** de la page de test.
+
+### Ce qui a été implémenté, expliqué simplement
+
+**A. Montants inconnus** (`lib/lecture-page.ts`)
+- Tout montant affiché reçoit une pastille, avec le texte écrit juste avant lui. Exemple : « Solde après opération : −52 500 FCFA ».
+- Le montant et le texte sont **recopiés tels quels**, et Kama dit qu'il ne connaît pas encore cette information (`gabaritMontantInconnu` dans `config/gabarits.ts`).
+- Kama reconnaît aussi les autres écritures du franc CFA : « F CFA », « XAF », devise devant ou derrière.
+- Ne reçoivent pas de pastille :
+  - les montants déjà expliqués ;
+  - un montant répété sous un libellé connu, comme le solde rappelé sur le côté de la page ;
+  - les montants des transactions ;
+  - ceux des listes et tableaux, à partir de 3 montants au même endroit.
+
+**B. Alertes et nouveaux messages**
+- Une **alerte inconnue** est repérée par un rôle d'alerte (accessibilité), un code de type `XXX_000` ou un premier mot d'alerte (« Attention », « Alerte », « Erreur »…). Kama affiche le message de la banque tel quel, avec une explication franche.
+- Un **nouveau message**, c'est un texte apparu sur un écran déjà affiché.
+  - Kama retient en mémoire les textes de l'écran ; rien n'est stocké.
+  - Le message garde sa pastille même si on change d'étape.
+  - Un texte qui change à un endroit déjà affiché, comme la phrase des frais, est une mise à jour et non un nouveau message.
+  - Un grand changement d'un coup, comme un nouvel écran ou la page passée en anglais, remet la mémoire à zéro.
+- « Expliquer cette page » ajoute une étape « Un nouveau message est apparu… » avec « Montre-moi ».
+
+**C. Écran inconnu** : « Kama ne connaît pas encore cette page. Voici ce qu'il y voit. » Suivent le titre, les messages, les montants (recopiés) et les boutons (« C'est toi qui décides d'appuyer »), chacun avec « Montre-moi ».
+
+**E. Test avec le panneau du jury** (`?jury=1`) : injection d'un texte, puis déclenchement des 3 erreurs du panneau.
+
+### Démarche utilisée
+
+- **Lecture du code public** du panneau du jury (« Outil interne Safinum — non fourni aux équipes ») pour savoir ce qu'il permet :
+  - injecter un texte ;
+  - déclencher 3 erreurs ;
+  - changer le montant, les frais et le bénéficiaire ;
+  - vérifier les valeurs affichées et soumises ;
+  - mesurer une **couverture**.
+- **Tests automatiques** sur le vrai site : lecture seule à chaque étape, puis extension chargée dans Chrome for Testing (captures 11 à 16).
+- **Défauts trouvés et corrigés grâce aux tests** :
+  1. le solde, affiché deux fois, avait deux pastilles ;
+  2. la phrase des frais, qui change avec le type d'envoi, était prise pour un nouveau message ;
+  3. le texte injecté était compté deux fois, car le panneau du jury le recopie ;
+  4. les **boutons** « Alerte de sécurité » du panneau du jury étaient pris pour des alertes de la banque.
+
+### Résultats et limites connues
+
+- Le texte injecté par le jury est détecté sans rechargement et reçoit sa pastille. La page l'affiche sous le titre « Message important », que Kama connaît déjà.
+- Les 3 erreurs du panneau (AMOUNT_002, SECURITY_002, NETWORK_001) sont reconnues avec leur code.
+- Les scénarios 1 et 2 passent toujours ; la page ne produit aucune erreur.
+- **Limites** :
+  - Kama **ne traduit pas** le texte inédit. Il le montre et propose de l'écouter en français, faute de traduction validée (règle d'or n° 4).
+  - Un texte injecté **avant** l'arrivée de Kama est vu comme faisant partie de la page.
+- **Constat important.** La « couverture » du jury mesure le **pourcentage de textes de la page qui ont été remplacés**. On mémorise les textes, on charge l'extension, puis on compte ceux qui ont changé. Le guide demande aussi que l'extension « analyse et traduise la page telle qu'elle est ».
+  - Kama, qui explique dans sa propre fenêtre sans toucher à la page (règle d'or n° 3), obtiendrait 0 % à cette mesure.
+  - Décision à prendre par l'équipe (voir ci-dessous).
+
+### Ce que l'équipe doit faire ensuite
+
+| Qui | Quoi |
+|---|---|
+| Équipe | Décider si Kama doit aussi traduire la page directement (mesure de couverture du jury), ce qui change la règle d'or n° 3 |
+| Équipe langues | Si oui : traduire et faire valider la liste fermée des textes de la page en ghomálá' et en pidgin |
+| Dimitri | Pour le texte inédit : traduire sans transmettre les données affichées (protocole), par exemple avec le masquage déjà prévu côté serveur |
+
+### Composants tiers utilisés
+
+Aucun nouveau composant.
+
+
+## 2026-11-11 — Approche « assistant » confirmée par le règlement
+
+**Auteur :** Omar
+
+### En bref
+
+Le **règlement du défi** laisse libre l'approche technique : « une extension de navigateur, un composant logiciel indépendant, un assistant vocal ou toute autre solution pertinente ». Il demande de rendre les contenus **compréhensibles** dans une langue nationale, pas de remplacer le texte de la page.
+
+L'approche de Kama est donc conforme : il explique dans sa fenêtre, en audio d'abord, sans toucher à la page. La règle d'or n° 3 est maintenue. La mesure de « couverture » du panneau du jury n'est pas un critère du règlement.
+
+### Ce qui a été implémenté, expliqué simplement
+
+Rien. Il s'agit d'une décision, prise à partir du texte du règlement.
+
+### Démarche utilisée
+
+Les 5 fonctionnalités minimales du règlement ont été comparées à l'état actuel de Kama :
+
+| Fonctionnalité du règlement | État |
+|---|---|
+| 1. Adaptation linguistique des principaux textes, instructions et messages | **Manque l'essentiel** : explications prêtes, mais encore en français (badge « Pas encore traduit ») |
+| 2. Prise en charge d'un parcours (solde, frais, transfert) | Fait : « Expliquer cette page », « Montre-moi », pastilles |
+| 3. Préservation des montants, frais, bénéficiaires, avertissements | Fait : tout est recopié tel quel, Kama ne calcule rien |
+| 4. Fonctionnement sans modifier le code du service | Fait : reconnaissance par le texte, page non modifiée |
+| 5. Traiter un nouveau message pendant la démonstration | **À moitié** : détecté et montré, mais pas encore rendu dans la langue nationale |
+
+### Résultats et limites connues
+
+Les deux manques (1 et 5) dépendent des **textes en langue nationale**, pas du frontend.
+
+### Ce que l'équipe doit faire ensuite
+
+| Qui | Quoi |
+|---|---|
+| Équipe langues | Priorité n° 1 : traduire et faire valider les gabarits (`config/gabarits.ts`), les explications d'étapes et d'erreurs (`config/page-test.ts`) en ghomálá' et en pidgin, et enregistrer les audios |
+| Dimitri | Priorité n° 2 : traduction en direct d'un message inédit (badge « Traduction automatique »), sans transmettre les données affichées : masquage des montants, noms et numéros avant l'envoi |
+
+
 ## 2026-11-12 — Kama entièrement en pidgin, comparaison des modèles de traduction, entraînements Colab corrigés
 
 ### En bref
@@ -1515,3 +1652,188 @@ Les chiffres automatiques avantagent la v2, mais à la lecture, la v2 fait des c
 - Aucune nouvelle dépendance dans l'extension ni dans le serveur.
 
 Signé : Dimitri, 2026-11-12
+
+
+## 2026-11-12 — Assistant « Parler à Kama » : micro, accord de l'utilisateur, envoi au serveur (mode simulation)
+
+**Auteur :** Omar
+
+### En bref
+
+« Parler à Kama » fonctionne de bout en bout, **jusqu'à la compréhension de la question** :
+- au premier appui, Kama demande l'accord de l'utilisateur ;
+- il écoute, puis s'arrête tout seul quand la personne se tait ;
+- il prépare la voix au format exigé par le serveur et l'envoie par le service worker ;
+- il affiche la conversation.
+
+Le serveur n'étant pas encore en ligne, le service worker répond en **mode simulation**. Les réponses aux questions ne sont pas encore faites : décision d'Omar, « ce n'est pas encore le moment ».
+
+### Ce qui a été implémenté, expliqué simplement
+
+- **Enregistrement** (`lib/enregistreur.ts`) : WAV PCM 16 bits, 16 kHz, mono, comme le demande `backend/ARCHITECTURE.md`.
+  - Écoute de 30 s au plus.
+  - Arrêt automatique après 1,6 s de silence une fois que la personne a parlé, ou à l'appui sur le bouton.
+  - Moins de 0,5 s, ou aucun son : « Je n'ai rien entendu ».
+  - La voix reste en mémoire et le micro est coupé dès la fin.
+- **Barres « Je t'écoute »** : elles suivent le vrai niveau du micro. Ce n'est pas une animation en boucle.
+- **Accord au premier appui** (décision d'Omar) :
+  - message « Ta voix est envoyée à Kama pour comprendre ta question. Elle n'est pas gardée. », avec [D'accord] [Non merci] ;
+  - seule l'acceptation est retenue (`kama.consentementMicro`) ; après « Non merci », la question revient au prochain appui.
+- **Envoi** (`lib/messages.ts`, `entrypoints/background.ts`) :
+  - la page transmet la voix au service worker, seul autorisé à appeler le serveur ;
+  - le service worker appelle `POST /v1/voice/intent` avec l'en-tête `X-Kama-Lang` (`bbj` ou `wes`), avec une limite de 15 s.
+- **Adresse du serveur** (`config/serveur.ts`) : `SERVEUR_KAMA = null` tant qu'il n'est pas hébergé, ce qui active le mode simulation. Quand on écrira l'adresse, l'autorisation réseau sera ajoutée toute seule au manifest pour ce seul serveur.
+- **Conversation** (`components/Assistant.tsx`) :
+  - bulle « Message vocal · 3 s » (le serveur ne renvoie pas le texte de la question, seulement l'intention) ;
+  - « Kama réfléchit », puis la réponse ;
+  - la conversation est effacée à la fermeture de la fenêtre.
+- **Bouton micro** : il marche depuis n'importe quel contenu de la fenêtre et passe alors à « Parler à Kama ».
+- **Messages d'erreur simples**, avec « Réessayer » quand c'est utile :
+  - micro refusé (« Clique sur l'icône du micro dans la barre d'adresse… ») ;
+  - pas de micro ;
+  - pas de réseau ;
+  - serveur occupé ;
+  - trop de questions ;
+  - voix non comprise ;
+  - voix pas encore prise en charge par le serveur (`asr_unavailable`) ;
+  - extension mise à jour.
+
+### Démarche utilisée
+
+- **Lecture du travail du back** (`backend/ARCHITECTURE.md`, `contracts/openapi.json`, `content-data/intents.json`). Le serveur ne fait pas de discussion libre : il reconnaît la question et renvoie une **intention** (7 aujourd'hui). La réponse se construit dans l'extension, avec les montants lus dans la page.
+- **Discussion avec Omar** :
+  - pas de boutons de questions toutes prêtes : on reste sur le micro, comme dans la maquette Lovable ;
+  - le contenu des réponses sera traité plus tard.
+- **Test automatique** dans Chrome for Testing, avec un **faux micro** (son de 1,5 s suivi d'un silence) :
+  - accord → écoute → arrêt automatique → envoi → réponse simulée, sans erreur dans la page (captures 17 à 19) ;
+  - le son réellement envoyé par l'extension a été récupéré dans le service worker, puis passé aux contrôles du serveur (bibliothèque `wave`) : mono, 16 bits, 16 kHz, 3,46 s. Il serait donc accepté.
+
+### Résultats et limites connues
+
+- Les compilations Chrome et Edge réussissent, sans erreur TypeScript.
+- **Autorisation du micro** : le navigateur la demande au nom du site visité (« safinum.cm veut utiliser votre micro »), car l'écoute se fait dans la page. C'est la solution la plus simple, et elle a été testée. L'alternative (document caché de l'extension, « offscreen ») afficherait « Kama », mais demande une page d'autorisation en plus.
+- **Pas encore fait** : les réponses aux intentions, et la relecture des réponses en ghomálá' / pidgin (audios à venir).
+- **Mode simulation** : toute question reçoit « J'ai bien reçu ta question… le serveur n'est pas encore branché ».
+
+### Ce que l'équipe doit faire ensuite
+
+| Qui | Quoi |
+|---|---|
+| Dimitri | Héberger le serveur et donner son adresse HTTPS (à écrire dans `config/serveur.ts`) ; brancher le moteur de voix de `/v1/voice/intent` |
+| Dimitri | Mettre à jour `backend/ARCHITECTURE.md` : « Il te manque 3 000 FCFA » n'est plus calculé (décision du 2026-11-11) |
+| Omar (livraison) | Fixer la `key` du manifest, pour que l'identifiant de l'extension soit le même chez le jury et autorisé par le serveur (`KAMA_ALLOWED_ORIGINS`) |
+| Omar et l'équipe | Décider plus tard des réponses de l'assistant (intentions à ajouter, textes à valider) |
+
+### Composants tiers utilisés
+
+| Composant | Usage | Licence |
+|---|---|---|
+| `@puppeteer/browsers` | Réinstallation de Chrome for Testing pour les tests (outil de test, non livré) | Apache 2.0 |
+
+
+## 2026-11-12 — Le micro appartient à Kama, plus au site de la banque ; page de bienvenue
+
+**Auteur :** Omar
+
+### En bref
+
+Décision d'Omar : « c'est à Kama que l'on parle, pas au site de Safinum ».
+- Le micro est maintenant ouvert dans un **document caché de l'extension**, et plus dans la page de la banque.
+- Chrome demande donc « **Kama** souhaite utiliser votre micro », et la banque n'a **jamais** accès au micro.
+- L'autorisation se donne une fois, sur la nouvelle **page de bienvenue**, qui s'ouvre toute seule à l'installation.
+
+### Ce qui a été implémenté, expliqué simplement
+
+- **Document caché « micro »** (`entrypoints/micro/`, permission `offscreen`, sans avertissement à l'installation). C'est lui qui enregistre la voix, avec le même module qu'avant (`lib/enregistreur.ts`).
+- **Circulation** (`lib/messages.ts`, `lib/micro.ts`, `entrypoints/background.ts`) :
+  - la page demande « écoute » au service worker par un canal dédié ;
+  - le service worker fait écouter le document caché, renvoie à la page seulement le niveau du son et la durée, puis envoie la voix au serveur ;
+  - **la voix ne passe jamais par la page de la banque** ;
+  - fermer la fenêtre Kama coupe le micro et efface la voix.
+- **Page de bienvenue** (`entrypoints/bienvenue/`, `components/bienvenue/Bienvenue.tsx`), ouverte à l'installation. Elle confirme l'installation, puis donne 4 étapes :
+  1. épingler l'icône (pièce de puzzle, puis épingle) ;
+  2. choisir sa langue : c'est le 3e endroit prévu, et il n'y a pas de langue par défaut ;
+  3. autoriser le micro, avec le texte d'accord sur l'envoi de la voix (un clic sur « Autoriser » vaut aussi cet accord) ;
+  4. ouvrir la page de la banque.
+- **Micro pas encore autorisé** : la fenêtre dit « Kama n'a pas encore le droit d'utiliser le micro » et propose « Autoriser le micro », qui ouvre la page de bienvenue directement sur l'étape 3 (`bienvenue.html#micro`).
+
+### Démarche utilisée
+
+- Il n'existe pas de maquette Lovable pour la page de bienvenue (seul l'écran de langue du popup existe). Elle reprend la charte et les éléments de Kama : gros boutons de langue de 56 px, bouton d'écoute, badge, icônes lucide.
+- **Tests automatiques** dans Chrome for Testing :
+  - la page de bienvenue s'ouvre à l'installation ;
+  - choix de la langue → autorisation → écoute par le document caché → réponse simulée, sans erreur ;
+  - **avec refus du micro**, Kama propose « Autoriser le micro », qui ouvre la bonne étape ;
+  - **la page de la banque n'obtient jamais l'accès au micro** : son état reste « prompt », jamais « granted ».
+- **Défaut trouvé et corrigé** : Chrome réduit d'office le texte des pages d'extension à 75 % (12 px). La page de bienvenue fixe sa propre taille (16 px).
+
+### Résultats et limites connues
+
+- Compilation Chrome et Edge réussie, sans erreur TypeScript.
+- **Firefox** ne connaît pas les documents cachés (`offscreen`). Il faudra une autre solution le jour où on fera Firefox.
+- Si le micro était déjà autorisé avant l'installation (réinstallation), l'accord sur l'envoi de la voix est redemandé dans la fenêtre au premier appui.
+
+### Ce que l'équipe doit faire ensuite
+
+| Qui | Quoi |
+|---|---|
+| Omar | Tester dans un vrai Chrome : retirer Kama, puis le recharger pour voir la page de bienvenue et la demande « Kama souhaite utiliser votre micro » |
+
+
+## 2026-11-12 — 1 banque = 1 fichier, banque fictive « Banque Démo », version jury
+
+**Auteur :** Omar (réalisé par Claude Code en son absence, avec la consigne « prends les meilleures décisions » ; les points sensibles sont laissés à sa décision)
+
+### En bref
+
+Suite aux demandes de Dimitri :
+- Kama décrit chaque banque dans **son propre fichier** ;
+- une **2e banque, fictive**, prouve qu'il s'adapte à une autre page sans changer son code ;
+- une **version jury** de l'extension est produite pour Chrome et Edge, sans les pages locales de l'équipe ni le catalogue.
+
+### Ce qui a été implémenté, expliqué simplement
+
+- **`config/banques/`** remplace `config/page-test.ts` :
+  - `types.ts` : ce qu'il faut décrire pour une banque ;
+  - `safinum.ts` : la page des organisateurs, contenu inchangé ;
+  - `demo.ts` : la banque fictive ;
+  - `index.ts` : la liste des banques, et le choix de la banque selon l'adresse de la page.
+- Les explications restent écrites **une seule fois, par rôle** (solde, frais, total…). Chaque banque dit seulement quels textes de **sa** page jouent ces rôles.
+- Les erreurs sans code sont reconnues par leur message, avec une règle propre à chaque banque (`erreursParMessage`).
+- **Banque inconnue** (adresse sans fichier) : Kama fonctionne quand même. Il repère seul les montants, les alertes et les nouveaux messages, et décrit l'écran.
+- **Banque Démo** (`kama_frontend/banque-demo/index.html`, lancée avec `npm run banque-demo`, sur http://localhost:5180). Elle est volontairement différente de Safinum :
+  - autres mots : « Commission », « Montant total prélevé », « Valider le virement », « Opération refusée / Provision insuffisante » ;
+  - montants écrits « 25.500 XAF » ;
+  - autre mise en page ;
+  - un bouton de démonstration affiche un nouveau message de la banque ;
+  - aucune donnée réelle.
+- **Version jury** (`npm run build:jury`) → `.output/chrome-mv3-jury` et `.output/edge-mv3-jury`. Elle ne contient ni `localhost`, ni la Banque Démo, ni le catalogue des états (ni la page, ni son lien dans le popup). Vérifié dans les fichiers produits.
+- **Correction** : « 1 entrées » devient « 1 entrée » dans le résumé des transactions.
+
+### Démarche utilisée
+
+- **Tests** :
+  - **Safinum**, tout le parcours et le scénario 2 : rien ne change ;
+  - **Banque Démo** avec l'extension chargée :
+    - pastilles sur Solde du compte, Montant du virement, Commission, Montant total prélevé et Valider le virement ;
+    - « Expliquer cette page » et « Montre-moi » ;
+    - Commission : « Commission : 500 XAF… Au total, 25.500 XAF » (montants recopiés tels quels) ;
+    - refus « Provision insuffisante » reconnu et expliqué ;
+    - nouveau message détecté ;
+    - résumé des 3 opérations ;
+    - aucune erreur dans la page.
+- **Vérification** : le frontend n'envoie aujourd'hui **aucun texte** au serveur. Seule la voix part, et seulement si l'adresse du serveur est configurée. Le masquage ne sera nécessaire qu'au moment de brancher la traduction.
+
+### Résultats et limites connues
+
+- Quatre compilations réussies, sans erreur TypeScript : Chrome, Edge, Chrome jury, Edge jury.
+- **Firefox n'est pas fait.** Il ne connaît pas le document caché qui sert au micro.
+- **Laissés à la décision d'Omar** : explications quand la page est en anglais ; traduction des libellés des transactions ; masquage des informations sensibles avant traduction ; Firefox.
+
+### Ce que l'équipe doit faire ensuite
+
+| Qui | Quoi |
+|---|---|
+| Omar | Décider des 4 points ci-dessus |
+| Omar | Essayer la Banque Démo : `npm run banque-demo` dans `kama_frontend`, puis http://localhost:5180 avec l'extension de développement (`.output/chrome-mv3`) |
+| Équipe | Pour ajouter une banque : copier `config/banques/demo.ts`, remplacer les libellés, l'inscrire dans `config/banques/index.ts` |

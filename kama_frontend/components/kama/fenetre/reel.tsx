@@ -2,22 +2,29 @@
  * Contenus de la fenêtre construits à partir de la VRAIE page (et non des exemples Lovable).
  * La page est relue au moment d'afficher le contenu ; rien n'est stocké.
  *
+ * Deux sortes d'éléments :
+ *  - les éléments connus (config/banques/), expliqués par leurs gabarits ;
+ *  - les éléments découverts par Kama (contenu inédit) : montants, alertes, nouveaux messages.
+ *    Kama les recopie tels quels et dit franchement qu'il ne les connaît pas encore.
+ *
  * Chaque réponse passe par la traduction (lib/traduction.ts) : glossaire local validé d'abord, puis le serveur avec des textes
- * masqués. Tant qu'une phrase n'est pas validée en ghomálá' ou en pidgin, Kama montre le gabarit français avec le badge
- * « Pas encore traduit » (règle d'or n° 4). Les montants sont ceux de la page, recopiés tels quels (règle d'or n° 1).
+ * masqués. Tant qu'une phrase n'est pas traduite, Kama montre le gabarit français avec le badge « Pas encore traduit »
+ * (règle d'or n° 4). Les montants sont ceux de la page, recopiés tels quels et jamais envoyés (règle d'or n° 1).
  */
 import { useMemo } from 'react';
 import type { ElementApi } from '@/lib/api';
-import type { IdElement } from '@/config/page-test';
-import { GABARITS, texteAEcouter, type Ligne } from '@/config/gabarits';
+import type { IdElement } from '@/config/banques';
+import { GABARITS, gabaritMontantInconnu, texteAEcouter, type Ligne } from '@/config/gabarits';
 import { bilanTransactions, listeOperations, PHRASES } from '@/config/phrases';
 import {
   elementPourTexte,
   explicationErreur,
   lirePage,
   lireTransactions,
+  nomDecouverte,
   normaliser,
-  type ElementTrouve,
+  trouverDecouverte,
+  type Decouverte,
   type LecturePage,
 } from '@/lib/lecture-page';
 import { useLangueCourante } from '@/lib/langue-courante';
@@ -42,11 +49,15 @@ export type VueReelle =
   | { type: 'expliquer' }
   | { type: 'resumer' }
   | { type: 'element'; id: IdElement }
+  | { type: 'decouverte'; cle: string }
   | { type: 'selection'; texte: string };
 
-type Props = { vue: VueReelle; onShowMe: (id: IdElement) => void };
+/** `cible` = identifiant d'un élément connu ou clé d'un élément découvert. */
+type MontrerFn = (cible: string) => void;
 
-/** Nature de l'élément pour le serveur : tout ce qui touche à l'argent ou à la sécurité est « critique » (jamais de traduction automatique). */
+type Props = { vue: VueReelle; onShowMe: MontrerFn };
+
+/** Nature de l'élément pour le serveur : tout ce qui touche à l'argent ou à la sécurité est « critique ». */
 const ELEMENT_API: Partial<Record<IdElement, ElementApi>> = {
   solde: 'balance',
   'montant-saisie': 'amount',
@@ -68,16 +79,22 @@ export function ContenuReel({ vue, onShowMe }: Props) {
       return <ResumerTransactions lecture={lecture} />;
     case 'element':
       return <ExplicationElement id={vue.id} lecture={lecture} onShowMe={onShowMe} />;
+    case 'decouverte': {
+      const d = trouverDecouverte(lecture, vue.cle);
+      if (!d) return <PlusSurLaPage />;
+      return <ExplicationDecouverte d={d} onShowMe={onShowMe} />;
+    }
     case 'selection': {
       const id = elementPourTexte(lecture, vue.texte);
       if (id) return <ExplicationElement id={id} lecture={lecture} onShowMe={onShowMe} />;
-      // Texte quelconque : traduit s'il est validé ou s'il n'est pas critique ; sinon Kama le montre et propose de l'écouter en français.
-      return <SelectionLibre texte={vue.texte} />;
+      // Texte quelconque : traduit s'il est validé ou s'il n'est pas critique ; sinon Kama le montre tel quel.
+      return <TexteLibre texte={vue.texte} />;
     }
   }
 }
 
-function SelectionLibre({ texte }: { texte: string }) {
+/** Texte de la page (sélection, nouveau message découvert) : traduit si possible, sinon montré tel quel. */
+function TexteLibre({ texte, onShowMe }: { texte: string; onShowMe?: () => void }) {
   const langue = useLangueCourante();
   const [t, reessayer] = useTraductionTexte(texte, 'text', langue);
   if (t.statut === 'chargement') return <Reflexion />;
@@ -87,23 +104,88 @@ function SelectionLibre({ texte }: { texte: string }) {
   return (
     <>
       {t.statut === 'hors-ligne' && <BandeauHorsLigne onRetry={reessayer} />}
-      <UntranslatedContent texte={texte} langue={langue?.nom} />
+      <UntranslatedContent texte={texte} langue={langue?.nom} onShowMe={onShowMe} />
     </>
   );
 }
 
-function ExpliquerPage({ lecture, onShowMe }: { lecture: LecturePage; onShowMe: (id: IdElement) => void }) {
+/** Élément qui n'est plus sur la page (elle a changé entre-temps). */
+function PlusSurLaPage() {
+  const t = PHRASES.elementIntrouvable;
+  const r = useReponse([[t]]);
+  if (r.chargement) return <Reflexion />;
+  return (
+    <>
+      {r.horsLigne && <BandeauHorsLigne onRetry={r.reessayer} />}
+      <KamaResponse status={r.status} paroles={r.paroles} speech={t}>
+        <p className="m-0">{aplatir(r.lignes[0]!)}</p>
+      </KamaResponse>
+    </>
+  );
+}
+
+/* ---------------------------------------------------------------------------------------- */
+/* Expliquer cette page                                                                     */
+/* ---------------------------------------------------------------------------------------- */
+
+const TEXTE_ALERTE = 'La banque affiche un message important. Lis-le avant de continuer.';
+const TEXTE_NOUVEAU = 'Un nouveau message est apparu sur la page. Lis-le.';
+const PAGE_INCONNUE = "Kama ne connaît pas encore cette page. Voici ce qu'il y voit.";
+
+type EtapeLue = { cible: string; ligne: Ligne };
+
+/** Étapes ajoutées pour ce que Kama a découvert tout seul (alertes, messages apparus). */
+function etapesDecouvertes(lecture: LecturePage): EtapeLue[] {
+  return lecture.decouvertes
+    .filter((d) => d.nature === 'alerte' || d.nature === 'nouveau')
+    .map((d) => ({ cible: d.cle, ligne: [d.nature === 'alerte' ? TEXTE_ALERTE : TEXTE_NOUVEAU] }));
+}
+
+/**
+ * Écran que Kama ne connaît pas : il dit ce qu'il voit (titre, messages, montants, boutons), avec les textes de la page
+ * recopiés tels quels, et « Montre-moi » pour chacun. Les montants restent des montants (jamais envoyés à la traduction).
+ */
+function etapesEcranInconnu(lecture: LecturePage): EtapeLue[] {
+  let premierTitre = true;
+  return lecture.decouvertes
+    .map((d): EtapeLue => {
+      switch (d.nature) {
+        case 'titre': {
+          const ligne: Ligne = premierTitre ? [`La page s'appelle « ${d.texte} ».`] : [`Partie « ${d.texte} ».`];
+          premierTitre = false;
+          return { cible: d.cle, ligne };
+        }
+        case 'alerte':
+          return { cible: d.cle, ligne: [TEXTE_ALERTE] };
+        case 'nouveau':
+          return { cible: d.cle, ligne: [TEXTE_NOUVEAU] };
+        case 'montant':
+          return { cible: d.cle, ligne: [`${d.libelle ?? 'Montant affiché'} : `, { montant: d.valeur ?? '' }, '.'] };
+        case 'bouton':
+          return { cible: d.cle, ligne: [`Bouton « ${d.texte} ». C'est toi qui décides d'appuyer.`] };
+      }
+    })
+    .slice(0, 8);
+}
+
+function ExpliquerPage({ lecture, onShowMe }: { lecture: LecturePage; onShowMe: MontrerFn }) {
   const etape = lecture.etape;
-  // On ne propose « Montre-moi » que pour les éléments réellement présents sur la page.
-  const etapes = etape ? etape.etapes.filter((e) => lecture.elements.has(e.cible)) : [];
+  const etapes: EtapeLue[] = etape
+    ? // On ne propose « Montre-moi » que pour les éléments réellement présents sur la page.
+      [
+        ...etapesDecouvertes(lecture),
+        ...etape.etapes.filter((e) => lecture.elements.has(e.cible)).map((e) => ({ cible: e.cible, ligne: [e.texte] as Ligne })),
+      ]
+    : etapesEcranInconnu(lecture);
   const [t1, t2] = PHRASES.pageNonReconnue;
-  const lignes: Ligne[] = etape ? [[etape.phrase], ...etapes.map((e) => [e.texte])] : [[t1], [t2]];
+  const sansRien = !etape && !etapes.length;
+  const lignes: Ligne[] = sansRien ? [[t1], [t2]] : [[etape ? etape.phrase : PAGE_INCONNUE], ...etapes.map((e) => e.ligne)];
   const r = useReponse(lignes);
 
   if (r.chargement) return <Reflexion />;
   const retour = r.horsLigne ? <BandeauHorsLigne onRetry={r.reessayer} /> : null;
 
-  if (!etape) {
+  if (sansRien) {
     return (
       <>
         {retour}
@@ -123,11 +205,13 @@ function ExpliquerPage({ lecture, onShowMe }: { lecture: LecturePage; onShowMe: 
         phrase={aplatir(r.lignes[0]!)}
         etapes={etapes.map((e, i) => ({ cible: e.cible, texte: aplatir(r.lignes[i + 1]!) }))}
         speechFr={texteAEcouter(lignes)}
-        onShowMe={(cible) => onShowMe(cible as IdElement)}
+        onShowMe={onShowMe}
       />
     </>
   );
 }
+
+/* ---------------------------------------------------------------------------------------- */
 
 function ResumerTransactions({ lecture }: { lecture: LecturePage }) {
   const langue = useLangueCourante();
@@ -176,55 +260,62 @@ function ResumerTransactions({ lecture }: { lecture: LecturePage }) {
   );
 }
 
-function ExplicationElement({
-  id,
-  lecture,
-  onShowMe,
-}: {
-  id: IdElement;
-  lecture: LecturePage;
-  onShowMe: (id: IdElement) => void;
-}) {
+/* ---------------------------------------------------------------------------------------- */
+/* Explication d'un élément                                                                 */
+/* ---------------------------------------------------------------------------------------- */
+
+function ExplicationElement({ id, lecture, onShowMe }: { id: IdElement; lecture: LecturePage; onShowMe: MontrerFn }) {
   const e = lecture.elements.get(id);
-  if (!e) return <ElementIntrouvable />;
+  if (!e) return <PlusSurLaPage />;
 
   // Erreur ou alerte de la banque : message original + explication franche.
-  if (e.def.nature === 'erreur') return <ReponseErreur e={e} />;
+  if (e.def.nature === 'erreur') return <ReponseErreur code={e.code} message={e.message} libelleTexte={e.libelleTexte} />;
 
-  return <ReponseGabarit id={id} e={e} total={lecture.elements.get('total')?.valeur} onShowMe={onShowMe} />;
-}
-
-function ElementIntrouvable() {
-  const t = PHRASES.elementIntrouvable;
-  const r = useReponse([[t]]);
-  if (r.chargement) return <Reflexion />;
+  const gabarit = GABARITS[id];
+  if (!gabarit) return null;
+  const { lignes, alerte } = gabarit({ libelle: e.def.libelles[0] ?? e.libelleTexte, valeur: e.valeur, total: lecture.elements.get('total')?.valeur });
   return (
-    <>
-      {r.horsLigne && <BandeauHorsLigne onRetry={r.reessayer} />}
-      <KamaResponse status={r.status} paroles={r.paroles} speech={t}>
-        <p className="m-0">{aplatir(r.lignes[0]!)}</p>
-      </KamaResponse>
-    </>
+    <Explication
+      nomFr={e.def.nom}
+      libellePage={e.libelleTexte}
+      lignes={lignes}
+      alerte={alerte}
+      element={ELEMENT_API[id] ?? 'text'}
+      onShowMe={() => onShowMe(id)}
+    />
   );
 }
 
-function ReponseErreur({ e }: { e: ElementTrouve }) {
+function ExplicationDecouverte({ d, onShowMe }: { d: Decouverte; onShowMe: MontrerFn }) {
+  switch (d.nature) {
+    case 'alerte':
+      return <ReponseErreur code={d.code} message={d.texte} libelleTexte={d.texte ?? ''} />;
+    case 'montant': {
+      const { lignes } = gabaritMontantInconnu({ libelle: d.libelle, valeur: d.valeur! });
+      return <Explication nomFr={nomDecouverte(d)} lignes={lignes} element="amount" onShowMe={() => onShowMe(d.cle)} />;
+    }
+    default:
+      return <TexteLibre texte={d.texte ?? ''} onShowMe={() => onShowMe(d.cle)} />;
+  }
+}
+
+function ReponseErreur({ code, message, libelleTexte }: { code?: string; message?: string; libelleTexte: string }) {
   // Aucun calcul : Kama ne produit jamais un montant qui n'est pas écrit sur la page.
-  const explication = explicationErreur(e.code, e.message);
+  const explication = explicationErreur(code, message);
   const lignes: Ligne[] = [[explication.titre], [explication.conseil]];
   const r = useReponse(lignes, 'error');
 
   // Le message de la banque lui-même : traduit s'il figure dans le glossaire de la page de test (validé par un locuteur), ou s'il est
-  // inconnu de Kama (ex. « Message important » ajouté par le jury). S'il est critique, le serveur ne le traduit que validé ; sinon
-  // le texte original reste seul affiché.
+  // inconnu de Kama (ex. « Message important » ajouté par le jury). S'il est critique, le serveur ne le traduit que s'il y est autorisé ;
+  // sinon le texte original reste seul affiché.
   const langue = useLangueCourante();
-  const nature = normaliser(e.libelleTexte);
+  const nature = normaliser(libelleTexte);
   const element: ElementApi = /alerte de sécurité|security warning/.test(nature)
     ? 'warning'
     : /erreur est survenue|error occurred/.test(nature)
       ? 'error'
       : 'text';
-  const [m] = useTraductionTexte(e.message ?? null, element, langue);
+  const [m] = useTraductionTexte(message ?? null, element, langue);
 
   if (r.chargement) return <Reflexion />;
   const messageTraduit =
@@ -241,8 +332,8 @@ function ReponseErreur({ e }: { e: ElementTrouve }) {
       <BankErrorContent
         status={r.status}
         paroles={r.paroles}
-        messageBanque={e.message ?? e.libelleTexte}
-        code={e.code}
+        messageBanque={message ?? libelleTexte}
+        code={code}
         titre={aplatir(r.lignes[0]!)}
         conseil={aplatir(r.lignes[1]!)}
         messageTraduit={messageTraduit}
@@ -252,25 +343,27 @@ function ReponseErreur({ e }: { e: ElementTrouve }) {
   );
 }
 
-function ReponseGabarit({
-  id,
-  e,
-  total,
+function Explication({
+  nomFr,
+  libellePage,
+  lignes,
+  alerte,
+  element,
   onShowMe,
 }: {
-  id: IdElement;
-  e: ElementTrouve;
-  total?: string;
-  onShowMe: (id: IdElement) => void;
+  nomFr: string;
+  /** Libellé tel qu'écrit sur la page (traduit s'il est dans le glossaire de la page de test). */
+  libellePage?: string;
+  lignes: Ligne[];
+  alerte?: boolean;
+  element: ElementApi;
+  onShowMe: () => void;
 }) {
-  const gabarit = GABARITS[id];
-  const base = gabarit ? gabarit({ libelle: e.def.libelles[0] ?? e.libelleTexte, valeur: e.valeur, total }) : null;
   const langue = useLangueCourante();
-  const nomTraduit = traduireLibelle(langue?.code, e.libelleTexte);
-  const nom = nomTraduit !== e.libelleTexte ? nomTraduit : traduireKama(langue?.code, e.def.nom);
+  const nomTraduit = libellePage ? traduireLibelle(langue?.code, libellePage) : undefined;
+  const nom = nomTraduit && nomTraduit !== libellePage ? nomTraduit : traduireKama(langue?.code, nomFr);
   const elementChoisi = traduireKama(langue?.code, 'Élément choisi :');
-  const r = useReponse(base ? base.lignes : null, ELEMENT_API[id] ?? 'text');
-  if (!base) return null;
+  const r = useReponse(lignes, element);
   if (r.chargement) return <Reflexion />;
 
   const contenu = r.lignes.map((l, i) => (
@@ -278,15 +371,14 @@ function ReponseGabarit({
       {rendre(l)}
     </p>
   ));
-
   return (
     <div className="flex flex-col gap-3">
       <span className="self-start rounded-md border border-bank-border bg-bank-bg px-2 py-1 text-xs text-bank-text">
         {elementChoisi} <strong>{nom}</strong>
       </span>
       {r.horsLigne && <BandeauHorsLigne onRetry={r.reessayer} />}
-      <KamaResponse status={r.status} paroles={r.paroles} speech={texteAEcouter(base.lignes)}>
-        {base.alerte ? (
+      <KamaResponse status={r.status} paroles={r.paroles} speech={texteAEcouter(lignes)}>
+        {alerte ? (
           <div className="flex gap-2.5 rounded-xl border-2 border-kama-error p-3" role="alert">
             <AlertTriangle className="mt-0.5 size-5 shrink-0 text-kama-error" aria-hidden />
             <div className="flex flex-col gap-1">{contenu}</div>
@@ -295,7 +387,7 @@ function ReponseGabarit({
           contenu
         )}
         <div>
-          <MontreMoi onClick={() => onShowMe(id)} />
+          <MontreMoi onClick={onShowMe} />
         </div>
       </KamaResponse>
     </div>
@@ -305,4 +397,3 @@ function ReponseGabarit({
 function rendre(ligne: Ligne) {
   return ligne.map((m, i) => (typeof m === 'string' ? m : <Amount key={i}>{m.montant}</Amount>));
 }
-

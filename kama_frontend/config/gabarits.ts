@@ -8,7 +8,7 @@
  *
  * `libelle` = le libellé tel qu'écrit dans la page (« Frais », « Total à débiter »…).
  */
-import type { IdElement } from './page-test';
+import type { IdElement } from './banques';
 
 export type Morceau = string | { montant: string };
 export type Ligne = Morceau[];
@@ -57,6 +57,19 @@ export const GABARITS: Partial<Record<IdElement, (d: Donnees) => { lignes: Ligne
     ],
   }),
 };
+
+/**
+ * Montant que la configuration ne connaît pas (contenu inédit) : Kama le recopie tel quel avec
+ * le texte écrit juste avant lui, et dit franchement qu'il ne connaît pas encore cette information.
+ */
+export function gabaritMontantInconnu({ libelle, valeur }: { libelle?: string; valeur: string }) {
+  return {
+    lignes: [
+      [libelle ? `${libelle} : ` : 'Montant affiché : ', { montant: valeur }, '.'] as Ligne,
+      ["Kama ne connaît pas encore cette information. Il recopie le montant tel qu'il est écrit sur la page."] as Ligne,
+    ],
+  };
+}
 
 /** Texte lu à voix haute : les montants sont dits exactement comme ils sont écrits. */
 export function texteAEcouter(lignes: Ligne[]) {

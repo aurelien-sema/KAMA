@@ -87,7 +87,7 @@ Chaque réponse porte un **badge de fiabilité** : « Vérifié » (issu du glos
 - **Manifest V3**, compatible Chrome et Edge.
 - **`popup/`** : page du popup (réglages), stockage avec `chrome.storage.local` (langue, mode texte/audio, activé/désactivé, premier lancement).
 - **`content/`** : script injecté sur la page de test. Il :
-  - détecte les éléments importants (sélecteurs dédiés à la page des organisateurs, regroupés dans **un seul fichier de configuration** pour pouvoir les ajuster) ;
+  - détecte les éléments importants à partir de leur texte. **1 banque = 1 fichier de configuration** (`kama_frontend/config/banques/` : `safinum.ts` pour la page des organisateurs, `demo.ts` pour la banque fictive de l'équipe). Sur une banque sans fichier, Kama repère seul les montants, les alertes et les nouveaux messages (décidé le 2026-11-12) ;
   - injecte l'onglet, les pastilles, la barre de sélection et la fenêtre **dans un Shadow DOM**, pour que le CSS de la page et celui de Kama ne se mélangent pas ;
   - gère « Montre-moi » (scroll + surlignage).
 - **`background/`** (service worker) : appels réseau (traduction, synthèse vocale, reconnaissance vocale) et messages entre popup et page.
@@ -104,29 +104,31 @@ Chaque réponse porte un **badge de fiabilité** : « Vérifié » (issu du glos
 ## 6. Ce qu'il reste à faire (par priorité)
 
 ### P0 — indispensable pour la démo
-- [ ] Squelette de l'extension MV3 (manifest, popup, content script, service worker), chargeable via « Charger l'extension non empaquetée ».
-- [ ] Popup avec réglages persistants + écran de premier lancement (choix de la langue, sans langue par défaut).
-- [ ] Analyse de la page de test des organisateurs : liste des éléments à détecter et de leurs sélecteurs (fichier de config).
-- [ ] Onglet de bord + menu 3 boutons.
-- [ ] Fenêtre Kama unique avec ses états.
-- [ ] Pastilles sur les éléments importants + explication.
-- [ ] « Expliquer cette page » + « Montre-moi ».
-- [ ] Extraction fiable des montants depuis le DOM + gabarits de réponse.
-- [ ] Lecteur audio (fichiers pré-enregistrés en premier).
-- [ ] États d'erreur : pas de réseau, traduction indisponible, page non reconnue.
+- [x] Squelette de l'extension MV3 (manifest, popup, content script, service worker), chargeable via « Charger l'extension non empaquetée ».
+- [x] Popup avec réglages persistants + écran de premier lancement (choix de la langue, sans langue par défaut).
+- [x] Analyse de la page de test des organisateurs : liste des éléments à détecter et de leurs sélecteurs (fichier de config).
+- [x] Onglet de bord + menu 3 boutons.
+- [x] Fenêtre Kama unique avec ses états.
+- [x] Pastilles sur les éléments importants + explication.
+- [x] « Expliquer cette page » + « Montre-moi ».
+- [x] Extraction fiable des montants depuis le DOM + gabarits de réponse.
+- [ ] Lecteur audio (fichiers pré-enregistrés en premier). *(Lecteur prêt avec la voix française du navigateur ; audios enregistrés à brancher.)*
+- [ ] États d'erreur : pas de réseau, traduction indisponible, page non reconnue. *(Page non reconnue et erreurs réseau de l'assistant : faits. Traduction indisponible : à relier aux appels de traduction.)*
 
 ### P1 — important
-- [ ] Barre de sélection de texte.
-- [ ] Résumer mes transactions.
-- [ ] Parler à Kama (micro → réponse audio).
-- [ ] Badges de fiabilité.
-- [ ] Page de bienvenue ouverte automatiquement à l'installation (`chrome.runtime.onInstalled`) : confirme l'installation, montre comment épingler l'icône, choix de la langue, lien vers la page de test.
+- [x] Barre de sélection de texte.
+- [x] Résumer mes transactions.
+- [ ] Parler à Kama (micro → réponse audio). *(Micro écouté par Kama, accord, envoi au serveur : faits, en mode simulation. Réponses aux questions : plus tard.)*
+- [ ] Badges de fiabilité. *(Affichés ; seul « Pas encore traduit » sert tant que les textes validés ne sont pas fournis.)*
+- [x] Page de bienvenue ouverte automatiquement à l'installation (`chrome.runtime.onInstalled`) : confirme l'installation, montre comment épingler l'icône, choix de la langue, lien vers la page de test.
 
 ### P2 — si le temps le permet
 - [ ] Autres langues nationales (ewondo, duala, fulfulde, bassa'a…).
 - [ ] Traduction automatique en direct (avec badge « Traduction automatique »).
 
 ### Livraison au jury
+- [x] Version jury : `npm run build:jury` (Chrome et Edge), sans les pages locales de l'équipe ni le catalogue des états (dossiers `.output/chrome-mv3-jury` et `.output/edge-mv3-jury`).
+- [ ] Fixer la `key` du manifest (identifiant stable, autorisé par le serveur).
 - [ ] Zip avec cette structure exacte :
   ```
   Kama_Installation.zip

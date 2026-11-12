@@ -9,7 +9,10 @@
 import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { GABARITS } from '../config/gabarits.ts';
-import { ETAPES_PARCOURS, ERREURS, ERREUR_INCONNUE } from '../config/page-test.ts';
+import { SAFINUM } from '../config/banques/safinum.ts';
+import { ERREUR_INCONNUE } from '../config/banques/types.ts';
+const ETAPES_PARCOURS = SAFINUM.etapes;
+const ERREURS = SAFINUM.erreurs;
 import { PHRASES, bilanTransactions, listeOperations } from '../config/phrases.ts';
 import { CONSENTEMENT, CONSENTEMENT_MICRO } from '../config/consentement.ts';
 import { masquerLigne } from '../lib/lignes.ts';

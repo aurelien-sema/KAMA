@@ -11,12 +11,12 @@ import { Surlignage } from '@/components/Surlignage';
 import { BarreSelection } from '@/components/BarreSelection';
 import { ChoixLangue } from '@/components/kama/ChoixLangue';
 import { KamaWindow, KAMA_WINDOW_HEIGHT } from '@/components/kama/fenetre/KamaWindow';
+import { useAssistant } from '@/components/Assistant';
 import { ContenuReel, type VueReelle } from '@/components/kama/fenetre/reel';
-import { Consentement, ParlerContenu } from '@/components/kama/fenetre/parler';
+import { Consentement } from '@/components/kama/fenetre/parler';
 import { trouverLangue, type IdLangue } from '@/config/langues';
-import type { IdElement } from '@/config/page-test';
 import { LangueCourante, LectureAuto } from '@/lib/langue-courante';
-import { lirePage } from '@/lib/lecture-page';
+import { lirePage, nomDecouverte, trouverDecouverte } from '@/lib/lecture-page';
 import { estMessageKama } from '@/lib/messages';
 import { enregistrerPositionOnglet, lirePositionOnglet, POSITION_PAR_DEFAUT, topBorne } from '@/lib/position-onglet';
 import { reglageActif, reglageConsentement, reglageConsentementMicro, reglageLangue, reglageMode, useReglage } from '@/lib/reglages';
@@ -24,7 +24,7 @@ import { useLecturePage } from '@/lib/use-lecture-page';
 import { traduireKama } from '@/lib/use-texte';
 import { arreterLecture } from '@/lib/voix';
 import { peutRepeter, rejouerDerniere } from '@/lib/audio';
-import { useParler, VUE_PAR_INTENTION } from '@/lib/use-parler';
+import { VUE_PAR_INTENTION } from '@/lib/use-parler';
 
 /** Ce que montre la fenêtre Kama. */
 type Vue =
@@ -46,7 +46,7 @@ export function KamaApp() {
   const [actif] = useReglage(reglageActif);
   const [mode] = useReglage(reglageMode);
   const [consentement, setConsentement] = useReglage(reglageConsentement);
-  const [consentementMicro, setConsentementMicro] = useReglage(reglageConsentementMicro);
+  const [, setConsentementMicro] = useReglage(reglageConsentementMicro);
   const langue = trouverLangue(idLangue);
 
   const [position, setPosition] = useState(POSITION_PAR_DEFAUT);
@@ -61,6 +61,7 @@ export function KamaApp() {
   const nomSurligne = surligne ? traduireKama(langue?.code, surligne.nom) : '';
 
   const lecture = useLecturePage(actif);
+  const assistant = useAssistant({ langue, lectureAuto: mode === 'audio', surIntention });
 
   const racine = useRef<HTMLDivElement>(null);
   const onglet = useRef<HTMLButtonElement>(null);
@@ -83,8 +84,16 @@ export function KamaApp() {
       setMenuOuvert(false);
       setVue(null);
       setSurligne(null);
+      assistant.reinitialiser();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [actif]);
+
+  // On quitte « Parler à Kama » pendant l'écoute : le micro est coupé.
+  useEffect(() => {
+    if (vue?.type !== 'parler' && assistant.ecoute) assistant.reinitialiser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [vue]);
 
   // Clavier : à l'ouverture, le focus va dans le menu puis dans la fenêtre.
   useEffect(() => {
@@ -116,7 +125,7 @@ export function KamaApp() {
 
   function fermerFenetre() {
     arreterLecture();
-    parler.annuler();
+    assistant.reinitialiser();
     setVue(null);
     setEnAttente(null);
     onglet.current?.focus();
@@ -133,7 +142,7 @@ export function KamaApp() {
     setConsentementMicro(true);
     setEnAttente(null);
     setVue({ type: 'parler' });
-    void parler.demarrer(); // l'appui sur « J'accepte » est un geste de la personne : le navigateur peut demander le micro
+    assistant.appuiMicro();
   }
 
   /** Ce que l'on a compris de la voix : on ouvre l'explication correspondante (jamais d'action dans la page). */
@@ -147,36 +156,13 @@ export function KamaApp() {
     setReponseVocale(true);
   }
 
-  const parler = useParler(langue, surIntention);
-
-  function appuiMicro() {
-    if (parler.phase === 'ecoute') {
-      void parler.arreter();
-      return;
-    }
-    if (!consentementMicro) {
-      setEnAttente(null);
-      setVue({ type: 'consentement-micro' });
-      return;
-    }
-    arreterLecture();
-    setVue({ type: 'parler' });
-    void parler.demarrer();
-  }
-
-  // Si la personne quitte l'écran « Parler » pendant l'écoute, le micro se coupe.
-  useEffect(() => {
-    if (vue?.type !== 'parler' && parler.phase === 'ecoute') parler.annuler();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [vue]);
-
   // La fenêtre est vidée à chaque changement d'étape de la page : une explication ne doit pas rester sur un autre écran.
   const etapeId = lecture.etape?.id ?? null;
   const etapePrecedente = useRef<string | null>(null);
   useEffect(() => {
     if (etapePrecedente.current && etapePrecedente.current !== etapeId && vue && !ECRANS_SANS_PAGE.includes(vue.type)) {
       arreterLecture();
-      parler.annuler();
+      assistant.reinitialiser();
       setVue(null);
       setSurligne(null);
     }
@@ -192,6 +178,12 @@ export function KamaApp() {
       return;
     }
     setMenuOuvert((o) => !o);
+  }
+
+  /** Bouton micro de la fenêtre : depuis n'importe quel contenu, il passe à « Parler à Kama ». */
+  function appuiMicro() {
+    if (vue?.type !== 'parler') setVue({ type: 'parler' });
+    assistant.appuiMicro();
   }
 
   function choisirDansMenu(m: ModeKama) {
@@ -210,9 +202,19 @@ export function KamaApp() {
     }
   }
 
-  function montrer(id: IdElement) {
-    const e = lirePage().elements.get(id);
-    if (e) setSurligne({ zone: e.zone, nom: e.def.nom });
+  /** « Montre-moi » : `cible` = élément connu ou élément découvert par Kama. */
+  function montrer(cible: string) {
+    const lecture = lirePage();
+    const e = lecture.elements.get(cible as never);
+    if (e) return setSurligne({ zone: e.zone, nom: e.def.nom });
+    const d = trouverDecouverte(lecture, cible);
+    if (d) setSurligne({ zone: d.zone, nom: nomDecouverte(d) });
+  }
+
+  /** Clic sur une pastille : élément connu ou élément découvert. */
+  function ouvrirPastille(cible: string) {
+    const connu = lecture.elements.has(cible as never);
+    ouvrir(connu ? { type: 'element', id: cible as never } : { type: 'decouverte', cle: cible });
   }
 
   // Messages du popup : « Kama est-il là ? » et « Expliquer cette page ».
@@ -278,7 +280,7 @@ export function KamaApp() {
     <LangueCourante.Provider value={langue}>
       <LectureAuto.Provider value={mode === 'audio' || reponseVocale}>
         <div ref={racine} className="kama-racine">
-          <Pastilles lecture={lecture} onOuvrir={(id) => ouvrir({ type: 'element', id })} />
+          <Pastilles lecture={lecture} onOuvrir={ouvrirPastille} />
           <Surlignage cible={surligne?.zone ?? null} onFin={() => setSurligne(null)} dansKama={dansKama} />
           <BarreSelection dansKama={dansKama} onExpliquer={(texte) => ouvrir({ type: 'selection', texte })} />
 
@@ -301,9 +303,7 @@ export function KamaApp() {
               key={cleDeVue(vue)}
               ref={fenetre}
               avecMicro={!ECRANS_SANS_PAGE.includes(vue.type)}
-              mic={
-                parler.phase === 'ecoute' ? 'listening' : parler.phase === 'reflexion' ? 'thinking' : parler.phase === 'hors-ligne' ? 'offline' : 'idle'
-              }
+              mic={vue.type === 'parler' ? assistant.mic : 'idle'}
               onMic={appuiMicro}
               onClose={fermerFenetre}
               className="fixed right-14 z-[2147483647] -translate-y-1/2"
@@ -319,7 +319,7 @@ export function KamaApp() {
               ) : vue.type === 'consentement-micro' ? (
                 <Consentement micro onAccepter={accepterConsentementMicro} onRefuser={fermerFenetre} />
               ) : vue.type === 'parler' ? (
-                <ParlerContenu phase={parler.phase} onRetry={() => void parler.demarrer()} />
+                assistant.contenu
               ) : (
                 <ContenuReel vue={vue} onShowMe={montrer} />
               )}

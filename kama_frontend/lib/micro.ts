@@ -1,11 +1,73 @@
 /**
+ * Côté page : piloter l'écoute de Kama. Le micro n'est jamais ouvert dans la page de la banque :
+ * on demande au service worker, qui fait écouter le document caché de Kama (voir messages.ts).
+ * La page reçoit seulement le niveau du son (pour les barres), la durée et l'intention comprise.
+ */
+import { PORT_MICRO, type CommandeMicro, type DemandeAutorisation, type EvenementMicro } from './messages';
+import { encoderWav, secondes } from './wav';
+
+export type Micro = {
+  demarrer: (langue: string) => void;
+  arreter: () => void;
+  reessayer: () => void;
+  /** Coupe le micro et oublie la voix (fenêtre fermée). */
+  fermer: () => void;
+};
+
+/** `onEvenement` reçoit aussi `{ type: 'coupe' }` si l'extension a été rechargée entre-temps. */
+export function ouvrirMicro(onEvenement: (e: EvenementMicro | { type: 'coupe' }) => void): Micro {
+  let port: ReturnType<typeof browser.runtime.connect> | null = null;
+
+  function envoyer(c: CommandeMicro) {
+    try {
+      if (!port) {
+        const p = browser.runtime.connect({ name: PORT_MICRO });
+        p.onMessage.addListener((e: EvenementMicro) => onEvenement(e));
+        p.onDisconnect.addListener(() => {
+          if (port === p) port = null;
+          onEvenement({ type: 'coupe' });
+        });
+        port = p;
+      }
+      port.postMessage(c);
+    } catch {
+      port = null;
+      onEvenement({ type: 'coupe' });
+    }
+  }
+
+  return {
+    demarrer: (langue) => envoyer({ type: 'demarrer', langue }),
+    arreter: () => port && envoyer({ type: 'arreter' }),
+    reessayer: () => envoyer({ type: 'reessayer' }),
+    fermer: () => {
+      const p = port;
+      port = null;
+      p?.disconnect();
+    },
+  };
+}
+
+/** Ouvre la page de bienvenue de Kama sur l'étape « Autoriser le micro ». */
+export function demanderAutorisationMicro() {
+  try {
+    browser.runtime.sendMessage({ type: 'kama:autoriser-micro' } satisfies DemandeAutorisation).catch(() => {});
+  } catch {
+    // Extension rechargée : la page doit être rechargée (message affiché par ailleurs).
+  }
+}
+
+// ---------------------------------------------------------------------------------------------------------------
+// Enregistrement direct (fenêtre « Parler », lib/use-parler.ts). À terme, passer aussi par le micro hors écran ci-dessus.
+// ---------------------------------------------------------------------------------------------------------------
+
+/**
  * Enregistrement de la voix, seulement entre deux appuis sur le bouton micro (sécurité : « écoute seulement pendant l'appui,
  * indicateur visible, rien de conservé »). Le flux du micro est coupé dès l'arrêt et l'audio n'est gardé qu'en mémoire,
  * le temps de l'envoi.
  *
  * Le serveur n'accepte que du WAV PCM 16 bits, 16 kHz, mono : on enregistre les échantillons bruts (pas de MediaRecorder).
  */
-import { encoderWav, secondes } from './wav';
 
 export const DUREE_MAX = 28; // secondes (le serveur refuse plus de 30)
 export const DUREE_MIN = 0.4;
