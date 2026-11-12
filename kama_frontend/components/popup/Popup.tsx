@@ -16,6 +16,7 @@ import { Check, ChevronDown, TriangleAlert, Type, Volume2 } from 'lucide-react';
 import { ChoixLangue } from '@/components/kama/ChoixLangue';
 import { KamaLogo, SpeakButton, TranslationBadge } from '@/components/kama/primitives';
 import { LANGUES, trouverLangue, type IdLangue } from '@/config/langues';
+import { LanguesAVenir } from '@/components/kama/LanguesAVenir';
 import { LangueCourante, useLangueCourante } from '@/lib/langue-courante';
 import { traduireKama, useTexte } from '@/lib/use-texte';
 import { envoyerAOngletActif } from '@/lib/messages';
@@ -311,6 +312,7 @@ function ListeLangues({
           <SpeakButton texte={l.nom} label={`${ecouterPrefixe} ${l.nom}`} />
         </div>
       ))}
+      <LanguesAVenir compact />
       <button
         type="button"
         onClick={onFermer}

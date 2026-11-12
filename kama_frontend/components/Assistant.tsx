@@ -35,7 +35,7 @@ import { demanderAutorisationMicro, ouvrirMicro, type Micro } from '@/lib/micro'
 import { reglageConsentementMicro, useReglage } from '@/lib/reglages';
 import { aplatir, useReponse } from '@/lib/use-reponse';
 import { useTexte } from '@/lib/use-texte';
-import { arreterLecture, lireEnFrancais } from '@/lib/voix';
+import { arreterLecture, lireTexte } from '@/lib/voix';
 
 type Etat = 'attente' | 'accord' | 'ecoute' | 'envoi';
 
@@ -391,8 +391,8 @@ function ReponseKama({ titre, texte, children }: { titre: string; texte?: string
   useEffect(() => {
     if (!lectureAuto || r.chargement || lu.current) return;
     lu.current = true;
-    if (r.paroles?.length) jouerParoles(r.paroles).catch(() => lireEnFrancais(speechFr));
-    else lireEnFrancais(speechFr);
+    if (r.paroles?.length) jouerParoles(r.paroles).catch(() => lireTexte(speechFr));
+    else lireTexte(speechFr);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lectureAuto, r.chargement]);
 

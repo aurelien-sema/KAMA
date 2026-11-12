@@ -8,6 +8,7 @@ import { useEffect, useRef } from 'react';
 import type { Ligne } from '@/config/gabarits';
 import type { ElementApi } from './api';
 import { useLangueCourante } from './langue-courante';
+import { ligneSecours } from './langue-secours';
 import { masquer } from './masquage';
 import type { Parole } from './traduction';
 import { useTraductionLignes } from './use-traduction';
@@ -15,7 +16,7 @@ import { useTraductionLignes } from './use-traduction';
 const DEV = (import.meta as { env?: { DEV?: boolean } }).env?.DEV === true;
 
 export type Reponse = {
-  /** Lignes à afficher : traduites, ou le français si la traduction n'existe pas. */
+  /** Lignes à afficher : traduites, sinon dans la langue de secours du navigateur. */
   lignes: Ligne[];
   status: 'verified' | 'auto' | 'untranslated';
   /** Réponse à lire avec la voix du serveur ; absent : lecture en français. */
@@ -40,7 +41,8 @@ export function useReponse(lignesFr: Ligne[] | null, element: ElementApi = 'text
 
   const traduit = t.statut === 'ok';
   return {
-    lignes: traduit ? t.lignes : (lignesFr ?? []),
+    // Pas encore traduit : la langue de secours du navigateur (français ou anglais), montants inchangés.
+    lignes: traduit ? t.lignes : (lignesFr ?? []).map(ligneSecours),
     status: traduit ? t.badge : 'untranslated',
     paroles: traduit ? t.paroles : undefined,
     chargement: t.statut === 'chargement',

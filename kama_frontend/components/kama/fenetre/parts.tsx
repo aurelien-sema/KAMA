@@ -6,7 +6,7 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { BadgeCheck, CircleSlash, Languages, Pause, Play, Volume2 } from 'lucide-react';
 import { TranslationBadge } from '@/components/kama/primitives';
-import { arreterLecture, lireEnFrancais } from '@/lib/voix';
+import { arreterLecture, lireTexte } from '@/lib/voix';
 import { useLectureAuto } from '@/lib/langue-courante';
 import { traduireKama, useTexte } from '@/lib/use-texte';
 import { useLangueCourante } from '@/lib/langue-courante';
@@ -72,7 +72,7 @@ export function AudioPlayer({ text, paroles }: { text: string; paroles?: Parole[
     } else {
       setNote('Lecture en français');
     }
-    lireEnFrancais(text, vitesse, () => setPlaying(false));
+    lireTexte(text, vitesse, () => setPlaying(false));
   }
 
   // Préférence « Audio » : lecture automatique à l'ouverture.
@@ -173,7 +173,7 @@ export function KamaLine({ speech, paroles, children }: { speech: string; parole
     } else {
       setNote(true);
     }
-    lireEnFrancais(speech);
+    lireTexte(speech);
   }
   return (
     <div className="flex items-start gap-2">

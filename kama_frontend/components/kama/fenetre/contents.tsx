@@ -8,7 +8,7 @@
 import type { ReactNode } from 'react';
 import { AlertTriangle, Eye, Mic, ShieldCheck, Volume2, WifiOff } from 'lucide-react';
 import { TranslationBadge } from '@/components/kama/primitives';
-import { lireEnFrancais } from '@/lib/voix';
+import { lireTexte } from '@/lib/voix';
 import type { Parole } from '@/lib/traduction';
 import { useTexte } from '@/lib/use-texte';
 import { aplatir, useReponse } from '@/lib/use-reponse';
@@ -348,7 +348,7 @@ export function UntranslatedContent({
         {langue ? inexistant : "Ce texte n'existe pas encore dans ta langue."}
       </p>
       <div>
-        <WindowButton onClick={() => lireEnFrancais(texte)}>
+        <WindowButton onClick={() => lireTexte(texte)}>
           <Volume2 className="size-4" aria-hidden /> {ecouterFr}
         </WindowButton>
       </div>

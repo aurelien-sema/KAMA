@@ -29,6 +29,7 @@ import {
   type LecturePage,
 } from '@/lib/lecture-page';
 import { useLangueCourante } from '@/lib/langue-courante';
+import { LANGUE_SECOURS } from '@/lib/langue-secours';
 import { aplatir, useReponse } from '@/lib/use-reponse';
 import { useTraductionTexte } from '@/lib/use-traduction';
 import { traduireKama, traduireLibelle } from '@/lib/use-texte';
@@ -263,7 +264,7 @@ function ResumerTransactions({ lecture }: { lecture: LecturePage }) {
     );
   }
   // Les libellés viennent du glossaire local ; les montants restent ceux de la page et ne sont jamais envoyés (sécurité).
-  // Pas encore traduit : le bilan français par défaut (avec « 1 entrée » au singulier).
+  // Pas encore traduit et navigateur en français : le bilan français par défaut (avec « 1 entrée » au singulier).
   return (
     <>
       {retour}
@@ -273,7 +274,7 @@ function ResumerTransactions({ lecture }: { lecture: LecturePage }) {
         entrees={String(entrees)}
         sorties={String(sorties)}
         operations={operations}
-        bilan={r.status === 'untranslated' ? undefined : rendre(r.lignes[0]!)}
+        bilan={r.status === 'untranslated' && LANGUE_SECOURS === 'fr' ? undefined : rendre(r.lignes[0]!)}
         introListe={aplatir(r.lignes[1]!)}
       />
     </>

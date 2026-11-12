@@ -6,7 +6,7 @@
 import type { Langue } from '@/config/langues';
 import { jouerParoles } from './audio';
 import { traduireTexteLibre } from './traduction';
-import { arreterLecture, lireEnFrancais } from './voix';
+import { arreterLecture, lireTexte } from './voix';
 
 export type ResultatEcoute = 'langue' | 'francais';
 
@@ -23,6 +23,6 @@ export async function ecouterTexte(texte: string, langue: Langue | null): Promis
       // Serveur absent ou voix indisponible : repli en français ci-dessous.
     }
   }
-  lireEnFrancais(texte);
+  lireTexte(texte);
   return 'francais';
 }

@@ -73,7 +73,7 @@ function Pastille({ ancre, nom: nomFr, onClick }: { ancre: Element; nom: string;
     <button
       type="button"
       onClick={onClick}
-      aria-label={`${explique} : ${nom}`}
+      aria-label={`${explique}${explique === "Kama t'explique" ? ' :' : ':'} ${nom}`}
       style={{ left, top }}
       className="group fixed z-[2147483646] grid size-11 cursor-pointer place-items-center rounded-full border-0 bg-transparent p-0 focus-visible:outline-2 focus-visible:outline-kama-ink"
     >

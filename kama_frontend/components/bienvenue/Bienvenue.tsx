@@ -1,109 +1,164 @@
 /**
- * Page de bienvenue de Kama (CLARIFICATIONS.md, P1) : confirme l'installation, puis 4 étapes :
- *   1. épingler l'icône de Kama ;
- *   2. choisir sa langue (3e endroit prévu pour ce choix, sans langue par défaut) ;
- *   3. autoriser le micro : c'est KAMA qui demande le micro, pas le site de la banque.
- *      Cette page appartient à l'extension, donc le navigateur affiche « Kama souhaite utiliser
- *      votre micro ». L'accord donné ici vaut aussi pour l'envoi de la voix (même texte que dans
- *      la fenêtre Kama) ;
- *   4. ouvrir la page de test.
- * Pas de maquette Lovable pour cette page : elle reprend la charte et les éléments de Kama.
+ * Page d'accueil de Kama, ouverte toute seule à l'installation (CLARIFICATIONS.md, P1).
+ *
+ * Un seul écran, sans défilement (décision d'Omar du 2026-11-12) :
+ *   1. un grand titre orange et les langues côte à côte ; Bamoun et Fulfulde sont grisés, non activables ;
+ *   2. dès qu'une langue est choisie, trois étapes apparaissent en dessous : épingler Kama, autoriser le micro
+ *      (c'est KAMA qui le demande, pas le site de la banque), ouvrir la page de la banque.
+ * Les textes passent par la traduction : langue choisie, sinon langue du navigateur (français ou anglais).
+ * Ils sont volontairement courts : peu de phrases à faire traduire et valider en langue nationale.
  */
-import { forwardRef, useEffect, useRef, useState, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type ReactNode, type Ref } from 'react';
 import { Check, ExternalLink, Mic, MicOff, Pin, Puzzle } from 'lucide-react';
 import { KamaLogo, SpeakButton, TranslationBadge } from '@/components/kama/primitives';
-import { LANGUES, trouverLangue } from '@/config/langues';
-import { LangueCourante } from '@/lib/langue-courante';
+import { LANGUES, LANGUES_A_VENIR, trouverLangue } from '@/config/langues';
+import { LangueCourante, useLangueCourante } from '@/lib/langue-courante';
 import { reglageConsentementMicro, reglageLangue, useReglage } from '@/lib/reglages';
+import { traduireKama } from '@/lib/use-texte';
 
 const PAGE_TEST = 'https://safinum.cm/hackathon-test';
 
 type EtatMicro = 'inconnu' | 'autorise' | 'refuse' | 'absent';
 
 export function Bienvenue() {
-  const [idLangue, setIdLangue] = useReglage(reglageLangue);
-  const langue = trouverLangue(idLangue);
-
+  const [idLangue] = useReglage(reglageLangue);
   return (
-    <LangueCourante.Provider value={langue}>
-      <main className="mx-auto flex min-h-screen max-w-2xl flex-col gap-6 bg-kama-white px-6 py-10 text-base text-kama-ink">
-        <header className="flex items-center gap-4">
-          <KamaLogo taille={64} />
-          <div>
-            <p className="m-0 font-display text-2xl leading-none">Kama</p>
-            <h1 className="m-0 mt-2 text-3xl font-bold leading-tight">Kama est installé !</h1>
-          </div>
-        </header>
-        <p className="m-0 text-lg">
-          Kama t'explique ta banque en ligne dans ta langue. Encore 4 petites étapes.
-        </p>
-
-        <ol className="m-0 flex list-none flex-col gap-4 p-0">
-          <Etape numero={1} titre="Épingle Kama" fait={false}>
-            <p className="m-0">
-              En haut à droite de Chrome, clique sur la pièce de puzzle{' '}
-              <Puzzle className="inline size-5 align-text-bottom" aria-label="pièce de puzzle" />, puis sur l'épingle{' '}
-              <Pin className="inline size-5 align-text-bottom" aria-label="épingle" /> à côté de « Kama ».
-            </p>
-            <p className="m-0 text-kama-ink/70">L'icône de Kama reste alors visible : tu y trouves tes réglages.</p>
-          </Etape>
-
-          <Etape numero={2} titre="Choisis ta langue" fait={!!langue}>
-            <div className="flex flex-col gap-2">
-              {LANGUES.map((l) => {
-                const choisie = l.id === idLangue;
-                return (
-                  <div
-                    key={l.id}
-                    className={`flex items-center rounded-xl border-2 pr-1 ${choisie ? 'border-kama-orange bg-kama-cream' : 'border-kama-ink bg-kama-white'}`}
-                  >
-                    <button
-                      type="button"
-                      onClick={() => setIdLangue(l.id)}
-                      aria-pressed={choisie}
-                      className="flex min-h-14 flex-1 cursor-pointer items-center gap-3 rounded-l-xl border-0 bg-transparent py-1.5 pl-3 text-left text-kama-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-kama-ink"
-                    >
-                      <span className="flex flex-col">
-                        <span className="text-[17px] font-bold leading-tight">{l.nom}</span>
-                        <span className="text-sm leading-tight text-kama-ink/70">{l.region}</span>
-                      </span>
-                      {choisie && (
-                        <span className="ml-auto inline-flex items-center gap-1 text-sm font-semibold">
-                          <Check className="size-5" aria-hidden /> Choisie
-                        </span>
-                      )}
-                    </button>
-                    <SpeakButton texte={l.nom} label={`Écouter : ${l.nom}`} />
-                  </div>
-                );
-              })}
-              <TranslationBadge />
-              <p className="m-0 text-sm text-kama-ink/70">Tu pourras changer de langue à tout moment avec l'icône de Kama.</p>
-            </div>
-          </Etape>
-
-          <EtapeMicro />
-
-          <Etape numero={4} titre="Essaie Kama" fait={false}>
-            <p className="m-0">Ouvre la page de la banque. Touche l'onglet Kama, sur le bord droit de la page.</p>
-            <a
-              href={PAGE_TEST}
-              className="inline-flex min-h-12 items-center gap-2 self-start rounded-full bg-kama-ink px-5 text-[18px] font-bold text-kama-white no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-kama-ink"
-            >
-              Ouvrir la page de la banque <ExternalLink className="size-5" aria-hidden />
-            </a>
-          </Etape>
-        </ol>
-      </main>
+    <LangueCourante.Provider value={trouverLangue(idLangue)}>
+      <Accueil />
     </LangueCourante.Provider>
   );
 }
 
-/** Étape 3 : autoriser le micro. C'est Kama (cette page de l'extension) qui demande le micro. */
+/** Traduction d'un texte fixe de la page : langue choisie, sinon langue du navigateur. */
+function useTraduction() {
+  const langue = useLangueCourante();
+  return (texte: string) => traduireKama(langue?.code, texte);
+}
+
+function Accueil() {
+  const [idLangue, setIdLangue] = useReglage(reglageLangue);
+  const langue = trouverLangue(idLangue);
+  const t = useTraduction();
+
+  return (
+    <main className="mx-auto flex min-h-screen max-w-5xl flex-col justify-center gap-8 px-8 py-8 text-base text-kama-ink">
+      <header className="flex items-center gap-6">
+        <span className="animate-kama-appear grid size-28 shrink-0 place-items-center rounded-full bg-kama-cream">
+          <KamaLogo taille={88} />
+        </span>
+        <div className="flex flex-col gap-2">
+          <h1 className="m-0 font-display text-[40px] leading-[1.15] text-kama-orange">{t('Bienvenue ! Choisis ta langue.')}</h1>
+          <p className="m-0 text-xl">{t('Kama t’explique ta banque en ligne dans ta langue.')}</p>
+        </div>
+      </header>
+
+      <section aria-label={t('Choisir ma langue')} className="flex flex-col gap-2">
+        <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+          {LANGUES.map((l) => (
+            <CarteLangue
+              key={l.id}
+              nom={l.nom}
+              region={t(l.region)}
+              choisie={l.id === idLangue}
+              onChoisir={() => setIdLangue(l.id)}
+            />
+          ))}
+          {LANGUES_A_VENIR.map((l) => (
+            <CarteLangue key={l.id} nom={l.nom} region={t(l.region)} />
+          ))}
+        </div>
+        <div className="self-end">
+          <TranslationBadge />
+        </div>
+      </section>
+
+      {langue && <Etapes />}
+    </main>
+  );
+}
+
+/** Une langue : grande carte cliquable. Sans `onChoisir`, la langue n'est pas encore disponible (grisée, désactivée). */
+function CarteLangue({
+  nom,
+  region,
+  choisie = false,
+  onChoisir,
+}: {
+  nom: string;
+  region: string;
+  choisie?: boolean;
+  onChoisir?: () => void;
+}) {
+  const t = useTraduction();
+  const disponible = !!onChoisir;
+  return (
+    <div
+      className={`relative flex min-h-32 rounded-2xl border-2 transition-colors ${
+        !disponible
+          ? 'border-dashed border-kama-ink/25 bg-bank-bg opacity-60'
+          : choisie
+            ? 'border-kama-orange bg-kama-cream shadow-md'
+            : 'border-kama-ink bg-kama-white hover:bg-kama-cream'
+      }`}
+    >
+      <button
+        type="button"
+        onClick={onChoisir}
+        disabled={!disponible}
+        aria-pressed={disponible ? choisie : undefined}
+        className="flex flex-1 cursor-pointer flex-col items-start justify-start gap-1 rounded-2xl border-0 bg-transparent p-4 pr-14 pt-5 text-left text-kama-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-kama-ink disabled:cursor-not-allowed"
+      >
+        <span className="flex items-center gap-2 text-[22px] font-bold leading-tight">
+          {choisie && (
+            <span className="grid size-7 shrink-0 place-items-center rounded-full bg-kama-orange text-kama-ink">
+              <Check className="size-5" aria-hidden />
+            </span>
+          )}
+          {nom}
+        </span>
+        <span className="text-[15px] leading-tight text-kama-ink/75">{region}</span>
+      </button>
+      {disponible && (
+        <span className="absolute right-2 top-2.5">
+          <SpeakButton texte={nom} label={`${t('Écouter :')} ${nom}`} />
+        </span>
+      )}
+    </div>
+  );
+}
+
+/** Les trois étapes, affichées une fois la langue choisie. */
+function Etapes() {
+  const t = useTraduction();
+  return (
+    <ol className="animate-kama-appear m-0 grid list-none grid-cols-1 gap-4 p-0 md:grid-cols-3">
+      <Etape numero={1} titre={t('Épingle Kama')}>
+        <p className="m-0 flex items-center gap-2">
+          <Puzzle className="size-6" aria-label={t('pièce de puzzle')} />
+          <span aria-hidden>→</span>
+          <Pin className="size-6" aria-label={t('épingle')} />
+        </p>
+        <p className="m-0 text-[15px]">{t('En haut à droite de ton navigateur.')}</p>
+      </Etape>
+      <EtapeMicro />
+      <Etape numero={3} titre={t('Essaie Kama')}>
+        <a
+          href={PAGE_TEST}
+          className="inline-flex min-h-12 items-center gap-2 self-start rounded-full bg-kama-ink px-5 text-[17px] font-bold text-kama-white no-underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-kama-ink"
+        >
+          {t('Ouvrir ma banque')} <ExternalLink className="size-5" aria-hidden />
+        </a>
+      </Etape>
+    </ol>
+  );
+}
+
+/** Étape 2 : autoriser le micro. C'est Kama (cette page de l'extension) qui demande le micro. */
 function EtapeMicro() {
+  const t = useTraduction();
   const [, setConsentement] = useReglage(reglageConsentementMicro);
   const [etat, setEtat] = useState<EtatMicro>('inconnu');
-  const section = useRef<HTMLLIElement>(null);
+  const etape = useRef<HTMLLIElement>(null);
 
   useEffect(() => {
     // Micro déjà autorisé pour Kama ?
@@ -115,10 +170,7 @@ function EtapeMicro() {
       })
       .catch(() => {});
     // Ouverte depuis la fenêtre Kama (« Autoriser le micro ») : on va droit à cette étape.
-    if (location.hash === '#micro') {
-      section.current?.scrollIntoView({ block: 'center' });
-      section.current?.querySelector('button')?.focus();
-    }
+    if (location.hash === '#micro') etape.current?.querySelector('button')?.focus();
   }, []);
 
   async function autoriser() {
@@ -133,65 +185,50 @@ function EtapeMicro() {
   }
 
   return (
-    <Etape ref={section} numero={3} titre="Autorise le micro" fait={etat === 'autorise'}>
-      <p className="m-0">Pour parler à Kama et lui poser tes questions.</p>
-      <p className="m-0 text-kama-ink/70">Ta voix est envoyée à Kama pour comprendre ta question. Elle n'est pas gardée.</p>
+    <Etape ref={etape} numero={2} titre={t('Autorise le micro')} fait={etat === 'autorise'}>
       {etat === 'autorise' ? (
         <p className="m-0 inline-flex items-center gap-2 font-semibold" role="status">
-          <Check className="size-5" aria-hidden /> Micro autorisé. Tu peux parler à Kama.
-          {location.hash === '#micro' && ' Retourne sur la page de ta banque.'}
+          <Check className="size-5" aria-hidden /> {t('Micro autorisé.')}
         </p>
+      ) : etat === 'inconnu' ? (
+        <button
+          type="button"
+          onClick={autoriser}
+          className="inline-flex min-h-12 cursor-pointer items-center gap-2 self-start rounded-full border-0 bg-kama-ink px-5 text-[17px] font-bold text-kama-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-kama-ink"
+        >
+          <Mic className="size-5" aria-hidden /> {t('Autoriser le micro')}
+        </button>
       ) : (
-        <>
-          <button
-            type="button"
-            onClick={autoriser}
-            className="inline-flex min-h-12 cursor-pointer items-center gap-2 self-start rounded-full border-0 bg-kama-ink px-5 text-[18px] font-bold text-kama-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-kama-ink"
-          >
-            <Mic className="size-5" aria-hidden /> Autoriser le micro
-          </button>
-          <p className="m-0 text-sm text-kama-ink/70">Chrome va demander : « Kama souhaite utiliser votre micro ». Clique sur « Autoriser ».</p>
-        </>
-      )}
-      {etat === 'refuse' && (
-        <p className="m-0 flex items-start gap-2 rounded-xl border-2 border-kama-error p-3" role="alert">
+        <p className="m-0 flex items-start gap-2 text-[15px]" role="alert">
           <MicOff className="mt-0.5 size-5 shrink-0 text-kama-error" aria-hidden />
-          <span>
-            Le micro est bloqué pour Kama. Clique sur l'icône du micro dans la barre d'adresse de cette page, choisis
-            « Autoriser », puis appuie encore sur « Autoriser le micro ».
-          </span>
+          {etat === 'absent'
+            ? t('Aucun micro trouvé. Branche un micro ou un casque, puis réessaie.')
+            : t("Micro bloqué. Clique sur l'icône du micro dans la barre d'adresse, puis « Autoriser ».")}
         </p>
       )}
-      {etat === 'absent' && (
-        <p className="m-0 flex items-start gap-2 rounded-xl border-2 border-kama-error p-3" role="alert">
-          <MicOff className="mt-0.5 size-5 shrink-0 text-kama-error" aria-hidden />
-          <span>Aucun micro trouvé. Branche un micro ou un casque, puis réessaie.</span>
-        </p>
-      )}
+      <p className="m-0 text-sm text-kama-ink/75">{t('Ta voix sert seulement à comprendre ta question. Elle n’est pas gardée.')}</p>
     </Etape>
   );
 }
 
+type PropsEtape = { numero: number; titre: string; fait?: boolean; children: ReactNode; ref?: Ref<HTMLLIElement> };
 
-const Etape = forwardRef<HTMLLIElement, { numero: number; titre: string; fait: boolean; children: ReactNode }>(
-  function Etape({ numero, titre, fait, children }, ref) {
-    return (
-      <li ref={ref} className="flex gap-4 rounded-2xl border border-kama-ink/10 bg-kama-white p-5 shadow-sm">
+function Etape({ numero, titre, fait = false, children, ref }: PropsEtape) {
+  const t = useTraduction();
+  return (
+    <li ref={ref} className="flex flex-col gap-3 rounded-2xl border border-kama-ink/10 bg-kama-white p-5 shadow-sm">
+      <h2 className="m-0 flex items-center gap-3 text-lg font-bold">
         <span
-          className={`grid size-10 shrink-0 place-items-center rounded-full text-lg font-bold ${fait ? 'bg-kama-orange text-kama-ink' : 'bg-kama-ink text-kama-white'}`}
+          className={`grid size-8 shrink-0 place-items-center rounded-full text-base font-bold ${fait ? 'bg-kama-orange text-kama-ink' : 'bg-kama-ink text-kama-white'}`}
           aria-hidden
         >
-          {fait ? <Check className="size-5" /> : numero}
+          {fait ? <Check className="size-4" /> : numero}
         </span>
-        <div className="flex flex-1 flex-col gap-3">
-          <h2 className="m-0 text-xl font-bold">
-            <span className="sr-only">Étape {numero} : </span>
-            {titre}
-            {fait && <span className="sr-only"> (fait)</span>}
-          </h2>
-          {children}
-        </div>
-      </li>
-    );
-  },
-);
+        <span className="sr-only">{t(`Étape ${numero} :`)} </span>
+        {titre}
+        {fait && <span className="sr-only"> {t('(fait)')}</span>}
+      </h2>
+      {children}
+    </li>
+  );
+}

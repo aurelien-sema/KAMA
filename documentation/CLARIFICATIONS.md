@@ -55,6 +55,8 @@ Chaque réponse porte un **badge de fiabilité** : « Vérifié » (issu du glos
 
 ### Choix de la langue (décidé le 2026-11-11)
 - **Langues proposées** : Ghomálá' et Pidgin, dans l'ordre alphabétique, chacune avec une indication de région simple (Ghomálá' — Ouest ; Pidgin — Nord-Ouest, Sud-Ouest). Pas d'option « Français » dans la liste.
+- **Langues à venir** (décidé le 2026-11-12) : Bamoun (Ouest, Noun) et Fulfulde (Nord, Adamaoua, Extrême-Nord) apparaissent dans tous les choix de langue avec la mention « Bientôt », sans pouvoir être choisies.
+- **Langue du navigateur** (décidé le 2026-11-12) : avant le choix d'une langue nationale, tout Kama s'affiche dans la langue du navigateur, en français ou en anglais (anglais si le navigateur est dans une autre langue). Après le choix, ce qui n'est pas encore traduit dans cette langue nationale reste dans la langue du navigateur, avec le badge « Pas encore traduit ». Les textes de la page de la banque restent tels qu'ils sont écrits.
 - **Aucune langue par défaut.** Tant qu'aucune langue n'est choisie, Kama demande d'abord la langue, à 3 endroits :
   1. la page de bienvenue ouverte à l'installation ;
   2. le popup (écran « Bienvenue ! Choisis ta langue ») ;

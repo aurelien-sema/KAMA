@@ -36,7 +36,7 @@ function Catalogue() {
         <h1 className="m-0 font-display text-2xl text-kama-ink">Kama — Catalogue des états</h1>
         <p className="m-0 mt-2 text-base text-kama-ink/80">
           Les {ETATS.length} états de la fenêtre, rendus avec les composants de l'extension (langue d'exemple :{' '}
-          {LANGUES[0].nom}).
+          {LANGUES[0]!.nom}).
         </p>
       </header>
       <h2 className="m-0 mb-4 font-display text-xl text-kama-ink">Popup</h2>
@@ -81,7 +81,7 @@ function Catalogue() {
 chargerPolices();
 ReactDOM.createRoot(document.getElementById('racine')!).render(
   <React.StrictMode>
-    <LangueCourante.Provider value={LANGUES[0]}>
+    <LangueCourante.Provider value={LANGUES[0]!}>
       <Catalogue />
     </LangueCourante.Provider>
   </React.StrictMode>,

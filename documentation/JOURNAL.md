@@ -1918,3 +1918,106 @@ Dimitri et Omar avaient construit « Parler à Kama » chacun de leur côté. Di
 | Omar | Committer la fusion |
 | Dimitri | Ajouter les nouvelles phrases au catalogue à faire valider ; héberger le serveur et donner son adresse HTTPS |
 | Équipe | Tester la voix de bout en bout avec les modèles installés |
+
+## 2026-11-12 — Kama dans la langue du navigateur (français ou anglais) ; bamoun et fulfulde « Bientôt »
+
+**Auteur :** Omar (réalisé par Claude Code, sur ses décisions)
+
+### En bref
+
+Avant le choix d'une langue nationale, Kama n'est plus en français par défaut : il parle la langue du navigateur, français ou anglais. Après le choix, ce qui n'est pas encore traduit reste dans la langue du navigateur. Le bamoun et le fulfulde sont annoncés dans tous les choix de langue, sans pouvoir être choisis.
+
+### Décisions d'Omar
+
+| Point | Décision |
+|---|---|
+| Navigateur ni en français ni en anglais | Anglais |
+| Textes pas encore traduits en langue nationale | Dans la langue du navigateur |
+| Étendue | Tout Kama, pas seulement l'accueil |
+| Bamoun et fulfulde | Dans tous les choix de langue, non activables |
+
+### Ce qui a été implémenté, expliqué simplement
+
+- **Détection** : Kama lit la langue du navigateur (`chrome.i18n.getUILanguage()`), sans aucune autorisation (`lib/secours.ts`, `lib/langue-secours.ts`).
+- **Dictionnaire anglais** (`config/anglais.ts`) : environ 250 phrases. Il reprend l'anglais déjà écrit par Dimitri dans `content-data/kama_interface.json`, et le frontend a écrit le reste.
+- **Fonctionnement** :
+  - la traduction se fait phrase par phrase ;
+  - les montants et les textes entre « » sont mis de côté puis remis tels quels, donc un montant n'est jamais touché (règle d'or n° 1) ;
+  - une phrase absente du dictionnaire reste en français.
+- **Branchement en 3 points seulement** :
+  - textes d'interface (`traduireLibelle`) ;
+  - réponses (`useReponse`) ;
+  - voix de lecture (`lireTexte`, qui remplace `lireEnFrancais`).
+  Tout ce qui passait déjà par la traduction de Dimitri en profite.
+- **Voix** : la voix du navigateur suit la langue du texte lu. Un texte de la page resté en français est lu avec une voix française.
+- **Page de bienvenue** : tous ses textes passent maintenant par la traduction. « Chrome va demander » devient « Ton navigateur va demander », pour Edge.
+- **Nom et description de Kama** dans `chrome://extensions` et à l'installation : en français ou en anglais (`public/_locales/fr` et `en`, avec l'anglais par défaut).
+- **Langue des pages pour les lecteurs d'écran** : l'attribut `lang` des pages de Kama et de sa fenêtre suit la langue du navigateur.
+- **Bamoun** (Ouest, Noun ; code `bax`) et **Fulfulde** (Nord, Adamaoua, Extrême-Nord ; code `fub`) :
+  - ils apparaissent dans la page de bienvenue, le popup et la fenêtre Kama, avec la mention « Bientôt » ;
+  - ce ne sont pas des boutons : on ne peut ni les choisir ni les atteindre au clavier ;
+  - une langue « Bientôt » n'est jamais active, même si elle était enregistrée.
+
+### Démarche utilisée
+
+- Test automatique `tests/secours.test.mjs` (9 cas) :
+  - montants identiques au caractère près ;
+  - textes entre guillemets ;
+  - singulier et pluriel ;
+  - phrase inconnue gardée en français ;
+  - dans tout le dictionnaire, les balises du français sont les mêmes que celles de l'anglais.
+- `npm test` : 92 sur 92 ; aucune erreur TypeScript ; version de développement et version jury construites.
+- **Parcours complet dans Chrome réglé en anglais, puis en français**, sur la Banque Démo : page de bienvenue, popup, choix de la langue, accord, explication d'un élément, « Expliquer cette page », résumé, « Parler à Kama », refus. Un script relève les phrases restées dans l'autre langue.
+  - En anglais : il ne reste que des textes de la page de la banque, laissés tels quels exprès.
+  - En français : rien.
+
+### Résultats et limites connues
+
+- Les libellés de la page cités entre guillemets restent ceux de la page (« Press “Valider le virement” yourself. ») : l'utilisateur retrouve ainsi le bouton.
+- Une nouvelle phrase ajoutée dans le code doit aussi être ajoutée à `config/anglais.ts`. Sinon elle reste en français, et la console de développement l'indique avec `[kama:en]`.
+- L'anglais du dictionnaire est à relire par l'équipe.
+
+### Ce que l'équipe doit faire ensuite
+
+| Qui | Quoi |
+|---|---|
+| Équipe | Relire l'anglais de `config/anglais.ts` |
+| Dimitri | Décider si l'anglais doit aussi passer par `content-data/` (source unique des textes) |
+| Équipe langues | Bamoun et fulfulde : textes et voix, pour les rendre activables (v2) |
+
+## 2026-11-12 — Nouvelle page d'accueil : un écran, langues côte à côte, étapes progressives
+
+**Auteur :** Omar (réalisé par Claude Code, sur ses consignes et sa décision « progressive »)
+
+### En bref
+
+La page d'accueil était trop chargée et demandait de faire défiler. Elle tient maintenant sur un seul écran :
+- un grand titre orange ;
+- les quatre langues côte à côte ;
+- les trois étapes, qui n'apparaissent qu'une fois la langue choisie.
+
+### Ce qui a été implémenté, expliqué simplement
+
+- **Titre** « Bienvenue ! Choisis ta langue. » en Krona One, grand et orange. L'orange sur blanc à cette taille respecte le contraste minimal de 3:1 pour les grands textes. La mascotte est posée sur un cercle crème.
+- **Langues en cartes horizontales**, 4 colonnes : nom, région et bouton d'écoute. La langue choisie a un contour orange et une coche. Bamoun et Fulfulde sont des boutons grisés et désactivés, sans aucune mention : le popup et la fenêtre Kama font pareil.
+- **Après le choix**, une rangée de 3 étapes courtes apparaît :
+  1. Épingle Kama (icônes puzzle puis épingle) ;
+  2. Autorise le micro (bouton, puis « Micro autorisé ») ;
+  3. Essaie Kama (« Ouvrir ma banque »).
+- **Textes retirés** : explications longues, phrase sur le changement de langue, mentions « Bientôt » / « Coming soon ». Le message sur la voix est raccourci : « Ta voix sert seulement à comprendre ta question. Elle n’est pas gardée. »
+- **Pourquoi la page n'était pas en pidgin** : ses textes n'existaient pas dans les textes pidgin de Dimitri. Kama ne peut pas les inventer (règle d'or n° 4), il montrait donc la langue du navigateur. Le titre réutilise une phrase déjà traduite et s'affiche en pidgin. Les autres phrases sont à demander à Dimitri (voir ci-dessous).
+
+### Démarche utilisée
+
+- Captures automatiques à 1366 × 768 et 1280 × 720, navigateur en français puis en anglais, avant et après le choix du pidgin. La page ne défile jamais (0 px de dépassement) et ne montre aucune erreur.
+- Aucune erreur TypeScript ; tests : 92 sur 92.
+
+### Phrases de l'accueil à faire traduire en pidgin (et en ghomálá')
+
+Kama t’explique ta banque en ligne dans ta langue. · Épingle Kama · En haut à droite de ton navigateur. · Autorise le micro · Autoriser le micro · Micro autorisé. · Ta voix sert seulement à comprendre ta question. Elle n’est pas gardée. · Essaie Kama · Ouvrir ma banque · Aucun micro trouvé. Branche un micro ou un casque, puis réessaie. · Micro bloqué. Clique sur l'icône du micro dans la barre d'adresse, puis « Autoriser ». · Ouest (Noun) · Nord, Adamaoua, Extrême-Nord
+
+### Ce que l'équipe doit faire ensuite
+
+| Qui | Quoi |
+|---|---|
+| Dimitri / locuteurs | Ajouter ces 13 phrases à content-data/kama_interface.json (pidgin, puis ghomálá') |

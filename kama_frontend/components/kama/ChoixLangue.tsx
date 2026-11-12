@@ -8,6 +8,7 @@
  */
 import { LANGUES, type IdLangue } from '@/config/langues';
 import { SpeakButton, TranslationBadge } from '@/components/kama/primitives';
+import { LanguesAVenir } from '@/components/kama/LanguesAVenir';
 import { useLangueCourante } from '@/lib/langue-courante';
 import { traduireKama, useTexte } from '@/lib/use-texte';
 
@@ -24,7 +25,7 @@ export function ChoixLangue({ onChoisir, onPasMaintenant }: Props) {
     <div className="flex flex-col gap-3">
       <div className="flex items-center gap-2">
         <h2 className="m-0 flex-1 text-xl font-bold text-kama-ink">{titre}</h2>
-        <SpeakButton texte={TITRE_FR} label={`${ecouterPrefixe} ${titre}`} />
+        <SpeakButton texte={titre} label={`${ecouterPrefixe} ${titre}`} />
       </div>
 
       <div className="flex flex-col gap-2">
@@ -41,6 +42,7 @@ export function ChoixLangue({ onChoisir, onPasMaintenant }: Props) {
             <SpeakButton texte={l.nom} label={`${ecouterPrefixe} ${l.nom}`} />
           </div>
         ))}
+        <LanguesAVenir />
       </div>
 
       <TranslationBadge />

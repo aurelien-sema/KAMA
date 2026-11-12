@@ -21,8 +21,10 @@ const origines = (mode: string) =>
 export default defineConfig({
   modules: ['@wxt-dev/module-react'],
   manifest: ({ mode }) => ({
-    name: 'Kama',
-    description: 'Kama explique ta banque en ligne dans ta langue, à l’oral et à l’écrit.',
+    // Nom et description dans la langue du navigateur (public/_locales/fr et en) ; anglais pour les autres langues.
+    name: '__MSG_nom__',
+    description: '__MSG_description__',
+    default_locale: 'en',
     // `offscreen` : document caché où Kama écoute le micro (aucun avertissement à l'installation).
     permissions: ['storage', 'offscreen'],
     key: CLE_PUBLIQUE,

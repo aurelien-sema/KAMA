@@ -16,6 +16,7 @@ import { ContenuReel, type VueReelle } from '@/components/kama/fenetre/reel';
 import { Consentement } from '@/components/kama/fenetre/parler';
 import { trouverLangue, type IdLangue } from '@/config/langues';
 import { LangueCourante, LectureAuto } from '@/lib/langue-courante';
+import { LANGUE_SECOURS } from '@/lib/langue-secours';
 import { lirePage, nomDecouverte, trouverDecouverte } from '@/lib/lecture-page';
 import { estMessageKama } from '@/lib/messages';
 import { enregistrerPositionOnglet, lirePositionOnglet, POSITION_PAR_DEFAUT, topBorne } from '@/lib/position-onglet';
@@ -257,7 +258,8 @@ export function KamaApp() {
   return (
     <LangueCourante.Provider value={langue}>
       <LectureAuto.Provider value={mode === 'audio' || vue?.type === 'parler'}>
-        <div ref={racine} className="kama-racine">
+        {/* Langue des textes de Kama pour les lecteurs d'écran (celle du navigateur, pas celle de la page). */}
+        <div ref={racine} className="kama-racine" lang={LANGUE_SECOURS}>
           <Pastilles lecture={lecture} onOuvrir={ouvrirPastille} />
           <Surlignage cible={surligne?.zone ?? null} onFin={() => setSurligne(null)} dansKama={dansKama} />
           <BarreSelection dansKama={dansKama} onExpliquer={(texte) => ouvrir({ type: 'selection', texte })} />
