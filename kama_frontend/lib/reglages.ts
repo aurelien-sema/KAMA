@@ -16,6 +16,15 @@ export const reglageMode = storage.defineItem<'texte' | 'audio'>('local:kama.mod
 export const reglageActif = storage.defineItem<boolean>('local:kama.actif', { fallback: true });
 
 /**
+ * L'utilisateur a accepté que sa voix soit envoyée à Kama pour comprendre sa question
+ * (message affiché au premier appui sur le micro). Seule l'acceptation est retenue :
+ * après un « Non merci », la question revient au prochain appui.
+ */
+export const reglageConsentementMicro = storage.defineItem<boolean>('local:kama.consentementMicro', {
+  fallback: false,
+});
+
+/**
  * Lit un réglage, suit ses changements (venus du popup ou de la page) et permet de le modifier.
  * Renvoie [valeur, modifier, chargé].
  */

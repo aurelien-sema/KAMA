@@ -10,6 +10,7 @@
  * supplémentaire n'est prévu) ; la liste des langues s'ouvre dans le popup (et non par-dessus),
  * pour ne jamais être coupée par le bord du popup.
  */
+import { VERSION_JURY } from '@/config/banques';
 import { useEffect, useRef, useState } from 'react';
 import { Check, ChevronDown, TriangleAlert, Type, Volume2 } from 'lucide-react';
 import { ChoixLangue } from '@/components/kama/ChoixLangue';
@@ -46,7 +47,8 @@ export function Popup() {
         if (ok) window.close();
       }}
       onPasMaintenant={() => window.close()}
-      onCatalogue={() => browser.tabs.create({ url: browser.runtime.getURL('/catalogue.html') })}
+      // Catalogue des états : outil de l'équipe, absent de la version livrée au jury.
+      onCatalogue={VERSION_JURY ? undefined : () => browser.tabs.create({ url: (browser.runtime.getURL as (chemin: string) => string)('/catalogue.html') })}
     />
   );
 }

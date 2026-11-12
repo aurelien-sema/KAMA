@@ -11,7 +11,7 @@ import { Surlignage } from '@/components/Surlignage';
 import { BarreSelection } from '@/components/BarreSelection';
 import { ChoixLangue } from '@/components/kama/ChoixLangue';
 import { KamaWindow, KAMA_WINDOW_HEIGHT } from '@/components/kama/fenetre/KamaWindow';
-import { TalkIdleContent } from '@/components/kama/fenetre/contents';
+import { useAssistant } from '@/components/Assistant';
 import { ContenuReel, type VueReelle } from '@/components/kama/fenetre/reel';
 import { trouverLangue, type IdLangue } from '@/config/langues';
 import { LangueCourante, LectureAuto } from '@/lib/langue-courante';
@@ -43,6 +43,7 @@ export function KamaApp() {
   const [surligne, setSurligne] = useState<{ zone: Element; nom: string } | null>(null);
 
   const lecture = useLecturePage(actif);
+  const assistant = useAssistant({ langue, lectureAuto: mode === 'audio' });
 
   const racine = useRef<HTMLDivElement>(null);
   const onglet = useRef<HTMLButtonElement>(null);
@@ -65,8 +66,16 @@ export function KamaApp() {
       setMenuOuvert(false);
       setVue(null);
       setSurligne(null);
+      assistant.reinitialiser();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [actif]);
+
+  // On quitte « Parler à Kama » pendant l'écoute : le micro est coupé.
+  useEffect(() => {
+    if (vue?.type !== 'parler' && assistant.ecoute) assistant.reinitialiser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [vue]);
 
   // Clavier : à l'ouverture, le focus va dans le menu puis dans la fenêtre.
   useEffect(() => {
@@ -89,6 +98,7 @@ export function KamaApp() {
 
   function fermerFenetre() {
     arreterLecture();
+    assistant.reinitialiser();
     setVue(null);
     setEnAttente(null);
     onglet.current?.focus();
@@ -102,6 +112,12 @@ export function KamaApp() {
       return;
     }
     setMenuOuvert((o) => !o);
+  }
+
+  /** Bouton micro de la fenêtre : depuis n'importe quel contenu, il passe à « Parler à Kama ». */
+  function appuiMicro() {
+    if (vue?.type !== 'parler') setVue({ type: 'parler' });
+    assistant.appuiMicro();
   }
 
   function choisirDansMenu(m: ModeKama) {
@@ -220,6 +236,8 @@ export function KamaApp() {
               key={cleDeVue(vue)}
               ref={fenetre}
               avecMicro={vue.type !== 'choix-langue'}
+              mic={vue.type === 'parler' ? assistant.mic : 'idle'}
+              onMic={appuiMicro}
               onClose={fermerFenetre}
               className="fixed right-14 z-[2147483647] -translate-y-1/2"
               style={{
@@ -230,7 +248,7 @@ export function KamaApp() {
               {vue.type === 'choix-langue' ? (
                 <ChoixLangue onChoisir={choisirLangue} onPasMaintenant={fermerFenetre} />
               ) : vue.type === 'parler' ? (
-                <TalkIdleContent />
+                assistant.contenu
               ) : (
                 <ContenuReel vue={vue} onShowMe={montrer} />
               )}

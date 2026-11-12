@@ -1199,3 +1199,185 @@ Les deux manques (1 et 5) dépendent des **textes en langue nationale**, pas du 
 |---|---|
 | Équipe langues | Priorité n° 1 : traduire et faire valider les gabarits (`config/gabarits.ts`), les explications d'étapes et d'erreurs (`config/page-test.ts`) en ghomálá' et en pidgin, et enregistrer les audios |
 | Dimitri | Priorité n° 2 : traduction en direct d'un message inédit (badge « Traduction automatique »), sans transmettre les données affichées : masquage des montants, noms et numéros avant l'envoi |
+
+## 2026-11-12 — Assistant « Parler à Kama » : micro, accord de l'utilisateur, envoi au serveur (mode simulation)
+
+**Auteur :** Omar
+
+### En bref
+
+« Parler à Kama » fonctionne de bout en bout, **jusqu'à la compréhension de la question** :
+- au premier appui, Kama demande l'accord de l'utilisateur ;
+- il écoute, puis s'arrête tout seul quand la personne se tait ;
+- il prépare la voix au format exigé par le serveur et l'envoie par le service worker ;
+- il affiche la conversation.
+
+Le serveur n'étant pas encore en ligne, le service worker répond en **mode simulation**. Les réponses aux questions ne sont pas encore faites : décision d'Omar, « ce n'est pas encore le moment ».
+
+### Ce qui a été implémenté, expliqué simplement
+
+- **Enregistrement** (`lib/enregistreur.ts`) : WAV PCM 16 bits, 16 kHz, mono, comme le demande `backend/ARCHITECTURE.md`.
+  - Écoute de 30 s au plus.
+  - Arrêt automatique après 1,6 s de silence une fois que la personne a parlé, ou à l'appui sur le bouton.
+  - Moins de 0,5 s, ou aucun son : « Je n'ai rien entendu ».
+  - La voix reste en mémoire et le micro est coupé dès la fin.
+- **Barres « Je t'écoute »** : elles suivent le vrai niveau du micro. Ce n'est pas une animation en boucle.
+- **Accord au premier appui** (décision d'Omar) :
+  - message « Ta voix est envoyée à Kama pour comprendre ta question. Elle n'est pas gardée. », avec [D'accord] [Non merci] ;
+  - seule l'acceptation est retenue (`kama.consentementMicro`) ; après « Non merci », la question revient au prochain appui.
+- **Envoi** (`lib/messages.ts`, `entrypoints/background.ts`) :
+  - la page transmet la voix au service worker, seul autorisé à appeler le serveur ;
+  - le service worker appelle `POST /v1/voice/intent` avec l'en-tête `X-Kama-Lang` (`bbj` ou `wes`), avec une limite de 15 s.
+- **Adresse du serveur** (`config/serveur.ts`) : `SERVEUR_KAMA = null` tant qu'il n'est pas hébergé, ce qui active le mode simulation. Quand on écrira l'adresse, l'autorisation réseau sera ajoutée toute seule au manifest pour ce seul serveur.
+- **Conversation** (`components/Assistant.tsx`) :
+  - bulle « Message vocal · 3 s » (le serveur ne renvoie pas le texte de la question, seulement l'intention) ;
+  - « Kama réfléchit », puis la réponse ;
+  - la conversation est effacée à la fermeture de la fenêtre.
+- **Bouton micro** : il marche depuis n'importe quel contenu de la fenêtre et passe alors à « Parler à Kama ».
+- **Messages d'erreur simples**, avec « Réessayer » quand c'est utile :
+  - micro refusé (« Clique sur l'icône du micro dans la barre d'adresse… ») ;
+  - pas de micro ;
+  - pas de réseau ;
+  - serveur occupé ;
+  - trop de questions ;
+  - voix non comprise ;
+  - voix pas encore prise en charge par le serveur (`asr_unavailable`) ;
+  - extension mise à jour.
+
+### Démarche utilisée
+
+- **Lecture du travail du back** (`backend/ARCHITECTURE.md`, `contracts/openapi.json`, `content-data/intents.json`). Le serveur ne fait pas de discussion libre : il reconnaît la question et renvoie une **intention** (7 aujourd'hui). La réponse se construit dans l'extension, avec les montants lus dans la page.
+- **Discussion avec Omar** :
+  - pas de boutons de questions toutes prêtes : on reste sur le micro, comme dans la maquette Lovable ;
+  - le contenu des réponses sera traité plus tard.
+- **Test automatique** dans Chrome for Testing, avec un **faux micro** (son de 1,5 s suivi d'un silence) :
+  - accord → écoute → arrêt automatique → envoi → réponse simulée, sans erreur dans la page (captures 17 à 19) ;
+  - le son réellement envoyé par l'extension a été récupéré dans le service worker, puis passé aux contrôles du serveur (bibliothèque `wave`) : mono, 16 bits, 16 kHz, 3,46 s. Il serait donc accepté.
+
+### Résultats et limites connues
+
+- Les compilations Chrome et Edge réussissent, sans erreur TypeScript.
+- **Autorisation du micro** : le navigateur la demande au nom du site visité (« safinum.cm veut utiliser votre micro »), car l'écoute se fait dans la page. C'est la solution la plus simple, et elle a été testée. L'alternative (document caché de l'extension, « offscreen ») afficherait « Kama », mais demande une page d'autorisation en plus.
+- **Pas encore fait** : les réponses aux intentions, et la relecture des réponses en ghomálá' / pidgin (audios à venir).
+- **Mode simulation** : toute question reçoit « J'ai bien reçu ta question… le serveur n'est pas encore branché ».
+
+### Ce que l'équipe doit faire ensuite
+
+| Qui | Quoi |
+|---|---|
+| Dimitri | Héberger le serveur et donner son adresse HTTPS (à écrire dans `config/serveur.ts`) ; brancher le moteur de voix de `/v1/voice/intent` |
+| Dimitri | Mettre à jour `backend/ARCHITECTURE.md` : « Il te manque 3 000 FCFA » n'est plus calculé (décision du 2026-11-11) |
+| Omar (livraison) | Fixer la `key` du manifest, pour que l'identifiant de l'extension soit le même chez le jury et autorisé par le serveur (`KAMA_ALLOWED_ORIGINS`) |
+| Omar et l'équipe | Décider plus tard des réponses de l'assistant (intentions à ajouter, textes à valider) |
+
+### Composants tiers utilisés
+
+| Composant | Usage | Licence |
+|---|---|---|
+| `@puppeteer/browsers` | Réinstallation de Chrome for Testing pour les tests (outil de test, non livré) | Apache 2.0 |
+
+## 2026-11-12 — Le micro appartient à Kama, plus au site de la banque ; page de bienvenue
+
+**Auteur :** Omar
+
+### En bref
+
+Décision d'Omar : « c'est à Kama que l'on parle, pas au site de Safinum ».
+- Le micro est maintenant ouvert dans un **document caché de l'extension**, et plus dans la page de la banque.
+- Chrome demande donc « **Kama** souhaite utiliser votre micro », et la banque n'a **jamais** accès au micro.
+- L'autorisation se donne une fois, sur la nouvelle **page de bienvenue**, qui s'ouvre toute seule à l'installation.
+
+### Ce qui a été implémenté, expliqué simplement
+
+- **Document caché « micro »** (`entrypoints/micro/`, permission `offscreen`, sans avertissement à l'installation). C'est lui qui enregistre la voix, avec le même module qu'avant (`lib/enregistreur.ts`).
+- **Circulation** (`lib/messages.ts`, `lib/micro.ts`, `entrypoints/background.ts`) :
+  - la page demande « écoute » au service worker par un canal dédié ;
+  - le service worker fait écouter le document caché, renvoie à la page seulement le niveau du son et la durée, puis envoie la voix au serveur ;
+  - **la voix ne passe jamais par la page de la banque** ;
+  - fermer la fenêtre Kama coupe le micro et efface la voix.
+- **Page de bienvenue** (`entrypoints/bienvenue/`, `components/bienvenue/Bienvenue.tsx`), ouverte à l'installation. Elle confirme l'installation, puis donne 4 étapes :
+  1. épingler l'icône (pièce de puzzle, puis épingle) ;
+  2. choisir sa langue : c'est le 3e endroit prévu, et il n'y a pas de langue par défaut ;
+  3. autoriser le micro, avec le texte d'accord sur l'envoi de la voix (un clic sur « Autoriser » vaut aussi cet accord) ;
+  4. ouvrir la page de la banque.
+- **Micro pas encore autorisé** : la fenêtre dit « Kama n'a pas encore le droit d'utiliser le micro » et propose « Autoriser le micro », qui ouvre la page de bienvenue directement sur l'étape 3 (`bienvenue.html#micro`).
+
+### Démarche utilisée
+
+- Il n'existe pas de maquette Lovable pour la page de bienvenue (seul l'écran de langue du popup existe). Elle reprend la charte et les éléments de Kama : gros boutons de langue de 56 px, bouton d'écoute, badge, icônes lucide.
+- **Tests automatiques** dans Chrome for Testing :
+  - la page de bienvenue s'ouvre à l'installation ;
+  - choix de la langue → autorisation → écoute par le document caché → réponse simulée, sans erreur ;
+  - **avec refus du micro**, Kama propose « Autoriser le micro », qui ouvre la bonne étape ;
+  - **la page de la banque n'obtient jamais l'accès au micro** : son état reste « prompt », jamais « granted ».
+- **Défaut trouvé et corrigé** : Chrome réduit d'office le texte des pages d'extension à 75 % (12 px). La page de bienvenue fixe sa propre taille (16 px).
+
+### Résultats et limites connues
+
+- Compilation Chrome et Edge réussie, sans erreur TypeScript.
+- **Firefox** ne connaît pas les documents cachés (`offscreen`). Il faudra une autre solution le jour où on fera Firefox.
+- Si le micro était déjà autorisé avant l'installation (réinstallation), l'accord sur l'envoi de la voix est redemandé dans la fenêtre au premier appui.
+
+### Ce que l'équipe doit faire ensuite
+
+| Qui | Quoi |
+|---|---|
+| Omar | Tester dans un vrai Chrome : retirer Kama, puis le recharger pour voir la page de bienvenue et la demande « Kama souhaite utiliser votre micro » |
+
+## 2026-11-12 — 1 banque = 1 fichier, banque fictive « Banque Démo », version jury
+
+**Auteur :** Omar (réalisé par Claude Code en son absence, avec la consigne « prends les meilleures décisions » ; les points sensibles sont laissés à sa décision)
+
+### En bref
+
+Suite aux demandes de Dimitri :
+- Kama décrit chaque banque dans **son propre fichier** ;
+- une **2e banque, fictive**, prouve qu'il s'adapte à une autre page sans changer son code ;
+- une **version jury** de l'extension est produite pour Chrome et Edge, sans les pages locales de l'équipe ni le catalogue.
+
+### Ce qui a été implémenté, expliqué simplement
+
+- **`config/banques/`** remplace `config/page-test.ts` :
+  - `types.ts` : ce qu'il faut décrire pour une banque ;
+  - `safinum.ts` : la page des organisateurs, contenu inchangé ;
+  - `demo.ts` : la banque fictive ;
+  - `index.ts` : la liste des banques, et le choix de la banque selon l'adresse de la page.
+- Les explications restent écrites **une seule fois, par rôle** (solde, frais, total…). Chaque banque dit seulement quels textes de **sa** page jouent ces rôles.
+- Les erreurs sans code sont reconnues par leur message, avec une règle propre à chaque banque (`erreursParMessage`).
+- **Banque inconnue** (adresse sans fichier) : Kama fonctionne quand même. Il repère seul les montants, les alertes et les nouveaux messages, et décrit l'écran.
+- **Banque Démo** (`kama_frontend/banque-demo/index.html`, lancée avec `npm run banque-demo`, sur http://localhost:5180). Elle est volontairement différente de Safinum :
+  - autres mots : « Commission », « Montant total prélevé », « Valider le virement », « Opération refusée / Provision insuffisante » ;
+  - montants écrits « 25.500 XAF » ;
+  - autre mise en page ;
+  - un bouton de démonstration affiche un nouveau message de la banque ;
+  - aucune donnée réelle.
+- **Version jury** (`npm run build:jury`) → `.output/chrome-mv3-jury` et `.output/edge-mv3-jury`. Elle ne contient ni `localhost`, ni la Banque Démo, ni le catalogue des états (ni la page, ni son lien dans le popup). Vérifié dans les fichiers produits.
+- **Correction** : « 1 entrées » devient « 1 entrée » dans le résumé des transactions.
+
+### Démarche utilisée
+
+- **Tests** :
+  - **Safinum**, tout le parcours et le scénario 2 : rien ne change ;
+  - **Banque Démo** avec l'extension chargée :
+    - pastilles sur Solde du compte, Montant du virement, Commission, Montant total prélevé et Valider le virement ;
+    - « Expliquer cette page » et « Montre-moi » ;
+    - Commission : « Commission : 500 XAF… Au total, 25.500 XAF » (montants recopiés tels quels) ;
+    - refus « Provision insuffisante » reconnu et expliqué ;
+    - nouveau message détecté ;
+    - résumé des 3 opérations ;
+    - aucune erreur dans la page.
+- **Vérification** : le frontend n'envoie aujourd'hui **aucun texte** au serveur. Seule la voix part, et seulement si l'adresse du serveur est configurée. Le masquage ne sera nécessaire qu'au moment de brancher la traduction.
+
+### Résultats et limites connues
+
+- Quatre compilations réussies, sans erreur TypeScript : Chrome, Edge, Chrome jury, Edge jury.
+- **Firefox n'est pas fait.** Il ne connaît pas le document caché qui sert au micro.
+- **Laissés à la décision d'Omar** : explications quand la page est en anglais ; traduction des libellés des transactions ; masquage des informations sensibles avant traduction ; Firefox.
+
+### Ce que l'équipe doit faire ensuite
+
+| Qui | Quoi |
+|---|---|
+| Omar | Décider des 4 points ci-dessus |
+| Omar | Essayer la Banque Démo : `npm run banque-demo` dans `kama_frontend`, puis http://localhost:5180 avec l'extension de développement (`.output/chrome-mv3`) |
+| Équipe | Pour ajouter une banque : copier `config/banques/demo.ts`, remplacer les libellés, l'inscrire dans `config/banques/index.ts` |
