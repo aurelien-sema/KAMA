@@ -1,12 +1,13 @@
 /**
- * Adresse du serveur de Kama (dossier `backend/`, contrat dans backend/contracts/openapi.json).
+ * Adresse du serveur intermédiaire de Kama (traduction, voix, reconnaissance des commandes).
  *
- * `null` = serveur pas encore en ligne : Kama fonctionne en MODE SIMULATION. La voix est bien
- * enregistrée et transmise au service worker, qui répond « simulation » au lieu d'appeler le
- * serveur. Quand le serveur sera hébergé, écrire ici son adresse HTTPS (sans « / » final) :
- * c'est le seul changement à faire côté extension, l'autorisation réseau en découle.
+ * Aucune clé ni secret ici : n'importe qui peut décompresser l'extension (sécurité). Le serveur garde les modèles.
+ * En production l'adresse est en HTTPS : `WXT_KAMA_API=https://kama.exemple.com npm run build`.
+ * Par défaut, le serveur local lancé par `python -m app` (développement et démonstration sur un seul ordinateur).
  */
-export const SERVEUR_KAMA: string | null = null;
+export const ADRESSE_PAR_DEFAUT = 'http://127.0.0.1:8000';
+export const URL_SERVEUR: string = (import.meta.env.WXT_KAMA_API as string | undefined) ?? ADRESSE_PAR_DEFAUT;
 
-/** Au-delà, la demande est abandonnée et Kama propose « Réessayer ». */
-export const DELAI_SERVEUR_MS = 15000;
+/** Délais maximaux avant de dire « pas de connexion » (millisecondes). */
+// La voix de synthèse tourne sur processeur : une phrase longue peut prendre plus de 10 s sur une petite machine.
+export const DELAIS = { traduction: 8000, voix: 45000, reconnaissance: 15000, capacites: 4000 } as const;

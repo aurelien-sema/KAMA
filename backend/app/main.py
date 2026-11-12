@@ -26,7 +26,7 @@ def _capabilities(services: Services) -> Capabilities:
             name=name,
             translation_from=sorted(s for s in ("fr", "en") if f"{s}>{code}" in engines.translation),
             asr=code in engines.asr,
-            tts=code in engines.tts,
+            tts=code in engines.tts or code in engines.clips,
         )
         for code, name in engines.languages.items()
     ]

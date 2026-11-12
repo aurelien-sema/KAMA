@@ -118,7 +118,7 @@ Chaque réponse porte un **badge de fiabilité** : « Vérifié » (issu du glos
 ### P1 — important
 - [x] Barre de sélection de texte.
 - [x] Résumer mes transactions.
-- [ ] Parler à Kama (micro → réponse audio). *(Micro écouté par Kama, accord, envoi au serveur et réponses aux 7 intentions avec les montants de la page : faits, en mode simulation tant que le serveur n'est pas en ligne. Autres questions : modèle de langue à intégrer avec l'équipe.)*
+- [ ] Parler à Kama (micro → réponse audio). *(Micro écouté par Kama, accord, vérification de la voix disponible auprès du serveur, réponses aux 7 intentions avec les montants de la page, traduites et lues à voix haute : faits. Reste : tester avec les modèles de voix installés. Autres questions : modèle de langue à intégrer avec l'équipe.)*
 - [ ] Badges de fiabilité. *(Affichés ; seul « Pas encore traduit » sert tant que les textes validés ne sont pas fournis.)*
 - [x] Page de bienvenue ouverte automatiquement à l'installation (`chrome.runtime.onInstalled`) : confirme l'installation, montre comment épingler l'icône, choix de la langue, lien vers la page de test.
 
@@ -128,7 +128,7 @@ Chaque réponse porte un **badge de fiabilité** : « Vérifié » (issu du glos
 
 ### Livraison au jury
 - [x] Version jury : `npm run build:jury` (Chrome et Edge), sans les pages locales de l'équipe ni le catalogue des états (dossiers `.output/chrome-mv3-jury` et `.output/edge-mv3-jury`).
-- [ ] Fixer la `key` du manifest (identifiant stable, autorisé par le serveur).
+- [x] Fixer la `key` du manifest (identifiant stable, autorisé par le serveur). *(Fait par Dimitri ; l’identifiant doit figurer dans `KAMA_ALLOWED_ORIGINS` du serveur.)*
 - [ ] Zip avec cette structure exacte :
   ```
   Kama_Installation.zip

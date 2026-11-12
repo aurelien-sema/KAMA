@@ -8,16 +8,23 @@
  */
 import { LANGUES, type IdLangue } from '@/config/langues';
 import { SpeakButton, TranslationBadge } from '@/components/kama/primitives';
+import { useLangueCourante } from '@/lib/langue-courante';
+import { traduireKama, useTexte } from '@/lib/use-texte';
+
+const TITRE_FR = 'Bienvenue ! Choisis ta langue.';
 
 type Props = { onChoisir: (id: IdLangue) => void; onPasMaintenant: () => void };
 
 export function ChoixLangue({ onChoisir, onPasMaintenant }: Props) {
-  const titre = 'Bienvenue ! Choisis ta langue';
+  const langue = useLangueCourante();
+  const titre = useTexte(TITRE_FR);
+  const pasMaintenant = useTexte('Pas maintenant');
+  const ecouterPrefixe = useTexte('Écouter :');
   return (
     <div className="flex flex-col gap-3">
       <div className="flex items-center gap-2">
         <h2 className="m-0 flex-1 text-xl font-bold text-kama-ink">{titre}</h2>
-        <SpeakButton texte={titre} label={`Écouter : ${titre}`} />
+        <SpeakButton texte={TITRE_FR} label={`${ecouterPrefixe} ${titre}`} />
       </div>
 
       <div className="flex flex-col gap-2">
@@ -29,9 +36,9 @@ export function ChoixLangue({ onChoisir, onPasMaintenant }: Props) {
               className="flex min-h-14 flex-1 cursor-pointer flex-col items-start justify-center rounded-l-xl border-0 bg-transparent py-1.5 pl-3 text-left text-kama-ink hover:bg-kama-cream focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-kama-ink"
             >
               <span className="text-[17px] font-bold leading-tight">{l.nom}</span>
-              <span className="text-sm leading-tight text-kama-ink/70">{l.region}</span>
+              <span className="text-sm leading-tight text-kama-ink/70">{traduireKama(langue?.code, l.region)}</span>
             </button>
-            <SpeakButton texte={l.nom} label={`Écouter : ${l.nom}`} />
+            <SpeakButton texte={l.nom} label={`${ecouterPrefixe} ${l.nom}`} />
           </div>
         ))}
       </div>
@@ -43,7 +50,7 @@ export function ChoixLangue({ onChoisir, onPasMaintenant }: Props) {
         onClick={onPasMaintenant}
         className="hit-44 cursor-pointer self-start rounded-full border-0 bg-transparent px-2 text-sm font-semibold text-kama-ink underline underline-offset-4 hover:bg-kama-cream focus-visible:outline-2 focus-visible:outline-kama-ink"
       >
-        Pas maintenant
+        {pasMaintenant}
       </button>
     </div>
   );

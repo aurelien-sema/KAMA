@@ -2,9 +2,11 @@
  * Petits éléments communs à toutes les interfaces Kama.
  * Repris des maquettes Lovable (projets « fenêtre Kama » et « onglet / sélection »).
  */
+import { useState } from 'react';
 import { Volume2 } from 'lucide-react';
-import { lireEnFrancais } from '@/lib/voix';
 import { useLangueCourante } from '@/lib/langue-courante';
+import { ecouterTexte } from '@/lib/ecouter';
+import { useTexte } from '@/lib/use-texte';
 
 /**
  * Adresse du logo, calculée une seule fois au chargement du script.
@@ -34,24 +36,49 @@ export function KamaLogo({ taille = 32 }: { taille?: number }) {
  */
 export function TranslationBadge() {
   const langue = useLangueCourante();
+  const aVerifier = useTexte('à vérifier');
+  const aFournir = useTexte('Traduction à fournir');
   return (
     <span className="inline-flex items-center self-start rounded-full border border-kama-ink/20 bg-kama-cream px-1.5 py-0.5 text-[11px] font-semibold text-kama-ink">
-      {langue ? `${langue.nom} – traduction à fournir` : 'Traduction à fournir'}
+      {langue ? `${langue.nom} – ${aVerifier}` : aFournir}
     </span>
   );
 }
 
 /** Bouton haut-parleur discret (fond blanc, crème au survol), 44 × 44 px. Lit `texte` à voix haute. */
 export function SpeakButton({ texte, label }: { texte: string; label: string }) {
+  const langue = useLangueCourante();
+  const [note, setNote] = useState(false);
+  const noteFrancais = useTexte('Lecture en français');
+
+  async function lire() {
+    setNote(false);
+    const resultat = await ecouterTexte(texte, langue);
+    if (resultat === 'francais') {
+      setNote(true);
+      window.setTimeout(() => setNote(false), 5000);
+    }
+  }
+
   return (
-    <button
-      type="button"
-      onClick={() => lireEnFrancais(texte)}
-      aria-label={label}
-      title={label}
-      className="hit-44 grid shrink-0 cursor-pointer place-items-center rounded-full border-0 bg-transparent text-kama-ink hover:bg-kama-cream focus-visible:outline-2 focus-visible:outline-kama-ink"
-    >
-      <Volume2 className="size-5" aria-hidden />
-    </button>
+    <span className="relative inline-flex shrink-0">
+      <button
+        type="button"
+        onClick={() => void lire()}
+        aria-label={label}
+        title={label}
+        className="hit-44 grid shrink-0 cursor-pointer place-items-center rounded-full border-0 bg-transparent text-kama-ink hover:bg-kama-cream focus-visible:outline-2 focus-visible:outline-kama-ink"
+      >
+        <Volume2 className="size-5" aria-hidden />
+      </button>
+      {note && (
+        <span
+          role="status"
+          className="absolute right-0 top-full z-10 mt-1 whitespace-nowrap rounded-md bg-kama-ink px-2 py-1 text-[11px] font-medium text-kama-white shadow"
+        >
+          {noteFrancais}
+        </span>
+      )}
+    </span>
   );
 }

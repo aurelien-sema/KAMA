@@ -44,7 +44,14 @@ TEMPLATES = {
         },
     ]
 }
-INTENTS = {"intents": {"ask_balance": {"bbj": ["solde kama"], "fr": ["mon solde"]}, "repeat": {"bbj": ["encore"]}}}
+INTENTS = {
+    "intents": {
+        "ask_balance": {"bbj": ["solde kama"], "fr": ["mon solde"], "wes": ["how much money i get"]},
+        "ask_fees": {"wes": ["na how much dem go take"]},
+        "ask_total": {"wes": ["how much go comot"]},
+        "repeat": {"bbj": ["encore"], "wes": ["talk am again"]},
+    }
+}
 
 
 class FakeTranslator:

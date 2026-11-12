@@ -12,7 +12,9 @@
     "build:jury": "wxt build --mode jury && wxt build -b edge --mode jury",
     "banque-demo": "node scripts/banque-demo.mjs",
     "compile": "tsc --noEmit",
-    "postinstall": "wxt prepare"
+    "postinstall": "wxt prepare",
+    "test": "node --test tests/*.test.mjs",
+    "phrases": "node scripts/phrases-fenetre.mjs"
   },
   "dependencies": {
     "lucide-react": "^1.70.0",

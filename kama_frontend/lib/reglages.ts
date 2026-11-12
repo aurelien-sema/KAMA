@@ -5,7 +5,6 @@
 import { useEffect, useState } from 'react';
 import { storage, type WxtStorageItem } from 'wxt/utils/storage';
 import type { IdLangue } from '@/config/langues';
-import type { Intention } from '@/lib/messages';
 
 /** Langue choisie. `null` = pas encore choisie : Kama la demande avant tout le reste. */
 export const reglageLangue = storage.defineItem<IdLangue | null>('local:kama.langue', { fallback: null });
@@ -16,6 +15,9 @@ export const reglageMode = storage.defineItem<'texte' | 'audio'>('local:kama.mod
 /** Kama activé ou désactivé. Désactivé : Kama n'ajoute plus rien dans les pages. */
 export const reglageActif = storage.defineItem<boolean>('local:kama.actif', { fallback: true });
 
+/** Consentement donné au premier usage : aucune fonction ne démarre avant. Jamais envoyé nulle part. */
+export const reglageConsentement = storage.defineItem<boolean>('local:kama.consentement', { fallback: false });
+
 /**
  * L'utilisateur a accepté que sa voix soit envoyée à Kama pour comprendre sa question
  * (message affiché au premier appui sur le micro). Seule l'acceptation est retenue :
@@ -23,15 +25,6 @@ export const reglageActif = storage.defineItem<boolean>('local:kama.actif', { fa
  */
 export const reglageConsentementMicro = storage.defineItem<boolean>('local:kama.consentementMicro', {
   fallback: false,
-});
-
-/**
- * OUTIL DE L'ÉQUIPE (absent de la version jury) : tant que le serveur n'est pas branché, la
- * simulation répond cette intention à toute question vocale. Choisie dans le catalogue des états.
- * `null` = la simulation dit seulement qu'elle a reçu la question.
- */
-export const reglageIntentionSimulee = storage.defineItem<Intention | null>('local:kama.dev.intentionSimulee', {
-  fallback: null,
 });
 
 /**

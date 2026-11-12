@@ -62,7 +62,7 @@ export function intentionConnue(valeur: unknown): Intention {
  * ou `reseau` (pas de connexion, serveur muet).
  */
 export type ResultatIntention =
-  | { ok: true; intention: Intention; confiance: number; simulation: boolean }
+  | { ok: true; intention: Intention; confiance: number }
   | { ok: false; code: string };
 
 /** Erreurs d'accès au micro. `refuse` : Kama n'a pas (encore) l'autorisation du micro. */

@@ -1,6 +1,6 @@
 # Modèles retenus
 
-Ce dossier contient les meilleurs modèles de traduction testés. Les poids ne sont pas envoyés sur GitHub : un fichier ne peut pas y dépasser 100 Mo, et ces modèles pèsent jusqu'à 2,3 Go.
+Ce dossier présente les meilleurs modèles de traduction testés. Leurs poids se trouvent dans le sous-dossier `poids/`, qui n'est pas envoyé sur GitHub : un fichier ne peut pas y dépasser 100 Mo, et ces modèles pèsent jusqu'à 2,3 Go.
 
 Pour les récupérer depuis la racine du dépôt :
 
@@ -26,3 +26,15 @@ python models/fetch_models.py pidgin    # pour travailler sur le pidgin
 | Helsinki-NLP/opus-mt-fr-en et opus-mt-en-fr | français ↔ anglais | Non testés | Voir leur fiche | Passage par l'anglais pour le pidgin |
 
 Aucun de ces modèles n'est assez fiable pour traduire seul une phrase bancaire. Les notes complètes sont dans `evaluation/results/summary.csv`.
+
+## Modèles de voix (hors dépôt)
+
+| Dossier dans `models/poids/` | Rôle | Source | Licence |
+|---|---|---|---|
+| `asr/omnilingual-ctc-300m-onnx` | Reconnaissance vocale pidgin et Ghomala | `OpenVoiceOS/omnilingual-asr-ctc-300m-onnx` (Hugging Face) | Apache 2.0 |
+| `tts/mms-tts-pcm` | Synthèse vocale (pidgin nigérian, sans ajustement) | `facebook/mms-tts-pcm` | CC-BY-NC 4.0, non commercial |
+| `audio/wes/` | Voix pré-générée et validée des textes de la page de test | Générée par `backend/scripts/audio_catalogue.py` | Voix d'une personne : jamais sur GitHub |
+
+**Pour récupérer les modèles de voix** (par exemple pour un collaborateur) : `python models/telecharger_voix.py` télécharge la synthèse (145 Mo) et la reconnaissance depuis Hugging Face. Ils ne sont pas dans Git, car un fichier GitHub ne peut pas dépasser 100 Mo et le dépôt est public. Les extraits pré-générés se recréent ensuite avec `backend/scripts/audio_catalogue.py synthetiser` (même voix, même résultat).
+
+Le téléchargement des jeux d'essai se fait avec `evaluation/download_stt.py`. Les jeux Common Voice se téléchargent sur Mozilla Data Collective : leurs conditions interdisent de les republier, ils restent hors du dépôt.

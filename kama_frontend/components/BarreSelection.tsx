@@ -10,7 +10,9 @@
 import { useEffect, useState } from 'react';
 import { MessageCircleQuestion, Volume2 } from 'lucide-react';
 import { KamaLogo } from '@/components/kama/primitives';
-import { lireEnFrancais } from '@/lib/voix';
+import { useLangueCourante } from '@/lib/langue-courante';
+import { useTexte } from '@/lib/use-texte';
+import { ecouterTexte } from '@/lib/ecouter';
 
 const HAUTEUR = 52;
 const LARGEUR = 270;
@@ -20,7 +22,13 @@ const LONGUEUR_MAX = 500;
 type Props = { dansKama: (e: Event) => boolean; onExpliquer: (texte: string) => void };
 
 export function BarreSelection({ dansKama, onExpliquer }: Props) {
+  const langue = useLangueCourante();
   const [barre, setBarre] = useState<{ texte: string; top: number; left: number } | null>(null);
+  const [note, setNote] = useState<string | null>(null);
+  const barreLabel = useTexte('Kama : texte sélectionné');
+  const expliquer = useTexte('Expliquer');
+  const ecouter = useTexte('Écouter');
+  const noteFrancais = useTexte('Lecture en français');
 
   useEffect(() => {
     function verifier(e: Event) {
@@ -33,6 +41,7 @@ export function BarreSelection({ dansKama, onExpliquer }: Props) {
         const dansUnChamp = !!actif && (actif.tagName === 'INPUT' || actif.tagName === 'TEXTAREA' || (actif as HTMLElement).isContentEditable);
         if (!selection || selection.rangeCount === 0 || selection.isCollapsed || texte.length < 2 || dansUnChamp) {
           setBarre(null);
+          setNote(null);
           return;
         }
         const plage = selection.getRangeAt(0);
@@ -40,14 +49,21 @@ export function BarreSelection({ dansKama, onExpliquer }: Props) {
         let top = r.top - ECART - HAUTEUR;
         if (top < ECART) top = r.bottom + ECART;
         const left = Math.min(Math.max(ECART, r.left), window.innerWidth - LARGEUR - ECART);
+        setNote(null);
         setBarre({ texte: texte.slice(0, LONGUEUR_MAX), top, left });
       }, 0);
     }
     function siVide() {
       const s = document.getSelection();
-      if (!s || s.isCollapsed) setBarre(null);
+      if (!s || s.isCollapsed) {
+        setBarre(null);
+        setNote(null);
+      }
     }
-    const masquer = () => setBarre(null);
+    const masquer = () => {
+      setBarre(null);
+      setNote(null);
+    };
 
     document.addEventListener('mouseup', verifier);
     document.addEventListener('keyup', verifier);
@@ -71,7 +87,7 @@ export function BarreSelection({ dansKama, onExpliquer }: Props) {
   return (
     <div
       role="toolbar"
-      aria-label="Kama : texte sélectionné"
+      aria-label={barreLabel}
       // Garder la sélection de la page quand on appuie sur la barre.
       onMouseDown={(e) => e.preventDefault()}
       style={{ top: barre.top, left: barre.left }}
@@ -84,13 +100,29 @@ export function BarreSelection({ dansKama, onExpliquer }: Props) {
         onClick={() => {
           onExpliquer(barre.texte);
           setBarre(null);
+          setNote(null);
         }}
       >
-        <MessageCircleQuestion className="size-4" aria-hidden /> Expliquer
+        <MessageCircleQuestion className="size-4" aria-hidden /> {expliquer}
       </button>
-      <button type="button" className={bouton} onClick={() => lireEnFrancais(barre.texte)}>
-        <Volume2 className="size-4" aria-hidden /> Écouter
+      <button
+        type="button"
+        className={bouton}
+        onClick={async () => {
+          const resultat = await ecouterTexte(barre.texte, langue);
+          setNote(resultat === 'francais' ? noteFrancais : null);
+        }}
+      >
+        <Volume2 className="size-4" aria-hidden /> {ecouter}
       </button>
+      {note && (
+        <span
+          role="status"
+          className="absolute left-0 top-full mt-1 whitespace-nowrap rounded-md bg-kama-ink px-2 py-1 text-[11px] font-medium text-kama-white shadow"
+        >
+          {note}
+        </span>
+      )}
     </div>
   );
 }

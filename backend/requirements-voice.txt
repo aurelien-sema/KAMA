@@ -1,0 +1,7 @@
+# Moteurs vocaux (STT et TTS). Facultatif : sans ce fichier, le serveur demarre et la voix est indisponible.
+# Installer avec : pip install -r requirements.txt -r requirements-mt.txt -r requirements-voice.txt
+# Non verifie sous Docker a ce jour : valide sur le poste de developpement (Windows, Python 3.10).
+--extra-index-url https://download.pytorch.org/whl/cpu
+onnxruntime==1.22.0
+torch==2.8.0
+transformers==4.57.6

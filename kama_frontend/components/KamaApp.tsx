@@ -13,17 +13,26 @@ import { ChoixLangue } from '@/components/kama/ChoixLangue';
 import { KamaWindow, KAMA_WINDOW_HEIGHT } from '@/components/kama/fenetre/KamaWindow';
 import { useAssistant } from '@/components/Assistant';
 import { ContenuReel, type VueReelle } from '@/components/kama/fenetre/reel';
+import { Consentement } from '@/components/kama/fenetre/parler';
 import { trouverLangue, type IdLangue } from '@/config/langues';
 import { LangueCourante, LectureAuto } from '@/lib/langue-courante';
 import { lirePage, nomDecouverte, trouverDecouverte } from '@/lib/lecture-page';
 import { estMessageKama } from '@/lib/messages';
 import { enregistrerPositionOnglet, lirePositionOnglet, POSITION_PAR_DEFAUT, topBorne } from '@/lib/position-onglet';
-import { reglageActif, reglageLangue, reglageMode, useReglage } from '@/lib/reglages';
+import { reglageActif, reglageConsentement, reglageLangue, reglageMode, useReglage } from '@/lib/reglages';
 import { useLecturePage } from '@/lib/use-lecture-page';
+import { traduireKama } from '@/lib/use-texte';
 import { arreterLecture } from '@/lib/voix';
 
 /** Ce que montre la fenêtre Kama. */
-type Vue = { type: 'choix-langue' } | { type: 'parler' } | VueReelle;
+type Vue =
+  | { type: 'choix-langue' }
+  | { type: 'parler' }
+  | { type: 'consentement' }
+  | VueReelle;
+
+/** Écrans qui ne lisent rien dans la page : ils restent ouverts même si la page change. */
+const ECRANS_SANS_PAGE: string[] = ['choix-langue', 'consentement'];
 
 function cleDeVue(v: Vue) {
   return JSON.stringify(v);
@@ -33,6 +42,7 @@ export function KamaApp() {
   const [idLangue, setIdLangue] = useReglage(reglageLangue);
   const [actif] = useReglage(reglageActif);
   const [mode] = useReglage(reglageMode);
+  const [consentement, setConsentement] = useReglage(reglageConsentement);
   const langue = trouverLangue(idLangue);
 
   const [position, setPosition] = useState(POSITION_PAR_DEFAUT);
@@ -41,9 +51,12 @@ export function KamaApp() {
   /** Demande faite avant le choix de la langue : on l'affiche juste après le choix. */
   const [enAttente, setEnAttente] = useState<Vue | null>(null);
   const [surligne, setSurligne] = useState<{ zone: Element; nom: string } | null>(null);
+  const annoncePrefixe = traduireKama(langue?.code, 'Kama te montre :');
+  const nomSurligne = surligne ? traduireKama(langue?.code, surligne.nom) : '';
 
   const lecture = useLecturePage(actif);
-  const assistant = useAssistant({ langue, lectureAuto: mode === 'audio', onShowMe: montrer });
+  // Une question posée à voix haute reçoit une réponse lue tout de suite (UX 3.3), quel que soit le mode choisi.
+  const assistant = useAssistant({ langue, onShowMe: montrer });
 
   const racine = useRef<HTMLDivElement>(null);
   const onglet = useRef<HTMLButtonElement>(null);
@@ -85,12 +98,20 @@ export function KamaApp() {
     if (vue) fenetre.current?.focus();
   }, [vue]);
 
-  /** Ouvre la fenêtre. Si aucune langue n'est choisie, Kama la demande d'abord. */
-  function ouvrir(v: Vue) {
+  /**
+   * Ouvre la fenêtre. Si aucune langue n'est choisie, Kama la demande d'abord ; puis le consentement : aucune fonction ne
+   * démarre avant l'accord de la personne (sécurité).
+   */
+  function ouvrir(v: Vue, langueChoisie = !!langue) {
     setMenuOuvert(false);
-    if (!langue && v.type !== 'choix-langue') {
+    if (!langueChoisie && v.type !== 'choix-langue') {
       setEnAttente(v);
       setVue({ type: 'choix-langue' });
+      return;
+    }
+    if (!consentement && !ECRANS_SANS_PAGE.includes(v.type)) {
+      setEnAttente(v);
+      setVue({ type: 'consentement' });
       return;
     }
     setVue(v);
@@ -104,6 +125,27 @@ export function KamaApp() {
     onglet.current?.focus();
   }
 
+  function accepterConsentement() {
+    setConsentement(true);
+    const suite = enAttente;
+    setEnAttente(null);
+    setVue(suite);
+  }
+
+  // La fenêtre est vidée à chaque changement d'étape de la page : une explication ne doit pas rester sur un autre écran.
+  const etapeId = lecture.etape?.id ?? null;
+  const etapePrecedente = useRef<string | null>(null);
+  useEffect(() => {
+    if (etapePrecedente.current && etapePrecedente.current !== etapeId && vue && !ECRANS_SANS_PAGE.includes(vue.type)) {
+      arreterLecture();
+      assistant.reinitialiser();
+      setVue(null);
+      setSurligne(null);
+    }
+    etapePrecedente.current = etapeId;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [etapeId]);
+
   function clicOnglet() {
     if (!langue) {
       // Pas de langue : le premier clic ouvre le choix de la langue, pas le menu.
@@ -116,6 +158,8 @@ export function KamaApp() {
 
   /** Bouton micro de la fenêtre : depuis n'importe quel contenu, il passe à « Parler à Kama ». */
   function appuiMicro() {
+    // Accord général pas encore donné : il s'affiche d'abord, puis « Parler à Kama ».
+    if (!consentement) return ouvrir({ type: 'parler' });
     if (vue?.type !== 'parler') setVue({ type: 'parler' });
     assistant.appuiMicro();
   }
@@ -127,8 +171,9 @@ export function KamaApp() {
   function choisirLangue(id: IdLangue) {
     setIdLangue(id);
     if (enAttente) {
-      setVue(enAttente);
+      const suite = enAttente;
       setEnAttente(null);
+      ouvrir(suite, true); // la langue vient d'être choisie : le consentement peut encore venir avant la suite
     } else {
       setVue(null);
       setMenuOuvert(true);
@@ -211,7 +256,7 @@ export function KamaApp() {
 
   return (
     <LangueCourante.Provider value={langue}>
-      <LectureAuto.Provider value={mode === 'audio'}>
+      <LectureAuto.Provider value={mode === 'audio' || vue?.type === 'parler'}>
         <div ref={racine} className="kama-racine">
           <Pastilles lecture={lecture} onOuvrir={ouvrirPastille} />
           <Surlignage cible={surligne?.zone ?? null} onFin={() => setSurligne(null)} dansKama={dansKama} />
@@ -235,7 +280,7 @@ export function KamaApp() {
             <KamaWindow
               key={cleDeVue(vue)}
               ref={fenetre}
-              avecMicro={vue.type !== 'choix-langue'}
+              avecMicro={!ECRANS_SANS_PAGE.includes(vue.type)}
               mic={vue.type === 'parler' ? assistant.mic : 'idle'}
               onMic={appuiMicro}
               onClose={fermerFenetre}
@@ -247,6 +292,8 @@ export function KamaApp() {
             >
               {vue.type === 'choix-langue' ? (
                 <ChoixLangue onChoisir={choisirLangue} onPasMaintenant={fermerFenetre} />
+              ) : vue.type === 'consentement' ? (
+                <Consentement onAccepter={accepterConsentement} onRefuser={fermerFenetre} />
               ) : vue.type === 'parler' ? (
                 assistant.contenu
               ) : (
@@ -257,7 +304,7 @@ export function KamaApp() {
 
           {/* Annonce pour les lecteurs d'écran quand « Montre-moi » surligne un élément. */}
           <p className="sr-only" aria-live="polite">
-            {surligne ? `Kama te montre : ${surligne.nom}` : ''}
+            {surligne ? `${annoncePrefixe} ${nomSurligne}` : ''}
           </p>
         </div>
       </LectureAuto.Provider>

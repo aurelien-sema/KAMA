@@ -118,3 +118,11 @@ def test_no_engine_means_untranslated(client):
 
 def test_unknown_language(client):
     assert post(client, "Bonjour", target="xx").json()["error"]["code"] == "unsupported_language"
+
+
+def test_a_source_text_listed_twice_does_not_hide_its_translation():
+    from app.memory import Template, TranslationMemory
+
+    empty = Template("a", {"fr": ("Frais",)}, {})
+    filled = Template("b", {"fr": ("Frais",)}, {"wes": "Charge"})
+    assert TranslationMemory([empty, filled], 0.86).find_exact("Frais", "fr", "wes") == "Charge"

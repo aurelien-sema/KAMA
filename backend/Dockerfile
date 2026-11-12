@@ -4,8 +4,12 @@ FROM python:3.11-slim
 RUN useradd --create-home kama
 WORKDIR /srv/kama/backend
 
-COPY backend/requirements.txt backend/requirements-mt.txt ./
+COPY backend/requirements.txt backend/requirements-mt.txt backend/requirements-voice.txt ./
 RUN pip install --no-cache-dir -r requirements.txt -r requirements-mt.txt
+# Voix (reconnaissance + synthese) : docker build --build-arg WITH_VOICE=1 ... ajoute onnxruntime et torch (environ 700 Mo).
+# Sans cela, les routes de voix restent indisponibles ; le reste du serveur fonctionne.
+ARG WITH_VOICE=0
+RUN if [ "$WITH_VOICE" = "1" ]; then pip install --no-cache-dir -r requirements-voice.txt; fi
 
 COPY backend/app ./app
 COPY backend/config ./config

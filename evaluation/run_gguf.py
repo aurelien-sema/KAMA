@@ -109,7 +109,9 @@ def prepare(s):
         print("   conversion en GGUF")
         run_tool([sys.executable, "convert_hf_to_gguf.py", folder, "--outfile", source, "--outtype", "f16"], cwd=SRC)
     print("   compression Q4_K_M")
-    run_tool([os.path.join(BIN, "llama-quantize.exe"), source, target, "Q4_K_M"])
+    partial = target + ".partial"  # un fichier coupe en cours de route ne doit jamais passer pour valide
+    run_tool([os.path.join(BIN, "llama-quantize.exe"), source, partial, "Q4_K_M"])
+    os.replace(partial, target)
     if temporary:
         os.remove(source)
     return target

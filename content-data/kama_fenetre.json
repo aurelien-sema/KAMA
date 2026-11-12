@@ -1,0 +1,503 @@
+{
+ "_note": "Phrases fixes de la fenetre Kama (generees par kama_frontend/scripts/phrases-fenetre.mjs : ne pas changer le champ fr a la main). Meme format que safinum_test_page.json. Les montants sont les balises {x1}... remplacees par les valeurs exactes de la page. Un champ wes ou bbj sans validated_by (ou validated_by_bbj) n'est jamais servi : il faut qu'un locuteur valide chaque phrase. Les champs wes sans validated_by sont des BROUILLONS (affiches avec le badge Traduction automatique, jamais Verifie).",
+ "entries": [
+  {
+   "id": "fen_f8d73fcf",
+   "zone": "explication",
+   "fr": "Solde disponible : {x1}.",
+   "wes": "Money weh you fit use: {x1}."
+  },
+  {
+   "id": "fen_1821796e",
+   "zone": "explication",
+   "fr": "C'est l'argent que tu as maintenant sur ton compte.",
+   "wes": "Na di money weh you get now for your account."
+  },
+  {
+   "id": "fen_8650420c",
+   "zone": "explication",
+   "fr": "Ici, tu écris combien d'argent tu veux envoyer.",
+   "wes": "For here, you go write how much money you want send."
+  },
+  {
+   "id": "fen_a96d30ad",
+   "zone": "explication",
+   "fr": "Écris seulement des chiffres. Vérifie bien avant de continuer.",
+   "wes": "Write only number dem. Check am well before you continue."
+  },
+  {
+   "id": "fen_390e922f",
+   "zone": "explication",
+   "fr": "Au total, {x1} vont sortir de ton compte.",
+   "wes": "All together, {x1} go comot for your account."
+  },
+  {
+   "id": "fen_ab398751",
+   "zone": "explication",
+   "fr": "Montant : {x1}.",
+   "wes": "How much: {x1}."
+  },
+  {
+   "id": "fen_85753756",
+   "zone": "explication",
+   "fr": "C'est l'argent que la personne va recevoir.",
+   "wes": "Na di money weh di person go receive."
+  },
+  {
+   "id": "fen_3dc12188",
+   "zone": "explication",
+   "fr": "Frais : {x1}.",
+   "wes": "Charge: {x1}."
+  },
+  {
+   "id": "fen_e1ceecc3",
+   "zone": "explication",
+   "fr": "C'est ce que la banque prend pour faire le transfert.",
+   "wes": "Na wetin di bank di take for send di money."
+  },
+  {
+   "id": "fen_6f86ef38",
+   "zone": "explication",
+   "fr": "Total à débiter : {x1}.",
+   "wes": "All money weh go comot for your account: {x1}."
+  },
+  {
+   "id": "fen_67f36441",
+   "zone": "explication",
+   "fr": "C'est tout l'argent qui va sortir de ton compte : le montant plus les frais.",
+   "wes": "Na all di money weh go comot for your account: di money weh you send, plus di charge."
+  },
+  {
+   "id": "fen_cc362fa8",
+   "zone": "explication",
+   "fr": "Total débité : {x1}.",
+   "wes": "All money weh comot: {x1}."
+  },
+  {
+   "id": "fen_ff136ca2",
+   "zone": "explication",
+   "fr": "Ce bouton envoie l'argent pour de vrai.",
+   "wes": "Dis button go send di money for true."
+  },
+  {
+   "id": "fen_cfe90848",
+   "zone": "explication",
+   "fr": "Avant d'appuyer, vérifie le nom et le numéro de la personne.",
+   "wes": "Before you press am, check di name and di number for di person."
+  },
+  {
+   "id": "fen_f7ea40d3",
+   "zone": "explication",
+   "fr": "C'est toi qui appuies. Kama n'appuie jamais à ta place.",
+   "wes": "Na you go press am. Kama no dey ever press am for you."
+  },
+  {
+   "id": "fen_3bafdcd6",
+   "zone": "expliquer",
+   "fr": "Ton transfert est parti.",
+   "wes": "Your money don go."
+  },
+  {
+   "id": "fen_2736a0fb",
+   "zone": "expliquer",
+   "fr": "Regarde le total qui est sorti de ton compte.",
+   "wes": "Look all di money weh don comot for your account."
+  },
+  {
+   "id": "fen_aa50a34e",
+   "zone": "expliquer",
+   "fr": "Garde la référence : elle prouve ton transfert.",
+   "wes": "Keep di reference number: e show say you don send di money."
+  },
+  {
+   "id": "fen_d1b1a949",
+   "zone": "expliquer",
+   "fr": "Ici, tu vérifies tout avant d'envoyer l'argent.",
+   "wes": "For here, you go check everything before you send di money."
+  },
+  {
+   "id": "fen_80902b90",
+   "zone": "expliquer",
+   "fr": "Vérifie le montant.",
+   "wes": "Check how much."
+  },
+  {
+   "id": "fen_1b6a72a7",
+   "zone": "expliquer",
+   "fr": "Vérifie les frais.",
+   "wes": "Check di charge."
+  },
+  {
+   "id": "fen_ee2ef258",
+   "zone": "expliquer",
+   "fr": "Vérifie le total qui va sortir de ton compte.",
+   "wes": "Check all di money weh go comot for your account."
+  },
+  {
+   "id": "fen_eb0cec93",
+   "zone": "expliquer",
+   "fr": "Coche la case si tout est juste.",
+   "wes": "Tick di box if everything correct."
+  },
+  {
+   "id": "fen_2c9f2e14",
+   "zone": "expliquer",
+   "fr": "Appuie toi-même sur « Confirmer le transfert ».",
+   "wes": "Na you yourself go press « Confirmer le transfert »."
+  },
+  {
+   "id": "fen_41432cef",
+   "zone": "expliquer",
+   "fr": "Ici, tu dis à qui tu envoies l'argent.",
+   "wes": "For here, you go talk who you di send di money give."
+  },
+  {
+   "id": "fen_a869292b",
+   "zone": "expliquer",
+   "fr": "Écris le nom de la personne.",
+   "wes": "Write di name for di person."
+  },
+  {
+   "id": "fen_c5bef03b",
+   "zone": "expliquer",
+   "fr": "Écris son numéro. Vérifie-le bien.",
+   "wes": "Write e number. Check am well."
+  },
+  {
+   "id": "fen_217aee5e",
+   "zone": "expliquer",
+   "fr": "Coche la case quand tu as tout vérifié.",
+   "wes": "Tick di box when you don check everything."
+  },
+  {
+   "id": "fen_1e6f0233",
+   "zone": "expliquer",
+   "fr": "Appuie toi-même sur « Continuer ».",
+   "wes": "Na you yourself go press « Continuer »."
+  },
+  {
+   "id": "fen_cce28a45",
+   "zone": "expliquer",
+   "fr": "Ici, tu choisis comment envoyer l'argent, et combien.",
+   "wes": "For here, you go choose how you go send di money, and how much."
+  },
+  {
+   "id": "fen_cef1ff9f",
+   "zone": "expliquer",
+   "fr": "Choisis le type d'envoi.",
+   "wes": "Choose which kind send."
+  },
+  {
+   "id": "fen_6e25c12e",
+   "zone": "expliquer",
+   "fr": "Écris le montant à envoyer.",
+   "wes": "Write how much you want send."
+  },
+  {
+   "id": "fen_d63a88d4",
+   "zone": "expliquer",
+   "fr": "Regarde les frais.",
+   "wes": "Look di charge."
+  },
+  {
+   "id": "fen_d6193f25",
+   "zone": "expliquer",
+   "fr": "Regarde le total qui va sortir de ton compte.",
+   "wes": "Look all di money weh go comot for your account."
+  },
+  {
+   "id": "fen_1dd30b8f",
+   "zone": "expliquer",
+   "fr": "Ici, tu vois l'argent qui est sur ton compte.",
+   "wes": "For here, you go see di money weh dey for your account."
+  },
+  {
+   "id": "fen_9e143373",
+   "zone": "expliquer",
+   "fr": "Regarde ton solde : c'est l'argent que tu as.",
+   "wes": "Look your money weh you fit use: na di money weh you get."
+  },
+  {
+   "id": "fen_347ee064",
+   "zone": "expliquer",
+   "fr": "Regarde tes dernières opérations.",
+   "wes": "Look di last money weh enter or comot."
+  },
+  {
+   "id": "fen_3d245194",
+   "zone": "expliquer",
+   "fr": "Pour envoyer de l'argent, appuie toi-même sur « Effectuer un transfert ».",
+   "wes": "For send money, na you yourself go press « Effectuer un transfert »."
+  },
+  {
+   "id": "fen_3a74e061",
+   "zone": "erreur",
+   "fr": "Le montant n'est pas bon.",
+   "wes": "Di money weh you write no correct."
+  },
+  {
+   "id": "fen_555bb7a9",
+   "zone": "erreur",
+   "fr": "Écris un montant plus grand que zéro, puis appuie toi-même sur « Continuer ».",
+   "wes": "Write money weh pass zero, then na you yourself go press « Continuer »."
+  },
+  {
+   "id": "fen_ce9048f8",
+   "zone": "erreur",
+   "fr": "Tu n'as pas assez d'argent pour ce transfert.",
+   "wes": "You no get enough money for dis send."
+  },
+  {
+   "id": "fen_97611b56",
+   "zone": "erreur",
+   "fr": "Envoie un montant plus petit, ou mets de l’argent sur ton compte avant.",
+   "wes": "Send small money, or put money for your account first."
+  },
+  {
+   "id": "fen_be452bfb",
+   "zone": "erreur",
+   "fr": "Il manque le nom ou le numéro de la personne.",
+   "wes": "Di name or di number for di person no dey."
+  },
+  {
+   "id": "fen_67ecc5bb",
+   "zone": "erreur",
+   "fr": "Écris le nom et le numéro de la personne qui reçoit l’argent.",
+   "wes": "Write di name and di number for di person weh go receive di money."
+  },
+  {
+   "id": "fen_03128569",
+   "zone": "erreur",
+   "fr": "Attention : vérifie le numéro de la personne.",
+   "wes": "Take care: check di number for di person."
+  },
+  {
+   "id": "fen_d96fcea9",
+   "zone": "erreur",
+   "fr": "Si tu n'es pas sûr du numéro, n'envoie pas l'argent. Demande d'abord à la personne.",
+   "wes": "If you no sure for di number, no send di money. Ask di person first."
+  },
+  {
+   "id": "fen_d2c25937",
+   "zone": "erreur",
+   "fr": "Attention : tu n'as jamais envoyé d'argent à cette personne.",
+   "wes": "Take care: you never send money give dis person before."
+  },
+  {
+   "id": "fen_5364f349",
+   "zone": "erreur",
+   "fr": "Vérifie bien le nom et le numéro. Si tu as un doute, n'envoie pas l'argent.",
+   "wes": "Check di name and di number well. If you no sure, no send di money."
+  },
+  {
+   "id": "fen_bfeee7a8",
+   "zone": "erreur",
+   "fr": "La banque ne répond pas pour le moment.",
+   "wes": "Di bank no di answer now."
+  },
+  {
+   "id": "fen_60e48419",
+   "zone": "erreur",
+   "fr": "La banque demande de réessayer. Attends un peu, puis réessaie toi-même.",
+   "wes": "Di bank say make you try again. Wait small, then try again yourself."
+  },
+  {
+   "id": "fen_ebf473c8",
+   "zone": "erreur",
+   "fr": "Tu n'as pas coché la case de confirmation.",
+   "wes": "You never tick di box for confirm."
+  },
+  {
+   "id": "fen_60b0d392",
+   "zone": "erreur",
+   "fr": "Vérifie les informations, coche la case, puis appuie toi-même sur « Confirmer le transfert ».",
+   "wes": "Check di informations, tick di box, then na you yourself go press « Confirmer le transfert »."
+  },
+  {
+   "id": "fen_1b2f141e",
+   "zone": "erreur",
+   "fr": "La banque a affiché un message important.",
+   "wes": "Di bank don show one important message."
+  },
+  {
+   "id": "fen_42bf63f9",
+   "zone": "erreur",
+   "fr": "Lis le message de la banque ci-dessus. Kama ne le connaît pas encore.",
+   "wes": "Read di bank message for up. Kama no know am yet."
+  },
+  {
+   "id": "fen_887dae89",
+   "zone": "expliquer",
+   "fr": "Kama ne reconnaît pas encore cette partie de la page.",
+   "wes": "Kama no know dis part for di page yet."
+  },
+  {
+   "id": "fen_75df836c",
+   "zone": "expliquer",
+   "fr": "Touche une pastille Kama à côté d'un montant ou d'un bouton.",
+   "wes": "Touch one Kama sign weh dey near money or near button."
+  },
+  {
+   "id": "fen_7414a1c1",
+   "zone": "explication",
+   "fr": "Kama ne trouve plus cet élément sur la page.",
+   "wes": "Kama no fit find dis thing for di page again."
+  },
+  {
+   "id": "fen_37ee901a",
+   "zone": "resume",
+   "fr": "Cette page n'a pas tes transactions.",
+   "wes": "Dis page no get your transactions."
+  },
+  {
+   "id": "fen_6239c29c",
+   "zone": "resume",
+   "fr": "Va sur la première page : « Solde ».",
+   "wes": "Go for di first page: « Solde »."
+  },
+  {
+   "id": "fen_0076ac63",
+   "zone": "resume",
+   "fr": "Sur cette page : {x1} entrées, {x2} sorties.",
+   "wes": "For dis page: {x1} money don enter, {x2} money don comot."
+  },
+  {
+   "id": "fen_8079070e",
+   "zone": "resume",
+   "fr": "Les {x1} dernières opérations :",
+   "wes": "Di last {x1} money weh enter or comot:"
+  },
+  {
+   "id": "fen_fabf35d8",
+   "zone": "voix",
+   "fr": "Je n'ai pas compris.",
+   "wes": "I no understand."
+  },
+  {
+   "id": "fen_896853d1",
+   "zone": "voix",
+   "fr": "Redis-le, s'il te plaît.",
+   "wes": "Abeg talk am again."
+  },
+  {
+   "id": "fen_895d416b",
+   "zone": "voix",
+   "fr": "Réessayer",
+   "wes": "Try again"
+  },
+  {
+   "id": "fen_9d0307af",
+   "zone": "voix",
+   "fr": "La voix ne marche pas encore pour cette langue.",
+   "wes": "Voice never work yet for dis language."
+  },
+  {
+   "id": "fen_85190d5b",
+   "zone": "voix",
+   "fr": "Touche une pastille Kama ou utilise le menu de l'onglet.",
+   "wes": "Touch one Kama sign or use di Kama menu."
+  },
+  {
+   "id": "fen_b3adf7d3",
+   "zone": "voix",
+   "fr": "Kama n'a pas accès au micro.",
+   "wes": "Kama no fit use di micro."
+  },
+  {
+   "id": "fen_f2c9c5fb",
+   "zone": "voix",
+   "fr": "Autorise le micro dans le navigateur, puis réessaie. Tu peux aussi utiliser le menu de l'onglet.",
+   "wes": "Allow di micro for di browser, then try again. You fit also use di Kama menu."
+  },
+  {
+   "id": "fen_cc1e0f63",
+   "zone": "voix",
+   "fr": "Aucun micro trouvé.",
+   "wes": "Kama no see any micro."
+  },
+  {
+   "id": "fen_4eae719f",
+   "zone": "voix",
+   "fr": "Branche un micro, ou utilise le menu de l'onglet.",
+   "wes": "Plug one micro, or use di Kama menu."
+  },
+  {
+   "id": "fen_f3164b09",
+   "zone": "voix",
+   "fr": "Pas de connexion internet.",
+   "wes": "Internet no dey."
+  },
+  {
+   "id": "fen_9416aff8",
+   "zone": "voix",
+   "fr": "Kama ne peut pas comprendre ta voix pour le moment.",
+   "wes": "Kama no fit understand your voice now."
+  },
+  {
+   "id": "fen_907f14a3",
+   "zone": "consentement",
+   "fr": "Avant de commencer",
+   "wes": "Before we start"
+  },
+  {
+   "id": "fen_382e2f08",
+   "zone": "consentement",
+   "fr": "Kama lit la page de ta banque sur ton écran, puis l'oublie. Il ne garde rien.",
+   "wes": "Kama di read your bank page for your screen, then e forget am. E no di keep anything."
+  },
+  {
+   "id": "fen_4efb77d9",
+   "zone": "consentement",
+   "fr": "Tes montants, ton solde et les noms ne sont jamais envoyés.",
+   "wes": "Kama no dey ever send your money, your balance or any name."
+  },
+  {
+   "id": "fen_b6ac76d2",
+   "zone": "consentement",
+   "fr": "Pour traduire, Kama envoie seulement des phrases sans chiffres ni noms.",
+   "wes": "For translate, Kama di send only sentence weh no get number or name."
+  },
+  {
+   "id": "fen_378a9e70",
+   "zone": "consentement",
+   "fr": "Tu peux arrêter Kama quand tu veux, dans le menu de l’extension.",
+   "wes": "You fit stop Kama any time, for di extension menu."
+  },
+  {
+   "id": "fen_b22011d1",
+   "zone": "consentement",
+   "fr": "J'accepte",
+   "wes": "I agree"
+  },
+  {
+   "id": "fen_cf96b79c",
+   "zone": "consentement",
+   "fr": "Pas maintenant",
+   "wes": "No now"
+  },
+  {
+   "id": "fen_b72f4751",
+   "zone": "consentement",
+   "fr": "Parler à Kama",
+   "wes": "Talk to Kama"
+  },
+  {
+   "id": "fen_22c44e83",
+   "zone": "consentement",
+   "fr": "Le micro est ouvert seulement entre deux appuis sur le bouton. Kama ne garde aucun enregistrement.",
+   "wes": "Di micro open only between two press for di button. Kama no di keep any recording."
+  },
+  {
+   "id": "fen_606b3d59",
+   "zone": "consentement",
+   "fr": "Ta voix est envoyée au serveur de Kama pour comprendre ta demande, puis oubliée.",
+   "wes": "Kama di send your voice for e server for understand wetin you ask, then e forget am."
+  },
+  {
+   "id": "fen_1a17763c",
+   "zone": "consentement",
+   "fr": "Ne dis pas ton solde, ton numéro ni un nom : parle seulement de la page.",
+   "wes": "No talk your money, your number or any name: talk only about di page."
+  }
+ ]
+}
