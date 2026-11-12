@@ -6,12 +6,12 @@
  * tant que les textes validés en ghomálá' et en pidgin ne sont pas fournis (règle d'or n° 4).
  *
  * Deux sortes d'éléments :
- *  - les éléments connus (config/page-test.ts), expliqués par leurs gabarits ;
+ *  - les éléments connus (config/banques/), expliqués par leurs gabarits ;
  *  - les éléments découverts par Kama (contenu inédit) : montants, alertes, nouveaux messages.
  *    Kama les recopie tels quels et dit franchement qu'il ne les connaît pas encore.
  */
 import { useMemo } from 'react';
-import type { IdElement } from '@/config/page-test';
+import type { IdElement } from '@/config/banques';
 import { GABARITS, gabaritMontantInconnu, texteAEcouter, type Ligne } from '@/config/gabarits';
 import {
   elementPourTexte,

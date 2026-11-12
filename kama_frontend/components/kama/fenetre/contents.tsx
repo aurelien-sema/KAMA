@@ -35,9 +35,11 @@ export function TalkIdleContent() {
   );
 }
 
-/* 2 — Parler : écoute. Les barres suivront le niveau du micro (aucune animation en boucle). */
+/* 2 — Parler : écoute. Les barres suivent le niveau du micro (aucune animation en boucle). */
 const WAVE = [8, 14, 22, 30, 18, 36, 26, 40, 20, 32, 14, 24, 34, 16, 28, 10, 20, 12];
-export function TalkListeningContent() {
+export function TalkListeningContent({ niveaux }: { niveaux?: number[] }) {
+  // Sans niveaux (catalogue) : les barres de la maquette. Avec : de 6 à 40 px selon le son.
+  const barres = niveaux ? WAVE.map((_, i) => 6 + Math.round((niveaux[i] ?? 0) * 34)) : WAVE;
   return (
     <div className="flex h-full flex-col items-center justify-center gap-5">
       <span className="inline-flex items-center gap-2 rounded-full bg-kama-cream px-3 py-1.5 text-sm font-semibold text-kama-ink">
@@ -45,7 +47,7 @@ export function TalkListeningContent() {
         Micro actif
       </span>
       <div className="flex h-12 items-center gap-1" aria-hidden>
-        {WAVE.map((h, i) => (
+        {barres.map((h, i) => (
           <span key={i} className="w-1.5 rounded-full bg-kama-orange" style={{ height: h }} />
         ))}
       </div>
@@ -128,6 +130,9 @@ export function ExplainPageContent({
 }
 
 /* 6 — Résumer mes transactions */
+/** « 1 entrée », « 2 entrées » (0 et 1 au singulier, comme en français). */
+const pluriel = (nombre: string, mot: string) => (Number(nombre) > 1 ? `${mot}s` : mot);
+
 export function SummaryContent({
   entrees,
   sorties,
@@ -142,12 +147,13 @@ export function SummaryContent({
   return (
     <KamaResponse
       status={status}
-      speech={`Sur cette page : ${entrees} entrées, ${sorties} sorties. ${operations
+      speech={`Sur cette page : ${entrees} ${pluriel(entrees, 'entrée')}, ${sorties} ${pluriel(sorties, 'sortie')}. ${operations
         .map((o) => `${o.date}, ${o.libelle}, ${o.montant}`)
         .join('. ')}`}
     >
       <p className="m-0 font-semibold">
-        Sur cette page : <Amount>{entrees}</Amount> entrées, <Amount>{sorties}</Amount> sorties.
+        Sur cette page : <Amount>{entrees}</Amount> {pluriel(entrees, 'entrée')}, <Amount>{sorties}</Amount>{' '}
+        {pluriel(sorties, 'sortie')}.
       </p>
       <p className="m-0 text-sm text-kama-ink/70">Les {operations.length} dernières opérations :</p>
       <ul className="m-0 flex list-none flex-col divide-y divide-kama-ink/10 rounded-xl border border-kama-ink/10 p-0">

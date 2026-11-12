@@ -1,20 +1,20 @@
 /**
- * Pages sur lesquelles Kama s'active.
- * C'est le seul endroit à modifier si l'adresse du site de test change.
- * (Les sélecteurs des éléments de la page viendront dans ce même dossier `config/`.)
+ * Pages sur lesquelles Kama s'active : les adresses de toutes les banques connues
+ * (config/banques/). Pour ajouter une banque, on ajoute son fichier là-bas, pas ici.
  */
+import { BANQUES, VERSION_JURY } from './banques';
 
-/** Site de test des organisateurs du hackathon SAFINUM. */
-export const SITES_BANCAIRES = [
-  'https://safinum.cm/hackathon-test*',
-  'https://www.safinum.cm/hackathon-test*',
-];
+/** Adresses des banques connues. */
+export const SITES_BANCAIRES = BANQUES.flatMap((b) => b.sites);
 
-/** Page fictive locale, pour les cas impossibles à provoquer sur le vrai site (option C). */
-export const SITES_DEV = ['http://localhost/*', 'http://127.0.0.1/*'];
+/**
+ * Pages locales de l'équipe (banque de démonstration, essais). Absentes de la version jury :
+ * le jury n'a que la page de test des organisateurs.
+ */
+export const SITES_DEV = VERSION_JURY ? [] : ['http://localhost/*', 'http://127.0.0.1/*'];
 
 /** Tous les sites où Kama s'injecte. */
-export const SITES_KAMA = [...SITES_BANCAIRES, ...SITES_DEV];
+export const SITES_KAMA = [...new Set([...SITES_BANCAIRES, ...SITES_DEV])];
 
 /**
  * Mêmes sites, réduits à leur origine (`https://safinum.cm/*`).

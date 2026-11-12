@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Banque Démo — page fictive</title>
+    <!--
+      Page bancaire FICTIVE de l'équipe Kama, pour montrer que Kama s'adapte à une autre banque
+      que la page de test des organisateurs, avec un seul fichier de configuration
+      (kama_frontend/config/banques/demo.ts). Aucune donnée réelle, aucun envoi d'argent.
+      Volontairement différente : autres mots, montants écrits « 25.000 XAF », autre mise en page.
+      Lancer : npm run banque-demo, puis ouvrir http://localhost:5180
+    -->
+    <style>
+      * { box-sizing: border-box; }
+      body { margin: 0; font-family: Georgia, 'Times New Roman', serif; background: #eef3ee; color: #1d2b1f; }
+      .bandeau-demo { background: #1d2b1f; color: #fff; padding: 8px 16px; font: 14px system-ui, sans-serif; }
+      header { background: #2f6b3a; color: #fff; padding: 18px 32px; }
+      header h1 { margin: 0; font-size: 26px; letter-spacing: 0.5px; }
+      main { max-width: 1040px; margin: 24px auto; padding: 0 16px; display: grid; grid-template-columns: 1fr 1.3fr; gap: 24px; }
+      section { background: #fff; border: 1px solid #c9d8cb; border-radius: 4px; padding: 20px 24px; }
+      h2 { margin: 0 0 16px; font-size: 20px; color: #2f6b3a; }
+      .solde { font-size: 30px; font-weight: bold; margin: 4px 0 0; }
+      table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 15px; }
+      td { padding: 8px 4px; border-top: 1px solid #e3ebe4; }
+      td.somme { text-align: right; white-space: nowrap; }
+      label { display: block; font-weight: bold; margin: 12px 0 4px; }
+      input { width: 100%; padding: 10px; font-size: 16px; border: 1px solid #9fb5a2; border-radius: 4px; }
+      dl { display: grid; grid-template-columns: 1fr auto; gap: 8px 16px; margin: 20px 0; padding: 12px 16px; background: #f4f8f4; }
+      dt, dd { margin: 0; }
+      dd { text-align: right; font-weight: bold; }
+      button { font: inherit; font-size: 17px; padding: 12px 22px; border: 0; border-radius: 4px; background: #2f6b3a; color: #fff; cursor: pointer; }
+      .refus { border: 2px solid #b3261e; background: #fdecea; padding: 12px 16px; margin-bottom: 16px; }
+      .refus p { margin: 0; }
+      .refus .titre { font-weight: bold; color: #b3261e; }
+      .annonce { grid-column: 1 / -1; border-left: 4px solid #2f6b3a; }
+      .outil { grid-column: 1 / -1; background: transparent; border: 1px dashed #9fb5a2; font: 14px system-ui, sans-serif; }
+      .outil button { font-size: 14px; padding: 8px 14px; background: #fff; color: #1d2b1f; border: 1px solid #9fb5a2; }
+    </style>
+  </head>
+  <body>
+    <div class="bandeau-demo">Page fictive de démonstration pour Kama — aucune donnée réelle.</div>
+    <header><h1>Banque Démo</h1></header>
+    <main id="contenu">
+      <section>
+        <h2>Mon compte</h2>
+        <div>Solde du compte</div>
+        <p class="solde" id="solde">180.500 XAF</p>
+        <h2 style="margin-top: 24px">Dernières opérations</h2>
+        <table>
+          <tr><td>12/11</td><td>Achat boutique</td><td class="somme">-4.000 XAF</td></tr>
+          <tr><td>10/11</td><td>Versement espèces</td><td class="somme">+60.000 XAF</td></tr>
+          <tr><td>08/11</td><td>Facture eau</td><td class="somme">-7.250 XAF</td></tr>
+        </table>
+      </section>
+
+      <section id="virement"></section>
+
+      <section class="outil">
+        Outil de démonstration (pas une fonction de la banque) :
+        <button type="button" id="injecter">Afficher un nouveau message de la banque</button>
+      </section>
+    </main>
+
+    <script>
+      const SOLDE = 180500;
+      const xaf = (n) => `${String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.')} XAF`;
+      const commission = (m) => (m > 0 ? Math.max(500, Math.round(m * 0.01)) : 0);
+      const zone = document.getElementById('virement');
+
+      function formulaire(montant = 25000) {
+        zone.innerHTML = `
+          <h2>Nouveau virement</h2>
+          <div id="refus"></div>
+          <label for="benef">Bénéficiaire</label>
+          <input id="benef" value="Paul Ndam" autocomplete="off" />
+          <label for="montant">Montant du virement</label>
+          <input id="montant" type="number" min="0" step="500" value="${montant}" />
+          <dl>
+            <dt>Commission</dt><dd id="commission"></dd>
+            <dt>Montant total prélevé</dt><dd id="total"></dd>
+          </dl>
+          <button type="button" id="valider">Valider le virement</button>`;
+        const champ = document.getElementById('montant');
+        const maj = () => {
+          const m = Math.max(0, Math.round(Number(champ.value) || 0));
+          document.getElementById('commission').textContent = xaf(commission(m));
+          document.getElementById('total').textContent = xaf(m + commission(m));
+        };
+        champ.addEventListener('input', maj);
+        maj();
+        document.getElementById('valider').addEventListener('click', () => {
+          const m = Math.max(0, Math.round(Number(champ.value) || 0));
+          const total = m + commission(m);
+          if (total > SOLDE) {
+            document.getElementById('refus').innerHTML =
+              '<div class="refus"><p class="titre">Opération refusée</p><p>Provision insuffisante sur le compte.</p></div>';
+            return;
+          }
+          recu(total);
+        });
+      }
+
+      function recu(total) {
+        zone.innerHTML = `
+          <h2>Virement envoyé</h2>
+          <dl>
+            <dt>Montant total prélevé</dt><dd>${xaf(total)}</dd>
+            <dt>Référence du virement</dt><dd>BD-2026-0458</dd>
+          </dl>
+          <button type="button" id="autre">Faire un autre virement</button>`;
+        document.getElementById('autre').addEventListener('click', () => formulaire());
+      }
+
+      document.getElementById('injecter').addEventListener('click', () => {
+        const s = document.createElement('section');
+        s.className = 'annonce';
+        s.innerHTML = '<p>Information : les virements vers un compte Mobile Money sont gratuits ce samedi.</p>';
+        document.getElementById('contenu').prepend(s);
+      });
+
+      formulaire();
+    </script>
+  </body>
+</html>

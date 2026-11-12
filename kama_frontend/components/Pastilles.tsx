@@ -16,7 +16,7 @@ const PASTILLE = 24;
 const ECART = 8;
 
 /**
- * `cible` = identifiant d'un élément connu (config/page-test.ts) ou clé d'un élément
+ * `cible` = identifiant d'un élément connu (config/banques/) ou clé d'un élément
  * découvert tout seul par Kama (montant, alerte ou nouveau message inconnus).
  */
 export function Pastilles({ lecture, onOuvrir }: { lecture: LecturePage; onOuvrir: (cible: string) => void }) {

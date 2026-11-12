@@ -8,7 +8,7 @@
  *
  * `libelle` = le libellé tel qu'écrit dans la page (« Frais », « Total à débiter »…).
  */
-import type { IdElement } from './page-test';
+import type { IdElement } from './banques';
 
 export type Morceau = string | { montant: string };
 export type Ligne = Morceau[];

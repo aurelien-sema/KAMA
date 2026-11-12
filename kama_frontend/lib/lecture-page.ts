@@ -9,15 +9,13 @@
  *    stocké ni transmis : la lecture est refaite à chaque besoin, en mémoire uniquement.
  */
 import {
-  ELEMENTS,
-  ERREURS,
   ERREUR_INCONNUE,
-  ETAPES_PARCOURS,
+  banqueCourante,
   type DefinitionElement,
   type EtapeParcours,
   type ExplicationErreur,
   type IdElement,
-} from '@/config/page-test';
+} from '@/config/banques';
 
 /** Compare deux textes sans tenir compte des majuscules, des espaces en trop ni d'un « : » final. */
 export function normaliser(t: string) {
@@ -58,9 +56,10 @@ type IndexTextes = { libelles: Map<string, Element[]>; tousLesLibelles: Element[
 
 /** Un seul passage sur la page : repère tous les textes qui sont des libellés connus. */
 function indexer(): IndexTextes {
+  const banque = banqueCourante();
   const connus = new Set<string>();
-  for (const e of ELEMENTS) for (const l of e.libelles) connus.add(normaliser(l));
-  for (const etape of ETAPES_PARCOURS) for (const r of etape.reperes) connus.add(normaliser(r));
+  for (const e of banque.elements) for (const l of e.libelles) connus.add(normaliser(l));
+  for (const etape of banque.etapes) for (const r of etape.reperes) connus.add(normaliser(r));
 
   const libelles = new Map<string, Element[]>();
   const tousLesLibelles: Element[] = [];
@@ -176,7 +175,8 @@ export function lirePage(): LecturePage {
   const index = indexer();
   const elements = new Map<IdElement, ElementTrouve>();
 
-  for (const def of ELEMENTS) {
+  const banque = banqueCourante();
+  for (const def of banque.elements) {
     for (const libelle of occurrences(index, def.libelles)) {
       const trouve = lireElement(def, libelle, index);
       if (trouve) {
@@ -187,7 +187,7 @@ export function lirePage(): LecturePage {
   }
 
   const etape =
-    ETAPES_PARCOURS.find((e) => occurrences(index, e.reperes).length > 0) ?? null;
+    banque.etapes.find((e) => occurrences(index, e.reperes).length > 0) ?? null;
 
   return { elements, etape, decouvertes: decouvrir(elements, etape) };
 }
@@ -291,8 +291,11 @@ function feuilles(el: Element) {
 /* ---------------------------------------------------------------------------------------- */
 
 export function explicationErreur(code?: string, message?: string): ExplicationErreur {
-  if (code && ERREURS[code]) return ERREURS[code];
-  if (message && /solde insuffisant|insufficient balance/i.test(message)) return ERREURS.AMOUNT_002!;
+  const { erreurs, erreursParMessage = [] } = banqueCourante();
+  if (code && erreurs[code]) return erreurs[code];
+  for (const [motif, codeConnu] of erreursParMessage) {
+    if (message && motif.test(message) && erreurs[codeConnu]) return erreurs[codeConnu];
+  }
   return ERREUR_INCONNUE;
 }
 
@@ -399,7 +402,7 @@ function montantsInconnus(textes: Text[], connus: ElementTrouve[]): SansCle[] {
   }
   // Libellés déjà connus : un montant écrit une 2e fois sous le même libellé (ex. le solde
   // rappelé sur le côté de la page) n'a pas besoin d'une 2e pastille.
-  const libellesConnus = new Set(ELEMENTS.flatMap((e) => e.libelles.map(normaliser)));
+  const libellesConnus = new Set(banqueCourante().elements.flatMap((e) => e.libelles.map(normaliser)));
   return trouves
     .filter((el) => {
       const l = listeDe(el);
