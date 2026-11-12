@@ -1085,3 +1085,117 @@ Le montant manquant n'est écrit nulle part sur la page. Même calculé par le c
 | Qui | Quoi |
 |---|---|
 | Équipe langues | Ne pas prévoir de phrase « Il te manque {montant} » dans les traductions |
+
+## 2026-11-11 — Contenu inédit : montants, alertes et messages inconnus, écran inconnu, test avec le panneau du jury
+
+**Auteur :** Omar
+
+### En bref
+
+Kama ne s'appuie plus seulement sur sa liste de libellés. Il repère tout seul :
+- les **montants** qu'il ne connaît pas ;
+- les **messages d'alerte** ;
+- les **textes ajoutés** dans la page après son affichage.
+
+Sur un **écran qu'il ne connaît pas**, « Expliquer cette page » dit ce qu'il voit. Le tout a été testé avec le **panneau du jury** de la page de test.
+
+### Ce qui a été implémenté, expliqué simplement
+
+**A. Montants inconnus** (`lib/lecture-page.ts`)
+- Tout montant affiché reçoit une pastille, avec le texte écrit juste avant lui. Exemple : « Solde après opération : −52 500 FCFA ».
+- Le montant et le texte sont **recopiés tels quels**, et Kama dit qu'il ne connaît pas encore cette information (`gabaritMontantInconnu` dans `config/gabarits.ts`).
+- Kama reconnaît aussi les autres écritures du franc CFA : « F CFA », « XAF », devise devant ou derrière.
+- Ne reçoivent pas de pastille :
+  - les montants déjà expliqués ;
+  - un montant répété sous un libellé connu, comme le solde rappelé sur le côté de la page ;
+  - les montants des transactions ;
+  - ceux des listes et tableaux, à partir de 3 montants au même endroit.
+
+**B. Alertes et nouveaux messages**
+- Une **alerte inconnue** est repérée par un rôle d'alerte (accessibilité), un code de type `XXX_000` ou un premier mot d'alerte (« Attention », « Alerte », « Erreur »…). Kama affiche le message de la banque tel quel, avec une explication franche.
+- Un **nouveau message**, c'est un texte apparu sur un écran déjà affiché.
+  - Kama retient en mémoire les textes de l'écran ; rien n'est stocké.
+  - Le message garde sa pastille même si on change d'étape.
+  - Un texte qui change à un endroit déjà affiché, comme la phrase des frais, est une mise à jour et non un nouveau message.
+  - Un grand changement d'un coup, comme un nouvel écran ou la page passée en anglais, remet la mémoire à zéro.
+- « Expliquer cette page » ajoute une étape « Un nouveau message est apparu… » avec « Montre-moi ».
+
+**C. Écran inconnu** : « Kama ne connaît pas encore cette page. Voici ce qu'il y voit. » Suivent le titre, les messages, les montants (recopiés) et les boutons (« C'est toi qui décides d'appuyer »), chacun avec « Montre-moi ».
+
+**E. Test avec le panneau du jury** (`?jury=1`) : injection d'un texte, puis déclenchement des 3 erreurs du panneau.
+
+### Démarche utilisée
+
+- **Lecture du code public** du panneau du jury (« Outil interne Safinum — non fourni aux équipes ») pour savoir ce qu'il permet :
+  - injecter un texte ;
+  - déclencher 3 erreurs ;
+  - changer le montant, les frais et le bénéficiaire ;
+  - vérifier les valeurs affichées et soumises ;
+  - mesurer une **couverture**.
+- **Tests automatiques** sur le vrai site : lecture seule à chaque étape, puis extension chargée dans Chrome for Testing (captures 11 à 16).
+- **Défauts trouvés et corrigés grâce aux tests** :
+  1. le solde, affiché deux fois, avait deux pastilles ;
+  2. la phrase des frais, qui change avec le type d'envoi, était prise pour un nouveau message ;
+  3. le texte injecté était compté deux fois, car le panneau du jury le recopie ;
+  4. les **boutons** « Alerte de sécurité » du panneau du jury étaient pris pour des alertes de la banque.
+
+### Résultats et limites connues
+
+- Le texte injecté par le jury est détecté sans rechargement et reçoit sa pastille. La page l'affiche sous le titre « Message important », que Kama connaît déjà.
+- Les 3 erreurs du panneau (AMOUNT_002, SECURITY_002, NETWORK_001) sont reconnues avec leur code.
+- Les scénarios 1 et 2 passent toujours ; la page ne produit aucune erreur.
+- **Limites** :
+  - Kama **ne traduit pas** le texte inédit. Il le montre et propose de l'écouter en français, faute de traduction validée (règle d'or n° 4).
+  - Un texte injecté **avant** l'arrivée de Kama est vu comme faisant partie de la page.
+- **Constat important.** La « couverture » du jury mesure le **pourcentage de textes de la page qui ont été remplacés**. On mémorise les textes, on charge l'extension, puis on compte ceux qui ont changé. Le guide demande aussi que l'extension « analyse et traduise la page telle qu'elle est ».
+  - Kama, qui explique dans sa propre fenêtre sans toucher à la page (règle d'or n° 3), obtiendrait 0 % à cette mesure.
+  - Décision à prendre par l'équipe (voir ci-dessous).
+
+### Ce que l'équipe doit faire ensuite
+
+| Qui | Quoi |
+|---|---|
+| Équipe | Décider si Kama doit aussi traduire la page directement (mesure de couverture du jury), ce qui change la règle d'or n° 3 |
+| Équipe langues | Si oui : traduire et faire valider la liste fermée des textes de la page en ghomálá' et en pidgin |
+| Dimitri | Pour le texte inédit : traduire sans transmettre les données affichées (protocole), par exemple avec le masquage déjà prévu côté serveur |
+
+### Composants tiers utilisés
+
+Aucun nouveau composant.
+
+## 2026-11-11 — Approche « assistant » confirmée par le règlement
+
+**Auteur :** Omar
+
+### En bref
+
+Le **règlement du défi** laisse libre l'approche technique : « une extension de navigateur, un composant logiciel indépendant, un assistant vocal ou toute autre solution pertinente ». Il demande de rendre les contenus **compréhensibles** dans une langue nationale, pas de remplacer le texte de la page.
+
+L'approche de Kama est donc conforme : il explique dans sa fenêtre, en audio d'abord, sans toucher à la page. La règle d'or n° 3 est maintenue. La mesure de « couverture » du panneau du jury n'est pas un critère du règlement.
+
+### Ce qui a été implémenté, expliqué simplement
+
+Rien. Il s'agit d'une décision, prise à partir du texte du règlement.
+
+### Démarche utilisée
+
+Les 5 fonctionnalités minimales du règlement ont été comparées à l'état actuel de Kama :
+
+| Fonctionnalité du règlement | État |
+|---|---|
+| 1. Adaptation linguistique des principaux textes, instructions et messages | **Manque l'essentiel** : explications prêtes, mais encore en français (badge « Pas encore traduit ») |
+| 2. Prise en charge d'un parcours (solde, frais, transfert) | Fait : « Expliquer cette page », « Montre-moi », pastilles |
+| 3. Préservation des montants, frais, bénéficiaires, avertissements | Fait : tout est recopié tel quel, Kama ne calcule rien |
+| 4. Fonctionnement sans modifier le code du service | Fait : reconnaissance par le texte, page non modifiée |
+| 5. Traiter un nouveau message pendant la démonstration | **À moitié** : détecté et montré, mais pas encore rendu dans la langue nationale |
+
+### Résultats et limites connues
+
+Les deux manques (1 et 5) dépendent des **textes en langue nationale**, pas du frontend.
+
+### Ce que l'équipe doit faire ensuite
+
+| Qui | Quoi |
+|---|---|
+| Équipe langues | Priorité n° 1 : traduire et faire valider les gabarits (`config/gabarits.ts`), les explications d'étapes et d'erreurs (`config/page-test.ts`) en ghomálá' et en pidgin, et enregistrer les audios |
+| Dimitri | Priorité n° 2 : traduction en direct d'un message inédit (badge « Traduction automatique »), sans transmettre les données affichées : masquage des montants, noms et numéros avant l'envoi |

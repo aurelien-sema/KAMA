@@ -6,7 +6,7 @@
 import { useEffect, useState } from 'react';
 import { lirePage, type LecturePage } from './lecture-page';
 
-const VIDE: LecturePage = { elements: new Map(), etape: null };
+const VIDE: LecturePage = { elements: new Map(), etape: null, decouvertes: [] };
 const DELAI = 250;
 
 export function useLecturePage(actif: boolean): LecturePage {

@@ -14,9 +14,8 @@ import { KamaWindow, KAMA_WINDOW_HEIGHT } from '@/components/kama/fenetre/KamaWi
 import { TalkIdleContent } from '@/components/kama/fenetre/contents';
 import { ContenuReel, type VueReelle } from '@/components/kama/fenetre/reel';
 import { trouverLangue, type IdLangue } from '@/config/langues';
-import type { IdElement } from '@/config/page-test';
 import { LangueCourante, LectureAuto } from '@/lib/langue-courante';
-import { lirePage } from '@/lib/lecture-page';
+import { lirePage, nomDecouverte, trouverDecouverte } from '@/lib/lecture-page';
 import { estMessageKama } from '@/lib/messages';
 import { enregistrerPositionOnglet, lirePositionOnglet, POSITION_PAR_DEFAUT, topBorne } from '@/lib/position-onglet';
 import { reglageActif, reglageLangue, reglageMode, useReglage } from '@/lib/reglages';
@@ -120,9 +119,19 @@ export function KamaApp() {
     }
   }
 
-  function montrer(id: IdElement) {
-    const e = lirePage().elements.get(id);
-    if (e) setSurligne({ zone: e.zone, nom: e.def.nom });
+  /** « Montre-moi » : `cible` = élément connu ou élément découvert par Kama. */
+  function montrer(cible: string) {
+    const lecture = lirePage();
+    const e = lecture.elements.get(cible as never);
+    if (e) return setSurligne({ zone: e.zone, nom: e.def.nom });
+    const d = trouverDecouverte(lecture, cible);
+    if (d) setSurligne({ zone: d.zone, nom: nomDecouverte(d) });
+  }
+
+  /** Clic sur une pastille : élément connu ou élément découvert. */
+  function ouvrirPastille(cible: string) {
+    const connu = lecture.elements.has(cible as never);
+    ouvrir(connu ? { type: 'element', id: cible as never } : { type: 'decouverte', cle: cible });
   }
 
   // Messages du popup : « Kama est-il là ? » et « Expliquer cette page ».
@@ -188,7 +197,7 @@ export function KamaApp() {
     <LangueCourante.Provider value={langue}>
       <LectureAuto.Provider value={mode === 'audio'}>
         <div ref={racine} className="kama-racine">
-          <Pastilles lecture={lecture} onOuvrir={(id) => ouvrir({ type: 'element', id })} />
+          <Pastilles lecture={lecture} onOuvrir={ouvrirPastille} />
           <Surlignage cible={surligne?.zone ?? null} onFin={() => setSurligne(null)} dansKama={dansKama} />
           <BarreSelection dansKama={dansKama} onExpliquer={(texte) => ouvrir({ type: 'selection', texte })} />
 

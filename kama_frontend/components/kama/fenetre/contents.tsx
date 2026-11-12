@@ -271,7 +271,16 @@ export function OfflineContent({ onRetry }: { onRetry?: () => void }) {
 }
 
 /* 11 — Traduction indisponible : texte original + « Écouter en français » */
-export function UntranslatedContent({ texte, langue }: { texte: string; langue?: string }) {
+export function UntranslatedContent({
+  texte,
+  langue,
+  onShowMe,
+}: {
+  texte: string;
+  langue?: string;
+  /** Texte venu de la page (nouveau message) : « Montre-moi » le retrouve. */
+  onShowMe?: () => void;
+}) {
   return (
     <article className="flex flex-col gap-3">
       <div className="flex flex-wrap items-center gap-1.5">
@@ -287,6 +296,11 @@ export function UntranslatedContent({ texte, langue }: { texte: string; langue?:
           <Volume2 className="size-4" aria-hidden /> Écouter en français
         </WindowButton>
       </div>
+      {onShowMe && (
+        <div>
+          <MontreMoi onClick={onShowMe} />
+        </div>
+      )}
     </article>
   );
 }
