@@ -39,15 +39,22 @@ export async function envoyerAOngletActif(message: MessageKama): Promise<boolean
 export const PORT_MICRO = 'kama-micro';
 
 /** Intentions reconnues par le serveur (backend/app/schemas.py). */
-export type Intention =
-  | 'ask_balance'
-  | 'ask_fees'
-  | 'ask_total'
-  | 'what_to_do'
-  | 'explain_error'
-  | 'summarize_transactions'
-  | 'repeat'
-  | 'unknown';
+export const INTENTIONS = [
+  'ask_balance',
+  'ask_fees',
+  'ask_total',
+  'what_to_do',
+  'explain_error',
+  'summarize_transactions',
+  'repeat',
+  'unknown',
+] as const;
+export type Intention = (typeof INTENTIONS)[number];
+
+/** Une intention inconnue de cette version de Kama (serveur plus récent) devient `unknown`. */
+export function intentionConnue(valeur: unknown): Intention {
+  return INTENTIONS.includes(valeur as Intention) ? (valeur as Intention) : 'unknown';
+}
 
 /**
  * Réponse à une question vocale.

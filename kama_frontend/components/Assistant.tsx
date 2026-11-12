@@ -5,7 +5,11 @@
  *   appui sur le micro → (1re fois : accord de l'utilisateur) → KAMA écoute (document caché de
  *   l'extension, pas la page de la banque) → voix en WAV 16 kHz → service worker → serveur,
  *   qui renvoie seulement une INTENTION (« les frais »…)
- *   → Kama répondra localement, avec les montants lus dans la page (étape suivante du projet).
+ *   → Kama répond LOCALEMENT, avec les mêmes contenus que le menu et les pastilles : les
+ *   montants sont lus dans la page au moment de répondre, jamais fournis par le serveur.
+ *
+ * Plus tard, un modèle de langue pourra répondre aux questions hors de ces intentions ; il ne
+ * produira jamais de montant (règle d'or n° 1).
  *
  * Tant que le serveur n'est pas en ligne, le service worker répond en mode simulation.
  * La conversation reste affichée tant que la fenêtre est ouverte ; rien n'est stocké.
@@ -17,7 +21,9 @@ import { Mic, RotateCw, ShieldCheck } from 'lucide-react';
 import type { MicMode } from '@/components/kama/fenetre/KamaWindow';
 import { TalkIdleContent, TalkListeningContent } from '@/components/kama/fenetre/contents';
 import { KamaLine, UserBubble, WindowButton } from '@/components/kama/fenetre/parts';
+import { ContenuReel, type VueReelle } from '@/components/kama/fenetre/reel';
 import type { Langue } from '@/config/langues';
+import { lirePage } from '@/lib/lecture-page';
 import type { ErreurMicro, EvenementMicro, Intention, ResultatIntention } from '@/lib/messages';
 import { demanderAutorisationMicro, ouvrirMicro, type Micro } from '@/lib/micro';
 import { reglageConsentementMicro, useReglage } from '@/lib/reglages';
@@ -26,12 +32,24 @@ import { arreterLecture, lireEnFrancais } from '@/lib/voix';
 type Etat = 'attente' | 'accord' | 'ecoute' | 'envoi';
 
 type Bulle =
-  | { id: number; de: 'toi'; duree: number }
-  | { id: number; de: 'kama'; titre: string; texte?: string; reessayer?: boolean; autoriser?: boolean };
+  | { id: number; de: 'toi'; duree: number; compris?: string }
+  | { id: number; de: 'kama'; titre: string; texte?: string; reessayer?: boolean; autoriser?: boolean }
+  /** Réponse construite à partir de la page (solde, frais, explication…). */
+  | { id: number; de: 'reponse'; vue: VueReelle };
 
 const NB_BARRES = 18;
 
-export function useAssistant({ langue, lectureAuto }: { langue: Langue | null; lectureAuto: boolean }) {
+type MontrerFn = (cible: string) => void;
+
+export function useAssistant({
+  langue,
+  lectureAuto,
+  onShowMe,
+}: {
+  langue: Langue | null;
+  lectureAuto: boolean;
+  onShowMe: MontrerFn;
+}) {
   const [consentement, setConsentement] = useReglage(reglageConsentementMicro);
   const [etat, setEtat] = useState<Etat>('attente');
   const [bulles, setBulles] = useState<Bulle[]>([]);
@@ -80,8 +98,7 @@ export function useAssistant({ langue, lectureAuto }: { langue: Langue | null; l
         return setEtat('envoi');
       case 'resultat': {
         setEtat('attente');
-        const [titre, texte, reessayer] = messagePour(e.resultat);
-        return kama({ titre, texte, reessayer });
+        return repondre(e.resultat);
       }
       case 'erreur': {
         setEtat('attente');
@@ -96,6 +113,32 @@ export function useAssistant({ langue, lectureAuto }: { langue: Langue | null; l
         return;
     }
   };
+
+  function repondre(r: ResultatIntention) {
+    // Question comprise : on note sous le message vocal ce que Kama a compris.
+    if (r.ok && r.intention !== 'unknown') noterCompris(SENS[r.intention]);
+    const reponse = reponsePour(r, bulles);
+    if ('vue' in reponse) {
+      // Contenu complet (lecteur audio inclus) : il se lit tout seul si l'utilisateur préfère l'audio.
+      setBulles((liste) => [...liste, { id: ++compteur.current, de: 'reponse', vue: reponse.vue }]);
+    } else if ('repete' in reponse) {
+      const b = reponse.repete;
+      if (b.de === 'kama' && lectureAuto) lireEnFrancais([b.titre, b.texte].filter(Boolean).join(' '));
+      setBulles((liste) => [...liste, { ...b, id: ++compteur.current }]);
+    } else {
+      kama(reponse);
+    }
+  }
+
+  function noterCompris(compris: string) {
+    setBulles((liste) => {
+      const i = liste.findLastIndex((b) => b.de === 'toi');
+      if (i < 0) return liste;
+      const copie = [...liste];
+      copie[i] = { ...(copie[i] as Extract<Bulle, { de: 'toi' }>), compris };
+      return copie;
+    });
+  }
 
   function reessayer() {
     if (etat !== 'attente') return;
@@ -131,6 +174,7 @@ export function useAssistant({ langue, lectureAuto }: { langue: Langue | null; l
       onRefuser={refuser}
       onReessayer={reessayer}
       onAutoriser={demanderAutorisationMicro}
+      onShowMe={onShowMe}
     />
   );
 
@@ -148,7 +192,7 @@ const MESSAGES_MICRO: Record<ErreurMicro, [string, string]> = {
   indisponible: ['Le micro ne marche pas pour le moment.', 'Ferme les autres applications qui utilisent le micro, puis réessaie.'],
 };
 
-/** Ce que l'intention reconnue veut dire, pour le dire à l'utilisateur. */
+/** Ce que Kama a compris, affiché sous le message vocal (« Kama a compris : les frais »). */
 const SENS: Record<Intention, string> = {
   ask_balance: 'ton solde',
   ask_fees: 'les frais',
@@ -160,34 +204,91 @@ const SENS: Record<Intention, string> = {
   unknown: '',
 };
 
-/** [titre, texte, proposer « Réessayer »]. Les réponses aux questions viendront à l'étape suivante. */
-function messagePour(r: ResultatIntention): [string, string?, boolean?] {
-  if (r.ok) {
-    if (r.simulation) {
-      return [
-        "J'ai bien reçu ta question.",
-        "Mode simulation : le serveur de Kama n'est pas encore branché, je ne peux pas encore la comprendre.",
-      ];
-    }
-    if (r.intention === 'unknown') return ["Je n'ai pas compris ta question.", 'Redis-la autrement, avec des mots simples.'];
-    return [`Tu me demandes : ${SENS[r.intention]}.`, 'Ma réponse arrive dans une prochaine version.'];
+type Message = { titre: string; texte?: string; reessayer?: boolean };
+type Reponse = { vue: VueReelle } | { repete: Bulle } | Message;
+
+/** Quand l'élément demandé n'est pas sur la page : Kama le dit, il n'invente rien. */
+const ABSENT: Record<'solde' | 'frais' | 'total' | 'erreur', Message> = {
+  solde: { titre: 'Je ne vois pas ton solde sur cette page.', texte: 'Va sur la page de ta banque où ton solde est écrit.' },
+  frais: {
+    titre: 'Je ne vois pas de frais sur cette page.',
+    texte: 'Les frais s’affichent quand tu prépares un transfert.',
+  },
+  total: {
+    titre: 'Je ne vois pas de total sur cette page.',
+    texte: 'Le total s’affiche quand tu prépares un transfert.',
+  },
+  erreur: {
+    titre: 'Je ne vois pas de message d’erreur sur cette page.',
+    texte: 'Si la banque affiche un message, touche la pastille Kama à côté.',
+  },
+};
+
+/**
+ * La réponse de Kama à une intention. La page est relue maintenant : Kama répond sur ce qui
+ * est affiché, avec les montants exacts de la page (ou dit qu'il ne les voit pas).
+ */
+function reponsePour(r: ResultatIntention, bulles: Bulle[]): Reponse {
+  if (!r.ok) return messageErreur(r.code);
+  if (r.simulation && r.intention === 'unknown') {
+    return {
+      titre: "J'ai bien reçu ta question.",
+      texte: "Mode simulation : le serveur de Kama n'est pas encore branché, je ne peux pas encore la comprendre.",
+    };
   }
-  switch (r.code) {
+  const lecture = lirePage();
+  const element = (id: 'solde' | 'frais' | 'total'): Reponse =>
+    lecture.elements.has(id) ? { vue: { type: 'element', id } } : ABSENT[id];
+
+  switch (r.intention) {
+    case 'ask_balance':
+      return element('solde');
+    case 'ask_fees':
+      return element('frais');
+    case 'ask_total':
+      return element('total');
+    case 'what_to_do':
+      return { vue: { type: 'expliquer' } };
+    case 'summarize_transactions':
+      return { vue: { type: 'resumer' } };
+    case 'explain_error': {
+      if (lecture.elements.has('erreur')) return { vue: { type: 'element', id: 'erreur' } };
+      const alerte = lecture.decouvertes.find((d) => d.nature === 'alerte');
+      return alerte ? { vue: { type: 'decouverte', cle: alerte.cle } } : ABSENT.erreur;
+    }
+    case 'repeat': {
+      // La dernière réponse de Kama, telle quelle (les messages d'erreur ne sont pas répétés).
+      const derniere = bulles.findLast((b) => b.de === 'reponse' || (b.de === 'kama' && !b.reessayer && !b.autoriser));
+      return derniere
+        ? { repete: derniere }
+        : { titre: "Je n'ai encore rien dit.", texte: 'Appuie sur le micro et pose ta question.' };
+    }
+    case 'unknown':
+      return { titre: "Je n'ai pas compris ta question.", texte: 'Redis-la autrement, avec des mots simples.' };
+  }
+}
+
+function messageErreur(code: string): Message {
+  switch (code) {
     case 'reseau':
     case 'busy':
-      return ["Je n'arrive pas à joindre Kama.", "Vérifie ta connexion internet, puis appuie sur « Réessayer ».", true];
+      return {
+        titre: "Je n'arrive pas à joindre Kama.",
+        texte: 'Vérifie ta connexion internet, puis appuie sur « Réessayer ».',
+        reessayer: true,
+      };
     case 'rate_limited':
-      return ['Trop de questions en peu de temps.', 'Attends un peu, puis appuie sur « Réessayer ».', true];
+      return { titre: 'Trop de questions en peu de temps.', texte: 'Attends un peu, puis appuie sur « Réessayer ».', reessayer: true };
     case 'invalid_audio':
     case 'invalid_duration':
-      return ["Je n'ai pas bien entendu.", 'Appuie sur le micro et repose ta question.'];
+      return { titre: "Je n'ai pas bien entendu.", texte: 'Appuie sur le micro et repose ta question.' };
     case 'asr_unavailable':
-      return [
-        'Kama ne comprend pas encore la voix pour le moment.',
-        "Utilise « Expliquer cette page » ou les pastilles Kama à côté des montants.",
-      ];
+      return {
+        titre: 'Kama ne comprend pas encore la voix pour le moment.',
+        texte: 'Utilise « Expliquer cette page » ou les pastilles Kama à côté des montants.',
+      };
     default:
-      return ['Kama a eu un problème.', 'Appuie sur « Réessayer ».', true];
+      return { titre: 'Kama a eu un problème.', texte: 'Appuie sur « Réessayer ».', reessayer: true };
   }
 }
 
@@ -201,6 +302,7 @@ function Conversation({
   onRefuser,
   onReessayer,
   onAutoriser,
+  onShowMe,
 }: {
   etat: Etat;
   bulles: Bulle[];
@@ -209,6 +311,7 @@ function Conversation({
   onRefuser: () => void;
   onReessayer: () => void;
   onAutoriser: () => void;
+  onShowMe: MontrerFn;
 }) {
   const fin = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -224,11 +327,16 @@ function Conversation({
 
       {bulles.map((b) =>
         b.de === 'toi' ? (
-          <UserBubble key={b.id}>
-            <span className="inline-flex items-center gap-1.5">
-              <Mic className="size-4" aria-hidden /> Message vocal · {Math.max(1, Math.round(b.duree))} s
-            </span>
-          </UserBubble>
+          <div key={b.id} className="flex flex-col items-end gap-1">
+            <UserBubble>
+              <span className="inline-flex items-center gap-1.5">
+                <Mic className="size-4" aria-hidden /> Message vocal · {Math.max(1, Math.round(b.duree))} s
+              </span>
+            </UserBubble>
+            {b.compris && <span className="text-xs text-kama-ink/70">Kama a compris : {b.compris}</span>}
+          </div>
+        ) : b.de === 'reponse' ? (
+          <ContenuReel key={b.id} vue={b.vue} onShowMe={onShowMe} />
         ) : (
           <ReponseKama key={b.id} titre={b.titre} texte={b.texte}>
             {b.reessayer && b === derniere && etat === 'attente' && (

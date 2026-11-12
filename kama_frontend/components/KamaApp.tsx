@@ -43,7 +43,7 @@ export function KamaApp() {
   const [surligne, setSurligne] = useState<{ zone: Element; nom: string } | null>(null);
 
   const lecture = useLecturePage(actif);
-  const assistant = useAssistant({ langue, lectureAuto: mode === 'audio' });
+  const assistant = useAssistant({ langue, lectureAuto: mode === 'audio', onShowMe: montrer });
 
   const racine = useRef<HTMLDivElement>(null);
   const onglet = useRef<HTMLButtonElement>(null);

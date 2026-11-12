@@ -5,10 +5,13 @@
  *    niveau du son vers la page, puis envoie la voix au serveur de Kama. C'est la seule partie
  *    qui parle au serveur ; la page bancaire ne le contacte jamais et ne reçoit jamais la voix.
  */
+import { VERSION_JURY } from '@/config/banques';
 import { DELAI_SERVEUR_MS, SERVEUR_KAMA } from '@/config/serveur';
+import { reglageIntentionSimulee } from '@/lib/reglages';
 import {
   PORT_MICRO,
   depuisBase64,
+  intentionConnue,
   pourDestinataire,
   type CommandeMicro,
   type DemandeAutorisation,
@@ -142,9 +145,13 @@ async function assurerDocumentMicro() {
 async function comprendre(audio: string, langue: string): Promise<ResultatIntention> {
   // Mode simulation : pas encore de serveur en ligne. On répond après un court délai, comme
   // le ferait le serveur, sans rien envoyer nulle part. La voix est oubliée aussitôt.
+  // Pour l'équipe seulement : l'intention choisie dans le catalogue, pour essayer les réponses.
   if (!SERVEUR_KAMA) {
     await new Promise((r) => setTimeout(r, 900));
-    return { ok: true, intention: 'unknown', confiance: 0, simulation: true };
+    const choisie = VERSION_JURY ? null : await reglageIntentionSimulee.getValue();
+    return choisie
+      ? { ok: true, intention: choisie, confiance: 1, simulation: true }
+      : { ok: true, intention: 'unknown', confiance: 0, simulation: true };
   }
 
   const abandon = new AbortController();
@@ -158,7 +165,7 @@ async function comprendre(audio: string, langue: string): Promise<ResultatIntent
     });
     const corps = await reponse.json().catch(() => null);
     if (!reponse.ok) return { ok: false, code: corps?.error?.code ?? `http_${reponse.status}` };
-    return { ok: true, intention: corps.intent, confiance: corps.confidence, simulation: false };
+    return { ok: true, intention: intentionConnue(corps?.intent), confiance: Number(corps?.confidence) || 0, simulation: false };
   } catch {
     return { ok: false, code: 'reseau' };
   } finally {

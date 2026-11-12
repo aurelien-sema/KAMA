@@ -1381,3 +1381,55 @@ Suite aux demandes de Dimitri :
 | Omar | Décider des 4 points ci-dessus |
 | Omar | Essayer la Banque Démo : `npm run banque-demo` dans `kama_frontend`, puis http://localhost:5180 avec l'extension de développement (`.output/chrome-mv3`) |
 | Équipe | Pour ajouter une banque : copier `config/banques/demo.ts`, remplacer les libellés, l'inscrire dans `config/banques/index.ts` |
+
+## 2026-11-12 — Parler à Kama : les réponses (côté frontend)
+
+**Auteur :** Omar (réalisé par Claude Code, à sa demande : « tu peux lancer les réponses de l'assistant côté frontend »)
+
+### En bref
+
+Quand le serveur reconnaît une question (une « intention »), Kama y répond maintenant dans la conversation. Il répond **localement**, avec les mêmes contenus que le menu et les pastilles. Les montants sont lus dans la page au moment de répondre ; le serveur n'en fournit aucun. Le modèle de langue qui répondra aux autres questions sera intégré plus tard, avec l'équipe.
+
+### Ce qui a été implémenté, expliqué simplement
+
+- **Une réponse pour chaque intention** :
+
+  | Intention | Réponse de Kama |
+  |---|---|
+  | ton solde, les frais, le total | L'explication de l'élément, avec le montant exact de la page et « Montre-moi » |
+  | quoi faire ici | « Expliquer cette page » |
+  | tes transactions | Le résumé des transactions |
+  | le message de la banque | L'erreur affichée, connue ou découverte par Kama |
+  | répéter | La dernière réponse de Kama, à l'identique |
+  | non comprise | « Je n'ai pas compris ta question. Redis-la autrement. » |
+
+- **L'élément demandé n'est pas sur la page** : Kama le dit franchement (par exemple « Je ne vois pas de frais sur cette page »), sans rien inventer.
+- **« Kama a compris : les frais »** s'affiche sous le message vocal. L'utilisateur voit ainsi tout de suite si Kama s'est trompé.
+- **Lecture audio** : la réponse se lit toute seule si l'utilisateur a choisi « Audio » dans le popup, comme partout ailleurs.
+- **Robustesse** : une intention inconnue de cette version (serveur plus récent) est traitée comme « non comprise ».
+- **Outil de l'équipe** : dans le catalogue des états, une liste permet de choisir l'intention que la simulation renvoie. On peut ainsi essayer chaque réponse sur la vraie page sans serveur. Cet outil est absent de la version jury.
+- **Petit correctif** : le serveur de la Banque Démo ne produit plus d'erreur 404 sur l'icône de l'onglet.
+
+### Démarche utilisée
+
+- Test automatique sur la Banque Démo, avec un micro simulé (fichier audio) : une question pour chacune des 8 intentions, puis « le message de la banque » après un refus, puis « Montre-moi » depuis une réponse.
+- Résultats :
+  - montants recopiés à l'identique (« 500 XAF », « 25.500 XAF », puis « 9.000 XAF » et « 909.000 XAF » après changement du montant) ;
+  - refus « Provision insuffisante » expliqué ;
+  - « Montre-moi » surligne la Commission ;
+  - aucune erreur.
+- Aucune erreur TypeScript.
+
+### Résultats et limites connues
+
+- Les réponses restent en français, avec le badge « Pas encore traduit », tant que les textes validés ne sont pas fournis.
+- Les questions hors des 7 intentions attendent le modèle de langue (à intégrer ensemble). Il ne produira jamais de montant (règle d'or n° 1).
+- **Repéré pour la phase qualité** : la fenêtre Kama peut cacher en partie l'élément surligné par « Montre-moi ».
+
+### Ce que l'équipe doit faire ensuite
+
+| Qui | Quoi |
+|---|---|
+| Omar | Essayer : catalogue des états → choisir une intention → page de la banque → micro |
+| Dimitri | Mettre le serveur en ligne et donner son adresse (`config/serveur.ts`) : les vraies intentions remplaceront alors la simulation |
+| Équipe | Intégrer ensemble le modèle qui répondra aux autres questions |

@@ -19,6 +19,8 @@ import {
 import { LANGUES } from '@/config/langues';
 import { LangueCourante } from '@/lib/langue-courante';
 import { PopupVue } from '@/components/popup/Popup';
+import { INTENTIONS, type Intention } from '@/lib/messages';
+import { reglageIntentionSimulee, useReglage } from '@/lib/reglages';
 
 const rien = () => {};
 const POPUP = [
@@ -28,6 +30,38 @@ const POPUP = [
   { titre: '4. Désactivé', idLangue: 'ghomala', actif: false, pageReconnue: true },
   { titre: '5. Page non reconnue', idLangue: 'pidgin', actif: true, pageReconnue: false },
 ] as const;
+
+/**
+ * Tant que le serveur n'est pas branché, la simulation répond l'intention choisie ici à toute
+ * question vocale : on peut essayer chaque réponse de Kama sur la vraie page.
+ */
+function IntentionSimulee() {
+  const [intention, setIntention] = useReglage(reglageIntentionSimulee);
+  return (
+    <section className="mb-12 max-w-xl rounded-xl border border-bank-line bg-kama-white p-4">
+      <h2 className="m-0 mb-2 font-display text-xl text-kama-ink">Parler à Kama : intention simulée</h2>
+      <p className="m-0 mb-3 text-sm text-kama-ink/80">
+        Sans serveur, toute question vocale est « comprise » comme l'intention choisie. Outil de l'équipe, absent de la
+        version jury.
+      </p>
+      <label className="flex items-center gap-3 text-sm font-semibold text-kama-ink">
+        Intention
+        <select
+          value={intention ?? ''}
+          onChange={(e) => setIntention((e.target.value || null) as Intention | null)}
+          className="h-11 rounded-lg border border-bank-line px-2 text-sm"
+        >
+          <option value="">Aucune (message de simulation)</option>
+          {INTENTIONS.map((i) => (
+            <option key={i} value={i}>
+              {i}
+            </option>
+          ))}
+        </select>
+      </label>
+    </section>
+  );
+}
 
 function Catalogue() {
   return (
@@ -39,6 +73,7 @@ function Catalogue() {
           {LANGUES[0].nom}).
         </p>
       </header>
+      <IntentionSimulee />
       <h2 className="m-0 mb-4 font-display text-xl text-kama-ink">Popup</h2>
       <div className="mb-12 flex flex-wrap items-start gap-8">
         {POPUP.map((e) => (

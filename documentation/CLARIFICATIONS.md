@@ -118,7 +118,7 @@ Chaque réponse porte un **badge de fiabilité** : « Vérifié » (issu du glos
 ### P1 — important
 - [x] Barre de sélection de texte.
 - [x] Résumer mes transactions.
-- [ ] Parler à Kama (micro → réponse audio). *(Micro écouté par Kama, accord, envoi au serveur : faits, en mode simulation. Réponses aux questions : plus tard.)*
+- [ ] Parler à Kama (micro → réponse audio). *(Micro écouté par Kama, accord, envoi au serveur et réponses aux 7 intentions avec les montants de la page : faits, en mode simulation tant que le serveur n'est pas en ligne. Autres questions : modèle de langue à intégrer avec l'équipe.)*
 - [ ] Badges de fiabilité. *(Affichés ; seul « Pas encore traduit » sert tant que les textes validés ne sont pas fournis.)*
 - [x] Page de bienvenue ouverte automatiquement à l'installation (`chrome.runtime.onInstalled`) : confirme l'installation, montre comment épingler l'icône, choix de la langue, lien vers la page de test.
 
