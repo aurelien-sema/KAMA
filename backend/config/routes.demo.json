@@ -78,9 +78,10 @@
     "wes": {
       "enabled": true,
       "engine": "mms_vits",
-      "path": "poids/tts/mms-tts-pcm",
+      "path": "poids/tts/mms-tts-wes-v1",
       "options": {
-        "threads": 2
+        "threads": 2,
+        "speaker_id": 12
       }
     }
   }

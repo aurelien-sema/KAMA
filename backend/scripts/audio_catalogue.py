@@ -9,6 +9,8 @@
 3) Voix de synthese pre-generee pour les textes valides (sans enregistrement humain) :
        python backend/scripts/audio_catalogue.py synthetiser --valide-par "Locuteur 1" [--ecoute evaluation/tts_ecoute]
 4) Controle : python backend/scripts/audio_catalogue.py verifier
+5) Changer de voix pour les extraits deja valides (memes identifiants, memes textes ; l'ancienne voix est gardee a cote) :
+       python backend/scripts/audio_catalogue.py revoix --modele models/poids/tts/mms-tts-wes-v1 --speaker-id 12
 
 Les enregistrements sont convertis en WAV 16 bits, 16 kHz, mono, rognes aux extremites et ramenes a un niveau commun.
 Un texte avec un chiffre ou une balise est refuse : les nombres sont lus par les extraits de l'extension.
@@ -158,7 +160,7 @@ def commande_synthetiser(a):
     """
     from app.voice_engines import MmsVitsSynthesizer
 
-    synth = MmsVitsSynthesizer(Path(a.modele))
+    synth = MmsVitsSynthesizer(Path(a.modele), speaker_id=a.speaker_id)
     ecoute = Path(a.ecoute) if a.ecoute else None
     DESTINATION.mkdir(parents=True, exist_ok=True)
     clips, repris, generes = {}, 0, 0
@@ -174,6 +176,33 @@ def commande_synthetiser(a):
     (DESTINATION / "manifest.json").write_text(
         json.dumps({"sample_rate": SAMPLE_RATE, "clips": list(clips.values())}, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"{len(clips)} clips synthetiques ({repris} repris de l'ecoute validee, {generes} generes) -> {DESTINATION}")
+
+
+def commande_revoix(a):
+    """Regenere la voix de synthese des extraits deja valides avec un autre modele (meme texte, meme identifiant).
+
+    Seuls les extraits d'origine « synthetic » changent ; un enregistrement humain (« recorded ») n'est jamais remplace.
+    Le texte reste celui que le locuteur a valide ; la nouvelle voix est notee (champ « voix ») et marquee a reecouter
+    (« audio_a_reecouter ») tant que le locuteur ne l'a pas entendue. L'ancien dossier est copie dans <langue>_ancienne_voix.
+    """
+    from app.voice_engines import MmsVitsSynthesizer
+
+    manifeste = DESTINATION / "manifest.json"
+    donnees = json.loads(manifeste.read_text(encoding="utf-8"))
+    sauvegarde = DESTINATION.with_name(DESTINATION.name + "_ancienne_voix")
+    if not sauvegarde.exists():
+        shutil.copytree(DESTINATION, sauvegarde)
+    synth = MmsVitsSynthesizer(Path(a.modele), speaker_id=a.speaker_id)
+    voix = f"{Path(a.modele).name}" + (f"#{a.speaker_id}" if a.speaker_id is not None else "")
+    changes = 0
+    for clip in donnees["clips"]:
+        if clip.get("origin") != "synthetic":
+            continue
+        (DESTINATION / clip["file"]).write_bytes(synth.synthesize(clip["text"]))
+        clip.update(voix=voix, date=datetime.date.today().isoformat(), audio_a_reecouter=True)
+        changes += 1
+    manifeste.write_text(json.dumps(donnees, ensure_ascii=False, indent=1), encoding="utf-8")
+    print(f"{changes} extraits regeneres avec {voix} -> {DESTINATION} (ancienne voix : {sauvegarde})")
 
 
 def commande_verifier(_):
@@ -198,9 +227,14 @@ def main():
     y.add_argument("--valide-par", required=True)
     y.add_argument("--modele", default=str(DEPOT / "models" / "poids" / "tts" / "mms-tts-pcm"))
     y.add_argument("--ecoute", help="Dossier des WAV deja ecoutes et valides (evaluation/tts_ecoute)")
+    y.add_argument("--speaker-id", type=int, help="Voix a utiliser pour un modele a plusieurs voix (12 = melange de mms-tts-wes-v1)")
+    v = sub.add_parser("revoix")
+    v.add_argument("--modele", required=True)
+    v.add_argument("--speaker-id", type=int)
     sub.add_parser("verifier")
     a = ap.parse_args()
-    {"script": commande_script, "importer": commande_importer, "synthetiser": commande_synthetiser, "verifier": commande_verifier}[a.cmd](a)
+    {"script": commande_script, "importer": commande_importer, "synthetiser": commande_synthetiser, "revoix": commande_revoix,
+     "verifier": commande_verifier}[a.cmd](a)
 
 
 if __name__ == "__main__":
