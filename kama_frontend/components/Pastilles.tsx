@@ -8,15 +8,18 @@
  * Les pastilles vivent dans le Shadow DOM de Kama, par-dessus la page : la page n'est pas modifiée.
  */
 import { useEffect, useReducer } from 'react';
-import type { IdElement } from '@/config/page-test';
-import type { ElementTrouve, LecturePage } from '@/lib/lecture-page';
+import { AVEC_PASTILLE, nomDecouverte, type LecturePage } from '@/lib/lecture-page';
 import { KamaLogo } from '@/components/kama/primitives';
 
 const ZONE = 44;
 const PASTILLE = 24;
 const ECART = 8;
 
-export function Pastilles({ lecture, onOuvrir }: { lecture: LecturePage; onOuvrir: (id: IdElement) => void }) {
+/**
+ * `cible` = identifiant d'un élément connu (config/page-test.ts) ou clé d'un élément
+ * découvert tout seul par Kama (montant, alerte ou nouveau message inconnus).
+ */
+export function Pastilles({ lecture, onOuvrir }: { lecture: LecturePage; onOuvrir: (cible: string) => void }) {
   // Recalcule les positions quand la page défile ou que la fenêtre change de taille.
   const [, rafraichir] = useReducer((x: number) => x + 1, 0);
   useEffect(() => {
@@ -34,18 +37,25 @@ export function Pastilles({ lecture, onOuvrir }: { lecture: LecturePage; onOuvri
     };
   }, []);
 
-  const importants = [...lecture.elements.values()].filter((e) => e.def.pastille && e.ancre.isConnected);
+  const importants = [
+    ...[...lecture.elements.values()]
+      .filter((e) => e.def.pastille)
+      .map((e) => ({ cible: e.def.id as string, ancre: e.ancre, nom: e.def.nom })),
+    ...lecture.decouvertes
+      .filter((d) => AVEC_PASTILLE.includes(d.nature))
+      .map((d) => ({ cible: d.cle, ancre: d.ancre, nom: nomDecouverte(d) })),
+  ].filter((p) => p.ancre.isConnected);
   return (
     <>
-      {importants.map((e) => (
-        <Pastille key={e.def.id} element={e} onClick={() => onOuvrir(e.def.id)} />
+      {importants.map((p) => (
+        <Pastille key={p.cible} ancre={p.ancre} nom={p.nom} onClick={() => onOuvrir(p.cible)} />
       ))}
     </>
   );
 }
 
-function Pastille({ element, onClick }: { element: ElementTrouve; onClick: () => void }) {
-  const r = rectangleDuTexte(element.ancre);
+function Pastille({ ancre, nom, onClick }: { ancre: Element; nom: string; onClick: () => void }) {
+  const r = rectangleDuTexte(ancre);
   if (!r || r.bottom < 0 || r.top > window.innerHeight) return null;
 
   const decalage = (ZONE - PASTILLE) / 2;
@@ -58,7 +68,7 @@ function Pastille({ element, onClick }: { element: ElementTrouve; onClick: () =>
     <button
       type="button"
       onClick={onClick}
-      aria-label={`Kama t'explique : ${element.def.nom}`}
+      aria-label={`Kama t'explique : ${nom}`}
       style={{ left, top }}
       className="group fixed z-[2147483646] grid size-11 cursor-pointer place-items-center rounded-full border-0 bg-transparent p-0 focus-visible:outline-2 focus-visible:outline-kama-ink"
     >
