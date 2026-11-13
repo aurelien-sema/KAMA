@@ -18,7 +18,7 @@ from .engines import EngineSet, TranslationRoute, load_engines
 from .errors import KamaError, busy, unmasked, unsupported_language
 from .memory import TranslationMemory
 from .schemas import AudioSegment, IntentResponse, SlotSegment, TranslateRequest, TranslateResponse, TtsResponse
-from .security.guards import canonical, is_critical, output_problem, similarity
+from .security.guards import CriticalTerms, canonical, is_critical, output_problem, similarity
 from .security.masking import SLOT_RE, has_hard_pii, is_masked
 from .settings import Settings
 from .simplify import Simplifier
@@ -59,8 +59,16 @@ def religious_drift(source: str, output: str) -> bool:
 class TranslationService:
     """Ordre impose : memoire validee, memoire proche, modele sous controle, sinon rien."""
 
-    def __init__(self, memory: TranslationMemory, engines: EngineSet, settings: Settings, gate: asyncio.Semaphore) -> None:
+    def __init__(
+        self,
+        memory: TranslationMemory,
+        engines: EngineSet,
+        settings: Settings,
+        gate: asyncio.Semaphore,
+        critical: CriticalTerms | None = None,
+    ) -> None:
         self.memory, self.engines, self.settings, self.gate = memory, engines, settings, gate
+        self.critical = critical or CriticalTerms([])
 
     async def translate(self, req: TranslateRequest) -> TranslateResponse:
         if req.target_lang not in self.engines.languages:
@@ -89,7 +97,7 @@ class TranslationService:
 
     def _run_model(self, req: TranslateRequest, route: TranslationRoute) -> TranslateResponse:
         output = route.translator.translate(req.text)
-        if output_problem(req.text, output) or religious_drift(req.text, output):
+        if output_problem(req.text, output, self.critical) or religious_drift(req.text, output):
             return untranslated("guard_failed")
         if route.lexicon is not None and unknown_ratio(output, route.lexicon) > route.max_unknown_ratio:
             return untranslated("guard_failed")  # trop de mots absents des corpus : probablement invente
@@ -251,5 +259,10 @@ def build_services(settings: Settings, engines: EngineSet | None = None) -> Serv
         [settings.content_dir / "safinum_test_page.json", settings.content_dir / "kama_interface.json", settings.content_dir / "kama_fenetre.json"],
     )
     intents = IntentMatcher.from_file(settings.content_dir / "intents.json")
+    critical = CriticalTerms.from_file(settings.content_dir / "termes_critiques_wes.json")
     gate = asyncio.Semaphore(settings.max_concurrent_models)
-    return Services(engines, TranslationService(memory, engines, settings, gate), SpeechService(engines, intents, gate))
+    return Services(
+        engines,
+        TranslationService(memory, engines, settings, gate, critical),
+        SpeechService(engines, intents, gate),
+    )

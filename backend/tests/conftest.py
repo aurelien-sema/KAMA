@@ -8,7 +8,7 @@ from fastapi.testclient import TestClient
 from app.engines import EngineSet, TranslationRoute
 from app.main import create_app
 from app.services import build_services
-from app.settings import Settings
+from app.settings import REPO_DIR, Settings
 
 TEMPLATES = {
     "templates": [
@@ -95,6 +95,8 @@ def wav_bytes(seconds=1.0, rate=16000, channels=1, width=2):
 def content_dir(tmp_path):
     (tmp_path / "templates.json").write_text(json.dumps(TEMPLATES), encoding="utf-8")
     (tmp_path / "intents.json").write_text(json.dumps(INTENTS), encoding="utf-8")
+    table = REPO_DIR / "content-data" / "termes_critiques_wes.json"
+    (tmp_path / "termes_critiques_wes.json").write_text(table.read_text(encoding="utf-8"), encoding="utf-8")
     return tmp_path
 
 

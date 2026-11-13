@@ -88,6 +88,31 @@ def test_lost_placeholder_is_rejected_even_if_policy_allows_critical(make_client
     assert r["reason"] == "guard_failed"
 
 
+def test_critical_term_must_be_rendered(make_client):
+    client = make_client(
+        engines_with({"fr>bbj": route(lambda t: "Close di money if you no know this person.")}),
+        mt_allow_critical=True,
+    )
+    r = post(client, "Annulez ce transfert si vous ne connaissez pas cette personne.").json()
+    assert r["text"] is None and r["reason"] == "guard_failed"
+
+
+def test_suspended_is_not_rendered_as_wait(make_client):
+    client = make_client(
+        engines_with({"fr>bbj": route(lambda t: "Your account don di wait for some time.")}),
+        mt_allow_critical=True,
+    )
+    r = post(client, "Votre compte a été suspendu temporairement.").json()
+    assert r["text"] is None and r["reason"] == "guard_failed"
+
+
+def test_negation_and_password_survive(make_client):
+    output = "We no go ever ask you for ya code so that no person no go know-am with telephone."
+    client = make_client(engines_with({"fr>bbj": route(lambda t: output)}), mt_allow_critical=True)
+    r = post(client, "Nous ne vous demanderons jamais votre mot de passe par téléphone.").json()
+    assert (r["text"], r["badge"], r["origin"]) == (output, "machine", "model")
+
+
 def test_backtranslation_can_reject(make_client):
     translation = {
         "fr>bbj": route(lambda t: "ywə tsə", backtranslate="bbj>fr", min_backtranslation=0.5),
