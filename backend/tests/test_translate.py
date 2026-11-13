@@ -83,14 +83,59 @@ def test_model_repeating_itself_is_rejected(make_client):
 
 
 def test_lost_placeholder_is_rejected_even_if_policy_allows_critical(make_client):
-    client = make_client(engines_with({"fr>bbj": route(lambda t: "Zzɔp zhwenyə")}), mt_allow_critical=True)
+    client = make_client(
+        engines_with({"fr>bbj": route(lambda t: "Zzɔp zhwenyə")}, critical_model_elements={"text"}),
+        mt_allow_critical=True,
+    )
     r = post(client, "Votre facture de {x1} est prête.").json()
     assert r["reason"] == "guard_failed"
 
 
+def test_policy_enabled_without_allowlist_still_blocks(make_client):
+    engine = route(lambda t: "Di money weh you get dey ready.")
+    client = make_client(engines_with({"fr>bbj": engine}), mt_allow_critical=True)
+    r = post(client, "Votre solde est disponible.").json()
+    assert r["reason"] == "critical_content" and engine.translator.calls == []
+
+
+def test_policy_allows_critical_text_when_configured(make_client):
+    output = "Di money weh you get dey ready."
+    engine = route(lambda t: output)
+    client = make_client(
+        engines_with({"fr>bbj": engine}, critical_model_elements={"text"}),
+        mt_allow_critical=True,
+    )
+    r = post(client, "Votre solde est disponible.").json()
+    assert (r["text"], r["badge"], r["origin"]) == (output, "machine", "model")
+    assert engine.translator.calls == ["Votre solde est disponible."]
+
+
+def test_policy_never_allows_alert_elements(make_client):
+    engine = route(lambda t: "Di money weh you get dey ready.")
+    client = make_client(
+        engines_with({"fr>bbj": engine}, critical_model_elements={"text"}),
+        mt_allow_critical=True,
+    )
+    r = post(client, "Votre solde est disponible.", element="confirm").json()
+    assert r["reason"] == "critical_content" and engine.translator.calls == []
+
+
+def test_allowed_critical_text_still_passes_the_output_guard(make_client):
+    engine = route(lambda t: "Di money dey ready.")
+    client = make_client(
+        engines_with({"fr>bbj": engine}, critical_model_elements={"text"}),
+        mt_allow_critical=True,
+    )
+    r = post(client, "Votre solde est disponible.").json()
+    assert r["reason"] == "guard_failed" and engine.translator.calls
+
+
 def test_critical_term_must_be_rendered(make_client):
     client = make_client(
-        engines_with({"fr>bbj": route(lambda t: "Close di money if you no know this person.")}),
+        engines_with(
+            {"fr>bbj": route(lambda t: "Close di money if you no know this person.")},
+            critical_model_elements={"text"},
+        ),
         mt_allow_critical=True,
     )
     r = post(client, "Annulez ce transfert si vous ne connaissez pas cette personne.").json()
@@ -99,7 +144,10 @@ def test_critical_term_must_be_rendered(make_client):
 
 def test_suspended_is_not_rendered_as_wait(make_client):
     client = make_client(
-        engines_with({"fr>bbj": route(lambda t: "Your account don di wait for some time.")}),
+        engines_with(
+            {"fr>bbj": route(lambda t: "Your account don di wait for some time.")},
+            critical_model_elements={"text"},
+        ),
         mt_allow_critical=True,
     )
     r = post(client, "Votre compte a été suspendu temporairement.").json()
@@ -108,7 +156,10 @@ def test_suspended_is_not_rendered_as_wait(make_client):
 
 def test_negation_and_password_survive(make_client):
     output = "We no go ever ask you for ya code so that no person no go know-am with telephone."
-    client = make_client(engines_with({"fr>bbj": route(lambda t: output)}), mt_allow_critical=True)
+    client = make_client(
+        engines_with({"fr>bbj": route(lambda t: output)}, critical_model_elements={"text"}),
+        mt_allow_critical=True,
+    )
     r = post(client, "Nous ne vous demanderons jamais votre mot de passe par téléphone.").json()
     assert (r["text"], r["badge"], r["origin"]) == (output, "machine", "model")
 

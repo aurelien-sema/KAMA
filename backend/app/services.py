@@ -81,7 +81,9 @@ class TranslationService:
         near = self.memory.find_near(req.text, req.source_lang, req.target_lang)
         if near is not None:
             return TranslateResponse(text=near, badge="machine", origin="near_memory")
-        if is_critical(req.text, req.element) and not self.settings.mt_allow_critical:
+        if is_critical(req.text, req.element) and (
+            not self.settings.mt_allow_critical or req.element not in self.engines.critical_model_elements
+        ):
             return untranslated("critical_content")
         route = self.engines.translation.get(f"{req.source_lang}>{req.target_lang}")
         if route is None:

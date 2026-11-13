@@ -117,6 +117,7 @@ class EngineSet:
     asr: dict[str, Recognizer] = field(default_factory=dict)
     tts: dict[str, Synthesizer] = field(default_factory=dict)
     clips: dict[str, ClipLibrary] = field(default_factory=dict)  # voix humaine validee, prioritaire sur le modele
+    critical_model_elements: frozenset[str] = field(default_factory=frozenset)
 
 
 def _lexicon(content_dir: Path | None, name: str | None) -> frozenset[str] | None:
@@ -146,7 +147,13 @@ def load_engines(
     config = json.loads(routes_file.read_text(encoding="utf-8"))
     engines = EngineSet(languages={k: v["name"] for k, v in config["languages"].items()})
     built: dict[str, Translator] = {}
-    specs = {k: v for k, v in config.get("translation", {}).items() if v.get("enabled", True)}
+    translation_config = config.get("translation", {})
+    engines.critical_model_elements = frozenset(translation_config.get("critical_model_elements", []))
+    specs = {
+        k: v
+        for k, v in translation_config.items()
+        if isinstance(v, dict) and v.get("enabled", True)
+    }
     for route, spec in specs.items():
         if spec["engine"] == "pipeline":
             continue
