@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react';
 import { MessageCircleQuestion, Volume2 } from 'lucide-react';
 import { KamaLogo } from '@/components/kama/primitives';
 import { useLangueCourante } from '@/lib/langue-courante';
+import { texteSelection } from '@/lib/selection';
 import { useTexte } from '@/lib/use-texte';
 import { ecouterTexte } from '@/lib/ecouter';
 
@@ -36,7 +37,7 @@ export function BarreSelection({ dansKama, onExpliquer }: Props) {
       // On laisse le navigateur finir de mettre à jour la sélection.
       window.setTimeout(() => {
         const selection = document.getSelection();
-        const texte = selection?.toString().replace(/\s+/g, ' ').trim() ?? '';
+        const texte = texteSelection(selection);
         const actif = document.activeElement;
         const dansUnChamp = !!actif && (actif.tagName === 'INPUT' || actif.tagName === 'TEXTAREA' || (actif as HTMLElement).isContentEditable);
         if (!selection || selection.rangeCount === 0 || selection.isCollapsed || texte.length < 2 || dansUnChamp) {

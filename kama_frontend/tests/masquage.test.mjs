@@ -32,3 +32,7 @@ test("les valeurs de l'en-tête masquent le titulaire et le bénéficiaire d'un 
     'Le bénéficiaire {x1} recevra {x2}.',
   );
 });
+
+test("un libellé d'interface en majuscules n'est pas pris pour un nom", () => {
+  assert.equal(masquer('AVOIR SUR LE COMPTE').texte, 'AVOIR SUR LE COMPTE');
+});
