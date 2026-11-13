@@ -1,27 +1,26 @@
 /**
- * Menu de l'onglet de bord : 3 boutons ronds à icônes, empilés à gauche de l'onglet (décision d'Omar du 2026-11-13 :
+ * Menu de l'onglet de bord : 2 boutons ronds à icônes, empilés à gauche de l'onglet (décision d'Omar du 2026-11-13 :
  * pas de texte ni de bouton d'écoute, il faut décider vite).
- *  - Parler à Kama (micro) · Expliquer cette page (document) · Résumer mes transactions (billet).
+ *  - Parler à Kama (micro) · Expliquer cette page (document). « Résumer mes transactions » retiré le 2026-11-13.
  *  - Boutons de 56 px ; le nom de chaque bouton est donné aux lecteurs d'écran (`aria-label`) et s'affiche dans
  *    une infobulle au survol ou au focus clavier.
  * Icônes : lucide-react (pas d'emoji, rendu identique sur tous les ordinateurs).
  */
 import { forwardRef } from 'react';
-import { Banknote, FileText, Mic, type LucideIcon } from 'lucide-react';
+import { FileText, Mic, type LucideIcon } from 'lucide-react';
 import { useLangueCourante } from '@/lib/langue-courante';
 import { topBorne } from '@/lib/position-onglet';
 import { traduireKama, useTexte } from '@/lib/use-texte';
 
-export type ModeKama = 'parler' | 'expliquer' | 'resumer';
+export type ModeKama = 'parler' | 'expliquer';
 
 export const ACTIONS: { mode: ModeKama; Icone: LucideIcon; libelle: string }[] = [
   { mode: 'parler', Icone: Mic, libelle: 'Parler à Kama' },
   { mode: 'expliquer', Icone: FileText, libelle: 'Expliquer cette page' },
-  { mode: 'resumer', Icone: Banknote, libelle: 'Résumer mes transactions' },
 ];
 
-/** Hauteur du menu (3 boutons de 56 px, espaces et marges), pour qu'il ne sorte pas de l'écran. */
-const HAUTEUR_MENU = 208;
+/** Hauteur du menu (2 boutons de 56 px, espace et marges), pour qu'il ne sorte pas de l'écran. */
+const HAUTEUR_MENU = 144;
 
 type Props = { position: number; onChoisir: (mode: ModeKama) => void };
 

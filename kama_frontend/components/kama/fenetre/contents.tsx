@@ -7,15 +7,13 @@
  */
 import type { ReactNode } from 'react';
 import { AlertTriangle, Eye, Mic, ShieldCheck, Volume2, WifiOff } from 'lucide-react';
-import { TranslationBadge } from '@/components/kama/primitives';
 import { lireTexte } from '@/lib/voix';
 import type { Parole } from '@/lib/traduction';
 import { useTexte } from '@/lib/use-texte';
 import { aplatir, useReponse } from '@/lib/use-reponse';
-import { Amount, KamaLine, KamaResponse, StatusBadge, UserBubble, WindowButton, type TranslationStatus } from './parts';
+import { KamaLine, KamaResponse, UserBubble, WindowButton, type TranslationStatus } from './parts';
 
 export type Etape = { cible: string; texte: string };
-export type Operation = { date: string; libelle: string; libelleTraduit?: string; montant: string; sens: 'entree' | 'sortie' };
 
 /** Bouton « Montre-moi » : fait défiler jusqu'à l'élément et le surligne (étape suivante). */
 export function MontreMoi({ onClick }: { onClick?: () => void }) {
@@ -107,6 +105,7 @@ export function ExplainPageContent({
   paroles?: Parole[];
   speechFr?: string;
 }) {
+  const montreMoi = useTexte('Montre-moi');
   return (
     <KamaResponse
       status={status}
@@ -114,100 +113,25 @@ export function ExplainPageContent({
       speech={speechFr ?? `${phrase} ${etapes.map((s, i) => `${i + 1}. ${s.texte}`).join(' ')}`}
     >
       <p className="m-0 font-semibold">{phrase}</p>
+      {/* Chaque étape est elle-même le bouton « Montre-moi » (décision d'Omar du 2026-11-13). */}
       <ol className="m-0 flex list-none flex-col gap-1.5 p-0">
         {etapes.map((s, i) => (
-          <li key={s.cible} className="flex items-center gap-2.5 rounded-xl border border-kama-ink/10 py-px pl-2 pr-px">
-            <span className="grid size-7 shrink-0 place-items-center rounded-full bg-kama-ink text-sm font-bold text-kama-white">
-              {i + 1}
-            </span>
-            <span className="flex-1 text-sm leading-tight">{s.texte}</span>
-            <MontreMoi onClick={() => onShowMe?.(s.cible)} />
+          <li key={s.cible}>
+            <button
+              type="button"
+              onClick={() => onShowMe?.(s.cible)}
+              aria-label={`${s.texte} ${montreMoi}`}
+              className="flex min-h-11 w-full cursor-pointer items-center gap-2.5 rounded-xl border border-kama-ink/10 bg-kama-white py-1.5 pl-2 pr-3 text-left text-kama-ink hover:border-kama-ink/30 hover:bg-kama-cream focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-kama-ink"
+            >
+              <span className="grid size-7 shrink-0 place-items-center rounded-full bg-kama-ink text-sm font-bold text-kama-white">
+                {i + 1}
+              </span>
+              <span className="flex-1 text-sm leading-tight">{s.texte}</span>
+              <Eye className="size-5 shrink-0" aria-hidden />
+            </button>
           </li>
         ))}
       </ol>
-    </KamaResponse>
-  );
-}
-
-/* 6 — Résumer mes transactions */
-/** « 1 entrée », « 2 entrées » (0 et 1 au singulier, comme en français). */
-const pluriel = (nombre: string, mot: string) => (Number(nombre) > 1 ? `${mot}s` : mot);
-
-export function SummaryContent({
-  entrees,
-  sorties,
-  operations,
-  status = 'verified',
-  bilan,
-  introListe,
-  paroles,
-}: {
-  entrees: string;
-  sorties: string;
-  operations: Operation[];
-  status?: TranslationStatus;
-  /** Phrase du bilan dans la langue choisie (montants de la page déjà remis). Par défaut : le français ci-dessous. */
-  bilan?: ReactNode;
-  introListe?: string;
-  paroles?: Parole[];
-}) {
-  return (
-    <KamaResponse
-      status={status}
-      paroles={paroles}
-      speech={`Sur cette page : ${entrees} ${pluriel(entrees, 'entrée')}, ${sorties} ${pluriel(sorties, 'sortie')}. ${operations
-        .map((o) => `${o.date}, ${o.libelle}, ${o.montant}`)
-        .join('. ')}`}
-    >
-      <p className="m-0 font-semibold">
-        {bilan ?? (
-          <>
-            Sur cette page : <Amount>{entrees}</Amount> {pluriel(entrees, 'entrée')}, <Amount>{sorties}</Amount>{' '}
-            {pluriel(sorties, 'sortie')}.
-          </>
-        )}
-      </p>
-      <p className="m-0 text-sm text-kama-ink/70">{introListe ?? `Les ${operations.length} dernières opérations :`}</p>
-      <ul className="m-0 flex list-none flex-col divide-y divide-kama-ink/10 rounded-xl border border-kama-ink/10 p-0">
-        {operations.map((o) => (
-          <li key={o.date + o.libelle} className="flex items-center gap-3 px-3 py-2.5">
-            <span className="w-11 shrink-0 text-sm text-kama-ink/70">{o.date}</span>
-            <span className="flex-1 text-sm">{o.libelleTraduit ?? o.libelle}</span>
-            <Amount className={`text-sm ${o.sens === 'entree' ? 'text-kama-success' : 'text-kama-error'}`}>
-              {o.montant}
-            </Amount>
-          </li>
-        ))}
-      </ul>
-    </KamaResponse>
-  );
-}
-
-/* 7 — Pas de transactions sur cette page */
-export function NoTransactionsContent({
-  destination = 'Va sur la page Historique.',
-  onShowMe,
-  status = 'auto',
-  phrase = "Cette page n'a pas tes transactions.",
-  paroles,
-  speechFr,
-}: {
-  destination?: string;
-  onShowMe?: (cible: string) => void;
-  status?: TranslationStatus;
-  phrase?: string;
-  paroles?: Parole[];
-  speechFr?: string;
-}) {
-  return (
-    <KamaResponse status={status} paroles={paroles} speech={speechFr ?? `${phrase} ${destination}`}>
-      <p className="m-0">{phrase}</p>
-      <p className="m-0 font-semibold">{destination}</p>
-      {onShowMe && (
-        <div>
-          <MontreMoi onClick={() => onShowMe('historique')} />
-        </div>
-      )}
     </KamaResponse>
   );
 }
@@ -271,10 +195,6 @@ export function UntranslatedContent({
   const ecouterFr = useTexte('Écouter en français');
   return (
     <article className="flex flex-col gap-3">
-      <div className="flex flex-wrap items-center gap-1.5">
-        <StatusBadge status="untranslated" />
-        <TranslationBadge />
-      </div>
       <p className="m-0 text-[15px] leading-snug text-kama-ink">{texte}</p>
       <p className="m-0 text-sm text-kama-ink/70">
         {langue ? inexistant : "Ce texte n'existe pas encore dans ta langue."}

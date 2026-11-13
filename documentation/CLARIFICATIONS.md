@@ -37,7 +37,7 @@ Tous les éléments mènent à **une seule fenêtre Kama**, dont seul le contenu
 | Élément | Où | Rôle |
 |---|---|---|
 | **Popup** | Icône Kama dans la barre du navigateur (popup d'extension, 340 px de large) | Réglages : activer/désactiver, choisir la langue, préférer texte ou audio, bouton « Expliquer cette page » |
-| **Onglet de bord** | Injecté dans la page, collé au bord droit, centré verticalement, `position: fixed`, déplaçable verticalement (~44×44 px) | Au clic, menu de 3 boutons : Parler à Kama (icône micro) · Expliquer cette page (icône document) · Résumer mes transactions (icône billet) |
+| **Onglet de bord** | Injecté dans la page, collé au bord droit, centré verticalement, `position: fixed`, déplaçable verticalement (~44×44 px) | Au clic, menu de 2 boutons ronds à icônes, sans texte (nom en infobulle et pour les lecteurs d'écran) : Parler à Kama (icône micro) · Expliquer cette page (icône document). « Résumer mes transactions » retiré le 2026-11-13. |
 | **Pastilles** | Petites icônes rondes (24 px) injectées à côté des éléments importants **seulement** : solde, montant, frais, total débité, bouton Confirmer, messages d'erreur | Au clic, la fenêtre s'ouvre avec l'explication de cet élément |
 | **Barre de sélection** | Apparaît au-dessus d'un texte surligné : [Expliquer] [Écouter] | Explique ou lit le texte sélectionné |
 | **Fenêtre Kama** | S'ouvre à gauche de l'onglet de bord, 360×520 px | Seul endroit où Kama répond : lecteur audio + texte, micro en bas |
@@ -45,13 +45,13 @@ Tous les éléments mènent à **une seule fenêtre Kama**, dont seul le contenu
 ### Contenus de la fenêtre (états)
 1. Parler — attente / écoute / réflexion / réponse
 2. Expliquer cette page : 1 phrase + étapes numérotées, chacune avec un bouton **« Montre-moi »** qui fait défiler jusqu'à l'élément et le surligne (contour orange, 2 pulsations puis fixe)
-3. Résumer mes transactions (ou « Va sur la page Historique » s'il n'y en a pas sur la page)
+3. ~~Résumer mes transactions~~ : retiré le 2026-11-13 (peu utile, alourdissait Kama). Les montants s'expliquent par les pastilles et la sélection ; à revoir avec le modèle de langue.
 4. Explication d'un élément (venue d'une pastille ou d'une sélection)
 5. Erreur bancaire expliquée (message original affiché + explication sans minimiser)
 6. Pas de connexion (+ Réessayer)
 7. Traduction indisponible (texte original + « Écouter en français »)
 
-Chaque réponse porte un **badge de fiabilité** : « Vérifié » (issu du glossaire validé) / « Traduction automatique » / « Pas encore traduit ».
+Chaque réponse porte un **indicateur de fiabilité** : depuis le 2026-11-13, une petite icône discrète à côté du lecteur audio, sans texte (nom en infobulle et pour les lecteurs d'écran) : « Traduction automatique » / « Pas encore traduit ». Aucune icône quand le texte est « Vérifié » (glossaire validé). Objectif : des fenêtres épurées, une information à la fois.
 
 ### Choix de la langue (décidé le 2026-11-11)
 - **Langues proposées** : Ghomálá' et Pidgin, dans l'ordre alphabétique, chacune avec une indication de région simple (Ghomálá' — Ouest ; Pidgin — Nord-Ouest, Sud-Ouest). Pas d'option « Français » dans la liste.
@@ -109,7 +109,7 @@ Chaque réponse porte un **badge de fiabilité** : « Vérifié » (issu du glos
 - [x] Squelette de l'extension MV3 (manifest, popup, content script, service worker), chargeable via « Charger l'extension non empaquetée ».
 - [x] Popup avec réglages persistants + écran de premier lancement (choix de la langue, sans langue par défaut).
 - [x] Analyse de la page de test des organisateurs : liste des éléments à détecter et de leurs sélecteurs (fichier de config).
-- [x] Onglet de bord + menu 3 boutons.
+- [x] Onglet de bord + menu (2 boutons à icônes depuis le 2026-11-13).
 - [x] Fenêtre Kama unique avec ses états.
 - [x] Pastilles sur les éléments importants + explication.
 - [x] « Expliquer cette page » + « Montre-moi ».
@@ -119,9 +119,9 @@ Chaque réponse porte un **badge de fiabilité** : « Vérifié » (issu du glos
 
 ### P1 — important
 - [x] Barre de sélection de texte.
-- [x] Résumer mes transactions.
+- [x] ~~Résumer mes transactions.~~ Retiré le 2026-11-13.
 - [ ] Parler à Kama (micro → réponse audio). *(Micro écouté par Kama, accord, vérification de la voix disponible auprès du serveur, réponses aux 7 intentions avec les montants de la page, traduites et lues à voix haute : faits. Reste : tester avec les modèles de voix installés. Autres questions : modèle de langue à intégrer avec l'équipe.)*
-- [ ] Badges de fiabilité. *(Affichés ; seul « Pas encore traduit » sert tant que les textes validés ne sont pas fournis.)*
+- [ ] Badges de fiabilité. *(Petite icône depuis le 2026-11-13 ; seul « Pas encore traduit » sert tant que les textes validés ne sont pas fournis.)*
 - [x] Page de bienvenue ouverte automatiquement à l'installation (`chrome.runtime.onInstalled`) : confirme l'installation, montre comment épingler l'icône, choix de la langue, lien vers la page de test.
 
 ### P2 — si le temps le permet

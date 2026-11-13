@@ -2078,3 +2078,51 @@ Le menu de l'onglet de bord était chargé : trois longs boutons texte, chacun a
   - ouverture à la souris : le focus reste sur l'onglet ; au clavier : le focus va sur « Parler à Kama » ;
   - captures du survol.
 - Aucune erreur TypeScript ; compilation réussie.
+
+## 2026-11-13 — Fenêtres Kama épurées ; « Résumer mes transactions » retiré
+
+**Auteur :** Omar (réalisé par Claude Code, sur ses décisions)
+
+### En bref
+
+Chaque fenêtre donnait trop d'informations : au lieu d'aider, Kama risquait de perdre l'utilisateur. Les fenêtres ne gardent que l'essentiel. La fonction « Résumer mes transactions », peu utile, est retirée.
+
+### Décisions d'Omar
+
+| Point | Décision |
+|---|---|
+| Badges « Computer translate dis one », « Pidgin · make dem check am » | Remplacés par une petite icône (la règle d'or n° 4 reste respectée) |
+| Étiquette « Élément choisi : … » | Retirée (elle répétait la première ligne) |
+| « Montre-moi » sous chaque étape | Chaque étape devient elle-même le bouton |
+| Lecteur audio et vitesse 1x / 0,75x | Gardés tels quels |
+| « Résumer mes transactions » | Retiré (fenêtre et bouton du menu) ; la réponse à la question vocale sera revue avec le modèle de langue |
+
+### Ce qui a été implémenté, expliqué simplement
+
+- **Indicateur de fiabilité** :
+  - une petite icône grise à droite du lecteur audio ;
+  - son nom (« Pas encore traduit », « Traduction automatique ») s'affiche au survol et est lu par les lecteurs d'écran ;
+  - aucune icône quand le texte est vérifié ;
+  - le badge de langue est retiré des réponses et des messages de Kama : la langue est déjà affichée dans l'en-tête de la fenêtre. Le popup, l'accueil et le choix de la langue gardent leur badge.
+- **« Expliquer cette page »** : chaque étape est une ligne cliquable (numéro, texte, icône œil) qui fait défiler jusqu'à l'élément et le surligne. Il n'y a plus 6 boutons « Montre-moi » empilés.
+- **Explication d'un élément** : l'étiquette « Élément choisi » est retirée.
+- **Texte non traduit** (sélection, nouveau message) : la rangée de badges est retirée, la phrase « Ce texte n'existe pas encore dans ta langue » suffit.
+- **Transactions** :
+  - le menu de l'onglet passe à 2 boutons ;
+  - la fenêtre, ses contenus (`SummaryContent`, `NoTransactionsContent`) et la lecture de la liste des opérations (`lireTransactions`) sont supprimés ;
+  - Kama continue à ignorer cette liste quand il cherche des montants inconnus ;
+  - à la question vocale « mes transactions », Kama répond pour l'instant qu'il n'a pas compris (à revoir avec le modèle de langue).
+- Les phrases des transactions restent dans `config/phrases.ts` : elles font partie du catalogue de Dimitri, et le test de ce catalogue en dépend.
+
+### Démarche utilisée
+
+- Captures en pidgin, avec le serveur de Dimitri lancé, sur la Banque Démo : explication de la Commission, « Expliquer cette page », refus de la banque.
+- Le clic sur une étape surligne bien l'élément (« Kama di show you: Commission »).
+- Le menu n'a plus que 2 boutons ; aucune erreur.
+- Aucune erreur TypeScript ; tests : 92 sur 92.
+
+## 2026-11-13 — Popup : titres de section en DM Sans
+
+**Auteur :** Omar (réalisé par Claude Code)
+
+« Ma langue » et « Je préfère » restent orange, mais passent de Krona One à DM Sans gras, en 20 px : Krona One paraissait trop lourd à cette taille. En gras à 20 px, ces titres comptent comme du « grand texte » pour l'accessibilité, donc l'orange reste lisible sur blanc. Capture vérifiée en pidgin ; compilation sans erreur.

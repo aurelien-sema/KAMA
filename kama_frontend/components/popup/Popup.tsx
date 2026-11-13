@@ -6,7 +6,7 @@
  *  3. Liste des langues ouverte : elle s'ouvre PAR-DESSUS le reste (rien n'est poussé vers le bas).
  *  4. Désactivé : tout est grisé sauf l'interrupteur ; Kama n'ajoute plus rien dans les pages.
  *  5. Page non reconnue : Kama n'est pas présent sur l'onglet ouvert.
- * Titres de section en Krona One orange (décision d'Omar du 2026-11-12), à 22 px : grand texte, contraste
+ * Titres de section en DM Sans gras orange (décisions d'Omar des 2026-11-12 et 13), à 20 px : grand texte, contraste
  * suffisant sur blanc. Pas d'emoji ; pas de lien « Paramètres » (aucun réglage supplémentaire n'est prévu).
  */
 import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react';
@@ -108,10 +108,13 @@ function PageInconnue() {
   );
 }
 
-/** Titre de section : Krona One, orange, 22 px. */
+/**
+ * Titre de section : DM Sans gras, orange, 20 px (décision d'Omar du 2026-11-13 : Krona One trop lourd ici).
+ * Gras et 20 px : « grand texte » au sens de l'accessibilité, l'orange reste lisible sur blanc.
+ */
 function Titre({ children, id }: { children: ReactNode; id?: string }) {
   return (
-    <h2 id={id} className="m-0 mb-2 font-display text-[22px] font-normal leading-tight text-kama-orange">
+    <h2 id={id} className="m-0 mb-2 text-[20px] font-bold leading-tight text-kama-orange">
       {children}
     </h2>
   );

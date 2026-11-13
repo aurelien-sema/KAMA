@@ -123,7 +123,7 @@ export function useAssistant({ langue, onShowMe }: { langue: Langue | null; onSh
 
   function repondre(r: ResultatIntention) {
     // Question comprise : on note sous le message vocal ce que Kama a compris.
-    if (r.ok && r.intention !== 'unknown') noterCompris(SENS[r.intention]);
+    if (r.ok && SENS[r.intention]) noterCompris(SENS[r.intention]);
     const reponse = reponsePour(r, bulles);
     if ('vue' in reponse) ajouter({ de: 'reponse', vue: reponse.vue });
     else if ('repete' in reponse) {
@@ -207,7 +207,7 @@ const SENS: Record<Intention, string> = {
   ask_total: 'le total',
   what_to_do: 'quoi faire ici',
   explain_error: 'le message de la banque',
-  summarize_transactions: 'tes transactions',
+  summarize_transactions: '', // résumé retiré le 2026-11-13 : la réponse sera revue avec le modèle de langue
   repeat: 'répéter',
   unknown: '',
 };
@@ -244,8 +244,6 @@ function reponsePour(r: ResultatIntention, bulles: Bulle[]): Reponse {
       return element('total');
     case 'what_to_do':
       return { vue: { type: 'expliquer' } };
-    case 'summarize_transactions':
-      return { vue: { type: 'resumer' } };
     case 'explain_error': {
       if (lecture.elements.has('erreur')) return { vue: { type: 'element', id: 'erreur' } };
       const alerte = lecture.decouvertes.find((d) => d.nature === 'alerte');
@@ -258,6 +256,8 @@ function reponsePour(r: ResultatIntention, bulles: Bulle[]): Reponse {
         ? { repete: derniere }
         : { titre: "Je n'ai encore rien dit.", texte: 'Appuie sur le micro et pose ta question.' };
     }
+    // Résumé des transactions retiré : en attendant le modèle de langue, Kama dit qu'il n'a pas compris.
+    case 'summarize_transactions':
     case 'unknown':
       return { titre: PHRASES.voix.nonCompris[0], texte: PHRASES.voix.nonCompris[1] };
   }

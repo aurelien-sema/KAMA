@@ -15,12 +15,11 @@ import { useMemo } from 'react';
 import type { ElementApi } from '@/lib/api';
 import type { IdElement } from '@/config/banques';
 import { GABARITS, gabaritMontantInconnu, texteAEcouter, type Ligne } from '@/config/gabarits';
-import { bilanTransactions, listeOperations, PHRASES } from '@/config/phrases';
+import { PHRASES } from '@/config/phrases';
 import {
   elementPourTexte,
   explicationErreur,
   lirePage,
-  lireTransactions,
   nomDecouverte,
   normaliser,
   trouverDecouverte,
@@ -29,7 +28,6 @@ import {
   type LecturePage,
 } from '@/lib/lecture-page';
 import { useLangueCourante } from '@/lib/langue-courante';
-import { LANGUE_SECOURS } from '@/lib/langue-secours';
 import { aplatir, useReponse } from '@/lib/use-reponse';
 import { useTraductionTexte } from '@/lib/use-traduction';
 import { traduireKama, traduireLibelle } from '@/lib/use-texte';
@@ -38,10 +36,8 @@ import {
   BankErrorContent,
   ExplainPageContent,
   MontreMoi,
-  NoTransactionsContent,
   Reflexion,
   SelectionTraduiteContent,
-  SummaryContent,
   UntranslatedContent,
 } from './contents';
 import { Amount, KamaResponse, StatusBadge } from './parts';
@@ -49,7 +45,6 @@ import { AlertTriangle } from 'lucide-react';
 
 export type VueReelle =
   | { type: 'expliquer' }
-  | { type: 'resumer' }
   | { type: 'element'; id: IdElement }
   | { type: 'decouverte'; cle: string }
   | { type: 'selection'; texte: string };
@@ -77,8 +72,6 @@ export function ContenuReel({ vue, onShowMe }: Props) {
   switch (vue.type) {
     case 'expliquer':
       return <ExpliquerPage lecture={lecture} onShowMe={onShowMe} />;
-    case 'resumer':
-      return <ResumerTransactions lecture={lecture} />;
     case 'element':
       return <ExplicationElement id={vue.id} lecture={lecture} onShowMe={onShowMe} />;
     case 'decouverte': {
@@ -228,56 +221,6 @@ function ExpliquerEcranInconnu({ lecture, onShowMe }: { lecture: LecturePage; on
       speechFr={[phrase, ...etapes.map((e) => e.texte)].join(' ')}
       onShowMe={onShowMe}
     />
-  );
-}
-
-/* ---------------------------------------------------------------------------------------- */
-
-function ResumerTransactions({ lecture }: { lecture: LecturePage }) {
-  const langue = useLangueCourante();
-  const operations = lireTransactions(lecture).map((o) => ({
-    ...o,
-    libelleTraduit: traduireLibelle(langue?.code, o.libelle),
-  }));
-  const entrees = operations.filter((o) => o.sens === 'entree').length;
-  const sorties = operations.length - entrees;
-  const lignes: Ligne[] = operations.length
-    ? [bilanTransactions(String(entrees), String(sorties)), listeOperations(String(operations.length))]
-    : PHRASES.pasDeTransactions.map((t): Ligne => [t]);
-  const r = useReponse(lignes, 'text');
-
-  if (r.chargement) return <Reflexion />;
-  const retour = r.horsLigne ? <BandeauHorsLigne onRetry={r.reessayer} /> : null;
-
-  if (!operations.length) {
-    return (
-      <>
-        {retour}
-        <NoTransactionsContent
-          status={r.status}
-          paroles={r.paroles}
-          phrase={aplatir(r.lignes[0]!)}
-          destination={aplatir(r.lignes[1]!)}
-          speechFr={texteAEcouter(lignes)}
-        />
-      </>
-    );
-  }
-  // Les libellés viennent du glossaire local ; les montants restent ceux de la page et ne sont jamais envoyés (sécurité).
-  // Pas encore traduit et navigateur en français : le bilan français par défaut (avec « 1 entrée » au singulier).
-  return (
-    <>
-      {retour}
-      <SummaryContent
-        status={r.status}
-        paroles={r.paroles}
-        entrees={String(entrees)}
-        sorties={String(sorties)}
-        operations={operations}
-        bilan={r.status === 'untranslated' && LANGUE_SECOURS === 'fr' ? undefined : rendre(r.lignes[0]!)}
-        introListe={aplatir(r.lignes[1]!)}
-      />
-    </>
   );
 }
 
@@ -433,8 +376,6 @@ function Explication({
   horsLigne?: () => void;
   onShowMe: () => void;
 }) {
-  const langue = useLangueCourante();
-  const elementChoisi = traduireKama(langue?.code, 'Élément choisi :');
   const contenu = lignes.map((l, i) => (
     <p key={i} className={`m-0 ${i === 0 ? 'font-semibold' : ''}`}>
       {rendre(l)}
@@ -442,9 +383,6 @@ function Explication({
   ));
   return (
     <div className="flex flex-col gap-3">
-      <span className="self-start rounded-md border border-bank-border bg-bank-bg px-2 py-1 text-xs text-bank-text">
-        {elementChoisi} <strong>{nom}</strong>
-      </span>
       {horsLigne && <BandeauHorsLigne onRetry={horsLigne} />}
       <KamaResponse status={status} paroles={paroles} speech={speechFr}>
         {alerte ? (
