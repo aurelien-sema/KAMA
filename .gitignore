@@ -3,7 +3,9 @@ __pycache__/
 *.pyc
 .pytest_cache/
 .env
-models/
+models/*
+!models/README.md
+!models/fetch_models.py
 *.safetensors
 *.gguf
 *.bin
@@ -22,3 +24,14 @@ evaluation/testsets/bible_sample100.jsonl
 evaluation/results/*/mafand*
 evaluation/results/*/bible*
 evaluation/results/*/wes_heldout*
+
+# Donnees trop lourdes ou dont les droits interdisent la publication
+datasets/ghomala/spoken_bible/
+datasets/pidgin/oxford_spoken_corpus_2563/
+.cache/
+
+# Fichier d instructions local pour Claude Code (non partage)
+CLAUDE.md
+
+# Frontend : code exporte des projets Lovable (reference visuelle locale, non livree)
+kama_frontend/reference/

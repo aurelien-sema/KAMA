@@ -31,7 +31,11 @@ def is_done(log, marker):
 
 
 while True:
-    procs = running()
+    try:
+        procs = running()
+    except (subprocess.SubprocessError, OSError):  # machine trop chargee : on reessaie au tour suivant
+        time.sleep(60)
+        continue
     pending = 0
     for script, (log, marker) in JOBS.items():
         if is_done(log, marker):
