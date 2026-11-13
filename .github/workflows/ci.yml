@@ -61,7 +61,6 @@ jobs:
     needs: [backend, frontend]
     steps:
       - name: Deploy on VPS via SSH
-        if: ${{ secrets.VPS_HOST != '' }}
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.VPS_HOST }}
