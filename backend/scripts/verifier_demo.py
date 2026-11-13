@@ -2,7 +2,7 @@
 
 Usage : python scripts/verifier_demo.py [adresse] [origine]
   adresse : http://127.0.0.1:8000 par defaut
-  origine : chrome-extension://bbgkmjbkhecafcpladgdbecpgmpcelho par defaut (identifiant fixe par la cle de wxt.config.ts)
+  origine : chrome-extension://nneecloagollpakilpepnamdaelmgkbn par defaut (identifiant fixe par la cle de wxt.config.ts)
 
 Aucune dependance : bibliotheque standard seulement. Code de sortie 0 si tout ce qui est obligatoire passe.
 """
@@ -14,7 +14,7 @@ import urllib.request
 import wave
 
 ADRESSE = sys.argv[1] if len(sys.argv) > 1 else "http://127.0.0.1:8000"
-ORIGINE = sys.argv[2] if len(sys.argv) > 2 else "chrome-extension://bbgkmjbkhecafcpladgdbecpgmpcelho"
+ORIGINE = sys.argv[2] if len(sys.argv) > 2 else "chrome-extension://nneecloagollpakilpepnamdaelmgkbn"
 resultats: list[tuple[str, str, str]] = []  # (etat, nom, detail)
 
 

@@ -13,7 +13,7 @@ if (-not (Test-Path $python)) { throw "Environnement Python introuvable : $pytho
 
 $env:KAMA_ENV = 'prod'
 # Identifiant FIXE de l'extension (clé publique dans kama_frontend/wxt.config.ts) : il ne change pas d'un ordinateur à l'autre.
-$env:KAMA_ALLOWED_ORIGINS = 'chrome-extension://bbgkmjbkhecafcpladgdbecpgmpcelho'
+$env:KAMA_ALLOWED_ORIGINS = 'chrome-extension://nneecloagollpakilpepnamdaelmgkbn'
 $env:KAMA_HOST = '127.0.0.1'
 $env:KAMA_PORT = '8000'
 $env:KAMA_ROUTES_FILE = Join-Path $backend ($(if ($SansVoix) { 'config\routes.json' } else { 'config\routes.demo.json' }))

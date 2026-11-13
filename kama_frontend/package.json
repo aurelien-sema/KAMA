@@ -8,6 +8,7 @@
     "dev": "wxt",
     "dev:edge": "wxt -b edge",
     "build": "wxt build",
+    "build:local": "node scripts/build-local.mjs",
     "build:edge": "wxt build -b edge",
     "build:jury": "wxt build --mode jury && wxt build -b edge --mode jury",
     "banque-demo": "node scripts/banque-demo.mjs",
