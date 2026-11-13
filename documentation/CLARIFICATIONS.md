@@ -82,6 +82,11 @@ Chaque réponse porte un **indicateur de fiabilité** : depuis le 2026-11-13, un
    - tous les éléments utilisables au clavier, avec des `aria-label`.
 6. **Une seule fenêtre** pour toutes les réponses.
 
+### Rôle du LLM (décidé le 2026-11-13)
+- Parcours : voix → reconnaissance (ASR) → traduction vers la langue pivot (pidgin → anglais ; ghomálá' → français) → masquage (montants, noms → {xN}) → LLM → contrôles → réponse.
+- Le LLM rédige sa réponse en langue pivot, avec seulement des balises {xN} : il n'écrit, ne recopie ni ne calcule aucun montant (règle n° 1), ne déclenche aucune action (règle n° 2).
+- Retour vers la langue nationale : une phrase validée du catalogue passe en premier ; sinon traduction automatique avec badge, **uniquement pour un texte non critique**. Une réponse critique (argent, alerte, condition, négation) **reste en anglais**, badge « Pas encore traduit » (règle n° 4).
+
 ---
 
 ## 5. Architecture proposée (à valider avec l'équipe)
