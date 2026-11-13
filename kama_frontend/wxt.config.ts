@@ -34,14 +34,6 @@ export default defineConfig({
     // Fichiers que les éléments injectés dans la page ont le droit de charger : polices et logo.
     web_accessible_resources: [{ resources: ['fonts/*', 'icon/128.png'], matches: origines(mode) }],
   }),
-  hooks: {
-    // Version jury (`--mode jury`) : sans le catalogue des états, outil interne de l'équipe.
-    'entrypoints:resolved': (wxt, entrypoints) => {
-      if (wxt.config.mode !== 'jury') return;
-      const i = entrypoints.findIndex((e) => e.name === 'catalogue');
-      if (i >= 0) entrypoints.splice(i, 1);
-    },
-  },
   vite: () => ({
     plugins: [tailwindcss()],
     css: { postcss: { plugins: [shadowDomCss()] } },

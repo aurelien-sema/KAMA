@@ -129,7 +129,7 @@ Chaque réponse porte un **badge de fiabilité** : « Vérifié » (issu du glos
 - [ ] Traduction automatique en direct (avec badge « Traduction automatique »).
 
 ### Livraison au jury
-- [x] Version jury : `npm run build:jury` (Chrome et Edge), sans les pages locales de l'équipe ni le catalogue des états (dossiers `.output/chrome-mv3-jury` et `.output/edge-mv3-jury`).
+- [x] Version jury : `npm run build:jury` (Chrome et Edge), sans les pages locales de l'équipe (dossiers `.output/chrome-mv3-jury` et `.output/edge-mv3-jury`).
 - [x] Fixer la `key` du manifest (identifiant stable, autorisé par le serveur). *(Fait par Dimitri ; l’identifiant doit figurer dans `KAMA_ALLOWED_ORIGINS` du serveur.)*
 - [ ] Zip avec cette structure exacte :
   ```

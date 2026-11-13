@@ -3,7 +3,7 @@
  * Repris des maquettes Lovable (projets « fenêtre Kama » et « onglet / sélection »).
  */
 import { useState } from 'react';
-import { Volume2 } from 'lucide-react';
+import { Languages, Volume2 } from 'lucide-react';
 import { useLangueCourante } from '@/lib/langue-courante';
 import { ecouterTexte } from '@/lib/ecouter';
 import { useTexte } from '@/lib/use-texte';
@@ -39,8 +39,17 @@ export function TranslationBadge() {
   const aVerifier = useTexte('à vérifier');
   const aFournir = useTexte('Traduction à fournir');
   return (
-    <span className="inline-flex items-center self-start rounded-full border border-kama-ink/20 bg-kama-cream px-1.5 py-0.5 text-[11px] font-semibold text-kama-ink">
-      {langue ? `${langue.nom} – ${aVerifier}` : aFournir}
+    <span className="inline-flex items-center gap-1.5 self-start rounded-full bg-kama-cream px-2.5 py-1 text-xs leading-none text-kama-ink ring-1 ring-kama-orange/30">
+      <Languages className="size-3.5 shrink-0 text-kama-orange" aria-hidden />
+      {langue ? (
+        <>
+          <strong className="font-bold">{langue.nom}</strong>
+          <span aria-hidden>·</span>
+          <span>{aVerifier}</span>
+        </>
+      ) : (
+        <span className="font-semibold">{aFournir}</span>
+      )}
     </span>
   );
 }

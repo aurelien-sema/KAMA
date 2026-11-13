@@ -1,12 +1,13 @@
 /**
- * Menu de l'onglet de bord (état 3 de la maquette Lovable « Onglet de bord »).
- * 248 px de large, 12 px à gauche de l'onglet ; boutons de 56 px de haut minimum, texte 16 px.
- * Chaque bouton ouvre la fenêtre Kama sur le mode choisi ; le bouton haut-parleur lit le libellé.
+ * Menu de l'onglet de bord : 3 boutons ronds à icônes, empilés à gauche de l'onglet (décision d'Omar du 2026-11-13 :
+ * pas de texte ni de bouton d'écoute, il faut décider vite).
+ *  - Parler à Kama (micro) · Expliquer cette page (document) · Résumer mes transactions (billet).
+ *  - Boutons de 56 px ; le nom de chaque bouton est donné aux lecteurs d'écran (`aria-label`) et s'affiche dans
+ *    une infobulle au survol ou au focus clavier.
  * Icônes : lucide-react (pas d'emoji, rendu identique sur tous les ordinateurs).
  */
 import { forwardRef } from 'react';
 import { Banknote, FileText, Mic, type LucideIcon } from 'lucide-react';
-import { SpeakButton, TranslationBadge } from '@/components/kama/primitives';
 import { useLangueCourante } from '@/lib/langue-courante';
 import { topBorne } from '@/lib/position-onglet';
 import { traduireKama, useTexte } from '@/lib/use-texte';
@@ -19,15 +20,14 @@ export const ACTIONS: { mode: ModeKama; Icone: LucideIcon; libelle: string }[] =
   { mode: 'resumer', Icone: Banknote, libelle: 'Résumer mes transactions' },
 ];
 
-/** Hauteur approximative du menu, pour qu'il ne sorte pas de l'écran. */
-const HAUTEUR_MENU = 250;
+/** Hauteur du menu (3 boutons de 56 px, espaces et marges), pour qu'il ne sorte pas de l'écran. */
+const HAUTEUR_MENU = 208;
 
 type Props = { position: number; onChoisir: (mode: ModeKama) => void };
 
 export const MenuOnglet = forwardRef<HTMLDivElement, Props>(function MenuOnglet({ position, onChoisir }, ref) {
   const langue = useLangueCourante();
   const menu = useTexte('Menu Kama');
-  const ecouterPrefixe = useTexte('Écouter :');
   return (
     <div
       ref={ref}
@@ -35,25 +35,29 @@ export const MenuOnglet = forwardRef<HTMLDivElement, Props>(function MenuOnglet(
       role="group"
       aria-label={menu}
       style={{ top: topBorne(position, HAUTEUR_MENU) }}
-      className="animate-kama-appear fixed right-14 z-[2147483647] flex w-[248px] -translate-y-1/2 flex-col gap-2 rounded-2xl bg-kama-white p-3 shadow-xl"
+      className="animate-kama-appear fixed right-14 z-[2147483647] flex -translate-y-1/2 flex-col gap-2 rounded-full bg-kama-white p-2 shadow-xl ring-1 ring-kama-ink/5"
     >
       {ACTIONS.map(({ mode, Icone, libelle }) => {
         const texte = traduireKama(langue?.code, libelle);
         return (
-          <div key={mode} className="flex items-center gap-1">
-            <button
-              type="button"
-              onClick={() => onChoisir(mode)}
-              className="flex min-h-14 flex-1 cursor-pointer items-center gap-2.5 rounded-xl border-0 bg-kama-cream px-3 text-left text-base font-bold text-kama-ink hover:bg-kama-orange focus-visible:outline-2 focus-visible:outline-kama-ink"
+          <button
+            key={mode}
+            type="button"
+            onClick={() => onChoisir(mode)}
+            aria-label={texte}
+            className="group relative grid size-14 cursor-pointer place-items-center rounded-full border-0 bg-kama-cream text-kama-ink transition-colors hover:bg-kama-orange focus-visible:bg-kama-orange focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-kama-ink"
+          >
+            <Icone className="size-6" strokeWidth={2.25} aria-hidden />
+            {/* Infobulle : nom du bouton, au survol ou au focus clavier (après 300 ms). */}
+            <span
+              aria-hidden
+              className="pointer-events-none absolute right-full mr-3 whitespace-nowrap rounded-lg bg-kama-ink px-3 py-1.5 text-sm font-semibold text-kama-white opacity-0 shadow-lg transition-opacity delay-300 duration-150 group-hover:opacity-100 group-focus-visible:opacity-100"
             >
-              <Icone className="size-6 shrink-0" strokeWidth={2.25} aria-hidden />
               {texte}
-            </button>
-            <SpeakButton texte={libelle} label={`${ecouterPrefixe} ${texte}`} />
-          </div>
+            </span>
+          </button>
         );
       })}
-      <TranslationBadge />
     </div>
   );
 });

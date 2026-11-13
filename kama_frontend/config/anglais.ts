@@ -68,7 +68,6 @@ export const ANGLAIS: Record<string, string> = {
   'Pas de connexion internet.': 'No internet connection.',
   'Traduction indisponible. Voici le texte original.': 'Translation unavailable. Here is the original text.',
   "Tu peux l'écouter en français.": 'You can listen to it in English.',
-  'Catalogue des états (développement)': 'State catalogue (development)',
   'Nouveau message': 'New message',
   'Montant affiché': 'Amount shown',
 

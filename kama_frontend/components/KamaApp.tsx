@@ -91,9 +91,10 @@ export function KamaApp() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [vue]);
 
-  // Clavier : à l'ouverture, le focus va dans le menu puis dans la fenêtre.
+  // Clavier : menu ouvert au clavier, le focus va sur son premier bouton (à la souris, rien n'est mis en avant).
+  const menuAuClavier = useRef(false);
   useEffect(() => {
-    if (menuOuvert) menu.current?.querySelector('button')?.focus();
+    if (menuOuvert && menuAuClavier.current) menu.current?.querySelector('button')?.focus();
   }, [menuOuvert]);
   useEffect(() => {
     if (vue) fenetre.current?.focus();
@@ -147,7 +148,8 @@ export function KamaApp() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [etapeId]);
 
-  function clicOnglet() {
+  function clicOnglet(auClavier = false) {
+    menuAuClavier.current = auClavier;
     if (!langue) {
       // Pas de langue : le premier clic ouvre le choix de la langue, pas le menu.
       if (vue?.type === 'choix-langue') fermerFenetre();

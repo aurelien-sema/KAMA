@@ -47,7 +47,7 @@ const WAVE = [8, 14, 22, 30, 18, 36, 26, 40, 20, 32, 14, 24, 34, 16, 28, 10, 20,
 export function TalkListeningContent({ niveaux }: { niveaux?: number[] }) {
   const microActif = useTexte('Micro actif');
   const r = useReponse([["Je t'écoute. Parle maintenant."]]);
-  // Sans niveaux (catalogue) : les barres de la maquette. Avec : de 6 à 40 px selon le son.
+  // Sans niveaux : les barres de la maquette. Avec : de 6 à 40 px selon le son.
   const barres = niveaux ? WAVE.map((_, i) => 6 + Math.round((niveaux[i] ?? 0) * 34)) : WAVE;
   return (
     <div className="flex h-full flex-col items-center justify-center gap-5">
@@ -87,24 +87,6 @@ export function TalkThinkingContent({ question }: { question?: string }) {
           ))}
         </span>
       </div>
-    </div>
-  );
-}
-
-/* 4 — Parler : réponse (exemple de la maquette : question sur les frais) */
-export function TalkAnswerContent({ question, frais }: { question: string; frais: string }) {
-  return (
-    <div className="flex flex-col gap-4">
-      <UserBubble>{question}</UserBubble>
-      <KamaResponse
-        status="verified"
-        speech={`Les frais sont de ${frais}. C'est ce que la banque prend pour faire le transfert.`}
-      >
-        <p className="m-0">
-          Les frais sont de <Amount>{frais}</Amount>.
-        </p>
-        <p className="m-0">C'est ce que la banque prend pour faire le transfert.</p>
-      </KamaResponse>
     </div>
   );
 }
@@ -230,29 +212,6 @@ export function NoTransactionsContent({
   );
 }
 
-/* 8 — Explication d'un élément (exemple de la maquette : pastille Frais) */
-export function ElementExplainContent({ libelle, frais, total }: { libelle: string; frais: string; total: string }) {
-  return (
-    <div className="flex flex-col gap-3">
-      <span className="self-start rounded-md border border-bank-border bg-bank-bg px-2 py-1 text-xs text-bank-text">
-        Élément choisi : <strong>{libelle}</strong>
-      </span>
-      <KamaResponse
-        status="verified"
-        speech={`${libelle} : ${frais}. C'est ce que la banque prend pour faire le transfert. Au total, ${total} vont sortir de ton compte.`}
-      >
-        <p className="m-0">
-          <span className="font-semibold">{libelle} :</span> <Amount>{frais}</Amount>.
-        </p>
-        <p className="m-0">C'est ce que la banque prend pour faire le transfert.</p>
-        <p className="m-0">
-          Au total, <Amount>{total}</Amount> vont sortir de ton compte.
-        </p>
-      </KamaResponse>
-    </div>
-  );
-}
-
 /* 9 — Erreur bancaire expliquée : message original affiché + explication sans minimiser */
 export function BankErrorContent({
   messageBanque,
@@ -293,33 +252,6 @@ export function BankErrorContent({
           </div>
         </div>
       </KamaResponse>
-    </div>
-  );
-}
-
-/* 10 — Pas de connexion */
-export function OfflineContent({ onRetry }: { onRetry?: () => void }) {
-  const reessayer = useTexte('Réessayer');
-  const pasInternet = useTexte("Pas d'internet.");
-  const nePeutPas = useTexte('Kama ne peut pas expliquer pour le moment.');
-  return (
-    <div className="flex h-full flex-col items-center justify-center gap-4 text-center" role="alert">
-      <span className="grid size-14 place-items-center rounded-full bg-kama-cream text-kama-ink">
-        <WifiOff className="size-7" aria-hidden />
-      </span>
-      <div className="w-full text-left">
-        <KamaLine speech="Pas d'internet. Kama ne peut pas expliquer pour le moment.">
-          <p className="m-0 flex items-start gap-2">
-            <AlertTriangle className="mt-0.5 size-5 shrink-0" aria-hidden />
-            <span>
-              <span className="font-semibold">{pasInternet}</span> {nePeutPas}
-            </span>
-          </p>
-        </KamaLine>
-      </div>
-      <WindowButton variant="solid" onClick={onRetry}>
-        {reessayer}
-      </WindowButton>
     </div>
   );
 }
@@ -384,42 +316,6 @@ export function BandeauHorsLigne({ onRetry }: { onRetry?: () => void }) {
           {reessayer}
         </WindowButton>
       </div>
-    </div>
-  );
-}
-
-/* 14 — Parler : message simple (je n'ai pas compris, voix indisponible, micro refusé…) avec une action possible */
-export function ParlerMessageContent({
-  texte,
-  detail,
-  actionLabel,
-  onAction,
-  paroles,
-  speechFr,
-}: {
-  texte: string;
-  detail?: string;
-  actionLabel?: string;
-  onAction?: () => void;
-  paroles?: Parole[];
-  speechFr?: string;
-}) {
-  return (
-    <div className="flex h-full flex-col justify-end gap-3" role="status">
-      <KamaLine speech={speechFr ?? (detail ? `${texte} ${detail}` : texte)} paroles={paroles}>
-        <p className="m-0 flex items-start gap-2">
-          <AlertTriangle className="mt-0.5 size-5 shrink-0" aria-hidden />
-          <span className="font-semibold">{texte}</span>
-        </p>
-        {detail && <p className="m-0 mt-1 text-kama-ink/80">{detail}</p>}
-      </KamaLine>
-      {actionLabel && (
-        <div>
-          <WindowButton variant="solid" onClick={onAction}>
-            {actionLabel}
-          </WindowButton>
-        </div>
-      )}
     </div>
   );
 }

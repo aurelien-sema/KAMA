@@ -2021,3 +2021,60 @@ Kama t’explique ta banque en ligne dans ta langue. · Épingle Kama · En haut
 | Qui | Quoi |
 |---|---|
 | Dimitri / locuteurs | Ajouter ces 13 phrases à content-data/kama_interface.json (pidgin, puis ghomálá') |
+
+## 2026-11-12 — Popup retravaillé ; catalogue des états supprimé
+
+**Auteur :** Omar (réalisé par Claude Code, sur ses consignes)
+
+### En bref
+
+Le popup est plus soigné et la liste des langues ne pousse plus rien vers le bas. Le catalogue des états, l'outil de comparaison avec les maquettes Lovable, est supprimé : on n'en a plus besoin.
+
+### Ce qui a été implémenté, expliqué simplement
+
+- **En-tête** : logo et « Kama » en Krona One, interrupteur Activé / Désactivé à droite, fine ligne de séparation.
+- **Titres de section** (« Ma langue », « Je préfère ») en Krona One orange, à 22 px. C'est un grand texte, donc le contraste reste acceptable sur blanc.
+- **Badge de traduction** (règle d'or n° 4) gardé, avec un style plus soigné : icône de traduction orange, langue en gras, fin contour orange. Il est placé sous le choix de la langue, qu'il concerne. Le même badge sert dans la fenêtre Kama.
+- **Liste des langues** :
+  - elle s'ouvre par-dessus le reste, comme un vrai menu déroulant : vérifié, le titre suivant ne bouge pas (218,5 px avant et après) ;
+  - un clic en dehors ou Échap la ferme ;
+  - si elle dépasse, le popup s'agrandit vers le bas.
+- **Texte / Audio** gardés, sous forme de sélecteur à deux segments : le choix actif est plein, quasi-noir avec texte blanc.
+- **« Expliquer cette page »** : icône document, coins plus arrondis.
+- **Catalogue supprimé** : page `entrypoints/catalogue/`, ses exemples (`etats.tsx`, `exemples.ts`), 4 contenus de démonstration qui ne servaient qu'à lui, et le réglage qui le retirait de la version jury.
+
+### Démarche utilisée
+
+- Captures automatiques du popup avec un navigateur en anglais et le pidgin choisi, puis en français avec le ghomálá'. Liste fermée et ouverte, aucune erreur.
+- Aucune erreur TypeScript ; tests : 92 sur 92.
+
+## 2026-11-13 — Menu de l'onglet de bord : 3 boutons ronds à icônes
+
+**Auteur :** Omar (réalisé par Claude Code, sur ses consignes)
+
+### En bref
+
+Le menu de l'onglet de bord était chargé : trois longs boutons texte, chacun avec son haut-parleur, plus le badge de traduction. En pidgin, les libellés passaient sur trois lignes. Il devient une colonne de 3 boutons ronds à icônes. L'utilisateur doit décider vite : il n'a besoin ni de lire ni d'écouter.
+
+### Ce qui a été implémenté, expliqué simplement
+
+- **3 boutons ronds de 56 px**, empilés dans une pastille blanche à gauche de l'onglet :
+  - micro (Parler à Kama) ;
+  - document (Expliquer cette page) ;
+  - billet (Résumer mes transactions).
+- Fond crème, orange au survol et au focus. L'icône reste quasi-noire sur l'orange.
+- **Retirés** : les textes, les boutons d'écoute à droite et le badge de traduction.
+- **Le nom reste accessible** :
+  - les lecteurs d'écran le lisent (`aria-label`, traduit dans la langue choisie) ;
+  - une infobulle l'affiche au survol ou au focus clavier, après 300 ms, comme pour les pastilles.
+- **Clavier** : si le menu est ouvert au clavier (Entrée ou Espace sur l'onglet), le focus va sur le premier bouton. S'il est ouvert à la souris, aucun bouton n'est mis en avant. Avant, le premier bouton restait orange avec son infobulle pendant qu'on survolait un autre.
+
+### Démarche utilisée
+
+- Test automatique sur la Banque Démo :
+  - 3 boutons de 56 × 56 px ;
+  - nom lu dans la langue choisie ;
+  - chaque bouton ouvre le bon contenu ;
+  - ouverture à la souris : le focus reste sur l'onglet ; au clavier : le focus va sur « Parler à Kama » ;
+  - captures du survol.
+- Aucune erreur TypeScript ; compilation réussie.
