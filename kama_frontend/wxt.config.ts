@@ -22,8 +22,10 @@ const origines = (mode: string) =>
 export default defineConfig({
   modules: ['@wxt-dev/module-react'],
   manifest: ({ mode }) => ({
-    name: 'Kama',
-    description: 'Kama explique ta banque en ligne dans ta langue, à l’oral et à l’écrit.',
+    // Nom et description dans la langue du navigateur (public/_locales/fr et en) ; anglais pour les autres langues.
+    name: '__MSG_nom__',
+    description: '__MSG_description__',
+    default_locale: 'en',
     // `offscreen` : document caché où Kama écoute le micro (aucun avertissement à l'installation).
     permissions: ['storage', 'offscreen'],
     key: CLE_PUBLIQUE,
@@ -33,14 +35,6 @@ export default defineConfig({
     // Fichiers que les éléments injectés dans la page ont le droit de charger : polices et logo.
     web_accessible_resources: [{ resources: ['fonts/*', 'icon/128.png'], matches: origines(mode) }],
   }),
-  hooks: {
-    // Version jury (`--mode jury`) : sans le catalogue des états, outil interne de l'équipe.
-    'entrypoints:resolved': (wxt, entrypoints) => {
-      if (wxt.config.mode !== 'jury') return;
-      const i = entrypoints.findIndex((e) => e.name === 'catalogue');
-      if (i >= 0) entrypoints.splice(i, 1);
-    },
-  },
   vite: () => ({
     plugins: [tailwindcss()],
     css: { postcss: { plugins: [shadowDomCss()] } },

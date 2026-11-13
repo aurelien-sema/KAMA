@@ -1,6 +1,6 @@
 /**
  * Phrases fixes de la fenêtre Kama qui ne sont pas dans les gabarits (`gabarits.ts`) ni dans la configuration de la page
- * (`page-test.ts`). Elles sont écrites ici UNE seule fois pour que le catalogue des phrases à faire valider par les locuteurs
+ * (`config/banques/`). Elles sont écrites ici UNE seule fois pour que le catalogue des phrases à faire valider par les locuteurs
  * (content-data/kama_fenetre.json) puisse être contrôlé automatiquement contre le code (`npm test`).
  *
  * Modifier une phrase ici = la phrase validée ne correspond plus : il faut la faire valider de nouveau.

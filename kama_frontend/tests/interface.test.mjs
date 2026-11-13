@@ -5,6 +5,7 @@ import { readFileSync } from 'node:fs';
 import { libelle, chercherInterface } from '../lib/interface.ts';
 import { cleGlossaire } from '../lib/glossaire.ts';
 import { SAFINUM } from '../config/banques/safinum.ts';
+
 const ELEMENTS = SAFINUM.elements;
 
 const lire = (c) => JSON.parse(readFileSync(new URL(c, import.meta.url), 'utf8'));

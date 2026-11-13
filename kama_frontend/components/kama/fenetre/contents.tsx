@@ -7,15 +7,13 @@
  */
 import type { ReactNode } from 'react';
 import { AlertTriangle, Eye, Mic, ShieldCheck, Volume2, WifiOff } from 'lucide-react';
-import { TranslationBadge } from '@/components/kama/primitives';
-import { lireEnFrancais } from '@/lib/voix';
+import { lireTexte } from '@/lib/voix';
 import type { Parole } from '@/lib/traduction';
 import { useTexte } from '@/lib/use-texte';
 import { aplatir, useReponse } from '@/lib/use-reponse';
-import { Amount, KamaLine, KamaResponse, StatusBadge, UserBubble, WindowButton, type TranslationStatus } from './parts';
+import { KamaLine, KamaResponse, UserBubble, WindowButton, type TranslationStatus } from './parts';
 
 export type Etape = { cible: string; texte: string };
-export type Operation = { date: string; libelle: string; libelleTraduit?: string; montant: string; sens: 'entree' | 'sortie' };
 
 /** Bouton « Montre-moi » : fait défiler jusqu'à l'élément et le surligne (étape suivante). */
 export function MontreMoi({ onClick }: { onClick?: () => void }) {
@@ -47,7 +45,7 @@ const WAVE = [8, 14, 22, 30, 18, 36, 26, 40, 20, 32, 14, 24, 34, 16, 28, 10, 20,
 export function TalkListeningContent({ niveaux }: { niveaux?: number[] }) {
   const microActif = useTexte('Micro actif');
   const r = useReponse([["Je t'écoute. Parle maintenant."]]);
-  // Sans niveaux (catalogue) : les barres de la maquette. Avec : de 6 à 40 px selon le son.
+  // Sans niveaux : les barres de la maquette. Avec : de 6 à 40 px selon le son.
   const barres = niveaux ? WAVE.map((_, i) => 6 + Math.round((niveaux[i] ?? 0) * 34)) : WAVE;
   return (
     <div className="flex h-full flex-col items-center justify-center gap-5">
@@ -91,24 +89,6 @@ export function TalkThinkingContent({ question }: { question?: string }) {
   );
 }
 
-/* 4 — Parler : réponse (exemple de la maquette : question sur les frais) */
-export function TalkAnswerContent({ question, frais }: { question: string; frais: string }) {
-  return (
-    <div className="flex flex-col gap-4">
-      <UserBubble>{question}</UserBubble>
-      <KamaResponse
-        status="verified"
-        speech={`Les frais sont de ${frais}. C'est ce que la banque prend pour faire le transfert.`}
-      >
-        <p className="m-0">
-          Les frais sont de <Amount>{frais}</Amount>.
-        </p>
-        <p className="m-0">C'est ce que la banque prend pour faire le transfert.</p>
-      </KamaResponse>
-    </div>
-  );
-}
-
 /* 5 — Expliquer cette page : 1 phrase + étapes numérotées, chacune avec « Montre-moi » */
 export function ExplainPageContent({
   phrase,
@@ -125,6 +105,7 @@ export function ExplainPageContent({
   paroles?: Parole[];
   speechFr?: string;
 }) {
+  const montreMoi = useTexte('Montre-moi');
   return (
     <KamaResponse
       status={status}
@@ -132,124 +113,26 @@ export function ExplainPageContent({
       speech={speechFr ?? `${phrase} ${etapes.map((s, i) => `${i + 1}. ${s.texte}`).join(' ')}`}
     >
       <p className="m-0 font-semibold">{phrase}</p>
+      {/* Chaque étape est elle-même le bouton « Montre-moi » (décision d'Omar du 2026-11-13). */}
       <ol className="m-0 flex list-none flex-col gap-1.5 p-0">
         {etapes.map((s, i) => (
-          <li key={s.cible} className="flex items-center gap-2.5 rounded-xl border border-kama-ink/10 py-px pl-2 pr-px">
-            <span className="grid size-7 shrink-0 place-items-center rounded-full bg-kama-ink text-sm font-bold text-kama-white">
-              {i + 1}
-            </span>
-            <span className="flex-1 text-sm leading-tight">{s.texte}</span>
-            <MontreMoi onClick={() => onShowMe?.(s.cible)} />
+          <li key={s.cible}>
+            <button
+              type="button"
+              onClick={() => onShowMe?.(s.cible)}
+              aria-label={`${s.texte} ${montreMoi}`}
+              className="flex min-h-11 w-full cursor-pointer items-center gap-2.5 rounded-xl border border-kama-ink/10 bg-kama-white py-1.5 pl-2 pr-3 text-left text-kama-ink hover:border-kama-ink/30 hover:bg-kama-cream focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-kama-ink"
+            >
+              <span className="grid size-7 shrink-0 place-items-center rounded-full bg-kama-ink text-sm font-bold text-kama-white">
+                {i + 1}
+              </span>
+              <span className="flex-1 text-sm leading-tight">{s.texte}</span>
+              <Eye className="size-5 shrink-0" aria-hidden />
+            </button>
           </li>
         ))}
       </ol>
     </KamaResponse>
-  );
-}
-
-/* 6 — Résumer mes transactions */
-/** « 1 entrée », « 2 entrées » (0 et 1 au singulier, comme en français). */
-const pluriel = (nombre: string, mot: string) => (Number(nombre) > 1 ? `${mot}s` : mot);
-
-export function SummaryContent({
-  entrees,
-  sorties,
-  operations,
-  status = 'verified',
-  bilan,
-  introListe,
-  paroles,
-}: {
-  entrees: string;
-  sorties: string;
-  operations: Operation[];
-  status?: TranslationStatus;
-  /** Phrase du bilan dans la langue choisie (montants de la page déjà remis). Par défaut : le français ci-dessous. */
-  bilan?: ReactNode;
-  introListe?: string;
-  paroles?: Parole[];
-}) {
-  return (
-    <KamaResponse
-      status={status}
-      paroles={paroles}
-      speech={`Sur cette page : ${entrees} ${pluriel(entrees, 'entrée')}, ${sorties} ${pluriel(sorties, 'sortie')}. ${operations
-        .map((o) => `${o.date}, ${o.libelle}, ${o.montant}`)
-        .join('. ')}`}
-    >
-      <p className="m-0 font-semibold">
-        {bilan ?? (
-          <>
-            Sur cette page : <Amount>{entrees}</Amount> {pluriel(entrees, 'entrée')}, <Amount>{sorties}</Amount>{' '}
-            {pluriel(sorties, 'sortie')}.
-          </>
-        )}
-      </p>
-      <p className="m-0 text-sm text-kama-ink/70">{introListe ?? `Les ${operations.length} dernières opérations :`}</p>
-      <ul className="m-0 flex list-none flex-col divide-y divide-kama-ink/10 rounded-xl border border-kama-ink/10 p-0">
-        {operations.map((o) => (
-          <li key={o.date + o.libelle} className="flex items-center gap-3 px-3 py-2.5">
-            <span className="w-11 shrink-0 text-sm text-kama-ink/70">{o.date}</span>
-            <span className="flex-1 text-sm">{o.libelleTraduit ?? o.libelle}</span>
-            <Amount className={`text-sm ${o.sens === 'entree' ? 'text-kama-success' : 'text-kama-error'}`}>
-              {o.montant}
-            </Amount>
-          </li>
-        ))}
-      </ul>
-    </KamaResponse>
-  );
-}
-
-/* 7 — Pas de transactions sur cette page */
-export function NoTransactionsContent({
-  destination = 'Va sur la page Historique.',
-  onShowMe,
-  status = 'auto',
-  phrase = "Cette page n'a pas tes transactions.",
-  paroles,
-  speechFr,
-}: {
-  destination?: string;
-  onShowMe?: (cible: string) => void;
-  status?: TranslationStatus;
-  phrase?: string;
-  paroles?: Parole[];
-  speechFr?: string;
-}) {
-  return (
-    <KamaResponse status={status} paroles={paroles} speech={speechFr ?? `${phrase} ${destination}`}>
-      <p className="m-0">{phrase}</p>
-      <p className="m-0 font-semibold">{destination}</p>
-      {onShowMe && (
-        <div>
-          <MontreMoi onClick={() => onShowMe('historique')} />
-        </div>
-      )}
-    </KamaResponse>
-  );
-}
-
-/* 8 — Explication d'un élément (exemple de la maquette : pastille Frais) */
-export function ElementExplainContent({ libelle, frais, total }: { libelle: string; frais: string; total: string }) {
-  return (
-    <div className="flex flex-col gap-3">
-      <span className="self-start rounded-md border border-bank-border bg-bank-bg px-2 py-1 text-xs text-bank-text">
-        Élément choisi : <strong>{libelle}</strong>
-      </span>
-      <KamaResponse
-        status="verified"
-        speech={`${libelle} : ${frais}. C'est ce que la banque prend pour faire le transfert. Au total, ${total} vont sortir de ton compte.`}
-      >
-        <p className="m-0">
-          <span className="font-semibold">{libelle} :</span> <Amount>{frais}</Amount>.
-        </p>
-        <p className="m-0">C'est ce que la banque prend pour faire le transfert.</p>
-        <p className="m-0">
-          Au total, <Amount>{total}</Amount> vont sortir de ton compte.
-        </p>
-      </KamaResponse>
-    </div>
   );
 }
 
@@ -297,33 +180,6 @@ export function BankErrorContent({
   );
 }
 
-/* 10 — Pas de connexion */
-export function OfflineContent({ onRetry }: { onRetry?: () => void }) {
-  const reessayer = useTexte('Réessayer');
-  const pasInternet = useTexte("Pas d'internet.");
-  const nePeutPas = useTexte('Kama ne peut pas expliquer pour le moment.');
-  return (
-    <div className="flex h-full flex-col items-center justify-center gap-4 text-center" role="alert">
-      <span className="grid size-14 place-items-center rounded-full bg-kama-cream text-kama-ink">
-        <WifiOff className="size-7" aria-hidden />
-      </span>
-      <div className="w-full text-left">
-        <KamaLine speech="Pas d'internet. Kama ne peut pas expliquer pour le moment.">
-          <p className="m-0 flex items-start gap-2">
-            <AlertTriangle className="mt-0.5 size-5 shrink-0" aria-hidden />
-            <span>
-              <span className="font-semibold">{pasInternet}</span> {nePeutPas}
-            </span>
-          </p>
-        </KamaLine>
-      </div>
-      <WindowButton variant="solid" onClick={onRetry}>
-        {reessayer}
-      </WindowButton>
-    </div>
-  );
-}
-
 /* 11 — Traduction indisponible : texte original + « Écouter en français » */
 export function UntranslatedContent({
   texte,
@@ -339,16 +195,12 @@ export function UntranslatedContent({
   const ecouterFr = useTexte('Écouter en français');
   return (
     <article className="flex flex-col gap-3">
-      <div className="flex flex-wrap items-center gap-1.5">
-        <StatusBadge status="untranslated" />
-        <TranslationBadge />
-      </div>
       <p className="m-0 text-[15px] leading-snug text-kama-ink">{texte}</p>
       <p className="m-0 text-sm text-kama-ink/70">
         {langue ? inexistant : "Ce texte n'existe pas encore dans ta langue."}
       </p>
       <div>
-        <WindowButton onClick={() => lireEnFrancais(texte)}>
+        <WindowButton onClick={() => lireTexte(texte)}>
           <Volume2 className="size-4" aria-hidden /> {ecouterFr}
         </WindowButton>
       </div>
@@ -384,42 +236,6 @@ export function BandeauHorsLigne({ onRetry }: { onRetry?: () => void }) {
           {reessayer}
         </WindowButton>
       </div>
-    </div>
-  );
-}
-
-/* 14 — Parler : message simple (je n'ai pas compris, voix indisponible, micro refusé…) avec une action possible */
-export function ParlerMessageContent({
-  texte,
-  detail,
-  actionLabel,
-  onAction,
-  paroles,
-  speechFr,
-}: {
-  texte: string;
-  detail?: string;
-  actionLabel?: string;
-  onAction?: () => void;
-  paroles?: Parole[];
-  speechFr?: string;
-}) {
-  return (
-    <div className="flex h-full flex-col justify-end gap-3" role="status">
-      <KamaLine speech={speechFr ?? (detail ? `${texte} ${detail}` : texte)} paroles={paroles}>
-        <p className="m-0 flex items-start gap-2">
-          <AlertTriangle className="mt-0.5 size-5 shrink-0" aria-hidden />
-          <span className="font-semibold">{texte}</span>
-        </p>
-        {detail && <p className="m-0 mt-1 text-kama-ink/80">{detail}</p>}
-      </KamaLine>
-      {actionLabel && (
-        <div>
-          <WindowButton variant="solid" onClick={onAction}>
-            {actionLabel}
-          </WindowButton>
-        </div>
-      )}
     </div>
   );
 }

@@ -1,12 +1,11 @@
 /**
- * Briques du contenu de la fenêtre Kama : badge de fiabilité, montant, lecteur audio,
+ * Briques du contenu de la fenêtre Kama : indicateur de fiabilité, montant, lecteur audio,
  * réponse, ligne de Kama, bulle de l'utilisateur, bouton secondaire.
  * Repris de la maquette Lovable « Fenêtre Kama » (parts.tsx).
  */
 import { useEffect, useState, type ReactNode } from 'react';
-import { BadgeCheck, CircleSlash, Languages, Pause, Play, Volume2 } from 'lucide-react';
-import { TranslationBadge } from '@/components/kama/primitives';
-import { arreterLecture, lireEnFrancais } from '@/lib/voix';
+import { CircleSlash, Languages, Pause, Play, Volume2 } from 'lucide-react';
+import { arreterLecture, lireTexte } from '@/lib/voix';
 import { useLectureAuto } from '@/lib/langue-courante';
 import { traduireKama, useTexte } from '@/lib/use-texte';
 import { useLangueCourante } from '@/lib/langue-courante';
@@ -16,23 +15,23 @@ import type { Parole } from '@/lib/traduction';
 export type TranslationStatus = 'verified' | 'auto' | 'untranslated';
 
 const STATUS = {
-  verified: { label: 'Vérifié', Icon: BadgeCheck, cls: 'bg-status-verified text-status-verified-foreground' },
-  auto: { label: 'Traduction automatique', Icon: Languages, cls: 'bg-status-auto text-status-auto-foreground' },
-  untranslated: {
-    label: 'Pas encore traduit',
-    Icon: CircleSlash,
-    cls: 'bg-status-untranslated text-status-untranslated-foreground',
-  },
+  auto: { label: 'Traduction automatique', Icon: Languages },
+  untranslated: { label: 'Pas encore traduit', Icon: CircleSlash },
 } as const;
 
-/** Badge en tête de chaque réponse. Icône + texte, jamais la couleur seule. */
+/**
+ * Indicateur de fiabilité (règle d'or n° 4), discret (décision d'Omar du 2026-11-13) : une petite icône, sans texte.
+ * Son nom (« Pas encore traduit », « Traduction automatique ») s'affiche au survol et est lu par les lecteurs d'écran.
+ * Texte vérifié par un locuteur : aucune icône.
+ */
 export function StatusBadge({ status }: { status: TranslationStatus }) {
-  const { label: labelFr, Icon, cls } = STATUS[status];
-  const label = useTexte(labelFr);
+  const info = status === 'verified' ? null : STATUS[status];
+  const label = useTexte(info?.label ?? '');
+  if (!info) return null;
+  const { Icon } = info;
   return (
-    <span className={`inline-flex items-center gap-1 rounded-full px-1.5 py-0.5 text-[11px] font-semibold ${cls}`}>
-      <Icon className="size-3.5" aria-hidden />
-      {label}
+    <span role="img" aria-label={label} title={label} className="grid size-6 shrink-0 place-items-center text-kama-ink/55">
+      <Icon className="size-4" aria-hidden />
     </span>
   );
 }
@@ -72,7 +71,7 @@ export function AudioPlayer({ text, paroles }: { text: string; paroles?: Parole[
     } else {
       setNote('Lecture en français');
     }
-    lireEnFrancais(text, vitesse, () => setPlaying(false));
+    lireTexte(text, vitesse, () => setPlaying(false));
   }
 
   // Préférence « Audio » : lecture automatique à l'ouverture.
@@ -129,7 +128,7 @@ export function AudioPlayer({ text, paroles }: { text: string; paroles?: Parole[
   );
 }
 
-/** Une réponse de Kama : badge en haut, lecteur audio, puis le texte. `speech` = texte lu. */
+/** Une réponse de Kama : lecteur audio (avec l'indicateur de fiabilité à côté), puis le texte. `speech` = texte lu. */
 export function KamaResponse({
   status,
   speech,
@@ -144,11 +143,12 @@ export function KamaResponse({
 }) {
   return (
     <article className="flex flex-col gap-2">
-      <div className="flex flex-wrap items-center gap-1">
+      <div className="flex items-center gap-1.5">
+        <div className="min-w-0 flex-1">
+          <AudioPlayer text={speech} paroles={paroles} />
+        </div>
         <StatusBadge status={status} />
-        <TranslationBadge />
       </div>
-      <AudioPlayer text={speech} paroles={paroles} />
       <div className="flex flex-col gap-2 text-[15px] leading-snug text-kama-ink">{children}</div>
     </article>
   );
@@ -173,7 +173,7 @@ export function KamaLine({ speech, paroles, children }: { speech: string; parole
     } else {
       setNote(true);
     }
-    lireEnFrancais(speech);
+    lireTexte(speech);
   }
   return (
     <div className="flex items-start gap-2">
@@ -184,9 +184,6 @@ export function KamaLine({ speech, paroles, children }: { speech: string; parole
             {noteFrancais}
           </span>
         )}
-        <span className="mt-1.5 block">
-          <TranslationBadge />
-        </span>
       </div>
       <button
         type="button"

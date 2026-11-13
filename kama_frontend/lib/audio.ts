@@ -4,7 +4,7 @@
  * Le serveur renvoie des segments dans l'ordre : de l'audio (extrait enregistré par un locuteur, ou voix automatique) et des
  * balises {xN} à la place des montants. Les montants ne sont jamais envoyés au serveur : à chaque balise, Kama lit LUI-MÊME le
  * montant de la page (nombre en mots, voix du navigateur) tant que les audios de chiffres enregistrés ne sont pas embarqués.
- * Si le serveur ne peut pas parler, l'appelant bascule sur la lecture en français (`lireEnFrancais`).
+ * Si le serveur ne peut pas parler, l'appelant bascule sur la lecture en français (`lireTexte`).
  *
  * L'audio est décodé avec Web Audio (pas d'adresse blob:) : la politique de sécurité de la page bancaire ne peut pas le bloquer.
  */

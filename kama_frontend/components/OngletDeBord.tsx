@@ -18,7 +18,8 @@ const SEUIL_GLISSER = 4;
 type Props = {
   position: number;
   menuOuvert: boolean;
-  onClic: () => void;
+  /** `auClavier` : ouvert avec Entrée ou Espace (le focus ira alors dans le menu). */
+  onClic: (auClavier: boolean) => void;
   onDeplace: (position: number) => void;
   onDeplacementFini: (position: number) => void;
 };
@@ -64,13 +65,13 @@ export const OngletDeBord = forwardRef<HTMLButtonElement, Props>(function Onglet
     }
   }
 
-  function onClick() {
+  function onClick(e: React.MouseEvent) {
     // Un glisser-déposer ne doit pas ouvrir le menu.
     if (aGlisse.current) {
       aGlisse.current = false;
       return;
     }
-    onClic();
+    onClic(e.detail === 0); // detail 0 : clic venu du clavier
   }
 
   return (

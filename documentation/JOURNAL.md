@@ -1837,3 +1837,326 @@ Suite aux demandes de Dimitri :
 | Omar | Décider des 4 points ci-dessus |
 | Omar | Essayer la Banque Démo : `npm run banque-demo` dans `kama_frontend`, puis http://localhost:5180 avec l'extension de développement (`.output/chrome-mv3`) |
 | Équipe | Pour ajouter une banque : copier `config/banques/demo.ts`, remplacer les libellés, l'inscrire dans `config/banques/index.ts` |
+
+
+## 2026-11-12 — Parler à Kama : les réponses (côté frontend)
+
+**Auteur :** Omar (réalisé par Claude Code, à sa demande : « tu peux lancer les réponses de l'assistant côté frontend »)
+
+### En bref
+
+Quand le serveur reconnaît une question (une « intention »), Kama y répond maintenant dans la conversation. Il répond **localement**, avec les mêmes contenus que le menu et les pastilles. Les montants sont lus dans la page au moment de répondre ; le serveur n'en fournit aucun. Le modèle de langue qui répondra aux autres questions sera intégré plus tard, avec l'équipe.
+
+### Ce qui a été implémenté, expliqué simplement
+
+- **Une réponse pour chaque intention** :
+
+  | Intention | Réponse de Kama |
+  |---|---|
+  | ton solde, les frais, le total | L'explication de l'élément, avec le montant exact de la page et « Montre-moi » |
+  | quoi faire ici | « Expliquer cette page » |
+  | tes transactions | Le résumé des transactions |
+  | le message de la banque | L'erreur affichée, connue ou découverte par Kama |
+  | répéter | La dernière réponse de Kama, à l'identique |
+  | non comprise | « Je n'ai pas compris ta question. Redis-la autrement. » |
+
+- **L'élément demandé n'est pas sur la page** : Kama le dit franchement (par exemple « Je ne vois pas de frais sur cette page »), sans rien inventer.
+- **« Kama a compris : les frais »** s'affiche sous le message vocal. L'utilisateur voit ainsi tout de suite si Kama s'est trompé.
+- **Lecture audio** : la réponse se lit toute seule si l'utilisateur a choisi « Audio » dans le popup, comme partout ailleurs.
+- **Robustesse** : une intention inconnue de cette version (serveur plus récent) est traitée comme « non comprise ».
+- **Outil de l'équipe** : dans le catalogue des états, une liste permet de choisir l'intention que la simulation renvoie. On peut ainsi essayer chaque réponse sur la vraie page sans serveur. Cet outil est absent de la version jury.
+- **Petit correctif** : le serveur de la Banque Démo ne produit plus d'erreur 404 sur l'icône de l'onglet.
+
+### Démarche utilisée
+
+- Test automatique sur la Banque Démo, avec un micro simulé (fichier audio) : une question pour chacune des 8 intentions, puis « le message de la banque » après un refus, puis « Montre-moi » depuis une réponse.
+- Résultats :
+  - montants recopiés à l'identique (« 500 XAF », « 25.500 XAF », puis « 9.000 XAF » et « 909.000 XAF » après changement du montant) ;
+  - refus « Provision insuffisante » expliqué ;
+  - « Montre-moi » surligne la Commission ;
+  - aucune erreur.
+- Aucune erreur TypeScript.
+
+### Résultats et limites connues
+
+- Les réponses restent en français, avec le badge « Pas encore traduit », tant que les textes validés ne sont pas fournis.
+- Les questions hors des 7 intentions attendent le modèle de langue (à intégrer ensemble). Il ne produira jamais de montant (règle d'or n° 1).
+- **Repéré pour la phase qualité** : la fenêtre Kama peut cacher en partie l'élément surligné par « Montre-moi ».
+
+### Ce que l'équipe doit faire ensuite
+
+| Qui | Quoi |
+|---|---|
+| Omar | Essayer : catalogue des états → choisir une intention → page de la banque → micro |
+| Dimitri | Mettre le serveur en ligne et donner son adresse (`config/serveur.ts`) : les vraies intentions remplaceront alors la simulation |
+| Équipe | Intégrer ensemble le modèle qui répondra aux autres questions |
+
+
+## 2026-11-12 — Fusion de la branche `dimitri` dans `omar`
+
+**Auteur :** Omar (fusion réalisée par Claude Code ; décisions d'Omar sur les 4 points de désaccord)
+
+### En bref
+
+Dimitri et Omar avaient construit « Parler à Kama » chacun de leur côté. Dimitri a aussi ajouté la traduction de toutes les réponses, la voix du serveur, la `key` du manifest et l'écran d'accord. La fusion garde le meilleur des deux. 9 fichiers étaient en conflit.
+
+### Décisions d'Omar
+
+| Point | Décision |
+|---|---|
+| Qui écoute le micro | **Kama** (document caché) : la page de la banque n'a jamais accès au micro. L'écoute dans la page (version Dimitri) est retirée. |
+| Affichage des réponses vocales | **Combiner** : la conversation d'Omar, plus ce qu'apporte Dimitri (réponses traduites, lecture à voix haute après une question vocale, état hors ligne). |
+| Adresse du serveur | **Version Dimitri** : serveur local `http://127.0.0.1:8000` par défaut, adresse HTTPS donnée au moment de construire (`WXT_KAMA_API`). Le mode simulation et l'outil « intention simulée » sont retirés. |
+| Consentements | **L'accord général de Dimitri** au premier usage, et **l'accord micro dans la conversation** (texte de Dimitri, `config/consentement.ts`). Un écran de moins. |
+
+### Ce qui a été combiné, expliqué simplement
+
+- **Service worker** : les appels au serveur de Dimitri (capacités, traduction, voix, intention), avec sa vérification de l'expéditeur, plus le micro de Kama et la page de bienvenue. La même vérification protège maintenant aussi la connexion du micro.
+- **Avant d'ouvrir le micro**, Kama demande au serveur s'il comprend la voix dans cette langue (idée de Dimitri). Sinon, il le dit sans solliciter le micro. Serveur absent : « Pas de connexion internet », et « Réessayer » réécoute.
+- **Enregistrement** : l'encodeur WAV de Dimitri, qui rééchantillonne à 16 kHz si le navigateur impose une autre fréquence, remplace celui d'Omar.
+- **Conversation** : les messages de Kama passent par la traduction et se lisent à voix haute avec la voix du serveur. Seule la dernière bulle se lit, pas les anciennes. Les phrases déjà prévues par Dimitri (`PHRASES.voix`) sont réutilisées.
+- **Fenêtre** : la traduction de Dimitri est appliquée aux ajouts d'Omar :
+  - plusieurs banques (`config/banques/`) ;
+  - éléments découverts : un message inédit est traduit comme une sélection, et un montant inconnu garde le libellé de la page sans l'envoyer ;
+  - « 1 entrée » au singulier quand le bilan n'est pas traduit.
+- **Manifest** : la `key` de Dimitri (identifiant stable de l'extension), plus le document caché et la version jury d'Omar.
+- **Scripts et tests de Dimitri** : ils lisent maintenant `config/banques/safinum.ts` au lieu de l'ancien `config/page-test.ts`.
+- **Journal** : le journal de Dimitri est gardé en entier, et les entrées d'Omar viennent à la suite.
+
+### Démarche utilisée
+
+- Vérification des types sans erreur ; `npm test` (tests de Dimitri) : 83 sur 83.
+- Compilation de la version de développement et de la version jury.
+- **Tests dans Chrome, sur la Banque Démo** :
+  - sans serveur, la voix donne « Pas de connexion internet » ;
+  - avec le serveur de Dimitri lancé sans modèles, la voix donne « La voix ne marche pas encore pour cette langue » ;
+  - pastilles, « Expliquer cette page », « Montre-moi », montants à l'identique, refus, nouveau message, résumé : tout fonctionne, sans erreur ;
+  - en pidgin, l'interface est traduite. L'explication de la Commission reste en français, avec le badge « Pas encore traduit », car elle n'est pas validée.
+
+### Résultats et limites connues
+
+- La version jury pointe vers `127.0.0.1:8000` tant que l'adresse hébergée n'est pas donnée au moment de construire (`WXT_KAMA_API=https://… npm run build:jury`).
+- Les nouvelles phrases d'Omar (assistant, éléments découverts) ne sont pas encore dans le catalogue à faire valider (`npm run phrases -- --ecrire`).
+- Le bilan traduit garde « entrées / sorties » au pluriel, même pour 1 : c'est la phrase validée par les locuteurs.
+
+### Ce que l'équipe doit faire ensuite
+
+| Qui | Quoi |
+|---|---|
+| Omar | Committer la fusion |
+| Dimitri | Ajouter les nouvelles phrases au catalogue à faire valider ; héberger le serveur et donner son adresse HTTPS |
+| Équipe | Tester la voix de bout en bout avec les modèles installés |
+
+
+## 2026-11-12 — Kama dans la langue du navigateur (français ou anglais) ; bamoun et fulfulde « Bientôt »
+
+**Auteur :** Omar (réalisé par Claude Code, sur ses décisions)
+
+### En bref
+
+Avant le choix d'une langue nationale, Kama n'est plus en français par défaut : il parle la langue du navigateur, français ou anglais. Après le choix, ce qui n'est pas encore traduit reste dans la langue du navigateur. Le bamoun et le fulfulde sont annoncés dans tous les choix de langue, sans pouvoir être choisis.
+
+### Décisions d'Omar
+
+| Point | Décision |
+|---|---|
+| Navigateur ni en français ni en anglais | Anglais |
+| Textes pas encore traduits en langue nationale | Dans la langue du navigateur |
+| Étendue | Tout Kama, pas seulement l'accueil |
+| Bamoun et fulfulde | Dans tous les choix de langue, non activables |
+
+### Ce qui a été implémenté, expliqué simplement
+
+- **Détection** : Kama lit la langue du navigateur (`chrome.i18n.getUILanguage()`), sans aucune autorisation (`lib/secours.ts`, `lib/langue-secours.ts`).
+- **Dictionnaire anglais** (`config/anglais.ts`) : environ 250 phrases. Il reprend l'anglais déjà écrit par Dimitri dans `content-data/kama_interface.json`, et le frontend a écrit le reste.
+- **Fonctionnement** :
+  - la traduction se fait phrase par phrase ;
+  - les montants et les textes entre « » sont mis de côté puis remis tels quels, donc un montant n'est jamais touché (règle d'or n° 1) ;
+  - une phrase absente du dictionnaire reste en français.
+- **Branchement en 3 points seulement** :
+  - textes d'interface (`traduireLibelle`) ;
+  - réponses (`useReponse`) ;
+  - voix de lecture (`lireTexte`, qui remplace `lireEnFrancais`).
+  Tout ce qui passait déjà par la traduction de Dimitri en profite.
+- **Voix** : la voix du navigateur suit la langue du texte lu. Un texte de la page resté en français est lu avec une voix française.
+- **Page de bienvenue** : tous ses textes passent maintenant par la traduction. « Chrome va demander » devient « Ton navigateur va demander », pour Edge.
+- **Nom et description de Kama** dans `chrome://extensions` et à l'installation : en français ou en anglais (`public/_locales/fr` et `en`, avec l'anglais par défaut).
+- **Langue des pages pour les lecteurs d'écran** : l'attribut `lang` des pages de Kama et de sa fenêtre suit la langue du navigateur.
+- **Bamoun** (Ouest, Noun ; code `bax`) et **Fulfulde** (Nord, Adamaoua, Extrême-Nord ; code `fub`) :
+  - ils apparaissent dans la page de bienvenue, le popup et la fenêtre Kama, avec la mention « Bientôt » ;
+  - ce ne sont pas des boutons : on ne peut ni les choisir ni les atteindre au clavier ;
+  - une langue « Bientôt » n'est jamais active, même si elle était enregistrée.
+
+### Démarche utilisée
+
+- Test automatique `tests/secours.test.mjs` (9 cas) :
+  - montants identiques au caractère près ;
+  - textes entre guillemets ;
+  - singulier et pluriel ;
+  - phrase inconnue gardée en français ;
+  - dans tout le dictionnaire, les balises du français sont les mêmes que celles de l'anglais.
+- `npm test` : 92 sur 92 ; aucune erreur TypeScript ; version de développement et version jury construites.
+- **Parcours complet dans Chrome réglé en anglais, puis en français**, sur la Banque Démo : page de bienvenue, popup, choix de la langue, accord, explication d'un élément, « Expliquer cette page », résumé, « Parler à Kama », refus. Un script relève les phrases restées dans l'autre langue.
+  - En anglais : il ne reste que des textes de la page de la banque, laissés tels quels exprès.
+  - En français : rien.
+
+### Résultats et limites connues
+
+- Les libellés de la page cités entre guillemets restent ceux de la page (« Press “Valider le virement” yourself. ») : l'utilisateur retrouve ainsi le bouton.
+- Une nouvelle phrase ajoutée dans le code doit aussi être ajoutée à `config/anglais.ts`. Sinon elle reste en français, et la console de développement l'indique avec `[kama:en]`.
+- L'anglais du dictionnaire est à relire par l'équipe.
+
+### Ce que l'équipe doit faire ensuite
+
+| Qui | Quoi |
+|---|---|
+| Équipe | Relire l'anglais de `config/anglais.ts` |
+| Dimitri | Décider si l'anglais doit aussi passer par `content-data/` (source unique des textes) |
+| Équipe langues | Bamoun et fulfulde : textes et voix, pour les rendre activables (v2) |
+
+
+## 2026-11-12 — Nouvelle page d'accueil : un écran, langues côte à côte, étapes progressives
+
+**Auteur :** Omar (réalisé par Claude Code, sur ses consignes et sa décision « progressive »)
+
+### En bref
+
+La page d'accueil était trop chargée et demandait de faire défiler. Elle tient maintenant sur un seul écran :
+- un grand titre orange ;
+- les quatre langues côte à côte ;
+- les trois étapes, qui n'apparaissent qu'une fois la langue choisie.
+
+### Ce qui a été implémenté, expliqué simplement
+
+- **Titre** « Bienvenue ! Choisis ta langue. » en Krona One, grand et orange. L'orange sur blanc à cette taille respecte le contraste minimal de 3:1 pour les grands textes. La mascotte est posée sur un cercle crème.
+- **Langues en cartes horizontales**, 4 colonnes : nom, région et bouton d'écoute. La langue choisie a un contour orange et une coche. Bamoun et Fulfulde sont des boutons grisés et désactivés, sans aucune mention : le popup et la fenêtre Kama font pareil.
+- **Après le choix**, une rangée de 3 étapes courtes apparaît :
+  1. Épingle Kama (icônes puzzle puis épingle) ;
+  2. Autorise le micro (bouton, puis « Micro autorisé ») ;
+  3. Essaie Kama (« Ouvrir ma banque »).
+- **Textes retirés** : explications longues, phrase sur le changement de langue, mentions « Bientôt » / « Coming soon ». Le message sur la voix est raccourci : « Ta voix sert seulement à comprendre ta question. Elle n’est pas gardée. »
+- **Pourquoi la page n'était pas en pidgin** : ses textes n'existaient pas dans les textes pidgin de Dimitri. Kama ne peut pas les inventer (règle d'or n° 4), il montrait donc la langue du navigateur. Le titre réutilise une phrase déjà traduite et s'affiche en pidgin. Les autres phrases sont à demander à Dimitri (voir ci-dessous).
+
+### Démarche utilisée
+
+- Captures automatiques à 1366 × 768 et 1280 × 720, navigateur en français puis en anglais, avant et après le choix du pidgin. La page ne défile jamais (0 px de dépassement) et ne montre aucune erreur.
+- Aucune erreur TypeScript ; tests : 92 sur 92.
+
+### Phrases de l'accueil à faire traduire en pidgin (et en ghomálá')
+
+Kama t’explique ta banque en ligne dans ta langue. · Épingle Kama · En haut à droite de ton navigateur. · Autorise le micro · Autoriser le micro · Micro autorisé. · Ta voix sert seulement à comprendre ta question. Elle n’est pas gardée. · Essaie Kama · Ouvrir ma banque · Aucun micro trouvé. Branche un micro ou un casque, puis réessaie. · Micro bloqué. Clique sur l'icône du micro dans la barre d'adresse, puis « Autoriser ». · Ouest (Noun) · Nord, Adamaoua, Extrême-Nord
+
+### Ce que l'équipe doit faire ensuite
+
+| Qui | Quoi |
+|---|---|
+| Dimitri / locuteurs | Ajouter ces 13 phrases à content-data/kama_interface.json (pidgin, puis ghomálá') |
+
+
+## 2026-11-12 — Popup retravaillé ; catalogue des états supprimé
+
+**Auteur :** Omar (réalisé par Claude Code, sur ses consignes)
+
+### En bref
+
+Le popup est plus soigné et la liste des langues ne pousse plus rien vers le bas. Le catalogue des états, l'outil de comparaison avec les maquettes Lovable, est supprimé : on n'en a plus besoin.
+
+### Ce qui a été implémenté, expliqué simplement
+
+- **En-tête** : logo et « Kama » en Krona One, interrupteur Activé / Désactivé à droite, fine ligne de séparation.
+- **Titres de section** (« Ma langue », « Je préfère ») en Krona One orange, à 22 px. C'est un grand texte, donc le contraste reste acceptable sur blanc.
+- **Badge de traduction** (règle d'or n° 4) gardé, avec un style plus soigné : icône de traduction orange, langue en gras, fin contour orange. Il est placé sous le choix de la langue, qu'il concerne. Le même badge sert dans la fenêtre Kama.
+- **Liste des langues** :
+  - elle s'ouvre par-dessus le reste, comme un vrai menu déroulant : vérifié, le titre suivant ne bouge pas (218,5 px avant et après) ;
+  - un clic en dehors ou Échap la ferme ;
+  - si elle dépasse, le popup s'agrandit vers le bas.
+- **Texte / Audio** gardés, sous forme de sélecteur à deux segments : le choix actif est plein, quasi-noir avec texte blanc.
+- **« Expliquer cette page »** : icône document, coins plus arrondis.
+- **Catalogue supprimé** : page `entrypoints/catalogue/`, ses exemples (`etats.tsx`, `exemples.ts`), 4 contenus de démonstration qui ne servaient qu'à lui, et le réglage qui le retirait de la version jury.
+
+### Démarche utilisée
+
+- Captures automatiques du popup avec un navigateur en anglais et le pidgin choisi, puis en français avec le ghomálá'. Liste fermée et ouverte, aucune erreur.
+- Aucune erreur TypeScript ; tests : 92 sur 92.
+
+
+## 2026-11-13 — Menu de l'onglet de bord : 3 boutons ronds à icônes
+
+**Auteur :** Omar (réalisé par Claude Code, sur ses consignes)
+
+### En bref
+
+Le menu de l'onglet de bord était chargé : trois longs boutons texte, chacun avec son haut-parleur, plus le badge de traduction. En pidgin, les libellés passaient sur trois lignes. Il devient une colonne de 3 boutons ronds à icônes. L'utilisateur doit décider vite : il n'a besoin ni de lire ni d'écouter.
+
+### Ce qui a été implémenté, expliqué simplement
+
+- **3 boutons ronds de 56 px**, empilés dans une pastille blanche à gauche de l'onglet :
+  - micro (Parler à Kama) ;
+  - document (Expliquer cette page) ;
+  - billet (Résumer mes transactions).
+- Fond crème, orange au survol et au focus. L'icône reste quasi-noire sur l'orange.
+- **Retirés** : les textes, les boutons d'écoute à droite et le badge de traduction.
+- **Le nom reste accessible** :
+  - les lecteurs d'écran le lisent (`aria-label`, traduit dans la langue choisie) ;
+  - une infobulle l'affiche au survol ou au focus clavier, après 300 ms, comme pour les pastilles.
+- **Clavier** : si le menu est ouvert au clavier (Entrée ou Espace sur l'onglet), le focus va sur le premier bouton. S'il est ouvert à la souris, aucun bouton n'est mis en avant. Avant, le premier bouton restait orange avec son infobulle pendant qu'on survolait un autre.
+
+### Démarche utilisée
+
+- Test automatique sur la Banque Démo :
+  - 3 boutons de 56 × 56 px ;
+  - nom lu dans la langue choisie ;
+  - chaque bouton ouvre le bon contenu ;
+  - ouverture à la souris : le focus reste sur l'onglet ; au clavier : le focus va sur « Parler à Kama » ;
+  - captures du survol.
+- Aucune erreur TypeScript ; compilation réussie.
+
+
+## 2026-11-13 — Fenêtres Kama épurées ; « Résumer mes transactions » retiré
+
+**Auteur :** Omar (réalisé par Claude Code, sur ses décisions)
+
+### En bref
+
+Chaque fenêtre donnait trop d'informations : au lieu d'aider, Kama risquait de perdre l'utilisateur. Les fenêtres ne gardent que l'essentiel. La fonction « Résumer mes transactions », peu utile, est retirée.
+
+### Décisions d'Omar
+
+| Point | Décision |
+|---|---|
+| Badges « Computer translate dis one », « Pidgin · make dem check am » | Remplacés par une petite icône (la règle d'or n° 4 reste respectée) |
+| Étiquette « Élément choisi : … » | Retirée (elle répétait la première ligne) |
+| « Montre-moi » sous chaque étape | Chaque étape devient elle-même le bouton |
+| Lecteur audio et vitesse 1x / 0,75x | Gardés tels quels |
+| « Résumer mes transactions » | Retiré (fenêtre et bouton du menu) ; la réponse à la question vocale sera revue avec le modèle de langue |
+
+### Ce qui a été implémenté, expliqué simplement
+
+- **Indicateur de fiabilité** :
+  - une petite icône grise à droite du lecteur audio ;
+  - son nom (« Pas encore traduit », « Traduction automatique ») s'affiche au survol et est lu par les lecteurs d'écran ;
+  - aucune icône quand le texte est vérifié ;
+  - le badge de langue est retiré des réponses et des messages de Kama : la langue est déjà affichée dans l'en-tête de la fenêtre. Le popup, l'accueil et le choix de la langue gardent leur badge.
+- **« Expliquer cette page »** : chaque étape est une ligne cliquable (numéro, texte, icône œil) qui fait défiler jusqu'à l'élément et le surligne. Il n'y a plus 6 boutons « Montre-moi » empilés.
+- **Explication d'un élément** : l'étiquette « Élément choisi » est retirée.
+- **Texte non traduit** (sélection, nouveau message) : la rangée de badges est retirée, la phrase « Ce texte n'existe pas encore dans ta langue » suffit.
+- **Transactions** :
+  - le menu de l'onglet passe à 2 boutons ;
+  - la fenêtre, ses contenus (`SummaryContent`, `NoTransactionsContent`) et la lecture de la liste des opérations (`lireTransactions`) sont supprimés ;
+  - Kama continue à ignorer cette liste quand il cherche des montants inconnus ;
+  - à la question vocale « mes transactions », Kama répond pour l'instant qu'il n'a pas compris (à revoir avec le modèle de langue).
+- Les phrases des transactions restent dans `config/phrases.ts` : elles font partie du catalogue de Dimitri, et le test de ce catalogue en dépend.
+
+### Démarche utilisée
+
+- Captures en pidgin, avec le serveur de Dimitri lancé, sur la Banque Démo : explication de la Commission, « Expliquer cette page », refus de la banque.
+- Le clic sur une étape surligne bien l'élément (« Kama di show you: Commission »).
+- Le menu n'a plus que 2 boutons ; aucune erreur.
+- Aucune erreur TypeScript ; tests : 92 sur 92.
+
+
+## 2026-11-13 — Popup : titres de section en DM Sans
+
+**Auteur :** Omar (réalisé par Claude Code)
+
+« Ma langue » et « Je préfère » restent orange, mais passent de Krona One à DM Sans gras, en 20 px : Krona One paraissait trop lourd à cette taille. En gras à 20 px, ces titres comptent comme du « grand texte » pour l'accessibilité, donc l'orange reste lisible sur blanc. Capture vérifiée en pidgin ; compilation sans erreur.

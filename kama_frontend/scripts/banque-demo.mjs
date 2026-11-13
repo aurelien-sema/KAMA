@@ -7,6 +7,10 @@ const PORT = 5180;
 const PAGE = new URL('../banque-demo/index.html', import.meta.url);
 
 createServer(async (requete, reponse) => {
+  if (requete.url === '/favicon.ico') {
+    reponse.writeHead(204).end(); // pas d'icône : on évite une erreur 404 dans la console
+    return;
+  }
   if (requete.url !== '/' && requete.url !== '/index.html') {
     reponse.writeHead(404).end();
     return;

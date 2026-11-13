@@ -11,6 +11,8 @@ import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { GABARITS } from '../config/gabarits.ts';
 import { SAFINUM } from '../config/banques/safinum.ts';
 import { ERREUR_INCONNUE } from '../config/banques/types.ts';
+
+// Phrases de la page de test des organisateurs (la Banque Démo, absente de la version jury, n'est pas à faire valider).
 const ETAPES_PARCOURS = SAFINUM.etapes;
 const ERREURS = SAFINUM.erreurs;
 import { PHRASES, bilanTransactions, listeOperations } from '../config/phrases.ts';

@@ -1,13 +1,18 @@
 /**
- * Lecture à voix haute, provisoire : voix française du navigateur (speechSynthesis),
- * comme dans les maquettes Lovable. Elle correspond au repli « Écouter en français ».
- * Les audios pré-enregistrés en ewondo remplaceront cette lecture quand ils seront fournis.
+ * Lecture à voix haute avec la voix du navigateur (speechSynthesis), dans la langue de secours :
+ * celle du navigateur, français ou anglais (lib/secours.ts). C'est le repli quand la voix en langue
+ * nationale du serveur n'est pas disponible (« Écouter en français / Listen in English »).
+ * La voix suit la langue du texte lu : un texte de la page resté en français est lu avec une voix française.
  */
-export function lireEnFrancais(texte: string, vitesse = 1, aLaFin?: () => void) {
+import { detecterLangueSource } from './api';
+import { LANGUE_SECOURS, secours } from './langue-secours';
+
+export function lireTexte(texte: string, vitesse = 1, aLaFin?: () => void) {
   if (!('speechSynthesis' in window)) return;
   window.speechSynthesis.cancel();
-  const phrase = new SpeechSynthesisUtterance(texte);
-  phrase.lang = 'fr-FR';
+  const lu = secours(texte);
+  const phrase = new SpeechSynthesisUtterance(lu);
+  phrase.lang = LANGUE_SECOURS === 'en' && detecterLangueSource(lu) === 'en' ? 'en-GB' : 'fr-FR';
   phrase.rate = vitesse;
   if (aLaFin) {
     phrase.onend = aLaFin;

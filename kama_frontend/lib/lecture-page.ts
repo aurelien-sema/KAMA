@@ -242,9 +242,6 @@ function lireElement(def: DefinitionElement, libelle: Element, index: IndexTexte
 
 /* ---------------------------------------------------------------------------------------- */
 
-export type OperationLue = { date: string; libelle: string; montant: string; sens: 'entree' | 'sortie' };
-
-/** Lit la liste « Transactions récentes » (page Solde). Liste vide si elle n'est pas affichée. */
 /** La section « Transactions récentes » et ses montants (ou rien si elle n'est pas affichée). */
 function trouverTransactions(titre: ElementTrouve | undefined): { section: Element; montants: Element[] } | null {
   if (!titre) return null;
@@ -262,30 +259,6 @@ function trouverTransactions(titre: ElementTrouve | undefined): { section: Eleme
 
 function sectionTransactions(connus: ElementTrouve[]) {
   return trouverTransactions(connus.find((e) => e.def.id === 'transactions'))?.section ?? null;
-}
-
-export function lireTransactions(lecture: LecturePage): OperationLue[] {
-  const montants = trouverTransactions(lecture.elements.get('transactions'))?.montants ?? [];
-  return montants.map((m) => {
-    // Ligne = plus petit ancêtre qui contient au moins 3 textes (libellé, date, montant).
-    let ligne: Element = m;
-    while (ligne.parentElement && feuilles(ligne).length < 3) ligne = ligne.parentElement;
-    const autres = feuilles(ligne).filter((t) => t !== texte(m));
-    const montant = texte(m);
-    return {
-      libelle: autres[0] ?? '',
-      date: autres[1] ?? '',
-      montant,
-      sens: /^[\-−]/.test(montant) ? 'sortie' : 'entree',
-    };
-  });
-}
-
-function feuilles(el: Element) {
-  return [...el.querySelectorAll('*')]
-    .filter((x) => x.children.length === 0)
-    .map(texte)
-    .filter(Boolean);
 }
 
 /* ---------------------------------------------------------------------------------------- */

@@ -23,6 +23,7 @@ export type FinEnregistrement =
   | { ok: false; raison: 'rien-entendu' | 'annule' };
 
 import type { ErreurMicro } from './messages';
+import { encoderWav } from './wav';
 export type { ErreurMicro };
 
 export type Enregistrement = {
@@ -76,7 +77,7 @@ export async function demarrerEnregistrement({ onNiveau, onFin }: Options): Prom
     const niveau = Math.min(1, Math.sqrt(somme / entree.length) * 4);
     onNiveau(niveau);
 
-    const duree = echantillons / FREQUENCE;
+    const duree = echantillons / contexte.sampleRate;
     if (niveau > SEUIL_PAROLE) {
       aParle = true;
       silenceDepuis = duree;
@@ -87,6 +88,7 @@ export async function demarrerEnregistrement({ onNiveau, onFin }: Options): Prom
   };
   source.connect(processeur);
   // Le processeur ne tourne que s'il est relié à la sortie ; il ne produit aucun son.
+  // Si le navigateur impose une autre fréquence que 16 kHz, lib/wav.ts rééchantillonne à l'envoi.
   processeur.connect(contexte.destination);
 
   function couper() {
@@ -106,41 +108,18 @@ export async function demarrerEnregistrement({ onNiveau, onFin }: Options): Prom
     termine = true;
     couper();
     if (!garder) return onFin({ ok: false, raison: 'annule' });
-    const duree = echantillons / FREQUENCE;
+    const taux = contexte.sampleRate;
+    const duree = echantillons / taux;
     if (!aParle || duree < DUREE_MIN_S) return onFin({ ok: false, raison: 'rien-entendu' });
-    onFin({ ok: true, wav: encoderWav(morceaux, echantillons), duree });
+    const x = new Float32Array(echantillons);
+    let curseur = 0;
+    for (const m of morceaux) {
+      x.set(m, curseur);
+      curseur += m.length;
+    }
+    const octets = encoderWav(x, taux);
+    onFin({ ok: true, wav: octets.buffer.slice(octets.byteOffset, octets.byteOffset + octets.byteLength) as ArrayBuffer, duree });
   }
 
   return { arreter: () => finir(true), annuler: () => finir(false) };
-}
-
-/** WAV PCM 16 bits mono, à la fréquence de l'enregistrement. */
-function encoderWav(morceaux: Float32Array[], total: number): ArrayBuffer {
-  const tampon = new ArrayBuffer(44 + total * 2);
-  const v = new DataView(tampon);
-  const ecrire = (pos: number, texte: string) => {
-    for (let i = 0; i < texte.length; i++) v.setUint8(pos + i, texte.charCodeAt(i));
-  };
-  ecrire(0, 'RIFF');
-  v.setUint32(4, 36 + total * 2, true);
-  ecrire(8, 'WAVE');
-  ecrire(12, 'fmt ');
-  v.setUint32(16, 16, true); // taille du bloc « fmt »
-  v.setUint16(20, 1, true); // PCM
-  v.setUint16(22, 1, true); // mono
-  v.setUint32(24, FREQUENCE, true);
-  v.setUint32(28, FREQUENCE * 2, true); // octets par seconde
-  v.setUint16(32, 2, true); // octets par échantillon
-  v.setUint16(34, 16, true); // bits par échantillon
-  ecrire(36, 'data');
-  v.setUint32(40, total * 2, true);
-  let pos = 44;
-  for (const m of morceaux) {
-    for (let i = 0; i < m.length; i++) {
-      const s = Math.max(-1, Math.min(1, m[i]!));
-      v.setInt16(pos, s < 0 ? s * 0x8000 : s * 0x7fff, true);
-      pos += 2;
-    }
-  }
-  return tampon;
 }

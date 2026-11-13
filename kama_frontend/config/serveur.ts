@@ -14,10 +14,3 @@ export const URL_SERVEUR: string = (import.meta.env.WXT_KAMA_API as string | und
 // La voix de synthèse tourne sur processeur : une phrase longue peut prendre plus de 10 s sur une petite machine.
 export const DELAIS = { traduction: 8000, voix: 45000, reconnaissance: 15000, capacites: 4000 } as const;
 
-/**
- * Noms utilisés par le micro hors écran (travail d'Omar). Le serveur étant branché, la simulation (`null`) n'est plus active ;
- * remettre `null` ici réactive le mode simulation de background.ts pour une démonstration sans serveur.
- */
-export const SERVEUR_KAMA: string | null = URL_SERVEUR;
-/** Au-delà, la demande est abandonnée et Kama propose « Réessayer ». */
-export const DELAI_SERVEUR_MS = DELAIS.reconnaissance;
