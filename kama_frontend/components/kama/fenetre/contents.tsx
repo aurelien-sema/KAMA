@@ -5,9 +5,9 @@
  *  - textes et montants passés en paramètres : ils viendront de la page bancaire (DOM),
  *    jamais d'un modèle de langue (règle d'or n° 1). Les données d'exemple sont dans `exemples.ts`.
  */
-import type { ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
 import { AlertTriangle, Eye, Mic, ShieldCheck, Volume2, WifiOff } from 'lucide-react';
-import { lireTexte } from '@/lib/voix';
+import { jouerAnnonce } from '@/lib/annonces';
 import type { Parole } from '@/lib/traduction';
 import { useTexte } from '@/lib/use-texte';
 import { aplatir, useReponse } from '@/lib/use-reponse';
@@ -180,7 +180,7 @@ export function BankErrorContent({
   );
 }
 
-/* 11 — Traduction indisponible : texte original + « Écouter en français » */
+/* 11 — Traduction indisponible : texte original + annonce audio en pidgin (aucun repli français) */
 export function UntranslatedContent({
   texte,
   langue,
@@ -192,7 +192,9 @@ export function UntranslatedContent({
   onShowMe?: () => void;
 }) {
   const inexistant = useTexte("Ce texte n'existe pas encore dans ta langue.");
-  const ecouterFr = useTexte('Écouter en français');
+  const ecouterMessage = useTexte('Écouter le message');
+  const pasDeTraduction = useTexte("Kama n'arrive pas bien à traduire ce texte. Lis-le bien ou demande à ta banque.");
+  const [note, setNote] = useState(false);
   return (
     <article className="flex flex-col gap-3">
       <p className="m-0 text-[15px] leading-snug text-kama-ink">{texte}</p>
@@ -200,10 +202,19 @@ export function UntranslatedContent({
         {langue ? inexistant : "Ce texte n'existe pas encore dans ta langue."}
       </p>
       <div>
-        <WindowButton onClick={() => lireTexte(texte)}>
-          <Volume2 className="size-4" aria-hidden /> {ecouterFr}
+        <WindowButton
+          onClick={() => {
+            void jouerAnnonce('traduction').then((ok) => setNote(!ok));
+          }}
+        >
+          <Volume2 className="size-4" aria-hidden /> {ecouterMessage}
         </WindowButton>
       </div>
+      {note && (
+        <p role="status" className="m-0 text-sm text-kama-ink/70">
+          {pasDeTraduction}
+        </p>
+      )}
       {onShowMe && (
         <div>
           <MontreMoi onClick={onShowMe} />

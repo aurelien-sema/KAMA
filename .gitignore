@@ -48,6 +48,9 @@ evaluation/tts_ecoute/
 evaluation/tts_inedit/
 evaluation/results/stt/
 
+# Annonces pidgin pre-generees : audio local, pas dans le depot
+kama_frontend/public/audio/wes/
+
 # Donnees d'entrainement issues de MT560 (dont des textes religieux) : a regenerer avec training/pidgin/01_nettoyer_donnees.py
 datasets/pidgin/kama_pidgin_v2/train.jsonl
 datasets/pidgin/kama_pidgin_v2/dev.jsonl

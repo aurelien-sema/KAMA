@@ -90,6 +90,8 @@
     { "id": "ui_case_verification", "zone": "element", "fr": "Case de vérification", "en": "Check box", "wes": "Tick box" },
     { "id": "ui_case_confirmation", "zone": "element", "fr": "Case de confirmation", "en": "Confirmation check box", "wes": "Tick box for confirm" },
     { "id": "ui_region_ouest", "zone": "langue", "fr": "Ouest", "en": "West", "wes": "West" },
-    { "id": "ui_region_nord_ouest_sud_ouest", "zone": "langue", "fr": "Nord-Ouest, Sud-Ouest", "en": "North West, South West", "wes": "North West, South West" }
+    { "id": "ui_region_nord_ouest_sud_ouest", "zone": "langue", "fr": "Nord-Ouest, Sud-Ouest", "en": "North West, South West", "wes": "North West, South West" },
+    { "id": "a_annonce_serveur", "zone": "fenetre", "fr": "Kama n'arrive pas à joindre le serveur. Réessaie dans un instant.", "en": "Kama cannot reach the server. Try again in a moment.", "wes": "Kama no fit reach im server now. Try am again small time." },
+    { "id": "a_annonce_traduction", "zone": "fenetre", "fr": "Kama n'arrive pas bien à traduire ce texte. Lis-le bien ou demande à ta banque.", "en": "Kama cannot translate this text well. Read it carefully or ask your bank.", "wes": "Kama no fit translate dis one well. Read am well or ask your bank." }
   ]
 }

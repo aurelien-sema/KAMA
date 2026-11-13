@@ -332,6 +332,16 @@
     "statut": "brouillon",
     "zone": "voix"
    },
+   "kama n'arrive pas bien à traduire ce texte. lis-le bien ou demande à ta banque": {
+    "texte": "Kama no fit translate dis one well. Read am well or ask your bank.",
+    "statut": "brouillon",
+    "zone": "fenetre"
+   },
+   "kama n'arrive pas à joindre le serveur. réessaie dans un instant": {
+    "texte": "Kama no fit reach im server now. Try am again small time.",
+    "statut": "brouillon",
+    "zone": "fenetre"
+   },
    "kama ne peut pas comprendre ta voix pour le moment": {
     "texte": "Kama no fit understand your voice now.",
     "statut": "brouillon",

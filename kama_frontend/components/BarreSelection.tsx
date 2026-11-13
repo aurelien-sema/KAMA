@@ -29,7 +29,7 @@ export function BarreSelection({ dansKama, onExpliquer }: Props) {
   const barreLabel = useTexte('Kama : texte sélectionné');
   const expliquer = useTexte('Expliquer');
   const ecouter = useTexte('Écouter');
-  const noteFrancais = useTexte('Lecture en français');
+  const notePasDeVoix = useTexte("Kama n'arrive pas à joindre le serveur. Réessaie dans un instant.");
 
   useEffect(() => {
     function verifier(e: Event) {
@@ -111,7 +111,7 @@ export function BarreSelection({ dansKama, onExpliquer }: Props) {
         className={bouton}
         onClick={async () => {
           const resultat = await ecouterTexte(barre.texte, langue);
-          setNote(resultat === 'francais' ? noteFrancais : null);
+          setNote(resultat === 'indisponible' ? notePasDeVoix : null);
         }}
       >
         <Volume2 className="size-4" aria-hidden /> {ecouter}

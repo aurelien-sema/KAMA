@@ -58,12 +58,12 @@ export function TranslationBadge() {
 export function SpeakButton({ texte, label }: { texte: string; label: string }) {
   const langue = useLangueCourante();
   const [note, setNote] = useState(false);
-  const noteFrancais = useTexte('Lecture en français');
+  const notePasDeVoix = useTexte("Kama n'arrive pas à joindre le serveur. Réessaie dans un instant.");
 
   async function lire() {
     setNote(false);
     const resultat = await ecouterTexte(texte, langue);
-    if (resultat === 'francais') {
+    if (resultat === 'indisponible') {
       setNote(true);
       window.setTimeout(() => setNote(false), 5000);
     }
@@ -85,7 +85,7 @@ export function SpeakButton({ texte, label }: { texte: string; label: string }) 
           role="status"
           className="absolute right-0 top-full z-10 mt-1 whitespace-nowrap rounded-md bg-kama-ink px-2 py-1 text-[11px] font-medium text-kama-white shadow"
         >
-          {noteFrancais}
+          {notePasDeVoix}
         </span>
       )}
     </span>
