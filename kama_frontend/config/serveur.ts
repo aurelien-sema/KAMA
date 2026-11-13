@@ -6,7 +6,7 @@
  * serveur. Quand le serveur sera hébergé, écrire ici son adresse HTTPS (sans « / » final) :
  * c'est le seul changement à faire côté extension, l'autorisation réseau en découle.
  */
-export const SERVEUR_KAMA: string | null = null;
+export const SERVEUR_KAMA: string | null = "https://kama-project.duckdns.org";
 
 /** Au-delà, la demande est abandonnée et Kama propose « Réessayer ». */
 export const DELAI_SERVEUR_MS = 15000;

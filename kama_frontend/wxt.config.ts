@@ -14,6 +14,8 @@ export default defineConfig({
   manifest: ({ mode }) => ({
     name: 'Kama',
     description: 'Kama explique ta banque en ligne dans ta langue, à l’oral et à l’écrit.',
+    // Clé publique fixe : identifiant d'extension stable (chrome-extension://nneecloagollpakilpepnamdaelmgkbn).
+    key: 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqnKmnqINdLDd9mzPYpQfLA7dNgWJxI5bFLJ0lMRouaW3SvpsgdN29OUyk+kplEXKfZfT+DwYFagY1LE5Z7nI4R6BY6gNxj/Rzo4wLY4uashUHefPWczPiFTpugtmV5+lwYEfP53x2l6LRVb8/ltyKcVkU4/vTkZbz7a2Xgg5FrSygiwWXT0lwX9NKj82fHyVxFWI6MnfBNPohSL3rwHvHoJ+I+PRf9F8J7pCefh9w9az9qU3M3hUKXgJqzdP62SdKiZeMrVE3ai7flDAU+RYRJPmwFe7jD58SeLeBQh3mx9LDEQG70Pdk8HIlpsuLUq7S3GckQFYPRASKsi+VornaQIDAQAB',
     // `offscreen` : document caché où Kama écoute le micro (aucun avertissement à l'installation).
     permissions: ['storage', 'offscreen'],
     // Le service worker n'a le droit d'appeler que le serveur de Kama (aucun autre site).
