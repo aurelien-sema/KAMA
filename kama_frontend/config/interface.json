@@ -2,6 +2,11 @@
  "_note": "Genere par `python -m app.export_glossary` depuis content-data/kama_interface.json et kama_fenetre.json. statut brouillon = pas encore valide par un locuteur (badge Traduction automatique). Ne pas modifier a la main.",
  "fr": {
   "wes": {
+   "(fait)": {
+    "texte": "(e don finish)",
+    "statut": "brouillon",
+    "zone": "bienvenue"
+   },
    "activé": {
     "texte": "On",
     "statut": "brouillon",
@@ -16,6 +21,31 @@
     "texte": "Press for talk",
     "statut": "brouillon",
     "zone": "fenetre"
+   },
+   "appuie sur le micro et parle près de l'ordinateur": {
+    "texte": "Press di micro and talk close to di computer.",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
+   "appuie sur le micro et pose ta question": {
+    "texte": "Press di micro and ask your question.",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
+   "appuie sur le micro et repose ta question": {
+    "texte": "Press di micro and ask your question again.",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
+   "appuie sur « {q1} »": {
+    "texte": "Press « {q1} ».",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
+   "appuie sur « {q1} » : une page de kama s'ouvre. reviens ensuite ici et appuie encore sur le micro": {
+    "texte": "Press « {q1} »: one Kama page go open. Then come back for here and press di micro again.",
+    "statut": "brouillon",
+    "zone": "micro"
    },
    "appuie toi-même sur confirmer": {
     "texte": "Na you yourself go press Confirm.",
@@ -32,10 +62,20 @@
     "statut": "brouillon",
     "zone": "expliquer"
    },
+   "appuie toi-même sur « {q1} »": {
+    "texte": "Na you go press « {q1} » by yourself.",
+    "statut": "brouillon",
+    "zone": "fenetre"
+   },
    "argent reçu": {
     "texte": "Money don enter",
     "statut": "brouillon",
     "zone": "resume"
+   },
+   "attends un peu, puis appuie sur « {q1} »": {
+    "texte": "Wait small, then press « {q1} ».",
+    "statut": "brouillon",
+    "zone": "assistant"
    },
    "attention : tu n'as jamais envoyé d'argent à cette personne": {
     "texte": "Take care: you never send money give dis person before.",
@@ -57,15 +97,35 @@
     "statut": "brouillon",
     "zone": "voix"
    },
+   "aucun micro trouvé. branche un micro ou un casque, puis réessaie": {
+    "texte": "Kama no see any micro. Plug one micro or headphone, then try again.",
+    "statut": "brouillon",
+    "zone": "micro"
+   },
    "audio": {
     "texte": "Audio",
     "statut": "brouillon",
     "zone": "popup"
    },
+   "autorise le micro": {
+    "texte": "Allow di micro",
+    "statut": "brouillon",
+    "zone": "micro"
+   },
    "autorise le micro dans le navigateur, puis réessaie. tu peux aussi utiliser le menu de l'onglet": {
     "texte": "Allow di micro for di browser, then try again. You fit also use di Kama menu.",
     "statut": "brouillon",
     "zone": "voix"
+   },
+   "autoriser": {
+    "texte": "Allow am",
+    "statut": "brouillon",
+    "zone": "micro"
+   },
+   "autoriser le micro": {
+    "texte": "Allow di micro",
+    "statut": "brouillon",
+    "zone": "micro"
    },
    "avant d'appuyer, vérifie le nom et le numéro de la personne": {
     "texte": "Before you press am, check di name and di number for di person.",
@@ -82,6 +142,11 @@
     "statut": "brouillon",
     "zone": "popup"
    },
+   "bienvenue dans kama": {
+    "texte": "Welcome for Kama",
+    "statut": "brouillon",
+    "zone": "bienvenue"
+   },
    "bouton « confirmer le transfert »": {
     "texte": "Button « Confirm di transfer »",
     "statut": "brouillon",
@@ -96,6 +161,11 @@
     "texte": "Button « Make a transfer »",
     "statut": "brouillon",
     "zone": "element"
+   },
+   "bouton « {q1} »": {
+    "texte": "Button « {q1} »",
+    "statut": "brouillon",
+    "zone": "fenetre"
    },
    "branche un micro, ou utilise le menu de l'onglet": {
     "texte": "Plug one micro, or use di Kama menu.",
@@ -121,6 +191,11 @@
     "texte": "Na you go press am. Kama no dey ever press am for you.",
     "statut": "brouillon",
     "zone": "explication"
+   },
+   "c'est toi qui décides d'appuyer": {
+    "texte": "Na you go decide if you go press am.",
+    "statut": "brouillon",
+    "zone": "fenetre"
    },
    "c'est tout l'argent qui va sortir de ton compte : le montant plus les frais": {
     "texte": "Na all di money weh go comot for your account: di money weh you send, plus di charge.",
@@ -197,6 +272,21 @@
     "statut": "brouillon",
     "zone": "expliquer"
    },
+   "commission": {
+    "texte": "Commission",
+    "statut": "brouillon",
+    "zone": "element"
+   },
+   "d'accord, je ne t'écoute pas": {
+    "texte": "Okay, I no go listen you.",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
+   "dernières opérations": {
+    "texte": "Last transactions",
+    "statut": "brouillon",
+    "zone": "element"
+   },
    "des frais s'appliquent à cette opération. vérifie le montant avant de continuer, c'est toi qui décides": {
     "texte": "Fee dey apply for this operation. Check the amount before you continue, na you go decide.",
     "statut": "brouillon",
@@ -207,10 +297,20 @@
     "statut": "brouillon",
     "zone": "popup"
    },
+   "en haut à droite de ton navigateur": {
+    "texte": "For up, for di right side of your browser.",
+    "statut": "brouillon",
+    "zone": "bienvenue"
+   },
    "envoie un montant plus petit, ou mets de l'argent sur ton compte avant": {
     "texte": "Send small money, or put money for your account first.",
     "statut": "brouillon",
     "zone": "erreur"
+   },
+   "essaie kama": {
+    "texte": "Try Kama",
+    "statut": "brouillon",
+    "zone": "bienvenue"
    },
    "expliquer": {
     "texte": "Explain",
@@ -226,6 +326,11 @@
     "texte": "Kama window",
     "statut": "brouillon",
     "zone": "fenetre"
+   },
+   "ferme les autres applications qui utilisent le micro, puis réessaie": {
+    "texte": "Close di other applications wey di use di micro, then try again.",
+    "statut": "brouillon",
+    "zone": "micro"
    },
    "fermer kama": {
     "texte": "Close Kama",
@@ -246,6 +351,11 @@
     "texte": "Keep di reference number: e show say you don send di money.",
     "statut": "brouillon",
     "zone": "expliquer"
+   },
+   "garde la référence : elle prouve ton virement": {
+    "texte": "Keep di reference: na yi show say you don transfer.",
+    "statut": "brouillon",
+    "zone": "element"
    },
    "ici, tu choisis comment envoyer l'argent, et combien": {
     "texte": "For here, you go choose how you go send di money, and how much.",
@@ -297,6 +407,16 @@
     "statut": "brouillon",
     "zone": "consentement"
    },
+   "je n'ai encore rien dit": {
+    "texte": "I never talk anything yet.",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
+   "je n'ai pas bien entendu": {
+    "texte": "I no hear am well.",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
    "je n'ai pas compris": {
     "texte": "I no understand.",
     "statut": "brouillon",
@@ -306,6 +426,31 @@
     "texte": "I no understand. Abeg talk am again.",
     "statut": "brouillon",
     "zone": "voix"
+   },
+   "je n'ai rien entendu": {
+    "texte": "I no hear anything.",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
+   "je ne vois pas de frais sur cette page": {
+    "texte": "I no see any charge for dis page.",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
+   "je ne vois pas de message d'erreur sur cette page": {
+    "texte": "I no see any error message for dis page.",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
+   "je ne vois pas de total sur cette page": {
+    "texte": "I no see total for dis page.",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
+   "je ne vois pas ton solde sur cette page": {
+    "texte": "I no see your balance for dis page.",
+    "statut": "brouillon",
+    "zone": "assistant"
    },
    "je préfère": {
     "texte": "Wetin I like",
@@ -322,10 +467,25 @@
     "statut": "brouillon",
     "zone": "voix"
    },
+   "kama": {
+    "texte": "Kama",
+    "statut": "brouillon",
+    "zone": "interface"
+   },
    "kama : texte sélectionné": {
     "texte": "Kama: text weh you select",
     "statut": "brouillon",
     "zone": "selection"
+   },
+   "kama a compris :": {
+    "texte": "Kama don understand:",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
+   "kama a eu un problème": {
+    "texte": "Kama don get problem.",
+    "statut": "brouillon",
+    "zone": "assistant"
    },
    "kama activé": {
     "texte": "Kama don on",
@@ -347,6 +507,16 @@
     "statut": "brouillon",
     "zone": "voix"
    },
+   "kama n'a pas encore le droit d'utiliser le micro": {
+    "texte": "Kama never get permission for use di micro.",
+    "statut": "brouillon",
+    "zone": "micro"
+   },
+   "kama n'a pas pu répondre correctement. demande à ta banque": {
+    "texte": "Kama no fit answer dis one well. Make you ask your bank.",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
    "kama n'arrive pas bien à traduire ce texte. lis-le bien ou demande à ta banque": {
     "texte": "Kama no fit translate dis one well. Read am well or ask your bank.",
     "statut": "brouillon",
@@ -354,6 +524,16 @@
    },
    "kama n'arrive pas à joindre le serveur. réessaie dans un instant": {
     "texte": "Kama no fit reach im server now. Try am again small time.",
+    "statut": "brouillon",
+    "zone": "fenetre"
+   },
+   "kama ne connaît pas encore cette information. il recopie le montant tel qu'il est écrit sur la page": {
+    "texte": "Kama no sabi dis information yet. E copy di money as dem write am for di page.",
+    "statut": "brouillon",
+    "zone": "element"
+   },
+   "kama ne connaît pas encore cette page. voici ce qu'il y voit": {
+    "texte": "Kama no sabi dis page yet. See wetin e see for here.",
     "statut": "brouillon",
     "zone": "fenetre"
    },
@@ -387,6 +567,11 @@
     "statut": "brouillon",
     "zone": "explication"
    },
+   "kama réfléchit": {
+    "texte": "Kama di think",
+    "statut": "brouillon",
+    "zone": "etat"
+   },
    "kama réfléchit…": {
     "texte": "Kama dey think…",
     "statut": "brouillon",
@@ -397,15 +582,30 @@
     "statut": "brouillon",
     "zone": "fenetre"
    },
+   "kama t'explique ta banque en ligne dans ta langue": {
+    "texte": "Kama di explain your bank for internet for your own language.",
+    "statut": "brouillon",
+    "zone": "bienvenue"
+   },
    "kama te montre :": {
     "texte": "Kama di show you:",
     "statut": "brouillon",
     "zone": "fenetre"
    },
+   "kama vient d'être mis à jour": {
+    "texte": "Dem don update Kama just now.",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
    "la banque a affiché un message important": {
     "texte": "Di bank don show one important message.",
     "statut": "brouillon",
     "zone": "erreur"
+   },
+   "la banque affiche un message important. lis-le avant de continuer": {
+    "texte": "Di bank don show one important message. Read am before you continue.",
+    "statut": "brouillon",
+    "zone": "fenetre"
    },
    "la banque demande de réessayer. attends un peu, puis réessaie toi-même": {
     "texte": "Di bank say make you try again. Wait small, then try again yourself.",
@@ -417,15 +617,30 @@
     "statut": "brouillon",
     "zone": "erreur"
    },
+   "la page s'appelle « {q1} »": {
+    "texte": "Di page name na « {q1} ».",
+    "statut": "brouillon",
+    "zone": "fenetre"
+   },
    "la voix ne marche pas encore pour cette langue": {
     "texte": "Voice never work yet for dis language.",
     "statut": "brouillon",
     "zone": "voix"
    },
+   "le message de la banque": {
+    "texte": "di bank message",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
    "le micro est ouvert seulement entre deux appuis sur le bouton. kama ne garde aucun enregistrement": {
     "texte": "Di micro open only between two press for di button. Kama no di keep any recording.",
     "statut": "brouillon",
     "zone": "consentement"
+   },
+   "le micro ne marche pas pour le moment": {
+    "texte": "Di micro no di work now.",
+    "statut": "brouillon",
+    "zone": "micro"
    },
    "le montant n'est pas bon": {
     "texte": "Di money weh you write no correct.",
@@ -437,6 +652,16 @@
     "statut": "brouillon",
     "zone": "explication"
    },
+   "le total": {
+    "texte": "di total",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
+   "le total s'affiche quand tu prépares un transfert": {
+    "texte": "Di total di show when you di prepare transfer.",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
    "lecture en français": {
     "texte": "E di read for French",
     "statut": "brouillon",
@@ -446,6 +671,21 @@
     "texte": "E di read…",
     "statut": "brouillon",
     "zone": "fenetre"
+   },
+   "les frais": {
+    "texte": "di charge",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
+   "les frais s'affichent quand tu prépares un transfert": {
+    "texte": "Di charge di show when you di prepare transfer.",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
+   "les frais sont de {x1}": {
+    "texte": "Di charge na {x1}.",
+    "statut": "brouillon",
+    "zone": "element"
    },
    "les {x1} dernières opérations :": {
     "texte": "Di last {x1} money weh enter or comot:",
@@ -472,6 +712,11 @@
     "statut": "brouillon",
     "zone": "fenetre"
    },
+   "message vocal": {
+    "texte": "Voice message",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
    "mets le montant": {
     "texte": "Put di money weh you want send.",
     "statut": "brouillon",
@@ -492,6 +737,16 @@
     "statut": "brouillon",
     "zone": "voix"
    },
+   "micro autorisé": {
+    "texte": "Di micro don get permission.",
+    "statut": "brouillon",
+    "zone": "micro"
+   },
+   "micro bloqué. clique sur l'icône du micro dans la barre d'adresse, puis « {q1} »": {
+    "texte": "Di micro don block. Click di micro picture for di address bar, then « {q1} ».",
+    "statut": "brouillon",
+    "zone": "micro"
+   },
    "micro indisponible sans internet": {
     "texte": "Micro no fit work without internet",
     "statut": "brouillon",
@@ -502,10 +757,30 @@
     "statut": "brouillon",
     "zone": "explication"
    },
+   "montant affiché": {
+    "texte": "Money wey dem show",
+    "statut": "brouillon",
+    "zone": "element"
+   },
+   "montant du virement": {
+    "texte": "How much you di transfer",
+    "statut": "brouillon",
+    "zone": "element"
+   },
+   "montant total prélevé": {
+    "texte": "All di money wey dem go remove",
+    "statut": "brouillon",
+    "zone": "element"
+   },
    "montre-moi": {
     "texte": "Show me",
     "statut": "brouillon",
     "zone": "fenetre"
+   },
+   "ne dis jamais ton code ni ton numéro à personne, même pas à kama": {
+    "texte": "No talk your code or your number give anybody, even Kama.",
+    "statut": "brouillon",
+    "zone": "assistant"
    },
    "ne dis pas ton solde, ton numéro ni un nom : parle seulement de la page": {
     "texte": "No talk your money, your number or any name: talk only about di page.",
@@ -517,6 +792,11 @@
     "statut": "brouillon",
     "zone": "popup"
    },
+   "nord, adamaoua, extrême-nord": {
+    "texte": "North, Adamawa, Far North",
+    "statut": "brouillon",
+    "zone": "langue"
+   },
    "nord-ouest, sud-ouest": {
     "texte": "North West, South West",
     "statut": "brouillon",
@@ -526,6 +806,11 @@
     "texte": "Normal",
     "statut": "brouillon",
     "zone": "fenetre"
+   },
+   "nouveau message": {
+    "texte": "New message",
+    "statut": "brouillon",
+    "zone": "etat"
    },
    "on te demande de mettre à jour tes informations avant une date limite. fais-le seulement par le site officiel de ta banque, c'est toi qui décides": {
     "texte": "Dem ask you update your information before deadline. Do am only for your bank official website, na you go decide.",
@@ -562,10 +847,20 @@
     "statut": "brouillon",
     "zone": "langue"
    },
+   "ouest (noun)": {
+    "texte": "West (Noun)",
+    "statut": "brouillon",
+    "zone": "langue"
+   },
    "ouvrir kama": {
     "texte": "Open Kama",
     "statut": "brouillon",
     "zone": "onglet"
+   },
+   "ouvrir ma banque": {
+    "texte": "Open my bank",
+    "statut": "brouillon",
+    "zone": "bienvenue"
    },
    "paiement de facture": {
     "texte": "You pay bill",
@@ -577,6 +872,11 @@
     "statut": "brouillon",
     "zone": "voix"
    },
+   "par exemple : « {q1} »": {
+    "texte": "For example: « {q1} »",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
    "paramètres": {
     "texte": "Settings",
     "statut": "brouillon",
@@ -586,6 +886,11 @@
     "texte": "Talk to Kama",
     "statut": "brouillon",
     "zone": "consentement"
+   },
+   "partie « {q1} »": {
+    "texte": "Part « {q1} ».",
+    "statut": "brouillon",
+    "zone": "fenetre"
    },
    "pas d'internet": {
     "texte": "Internet no dey.",
@@ -612,6 +917,11 @@
     "statut": "brouillon",
     "zone": "fenetre"
    },
+   "pièce de puzzle": {
+    "texte": "puzzle piece",
+    "statut": "brouillon",
+    "zone": "bienvenue"
+   },
    "pose ta question": {
     "texte": "Ask your question.",
     "statut": "brouillon",
@@ -621,6 +931,11 @@
     "texte": "For send money, na you yourself go press « Effectuer un transfert ».",
     "statut": "brouillon",
     "zone": "expliquer"
+   },
+   "pour envoyer de l'argent, appuie toi-même sur « {q1} »": {
+    "texte": "For send money, press « {q1} » by yourself.",
+    "statut": "brouillon",
+    "zone": "fenetre"
    },
    "pour traduire, kama envoie seulement des phrases sans chiffres ni noms": {
     "texte": "For translate, Kama di send only sentence weh no get number or name.",
@@ -632,20 +947,40 @@
     "statut": "brouillon",
     "zone": "fenetre"
    },
+   "qu'est-ce que je dois faire ici": {
+    "texte": "wetin I go do for here?",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
    "quelqu'un te demande ton code secret ou ton code de retrait. une banque ne demande jamais un code : ne le donne pas, c'est toi qui décides": {
     "texte": "Somebody dey ask you for your secret code or withdrawal code. Bank no go ever ask you for code - no give am, na you go decide.",
     "statut": "brouillon",
     "zone": "explication"
+   },
+   "quoi faire ici": {
+    "texte": "wetin you go do for here",
+    "statut": "brouillon",
+    "zone": "assistant"
    },
    "ralentie": {
     "texte": "Slow",
     "statut": "brouillon",
     "zone": "fenetre"
    },
+   "recharge la page (touche f5), puis repose ta question": {
+    "texte": "Load di page again (F5 button), then ask your question again.",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
    "redis-le, s'il te plaît": {
     "texte": "Abeg talk am again.",
     "statut": "brouillon",
     "zone": "voix"
+   },
+   "regarde la commission : c'est ce que la banque prend": {
+    "texte": "Look di commission: na wetin di bank di take.",
+    "statut": "brouillon",
+    "zone": "element"
    },
    "regarde le total qui est sorti de ton compte": {
     "texte": "Look all di money weh don comot for your account.",
@@ -682,6 +1017,16 @@
     "statut": "brouillon",
     "zone": "voix"
    },
+   "référence du virement": {
+    "texte": "Transfer reference",
+    "statut": "brouillon",
+    "zone": "element"
+   },
+   "répéter": {
+    "texte": "talk am again",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
    "résumer mes transactions": {
     "texte": "Di money weh enter and weh comot",
     "statut": "brouillon",
@@ -691,6 +1036,11 @@
     "texte": "If e don already open, load am again.",
     "statut": "brouillon",
     "zone": "popup"
+   },
+   "si la banque affiche un message, touche la pastille kama à côté": {
+    "texte": "If di bank show message, touch di Kama button for yi side.",
+    "statut": "brouillon",
+    "zone": "assistant"
    },
    "si tu n'es pas sûr du numéro, n'envoie pas l'argent. demande d'abord à la personne": {
     "texte": "If you no sure for di number, no send di money. Ask di person first.",
@@ -702,6 +1052,26 @@
     "statut": "brouillon",
     "zone": "explication"
    },
+   "solde du compte": {
+    "texte": "Account balance",
+    "statut": "brouillon",
+    "zone": "element"
+   },
+   "sur cette page : {x1} entrée, {x2} sortie": {
+    "texte": "For dis page: {x1} money wey enter, {x2} money wey comot.",
+    "statut": "brouillon",
+    "zone": "fenetre"
+   },
+   "sur cette page : {x1} entrée, {x2} sorties": {
+    "texte": "For dis page: {x1} money wey enter, {x2} money wey comot.",
+    "statut": "brouillon",
+    "zone": "fenetre"
+   },
+   "sur cette page : {x1} entrées, {x2} sortie": {
+    "texte": "For dis page: {x1} money wey enter, {x2} money wey comot.",
+    "statut": "brouillon",
+    "zone": "fenetre"
+   },
    "sur cette page : {x1} entrées, {x2} sorties": {
     "texte": "For dis page: {x1} money don enter, {x2} money don comot.",
     "statut": "brouillon",
@@ -712,10 +1082,20 @@
     "statut": "brouillon",
     "zone": "consentement"
    },
+   "ta voix sert seulement à comprendre ta question. elle n'est pas gardée": {
+    "texte": "Your voice na only for understand your question. Kama no di keep am.",
+    "statut": "brouillon",
+    "zone": "micro"
+   },
    "tes montants, ton solde et les noms ne sont jamais envoyés": {
     "texte": "Kama no dey ever send your money, your balance or any name.",
     "statut": "brouillon",
     "zone": "consentement"
+   },
+   "tes transactions": {
+    "texte": "your transactions",
+    "statut": "brouillon",
+    "zone": "assistant"
    },
    "texte": {
     "texte": "Text",
@@ -724,6 +1104,11 @@
    },
    "texte de la page :": {
     "texte": "Text for di page:",
+    "statut": "brouillon",
+    "zone": "fenetre"
+   },
+   "titre « {q1} »": {
+    "texte": "Title « {q1} »",
     "statut": "brouillon",
     "zone": "fenetre"
    },
@@ -747,10 +1132,20 @@
     "statut": "brouillon",
     "zone": "explication"
    },
+   "ton solde": {
+    "texte": "your balance",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
    "ton transfert est parti": {
     "texte": "Your money don go.",
     "statut": "brouillon",
     "zone": "expliquer"
+   },
+   "ton virement est parti": {
+    "texte": "Your transfer don go.",
+    "statut": "brouillon",
+    "zone": "element"
    },
    "total débité : {x1}": {
     "texte": "All money weh comot: {x1}.",
@@ -792,6 +1187,11 @@
     "statut": "brouillon",
     "zone": "resume"
    },
+   "trop de questions en peu de temps": {
+    "texte": "Too much question for small time.",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
    "tu as 22 500 fcfa sur ton compte": {
     "texte": "You get 22 500 FCFA for your account.",
     "statut": "brouillon",
@@ -806,6 +1206,11 @@
     "texte": "You no get enough money for dis send.",
     "statut": "brouillon",
     "zone": "erreur"
+   },
+   "tu n'as pas assez d'argent pour ce virement": {
+    "texte": "Your money no reach for dis transfer.",
+    "statut": "brouillon",
+    "zone": "element"
    },
    "tu n'as pas coché la case de confirmation": {
     "texte": "You never tick di box for confirm.",
@@ -822,10 +1227,35 @@
     "statut": "brouillon",
     "zone": "etat"
    },
+   "tu peux toujours utiliser « {q1} » ou les pastilles kama": {
+    "texte": "You fit still use « {q1} » or di Kama buttons.",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
+   "un nouveau message est apparu sur la page. lis-le": {
+    "texte": "One new message don show for di page. Read am.",
+    "statut": "brouillon",
+    "zone": "fenetre"
+   },
+   "va sur la page de ta banque où ton solde est écrit": {
+    "texte": "Go for di page for your bank wey dem write your balance.",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
+   "va sur la page historique": {
+    "texte": "Go for di History page.",
+    "statut": "brouillon",
+    "zone": "fenetre"
+   },
    "va sur la première page : « solde »": {
     "texte": "Go for di first page: « Solde ».",
     "statut": "brouillon",
     "zone": "resume"
+   },
+   "va sur la première page : « {q1} »": {
+    "texte": "Go for di first page: « {q1} ».",
+    "statut": "brouillon",
+    "zone": "fenetre"
    },
    "vitesse de lecture": {
     "texte": "How fast e di read",
@@ -861,6 +1291,11 @@
     "texte": "Check di informations, tick di box, then na you yourself go press « Confirmer le transfert ».",
     "statut": "brouillon",
     "zone": "erreur"
+   },
+   "vérifie les informations, coche la case, puis appuie toi-même sur « {q1} »": {
+    "texte": "Check di information, tick di box, then press « {q1} » by yourself.",
+    "statut": "brouillon",
+    "zone": "fenetre"
    },
    "vérifié": {
     "texte": "Dem don check am",
@@ -927,8 +1362,28 @@
     "statut": "brouillon",
     "zone": "erreur"
    },
+   "écris un montant plus grand que zéro, puis appuie toi-même sur « {q1} »": {
+    "texte": "Write money wey pass zero, then press « {q1} » by yourself.",
+    "statut": "brouillon",
+    "zone": "fenetre"
+   },
    "élément choisi :": {
     "texte": "Wetin you choose:",
+    "statut": "brouillon",
+    "zone": "fenetre"
+   },
+   "épingle": {
+    "texte": "pin",
+    "statut": "brouillon",
+    "zone": "bienvenue"
+   },
+   "épingle kama": {
+    "texte": "Pin Kama",
+    "statut": "brouillon",
+    "zone": "bienvenue"
+   },
+   "étape {x1} :": {
+    "texte": "Step {x1}:",
     "statut": "brouillon",
     "zone": "fenetre"
    }

@@ -67,3 +67,5 @@ models/poids/ct2/*
 !models/poids/ct2/opus-mt-fr-en/*.bin
 !models/poids/ct2/opus-mt-en-fr/
 !models/poids/ct2/opus-mt-en-fr/*.bin
+training/pidgin_pcm_en/data/
+training/pidgin_pcm_en/sortie/
