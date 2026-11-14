@@ -54,6 +54,21 @@ jobs:
             kama_frontend/.output/edge-mv3
             kama_frontend/.output/chrome-mv3-jury
             kama_frontend/.output/edge-mv3-jury
+          if-no-files-found: error
+      - name: Build extension zip archives
+        working-directory: kama_frontend
+        run: |
+          set -euo pipefail
+          for d in chrome-mv3 edge-mv3 chrome-mv3-jury edge-mv3-jury; do
+            test -d ".output/$d"
+            (cd ".output/$d" && zip -qr "../../${d}.zip" .)
+          done
+      - name: Upload extension zip archives
+        uses: actions/upload-artifact@v4
+        with:
+          name: kama-extension-zips
+          path: kama_frontend/*.zip
+          if-no-files-found: error
 
   deploy:
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
@@ -70,20 +85,4 @@ jobs:
             set -e
             cd "${{ secrets.VPS_REPO_PATH }}"
             git pull --ff-only
-            docker compose up -d --build
-      - name: Build extension zips
-        working-directory: kama_frontend
-        run: |
-          npm ci
-          npm run build
-          npm run build:edge
-          npm run build:jury
-          cd .output
-          for d in chrome-mv3 edge-mv3 chrome-mv3-jury edge-mv3-jury; do
-            (cd "$d" && zip -r "../../${d}.zip" .)
-          done
-      - name: Upload zips
-        uses: actions/upload-artifact@v4
-        with:
-          name: kama-extension-zips
-          path: kama_frontend/*.zip
+            docker compose up -d --build --remove-orphans
