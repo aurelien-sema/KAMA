@@ -10,6 +10,13 @@ models/*
 *.safetensors
 *.gguf
 *.bin
+# Exception : modèle pidgin -> anglais ajusté, ajouté au dépôt avec sa fiche (moins de 100 Mo)
+!models/poids/
+models/poids/*
+!models/poids/ct2/
+models/poids/ct2/*
+!models/poids/ct2/pcm_en/
+!models/poids/ct2/pcm_en/**
 node_modules/
 dist/
 .output/

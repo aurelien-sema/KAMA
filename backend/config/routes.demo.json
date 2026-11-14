@@ -21,6 +21,11 @@
       "engine": "marian_ct2",
       "path": "poids/ct2/pidgin_en_wes_ajuste_v2"
     },
+    "wes>en": {
+      "enabled": true,
+      "engine": "marian_ct2",
+      "path": "poids/ct2/pcm_en"
+    },
     "en>wes": {
       "enabled": true,
       "engine": "pipeline",
