@@ -92,12 +92,7 @@ class OriginGuard:
         if scope["type"] != "http" or scope["path"] in PUBLIC_PATHS:
             return await self.app(scope, receive, send)
         origin = Headers(scope=scope).get("origin")
-        # Le service worker de l'extension peut omettre Origin sur ce GET sans effet de bord.
-        # Ce endpoint ne renvoie que des capacités publiques; toutes les autres routes restent protégées.
-        capabilities_without_origin = (
-            scope["method"] == "GET" and scope["path"] == "/v1/capabilities" and origin is None
-        )
-        if not capabilities_without_origin and not self.settings.origin_allowed(origin):
+        if not self.settings.origin_allowed(origin):
             return await _reject(403, "forbidden_origin", "Origine non autorisée.")(scope, receive, send)
         cors = {}
         if origin:
