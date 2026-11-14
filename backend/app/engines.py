@@ -30,6 +30,10 @@ class Synthesizer(Protocol):
     def synthesize(self, text: str) -> bytes: ...
 
 
+class Chatter(Protocol):
+    def answer(self, question: str, context: str) -> str: ...
+
+
 class EngineRefused(Exception):
     """Le moteur a produit une sortie inutilisable : la phrase restera non traduite."""
 
@@ -117,6 +121,8 @@ class EngineSet:
     asr: dict[str, Recognizer] = field(default_factory=dict)
     tts: dict[str, Synthesizer] = field(default_factory=dict)
     clips: dict[str, ClipLibrary] = field(default_factory=dict)  # voix humaine validee, prioritaire sur le modele
+    critical_model_elements: frozenset[str] = field(default_factory=frozenset)
+    llm: Chatter | None = None  # modele de langue local, facultatif
 
 
 def _lexicon(content_dir: Path | None, name: str | None) -> frozenset[str] | None:
@@ -146,7 +152,13 @@ def load_engines(
     config = json.loads(routes_file.read_text(encoding="utf-8"))
     engines = EngineSet(languages={k: v["name"] for k, v in config["languages"].items()})
     built: dict[str, Translator] = {}
-    specs = {k: v for k, v in config.get("translation", {}).items() if v.get("enabled", True)}
+    translation_config = config.get("translation", {})
+    engines.critical_model_elements = frozenset(translation_config.get("critical_model_elements", []))
+    specs = {
+        k: v
+        for k, v in translation_config.items()
+        if isinstance(v, dict) and v.get("enabled", True)
+    }
     for route, spec in specs.items():
         if spec["engine"] == "pipeline":
             continue
@@ -187,6 +199,17 @@ def load_engines(
 
     engines.asr = _load_voice(config, "asr", ASR_FACTORIES, models_dir)
     engines.tts = _load_voice(config, "tts", TTS_FACTORIES, models_dir)
+
+    spec = config.get("llm")
+    if spec and spec.get("enabled", True):
+        try:
+            from .llm_engines import LLM_FACTORIES
+
+            engines.llm = LLM_FACTORIES[spec["engine"]](
+                models_dir / spec["path"], sha256=spec.get("sha256"), **spec.get("options", {})
+            )
+        except Exception as exc:  # empreinte, fichier absent ou bibliotheque : la route restera indisponible
+            log.warning("llm indisponible (%s)", type(exc).__name__)
     for lang in engines.languages:
         library = ClipLibrary.load(clips_dir / lang) if clips_dir else ClipLibrary()
         if len(library):

@@ -25,6 +25,7 @@ class Settings:
     trust_proxy: bool = False
     rate_per_min: int = 60
     voice_rate_per_min: int = 12
+    ask_rate_per_min: int = 6  # questions au LLM local : plus couteuses
     global_rate_per_min: int = 1200
     max_json_bytes: int = 4096
     max_audio_bytes: int = 960_100  # 30 s en PCM 16 bits, 16 kHz, mono, plus l'en-tete WAV
@@ -66,6 +67,7 @@ def load_settings() -> Settings:
         trust_proxy=_bool("KAMA_TRUST_PROXY", d.trust_proxy),
         rate_per_min=_int("KAMA_RATE_PER_MIN", d.rate_per_min),
         voice_rate_per_min=_int("KAMA_VOICE_RATE_PER_MIN", d.voice_rate_per_min),
+        ask_rate_per_min=_int("KAMA_ASK_RATE_PER_MIN", d.ask_rate_per_min),
         global_rate_per_min=_int("KAMA_GLOBAL_RATE_PER_MIN", d.global_rate_per_min),
         max_concurrent_models=_int("KAMA_MAX_CONCURRENT_MODELS", d.max_concurrent_models),
         near_match_threshold=float(os.environ.get("KAMA_NEAR_MATCH_THRESHOLD", d.near_match_threshold)),

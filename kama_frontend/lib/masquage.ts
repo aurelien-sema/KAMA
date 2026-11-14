@@ -41,7 +41,7 @@ const LABEL_RE = new RegExp(
 /** Mots d'interface : une suite de mots en majuscules faite uniquement de ces mots n'est pas un nom de personne. */
 const INTERFACE_WORDS = new Set(
   `
-  mon ma mes votre vos notre nos le la les un une des du de au aux et ou sur
+  mon ma mes votre vos notre nos le la les un une des du de au aux et ou sur avoir
   my your our the a an of to and or on for in at
   compte comptes solde soldes disponible insuffisant frais montant montants total totaux
   transfert transferts retrait retraits depot dépôt versement virement paiement paiements

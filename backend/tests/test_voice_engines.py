@@ -1,13 +1,16 @@
 """Voix : enregistrements valides avant le modele, intentions approchantes, moteurs absents."""
 import io
 import json
+import sys
 import wave
+from contextlib import nullcontext
+from types import SimpleNamespace
 
 import numpy as np
 
 from app.clips import ClipLibrary, piece_key, split_pieces
 from app.engines import EngineSet, load_engines
-from app.voice_engines import ctc_greedy, pcm16_to_wav, read_tokens
+from app.voice_engines import HfCtcRecognizer, ctc_greedy, pcm16_to_wav, read_tokens
 from conftest import FakeRecognizer, FakeSynth, engines_with, wav_bytes
 
 
@@ -147,6 +150,43 @@ def test_tokens_file_with_and_without_numbers(tmp_path):
 def test_wav_written_for_a_segment_is_readable():
     with wave.open(io.BytesIO(pcm16_to_wav(b"\0\0" * 1600))) as w:
         assert (w.getnchannels(), w.getsampwidth(), w.getframerate(), w.getnframes()) == (1, 2, 16000, 1600)
+
+
+def test_hf_ctc_warms_the_model_before_serving_requests(tmp_path, monkeypatch):
+    calls = []
+
+    class FakeProcessor:
+        def feature_extractor(self, wave_f, **_kwargs):
+            return {"input_values": wave_f}
+
+        def batch_decode(self, _tokens):
+            return [""]
+
+    class FakeModel:
+        def float(self):
+            return self
+
+        def eval(self):
+            return self
+
+        def __call__(self, **_features):
+            calls.append(True)
+            return SimpleNamespace(logits=np.zeros((1, 1, 2), dtype=np.float32))
+
+    fake_torch = SimpleNamespace(
+        set_num_threads=lambda _threads: None,
+        inference_mode=nullcontext,
+    )
+    fake_transformers = SimpleNamespace(
+        AutoProcessor=SimpleNamespace(from_pretrained=lambda _path: FakeProcessor()),
+        AutoModelForCTC=SimpleNamespace(from_pretrained=lambda _path: FakeModel()),
+    )
+    monkeypatch.setitem(sys.modules, "torch", fake_torch)
+    monkeypatch.setitem(sys.modules, "transformers", fake_transformers)
+
+    HfCtcRecognizer(tmp_path)
+
+    assert len(calls) == 1
 
 
 def test_missing_voice_models_do_not_stop_the_server(tmp_path):

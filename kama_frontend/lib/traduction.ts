@@ -14,7 +14,7 @@ import type { Langue } from '@/config/langues';
 import { ErreurApi, traduireTexte, type ElementApi } from './api';
 import { chercherGlossaire, chercherModele, type Glossaire } from './glossaire';
 import { masquerLigne } from './lignes';
-import { chercherInterface, type DonneesInterface } from './interface';
+import { chercherInterface, libelle, type DonneesInterface } from './interface';
 import { balisesDe, demasquer, estMasque, masquer } from './masquage';
 
 /** Une phrase à traduire : une ligne du gabarit (texte fixe + montants lus dans la page) et sa nature. */
@@ -48,6 +48,9 @@ async function traduireMasque(texte: string, valeurs: Record<string, string>, el
   // ceux de la page : fabriquer() refuse une traduction qui change les balises.
   const defaut = chercherInterface(interfaceJson as unknown as DonneesInterface, langue.code, texte);
   if (defaut) return fabriquer(defaut.texte, defaut.statut === 'valide' ? 'verified' : 'auto');
+  // Phrase modèle de Kama (« Bouton « {q1} » », « Les frais sont de {x1}. ») : libellé de la page traduit à part s'il est connu.
+  const modele = libelle(glossaire as Glossaire, interfaceJson as unknown as DonneesInterface, langue.code, texte);
+  if (modele !== texte) return fabriquer(modele, 'auto');
 
   if (!estMasque(texte)) return { statut: 'original', raison: 'non_masque' }; // le serveur refuserait : on n'envoie pas
 

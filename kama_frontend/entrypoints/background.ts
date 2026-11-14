@@ -14,6 +14,7 @@ import { SITES_KAMA } from '@/config/sites';
 import { DELAIS, URL_SERVEUR } from '@/config/serveur';
 import {
   PORT_MICRO,
+  enBase64,
   intentionConnue,
   pourDestinataire,
   type CommandeMicro,
@@ -73,12 +74,18 @@ export default defineBackground(() => {
 
 function demandeConnue(m: unknown): m is DemandeApi {
   if (typeof m !== 'object' || m === null || (m as { type?: unknown }).type !== 'kama:api') return false;
-  return ['capabilities', 'translate', 'tts', 'intent'].includes((m as { route?: string }).route ?? '');
+  return ['capabilities', 'translate', 'tts', 'intent', 'ask'].includes((m as { route?: string }).route ?? '');
 }
 
 async function appelerServeur(d: DemandeApi): Promise<ReponseBrute> {
   const controle = new AbortController();
-  const delai = { capabilities: DELAIS.capacites, translate: DELAIS.traduction, tts: DELAIS.voix, intent: DELAIS.reconnaissance }[d.route];
+  const delai = {
+    capabilities: DELAIS.capacites,
+    translate: DELAIS.traduction,
+    tts: DELAIS.voix,
+    intent: DELAIS.reconnaissance,
+    ask: DELAIS.question,
+  }[d.route];
   const minuterie = setTimeout(() => controle.abort(), delai);
   try {
     let reponse: Response;
@@ -88,6 +95,15 @@ async function appelerServeur(d: DemandeApi): Promise<ReponseBrute> {
       reponse = await fetch(`${URL_SERVEUR}/v1/voice/intent`, {
         method: 'POST',
         headers: { 'Content-Type': 'audio/wav', 'X-Kama-Lang': d.lang },
+        body: depuisBase64(d.wavBase64),
+        signal: controle.signal,
+      });
+    } else if (d.route === 'ask') {
+      // Le contexte est déjà masqué par la page : il ne peut contenir ni nom, ni numéro, ni montant en clair.
+      const contexte = enBase64(new TextEncoder().encode(d.contexte).buffer as ArrayBuffer);
+      reponse = await fetch(`${URL_SERVEUR}/v1/voice/ask`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'audio/wav', 'X-Kama-Lang': d.lang, 'X-Kama-Context-B64': contexte },
         body: depuisBase64(d.wavBase64),
         signal: controle.signal,
       });
@@ -119,7 +135,12 @@ async function appelerServeur(d: DemandeApi): Promise<ReponseBrute> {
 /* ---------------------------------------------------------------------------------------- */
 
 type Port = ReturnType<typeof browser.runtime.connect>;
-const session: { port: Port | null; langue: string; voix: string | null } = { port: null, langue: 'fr', voix: null };
+const session: { port: Port | null; langue: string; voix: string | null; contexte: string } = {
+  port: null,
+  langue: 'fr',
+  voix: null,
+  contexte: '',
+};
 
 function versPage(e: EvenementMicro) {
   try {
@@ -155,6 +176,7 @@ function brancherPage(port: Port) {
       case 'demarrer': {
         session.langue = m.langue;
         session.voix = null;
+        session.contexte = m.contexte;
         const indisponible = await voixDisponible(m.langue);
         if (indisponible) return versPage({ type: 'resultat', resultat: { ok: false, code: indisponible } });
         try {
@@ -203,8 +225,41 @@ async function analyser(wav: string, duree: number) {
   versPage({ type: 'resultat', resultat });
 }
 
-/** Le serveur renvoie seulement une intention (liste fermée) : le texte reconnu ne sort pas du serveur. */
+/**
+ * Une seule écoute : la route `ask` reconnaît d'abord les intentions validées, puis interroge le
+ * modèle local pour le reste. Elle renvoie le pidgin entendu et, le cas échéant, une réponse pidgin.
+ * Le texte de la page (masqué) ne sort que par cette route et n'est jamais conservé.
+ */
 async function comprendre(wavBase64: string, langue: string): Promise<ResultatIntention> {
+  const r = await appelerServeur({
+    type: 'kama:api',
+    route: 'ask',
+    lang: langue,
+    wavBase64,
+    contexte: session.contexte,
+  });
+  if (!r.ok) {
+    // Serveur plus ancien, sans assistant local : on garde les intentions validées.
+    if (r.statut === 404) return comprendreIntention(wavBase64, langue);
+    return { ok: false, code: r.code };
+  }
+  const corps = r.donnees as { heard?: unknown; intent?: unknown; confidence?: unknown; answer?: unknown; badge?: unknown };
+  const intention = intentionConnue(corps.intent);
+  const confiance = Number(corps.confidence) || 0;
+  if (typeof corps.answer === 'string' && corps.answer) {
+    return {
+      ok: true,
+      intention,
+      confiance,
+      entendu: typeof corps.heard === 'string' ? corps.heard : '',
+      reponse: corps.answer,
+      badge: corps.badge === 'untranslated' ? 'untranslated' : 'machine',
+    };
+  }
+  return { ok: true, intention, confiance };
+}
+
+async function comprendreIntention(wavBase64: string, langue: string): Promise<ResultatIntention> {
   const r = await appelerServeur({ type: 'kama:api', route: 'intent', lang: langue, wavBase64 });
   if (!r.ok) return { ok: false, code: r.code };
   const corps = r.donnees as { intent?: unknown; confidence?: unknown };

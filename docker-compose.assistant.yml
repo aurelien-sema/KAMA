@@ -1,0 +1,32 @@
+# Isolation de l'assistant vocal sur le VPS — SURCOUCHE FACULTATIVE.
+#
+#   docker compose -f docker-compose.yml -f docker-compose.assistant.yml up -d
+#
+# Ne modifie pas le déploiement existant tant que cette commande n'est pas lancée (accord de
+# l'équipe requis). Le conteneur reste non-root (voir backend/Dockerfile), n'a plus aucun accès
+# réseau sortant, tourne en lecture seule et ne peut pas dépasser 7 Go.
+services:
+  backend:
+    environment:
+      PYTHONDONTWRITEBYTECODE: "1"  # pas d'écriture de __pycache__ dans un système de fichiers en lecture seule
+    read_only: true
+    tmpfs:
+      - /tmp:size=256m
+    mem_limit: 7g
+    memswap_limit: 7g
+    pids_limit: 256
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    networks:
+      - assistant
+
+  caddy:
+    networks:
+      - default
+      - assistant
+
+networks:
+  assistant:
+    internal: true  # aucun accès Internet pour le backend : le LLM est un fichier local

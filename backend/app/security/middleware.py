@@ -17,7 +17,9 @@ from ..settings import Settings
 log = logging.getLogger("kama.access")
 
 VOICE_PATH = "/v1/voice/intent"
-KNOWN_PATHS = frozenset({"/healthz", "/v1/capabilities", "/v1/translate", "/v1/tts", VOICE_PATH, "/docs", "/openapi.json"})
+ASK_PATH = "/v1/voice/ask"
+AUDIO_PATHS = frozenset({VOICE_PATH, ASK_PATH})
+KNOWN_PATHS = frozenset({"/healthz", "/v1/capabilities", "/v1/translate", "/v1/tts", VOICE_PATH, ASK_PATH, "/docs", "/openapi.json"})
 PUBLIC_PATHS = frozenset({"/healthz"})
 
 
@@ -99,7 +101,7 @@ class OriginGuard:
             headers = {
                 **cors,
                 "access-control-allow-methods": "GET, POST",
-                "access-control-allow-headers": "Content-Type, X-Kama-Lang",
+                "access-control-allow-headers": "Content-Type, X-Kama-Lang, X-Kama-Context-B64",
                 "access-control-max-age": "600",
             }
             return await Response(status_code=204, headers=headers)(scope, receive, send)
@@ -156,8 +158,9 @@ class RateLimit:
         now = time.monotonic()
         self._sweep(now)
         voice = scope["path"] == VOICE_PATH
-        limit = self.settings.voice_rate_per_min if voice else self.settings.rate_per_min
-        window = self.hits.setdefault(("v:" if voice else "t:") + self._client(scope), deque())
+        ask = scope["path"] == ASK_PATH
+        limit = self.settings.ask_rate_per_min if ask else (self.settings.voice_rate_per_min if voice else self.settings.rate_per_min)
+        window = self.hits.setdefault(("a:" if ask else "v:" if voice else "t:") + self._client(scope), deque())
         self._prune(window, now)
         self._prune(self.global_hits, now)
         if len(window) >= limit or len(self.global_hits) >= self.settings.global_rate_per_min:
@@ -177,7 +180,7 @@ class BodyLimit:
     async def __call__(self, scope, receive, send):
         if scope["type"] != "http" or scope["method"] != "POST":
             return await self.app(scope, receive, send)
-        limit = self.settings.max_audio_bytes if scope["path"] == VOICE_PATH else self.settings.max_json_bytes
+        limit = self.settings.max_audio_bytes if scope["path"] in AUDIO_PATHS else self.settings.max_json_bytes
         too_large = _reject(413, "payload_too_large", "Requête trop volumineuse.")
         declared = Headers(scope=scope).get("content-length")
         if declared and (not (declared.isascii() and declared.isdigit()) or int(declared) > limit):

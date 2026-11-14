@@ -5,7 +5,7 @@
  */
 import { useEffect, useState, type ReactNode } from 'react';
 import { CircleSlash, Languages, Pause, Play, Volume2 } from 'lucide-react';
-import { arreterLecture, lireTexte } from '@/lib/voix';
+import { arreterLecture } from '@/lib/voix';
 import { useLectureAuto } from '@/lib/langue-courante';
 import { traduireKama, useTexte } from '@/lib/use-texte';
 import { useLangueCourante } from '@/lib/langue-courante';
@@ -47,15 +47,16 @@ export function Amount({ children, className = '' }: { children: ReactNode; clas
 /**
  * ▶ + barre de progression + vitesse 1x / 0,75x. Hauteur 44 px.
  * `paroles` : la réponse dans la langue choisie, lue par le serveur. Sans elles (ou si le serveur ne peut pas parler),
- * `text` est lu en français avec la voix du navigateur et la ligne d'état le dit.
+ * aucune lecture : la ligne d'état affiche une annonce en pidgin.
  */
-export function AudioPlayer({ text, paroles }: { text: string; paroles?: Parole[] }) {
+export function AudioPlayer({ paroles }: { paroles?: Parole[] }) {
   const [rate, setRate] = useState<1 | 0.75>(1);
   const [playing, setPlaying] = useState(false);
   const [note, setNote] = useState<string | null>(null);
   const lectureAuto = useLectureAuto();
   const code = useLangueCourante()?.code;
   const t = (fr: string) => traduireKama(code, fr);
+  const notePasDeVoix = "Kama n'arrive pas à joindre le serveur. Réessaie dans un instant.";
 
   async function demarrer(vitesse: number) {
     setPlaying(true);
@@ -66,12 +67,11 @@ export function AudioPlayer({ text, paroles }: { text: string; paroles?: Parole[
         setPlaying(false);
         return;
       } catch {
-        setNote('Lecture en français'); // le serveur ne peut pas parler : on le dit au lieu de se taire
+        // Le serveur ne peut pas parler : aucune lecture, l'annonce pidgin le dit.
       }
-    } else {
-      setNote('Lecture en français');
     }
-    lireTexte(text, vitesse, () => setPlaying(false));
+    setNote(notePasDeVoix);
+    setPlaying(false);
   }
 
   // Préférence « Audio » : lecture automatique à l'ouverture.
@@ -128,16 +128,15 @@ export function AudioPlayer({ text, paroles }: { text: string; paroles?: Parole[
   );
 }
 
-/** Une réponse de Kama : lecteur audio (avec l'indicateur de fiabilité à côté), puis le texte. `speech` = texte lu. */
+/** Une réponse de Kama : lecteur audio (avec l'indicateur de fiabilité à côté), puis le texte. */
 export function KamaResponse({
   status,
-  speech,
   paroles,
   children,
 }: {
   status: TranslationStatus;
+  /** Texte français conservé pour les appelants existants ; l'audio ne vient que de `paroles`. */
   speech: string;
-  /** Réponse dans la langue choisie, à lire avec la voix du serveur (sinon `speech` est lu en français). */
   paroles?: Parole[];
   children: ReactNode;
 }) {
@@ -145,7 +144,7 @@ export function KamaResponse({
     <article className="flex flex-col gap-2">
       <div className="flex items-center gap-1.5">
         <div className="min-w-0 flex-1">
-          <AudioPlayer text={speech} paroles={paroles} />
+          <AudioPlayer paroles={paroles} />
         </div>
         <StatusBadge status={status} />
       </div>
@@ -155,9 +154,9 @@ export function KamaResponse({
 }
 
 /** Courte phrase de Kama hors réponse (consigne, message système), avec son bouton haut-parleur. */
-export function KamaLine({ speech, paroles, children }: { speech: string; paroles?: Parole[]; children: ReactNode }) {
+export function KamaLine({ paroles, children }: { speech: string; paroles?: Parole[]; children: ReactNode }) {
   const ecouter = useTexte('Écouter');
-  const noteFrancais = useTexte('Lecture en français');
+  const pasDeVoix = useTexte("Kama n'arrive pas à joindre le serveur. Réessaie dans un instant.");
   const [note, setNote] = useState(false);
   useEffect(() => prechargerParoles(paroles), [paroles]);
   async function lire() {
@@ -167,13 +166,10 @@ export function KamaLine({ speech, paroles, children }: { speech: string; parole
         await jouerParoles(paroles);
         return;
       } catch {
-        // Le serveur ne peut pas parler : lecture en français.
-        setNote(true);
+        // Le serveur ne peut pas parler : aucune lecture, l'annonce pidgin le dit.
       }
-    } else {
-      setNote(true);
     }
-    lireTexte(speech);
+    setNote(true);
   }
   return (
     <div className="flex items-start gap-2">
@@ -181,7 +177,7 @@ export function KamaLine({ speech, paroles, children }: { speech: string; parole
         {children}
         {note && (
           <span role="status" className="mt-1 block text-[11px] text-kama-ink/70">
-            {noteFrancais}
+            {pasDeVoix}
           </span>
         )}
       </div>

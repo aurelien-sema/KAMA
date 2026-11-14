@@ -23,3 +23,16 @@ test('une balise inconnue dans la traduction la fait refuser', () => assert.equa
 test('les valeurs connues de la page (nom du bénéficiaire) sont masquées même sans indice', () => {
   assert.equal(masquer('Bonjour, Amina', ['Amina']).texte, 'Bonjour, {x1}');
 });
+
+test("les valeurs de l'en-tête masquent le titulaire et le bénéficiaire d'un texte libre", () => {
+  const connues = ['Amina', 'Mbarga'];
+  assert.equal(masquer('Votre session expire bientôt, Amina.', connues).texte, 'Votre session expire bientôt, {x1}.');
+  assert.equal(
+    masquer('Le bénéficiaire Mbarga recevra 25 000 FCFA.', connues).texte,
+    'Le bénéficiaire {x1} recevra {x2}.',
+  );
+});
+
+test("un libellé d'interface en majuscules n'est pas pris pour un nom", () => {
+  assert.equal(masquer('AVOIR SUR LE COMPTE').texte, 'AVOIR SUR LE COMPTE');
+});

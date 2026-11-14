@@ -142,6 +142,16 @@ def phrases(jeu, limite):
     return sortie[:limite] if limite else sortie
 
 
+def fichier_resultat(nom: str, jeu: str) -> Path:
+    if ":" in nom:
+        moteur, modele = nom.split(":", 1)
+        identifiant = f"{moteur}_{Path(modele).name or 'modele'}"
+    else:
+        identifiant = nom
+    identifiant = re.sub(r"[^A-Za-z0-9_.-]+", "_", identifiant).strip("._")
+    return SORTIE / f"{identifiant}_{jeu}.jsonl"
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--limite", type=int)
@@ -161,20 +171,23 @@ def main():
             continue
         erreurs_m = mots = erreurs_c = lettres = 0
         duree = audio = 0.0
-        lignes = []
-        for fichier, ref, chemin in data:
-            x = lire_audio(chemin)
-            t0 = time.time()
-            hyp = run(x)
-            duree += time.time() - t0
-            audio += len(x) / 16000
-            r, h = normaliser(ref), normaliser(hyp)
-            erreurs_m += distance(r.split(), h.split())
-            mots += len(r.split())
-            erreurs_c += distance(r, h)
-            lettres += len(r)
-            lignes.append({"fichier": fichier, "ref": r, "hyp": h})
-        (SORTIE / f"{nom}_{a.jeu}.jsonl").write_text("\n".join(json.dumps(l, ensure_ascii=False) for l in lignes), encoding="utf-8")
+        sortie = fichier_resultat(nom, a.jeu)
+        with sortie.open("w", encoding="utf-8") as f:
+            for i, (fichier, ref, chemin) in enumerate(data, 1):
+                x = lire_audio(chemin)
+                t0 = time.time()
+                hyp = run(x)
+                duree += time.time() - t0
+                audio += len(x) / 16000
+                r, h = normaliser(ref), normaliser(hyp)
+                erreurs_m += distance(r.split(), h.split())
+                mots += len(r.split())
+                erreurs_c += distance(r, h)
+                lettres += len(r)
+                f.write(json.dumps({"fichier": fichier, "ref": r, "hyp": h}, ensure_ascii=False) + "\n")
+                if i % 25 == 0:
+                    f.flush()
+                    print(f"{nom}: {i}/{len(data)}")
         print(f"{nom:<14} WER {100 * erreurs_m / mots:5.1f} %   CER {100 * erreurs_c / lettres:5.1f} %   vitesse x{audio / duree:.1f} le temps reel")
 
 

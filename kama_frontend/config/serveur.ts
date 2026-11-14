@@ -12,5 +12,12 @@ export const URL_SERVEUR: string = (import.meta.env.WXT_KAMA_API as string | und
 
 /** Délais maximaux avant de dire « pas de connexion » (millisecondes). */
 // La voix de synthèse tourne sur processeur : une phrase longue peut prendre plus de 10 s sur une petite machine.
-export const DELAIS = { traduction: 8000, voix: 45000, reconnaissance: 15000, capacites: 4000 } as const;
+export const DELAIS = {
+  traduction: 8000,
+  voix: 45000,
+  reconnaissance: 15000,
+  // Question au modèle local : 20 s de génération au serveur + traductions + marge réseau.
+  question: 60000,
+  capacites: 4000,
+} as const;
 
