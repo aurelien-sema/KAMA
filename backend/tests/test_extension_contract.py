@@ -86,7 +86,9 @@ def test_demo_routes_keep_llm_disabled_and_only_change_demo_settings():
     default = json.loads((REPO_DIR / "backend" / "config" / "routes.json").read_text(encoding="utf-8"))
     demo = json.loads((REPO_DIR / "backend" / "config" / "routes.demo.json").read_text(encoding="utf-8"))
     assert demo["asr"]["wes"]["enabled"] is True
+    assert default["llm"]["enabled"] is False
     assert demo["llm"]["enabled"] is False
+    assert default["llm"]["path"] == demo["llm"]["path"] == "poids/llm/LFM3-1.7B-Q4_K_M.gguf"
     default.pop("_note", None)
     demo.pop("_note", None)
     demo["asr"]["wes"]["enabled"] = default["asr"]["wes"]["enabled"]

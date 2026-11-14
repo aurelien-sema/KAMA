@@ -6,10 +6,13 @@ WORKDIR /srv/kama/backend
 
 COPY backend/requirements.txt backend/requirements-mt.txt backend/requirements-voice.txt ./
 RUN pip install --no-cache-dir -r requirements.txt -r requirements-mt.txt
-# Voix (reconnaissance + synthese) : docker build --build-arg WITH_VOICE=1 ... ajoute onnxruntime et torch (environ 700 Mo).
-# Sans cela, les routes de voix restent indisponibles ; le reste du serveur fonctionne.
+# Voix et LLM CPU : WITH_VOICE=1 ajoute les moteurs vocaux et compile llama-cpp-python.
+# Le build C++ est sequentiel pour limiter le pic memoire sur le VPS.
 ARG WITH_VOICE=0
-RUN if [ "$WITH_VOICE" = "1" ]; then pip install --no-cache-dir -r requirements-voice.txt; fi
+RUN if [ "$WITH_VOICE" = "1" ]; then \
+      apt-get update && apt-get install -y --no-install-recommends build-essential cmake git && rm -rf /var/lib/apt/lists/* && \
+      CMAKE_ARGS="-DGGML_NATIVE=OFF" CMAKE_BUILD_PARALLEL_LEVEL=1 pip install --no-cache-dir -r requirements-voice.txt; \
+    fi
 
 COPY backend/app ./app
 COPY backend/config ./config

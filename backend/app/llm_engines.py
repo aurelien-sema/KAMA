@@ -1,4 +1,4 @@
-"""Modele de langue local (Liquid AI LFM2 en GGUF), charge avec llama-cpp-python.
+"""Modele de langue local Liquid AI en GGUF, charge avec llama-cpp-python.
 
 Aucun appel a un service exterieur : le fichier GGUF est copie sur la machine et son empreinte
 SHA-256 est verifiee au chargement. Si elle differe, le moteur refuse de se charger et la route
@@ -43,12 +43,16 @@ class LlamaCppChat:
         threads: int = 4,
         n_ctx: int = 1024,
         max_tokens: int = 120,
-        temperature: float = 0.2,
+        temperature: float = 0.1,
+        top_k: int = 50,
+        repeat_penalty: float = 1.1,
         timeout_s: float = 20.0,
     ) -> None:
         if not path.exists():
             raise FileNotFoundError("modele gguf absent")
-        if sha256 and file_sha256(path) != sha256.strip().lower():
+        if not sha256:
+            raise RuntimeError("empreinte SHA-256 du modele obligatoire")
+        if file_sha256(path) != sha256.strip().lower():
             raise RuntimeError("empreinte du modele differente : chargement refuse")
         from llama_cpp import Llama
 
@@ -61,6 +65,8 @@ class LlamaCppChat:
         )
         self._max_tokens = max(16, int(max_tokens))
         self._temperature = float(temperature)
+        self._top_k = max(1, int(top_k))
+        self._repeat_penalty = max(0.0, float(repeat_penalty))
         self._timeout = max(1.0, float(timeout_s))
         self._lock = threading.Lock()  # le contexte llama.cpp n'est pas reentrant
 
@@ -91,6 +97,8 @@ class LlamaCppChat:
                 max_tokens=self._max_tokens,
                 temperature=self._temperature,
                 top_p=0.9,
+                top_k=self._top_k,
+                repeat_penalty=self._repeat_penalty,
                 logits_processor=[stop_after_deadline],
             )
         return str(result["choices"][0]["message"]["content"]).strip()

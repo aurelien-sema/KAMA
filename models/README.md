@@ -17,6 +17,15 @@ python models/fetch_models.py pidgin    # pour travailler sur le pidgin
 | masakhane/m2m100_418M_fr_bbj_rel_news_ft | français → Ghomala | 18,4 | AFL-3.0 |
 | masakhane/m2m100_418M_bbj_fr_rel_news_ft | Ghomala → français | Test en cours | AFL-3.0 |
 
+### Candidats locaux reçus le 14 novembre 2026
+
+| Dossier dans `models/poids/` | Rôle | État |
+|---|---|---|
+| `ghomala/fr-bbj-m2m100-v1` | français → Ghomala, checkpoint M2M100 FP16 | Branché au moteur `m2m100`, route désactivée : smoke test « Bonjour » et « Salut » identique ; aucune route inverse fournie |
+| `ghomala/tts-vits-v2` | synthèse Ghomala VITS, 16 kHz | Branché au moteur `ghomala_vits`, route désactivée : WAV produit, mais synthèse plus lente que la durée audio et écoute native à faire |
+
+Le smoke test local TTS a chargé le modèle en 27 s et produit 1,58 s de WAV en 12,9 s. Le checkpoint TTS annonce une licence CC BY-NC 4.0 ; ne pas l'utiliser commercialement. Les deux routes restent désactivées tant que la qualité, la latence et les conditions de diffusion ne sont pas validées.
+
 ## Pidgin
 
 | Modèle | Sens | Note SOREVA (sur 100) | Licence | À savoir |

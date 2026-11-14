@@ -9,6 +9,7 @@ import io
 import json
 import re
 import threading
+import unicodedata
 import wave
 from pathlib import Path
 
@@ -167,5 +168,75 @@ class MmsVitsSynthesizer:
         return pcm16_to_wav((np.clip(samples, -1, 1) * 32767).astype("<i2").tobytes(), self._rate)
 
 
+_GH_APOSTROPHES = "'’‘`´ʻʼʹ′ꞌꞋ"
+_GH_PAUSE_SHORT = ","
+_GH_PAUSE_LONG = "."
+_GH_PAUSES = (_GH_PAUSE_SHORT, _GH_PAUSE_LONG)
+_GH_SENTENCE_END = re.compile(r"[.;:!?…]+")
+_GH_OTHER_PUNCTUATION = re.compile(r'[«»"“”„()\[\]{}—–/\\]+')
+
+
+def normaliser_ghomala_tts(text: str) -> str:
+    """Normalise les tons, apostrophes et pauses attendus par le VITS Ghomala."""
+    normalized = unicodedata.normalize("NFC", text)
+    for apostrophe in _GH_APOSTROPHES:
+        normalized = normalized.replace(apostrophe, "ʼ")
+    normalized = normalized.replace("ǝ", "ə").replace("Ǝ", "Ə").replace("ɑ", "a").replace("Ɑ", "A")
+    normalized = normalized.replace("‐", "-")
+    normalized = _GH_SENTENCE_END.sub(f" {_GH_PAUSE_LONG} ", normalized)
+    normalized = normalized.replace(",", f" {_GH_PAUSE_SHORT} ")
+    normalized = _GH_OTHER_PUNCTUATION.sub(" ", normalized)
+    normalized = unicodedata.normalize("NFD", normalized.lower())
+
+    output: list[str] = []
+    for token in normalized.split():
+        if token not in _GH_PAUSES:
+            output.append(token)
+        elif output and output[-1][-1] in _GH_PAUSES:
+            if token == _GH_PAUSE_LONG:
+                output[-1] = output[-1][:-1] + _GH_PAUSE_LONG
+        elif output:
+            output[-1] += token
+    return " ".join(output)
+
+
+class GhomalaVitsSynthesizer:
+    """VITS Ghomala ajuste, avec la normalisation et le format WAV attendus par le modele."""
+
+    def __init__(self, path: Path, threads: int = 2, seed: int = 0) -> None:
+        import torch
+        from transformers import VitsModel, VitsTokenizer
+
+        torch.set_num_threads(threads)
+        self._torch = torch
+        self._tokenizer = VitsTokenizer.from_pretrained(path, local_files_only=True)
+        self._model = VitsModel.from_pretrained(path, local_files_only=True).eval()
+        config = json.loads((path / "kama_tts_config.json").read_text(encoding="utf-8"))
+        self._rate = int(config.get("frequence_echantillonnage", SAMPLE_RATE))
+        self._model.noise_scale = float(config.get("bruit", 0.667))
+        self._model.noise_scale_duration = float(config.get("bruit_duree", 0.8))
+        self._model.speaking_rate = float(config.get("vitesse", 1.0))
+        self._seed = seed
+        self._lock = threading.Lock()
+
+    def synthesize(self, text: str) -> bytes:
+        import numpy as np
+
+        if re.search(r"\d", text):
+            raise ValueError("Texte Ghomala non masque : les chiffres ne doivent pas etre synthetises.")
+        normalized = normaliser_ghomala_tts(text)
+        if not normalized:
+            raise ValueError("Texte vide apres normalisation.")
+        if normalized[-1] not in _GH_PAUSES:
+            normalized += _GH_PAUSE_LONG
+
+        with self._lock, self._torch.inference_mode():
+            self._torch.manual_seed(self._seed)
+            waveform = self._model(**self._tokenizer(normalized, return_tensors="pt")).waveform[0]
+            samples = waveform.float().cpu().numpy()
+        pcm = (np.clip(samples, -1.0, 1.0) * 32767).astype("<i2").tobytes()
+        return pcm16_to_wav(pcm, self._rate)
+
+
 ASR_FACTORIES = {"omnilingual_ctc": OnnxCtcRecognizer, "hf_ctc": HfCtcRecognizer}
-TTS_FACTORIES = {"mms_vits": MmsVitsSynthesizer}
+TTS_FACTORIES = {"mms_vits": MmsVitsSynthesizer, "ghomala_vits": GhomalaVitsSynthesizer}

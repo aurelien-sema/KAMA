@@ -2160,3 +2160,77 @@ Chaque fenêtre donnait trop d'informations : au lieu d'aider, Kama risquait de 
 **Auteur :** Omar (réalisé par Claude Code)
 
 « Ma langue » et « Je préfère » restent orange, mais passent de Krona One à DM Sans gras, en 20 px : Krona One paraissait trop lourd à cette taille. En gras à 20 px, ces titres comptent comme du « grand texte » pour l'accessibilité, donc l'orange reste lisible sur blanc. Capture vérifiée en pidgin ; compilation sans erreur.
+
+
+## 2026-11-14 — Intégration des trois agents, modèles de traduction dans le dépôt, mise sur `main`
+
+### En bref
+
+- La branche `dimitri` réunit désormais le travail de quatre branches : les garde-fous de traduction (agent A), la voie 3 pour les messages inconnus (agent B), l'assistant vocal (agent D) et le travail « tout Kama en pidgin ».
+- Les trois modèles de traduction (pidgin → anglais v2, français → anglais et anglais → français) sont dans le dépôt, ainsi que leurs fiches `MODELE.md`.
+- `dimitri` a été poussée, puis mise sur `main` (`67be4fb` → `8456dd0`). **La CI se déclenche sur `main` et déploie sur le VPS : à vérifier.**
+- Le modèle STT (2,4 Go) n'est **pas** dans le dépôt. Le LLM n'a **pas** de mesure de qualité enregistrée.
+
+### Ce qui a été fait
+
+**Garde-fous de traduction (agent A, `score-A`, fusion `393626c`)**
+- Contrôle des termes critiques (table `content-data/termes_critiques_wes.json`) et des négations sur la sortie du modèle.
+- Modèle limité aux types d'éléments autorisés pour la démo (`critical_model_elements`).
+- Masquage des valeurs de l'en-tête de la page ; casse d'origine de la sélection ; annonces en pidgin à la place des replis en français.
+- Mesure sur les 60 traductions inédites de la v2 : 46 acceptées, 14 refusées (toutes justifiées). Quatre contresens passent encore : à traiter (voir Limites).
+
+**Voie 3 : contenu inédit (agent B, `4686ce8`, fusion `67be4fb`)**
+- Classeur déterministe `lib/categories.ts` (16 catégories, testé) : un message inconnu est rangé avant tout appel au modèle.
+- Une explication pidgin par catégorie, en brouillon ; affichage dans les éléments découverts ; `voie3_a_valider.md` produit pour le locuteur.
+
+**Assistant vocal (agent D, `42d4736`, fusion `2b98bf0`)**
+- Moteur STT `hf_ctc` avec le modèle w2v-BERT pidgin (`wbert-wes-v1`, quantifié int8) configuré comme moteur par défaut ; Omnilingual reste en repli.
+- Moteur LLM `llama_cpp` avec LFM2-700M-Q4_K_M (Liquid AI, licence LFM Open v1.0, empreinte SHA-256 vérifiée dans `PROVENANCE.txt`).
+- Route `/v1/voice/ask`, filtre de sécurité vocale (`voice_guard.py`), réponse de repli fixe en pidgin.
+- Trois conflits de fusion résolus (`engines.py`, `services.py`, `conftest.py`) : les garde-fous de traduction et le service de traduction partagé sont conservés.
+
+**Tout Kama en pidgin (`7fc7f33`)**
+- Textes de Kama sans version pidgin ajoutés en brouillon à `content-data/kama_interface.json` (183 entrées) ; `config/interface.json` régénéré (277 brouillons pidgin).
+- Phrases modèles avec « libellé » ou nombre gérées (`lib/interface.ts`, `lib/traduction.ts`).
+- Test permanent `tests/pidgin-complet.test.mjs` : chaque phrase de Kama a sa version pidgin.
+
+**Modèles de traduction dans le dépôt**
+- `models/poids/ct2/pidgin_en_wes_ajuste_v2/` (`190c59e`, 76 Mo) : anglais → pidgin, dérivé de jamm55 (**licence non déclarée**, usage démonstration uniquement).
+- `models/poids/ct2/opus-mt-fr-en/` et `opus-mt-en-fr/` (`134c82a`, Apache 2.0).
+- Exception ciblée dans `.gitignore` : seuls ces dossiers entrent dans Git.
+
+**Préparation du modèle pidgin → anglais (`training/pidgin_pcm_en/`)**
+- Données inversées depuis `pidgin_m2m` : 12 242 paires d'entraînement, 600 de développement, 77 de test SOREVA, sans fuite. Données hors Git.
+- Code : `preparer.py`, `entrainer.py` (base `NITHUB-AI/marian-mt-bbc-pcm-en`), `evaluer.py`, carnet Kaggle `entrainement_pcm_en_kaggle.ipynb`.
+- **Entraînement non lancé.**
+
+**Fusions et pushs**
+- `origin/main` (déploiement d'Eunice) fusionné dans `score-B` sans conflit, puis `score-B` poussée sur `main`.
+- `dimitri` fusionnée avec `origin/dimitri` (modèles recopiés sur GitHub avec des identifiants de commit différents) ; conflit unique dans `.gitignore`, résolu.
+- Tests au moment de la mise sur `main` : extension 115 sur 115, types OK ; serveur 209 réussis, 1 sauté.
+
+### Limites connues
+
+- **Modèle STT absent du dépôt** : 2,4 Go, au-delà de la limite GitHub ; un dépôt Hugging Face privé est à prévoir, avec un script de téléchargement.
+- **LLM sans mesure enregistrée** : ni jeu d'Omar, ni cas de sécurité, ni latence. Tant que ces mesures ne sont pas faites, il ne doit pas entrer dans la version jury.
+- **Mesure int8 du STT non faite** : l'écart avec la version non quantifiée (50,7 % de mots faux sur SOREVA) n'est pas vérifié.
+- **Fichier SOREVA du STT** : introuvable dans `evaluation/results/stt/` ; le chiffre vient du journal de mesure.
+- **Contresens encore acceptés par les garde-fous** : « Your card don pass. Ask some new person. », « pass the mountain », « If you dei inside danger », « Give this code for the person weh ih want send ya money ».
+- **Modèle pidgin → anglais** : non entraîné ; le modèle `pcm_en` actuel vient de BBC Pidgin (nigérian) et n'a jamais été mesuré sur le pidgin camerounais.
+- **Licence de la v2** : jamm55 ne déclare aucune licence.
+- **Serveur hébergé** : `KAMA_ALLOWED_ORIGINS` doit contenir l'identifiant `nneecloagollpakilpepnamdaelmgkbn`, et les modèles hors Git doivent y être copiés. À confirmer par Eunice.
+- **Ghomálá'** : toujours sélectionnable alors que rien n'est traduit ; à passer en « Bientôt » tant que les modèles ne sont pas branchés et validés.
+
+### Ce qui reste à faire
+
+| Qui | Quoi |
+|---|---|
+| Dimitri | Vérifier la CI sur `main` (tests et déploiement), puis `kama-project.duckdns.org/healthz` |
+| Dimitri | Décider du dépôt Hugging Face pour le modèle STT et le LLM |
+| Dimitri | Lancer `entrainement_pcm_en_kaggle.ipynb` (essai puis entraînement) |
+| Eunice | `KAMA_ALLOWED_ORIGINS` sur le VPS ; copie des modèles hors Git |
+| Locuteur pidgin | Valider les textes critiques et les 16 explications de la voie 3 (`voie3_a_valider.md`) ; les variantes des termes critiques ; réécouter les 73 extraits audio |
+| Équipe | Mesures du LLM (jeu d'Omar, sécurité, latence) avant toute décision sur la version jury |
+| Équipe | Trancher la licence de la v2 (accord de jamm55 ou mention « démonstration ») |
+
+Signé : Dimitri, 2026-11-14
