@@ -62,7 +62,16 @@ export function intentionConnue(valeur: unknown): Intention {
  * ou `reseau` (pas de connexion, serveur muet).
  */
 export type ResultatIntention =
-  | { ok: true; intention: Intention; confiance: number }
+  | {
+      ok: true;
+      intention: Intention;
+      confiance: number;
+      /** Pidgin réellement entendu (absent si la personne a dit un code ou un numéro). */
+      entendu?: string;
+      /** Réponse du modèle local, en pidgin ou en anglais si son contenu est critique. */
+      reponse?: string;
+      badge?: 'machine' | 'untranslated';
+    }
   | { ok: false; code: string };
 
 /** Erreurs d'accès au micro. `refuse` : Kama n'a pas (encore) l'autorisation du micro. */
@@ -70,7 +79,7 @@ export type ErreurMicro = 'refuse' | 'absent' | 'indisponible';
 
 /** Page → service worker. */
 export type CommandeMicro =
-  | { type: 'demarrer'; langue: string }
+  | { type: 'demarrer'; langue: string; contexte: string }
   | { type: 'arreter' }
   | { type: 'reessayer' };
 

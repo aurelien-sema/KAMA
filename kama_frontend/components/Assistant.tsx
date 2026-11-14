@@ -18,16 +18,19 @@
  * La voix ne passe jamais par la page : elle va du document caché au service worker, qui la
  * garde en mémoire seulement le temps de pouvoir « Réessayer ».
  */
-import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { Mic, RotateCw, ShieldCheck } from 'lucide-react';
 import type { MicMode } from '@/components/kama/fenetre/KamaWindow';
 import { Reflexion, TalkIdleContent, TalkListeningContent } from '@/components/kama/fenetre/contents';
 import { Consentement } from '@/components/kama/fenetre/parler';
-import { KamaLine, UserBubble, WindowButton } from '@/components/kama/fenetre/parts';
+import { Amount, KamaLine, StatusBadge, UserBubble, WindowButton } from '@/components/kama/fenetre/parts';
 import { ContenuReel, type VueReelle } from '@/components/kama/fenetre/reel';
 import type { Langue } from '@/config/langues';
 import { PHRASES } from '@/config/phrases';
 import { jouerParoles } from '@/lib/audio';
+import { contextePage } from '@/lib/contexte-page';
+import { demasquer } from '@/lib/masquage';
+import type { Parole } from '@/lib/traduction';
 import { LectureAuto, useLectureAuto } from '@/lib/langue-courante';
 import { lirePage } from '@/lib/lecture-page';
 import type { ErreurMicro, EvenementMicro, Intention, ResultatIntention } from '@/lib/messages';
@@ -46,9 +49,12 @@ type Bulle =
   | { id: number; de: 'toi'; duree: number; compris?: string }
   | { id: number; de: 'kama'; titre: string; texte?: string; reessayer?: Reprise; autoriser?: boolean }
   /** Réponse construite à partir de la page (solde, frais, explication…). */
-  | { id: number; de: 'reponse'; vue: VueReelle };
+  | { id: number; de: 'reponse'; vue: VueReelle }
+  /** Réponse du modèle local : pidgin, badge « Traduction automatique », jamais de montant inventé. */
+  | { id: number; de: 'machine'; texte: string; valeurs: Record<string, string>; badge: 'machine' | 'untranslated' };
 
 const NB_BARRES = 18;
+const ANNONCE_NON_TRADUIT = 'Kama no fit translate dis one well. Read am well or ask your bank.';
 
 type MontrerFn = (cible: string) => void;
 
@@ -60,6 +66,8 @@ export function useAssistant({ langue, onShowMe }: { langue: Langue | null; onSh
   const [aLire, setALire] = useState<number | null>(null);
   const [niveaux, setNiveaux] = useState<number[]>(() => Array(NB_BARRES).fill(0));
   const compteur = useRef(0);
+  /** Valeurs de la page derrière les {xN} du contexte : elles ne quittent pas l'extension. */
+  const valeursContexte = useRef<Record<string, string>>({});
 
   // Le micro de Kama (via le service worker). Les événements passent par une référence pour
   // toujours utiliser la dernière version de `traiter`.
@@ -89,7 +97,10 @@ export function useAssistant({ langue, onShowMe }: { langue: Langue | null; onSh
     setALire(null);
     setNiveaux(Array(NB_BARRES).fill(0));
     setEtat('ecoute');
-    micro.current?.demarrer(langue?.code ?? 'fr');
+    // Contexte lu maintenant et masqué ici : seules les balises {xN} partiront au serveur.
+    const contexte = contextePage();
+    valeursContexte.current = contexte.valeurs;
+    micro.current?.demarrer(langue?.code ?? 'fr', contexte.texte);
   }
 
   traiterRef.current = (e) => {
@@ -122,6 +133,17 @@ export function useAssistant({ langue, onShowMe }: { langue: Langue | null; onSh
   };
 
   function repondre(r: ResultatIntention) {
+    if (r.ok && r.reponse) {
+      // Question hors grammaire fermee : on montre le pidgin entendu, puis la reponse machine.
+      if (r.entendu) noterCompris(`« ${r.entendu} »`);
+      ajouter({
+        de: 'machine',
+        texte: r.reponse,
+        valeurs: valeursContexte.current,
+        badge: r.badge === 'untranslated' ? 'untranslated' : 'machine',
+      });
+      return;
+    }
     // Question comprise : on note sous le message vocal ce que Kama a compris.
     if (r.ok && SENS[r.intention]) noterCompris(SENS[r.intention]);
     const reponse = reponsePour(r, bulles);
@@ -333,6 +355,8 @@ function Conversation({
         <LectureAuto.Provider key={b.id} value={lectureAuto && b.id === aLire}>
           {b.de === 'toi' ? (
             <MessageVocal duree={b.duree} compris={b.compris} />
+          ) : b.de === 'machine' ? (
+            <ReponseMachine texte={b.texte} valeurs={b.valeurs} badge={b.badge} />
           ) : b.de === 'reponse' ? (
             <ContenuReel vue={b.vue} onShowMe={onShowMe} />
           ) : (
@@ -377,6 +401,48 @@ function MessageVocal({ duree, compris }: { duree: number; compris?: string }) {
         </span>
       )}
     </div>
+  );
+}
+
+/**
+ * Réponse du modèle local : pidgin avec ses {xN} remplacés par les valeurs de la page, badge
+ * « Traduction automatique », lue avec la voix pidgin du serveur (repli : voix du navigateur).
+ */
+function ReponseMachine({
+  texte,
+  valeurs,
+  badge,
+}: {
+  texte: string;
+  valeurs: Record<string, string>;
+  badge: 'machine' | 'untranslated';
+}) {
+  const lectureAuto = useLectureAuto();
+  const lu = useRef(false);
+  const paroles = useMemo<Parole[]>(
+    () => [{ texte: badge === 'untranslated' ? ANNONCE_NON_TRADUIT : texte, valeurs, langue: 'wes' }],
+    [badge, texte, valeurs],
+  );
+  const morceaux = demasquer(texte, valeurs) ?? [texte];
+  const dit = morceaux.map((m) => (typeof m === 'string' ? m : m.montant)).join('');
+  const speech = badge === 'untranslated' ? ANNONCE_NON_TRADUIT : dit;
+
+  useEffect(() => {
+    if (!lectureAuto || lu.current) return;
+    lu.current = true;
+    jouerParoles(paroles).catch(() => lireTexte(speech));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lectureAuto]);
+
+  return (
+    <KamaLine speech={speech} paroles={paroles}>
+      <div className="flex items-start gap-2">
+        <p className="m-0">
+          {morceaux.map((m, i) => (typeof m === 'string' ? m : <Amount key={i}>{m.montant}</Amount>))}
+        </p>
+        <StatusBadge status={badge === 'untranslated' ? 'untranslated' : 'auto'} />
+      </div>
+    </KamaLine>
   );
 }
 

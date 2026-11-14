@@ -14,6 +14,15 @@ export type IntentionApi =
   | 'ask_balance' | 'ask_fees' | 'ask_total' | 'what_to_do' | 'explain_error' | 'summarize_transactions' | 'repeat' | 'unknown';
 
 export type ReponseTraduction = { text: string | null; badge: BadgeApi; origin: string; reason: string | null };
+/** Réponse de l'assistant : le pidgin entendu, puis la réponse pidgin (jamais un montant inventé). */
+export type ReponseAsk = {
+  heard: string;
+  intent: IntentionApi;
+  confidence: number;
+  answer: string | null;
+  badge: 'machine' | 'untranslated';
+  reason: string;
+};
 export type SegmentAudio = { type: 'audio'; format: 'wav'; data: string; origin: 'recorded' | 'synthetic' } | { type: 'slot'; name: string };
 export type LangueServeur = { code: string; name: string; translation_from: string[]; asr: boolean; tts: boolean };
 
@@ -21,7 +30,8 @@ export type DemandeApi =
   | { type: 'kama:api'; route: 'capabilities' }
   | { type: 'kama:api'; route: 'translate'; corps: { text: string; source_lang: 'fr' | 'en'; target_lang: string; element: ElementApi } }
   | { type: 'kama:api'; route: 'tts'; corps: { text: string; lang: string } }
-  | { type: 'kama:api'; route: 'intent'; lang: string; wavBase64: string };
+  | { type: 'kama:api'; route: 'intent'; lang: string; wavBase64: string }
+  | { type: 'kama:api'; route: 'ask'; lang: string; wavBase64: string; contexte: string };
 
 export type ReponseBrute = { ok: true; donnees: unknown } | { ok: false; code: string; statut: number };
 
@@ -124,6 +134,10 @@ export const synthetiser = (text: string, lang: string) =>
 
 export const reconnaitreIntention = (wav: Uint8Array, lang: string) =>
   appeler<{ intent: IntentionApi; confidence: number }>({ type: 'kama:api', route: 'intent', lang, wavBase64: versBase64(wav) });
+
+/** Question vocale : le serveur répond avec le texte entendu et, si besoin, une réponse pidgin. */
+export const demanderKama = (wav: Uint8Array, lang: string, contexte: string) =>
+  appeler<ReponseAsk>({ type: 'kama:api', route: 'ask', lang, wavBase64: versBase64(wav), contexte });
 
 export function versBase64(octets: Uint8Array) {
   let s = '';

@@ -5,3 +5,6 @@
 onnxruntime==1.22.0
 torch==2.8.0
 transformers==4.57.6
+# LLM local de l'assistant vocal. Windows : roue CPU officielle
+# https://github.com/abetlen/llama-cpp-python/releases/download/v0.3.36/llama_cpp_python-0.3.36-py3-none-win_amd64.whl
+llama-cpp-python==0.3.36

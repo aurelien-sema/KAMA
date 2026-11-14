@@ -7,6 +7,7 @@ import io
 import json
 import logging
 import re
+import time
 import unicodedata
 import wave
 from dataclasses import dataclass
@@ -17,9 +18,10 @@ from .clips import piece_key, split_pieces
 from .engines import EngineSet, TranslationRoute, load_engines
 from .errors import KamaError, busy, unmasked, unsupported_language
 from .memory import TranslationMemory
-from .schemas import AudioSegment, IntentResponse, SlotSegment, TranslateRequest, TranslateResponse, TtsResponse
+from .schemas import AskResponse, AudioSegment, IntentResponse, SlotSegment, TranslateRequest, TranslateResponse, TtsResponse
 from .security.guards import CriticalTerms, canonical, is_critical, output_problem, similarity
-from .security.masking import SLOT_RE, has_hard_pii, is_masked
+from .security.masking import SLOT_RE, has_hard_pii, is_masked, mask
+from .security.voice_guard import FALLBACK, SENSITIVE_SPEECH, answer_problem, sensitive_speech
 from .settings import Settings
 from .simplify import Simplifier
 
@@ -30,10 +32,24 @@ MAX_AUDIO_SECONDS = 30
 MIN_AUDIO_SECONDS = 0.2
 FUZZY_MIN = 0.85  # ressemblance minimale pour accepter une phrase approchante
 FUZZY_GAP = 0.05  # ecart minimal avec la deuxieme intention
+LLM_MAX_CONTEXT = 1500
+LLM_MAX_QUESTION = 500
+LLM_TIMEOUT_S = 20.0
 
 
 def untranslated(reason: str) -> TranslateResponse:
     return TranslateResponse(text=None, badge="untranslated", origin="none", reason=reason)
+
+
+def _clip(text: str, limit: int) -> str:
+    """Tronque sans couper une balise {xN} en deux."""
+    if len(text) <= limit:
+        return text
+    cut = text[:limit]
+    opening = cut.rfind("{")
+    if opening != -1 and "}" not in cut[opening:]:
+        cut = cut[:opening]
+    return cut.strip()
 
 
 _WORD = re.compile(r"[a-zà-ÿ']+")
@@ -96,6 +112,32 @@ class TranslationService:
             except Exception as exc:
                 log.warning("moteur en echec (%s)", type(exc).__name__)
                 return untranslated("engine_error")
+
+    async def translate_between(self, text: str, direction: str) -> str | None:
+        """Traduit un texte deja masque dans un sens donne (ex. `wes>en`), avec les controles de la route.
+
+        Reserve a l'assistant vocal : le texte genere par le LLM n'est pas un texte de page critique,
+        mais il passe quand meme les gardes de la route (balises, chiffres, derive religieuse, lexique).
+        """
+        if not is_masked(text):
+            return None
+        route = self.engines.translation.get(direction)
+        if route is None or self.gate.locked():
+            return None
+        async with self.gate:
+            try:
+                return await asyncio.to_thread(self._run_direction, text, route)
+            except Exception as exc:
+                log.warning("moteur en echec (%s)", type(exc).__name__)
+                return None
+
+    def _run_direction(self, text: str, route: TranslationRoute) -> str | None:
+        output = route.translator.translate(text)
+        if output_problem(text, output) or religious_drift(text, output):
+            return None
+        if route.lexicon is not None and unknown_ratio(output, route.lexicon) > route.max_unknown_ratio:
+            return None
+        return output
 
     def _run_model(self, req: TranslateRequest, route: TranslationRoute) -> TranslateResponse:
         output = route.translator.translate(req.text)
@@ -177,8 +219,18 @@ def read_pcm(audio: bytes) -> bytes:
 
 
 class SpeechService:
-    def __init__(self, engines: EngineSet, intents: IntentMatcher, gate: asyncio.Semaphore) -> None:
+    def __init__(
+        self,
+        engines: EngineSet,
+        intents: IntentMatcher,
+        gate: asyncio.Semaphore,
+        llm_gate: asyncio.Semaphore | None = None,
+        translation: "TranslationService | None" = None,
+    ) -> None:
         self.engines, self.intents, self.gate = engines, intents, gate
+        self.llm_gate = llm_gate or asyncio.Semaphore(1)
+        self.translation = translation
+        self._llm_busy = False
 
     async def voice_intent(self, audio: bytes, lang: str) -> IntentResponse:
         """Le texte reconnu et l'audio restent en memoire et ne sortent pas de cette fonction.
@@ -200,6 +252,110 @@ class SpeechService:
                 log.warning("reconnaissance en echec (%s)", type(exc).__name__)
                 raise KamaError(503, "asr_unavailable", "La reconnaissance vocale a échoué.") from None
         return self.intents.match(transcript, lang)
+
+    async def voice_ask(self, audio: bytes, lang: str, context: str) -> AskResponse:
+        """Question posee a voix haute : STT, puis grammaire fermee, puis LLM local sous controle.
+
+        Rien n'est stocke ni journalise du contenu : seules les durees et le statut sortent de cette
+        fonction (vers l'extension pour le texte, vers le journal pour les durees).
+        """
+        if lang not in self.engines.languages:
+            raise unsupported_language()
+        pcm = read_pcm(audio)
+        recognizer = self.engines.asr.get(lang)
+        if recognizer is None:
+            raise KamaError(503, "asr_unavailable", "La reconnaissance vocale n'est pas disponible pour cette langue.")
+        if self.gate.locked():
+            raise busy()
+
+        def fallback(reason: str, heard: str = "") -> AskResponse:
+            return AskResponse(heard=heard, answer=FALLBACK, reason=reason)
+
+        started = time.perf_counter()
+        async with self.gate:
+            try:
+                heard = await asyncio.to_thread(recognizer.transcribe, pcm)
+            except Exception as exc:  # le message pourrait citer ce qui a ete dit
+                log.warning("reconnaissance en echec (%s)", type(exc).__name__)
+                raise KamaError(503, "asr_unavailable", "La reconnaissance vocale a échoué.") from None
+        stt_ms = int((time.perf_counter() - started) * 1000)
+
+        # a) Ce qui est dit a voix haute ne part jamais vers un modele : code, numero, lien.
+        if sensitive_speech(heard):
+            log.info("ask stt=%dms sensitive_speech", stt_ms)
+            return AskResponse(heard="", answer=SENSITIVE_SPEECH, reason="sensitive_speech")
+
+        # b) Les reponses validees existantes restent prioritaires.
+        intent = self.intents.match(heard, lang)
+        if intent.intent != "unknown":
+            log.info("ask stt=%dms intent=%s", stt_ms, intent.intent)
+            return AskResponse(heard=heard, intent=intent.intent, confidence=intent.confidence, answer=None, reason="intent")
+
+        if self.engines.llm is None:
+            log.info("ask stt=%dms llm_unavailable", stt_ms)
+            return fallback("llm_unavailable", heard)
+        if self._llm_busy:
+            raise busy()
+        if self.translation is None:
+            log.info("ask stt=%dms translation_unavailable", stt_ms)
+            return fallback("translation_unavailable", heard)
+
+        # c) pidgin -> anglais, sur le texte masque seulement.
+        question = _clip(mask(heard).text, LLM_MAX_QUESTION)
+        if not re.search(r"[A-Za-zÀ-ÿ]{2}", SLOT_RE.sub("", question)):
+            log.info("ask stt=%dms nothing_to_ask", stt_ms)
+            return fallback("nothing_to_ask", heard)
+        before = time.perf_counter()
+        english = await self.translation.translate_between(question, f"{lang}>en")
+        in_ms = int((time.perf_counter() - before) * 1000)
+        if english is None:
+            log.info("ask stt=%dms in=%dms translation_unavailable", stt_ms, in_ms)
+            return fallback("translation_unavailable", heard)
+        if (problem := answer_problem(english, context, question=question)) is not None:
+            log.info("ask stt=%dms in=%dms guard=%s", stt_ms, in_ms, problem)
+            return fallback(f"guard_failed:{problem}", heard)
+
+        # d) LLM local : une seule generation a la fois, 20 s au plus.
+        self._llm_busy = True
+        before = time.perf_counter()
+        try:
+            async with self.llm_gate:
+                try:
+                    english = await asyncio.wait_for(
+                        asyncio.to_thread(self.engines.llm.answer, english, _clip(context, LLM_MAX_CONTEXT)),
+                        timeout=LLM_TIMEOUT_S + 2,
+                    )
+                except asyncio.TimeoutError:
+                    log.info("ask stt=%dms in=%dms llm_timeout", stt_ms, in_ms)
+                    return fallback("llm_timeout", heard)
+                except Exception as exc:
+                    log.warning("generation en echec (%s)", type(exc).__name__)
+                    return fallback("llm_error", heard)
+        finally:
+            self._llm_busy = False
+        llm_ms = int((time.perf_counter() - before) * 1000)
+        if (problem := answer_problem(english, context, question=question)) is not None:
+            log.info("ask stt=%dms in=%dms llm=%dms guard_en=%s", stt_ms, in_ms, llm_ms, problem)
+            return fallback(f"guard_failed:{problem}", heard)
+
+        if is_critical(english):
+            log.info("ask stt=%dms in=%dms llm=%dms critical_untranslated", stt_ms, in_ms, llm_ms)
+            return AskResponse(heard=heard, answer=english, badge="untranslated", reason="critical_untranslated")
+
+        # e) anglais -> pidgin, avec les controles de la route existante.
+        before = time.perf_counter()
+        pidgin = await self.translation.translate_between(english, "en>wes")
+        out_ms = int((time.perf_counter() - before) * 1000)
+        if pidgin is None:
+            log.info("ask stt=%dms in=%dms llm=%dms out=%dms translation_unavailable", stt_ms, in_ms, llm_ms, out_ms)
+            return fallback("translation_unavailable", heard)
+        route = self.engines.translation.get("en>wes")
+        if (problem := answer_problem(pidgin, context, question=heard, lexicon=route.lexicon if route else None)) is not None:
+            log.info("ask stt=%dms in=%dms llm=%dms out=%dms guard_wes=%s", stt_ms, in_ms, llm_ms, out_ms, problem)
+            return fallback(f"guard_failed:{problem}", heard)
+
+        log.info("ask stt=%dms in=%dms llm=%dms out=%dms ok", stt_ms, in_ms, llm_ms, out_ms)
+        return AskResponse(heard=heard, answer=pidgin, reason="llm")
 
     async def synthesize(self, text: str, lang: str) -> TtsResponse:
         """Ne synthetise que les morceaux entre les balises.
@@ -263,8 +419,9 @@ def build_services(settings: Settings, engines: EngineSet | None = None) -> Serv
     intents = IntentMatcher.from_file(settings.content_dir / "intents.json")
     critical = CriticalTerms.from_file(settings.content_dir / "termes_critiques_wes.json")
     gate = asyncio.Semaphore(settings.max_concurrent_models)
+    translation = TranslationService(memory, engines, settings, gate, critical)
     return Services(
         engines,
-        TranslationService(memory, engines, settings, gate, critical),
-        SpeechService(engines, intents, gate),
+        translation,
+        SpeechService(engines, intents, gate, asyncio.Semaphore(1), translation),
     )

@@ -81,12 +81,16 @@ def test_the_embedded_glossary_matches_what_the_server_serves():
     assert embedded["fr"] == generated["fr"] and embedded["en"] == generated["en"], "glossaire embarque perime : python -m app.export_glossary"
 
 
-def test_demo_routes_differ_from_default_routes_only_by_the_microphone():
-    """config/routes.demo.json (scripts/lancer_demo.ps1) ne doit pas deriver de routes.json : seule la reconnaissance du pidgin change."""
+def test_demo_routes_keep_llm_disabled_and_only_change_demo_settings():
+    """La demo garde le LLM coupe apres evaluation; seule l'ASR pidgin peut sinon differer des routes par defaut."""
     default = json.loads((REPO_DIR / "backend" / "config" / "routes.json").read_text(encoding="utf-8"))
     demo = json.loads((REPO_DIR / "backend" / "config" / "routes.demo.json").read_text(encoding="utf-8"))
     assert demo["asr"]["wes"]["enabled"] is True
+    assert demo["llm"]["enabled"] is False
+    default.pop("_note", None)
+    demo.pop("_note", None)
     demo["asr"]["wes"]["enabled"] = default["asr"]["wes"]["enabled"]
+    demo["llm"]["enabled"] = default["llm"]["enabled"]
     assert demo == default
 
 

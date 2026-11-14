@@ -1,6 +1,7 @@
 """Serveur intermediaire de Kama : sans etat, sans base de donnees, sans journal du contenu."""
 from __future__ import annotations
 
+import base64
 import logging
 
 from fastapi import FastAPI, Header, Request
@@ -9,8 +10,9 @@ from fastapi.responses import JSONResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from .errors import KamaError, error_body
-from .schemas import Capabilities, IntentResponse, LanguageInfo, Limits, TranslateRequest, TranslateResponse, TtsRequest, TtsResponse
-from .security.middleware import BodyLimit, ContentFreeLog, OriginGuard, RateLimit, SecurityHeaders
+from .schemas import AskResponse, Capabilities, IntentResponse, LanguageInfo, Limits, TranslateRequest, TranslateResponse, TtsRequest, TtsResponse
+from .security.masking import is_masked
+from .security.middleware import ASK_PATH, BodyLimit, ContentFreeLog, OriginGuard, RateLimit, SecurityHeaders
 from .services import MAX_AUDIO_SECONDS, Services, build_services
 from .settings import Settings, load_settings
 
@@ -95,5 +97,36 @@ def create_app(settings: Settings | None = None, services: Services | None = Non
         if content_type != "audio/wav":
             raise KamaError(415, "invalid_audio", "Format attendu : WAV PCM 16 bits, 16 kHz, mono.")
         return await services.speech.voice_intent(await request.body(), x_kama_lang)
+
+    @app.post(
+        ASK_PATH,
+        response_model=AskResponse,
+        tags=["voix"],
+        openapi_extra={
+            "requestBody": {"required": True, "content": {"audio/wav": {"schema": {"type": "string", "format": "binary"}}}}
+        },
+    )
+    async def voice_ask(
+        request: Request,
+        x_kama_lang: str = Header(min_length=2, max_length=8),
+        x_kama_context: str = Header("", alias="X-Kama-Context-B64", max_length=4096),
+    ) -> AskResponse:
+        """Question a voix haute -> texte entendu + reponse pidgin (ou intention validee).
+
+        Le contexte de page est transmis DEJA MASQUE, en base64, dans un en-tete : il ne peut pas
+        contenir de montant, de nom ni de numero en clair. Rien n'est ecrit dans les journaux.
+        """
+        content_type = request.headers.get("content-type", "").split(";")[0].strip().lower()
+        if content_type != "audio/wav":
+            raise KamaError(415, "invalid_audio", "Format attendu : WAV PCM 16 bits, 16 kHz, mono.")
+        try:
+            context = base64.b64decode(x_kama_context, validate=True).decode("utf-8")
+        except (ValueError, UnicodeDecodeError):
+            raise KamaError(422, "invalid_context", "Contexte de page illisible.") from None
+        if len(context) > 1500:
+            raise KamaError(422, "invalid_context", "Contexte de page trop long.")
+        if context and not is_masked(context):
+            raise KamaError(422, "unmasked_context", "Le contexte de page doit etre masque.")
+        return await services.speech.voice_ask(await request.body(), x_kama_lang, context)
 
     return app
