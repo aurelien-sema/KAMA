@@ -60,6 +60,18 @@ class IntentResponse(Strict):
     confidence: float = Field(ge=0, le=1)
 
 
+class AskResponse(Strict):
+    """Reponse de l'assistant : texte entendu (pidgin), intention si la grammaire fermee reconnait,
+    sinon reponse pidgin. `answer` est null quand une reponse validee existante doit etre utilisee."""
+
+    heard: str = Field(description="Texte pidgin entendu ; vide si la personne a dit un code ou un numero.")
+    intent: Intent = "unknown"
+    confidence: float = Field(0.0, ge=0, le=1)
+    answer: str | None = Field(description="Reponse pidgin avec ses {xN}, ou null.")
+    badge: Literal["machine"] = Field("machine", description="Toujours une reponse automatique.")
+    reason: str = Field(description="intent, llm, guard_failed, sensitive_speech, engine_unavailable...")
+
+
 class LanguageInfo(Strict):
     code: str
     name: str

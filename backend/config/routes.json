@@ -21,6 +21,12 @@
       "engine": "marian_ct2",
       "path": "poids/ct2/pidgin_en_wes_ajuste_v2"
     },
+    "wes>en": {
+      "enabled": true,
+      "internal": true,
+      "engine": "marian_ct2",
+      "path": "poids/ct2/pcm_en"
+    },
     "en>wes": {
       "enabled": true,
       "engine": "pipeline",
@@ -58,12 +64,14 @@
   },
   "asr": {
     "wes": {
-      "enabled": false,
-      "engine": "omnilingual_ctc",
-      "path": "poids/asr/omnilingual-ctc-300m-onnx",
+      "enabled": true,
+      "engine": "hf_ctc",
+      "path": "poids/asr/wbert-wes-v1",
       "options": {
-        "threads": 2
-      }
+        "threads": 2,
+        "quantize": "int8"
+      },
+      "_repli": "omnilingual_ctc : poids/asr/omnilingual-ctc-300m-onnx (fallback, desactive)"
     },
     "bbj": {
       "enabled": false,
@@ -83,6 +91,19 @@
         "threads": 2,
         "speaker_id": 12
       }
+    }
+  },
+  "llm": {
+    "enabled": true,
+    "engine": "llama_cpp",
+    "path": "poids/llm/LFM2-700M-Q4_K_M.gguf",
+    "sha256": "684e8406dc13321452b3f6aeca432776e2a6a7e1ad6c23f7887b8fe3efbe2efa",
+    "options": {
+      "threads": 4,
+      "n_ctx": 1024,
+      "max_tokens": 120,
+      "temperature": 0.2,
+      "timeout_s": 20.0
     }
   }
 }

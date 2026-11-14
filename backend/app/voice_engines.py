@@ -87,9 +87,13 @@ class OnnxCtcRecognizer:
 
 
 class HfCtcRecognizer:
-    """Modele CTC au format transformers (wav2vec2, w2v-BERT, MMS...) : par exemple celui ajuste sur Common Voice (training/stt_pidgin)."""
+    """Modele CTC au format transformers (wav2vec2, w2v-BERT, MMS...) : par exemple celui ajuste sur Common Voice (training/stt_pidgin).
 
-    def __init__(self, path: Path, threads: int = 2) -> None:
+    `quantize="int8"` applique la quantification dynamique de torch aux couches Linear : la memoire
+    baisse nettement, pour un cout mesure sur 30 phrases SOREVA (voir evaluation/results/stt/).
+    """
+
+    def __init__(self, path: Path, threads: int = 2, quantize: str | bool | None = None) -> None:
         import torch
         from transformers import AutoModelForCTC, AutoProcessor
 
@@ -97,6 +101,8 @@ class HfCtcRecognizer:
         self._torch = torch
         self._processor = AutoProcessor.from_pretrained(path)
         self._model = AutoModelForCTC.from_pretrained(path).float().eval()
+        if quantize in (True, "int8", "int8_dynamic", "dynamic_int8"):
+            self._model = torch.quantization.quantize_dynamic(self._model, {torch.nn.Linear}, dtype=torch.qint8)
         self._lock = threading.Lock()
 
     def transcribe(self, pcm16: bytes) -> str:

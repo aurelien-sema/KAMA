@@ -117,5 +117,5 @@ def route(fn, **kw):
     return TranslationRoute(FakeTranslator(fn), **kw)
 
 
-def engines_with(translation=None, asr=None, tts=None):
-    return EngineSet({"bbj": "Ghomálá'", "wes": "Pidgin"}, translation or {}, asr or {}, tts or {})
+def engines_with(translation=None, asr=None, tts=None, llm=None):
+    return EngineSet({"bbj": "Ghomálá'", "wes": "Pidgin"}, translation or {}, asr or {}, tts or {}, llm=llm)
