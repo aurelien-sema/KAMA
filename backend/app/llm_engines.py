@@ -68,8 +68,11 @@ class LlamaCppChat:
         """Genere une reponse anglaise courte. Le contexte est encadre comme DONNEES, jamais comme consigne."""
         deadline = time.monotonic() + self._timeout
 
-        def out_of_time(_ids, _logits) -> bool:
-            return time.monotonic() > deadline
+        def stop_after_deadline(_ids, logits):
+            if time.monotonic() > deadline:
+                logits.fill(float("-inf"))
+                logits[self._llm.token_eos()] = 0.0
+            return logits
 
         messages = [
             {"role": "system", "content": SYSTEM_PROMPT},
@@ -88,7 +91,7 @@ class LlamaCppChat:
                 max_tokens=self._max_tokens,
                 temperature=self._temperature,
                 top_p=0.9,
-                stopping_criteria=[out_of_time],
+                logits_processor=[stop_after_deadline],
             )
         return str(result["choices"][0]["message"]["content"]).strip()
 

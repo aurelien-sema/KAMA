@@ -243,7 +243,7 @@ async function comprendre(wavBase64: string, langue: string): Promise<ResultatIn
     if (r.statut === 404) return comprendreIntention(wavBase64, langue);
     return { ok: false, code: r.code };
   }
-  const corps = r.donnees as { heard?: unknown; intent?: unknown; confidence?: unknown; answer?: unknown };
+  const corps = r.donnees as { heard?: unknown; intent?: unknown; confidence?: unknown; answer?: unknown; badge?: unknown };
   const intention = intentionConnue(corps.intent);
   const confiance = Number(corps.confidence) || 0;
   if (typeof corps.answer === 'string' && corps.answer) {
@@ -253,6 +253,7 @@ async function comprendre(wavBase64: string, langue: string): Promise<ResultatIn
       confiance,
       entendu: typeof corps.heard === 'string' ? corps.heard : '',
       reponse: corps.answer,
+      badge: corps.badge === 'untranslated' ? 'untranslated' : 'machine',
     };
   }
   return { ok: true, intention, confiance };

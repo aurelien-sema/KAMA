@@ -34,6 +34,8 @@ sys.path.insert(0, str(DEPOT / "evaluation"))
 from stt_eval import lire_audio, phrases  # noqa: E402
 from app.security.masking import mask  # noqa: E402
 
+ASK_MIN_INTERVAL_SECONDS = 11.0
+
 
 def contexte_masque() -> str:
     page = json.loads((DEPOT / "content-data" / "safinum_test_page.json").read_text(encoding="utf-8"))
@@ -76,10 +78,13 @@ def memoire_pic(pid: int | None) -> str:
 def nouvelles_durees(log: Path, position: int) -> tuple[str, int]:
     if not log.exists():
         return "", position
-    with log.open("r", encoding="utf-8", errors="replace") as f:
+    with log.open("rb") as f:
+        bom = f.read(2)
         f.seek(position)
-        texte = f.read()
+        raw = f.read()
         position = f.tell()
+    encoding = "utf-16-le" if bom == b"\xff\xfe" else "utf-8"
+    texte = raw.decode(encoding, errors="replace")
     lignes = re.findall(r"ask stt=(\d+)ms(?: in=(\d+)ms)?(?: llm=(\d+)ms)?(?: out=(\d+)ms)?[^\n]*", texte)
     if not lignes:
         return "", position
@@ -117,7 +122,12 @@ def main() -> None:
             f"{a.url}/v1/voice/ask",
             data=corps,
             method="POST",
-            headers={"Content-Type": "audio/wav", "X-Kama-Lang": "wes", "X-Kama-Context-B64": __import__("base64").b64encode(contexte.encode()).decode()},
+            headers={
+                "Content-Type": "audio/wav",
+                "Origin": "chrome-extension://nneecloagollpakilpepnamdaelmgkbn",
+                "X-Kama-Lang": "wes",
+                "X-Kama-Context-B64": __import__("base64").b64encode(contexte.encode()).decode(),
+            },
         )
         debut = time.perf_counter()
         try:
@@ -126,7 +136,10 @@ def main() -> None:
         except urllib.error.HTTPError as e:
             print(f"{i:2}. ERREUR HTTP {e.code} : {e.read().decode(errors='replace')[:200]}")
             continue
-        duree = time.perf_counter() - debut
+        finally:
+            duree = time.perf_counter() - debut
+            if i < len(data):
+                time.sleep(max(0, ASK_MIN_INTERVAL_SECONDS - duree))
         total += duree
         etapes, position = nouvelles_durees(a.log, position) if a.log else ("", position)
         entendu = corps_reponse.get("heard") or "(non affiché : code ou numéro)"

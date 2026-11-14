@@ -51,9 +51,10 @@ type Bulle =
   /** Réponse construite à partir de la page (solde, frais, explication…). */
   | { id: number; de: 'reponse'; vue: VueReelle }
   /** Réponse du modèle local : pidgin, badge « Traduction automatique », jamais de montant inventé. */
-  | { id: number; de: 'machine'; texte: string; valeurs: Record<string, string> };
+  | { id: number; de: 'machine'; texte: string; valeurs: Record<string, string>; badge: 'machine' | 'untranslated' };
 
 const NB_BARRES = 18;
+const ANNONCE_NON_TRADUIT = 'Kama no fit translate dis one well. Read am well or ask your bank.';
 
 type MontrerFn = (cible: string) => void;
 
@@ -135,7 +136,12 @@ export function useAssistant({ langue, onShowMe }: { langue: Langue | null; onSh
     if (r.ok && r.reponse) {
       // Question hors grammaire fermee : on montre le pidgin entendu, puis la reponse machine.
       if (r.entendu) noterCompris(`« ${r.entendu} »`);
-      ajouter({ de: 'machine', texte: r.reponse, valeurs: valeursContexte.current });
+      ajouter({
+        de: 'machine',
+        texte: r.reponse,
+        valeurs: valeursContexte.current,
+        badge: r.badge === 'untranslated' ? 'untranslated' : 'machine',
+      });
       return;
     }
     // Question comprise : on note sous le message vocal ce que Kama a compris.
@@ -350,7 +356,7 @@ function Conversation({
           {b.de === 'toi' ? (
             <MessageVocal duree={b.duree} compris={b.compris} />
           ) : b.de === 'machine' ? (
-            <ReponseMachine texte={b.texte} valeurs={b.valeurs} />
+            <ReponseMachine texte={b.texte} valeurs={b.valeurs} badge={b.badge} />
           ) : b.de === 'reponse' ? (
             <ContenuReel vue={b.vue} onShowMe={onShowMe} />
           ) : (
@@ -402,27 +408,39 @@ function MessageVocal({ duree, compris }: { duree: number; compris?: string }) {
  * Réponse du modèle local : pidgin avec ses {xN} remplacés par les valeurs de la page, badge
  * « Traduction automatique », lue avec la voix pidgin du serveur (repli : voix du navigateur).
  */
-function ReponseMachine({ texte, valeurs }: { texte: string; valeurs: Record<string, string> }) {
+function ReponseMachine({
+  texte,
+  valeurs,
+  badge,
+}: {
+  texte: string;
+  valeurs: Record<string, string>;
+  badge: 'machine' | 'untranslated';
+}) {
   const lectureAuto = useLectureAuto();
   const lu = useRef(false);
-  const paroles = useMemo<Parole[]>(() => [{ texte, valeurs, langue: 'wes' }], [texte, valeurs]);
+  const paroles = useMemo<Parole[]>(
+    () => [{ texte: badge === 'untranslated' ? ANNONCE_NON_TRADUIT : texte, valeurs, langue: 'wes' }],
+    [badge, texte, valeurs],
+  );
   const morceaux = demasquer(texte, valeurs) ?? [texte];
   const dit = morceaux.map((m) => (typeof m === 'string' ? m : m.montant)).join('');
+  const speech = badge === 'untranslated' ? ANNONCE_NON_TRADUIT : dit;
 
   useEffect(() => {
     if (!lectureAuto || lu.current) return;
     lu.current = true;
-    jouerParoles(paroles).catch(() => lireTexte(dit));
+    jouerParoles(paroles).catch(() => lireTexte(speech));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lectureAuto]);
 
   return (
-    <KamaLine speech={dit} paroles={paroles}>
+    <KamaLine speech={speech} paroles={paroles}>
       <div className="flex items-start gap-2">
         <p className="m-0">
           {morceaux.map((m, i) => (typeof m === 'string' ? m : <Amount key={i}>{m.montant}</Amount>))}
         </p>
-        <StatusBadge status="auto" />
+        <StatusBadge status={badge === 'untranslated' ? 'untranslated' : 'auto'} />
       </div>
     </KamaLine>
   );

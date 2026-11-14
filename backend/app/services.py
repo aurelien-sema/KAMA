@@ -328,6 +328,10 @@ class SpeechService:
             log.info("ask stt=%dms in=%dms llm=%dms guard_en=%s", stt_ms, in_ms, llm_ms, problem)
             return fallback(f"guard_failed:{problem}", heard)
 
+        if is_critical(english):
+            log.info("ask stt=%dms in=%dms llm=%dms critical_untranslated", stt_ms, in_ms, llm_ms)
+            return AskResponse(heard=heard, answer=english, badge="untranslated", reason="critical_untranslated")
+
         # e) anglais -> pidgin, avec les controles de la route existante.
         before = time.perf_counter()
         pidgin = await self.translation.translate_between(english, "en>wes")

@@ -68,8 +68,9 @@ export type ResultatIntention =
       confiance: number;
       /** Pidgin réellement entendu (absent si la personne a dit un code ou un numéro). */
       entendu?: string;
-      /** Réponse pidgin du modèle local, déjà filtrée par le serveur. */
+      /** Réponse du modèle local, en pidgin ou en anglais si son contenu est critique. */
       reponse?: string;
+      badge?: 'machine' | 'untranslated';
     }
   | { ok: false; code: string };
 

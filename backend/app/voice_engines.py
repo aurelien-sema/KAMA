@@ -104,6 +104,7 @@ class HfCtcRecognizer:
         if quantize in (True, "int8", "int8_dynamic", "dynamic_int8"):
             self._model = torch.quantization.quantize_dynamic(self._model, {torch.nn.Linear}, dtype=torch.qint8)
         self._lock = threading.Lock()
+        self.transcribe(b"\0\0" * SAMPLE_RATE)
 
     def transcribe(self, pcm16: bytes) -> str:
         import numpy as np

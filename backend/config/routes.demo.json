@@ -1,5 +1,5 @@
 {
-  "_note": "Pidgin : un texte du catalogue valide est traduit par le dictionnaire (memoire de traduction), sinon le modele ajuste v2 prend le relais sous controle ; un texte critique (argent, alerte, confirmation) ne passe jamais par le modele. Pour changer de modele : scripts/convertir_modele.py puis modifier le chemin de en>wes_modele. Chemins relatifs a KAMA_MODELS_DIR. Voix : asr et tts suivent le meme principe (enabled false tant que le modele n'est pas teste). Les enregistrements humains valides (KAMA_CLIPS_DIR, par defaut poids/audio) passent avant le modele de synthese.",
+  "_note": "Pour la finale, LLM desactive apres evaluation : les demandes hors grammaire fermee recoivent la reponse fixe. Ne le reactiver qu'apres validation complete du contrat et des cas de securite. Pidgin : les routes de traduction restent actives. Chemins relatifs a KAMA_MODELS_DIR. Voix : asr et tts suivent le meme principe (enabled false tant que le modele n'est pas teste). Les enregistrements humains valides (KAMA_CLIPS_DIR, par defaut poids/audio) passent avant le modele de synthese.",
   "languages": {
     "bbj": {
       "name": "Ghomálá'"
@@ -94,7 +94,7 @@
     }
   },
   "llm": {
-    "enabled": true,
+    "enabled": false,
     "engine": "llama_cpp",
     "path": "poids/llm/LFM2-700M-Q4_K_M.gguf",
     "sha256": "684e8406dc13321452b3f6aeca432776e2a6a7e1ad6c23f7887b8fe3efbe2efa",

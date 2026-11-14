@@ -20,7 +20,7 @@ export type ReponseAsk = {
   intent: IntentionApi;
   confidence: number;
   answer: string | null;
-  badge: 'machine';
+  badge: 'machine' | 'untranslated';
   reason: string;
 };
 export type SegmentAudio = { type: 'audio'; format: 'wav'; data: string; origin: 'recorded' | 'synthetic' } | { type: 'slot'; name: string };

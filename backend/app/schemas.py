@@ -62,13 +62,14 @@ class IntentResponse(Strict):
 
 class AskResponse(Strict):
     """Reponse de l'assistant : texte entendu (pidgin), intention si la grammaire fermee reconnait,
-    sinon reponse pidgin. `answer` est null quand une reponse validee existante doit etre utilisee."""
+    sinon reponse pidgin. Une reponse critique reste en anglais et porte le badge `untranslated`.
+    `answer` est null quand une reponse validee existante doit etre utilisee."""
 
     heard: str = Field(description="Texte pidgin entendu ; vide si la personne a dit un code ou un numero.")
     intent: Intent = "unknown"
     confidence: float = Field(0.0, ge=0, le=1)
-    answer: str | None = Field(description="Reponse pidgin avec ses {xN}, ou null.")
-    badge: Literal["machine"] = Field("machine", description="Toujours une reponse automatique.")
+    answer: str | None = Field(description="Reponse pidgin, ou anglaise si critique, avec ses {xN}; ou null.")
+    badge: Literal["machine", "untranslated"] = Field("machine", description="Fiabilite de la reponse automatique.")
     reason: str = Field(description="intent, llm, guard_failed, sensitive_speech, engine_unavailable...")
 
 

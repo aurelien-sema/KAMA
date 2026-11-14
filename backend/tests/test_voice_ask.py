@@ -7,7 +7,7 @@ from app.security.voice_guard import FALLBACK, SENSITIVE_SPEECH, answer_problem,
 
 
 class FakeChat:
-    def __init__(self, text="The bank keeps your money safe."):
+    def __init__(self, text="This page shows general information."):
         self.text, self.calls = text, []
 
     def answer(self, question, context):
@@ -38,6 +38,25 @@ def test_unknown_question_goes_through_the_local_model(make_client):
     assert body["badge"] == "machine" and body["reason"] == "llm"
     assert body["intent"] == "unknown"
     assert chat.calls[0][1] == "Money wey you get {x1}"
+
+
+def test_critical_model_answer_stays_english_and_is_not_translated(make_client):
+    chat = FakeChat("Your balance is {x1}.")
+    en_to_wes = route(lambda _t: "This must not be used.")
+    client = make_client(
+        engines_with(
+            translation={"wes>en": route(lambda _t: "What is my balance?"), "en>wes": en_to_wes},
+            asr={"wes": FakeRecognizer("wetin dis mean")},
+            llm=chat,
+        )
+    )
+
+    body = ask(client, context="Money wey you get {x1}").json()
+
+    assert body["answer"] == "Your balance is {x1}."
+    assert body["badge"] == "untranslated"
+    assert body["reason"] == "critical_untranslated"
+    assert en_to_wes.translator.calls == []
 
 
 def test_known_intent_wins_and_never_calls_the_model(make_client):
