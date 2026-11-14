@@ -1,6 +1,6 @@
 # Modèles retenus
 
-Ce dossier présente les meilleurs modèles de traduction testés. Leurs poids se trouvent dans le sous-dossier `poids/`, qui n'est pas envoyé sur GitHub : un fichier ne peut pas y dépasser 100 Mo, et ces modèles pèsent jusqu'à 2,3 Go.
+Ce dossier présente les meilleurs modèles de traduction testés. La plupart de leurs poids se trouvent dans le sous-dossier `poids/`, qui n'est pas envoyé sur GitHub : un fichier ne peut pas y dépasser 100 Mo, et certains modèles pèsent jusqu'à 2,3 Go. Les modèles de traduction ajoutés au dépôt (moins de 100 Mo chacun) ont leur fiche `MODELE.md` dans leur dossier.
 
 Pour les récupérer depuis la racine du dépôt :
 
@@ -24,6 +24,7 @@ python models/fetch_models.py pidgin    # pour travailler sur le pidgin
 | jamm55/autotrain-improved-pidgin-model-2837583189 | anglais → pidgin nigérian | 37,0 | Non indiquée | Vrai pidgin, mais nigérian |
 | fotiecodes/Turaco-NLLB-mt-en-wes | anglais → pidgin camerounais | 30,2 | CC BY-NC 4.0 | Recopie souvent l'anglais |
 | Helsinki-NLP/opus-mt-fr-en et opus-mt-en-fr | français ↔ anglais | Non testés | Voir leur fiche | Passage par l'anglais pour le pidgin |
+| `poids/ct2/pcm_en`, ajusté KAMA depuis NITHUB-AI/marian-mt-bbc-pcm-en | pidgin camerounais → anglais | chrF 34,4 ; BLEU 17,4 | CC BY 4.0 | Dans le dépôt ; voir `models/poids/ct2/pcm_en/MODELE.md` |
 
 Aucun de ces modèles n'est assez fiable pour traduire seul une phrase bancaire. Les notes complètes sont dans `evaluation/results/summary.csv`.
 

@@ -26,7 +26,6 @@
     },
     "wes>en": {
       "enabled": true,
-      "internal": true,
       "engine": "marian_ct2",
       "path": "poids/ct2/pcm_en"
     },
