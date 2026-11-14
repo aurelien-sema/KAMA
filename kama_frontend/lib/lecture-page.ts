@@ -38,6 +38,83 @@ export function estMontant(t: string) {
   return RE_MONTANT.test(t.trim());
 }
 
+/**
+ * Valeurs de l'en-tete que Kama doit masquer dans un texte libre : nom du beneficiaire,
+ * telephone, reference, titulaire du compte. Elles sont lues dans le texte affiche, jamais
+ * dans un champ de saisie.
+ */
+const LIBELLES_ENTETE = new Set(
+  [
+    'Bénéficiaire',
+    'Nom du bénéficiaire',
+    'Beneficiary',
+    'Beneficiary name',
+    'Destinataire',
+    'Recipient',
+    'Téléphone',
+    'Numéro de téléphone',
+    'Phone',
+    'Phone number',
+    'Référence',
+    'Reference',
+    'Référence de transaction',
+    'Transaction reference',
+    'Titulaire du compte',
+    'Nom du titulaire',
+    'Account holder',
+    'Account holder name',
+  ].map(normaliser),
+);
+
+function echapperRegex(t: string) {
+  return t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function valeurPropre(valeur: string): string | null {
+  const t = valeur.replace(/\s+/g, ' ').trim().replace(/^[:\-–—]\s*/, '');
+  if (t.length < 2 || t.length > 80 || LIBELLES_ENTETE.has(normaliser(t))) return null;
+  return t;
+}
+
+/** Valeur ecrite juste apres un libelle, dans un meme texte : « Beneficiaire : Mbarga ». */
+export function valeurApresLibelle(libelle: string, contenu: string): string | null {
+  const motif = new RegExp(`^\\s*${echapperRegex(libelle).replace(/\s+/g, '\\s+')}\\s*[:\\-–—]?\\s*`, 'i');
+  const trouve = contenu.match(motif);
+  return trouve ? valeurPropre(contenu.slice(trouve[0].length)) : null;
+}
+
+function valeurVoisine(libelle: Element): string | null {
+  const suivant = libelle.nextElementSibling;
+  if (suivant && !suivant.closest(IGNORES) && estVisible(suivant)) {
+    const valeur = valeurPropre(texte(suivant));
+    if (valeur) return valeur;
+  }
+  const parent = libelle.parentElement;
+  if (!parent) return null;
+  return valeurApresLibelle(texte(libelle), texte(parent));
+}
+
+/** Valeurs de l'en-tete affichees sur la page, sans jamais lire un champ de saisie. */
+export function valeursEntete(
+  racine: Document | Element | null = typeof document === 'undefined' ? null : document.body,
+): string[] {
+  if (!racine) return [];
+  const valeurs = new Set<string>();
+  const parcours = document.createTreeWalker(racine, NodeFilter.SHOW_TEXT);
+  let n: Node | null;
+  while ((n = parcours.nextNode())) {
+    const t = n.textContent;
+    if (!t || t.length > 140) continue;
+    const cle = normaliser(t);
+    if (!LIBELLES_ENTETE.has(cle)) continue;
+    const el = n.parentElement;
+    if (!el || el.closest(IGNORES) || !estVisible(el)) continue;
+    const valeur = valeurVoisine(el);
+    if (valeur) valeurs.add(valeur);
+  }
+  return [...valeurs];
+}
+
 function estVisible(el: Element) {
   const r = el.getBoundingClientRect();
   if (r.width === 0 && r.height === 0) return false;

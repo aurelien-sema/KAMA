@@ -1,0 +1,220 @@
+{
+ "_note": "Termes critiques pour le garde de sortie. Formes issues de content-data/dictionnaire_pidgin.json et, si disponible, training/pidgin/data/attestations.json. Les formes a_valider restent a confirmer par un locuteur : le garde refuse une sortie qui ne les rend pas.",
+ "genere_par": "backend/scripts/construire_termes_critiques.py",
+ "terms": [
+  {
+   "id": "cancel",
+   "sources": [
+    "annul",
+    "cancel"
+   ],
+   "formes": [
+    "cancel",
+    "canceled",
+    "cancelled"
+   ],
+   "statut": "emprunt_atteste",
+   "paires_attestations": 4
+  },
+  {
+   "id": "confirm",
+   "sources": [
+    "confirm"
+   ],
+   "formes": [
+    "confirm",
+    "confirmed",
+    "confirm say"
+   ],
+   "statut": "emprunt_atteste",
+   "paires_attestations": 20
+  },
+  {
+   "id": "send",
+   "sources": [
+    "envoi",
+    "envoy",
+    "send"
+   ],
+   "formes": [
+    "send",
+    "sent",
+    "sen",
+    "transfer"
+   ],
+   "statut": "atteste",
+   "paires_attestations": 127
+  },
+  {
+   "id": "transfer",
+   "sources": [
+    "transfert",
+    "transfer",
+    "virement"
+   ],
+   "formes": [
+    "send",
+    "sent",
+    "sen",
+    "transfer",
+    "transferred",
+    "send money",
+    "send di money"
+   ],
+   "statut": "a_valider",
+   "paires_attestations": 0
+  },
+  {
+   "id": "block",
+   "sources": [
+    "bloqu",
+    "block"
+   ],
+   "formes": [
+    "block",
+    "blocked",
+    "lock",
+    "locked",
+    "no open"
+   ],
+   "statut": "a_valider",
+   "paires_attestations": 0
+  },
+  {
+   "id": "suspend",
+   "sources": [
+    "suspend"
+   ],
+   "formes": [
+    "suspend",
+    "suspended",
+    "stop",
+    "stopped",
+    "hold",
+    "held",
+    "no work"
+   ],
+   "statut": "a_valider",
+   "paires_attestations": 0
+  },
+  {
+   "id": "decline",
+   "sources": [
+    "refus",
+    "declin"
+   ],
+   "formes": [
+    "refuse",
+    "refused",
+    "deny",
+    "denied",
+    "no gree",
+    "no accept"
+   ],
+   "statut": "a_valider",
+   "paires_attestations": 0
+  },
+  {
+   "id": "fail",
+   "sources": [
+    "echou",
+    "échou",
+    "fail"
+   ],
+   "formes": [
+    "fail",
+    "failed",
+    "no work",
+    "problem",
+    "mistake"
+   ],
+   "statut": "a_valider",
+   "paires_attestations": 0
+  },
+  {
+   "id": "fee",
+   "sources": [
+    "frais",
+    "fee"
+   ],
+   "formes": [
+    "charge",
+    "fee",
+    "fees",
+    "cost"
+   ],
+   "statut": "a_valider",
+   "paires_attestations": 12
+  },
+  {
+   "id": "limit",
+   "sources": [
+    "plafond",
+    "limit"
+   ],
+   "formes": [
+    "limit",
+    "maximum",
+    "pass",
+    "no pass"
+   ],
+   "statut": "a_valider",
+   "paires_attestations": 0
+  },
+  {
+   "id": "balance",
+   "sources": [
+    "solde",
+    "balance"
+   ],
+   "formes": [
+    "money weh remain",
+    "money wey remain",
+    "money weh go remain",
+    "money weh you get",
+    "money wey you get",
+    "remain",
+    "remaining",
+    "balance"
+   ],
+   "statut": "a_valider",
+   "paires_attestations": 231
+  },
+  {
+   "id": "code",
+   "sources": [
+    "code secret",
+    "code",
+    "pin",
+    "otp",
+    "password",
+    "mot de passe"
+   ],
+   "formes": [
+    "code",
+    "pin",
+    "otp",
+    "password",
+    "passcode",
+    "secret code"
+   ],
+   "statut": "a_valider",
+   "paires_attestations": 0
+  },
+  {
+   "id": "refund",
+   "sources": [
+    "rembours",
+    "refund"
+   ],
+   "formes": [
+    "refund",
+    "pay back",
+    "return money",
+    "give back"
+   ],
+   "statut": "a_valider",
+   "paires_attestations": 0
+  }
+ ]
+}

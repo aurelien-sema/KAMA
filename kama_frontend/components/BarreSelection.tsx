@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react';
 import { MessageCircleQuestion, Volume2 } from 'lucide-react';
 import { KamaLogo } from '@/components/kama/primitives';
 import { useLangueCourante } from '@/lib/langue-courante';
+import { texteSelection } from '@/lib/selection';
 import { useTexte } from '@/lib/use-texte';
 import { ecouterTexte } from '@/lib/ecouter';
 
@@ -28,7 +29,7 @@ export function BarreSelection({ dansKama, onExpliquer }: Props) {
   const barreLabel = useTexte('Kama : texte sélectionné');
   const expliquer = useTexte('Expliquer');
   const ecouter = useTexte('Écouter');
-  const noteFrancais = useTexte('Lecture en français');
+  const notePasDeVoix = useTexte("Kama n'arrive pas à joindre le serveur. Réessaie dans un instant.");
 
   useEffect(() => {
     function verifier(e: Event) {
@@ -36,7 +37,7 @@ export function BarreSelection({ dansKama, onExpliquer }: Props) {
       // On laisse le navigateur finir de mettre à jour la sélection.
       window.setTimeout(() => {
         const selection = document.getSelection();
-        const texte = selection?.toString().replace(/\s+/g, ' ').trim() ?? '';
+        const texte = texteSelection(selection);
         const actif = document.activeElement;
         const dansUnChamp = !!actif && (actif.tagName === 'INPUT' || actif.tagName === 'TEXTAREA' || (actif as HTMLElement).isContentEditable);
         if (!selection || selection.rangeCount === 0 || selection.isCollapsed || texte.length < 2 || dansUnChamp) {
@@ -110,7 +111,7 @@ export function BarreSelection({ dansKama, onExpliquer }: Props) {
         className={bouton}
         onClick={async () => {
           const resultat = await ecouterTexte(barre.texte, langue);
-          setNote(resultat === 'francais' ? noteFrancais : null);
+          setNote(resultat === 'indisponible' ? notePasDeVoix : null);
         }}
       >
         <Volume2 className="size-4" aria-hidden /> {ecouter}

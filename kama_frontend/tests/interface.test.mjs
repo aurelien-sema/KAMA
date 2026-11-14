@@ -38,6 +38,8 @@ const CHAINES_INTERFACE = [
   'Bouton « Continuer »',
   'Case de vérification',
   'Case de confirmation',
+  "Kama n'arrive pas à joindre le serveur. Réessaie dans un instant.",
+  "Kama n'arrive pas bien à traduire ce texte. Lis-le bien ou demande à ta banque.",
 ];
 
 test('un libellé validé de la page de test passe avant tout', () => {
@@ -54,6 +56,18 @@ test("sans traduction, ou sans langue, le français reste tel quel (rien n'est i
   assert.equal(libelle(glossaire, interfaceJson, 'wes', 'Une phrase inconnue'), 'Une phrase inconnue');
   assert.equal(libelle(glossaire, interfaceJson, undefined, 'Réessayer'), 'Réessayer');
   assert.equal(libelle(glossaire, interfaceJson, 'bbj', 'Réessayer'), 'Réessayer');
+});
+
+test("les annonces de panne sont en pidgin et restent des brouillons", () => {
+  const serveur = "Kama n'arrive pas à joindre le serveur. Réessaie dans un instant.";
+  const traduction = "Kama n'arrive pas bien à traduire ce texte. Lis-le bien ou demande à ta banque.";
+  assert.equal(libelle(glossaire, interfaceJson, 'wes', serveur), 'Kama no fit reach im server now. Try am again small time.');
+  assert.equal(
+    libelle(glossaire, interfaceJson, 'wes', traduction),
+    'Kama no fit translate dis one well. Read am well or ask your bank.',
+  );
+  assert.equal(chercherInterface(interfaceJson, 'wes', serveur).statut, 'brouillon');
+  assert.equal(chercherInterface(interfaceJson, 'wes', traduction).statut, 'brouillon');
 });
 
 test("toute phrase de la fenêtre a sa version pidgin, et un brouillon n'est jamais marqué validé", () => {

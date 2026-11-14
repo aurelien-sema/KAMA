@@ -17,6 +17,9 @@ $env:KAMA_ALLOWED_ORIGINS = 'chrome-extension://nneecloagollpakilpepnamdaelmgkbn
 $env:KAMA_HOST = '127.0.0.1'
 $env:KAMA_PORT = '8000'
 $env:KAMA_ROUTES_FILE = Join-Path $backend ($(if ($SansVoix) { 'config\routes.json' } else { 'config\routes.demo.json' }))
+# Le modele peut voir un texte critique, jamais un montant, une alerte ou une confirmation :
+# routes.json limite cette exception a element="text" et le garde de sortie verifie les termes.
+$env:KAMA_MT_ALLOW_CRITICAL = '1'
 
 Write-Host "Serveur Kama sur http://127.0.0.1:8000  (routes : $($env:KAMA_ROUTES_FILE))"
 Write-Host "Ctrl+C pour arrêter. Le chargement des modèles prend environ une minute."

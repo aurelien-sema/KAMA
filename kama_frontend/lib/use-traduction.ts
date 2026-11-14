@@ -4,6 +4,7 @@
  */
 import { useCallback, useEffect, useState } from 'react';
 import type { Langue } from '@/config/langues';
+import { valeursEntete } from './lecture-page';
 import { traduireLignes, traduireTexteLibre, type Requete, type Resultat } from './traduction';
 import type { ElementApi } from './api';
 
@@ -43,7 +44,15 @@ export function useTraductionLignes(requetes: Requete[] | null, langue: Langue |
 }
 
 /** Traduit un texte libre (texte sélectionné, message de la banque). */
-export function useTraductionTexte(texte: string | null, element: ElementApi, langue: Langue | null) {
+export function useTraductionTexte(
+  texte: string | null,
+  element: ElementApi,
+  langue: Langue | null,
+  connues: string[] = valeursEntete(),
+) {
   const actif = !!texte && !!langue;
-  return useResultat(JSON.stringify([langue?.code, element, texte]), actif ? () => traduireTexteLibre(texte!, element, langue!) : null);
+  return useResultat(
+    JSON.stringify([langue?.code, element, texte, connues]),
+    actif ? () => traduireTexteLibre(texte!, element, langue!, connues) : null,
+  );
 }

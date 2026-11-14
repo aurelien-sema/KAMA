@@ -9,6 +9,9 @@
     }
   },
   "translation": {
+    "critical_model_elements": [
+      "text"
+    ],
     "fr>en": {
       "enabled": true,
       "internal": true,
