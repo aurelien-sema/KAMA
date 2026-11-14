@@ -51,3 +51,16 @@ evaluation/results/stt/
 # Donnees d'entrainement issues de MT560 (dont des textes religieux) : a regenerer avec training/pidgin/01_nettoyer_donnees.py
 datasets/pidgin/kama_pidgin_v2/train.jsonl
 datasets/pidgin/kama_pidgin_v2/dev.jsonl
+
+# Modèles de traduction utilisés par le serveur (anglais → pidgin v2, français ↔ anglais opus-mt ; format CTranslate2) : versionnés pour que le
+# serveur hébergé et toute personne qui clone le dépôt puissent le servir. Voir models/poids/ct2/pidgin_en_wes_ajuste_v2/MODELE.md.
+!models/poids/
+models/poids/*
+!models/poids/ct2/
+models/poids/ct2/*
+!models/poids/ct2/pidgin_en_wes_ajuste_v2/
+!models/poids/ct2/pidgin_en_wes_ajuste_v2/*.bin
+!models/poids/ct2/opus-mt-fr-en/
+!models/poids/ct2/opus-mt-fr-en/*.bin
+!models/poids/ct2/opus-mt-en-fr/
+!models/poids/ct2/opus-mt-en-fr/*.bin

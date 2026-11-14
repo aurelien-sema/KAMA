@@ -19,7 +19,7 @@ export const reglageActif = storage.defineItem<boolean>('local:kama.actif', { fa
 export const reglageConsentement = storage.defineItem<boolean>('local:kama.consentement', { fallback: false });
 
 /**
- * L'utilisateur a accepté que sa voix soit envoyée à Kama pour comprendre sa question
+ * Consentement séparé pour le micro. L'utilisateur a accepté que sa voix soit envoyée à Kama pour comprendre sa question
  * (message affiché au premier appui sur le micro). Seule l'acceptation est retenue :
  * après un « Non merci », la question revient au prochain appui.
  */
