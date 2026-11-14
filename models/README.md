@@ -17,6 +17,17 @@ python models/fetch_models.py pidgin    # pour travailler sur le pidgin
 | masakhane/m2m100_418M_fr_bbj_rel_news_ft | français → Ghomala | 18,4 | AFL-3.0 |
 | masakhane/m2m100_418M_bbj_fr_rel_news_ft | Ghomala → français | Test en cours | AFL-3.0 |
 
+### Modèles ajustés en service sur le serveur (14 novembre 2026)
+
+Poids hors Git (plus de 100 Mo) : ils sont sur le serveur, dans `models/poids/ghomala/`, et sur le Drive de l'équipe.
+
+| Dossier dans `models/poids/` | Rôle | Moteur | Origine |
+|---|---|---|---|
+| `ghomala/fr-bbj-m2m100-v1-ct2` | français → Ghomala, CTranslate2 int8 (488 Mo) | `m2m100_ct2` | `KAMA_sorties/ghomala/fr-bbj/modele_final` du 13 nov. (chrF++ MAFAND test 25,3 contre 23,9 au départ), converti avec `ctranslate2.converters.TransformersConverter(..., copy_files=["sentencepiece.bpe.model", "kama_config.json"]).convert(..., quantization="int8")` |
+| `ghomala/tts-vits-v2-final-20261114` | synthèse Ghomala VITS, 16 kHz | `ghomala_vits` | `KAMA_TTS/ghomala/modele_final` (v2, epoch 55) ; licence CC BY-NC 4.0 héritée de MMS |
+
+Le moteur `m2m100_ct2` applique les substitutions réversibles de `kama_config.json` (ʉ, caron), remet en casse normale une source en majuscules et décode avec une pénalité de répétition (1,2) sans 3-gramme répété. Les textes critiques restent refusés par les garde-fous. Aucun locuteur n'a encore validé ces sorties.
+
 ## Pidgin
 
 | Modèle | Sens | Note SOREVA (sur 100) | Licence | À savoir |

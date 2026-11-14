@@ -8,6 +8,8 @@ from __future__ import annotations
 import json
 import logging
 import re
+import threading
+import unicodedata
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Callable, Protocol
@@ -85,6 +87,156 @@ class MarianCT2Translator:
         return from_model_tags(self._target.decode(result[0].hypotheses[0]).strip())
 
 
+class M2M100Translator:
+    """Modele M2M100 Hugging Face pour une direction configuree dans ses fichiers locaux."""
+
+    def __init__(
+        self,
+        path: Path,
+        source_lang: str = "fr",
+        target_lang: str = "sw",
+        threads: int = 2,
+        num_beams: int = 1,
+        max_new_tokens: int = 128,
+    ) -> None:
+        import torch
+        from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
+
+        torch.set_num_threads(threads)
+        self._torch = torch
+        self._tokenizer = AutoTokenizer.from_pretrained(path, local_files_only=True)
+        self._tokenizer.src_lang = source_lang
+        self._target_id = self._tokenizer.get_lang_id(target_lang)
+        self._model = AutoModelForSeq2SeqLM.from_pretrained(
+            path, dtype=torch.float16, low_cpu_mem_usage=True, local_files_only=True
+        ).eval()
+        self._beams = num_beams
+        self._max_new_tokens = max_new_tokens
+        self._lock = threading.Lock()
+
+        model_config = json.loads((path / "kama_config.json").read_text(encoding="utf-8"))
+        self._normalisation = model_config.get("normalisation", {})
+        self._substitutions = {
+            chr(int(code.removeprefix("U+"), 16)): replacement
+            for code, replacement in model_config.get("substitutions", {}).items()
+        }
+
+    def translate(self, text: str) -> str:
+        return " ".join(self._sentence(sentence) for sentence in split_sentences(text))
+
+    def _sentence(self, text: str) -> str:
+        text = unicodedata.normalize("NFC", text)
+        if self._normalisation.get("apostrophe") == "'":
+            for apostrophe in ("’", "‘", "ʼ", "`", "´"):
+                text = text.replace(apostrophe, "'")
+        if self._normalisation.get("alpha_vers_a"):
+            text = text.replace("ɑ", "a").replace("Ɑ", "A")
+        for original, substitute in self._substitutions.items():
+            text = text.replace(original, substitute)
+
+        encoded = self._tokenizer(
+            to_model_tags(text), return_tensors="pt", truncation=True, max_length=256
+        )
+        input_length = int(encoded["attention_mask"].sum().item())
+        limit = min(self._max_new_tokens, 3 * input_length + 24)
+        with self._lock, self._torch.inference_mode():
+            output = self._model.generate(
+                **encoded,
+                num_beams=self._beams,
+                max_new_tokens=limit,
+                forced_bos_token_id=self._target_id,
+                do_sample=False,
+            )
+        translated = self._tokenizer.batch_decode(output, skip_special_tokens=True)[0].strip()
+        if "\ufffd" in translated:
+            raise EngineRefused("jeton inconnu")
+        for original, substitute in self._substitutions.items():
+            translated = translated.replace(substitute, original)
+        return unicodedata.normalize("NFC", from_model_tags(translated))
+
+
+class M2M100CT2Translator:
+    """M2M100 ajuste (francais -> Ghomala) converti en CTranslate2 int8 : ~4 fois moins de memoire que torch fp32.
+
+    Reprend les reglages du notebook d'entrainement : substitutions reversibles des caracteres que le
+    tokenizer perd (kama_config.json), casse normale pour les sources en majuscules, decodage anti-boucles.
+    """
+
+    def __init__(
+        self,
+        path: Path,
+        source_lang: str = "fr",
+        target_lang: str = "sw",
+        beam_size: int = 2,
+        threads: int = 2,
+        max_new_tokens: int = 128,
+        repetition_penalty: float = 1.2,
+        no_repeat_ngram_size: int = 3,
+    ) -> None:
+        import ctranslate2
+        import sentencepiece
+
+        self._sp = sentencepiece.SentencePieceProcessor(model_file=str(path / "sentencepiece.bpe.model"))
+        self._model = ctranslate2.Translator(
+            str(path), device="cpu", compute_type="int8", inter_threads=1, intra_threads=threads
+        )
+        self._source_tag = f"__{source_lang}__"
+        self._target_tag = f"__{target_lang}__"
+        self._beam_size = beam_size
+        self._max_new_tokens = max_new_tokens
+        self._repetition_penalty = repetition_penalty
+        self._no_repeat = no_repeat_ngram_size
+        self._lock = threading.Lock()
+
+        model_config = json.loads((path / "kama_config.json").read_text(encoding="utf-8"))
+        self._normalisation = model_config.get("normalisation", {})
+        self._substitutions = {
+            chr(int(code.removeprefix("U+"), 16)): replacement
+            for code, replacement in model_config.get("substitutions", {}).items()
+        }
+
+    def translate(self, text: str) -> str:
+        return " ".join(self._sentence(sentence) for sentence in split_sentences(text))
+
+    @staticmethod
+    def _casse_normale(text: str) -> str:
+        lettres = [c for c in text if c.isalpha()]
+        if len(lettres) < 4 or sum(c.isupper() for c in lettres) / len(lettres) <= 0.7:
+            return text
+        text = text.lower()  # les balises {x1} sont deja en minuscules
+        return text[:1].upper() + text[1:]
+
+    def _sentence(self, text: str) -> str:
+        text = unicodedata.normalize("NFC", self._casse_normale(text))
+        if self._normalisation.get("apostrophe") == "'":
+            for apostrophe in ("’", "‘", "ʼ", "`", "´"):
+                text = text.replace(apostrophe, "'")
+        if self._normalisation.get("alpha_vers_a"):
+            text = text.replace("ɑ", "a").replace("Ɑ", "A")
+        for original, substitute in self._substitutions.items():
+            text = text.replace(original, substitute)
+
+        pieces = self._sp.encode(to_model_tags(text), out_type=str)[:254]
+        tokens = [self._source_tag, *pieces, "</s>"]
+        limit = min(self._max_new_tokens, int(2.5 * len(tokens)) + 10)
+        with self._lock:
+            result = self._model.translate_batch(
+                [tokens],
+                target_prefix=[[self._target_tag]],
+                beam_size=self._beam_size,
+                max_decoding_length=limit,
+                repetition_penalty=self._repetition_penalty,
+                no_repeat_ngram_size=self._no_repeat,
+            )
+        output = [t for t in result[0].hypotheses[0] if t != self._target_tag]
+        if "<unk>" in output:
+            raise EngineRefused("jeton inconnu")
+        translated = self._sp.decode(output).strip()
+        for original, substitute in self._substitutions.items():
+            translated = translated.replace(substitute, original)
+        return unicodedata.normalize("NFC", from_model_tags(translated))
+
+
 class PipelineTranslator:
     """Enchaine des etapes : simplification du jargon, passage par l'anglais, puis modele final."""
 
@@ -102,7 +254,11 @@ class PipelineTranslator:
         return previous
 
 
-FACTORIES: dict[str, Callable[..., Translator]] = {"marian_ct2": MarianCT2Translator}
+FACTORIES: dict[str, Callable[..., Translator]] = {
+    "marian_ct2": MarianCT2Translator,
+    "m2m100": M2M100Translator,
+    "m2m100_ct2": M2M100CT2Translator,
+}
 
 
 @dataclass
@@ -163,7 +319,9 @@ def load_engines(
         if spec["engine"] == "pipeline":
             continue
         try:
-            built[route] = FACTORIES[spec["engine"]](models_dir / spec["path"])
+            built[route] = FACTORIES[spec["engine"]](
+                models_dir / spec["path"], **spec.get("options", {})
+            )
         except Exception as exc:  # le message pourrait citer un chemin : seul le type est journalise
             log.warning("route %s indisponible (%s)", route, type(exc).__name__)
     for route, spec in specs.items():

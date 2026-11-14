@@ -52,11 +52,16 @@
       "max_unknown_ratio": 0.25
     },
     "fr>bbj": {
-      "enabled": false,
-      "engine": "marian_ct2",
-      "path": "flagship-ai__cameroon-int8/francais-ghomala",
-      "backtranslate": "bbj>fr",
-      "min_backtranslation": 0.5
+      "enabled": true,
+      "engine": "m2m100_ct2",
+      "path": "poids/ghomala/fr-bbj-m2m100-v1-ct2",
+      "options": {
+        "source_lang": "fr",
+        "target_lang": "sw",
+        "beam_size": 2,
+        "threads": 2,
+        "max_new_tokens": 128
+      }
     },
     "bbj>fr": {
       "enabled": false,
@@ -85,6 +90,15 @@
     }
   },
   "tts": {
+    "bbj": {
+      "enabled": true,
+      "engine": "ghomala_vits",
+      "path": "poids/ghomala/tts-vits-v2-final-20261114",
+      "options": {
+        "threads": 2,
+        "seed": 0
+      }
+    },
     "wes": {
       "enabled": true,
       "engine": "mms_vits",

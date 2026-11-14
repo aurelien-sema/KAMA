@@ -29,4 +29,6 @@ services:
 
 networks:
   assistant:
-    internal: true  # aucun accès Internet pour le backend : le LLM est un fichier local
+    internal: false  # un reseau internal ne publie aucun port (cause du 502 du 14/11)
+    driver_opts:
+      com.docker.network.bridge.enable_ip_masquerade: "false"  # sans NAT sortant : le backend reste sans acces Internet
