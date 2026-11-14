@@ -29,6 +29,7 @@ const PAGE_BIENVENUE = '/bienvenue.html';
 const DOCUMENT_MICRO = '/micro.html';
 
 const motifs = SITES_KAMA.map((s) => new MatchPattern(s));
+const DELAI_ASSISTANT_MS = 60_000;
 
 /** Seule notre propre extension, depuis une page bancaire autorisée (pas d'autre extension, pas d'autre site). */
 function expediteurAutorise(expediteur: { id?: string; url?: string; tab?: { url?: string } } | undefined) {
@@ -73,12 +74,16 @@ export default defineBackground(() => {
 
 function demandeConnue(m: unknown): m is DemandeApi {
   if (typeof m !== 'object' || m === null || (m as { type?: unknown }).type !== 'kama:api') return false;
-  return ['capabilities', 'translate', 'tts', 'intent'].includes((m as { route?: string }).route ?? '');
+  return ['capabilities', 'translate', 'tts', 'intent', 'assistant'].includes((m as { route?: string }).route ?? '');
 }
 
 async function appelerServeur(d: DemandeApi): Promise<ReponseBrute> {
   const controle = new AbortController();
-  const delai = { capabilities: DELAIS.capacites, translate: DELAIS.traduction, tts: DELAIS.voix, intent: DELAIS.reconnaissance }[d.route];
+  // L'assistant (LLM sur processeur) peut prendre 10 à 20 s : délai plus long, y compris pour la voix qui peut y passer.
+  const avecAssistant = d.route === 'assistant' || (d.route === 'intent' && !!d.contexte);
+  const delai = avecAssistant
+    ? DELAI_ASSISTANT_MS
+    : { capabilities: DELAIS.capacites, translate: DELAIS.traduction, tts: DELAIS.voix, intent: DELAIS.reconnaissance, assistant: DELAI_ASSISTANT_MS }[d.route];
   const minuterie = setTimeout(() => controle.abort(), delai);
   try {
     let reponse: Response;
@@ -87,7 +92,7 @@ async function appelerServeur(d: DemandeApi): Promise<ReponseBrute> {
     } else if (d.route === 'intent') {
       reponse = await fetch(`${URL_SERVEUR}/v1/voice/intent`, {
         method: 'POST',
-        headers: { 'Content-Type': 'audio/wav', 'X-Kama-Lang': d.lang },
+        headers: { 'Content-Type': 'audio/wav', 'X-Kama-Lang': d.lang, ...(d.contexte ? { 'X-Kama-Context': d.contexte } : {}) },
         body: depuisBase64(d.wavBase64),
         signal: controle.signal,
       });
@@ -119,7 +124,7 @@ async function appelerServeur(d: DemandeApi): Promise<ReponseBrute> {
 /* ---------------------------------------------------------------------------------------- */
 
 type Port = ReturnType<typeof browser.runtime.connect>;
-const session: { port: Port | null; langue: string; voix: string | null } = { port: null, langue: 'fr', voix: null };
+const session: { port: Port | null; langue: string; voix: string | null; contexte?: string } = { port: null, langue: 'fr', voix: null };
 
 function versPage(e: EvenementMicro) {
   try {
@@ -154,6 +159,7 @@ function brancherPage(port: Port) {
     switch (m.type) {
       case 'demarrer': {
         session.langue = m.langue;
+        session.contexte = m.contexte;
         session.voix = null;
         const indisponible = await voixDisponible(m.langue);
         if (indisponible) return versPage({ type: 'resultat', resultat: { ok: false, code: indisponible } });
@@ -198,17 +204,22 @@ async function depuisDocumentMicro(m: DepuisDocumentMicro) {
 async function analyser(wav: string, duree: number) {
   if (duree) versPage({ type: 'envoi', duree });
   session.voix = wav; // gardée en mémoire seulement pour « Réessayer »
-  const resultat = await comprendre(wav, session.langue);
+  const resultat = await comprendre(wav, session.langue, session.contexte);
   if (resultat.ok) session.voix = null;
   versPage({ type: 'resultat', resultat });
 }
 
 /** Le serveur renvoie seulement une intention (liste fermée) : le texte reconnu ne sort pas du serveur. */
-async function comprendre(wavBase64: string, langue: string): Promise<ResultatIntention> {
-  const r = await appelerServeur({ type: 'kama:api', route: 'intent', lang: langue, wavBase64 });
+async function comprendre(wavBase64: string, langue: string, contexte?: string): Promise<ResultatIntention> {
+  const r = await appelerServeur({ type: 'kama:api', route: 'intent', lang: langue, wavBase64, contexte });
   if (!r.ok) return { ok: false, code: r.code };
-  const corps = r.donnees as { intent?: unknown; confidence?: unknown };
-  return { ok: true, intention: intentionConnue(corps.intent), confiance: Number(corps.confidence) || 0 };
+  const corps = r.donnees as { intent?: unknown; confidence?: unknown; answer?: { kind?: string; text?: string | null; badge?: string; text_lang?: string | null } };
+  const a = corps.answer;
+  const reponse =
+    a?.kind === 'answer' && a.text
+      ? { texte: a.text, badge: (a.badge as 'verified' | 'machine' | 'untranslated') ?? 'untranslated', langue: a.text_lang ?? null }
+      : undefined;
+  return { ok: true, intention: intentionConnue(corps.intent), confiance: Number(corps.confidence) || 0, reponse };
 }
 
 /* ---------------------------------------------------------------------------------------- */

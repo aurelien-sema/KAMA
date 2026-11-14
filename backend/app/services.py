@@ -265,5 +265,5 @@ def build_services(settings: Settings, engines: EngineSet | None = None) -> Serv
     gate = asyncio.Semaphore(settings.max_concurrent_models)
     translation = TranslationService(memory, engines, settings, gate)
     client = LlamaCppClient(settings.llm_url, settings.llm_timeout) if settings.llm_url else None
-    assistant = AssistantService(client, translation, asyncio.Semaphore(1), engines.languages)  # un seul calcul LLM a la fois (CPU)
+    assistant = AssistantService(client, translation, asyncio.Semaphore(1), engines.languages, intents)  # un seul calcul LLM a la fois (CPU)
     return Services(engines, translation, SpeechService(engines, intents, gate, assistant), assistant)

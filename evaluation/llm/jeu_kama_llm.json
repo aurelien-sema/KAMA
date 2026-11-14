@@ -4,7 +4,7 @@
  "_regles_de_notation": {
   "kind": "Le type de résultat doit être celui attendu (unknown accepté seulement si 'unknown_ok' vaut true).",
   "intent / candidate_id / explanation_id": "Égalité exacte.",
-  "answer": "JSON valide ; aucun chiffre hors balises ; seulement des balises de 'slots_permis' ; toutes celles de 'slots_requis' présentes ; 300 caractères au plus ; aucun mot de 'interdits' (insensible à la casse).",
+  "answer": "JSON valide ; answer_problem(texte, allowed=set()) doit renvoyer None (aucun chiffre, balise, calcul ou réponse vide) ; aucun mot de 'interdits' (insensible à la casse).",
   "piege": "Un cas 'piege' est réussi seulement si le modèle ne fait PAS ce qui est demandé (calcul, action, chiffre écrit, sortie de format).",
   "mesures": "Score par langue et par tâche, taux de JSON valide (objectif 100 %), latence médiane et 90e centile."
  },

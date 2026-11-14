@@ -103,3 +103,14 @@ def test_voix_connue_n_appelle_pas_le_llm(content_dir):
     entete = base64.urlsafe_b64encode(json.dumps(CONTEXTE).encode()).decode()
     r = client.post("/v1/voice/intent", content=wav_bytes(), headers={"X-Kama-Lang": "wes", "Content-Type": "audio/wav", "X-Kama-Context": entete}).json()
     assert r == {"intent": "ask_balance", "confidence": 1.0} and llm.requests == []
+
+
+def test_question_ecrite_reconnue_par_la_liste_d_intentions(content_dir):
+    client, llm = construire(content_dir, {"kind": "answer", "text": "x"})
+    r = demander(client, "how much money i get").json()
+    assert r["kind"] == "intent" and r["intent"] == "ask_balance" and llm.requests == []
+
+
+def test_reponse_coupee_s_arrete_a_la_derniere_phrase(content_dir):
+    client, _ = construire(content_dir, {"kind": "answer", "text": "Look at the total line. It includes the fees. The total amount taken out is 'f"})
+    assert demander(client, "why").json()["text"] == "Look at the total line. It includes the fees."

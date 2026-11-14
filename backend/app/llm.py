@@ -40,7 +40,7 @@ Rules (never break them):
 - Explain the meaning of things on the page. If the user wants an exact amount, tell them to touch the Kama badge next to that line to hear it.
 - Never act for the user: you do not click, confirm, send or fill anything. Never advise a financial decision (whether to send money or not).
 - If the request is off-topic, ambiguous, or you are not sure, answer {"kind": "unknown"}.
-Task "answer": answer the question in 1 to 3 short, simple English sentences, using only the page context.
+Task "answer": answer in 1 or 2 short, simple English sentences (under 200 characters), using only the page context.
 The user may write in French, English or Cameroonian Pidgin."""
 
 SCHEMA = {
@@ -93,12 +93,31 @@ def answer_problem(text: str, allowed: set[str]) -> str | None:
     return None
 
 
+def phrases_completes(text: str) -> str:
+    """Une réponse coupée par la limite de longueur s'arrête à sa dernière phrase complète (sinon : vide, donc « unknown »)."""
+    if not text or text[-1] in ".!?":
+        return text
+    fin = max(text.rfind(". "), text.rfind("! "), text.rfind("? "))
+    return text[: fin + 1] if fin >= 0 else ""
+
+
 UNKNOWN = AssistantResponse(kind="unknown", text=None, badge="untranslated", text_lang=None)
+INTENT_LANGS = ("fr", "en")  # une question écrite peut aussi être en français ou en anglais
 
 
 class AssistantService:
-    def __init__(self, client, translation, gate: asyncio.Semaphore, languages: dict[str, str]) -> None:
-        self.client, self.translation, self.gate, self.languages = client, translation, gate, languages
+    def __init__(self, client, translation, gate: asyncio.Semaphore, languages: dict[str, str], intents=None) -> None:
+        self.client, self.translation, self.gate, self.languages, self.intents = client, translation, gate, languages, intents
+
+    def intent_of(self, question: str, lang: str):
+        """La liste d'intentions d'abord : rapide, et la réponse de l'extension contient le montant exact de la page."""
+        if self.intents is None:
+            return None
+        for code in (lang, *INTENT_LANGS):
+            found = self.intents.match(question, code)
+            if found.intent != "unknown":
+                return AssistantResponse(kind="intent", intent=found.intent, text=None, badge="verified", text_lang=None)
+        return None
 
     @property
     def available(self) -> bool:
@@ -110,6 +129,9 @@ class AssistantService:
         # Défense en profondeur : rien de non masqué n'atteint le LLM.
         if not is_masked(question) or any(not is_masked(e.label) for e in context.elements):
             raise KamaError(422, "unmasked_content", "Le texte contient encore des données à masquer.")
+        known = self.intent_of(question, lang)
+        if known is not None:
+            return known
         if self.client is None:
             raise KamaError(503, "llm_unavailable", "L'assistant n'est pas disponible.")
         if self.gate.locked():
@@ -124,7 +146,7 @@ class AssistantService:
                 return UNKNOWN
         if out.get("kind") != "answer":
             return UNKNOWN
-        text = str(out.get("text") or "").strip()
+        text = phrases_completes(str(out.get("text") or "").strip())
         if answer_problem(text, allowed=set()):  # aucune balise permise : le LLM ne cite jamais de montant
             return UNKNOWN
         return await self._to_user_language(text, lang)

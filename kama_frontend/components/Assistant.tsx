@@ -14,6 +14,10 @@
  * Plus tard, un modèle de langue pourra répondre aux questions hors de ces intentions ; il ne
  * produira jamais de montant (règle d'or n° 1).
  *
+ * Question hors de la liste d'intentions (orale ou écrite) : l'assistant (LLM sur le serveur Kama) répond. Mesure de
+ * sécurité : il ne reçoit AUCUN montant, seulement les libellés de l'écran (lib/contexte-assistant.ts) ; il explique le
+ * sens et renvoie vers les pastilles pour les montants exacts.
+ *
  * La conversation reste affichée tant que la fenêtre est ouverte ; rien n'est stocké.
  * La voix ne passe jamais par la page : elle va du document caché au service worker, qui la
  * garde en mémoire seulement le temps de pouvoir « Réessayer ».
@@ -23,14 +27,16 @@ import { Mic, RotateCw, ShieldCheck } from 'lucide-react';
 import type { MicMode } from '@/components/kama/fenetre/KamaWindow';
 import { Reflexion, TalkIdleContent, TalkListeningContent } from '@/components/kama/fenetre/contents';
 import { Consentement } from '@/components/kama/fenetre/parler';
-import { KamaLine, UserBubble, WindowButton } from '@/components/kama/fenetre/parts';
+import { KamaLine, StatusBadge, UserBubble, WindowButton, type TranslationStatus } from '@/components/kama/fenetre/parts';
 import { ContenuReel, type VueReelle } from '@/components/kama/fenetre/reel';
 import type { Langue } from '@/config/langues';
 import { PHRASES } from '@/config/phrases';
+import { demanderAssistant, ErreurApi } from '@/lib/api';
 import { jouerParoles } from '@/lib/audio';
+import { contexteAssistant, contexteEnEntete, questionMasquee } from '@/lib/contexte-assistant';
 import { LectureAuto, useLectureAuto } from '@/lib/langue-courante';
 import { lirePage } from '@/lib/lecture-page';
-import type { ErreurMicro, EvenementMicro, Intention, ResultatIntention } from '@/lib/messages';
+import { intentionConnue, type ErreurMicro, type EvenementMicro, type Intention, type ResultatIntention, type ReponseAssistant } from '@/lib/messages';
 import { demanderAutorisationMicro, ouvrirMicro, type Micro } from '@/lib/micro';
 import { reglageConsentementMicro, useReglage } from '@/lib/reglages';
 import { aplatir, useReponse } from '@/lib/use-reponse';
@@ -43,7 +49,9 @@ type Etat = 'attente' | 'accord' | 'ecoute' | 'envoi';
 type Reprise = 'envoi' | 'ecoute';
 
 type Bulle =
-  | { id: number; de: 'toi'; duree: number; compris?: string }
+  | { id: number; de: 'toi'; duree?: number; texte?: string; compris?: string }
+  /** Réponse de l'assistant (LLM) : jamais de montant. */
+  | ({ id: number; de: 'assistant' } & ReponseAssistant)
   | { id: number; de: 'kama'; titre: string; texte?: string; reessayer?: Reprise; autoriser?: boolean }
   /** Réponse construite à partir de la page (solde, frais, explication…). */
   | { id: number; de: 'reponse'; vue: VueReelle };
@@ -89,7 +97,8 @@ export function useAssistant({ langue, onShowMe }: { langue: Langue | null; onSh
     setALire(null);
     setNiveaux(Array(NB_BARRES).fill(0));
     setEtat('ecoute');
-    micro.current?.demarrer(langue?.code ?? 'fr');
+    // Les libellés de l'écran accompagnent la voix : si la question sort de la liste d'intentions, l'assistant comprend où on est.
+    micro.current?.demarrer(langue?.code ?? 'fr', contexteEnEntete(lirePage()));
   }
 
   traiterRef.current = (e) => {
@@ -122,6 +131,7 @@ export function useAssistant({ langue, onShowMe }: { langue: Langue | null; onSh
   };
 
   function repondre(r: ResultatIntention) {
+    if (r.ok && r.reponse) return ajouter({ de: 'assistant', ...r.reponse });
     // Question comprise : on note sous le message vocal ce que Kama a compris.
     if (r.ok && SENS[r.intention]) noterCompris(SENS[r.intention]);
     const reponse = reponsePour(r, bulles);
@@ -140,6 +150,29 @@ export function useAssistant({ langue, onShowMe }: { langue: Langue | null; onSh
       copie[i] = { ...(copie[i] as Extract<Bulle, { de: 'toi' }>), compris };
       return copie;
     });
+  }
+
+  /** Question écrite : masquée avec les valeurs de la page, puis liste d'intentions et, à défaut, l'assistant. */
+  async function envoyerTexte(texte: string) {
+    if (etat === 'ecoute' || etat === 'envoi') return;
+    arreterLecture();
+    setALire(null);
+    ajouter({ de: 'toi', texte }, false);
+    setEtat('envoi');
+    const lecture = lirePage();
+    try {
+      const r = await demanderAssistant(questionMasquee(texte, lecture), langue?.code ?? 'wes', contexteAssistant(lecture));
+      setEtat('attente');
+      if (r.kind === 'intent' && r.intent) return repondre({ ok: true, intention: intentionConnue(r.intent), confiance: 1 });
+      if (r.kind === 'answer' && r.text) {
+        return ajouter({ de: 'assistant', texte: r.text, badge: r.badge, langue: r.text_lang ?? null });
+      }
+      repondre({ ok: true, intention: 'unknown', confiance: 0 });
+    } catch (e) {
+      setEtat('attente');
+      // Pas de « Réessayer » : la question écrite reste dans le champ de l'historique, il suffit de la renvoyer.
+      kama({ ...messageErreur(e instanceof ErreurApi ? e.code : 'network'), reessayer: undefined });
+    }
   }
 
   function reessayer(reprise: Reprise) {
@@ -184,7 +217,7 @@ export function useAssistant({ langue, onShowMe }: { langue: Langue | null; onSh
     />
   );
 
-  return { mic, appuiMicro, reinitialiser, ecoute: etat === 'ecoute', contenu };
+  return { mic, appuiMicro, envoyerTexte, reinitialiser, ecoute: etat === 'ecoute', contenu };
 }
 
 /* ---------------------------------------------------------------------------------------- */
@@ -278,6 +311,11 @@ function messageErreur(code: string): Message {
     case 'invalid_audio':
     case 'invalid_duration':
       return { titre: "Je n'ai pas bien entendu.", texte: 'Appuie sur le micro et repose ta question.' };
+    case 'llm_unavailable':
+      return {
+        titre: "L'assistant n'est pas disponible pour le moment.",
+        texte: 'Utilise « Expliquer cette page » ou les pastilles Kama à côté des montants.',
+      };
     case 'asr_unavailable':
       return { titre: PHRASES.voix.indisponible[0], texte: PHRASES.voix.indisponible[1] };
     default:
@@ -332,7 +370,9 @@ function Conversation({
         // Seule la dernière bulle ajoutée se lit toute seule.
         <LectureAuto.Provider key={b.id} value={lectureAuto && b.id === aLire}>
           {b.de === 'toi' ? (
-            <MessageVocal duree={b.duree} compris={b.compris} />
+            <MessageVocal duree={b.duree} texte={b.texte} compris={b.compris} />
+          ) : b.de === 'assistant' ? (
+            <ReponseAssistantBulle texte={b.texte} badge={b.badge} />
           ) : b.de === 'reponse' ? (
             <ContenuReel vue={b.vue} onShowMe={onShowMe} />
           ) : (
@@ -360,16 +400,18 @@ function Conversation({
   );
 }
 
-function MessageVocal({ duree, compris }: { duree: number; compris?: string }) {
+function MessageVocal({ duree = 0, texte, compris }: { duree?: number; texte?: string; compris?: string }) {
   const messageVocal = useTexte('Message vocal');
   const aCompris = useTexte('Kama a compris :');
   const sens = useTexte(compris ?? '');
   return (
     <div className="flex flex-col items-end gap-1">
       <UserBubble>
-        <span className="inline-flex items-center gap-1.5">
-          <Mic className="size-4" aria-hidden /> {messageVocal} · {Math.max(1, Math.round(duree))} s
-        </span>
+        {texte ?? (
+          <span className="inline-flex items-center gap-1.5">
+            <Mic className="size-4" aria-hidden /> {messageVocal} · {Math.max(1, Math.round(duree))} s
+          </span>
+        )}
       </UserBubble>
       {compris && (
         <span className="text-xs text-kama-ink/70">
@@ -405,5 +447,27 @@ function ReponseKama({ titre, texte, children }: { titre: string; texte?: string
       </KamaLine>
       {children && <div>{children}</div>}
     </div>
+  );
+}
+
+const STATUT: Record<ReponseAssistant['badge'], TranslationStatus> = { verified: 'verified', machine: 'auto', untranslated: 'untranslated' };
+
+/** Réponse de l'assistant : texte (sans montant), indicateur de fiabilité, lue à voix haute si elle vient d'arriver. */
+function ReponseAssistantBulle({ texte, badge }: { texte: string; badge: ReponseAssistant['badge'] }) {
+  const lectureAuto = useLectureAuto();
+  const lu = useRef(false);
+  useEffect(() => {
+    if (!lectureAuto || lu.current) return;
+    lu.current = true;
+    lireTexte(texte);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lectureAuto]);
+  return (
+    <KamaLine speech={texte}>
+      <div className="flex items-start gap-1.5">
+        <p className="m-0 flex-1">{texte}</p>
+        <StatusBadge status={STATUT[badge]} />
+      </div>
+    </KamaLine>
   );
 }

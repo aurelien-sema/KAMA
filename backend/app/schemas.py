@@ -74,7 +74,8 @@ class AssistantRequest(Strict):
 
 
 class AssistantResponse(Strict):
-    kind: Literal["answer", "unknown"]
+    kind: Literal["answer", "intent", "unknown"]
+    intent: Intent | None = Field(None, description="Question reconnue par la liste d'intentions : l'extension répond avec ses gabarits et les montants de la page.")
     text: str | None = Field(description="Reponse sans aucun montant : les montants exacts viennent des pastilles et des intentions.")
     badge: Badge
     text_lang: str | None = Field(description="Langue du texte : la langue nationale, ou en (texte critique laisse en anglais).")

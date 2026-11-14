@@ -2458,6 +2458,21 @@ Le LLM rédige ses réponses en langue pivot (anglais pour le pidgin), avec seul
 | 1 | 24/48 | Schéma incomplet : valeur non obligatoire |
 | 2 | 27/48 | Schéma corrigé |
 | 3 | **36/48** | Exemples d'intentions ajoutés aux consignes ; critère des balises aligné sur le contrat (toutes les balises de l'écran) |
+| 4 | **17/48** | Consigne `SYSTEM` du backend ; contexte sans champ `value` ; validation `answer_problem(..., allowed=set())` |
+
+**Détail de l'essai 4 :**
+
+| Mesure | Résultat |
+|---|---|
+| Par langue | anglais 6/15, français 8/19, pidgin 3/14 |
+| Par tâche | réponse 10/15, intention 4/21, message de banque 1/6, élément 2/6 |
+| Pièges | 7/8 |
+| JSON valide | 48/48 |
+| Latence | médiane 8,09 s, 90e centile 11,91 s |
+
+**Sécurité de l'essai 4 :** aucun montant n'est transmis dans les éléments de contexte. Pour `answer`, les balises sont refusées (`allowed=set()`), et les chiffres, formules et termes de calcul suivent le contrôle partagé avec le backend. Les 48 sorties sont du JSON valide. Le détail est dans `evaluation/llm/resultats_lfm3.csv`.
+
+**Comparaison :** le nouveau `SYSTEM` du backend décrit l'assistant de réponse, alors que ce jeu mesure encore quatre tâches. Les 17/48 ne sont donc pas directement comparables aux scores précédents, dont le prompt décrivait explicitement les tâches de sélection et de classement.
 
 **Détail de l'essai 3 :**
 
@@ -2486,3 +2501,21 @@ Le LLM rédige ses réponses en langue pivot (anglais pour le pidgin), avec seul
   - Toute réponse avec un chiffre, une balise, une formule, un mot de calcul ou une hésitation est rejetée.
 - **Limite connue :** le masquage ne détecte pas un prénom seul sans contexte. Le LLM tourne sur notre serveur, sans tiers.
 - **Tests :** 178 réussis, dont 16 pour l'assistant (sécurité, retour en pidgin, voix).
+
+## 2026-11-14 — Fenêtre Kama : barre de saisie et réponses de l'assistant
+
+**Auteur :** Omar (réalisé par Claude Code)
+
+- **Barre de saisie** en bas de toutes les fenêtres, comme une messagerie : champ arrondi « Écris ta question… », flèche d'envoi visible dès qu'on écrit (touche Entrée aussi), micro rond orange à côté. Zones cliquables de 44 px au moins ; champ en pause pendant l'écoute.
+- **Question écrite :**
+  - elle est masquée dans l'extension avec les valeurs lues sur la page (`lib/contexte-assistant.ts`) ;
+  - le serveur essaie d'abord la liste d'intentions (en pidgin, en français, en anglais) : la réponse donne alors le montant exact de la page ;
+  - à défaut, le LLM répond.
+- **Question orale :** les libellés de l'écran l'accompagnent (en-tête `X-Kama-Context`). Hors de la liste d'intentions, la réponse du LLM s'affiche dans la conversation.
+- **Réponse du LLM :**
+  - affichée avec son indicateur de fiabilité et lue à voix haute ;
+  - jamais de montant ;
+  - limitée à 2 phrases, coupée proprement à la dernière phrase complète.
+- **Essai de bout en bout** (Banque Démo, LFM3 local) : « pourquoi le total est plus grand… » est reconnu comme intention et Kama répond « Montant total prélevé : 25.500 XAF » ; « combien de frais ? » passe au LLM, qui explique et renvoie vers la pastille, sans montant. Aucune erreur.
+- **Tests :** serveur 180 réussis ; frontend 92 réussis, aucune erreur TypeScript.
+- **Limites :** environ 10 à 20 s de réponse sur le PC ; réponses du LLM en anglais tant que le modèle anglais → pidgin n'est pas chargé par le serveur (dépendances `requirements-mt.txt`).

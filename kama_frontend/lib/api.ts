@@ -21,7 +21,18 @@ export type DemandeApi =
   | { type: 'kama:api'; route: 'capabilities' }
   | { type: 'kama:api'; route: 'translate'; corps: { text: string; source_lang: 'fr' | 'en'; target_lang: string; element: ElementApi } }
   | { type: 'kama:api'; route: 'tts'; corps: { text: string; lang: string } }
-  | { type: 'kama:api'; route: 'intent'; lang: string; wavBase64: string };
+  | { type: 'kama:api'; route: 'intent'; lang: string; wavBase64: string; contexte?: string }
+  | { type: 'kama:api'; route: 'assistant'; corps: { text: string; lang: string; context: ContexteAssistant } };
+
+/** Ce que l'assistant sait de l'écran : ses libellés, masqués, JAMAIS ses montants (mesure de sécurité). */
+export type ContexteAssistant = { screen?: string; elements: { id: string; label: string }[] };
+export type ReponseAssistantApi = {
+  kind: 'answer' | 'intent' | 'unknown';
+  intent?: IntentionApi;
+  text?: string | null;
+  badge: BadgeApi;
+  text_lang?: string | null;
+};
 
 export type ReponseBrute = { ok: true; donnees: unknown } | { ok: false; code: string; statut: number };
 
@@ -121,6 +132,10 @@ export const traduireTexte = (text: string, target_lang: string, element: Elemen
 
 export const synthetiser = (text: string, lang: string) =>
   appeler<{ segments: SegmentAudio[] }>({ type: 'kama:api', route: 'tts', corps: { text, lang } });
+
+/** Question écrite, DÉJÀ masquée : intention reconnue, réponse de l'assistant, ou « unknown ». */
+export const demanderAssistant = (text: string, lang: string, context: ContexteAssistant) =>
+  appeler<ReponseAssistantApi>({ type: 'kama:api', route: 'assistant', corps: { text, lang, context } });
 
 export const reconnaitreIntention = (wav: Uint8Array, lang: string) =>
   appeler<{ intent: IntentionApi; confidence: number }>({ type: 'kama:api', route: 'intent', lang, wavBase64: versBase64(wav) });

@@ -61,8 +61,11 @@ export function intentionConnue(valeur: unknown): Intention {
  * `code` d'erreur : ceux du serveur (`asr_unavailable`, `busy`, `rate_limited`, `invalid_audio`…)
  * ou `reseau` (pas de connexion, serveur muet).
  */
+/** Réponse de l'assistant (LLM) : jamais de montant ; texte en langue nationale, ou en anglais s'il est critique. */
+export type ReponseAssistant = { texte: string; badge: 'verified' | 'machine' | 'untranslated'; langue: string | null };
+
 export type ResultatIntention =
-  | { ok: true; intention: Intention; confiance: number }
+  | { ok: true; intention: Intention; confiance: number; reponse?: ReponseAssistant }
   | { ok: false; code: string };
 
 /** Erreurs d'accès au micro. `refuse` : Kama n'a pas (encore) l'autorisation du micro. */
@@ -70,7 +73,7 @@ export type ErreurMicro = 'refuse' | 'absent' | 'indisponible';
 
 /** Page → service worker. */
 export type CommandeMicro =
-  | { type: 'demarrer'; langue: string }
+  | { type: 'demarrer'; langue: string; contexte?: string }
   | { type: 'arreter' }
   | { type: 'reessayer' };
 

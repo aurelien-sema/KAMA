@@ -6,7 +6,8 @@
 import { PORT_MICRO, type CommandeMicro, type DemandeAutorisation, type EvenementMicro } from './messages';
 
 export type Micro = {
-  demarrer: (langue: string) => void;
+  /** `contexte` : libellés de l'écran (JSON masqué, base64url), pour que l'assistant comprenne la question. */
+  demarrer: (langue: string, contexte?: string) => void;
   arreter: () => void;
   reessayer: () => void;
   /** Coupe le micro et oublie la voix (fenêtre fermée). */
@@ -36,7 +37,7 @@ export function ouvrirMicro(onEvenement: (e: EvenementMicro | { type: 'coupe' })
   }
 
   return {
-    demarrer: (langue) => envoyer({ type: 'demarrer', langue }),
+    demarrer: (langue, contexte) => envoyer({ type: 'demarrer', langue, contexte }),
     arreter: () => port && envoyer({ type: 'arreter' }),
     reessayer: () => envoyer({ type: 'reessayer' }),
     fermer: () => {

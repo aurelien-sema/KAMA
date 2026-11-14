@@ -110,7 +110,7 @@ def create_app(settings: Settings | None = None, services: Services | None = Non
                 raise KamaError(422, "invalid_request", "Contexte illisible.") from None
         return await services.speech.voice_intent(await request.body(), x_kama_lang, context)
 
-    @app.post("/v1/assistant", response_model=AssistantResponse, tags=["assistant"])
+    @app.post("/v1/assistant", response_model=AssistantResponse, response_model_exclude_none=True, tags=["assistant"])
     async def assistant(body: AssistantRequest) -> AssistantResponse:
         """Question ecrite (deja masquee) : reponse courte de l'assistant, avec les seules balises de l'ecran."""
         return await services.assistant.answer(body.text, body.lang, body.context)

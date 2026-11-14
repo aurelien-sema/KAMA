@@ -9,15 +9,17 @@ from __future__ import annotations
 import argparse
 import csv
 import json
-import re
 import statistics
+import sys
 import time
 import urllib.request
 from collections import defaultdict
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from backend.app.llm import SYSTEM as BACKEND_SYSTEM, answer_problem
+
 ICI = Path(__file__).resolve().parent
-CONTEXTES: dict = {}
 INTENTIONS = ["ask_balance", "ask_fees", "ask_total", "what_to_do", "explain_error", "repeat"]
 EXPLICATIONS = {
     "AMOUNT_001": "The amount is not valid (must be greater than zero).",
@@ -29,19 +31,7 @@ EXPLICATIONS = {
     "CONFIRM_001": "The confirmation box was not ticked.",
 }
 
-SYSTEME = """You are the understanding module of Kama, an assistant that explains an online banking page to people who read French or English with difficulty.
-You receive a JSON request with a task and reply with ONE JSON object, nothing else.
-Rules (never break them):
-- Never write a digit, an amount, a name or a phone number. Amounts on the page are given as tags like {x1}; you may only reuse tags present in the context.
-- Never compute anything (no sum, no difference, no missing amount).
-- Never act for the user: you do not click, confirm, send or fill anything. Never advise a financial decision (whether to send money or not).
-- If the request is off-topic, ambiguous, or you are not sure, answer {"kind": "unknown"}.
-Tasks:
-- intent: choose what the user asks, among: ask_balance (their balance), ask_fees (the fees), ask_total (total that will leave the account), what_to_do (what to do on this page), explain_error (the bank's error message), repeat (repeat the last answer).
-- select_element: choose the page element the user talks about, by its id among the candidates.
-- map_bank_message: choose which known explanation matches the bank's message, by its id among the candidates.
-- answer: answer the question in 1 to 3 short, simple English sentences, using only the page context.
-The user may write in French, English or Cameroonian Pidgin.
+SYSTEM = BACKEND_SYSTEM + """
 Examples for the intent task (do not answer unknown when the question matches an intent):
 - "c'est combien le solde" / "how much is in my account" -> ask_balance
 - "combien je vais payer en plus" / "what is the charge" / "na how much be di charge" -> ask_fees
@@ -74,7 +64,10 @@ def demande(cas: dict, contextes: dict) -> str:
     entree = {"task": cas["task"], "text": cas["text"]}
     if cas.get("contexte"):
         ctx = contextes[cas["contexte"]]
-        entree["context"] = {"screen": ctx["screen"], "elements": ctx["elements"]}
+        entree["context"] = {
+            "screen": ctx["screen"],
+            "elements": [{k: v for k, v in e.items() if k != "value"} for e in ctx["elements"]],
+        }
     if cas["task"] == "map_bank_message":
         entree["candidates"] = [{"id": k, "meaning": v} for k, v in EXPLICATIONS.items()]
     return json.dumps(entree, ensure_ascii=False)
@@ -82,7 +75,7 @@ def demande(cas: dict, contextes: dict) -> str:
 
 def appeler(url: str, cas: dict, contextes: dict) -> tuple[str, float]:
     corps = {
-        "messages": [{"role": "system", "content": SYSTEME}, {"role": "user", "content": demande(cas, contextes)}],
+        "messages": [{"role": "system", "content": SYSTEM}, {"role": "user", "content": demande(cas, contextes)}],
         "temperature": 0,
         "max_tokens": 200,
         "response_format": {"type": "json_schema", "json_schema": {"schema": schema(cas, contextes)}},
@@ -94,12 +87,6 @@ def appeler(url: str, cas: dict, contextes: dict) -> tuple[str, float]:
     with urllib.request.urlopen(req, timeout=120) as r:
         rep = json.loads(r.read())
     return rep["choices"][0]["message"]["content"], time.perf_counter() - debut
-
-
-def balises_du_contexte(cas: dict, contextes: dict) -> set[str]:
-    """Le contrat autorise toutes les balises de l'écran (pas seulement celles du sujet de la question)."""
-    ctx = contextes.get(cas.get("contexte") or "", {"elements": []})
-    return {m for e in ctx["elements"] for m in re.findall(r"\{(x\d+)\}", e.get("value", ""))}
 
 
 def noter(cas: dict, brut: str, contextes: dict) -> tuple[bool, bool, str]:
@@ -119,19 +106,9 @@ def noter(cas: dict, brut: str, contextes: dict) -> tuple[bool, bool, str]:
         return True, False, f"type {kind}"
     if kind == "answer":
         texte = sortie.get("text") or ""
-        sans_balises = re.sub(r"\{x\d+\}", "", texte)
-        balises = set(re.findall(r"\{(x\d+)\}", texte))
-        if not texte.strip():
-            return True, False, "réponse vide"
-        if re.search(r"\d", sans_balises):
-            return True, False, "chiffre écrit"
-        permises = balises_du_contexte(cas, CONTEXTES)
-        if not balises <= permises:
-            return True, False, f"balise inventée {sorted(balises - permises)}"
-        if not set(att["slots_requis"]) <= balises:
-            return True, False, "balise requise absente"
-        if len(texte) > 300:
-            return True, False, "trop long"
+        probleme = answer_problem(texte, allowed=set())
+        if probleme:
+            return True, False, probleme
         bas = texte.lower()
         interdit = next((m for m in att["interdits"] if m.lower() in bas), None)
         return True, interdit is None, f"mot interdit « {interdit} »" if interdit else ""
@@ -146,7 +123,6 @@ def main() -> None:
     args.add_argument("--sortie", default=str(ICI / "resultats_lfm3.csv"))
     a = args.parse_args()
     jeu = json.loads((ICI / "jeu_kama_llm.json").read_text(encoding="utf-8"))
-    CONTEXTES.update(jeu["contextes"])
     lignes, durees = [], []
     for cas in jeu["cas"]:
         try:
