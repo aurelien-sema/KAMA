@@ -17,9 +17,10 @@ from .clips import piece_key, split_pieces
 from .engines import EngineSet, TranslationRoute, load_engines
 from .errors import KamaError, busy, unmasked, unsupported_language
 from .memory import TranslationMemory
-from .schemas import AudioSegment, IntentResponse, SlotSegment, TranslateRequest, TranslateResponse, TtsResponse
+from .llm import AssistantService, LlamaCppClient
+from .schemas import AssistantContext, AudioSegment, IntentResponse, SlotSegment, TranslateRequest, TranslateResponse, TtsResponse
 from .security.guards import canonical, is_critical, output_problem, similarity
-from .security.masking import SLOT_RE, has_hard_pii, is_masked
+from .security.masking import SLOT_RE, has_hard_pii, is_masked, mask
 from .settings import Settings
 from .simplify import Simplifier
 
@@ -167,10 +168,10 @@ def read_pcm(audio: bytes) -> bytes:
 
 
 class SpeechService:
-    def __init__(self, engines: EngineSet, intents: IntentMatcher, gate: asyncio.Semaphore) -> None:
-        self.engines, self.intents, self.gate = engines, intents, gate
+    def __init__(self, engines: EngineSet, intents: IntentMatcher, gate: asyncio.Semaphore, assistant: AssistantService | None = None) -> None:
+        self.engines, self.intents, self.gate, self.assistant = engines, intents, gate, assistant
 
-    async def voice_intent(self, audio: bytes, lang: str) -> IntentResponse:
+    async def voice_intent(self, audio: bytes, lang: str, context: AssistantContext | None = None) -> IntentResponse:
         """Le texte reconnu et l'audio restent en memoire et ne sortent pas de cette fonction.
 
         Seule l'intention est renvoyee : l'extension lit ensuite le montant sur la page.
@@ -189,7 +190,16 @@ class SpeechService:
             except Exception as exc:  # le message pourrait citer ce qui a ete dit
                 log.warning("reconnaissance en echec (%s)", type(exc).__name__)
                 raise KamaError(503, "asr_unavailable", "La reconnaissance vocale a échoué.") from None
-        return self.intents.match(transcript, lang)
+        result = self.intents.match(transcript, lang)
+        # Question hors de la liste d'intentions : l'assistant repond, sur la transcription MASQUEE et le contexte de l'ecran.
+        if result.intent == "unknown" and context is not None and self.assistant and self.assistant.available:
+            try:
+                answer = await self.assistant.answer(mask(transcript).text, lang, context)
+            except KamaError:
+                answer = None
+            if answer is not None and answer.kind == "answer":
+                return IntentResponse(intent="unknown", confidence=0.0, answer=answer)
+        return result
 
     async def synthesize(self, text: str, lang: str) -> TtsResponse:
         """Ne synthetise que les morceaux entre les balises.
@@ -238,6 +248,7 @@ class Services:
     engines: EngineSet
     translation: TranslationService
     speech: SpeechService
+    assistant: AssistantService
 
 
 def build_services(settings: Settings, engines: EngineSet | None = None) -> Services:
@@ -252,4 +263,7 @@ def build_services(settings: Settings, engines: EngineSet | None = None) -> Serv
     )
     intents = IntentMatcher.from_file(settings.content_dir / "intents.json")
     gate = asyncio.Semaphore(settings.max_concurrent_models)
-    return Services(engines, TranslationService(memory, engines, settings, gate), SpeechService(engines, intents, gate))
+    translation = TranslationService(memory, engines, settings, gate)
+    client = LlamaCppClient(settings.llm_url, settings.llm_timeout) if settings.llm_url else None
+    assistant = AssistantService(client, translation, asyncio.Semaphore(1), engines.languages)  # un seul calcul LLM a la fois (CPU)
+    return Services(engines, translation, SpeechService(engines, intents, gate, assistant), assistant)

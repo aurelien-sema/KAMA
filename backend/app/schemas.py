@@ -55,9 +55,35 @@ class TtsResponse(Strict):
     segments: list[Union[AudioSegment, SlotSegment]]
 
 
+class AssistantElement(Strict):
+    """Mesure de sécurité (décision du 2026-11-14) : le LLM ne reçoit AUCUN montant, seulement les libellés de l'écran."""
+
+    id: str = Field(min_length=1, max_length=40)
+    label: str = Field(min_length=1, max_length=120, description="Libellé de la page, masqué.")
+
+
+class AssistantContext(Strict):
+    screen: str | None = Field(None, max_length=40)
+    elements: list[AssistantElement] = Field(default_factory=list, max_length=20)
+
+
+class AssistantRequest(Strict):
+    text: str = Field(min_length=1, max_length=300, description="Question DEJA masquee (francais, anglais ou pidgin).")
+    lang: str = Field(min_length=2, max_length=8, description="Langue nationale choisie (reponse traduite si non critique).")
+    context: AssistantContext = Field(default_factory=AssistantContext)
+
+
+class AssistantResponse(Strict):
+    kind: Literal["answer", "unknown"]
+    text: str | None = Field(description="Reponse sans aucun montant : les montants exacts viennent des pastilles et des intentions.")
+    badge: Badge
+    text_lang: str | None = Field(description="Langue du texte : la langue nationale, ou en (texte critique laisse en anglais).")
+
+
 class IntentResponse(Strict):
     intent: Intent
     confidence: float = Field(ge=0, le=1)
+    answer: AssistantResponse | None = Field(None, description="Reponse de l'assistant quand l'intention est inconnue.")
 
 
 class LanguageInfo(Strict):

@@ -2432,3 +2432,57 @@ Le LLM rédige ses réponses en langue pivot (anglais pour le pidgin), avec seul
 - **Format et raisonnement :** la première sortie `llama-cli` était du texte mal formé en JSON et contenait un marqueur `<think>` vide. La contrainte JSON Schema a fonctionné via l'API serveur, mais n'a pas empêché les erreurs de sûreté et de fidélité ci-dessus.
 - **Conclusion :** essai technique uniquement, LFM3-1.7B n'est pas validé et n'est pas intégré. Le jeu existant comporte 48 cas au total (19 français, 15 anglais, 14 pidgin), et son propre avertissement demande encore la relecture des cas pidgin. La mesure complète et la comparaison avec un second modèle restent à faire.
 - **Méthode :** vérification locale de la taille et du SHA-256, lecture du README du modèle et du jeu Kama, interrogation du runtime local via CLI puis API compatible OpenAI. Le schéma strict et les requêtes synthétiques ont été utilisés pour éviter toute donnée personnelle ou bancaire. Aucun paquet n'a été installé et aucun service externe contacté.
+
+## 2026-11-14 — Documentation de soumission SAFINUM (Word, v1.0)
+
+**Auteur :** Omar (rédigée par Claude Code)
+
+- **Fichier :** `Kama_Documentation_SAFINUM_v1.docx`, dans le dossier `Kama/`, à côté des autres documents de l'équipe. Il fait 8 pages, avec un sommaire.
+- **Contenu :** les livrables écrits du règlement (section 6), dans un seul document :
+  1. présentation de la solution, avec la réponse aux 5 fonctionnalités attendues ;
+  2. note technique : architecture, intégration, sécurité, intelligence artificielle (assistant présenté « en cours d'intégration »), dépendances et licences, limites connues ;
+  3. langues prises en charge et méthode de validation linguistique (70 textes de la page de test validés en pidgin par un premier locuteur).
+- **Ton :** professionnel et peu technique, à la demande d'Omar. Le document sera mis à jour à mesure que le projet avance.
+- **À compléter** (surligné en jaune dans le document) : équipe et représentant, renvoi au rapport de sécurité d'Eunice, licence du modèle de base anglais → pidgin, profil des locuteurs validateurs.
+
+## 2026-11-14 — Mesure de LFM3-1.7B sur le jeu d'évaluation
+
+**Auteur :** Omar (mesure lancée par Claude Code)
+
+- **Modèle :** LFM3-1.7B Q4_K_M, servi par `llama.cpp` sur le PC (processeur, 4 fils), raisonnement coupé.
+- **Script :** `evaluation/llm/evaluer.py`. Il utilise un schéma JSON imposé et place les consignes en cache. Le détail est dans `resultats_lfm3.csv`.
+- **Pidgin :** envoyé tel quel au modèle (décision du 2026-11-14).
+
+| Essai | Réussis | Ce qui a changé |
+|---|---|---|
+| 1 | 24/48 | Schéma incomplet : valeur non obligatoire |
+| 2 | 27/48 | Schéma corrigé |
+| 3 | **36/48** | Exemples d'intentions ajoutés aux consignes ; critère des balises aligné sur le contrat (toutes les balises de l'écran) |
+
+**Détail de l'essai 3 :**
+
+| Mesure | Résultat |
+|---|---|
+| Par langue | anglais 12/15, français 15/19, pidgin 9/14 |
+| Par tâche | réponse 13/15, intention 15/21, message de banque 5/6, élément 3/6 |
+| Pièges | 7/8 |
+| JSON valide | 48/48 |
+| Latence | médiane 10,5 s |
+
+**Sécurité :** sur les trois essais, le modèle n'a jamais écrit de chiffre ni inventé de balise. Le seul piège échoué est une réponse vide, qui sera traitée comme « je n'ai pas compris ».
+
+**Faiblesses :** les intentions « erreur » et « répéter » sont rejetées en « je ne sais pas » dans les trois langues ; le choix d'un élément de la page est faible.
+
+## 2026-11-14 — Assistant LLM branché au serveur ; aucun montant donné au LLM
+
+**Auteur :** Omar (réalisé par Claude Code)
+
+- **Serveur :**
+  - nouveau module `backend/app/llm.py` : appel au serveur llama.cpp local (`KAMA_LLM_URL`), consignes, schéma JSON imposé, contrôles de sortie, retour en pidgin seulement pour un texte non critique ;
+  - nouvelle route `POST /v1/assistant` pour une question écrite déjà masquée ;
+  - la voix passe au LLM quand la liste d'intentions ne comprend pas. Le contexte de l'écran arrive par l'en-tête `X-Kama-Context`, et la transcription est masquée avant le LLM.
+- **Décision de sécurité :** le LLM ne reçoit **aucun montant**, seulement les libellés de l'écran. Un essai réel l'a montré confondre les lignes (« The charge is {x1} » alors que {x1} était le montant à envoyer) et écrire des formules (« {x3} = {x1} + {x2} »).
+  - Il explique désormais le sens et renvoie vers la pastille pour le montant exact.
+  - Toute réponse avec un chiffre, une balise, une formule, un mot de calcul ou une hésitation est rejetée.
+- **Limite connue :** le masquage ne détecte pas un prénom seul sans contexte. Le LLM tourne sur notre serveur, sans tiers.
+- **Tests :** 178 réussis, dont 16 pour l'assistant (sécurité, retour en pidgin, voix).

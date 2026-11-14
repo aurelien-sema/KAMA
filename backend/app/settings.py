@@ -35,6 +35,8 @@ class Settings:
     content_dir: Path = REPO_DIR / "content-data"
     routes_file: Path = BACKEND_DIR / "config" / "routes.json"
     clips_dir: Path | None = None  # enregistrements valides ; par defaut models_dir/poids/audio
+    llm_url: str | None = None  # serveur llama.cpp local (ex. http://127.0.0.1:8081) ; absent : assistant indisponible
+    llm_timeout: float = 40.0
 
     @property
     def clips_path(self) -> Path:
@@ -74,6 +76,8 @@ def load_settings() -> Settings:
         content_dir=Path(os.environ.get("KAMA_CONTENT_DIR", d.content_dir)),
         routes_file=Path(os.environ.get("KAMA_ROUTES_FILE", d.routes_file)),
         clips_dir=Path(os.environ["KAMA_CLIPS_DIR"]) if os.environ.get("KAMA_CLIPS_DIR") else None,
+        llm_url=os.environ.get("KAMA_LLM_URL") or None,
+        llm_timeout=float(os.environ.get("KAMA_LLM_TIMEOUT", d.llm_timeout)),
     )
     if settings.is_prod and not settings.allowed_origins and not settings.allow_firefox:
         raise RuntimeError("KAMA_ALLOWED_ORIGINS est obligatoire en production.")
