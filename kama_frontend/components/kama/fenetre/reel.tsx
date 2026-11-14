@@ -30,7 +30,8 @@ import {
 import { useLangueCourante } from '@/lib/langue-courante';
 import { aplatir, useReponse } from '@/lib/use-reponse';
 import { useTraductionTexte } from '@/lib/use-traduction';
-import { traduireKama, traduireLibelle } from '@/lib/use-texte';
+import { traduireKama, traduireLibelle, useTexte } from '@/lib/use-texte';
+import { classer, libelleCategorie } from '@/lib/categories';
 import {
   BandeauHorsLigne,
   BankErrorContent,
@@ -82,8 +83,9 @@ export function ContenuReel({ vue, onShowMe }: Props) {
     case 'selection': {
       const id = elementPourTexte(lecture, vue.texte);
       if (id) return <ExplicationElement id={id} lecture={lecture} onShowMe={onShowMe} />;
-      // Texte quelconque : traduit s'il est validé ou s'il n'est pas critique ; sinon Kama le montre et propose de l'écouter en français.
-      return <TexteLibre texte={vue.texte} />;
+      // Texte libre non reconnu : message de la page tel quel, catégorie reconnue par le classeur, explication
+      // préparée et traduction automatique éventuelle (voie 3).
+      return <ReponseInconnue texte={vue.texte} />;
     }
   }
 }
@@ -322,10 +324,67 @@ function ReponseGabarit({
 /* Éléments découverts par Kama (contenu inédit)                                            */
 /* ---------------------------------------------------------------------------------------- */
 
+/**
+ * Message inédit (alerte, nouveau message ou texte libre non reconnu) : Kama ne le traduit pas mot à mot.
+ * Il affiche le message de la banque tel quel, le badge de la catégorie reconnue par le classeur déterministe,
+ * puis l'explication préparée pour cette catégorie (lue avec la voix pidgin du serveur). La traduction automatique
+ * du message original, si le serveur l'accorde, vient en plus avec son propre badge « Traduction automatique ».
+ */
+function ReponseInconnue({
+  texte,
+  nature,
+  onShowMe,
+}: {
+  texte: string;
+  nature?: Decouverte['nature'];
+  onShowMe?: () => void;
+}) {
+  const langue = useLangueCourante();
+  const cat = classer(texte);
+  const r = useReponse([[cat.fr]], 'text');
+  const [m] = useTraductionTexte(texte, 'text', langue);
+  const messageDeLaBanque = useTexte('Message de la banque');
+  if (r.chargement || m.statut === 'chargement') return <Reflexion />;
+  return (
+    <div className="flex flex-col gap-3">
+      {r.horsLigne && <BandeauHorsLigne onRetry={r.reessayer} />}
+      <div className="rounded-lg border border-bank-border bg-bank-bg p-3">
+        <p className="m-0 text-[11px] font-semibold uppercase tracking-wide text-bank-muted">{messageDeLaBanque}</p>
+        <p className="m-0 mt-1 text-sm font-medium text-bank-text">{texte}</p>
+      </div>
+      <span className="inline-flex w-fit items-center rounded-full bg-kama-cream px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider text-kama-ink/70">
+        {libelleCategorie(cat, langue?.code)}
+      </span>
+      <KamaResponse status={r.status} paroles={r.paroles} speech={aplatir(r.lignes[0]!)}>
+        {cat.arnaque || nature === 'alerte' ? (
+          <div className="flex gap-2.5 rounded-xl border-2 border-kama-error p-3" role="alert">
+            <AlertTriangle className="mt-0.5 size-5 shrink-0 text-kama-error" aria-hidden />
+            <p className="m-0">{rendre(r.lignes[0]!)}</p>
+          </div>
+        ) : (
+          <p className="m-0">{rendre(r.lignes[0]!)}</p>
+        )}
+        {m.statut === 'ok' && (
+          <div className="flex flex-col gap-1.5 rounded-lg border border-kama-ink/10 p-3">
+            <StatusBadge status={m.badge} />
+            <p className="m-0 text-sm font-medium">{rendre(m.lignes[0]!)}</p>
+          </div>
+        )}
+        {onShowMe && (
+          <div>
+            <MontreMoi onClick={onShowMe} />
+          </div>
+        )}
+      </KamaResponse>
+    </div>
+  );
+}
+
 function ExplicationDecouverte({ d, onShowMe }: { d: Decouverte; onShowMe: MontrerFn }) {
   switch (d.nature) {
     case 'alerte':
-      return <ReponseErreur code={d.code} message={d.texte} libelle={d.texte ?? ''} />;
+    case 'nouveau':
+      return <ReponseInconnue texte={d.texte ?? ''} nature={d.nature} onShowMe={() => onShowMe(d.cle)} />;
     case 'montant':
       return <MontantDecouvert d={d} onShowMe={() => onShowMe(d.cle)} />;
     default:

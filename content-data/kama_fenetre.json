@@ -1,5 +1,5 @@
 {
- "_note": "Phrases fixes de la fenetre Kama (generees par kama_frontend/scripts/phrases-fenetre.mjs : ne pas changer le champ fr a la main). Meme format que safinum_test_page.json. Les montants sont les balises {x1}... remplacees par les valeurs exactes de la page. Un champ wes ou bbj sans validated_by (ou validated_by_bbj) n'est jamais servi : il faut qu'un locuteur valide chaque phrase. Les champs wes sans validated_by sont des BROUILLONS (affiches avec le badge Traduction automatique, jamais Verifie).",
+ "_note": "Phrases fixes de la fenetre Kama (generees par kama_frontend/scripts/phrases-fenetre.mjs : ne pas changer le champ fr a la main). Meme format que safinum_test_page.json. Les montants sont les balises {x1}... remplacees par les valeurs exactes de la page. Un champ wes ou bbj sans validated_by (ou validated_by_bbj) n'est jamais servi : il faut qu'un locuteur valide chaque phrase.",
  "entries": [
   {
    "id": "fen_f8d73fcf",
@@ -498,6 +498,118 @@
    "zone": "consentement",
    "fr": "Ne dis pas ton solde, ton numéro ni un nom : parle seulement de la page.",
    "wes": "No talk your money, your number or any name: talk only about di page."
+  },
+  {
+   "id": "b_faux_agent_demande_code",
+   "zone": "explication",
+   "fr": "Quelqu'un te demande ton code secret ou ton code de retrait. Une banque ne demande jamais un code : ne le donne pas, c'est toi qui décides.",
+   "en": "Someone asks you for your secret code or your withdrawal code. A bank never asks for a code: do not give it, it's your decision.",
+   "wes": "Somebody dey ask you for your secret code or withdrawal code. Bank no go ever ask you for code - no give am, na you go decide."
+  },
+  {
+   "id": "b_lien_piege",
+   "zone": "explication",
+   "fr": "Ce lien te demande de payer ou de mettre à jour tes infos avant d'obtenir quoi que ce soit. Ne clique pas et n'envoie rien, c'est toi qui décides.",
+   "en": "This link asks you to pay or update your info before getting anything. Don't click and don't send anything, it's your decision.",
+   "wes": "Dis link dey ask you pay or update your info before you get anything. No click am, no send anything, na you go decide."
+  },
+  {
+   "id": "b_faux_gain",
+   "zone": "explication",
+   "fr": "On te dit que tu as gagné un prix et te demande de payer des frais d'abord. C'est une arnaque : n'envoie pas d'argent, c'est toi qui décides.",
+   "en": "They tell you that you won a prize and ask you to pay fees first. It's a scam: don't send money, it's your decision.",
+   "wes": "Dem talk say you win prize and ask you pay fee first. Na scam - no send money, na you go decide."
+  },
+  {
+   "id": "b_faux_remboursement_erreur",
+   "zone": "explication",
+   "fr": "On te dit qu'on t'a envoyé de l'argent par erreur et te demande de le renvoyer. Ne renvoie rien sans vérifier avec ta banque, c'est toi qui décides.",
+   "en": "They tell you money was sent to you by mistake and ask you to send it back. Don't send anything back without checking with your bank, it's your decision.",
+   "wes": "Dem talk say dem send you money by mistake and ask you send am back. No send anything until you check with your bank, na you go decide."
+  },
+  {
+   "id": "b_faux_emploi",
+   "zone": "explication",
+   "fr": "On te propose un travail et te demande de payer des frais de dossier ou d'admission. Ne paye rien, c'est toi qui décides.",
+   "en": "They offer you a job and ask you to pay application or admission fees. Don't pay anything, it's your decision.",
+   "wes": "Dem offer you work and ask you pay form fee or admission fee. No pay anything, na you go decide."
+  },
+  {
+   "id": "b_investissement_douteux",
+   "zone": "explication",
+   "fr": "On te promet de gagner beaucoup d'argent vite si tu déposes ou investis. Ne dépose pas d'argent, c'est toi qui décides.",
+   "en": "They promise you will make a lot of money fast if you deposit or invest. Don't deposit any money, it's your decision.",
+   "wes": "Dem promise say you go make plenty money quick if you deposit or invest. No deposit money, na you go decide."
+  },
+  {
+   "id": "b_urgence_menace",
+   "zone": "explication",
+   "fr": "On te dit qu'un proche est en danger et te presse de payer vite. Ne paye pas sous la pression : vérifie d'abord, c'est toi qui décides.",
+   "en": "They tell you a loved one is in danger and pressure you to pay fast. Don't pay under pressure: check first, it's your decision.",
+   "wes": "Dem talk say your relation dey danger and pressure you pay quick. No pay under pressure - check first, na you go decide."
+  },
+  {
+   "id": "b_panne_maintenance",
+   "zone": "explication",
+   "fr": "Le service bancaire est en maintenance ou en panne pour le moment. Réessaie plus tard, c'est toi qui décides quand refaire l'opération.",
+   "en": "The banking service is under maintenance or down right now. Try again later, it's your decision when to redo the operation.",
+   "wes": "Banking service for maintenance or e dey down for now. Try again later, na you go decide when you go redo am."
+  },
+  {
+   "id": "b_operation_refusee",
+   "zone": "explication",
+   "fr": "Ton opération a été refusée : aucun argent n'a quitté ton compte. Vérifie les informations et réessaie si tu veux, c'est toi qui décides.",
+   "en": "Your operation was declined: no money left your account. Check the details and try again if you want, it's your decision.",
+   "wes": "Your operation don refuse - no money leave your account. Check your details and try again if you want, na you go decide."
+  },
+  {
+   "id": "b_operation_reussie",
+   "zone": "explication",
+   "fr": "Ton opération est partie. Vérifie le total qui a quitté ton compte, c'est toi qui décides de garder le reçu ou non.",
+   "en": "Your operation went through. Check the total that left your account, it's your decision whether to keep the receipt or not.",
+   "wes": "Your operation don go through. Check the total wey leave your account, na you go decide if you go keep the receipt or not."
+  },
+  {
+   "id": "b_frais_tarif",
+   "zone": "explication",
+   "fr": "Des frais s'appliquent à cette opération. Vérifie le montant avant de continuer, c'est toi qui décides.",
+   "en": "Fees apply to this operation. Check the amount before continuing, it's your decision.",
+   "wes": "Fee dey apply for this operation. Check the amount before you continue, na you go decide."
+  },
+  {
+   "id": "b_plafond",
+   "zone": "explication",
+   "fr": "Tu as atteint un plafond ou une limite sur ton compte. Vérifie ton plafond avant d'envoyer, c'est toi qui décides.",
+   "en": "You reached a limit on your account. Check your limit before sending, it's your decision.",
+   "wes": "You reach limit for your account. Check your limit before you send, na you go decide."
+  },
+  {
+   "id": "b_compte_bloque_suspendu",
+   "zone": "explication",
+   "fr": "Ton compte est bloqué ou suspendu pour le moment. Contacte ta banque avant de faire quoi que ce soit, c'est toi qui décides.",
+   "en": "Your account is blocked or suspended right now. Contact your bank before doing anything, it's your decision.",
+   "wes": "Your account block or suspend for now. Contact your bank before you do anything, na you go decide."
+  },
+  {
+   "id": "b_mise_a_jour_informations",
+   "zone": "explication",
+   "fr": "On te demande de mettre à jour tes informations avant une date limite. Fais-le seulement par le site officiel de ta banque, c'est toi qui décides.",
+   "en": "You are asked to update your information before a deadline. Do it only through your bank's official website, it's your decision.",
+   "wes": "Dem ask you update your information before deadline. Do am only for your bank official website, na you go decide."
+  },
+  {
+   "id": "b_information_generale",
+   "zone": "explication",
+   "fr": "C'est un message d'information générale de ta banque. Lis-le, mais aucune opération urgente n'est demandée, c'est toi qui décides.",
+   "en": "It's a general information message from your bank. Read it, but no urgent operation is requested, it's your decision.",
+   "wes": "Na general information message from your bank. Read am, but no urgent operation you need do, na you go decide."
+  },
+  {
+   "id": "b_inconnu",
+   "zone": "explication",
+   "fr": "Kama ne reconnaît pas ce message. Lis-le bien ou demande à ta banque avant de faire quoi que ce soit, c'est toi qui décides.",
+   "en": "Kama does not recognize this message. Read it well or ask your bank before doing anything, it's your decision.",
+   "wes": "Kama never sabi dis message. Read am well or ask your bank before you do anything."
   }
  ]
 }

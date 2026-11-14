@@ -127,6 +127,11 @@
     "statut": "brouillon",
     "zone": "explication"
    },
+   "c'est un message d'information générale de ta banque. lis-le, mais aucune opération urgente n'est demandée, c'est toi qui décides": {
+    "texte": "Na general information message from your bank. Read am, but no urgent operation you need do, na you go decide.",
+    "statut": "brouillon",
+    "zone": "explication"
+   },
    "case de confirmation": {
     "texte": "Tick box for confirm",
     "statut": "brouillon",
@@ -144,6 +149,11 @@
    },
    "ce bouton envoie l'argent pour de vrai": {
     "texte": "Dis button go send di money for true.",
+    "statut": "brouillon",
+    "zone": "explication"
+   },
+   "ce lien te demande de payer ou de mettre à jour tes infos avant d'obtenir quoi que ce soit. ne clique pas et n'envoie rien, c'est toi qui décides": {
+    "texte": "Dis link dey ask you pay or update your info before you get anything. No click am, no send anything, na you go decide.",
     "statut": "brouillon",
     "zone": "explication"
    },
@@ -186,6 +196,11 @@
     "texte": "Tick di box if everything correct.",
     "statut": "brouillon",
     "zone": "expliquer"
+   },
+   "des frais s'appliquent à cette opération. vérifie le montant avant de continuer, c'est toi qui décides": {
+    "texte": "Fee dey apply for this operation. Check the amount before you continue, na you go decide.",
+    "statut": "brouillon",
+    "zone": "explication"
    },
    "désactivé": {
     "texte": "Off",
@@ -342,6 +357,11 @@
     "statut": "brouillon",
     "zone": "etat"
    },
+   "kama ne reconnaît pas ce message. lis-le bien ou demande à ta banque avant de faire quoi que ce soit, c'est toi qui décides": {
+    "texte": "Kama never sabi dis message. Read am well or ask your bank before you do anything.",
+    "statut": "brouillon",
+    "zone": "explication"
+   },
    "kama ne reconnaît pas cette page. ouvre la page de ta banque": {
     "texte": "Kama no know dis page. Open your bank page.",
     "statut": "brouillon",
@@ -401,6 +421,11 @@
     "texte": "Di money weh you write no correct.",
     "statut": "brouillon",
     "zone": "erreur"
+   },
+   "le service bancaire est en maintenance ou en panne pour le moment. réessaie plus tard, c'est toi qui décides quand refaire l'opération": {
+    "texte": "Banking service for maintenance or e dey down for now. Try again later, na you go decide when you go redo am.",
+    "statut": "brouillon",
+    "zone": "explication"
    },
    "lecture en français": {
     "texte": "E di read for French",
@@ -492,6 +517,36 @@
     "statut": "brouillon",
     "zone": "fenetre"
    },
+   "on te demande de mettre à jour tes informations avant une date limite. fais-le seulement par le site officiel de ta banque, c'est toi qui décides": {
+    "texte": "Dem ask you update your information before deadline. Do am only for your bank official website, na you go decide.",
+    "statut": "brouillon",
+    "zone": "explication"
+   },
+   "on te dit qu'on t'a envoyé de l'argent par erreur et te demande de le renvoyer. ne renvoie rien sans vérifier avec ta banque, c'est toi qui décides": {
+    "texte": "Dem talk say dem send you money by mistake and ask you send am back. No send anything until you check with your bank, na you go decide.",
+    "statut": "brouillon",
+    "zone": "explication"
+   },
+   "on te dit qu'un proche est en danger et te presse de payer vite. ne paye pas sous la pression : vérifie d'abord, c'est toi qui décides": {
+    "texte": "Dem talk say your relation dey danger and pressure you pay quick. No pay under pressure - check first, na you go decide.",
+    "statut": "brouillon",
+    "zone": "explication"
+   },
+   "on te dit que tu as gagné un prix et te demande de payer des frais d'abord. c'est une arnaque : n'envoie pas d'argent, c'est toi qui décides": {
+    "texte": "Dem talk say you win prize and ask you pay fee first. Na scam - no send money, na you go decide.",
+    "statut": "brouillon",
+    "zone": "explication"
+   },
+   "on te promet de gagner beaucoup d'argent vite si tu déposes ou investis. ne dépose pas d'argent, c'est toi qui décides": {
+    "texte": "Dem promise say you go make plenty money quick if you deposit or invest. No deposit money, na you go decide.",
+    "statut": "brouillon",
+    "zone": "explication"
+   },
+   "on te propose un travail et te demande de payer des frais de dossier ou d'admission. ne paye rien, c'est toi qui décides": {
+    "texte": "Dem offer you work and ask you pay form fee or admission fee. No pay anything, na you go decide.",
+    "statut": "brouillon",
+    "zone": "explication"
+   },
    "ouest": {
     "texte": "West",
     "statut": "brouillon",
@@ -566,6 +621,11 @@
     "texte": "Ready for read",
     "statut": "brouillon",
     "zone": "fenetre"
+   },
+   "quelqu'un te demande ton code secret ou ton code de retrait. une banque ne demande jamais un code : ne le donne pas, c'est toi qui décides": {
+    "texte": "Somebody dey ask you for your secret code or withdrawal code. Bank no go ever ask you for code - no give am, na you go decide.",
+    "statut": "brouillon",
+    "zone": "explication"
    },
    "ralentie": {
     "texte": "Slow",
@@ -662,6 +722,21 @@
     "statut": "brouillon",
     "zone": "fenetre"
    },
+   "ton compte est bloqué ou suspendu pour le moment. contacte ta banque avant de faire quoi que ce soit, c'est toi qui décides": {
+    "texte": "Your account block or suspend for now. Contact your bank before you do anything, na you go decide.",
+    "statut": "brouillon",
+    "zone": "explication"
+   },
+   "ton opération a été refusée : aucun argent n'a quitté ton compte. vérifie les informations et réessaie si tu veux, c'est toi qui décides": {
+    "texte": "Your operation don refuse - no money leave your account. Check your details and try again if you want, na you go decide.",
+    "statut": "brouillon",
+    "zone": "explication"
+   },
+   "ton opération est partie. vérifie le total qui a quitté ton compte, c'est toi qui décides de garder le reçu ou non": {
+    "texte": "Your operation don go through. Check the total wey leave your account, na you go decide if you go keep the receipt or not.",
+    "statut": "brouillon",
+    "zone": "explication"
+   },
    "ton transfert est parti": {
     "texte": "Your money don go.",
     "statut": "brouillon",
@@ -711,6 +786,11 @@
     "texte": "You get 22 500 FCFA for your account.",
     "statut": "brouillon",
     "zone": "reponse"
+   },
+   "tu as atteint un plafond ou une limite sur ton compte. vérifie ton plafond avant d'envoyer, c'est toi qui décides": {
+    "texte": "You reach limit for your account. Check your limit before you send, na you go decide.",
+    "statut": "brouillon",
+    "zone": "explication"
    },
    "tu n'as pas assez d'argent pour ce transfert": {
     "texte": "You no get enough money for dis send.",
