@@ -1,5 +1,5 @@
 {
-  "_note": "Pour la finale, LLM LFM3 desactive jusqu'a validation complete du contrat, des cas de securite et de son empreinte SHA-256. Pidgin : routes de traduction actives. Routes Ghomala experimentales et desactivees en attente de validation. Chemins relatifs a KAMA_MODELS_DIR. Les enregistrements humains valides passent avant la synthese.",
+  "_note": "Configuration de demonstration uniquement : LFM3 est actif en lecture seule, sans outil d'action, avec filtrage des sorties; le prompt ne garantit pas l'absence d'hallucinations. La configuration de production routes.json garde le LLM desactive. Pidgin : routes de traduction actives. Le TTS et l'ASR Ghomala sont actifs en demo; la traduction Ghomala et la grammaire vocale Ghomala restent indisponibles. Chemins relatifs a KAMA_MODELS_DIR. Les enregistrements humains valides passent avant la synthese.",
   "languages": {
     "bbj": {
       "name": "Ghomálá'"
@@ -81,7 +81,7 @@
       "_repli": "omnilingual_ctc : poids/asr/omnilingual-ctc-300m-onnx (fallback, desactive)"
     },
     "bbj": {
-      "enabled": false,
+      "enabled": true,
       "engine": "omnilingual_ctc",
       "path": "poids/asr/omnilingual-ctc-300m-onnx",
       "options": {
@@ -91,9 +91,9 @@
   },
   "tts": {
     "bbj": {
-      "enabled": false,
+      "enabled": true,
       "engine": "ghomala_vits",
-      "path": "poids/ghomala/tts-vits-v2",
+      "path": "poids/ghomala/tts-vits-v2-final-20261114",
       "options": {
         "threads": 2,
         "seed": 0
@@ -110,7 +110,7 @@
     }
   },
   "llm": {
-    "enabled": false,
+    "enabled": true,
     "engine": "llama_cpp",
     "path": "poids/llm/LFM3-1.7B-Q4_K_M.gguf",
     "sha256": "3793e1e6e2266919d6e015287221b41100175a98eddaba92e111aed3b05c93c4",

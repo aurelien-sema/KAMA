@@ -72,6 +72,11 @@
     "statut": "brouillon",
     "zone": "resume"
    },
+   "attends un instant, puis réessaie": {
+    "texte": "Wait small, then try again.",
+    "statut": "brouillon",
+    "zone": "voix"
+   },
    "attends un peu, puis appuie sur « {q1} »": {
     "texte": "Wait small, then press « {q1} ».",
     "statut": "brouillon",
@@ -497,6 +502,11 @@
     "statut": "brouillon",
     "zone": "consentement"
    },
+   "kama met trop de temps à répondre": {
+    "texte": "Kama dey take too long to answer.",
+    "statut": "brouillon",
+    "zone": "voix"
+   },
    "kama montre la réponse en français": {
     "texte": "Kama di show di answer for French.",
     "statut": "brouillon",
@@ -592,6 +602,11 @@
     "statut": "brouillon",
     "zone": "fenetre"
    },
+   "kama traite déjà une question": {
+    "texte": "Kama dey handle another question already.",
+    "statut": "brouillon",
+    "zone": "voix"
+   },
    "kama vient d'être mis à jour": {
     "texte": "Dem don update Kama just now.",
     "statut": "brouillon",
@@ -646,6 +661,11 @@
     "texte": "Di money weh you write no correct.",
     "statut": "brouillon",
     "zone": "erreur"
+   },
+   "le serveur kama ne répond pas": {
+    "texte": "Kama server no dey answer.",
+    "statut": "brouillon",
+    "zone": "voix"
    },
    "le service bancaire est en maintenance ou en panne pour le moment. réessaie plus tard, c'est toi qui décides quand refaire l'opération": {
     "texte": "Banking service for maintenance or e dey down for now. Try again later, na you go decide when you go redo am.",
@@ -1012,6 +1032,11 @@
     "statut": "brouillon",
     "zone": "resume"
    },
+   "réessaie dans un instant": {
+    "texte": "Try again small time.",
+    "statut": "brouillon",
+    "zone": "voix"
+   },
    "réessayer": {
     "texte": "Try again",
     "statut": "brouillon",
@@ -1296,6 +1321,11 @@
     "texte": "Check di information, tick di box, then press « {q1} » by yourself.",
     "statut": "brouillon",
     "zone": "fenetre"
+   },
+   "vérifie que le serveur kama est démarré, puis réessaie": {
+    "texte": "Check say di Kama server dey on, then try again.",
+    "statut": "brouillon",
+    "zone": "voix"
    },
    "vérifié": {
     "texte": "Dem don check am",

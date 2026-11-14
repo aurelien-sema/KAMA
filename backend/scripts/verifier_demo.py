@@ -56,6 +56,8 @@ def main():
     verifie("Pidgin : voix de synthese disponible", bool(wes.get("tts")))
     verifie("Pidgin : reconnaissance vocale (micro) disponible", bool(wes.get("asr")), "sinon le micro dira « La voix ne marche pas encore »", obligatoire=False)
     bbj = langues.get("bbj", {})
+    verifie("Ghomala : reconnaissance vocale disponible", bool(bbj.get("asr")), "ASR BBJ actif seulement dans routes.demo.json", obligatoire=False)
+    verifie("Ghomala : voix de synthese disponible", bool(bbj.get("tts")), obligatoire=False)
     verifie("Ghomala : traduction disponible", bool(bbj.get("translation_from")), "attendu desactive tant que le modele n'est pas valide", obligatoire=False)
 
     statut, _ = appel("/v1/capabilities", origine="https://autre-site.example")
@@ -90,6 +92,10 @@ def main():
         w.writeframes(b"\0\0" * 16000)
     statut, r = appel("/v1/voice/intent", silence.getvalue(), type_contenu="audio/wav", entetes={"X-Kama-Lang": "wes"})
     verifie("Reconnaissance d'une commande (silence : « unknown » attendu)", statut == 200 and r.get("intent") == "unknown", f"statut {statut} {r}", obligatoire=False)
+
+    if bbj.get("asr"):
+        statut, r = appel("/v1/voice/intent", silence.getvalue(), type_contenu="audio/wav", entetes={"X-Kama-Lang": "bbj"})
+        verifie("Ghomala : l'ASR accepte l'audio (silence : « unknown » attendu)", statut == 200 and r.get("intent") == "unknown", f"statut {statut} {r}", obligatoire=False)
 
     largeur = max(len(n) for _, n, _ in resultats)
     for etat, nom, detail in resultats:

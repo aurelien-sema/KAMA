@@ -434,6 +434,42 @@
    "wes": "Kama no fit understand your voice now."
   },
   {
+   "id": "fen_8b1f19e3",
+   "zone": "voix",
+   "fr": "Le serveur Kama ne répond pas.",
+   "wes": "Kama server no dey answer."
+  },
+  {
+   "id": "fen_6f091285",
+   "zone": "voix",
+   "fr": "Vérifie que le serveur Kama est démarré, puis réessaie.",
+   "wes": "Check say di Kama server dey on, then try again."
+  },
+  {
+   "id": "fen_d72ad539",
+   "zone": "voix",
+   "fr": "Kama met trop de temps à répondre.",
+   "wes": "Kama dey take too long to answer."
+  },
+  {
+   "id": "fen_5e76a0c5",
+   "zone": "voix",
+   "fr": "Réessaie dans un instant.",
+   "wes": "Try again small time."
+  },
+  {
+   "id": "fen_d37b446a",
+   "zone": "voix",
+   "fr": "Kama traite déjà une question.",
+   "wes": "Kama dey handle another question already."
+  },
+  {
+   "id": "fen_19f24973",
+   "zone": "voix",
+   "fr": "Attends un instant, puis réessaie.",
+   "wes": "Wait small, then try again."
+  },
+  {
    "id": "fen_907f14a3",
    "zone": "consentement",
    "fr": "Avant de commencer",
