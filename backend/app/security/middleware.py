@@ -17,7 +17,8 @@ from ..settings import Settings
 log = logging.getLogger("kama.access")
 
 VOICE_PATH = "/v1/voice/intent"
-KNOWN_PATHS = frozenset({"/healthz", "/v1/capabilities", "/v1/translate", "/v1/tts", VOICE_PATH, "/docs", "/openapi.json"})
+ASSISTANT_PATH = "/v1/assistant"
+KNOWN_PATHS = frozenset({"/healthz", "/v1/capabilities", "/v1/translate", "/v1/tts", VOICE_PATH, ASSISTANT_PATH, "/docs", "/openapi.json"})
 PUBLIC_PATHS = frozenset({"/healthz"})
 
 
@@ -99,7 +100,7 @@ class OriginGuard:
             headers = {
                 **cors,
                 "access-control-allow-methods": "GET, POST",
-                "access-control-allow-headers": "Content-Type, X-Kama-Lang",
+                "access-control-allow-headers": "Content-Type, X-Kama-Lang, X-Kama-Context",
                 "access-control-max-age": "600",
             }
             return await Response(status_code=204, headers=headers)(scope, receive, send)
@@ -177,7 +178,11 @@ class BodyLimit:
     async def __call__(self, scope, receive, send):
         if scope["type"] != "http" or scope["method"] != "POST":
             return await self.app(scope, receive, send)
-        limit = self.settings.max_audio_bytes if scope["path"] == VOICE_PATH else self.settings.max_json_bytes
+        limit = (
+            self.settings.max_audio_bytes if scope["path"] == VOICE_PATH
+            else 2 * self.settings.max_json_bytes if scope["path"] == ASSISTANT_PATH  # question + contexte de l'ecran
+            else self.settings.max_json_bytes
+        )
         too_large = _reject(413, "payload_too_large", "Requête trop volumineuse.")
         declared = Headers(scope=scope).get("content-length")
         if declared and (not (declared.isascii() and declared.isdigit()) or int(declared) > limit):

@@ -167,6 +167,13 @@ export function KamaApp() {
     assistant.appuiMicro();
   }
 
+  /** Question écrite dans la barre de saisie : on passe sur « Parler à Kama » et on l'envoie. */
+  function envoyerQuestion(texte: string) {
+    if (!consentement) return ouvrir({ type: 'parler' }); // accord général d'abord (la question part au serveur Kama)
+    if (vue?.type !== 'parler') setVue({ type: 'parler' });
+    void assistant.envoyerTexte(texte);
+  }
+
   function choisirDansMenu(m: ModeKama) {
     ouvrir(m === 'parler' ? { type: 'parler' } : { type: m });
   }
@@ -287,6 +294,7 @@ export function KamaApp() {
               avecMicro={!ECRANS_SANS_PAGE.includes(vue.type)}
               mic={vue.type === 'parler' ? assistant.mic : 'idle'}
               onMic={appuiMicro}
+              onEnvoyer={envoyerQuestion}
               onClose={fermerFenetre}
               className="fixed right-14 z-[2147483647] -translate-y-1/2"
               style={{

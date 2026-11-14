@@ -9,7 +9,10 @@ from fastapi.responses import JSONResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from .errors import KamaError, error_body
-from .schemas import Capabilities, IntentResponse, LanguageInfo, Limits, TranslateRequest, TranslateResponse, TtsRequest, TtsResponse
+import base64
+import binascii
+
+from .schemas import AssistantContext, AssistantRequest, AssistantResponse, Capabilities, IntentResponse, LanguageInfo, Limits, TranslateRequest, TranslateResponse, TtsRequest, TtsResponse
 from .security.middleware import BodyLimit, ContentFreeLog, OriginGuard, RateLimit, SecurityHeaders
 from .services import MAX_AUDIO_SECONDS, Services, build_services
 from .settings import Settings, load_settings
@@ -85,15 +88,31 @@ def create_app(settings: Settings | None = None, services: Services | None = Non
     @app.post(
         "/v1/voice/intent",
         response_model=IntentResponse,
+        response_model_exclude_none=True,  # « answer » n'apparaît que si l'assistant a répondu
         tags=["voix"],
         openapi_extra={
             "requestBody": {"required": True, "content": {"audio/wav": {"schema": {"type": "string", "format": "binary"}}}}
         },
     )
-    async def voice_intent(request: Request, x_kama_lang: str = Header(min_length=2, max_length=8)) -> IntentResponse:
+    async def voice_intent(
+        request: Request,
+        x_kama_lang: str = Header(min_length=2, max_length=8),
+        x_kama_context: str | None = Header(None, max_length=6000, description="Contexte de l'ecran (JSON masque, base64url), pour l'assistant."),
+    ) -> IntentResponse:
         content_type = request.headers.get("content-type", "").split(";")[0].strip().lower()
         if content_type != "audio/wav":
             raise KamaError(415, "invalid_audio", "Format attendu : WAV PCM 16 bits, 16 kHz, mono.")
-        return await services.speech.voice_intent(await request.body(), x_kama_lang)
+        context = None
+        if x_kama_context:
+            try:
+                context = AssistantContext.model_validate_json(base64.urlsafe_b64decode(x_kama_context + "=" * (-len(x_kama_context) % 4)))
+            except (binascii.Error, ValueError):
+                raise KamaError(422, "invalid_request", "Contexte illisible.") from None
+        return await services.speech.voice_intent(await request.body(), x_kama_lang, context)
+
+    @app.post("/v1/assistant", response_model=AssistantResponse, response_model_exclude_none=True, tags=["assistant"])
+    async def assistant(body: AssistantRequest) -> AssistantResponse:
+        """Question ecrite (deja masquee) : reponse courte de l'assistant, avec les seules balises de l'ecran."""
+        return await services.assistant.answer(body.text, body.lang, body.context)
 
     return app
