@@ -108,6 +108,14 @@ def test_known_words_pass(make_client):
 def test_pidgin_routes_are_unavailable_without_their_models(tmp_path):
     engines = load_engines(ROOT / "config" / "routes.json", tmp_path, CONTENT, Simplifier.from_file(CONTENT / "jargon_simplification.json"))
     assert "fr>wes" not in engines.translation and "en>wes" not in engines.translation
+    assert "wes>en" not in engines.translation
+
+
+def test_pidgin_to_english_route_is_declared():
+    routes = json.loads((ROOT / "config" / "routes.json").read_text(encoding="utf-8"))
+    route = routes["translation"]["wes>en"]
+    assert route["engine"] == "marian_ct2" and route["path"] == "poids/ct2/pcm_en"
+    assert not route.get("internal"), "le modele pidgin -> anglais doit etre charge, pas seulement etre une etape"
 
 
 def test_shipped_page_catalog_loads():
@@ -123,6 +131,18 @@ def test_shipped_jargon_never_leaves_a_term():
 
 
 CT2 = Settings().models_dir / "poids" / "ct2" / "pidgin_en_wes"
+
+
+CT2_EN = Settings().models_dir / "poids" / "ct2" / "pcm_en"
+
+
+@pytest.mark.skipif(not (CT2_EN / "model.bin").exists(), reason="modele pidgin -> anglais absent")
+def test_real_pidgin_to_english_model_translates_and_keeps_tags():
+    model = MarianCT2Translator(CT2_EN)
+    assert model.translate("ma name na Paul").strip().lower() == "my name is paul"
+    assert model.translate("na how wuna dey?").strip().lower() == "how are you?"
+    out = model.translate("Send {x1} to {x2} today.")
+    assert "{x1}" in out and "{x2}" in out
 
 
 @pytest.mark.skipif(not (CT2 / "model.bin").exists(), reason="modele pidgin non converti")
