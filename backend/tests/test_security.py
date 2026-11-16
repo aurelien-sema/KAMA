@@ -1,216 +1,154 @@
-"""Middlewares ASGI : origine, debit, taille des requetes, en-tetes, journal sans contenu."""
-from __future__ import annotations
-
-import hashlib
-import hmac
 import logging
-import secrets
-import time
-from collections import deque
+import sys
+from pathlib import Path
 
-from starlette.datastructures import Headers, MutableHeaders
-from starlette.responses import JSONResponse, Response
+import pytest
 
-from ..errors import error_body
-from ..settings import Settings
+from app.engines import MarianCT2Translator, load_engines
+from app.security.middleware import NoTraceback
+from app.settings import Settings
+from conftest import FakeRecognizer, engines_with, route, wav_bytes
 
-log = logging.getLogger("kama.access")
-
-VOICE_PATH = "/v1/voice/intent"
-ASK_PATH = "/v1/voice/ask"
-AUDIO_PATHS = frozenset({VOICE_PATH, ASK_PATH})
-KNOWN_PATHS = frozenset({"/healthz", "/v1/capabilities", "/v1/translate", "/v1/tts", VOICE_PATH, ASK_PATH, "/docs", "/openapi.json"})
-PUBLIC_PATHS = frozenset({"/healthz"})
+SENTINEL = "SECRET-25500-Mbarga"
+EXT = "chrome-extension://abcdefgh"
+BODY = {"text": "Bonjour", "source_lang": "fr", "target_lang": "bbj"}
 
 
-def _reject(status: int, code: str, message: str, headers: dict[str, str] | None = None) -> JSONResponse:
-    return JSONResponse(error_body(code, message), status_code=status, headers=headers)
+def test_health_and_capabilities(client):
+    assert client.get("/healthz").json() == {"status": "ok"}
+    caps = client.get("/v1/capabilities").json()
+    assert {l["code"] for l in caps["languages"]} == {"bbj", "wes"}
 
 
-class NoTraceback(logging.Filter):
-    """Retire la trace des exceptions : son message peut citer le texte traite."""
-
-    def filter(self, record: logging.LogRecord) -> bool:
-        record.exc_info = None
-        record.exc_text = None
-        record.stack_info = None
-        return True
+def test_response_is_never_cached(client):
+    r = client.get("/v1/capabilities")
+    assert r.headers["cache-control"] == "no-store" and r.headers["x-content-type-options"] == "nosniff"
 
 
-class ContentFreeLog:
-    """Journalise uniquement methode, route connue, statut et duree."""
-
-    def __init__(self, app) -> None:
-        self.app = app
-
-    async def __call__(self, scope, receive, send):
-        if scope["type"] != "http":
-            return await self.app(scope, receive, send)
-        start = time.perf_counter()
-        status = {"code": 500}
-
-        async def capture(message):
-            if message["type"] == "http.response.start":
-                status["code"] = message["status"]
-            await send(message)
-
-        try:
-            await self.app(scope, receive, capture)
-        finally:
-            path = scope["path"] if scope["path"] in KNOWN_PATHS else "(autre)"
-            log.info("%s %s %s %.0fms", scope["method"], path, status["code"], (time.perf_counter() - start) * 1000)
+def test_prod_allows_public_capabilities_but_protects_other_routes(make_client):
+    client = make_client(env="prod", allowed_origins=frozenset({EXT}))
+    assert client.get("/v1/capabilities").status_code == 200
+    assert client.get("/v1/capabilities", headers={"Origin": "https://evil.example"}).status_code == 403
+    r = client.get("/v1/capabilities", headers={"Origin": EXT})
+    assert r.status_code == 200 and r.headers["access-control-allow-origin"] == EXT
+    assert client.post("/v1/translate", json=BODY).status_code == 403
+    assert client.get("/v1/tts").status_code == 403
 
 
-class SecurityHeaders:
-    def __init__(self, app, settings: Settings) -> None:
-        self.app, self.settings = app, settings
-
-    async def __call__(self, scope, receive, send):
-        if scope["type"] != "http":
-            return await self.app(scope, receive, send)
-
-        async def add(message):
-            if message["type"] == "http.response.start":
-                h = MutableHeaders(scope=message)
-                h["cache-control"] = "no-store"
-                h["x-content-type-options"] = "nosniff"
-                h["referrer-policy"] = "no-referrer"
-                if self.settings.is_prod:
-                    h["strict-transport-security"] = "max-age=31536000"
-            await send(message)
-
-        await self.app(scope, receive, add)
+def test_prod_hides_docs_and_enables_hsts(make_client):
+    client = make_client(env="prod", allowed_origins=frozenset({EXT}))
+    assert client.get("/docs", headers={"Origin": EXT}).status_code == 404
+    assert "strict-transport-security" in client.get("/healthz").headers
 
 
-class OriginGuard:
-    """N'accepte que l'extension. C'est un filtre, pas une authentification."""
-
-    def __init__(self, app, settings: Settings) -> None:
-        self.app, self.settings = app, settings
-
-    async def __call__(self, scope, receive, send):
-        if scope["type"] != "http" or scope["path"] in PUBLIC_PATHS:
-            return await self.app(scope, receive, send)
-        origin = Headers(scope=scope).get("origin")
-        # Le service worker de l'extension peut omettre Origin sur ce GET sans effet de bord.
-        # Ce endpoint ne renvoie que des capacités publiques; toutes les autres routes restent protégées.
-        capabilities_without_origin = (
-            scope["method"] == "GET" and scope["path"] == "/v1/capabilities" and origin is None
-        )
-        if not capabilities_without_origin and not self.settings.origin_allowed(origin):
-            return await _reject(403, "forbidden_origin", "Origine non autorisée.")(scope, receive, send)
-        cors = {}
-        if origin:
-            cors = {"access-control-allow-origin": origin, "vary": "Origin"}
-        if scope["method"] == "OPTIONS":
-            headers = {
-                **cors,
-                "access-control-allow-methods": "GET, POST",
-                "access-control-allow-headers": "Content-Type, X-Kama-Lang, X-Kama-Context-B64",
-                "access-control-max-age": "600",
-            }
-            return await Response(status_code=204, headers=headers)(scope, receive, send)
-
-        async def add(message):
-            if message["type"] == "http.response.start":
-                h = MutableHeaders(scope=message)
-                for k, v in cors.items():
-                    h[k] = v
-            await send(message)
-
-        await self.app(scope, receive, add)
+def test_preflight(make_client):
+    client = make_client(env="prod", allowed_origins=frozenset({EXT}))
+    r = client.options("/v1/translate", headers={"Origin": EXT, "Access-Control-Request-Method": "POST"})
+    assert r.status_code == 204 and r.headers["access-control-allow-origin"] == EXT
 
 
-class RateLimit:
-    """Fenetre glissante d'une minute, en memoire uniquement.
-
-    L'adresse IP n'est jamais conservee en clair : elle est remplacee par un HMAC dont
-    la cle est tiree au demarrage et disparait a l'arret du processus.
-    """
-
-    def __init__(self, app, settings: Settings) -> None:
-        self.app, self.settings = app, settings
-        self.salt = secrets.token_bytes(32)
-        self.hits: dict[str, deque[float]] = {}
-        self.global_hits: deque[float] = deque()
-        self.last_sweep = 0.0
-
-    def _client(self, scope) -> str:
-        host = (scope.get("client") or ("inconnu", 0))[0]
-        if self.settings.trust_proxy:
-            forwarded = Headers(scope=scope).get("x-forwarded-for")
-            if forwarded:
-                host = forwarded.split(",")[-1].strip()
-        return hmac.new(self.salt, host.encode(), hashlib.sha256).hexdigest()
-
-    @staticmethod
-    def _prune(window: deque[float], now: float) -> None:
-        while window and now - window[0] >= 60:
-            window.popleft()
-
-    def _sweep(self, now: float) -> None:
-        if now - self.last_sweep < 60:
-            return
-        self.last_sweep = now
-        for key in list(self.hits):
-            self._prune(self.hits[key], now)
-            if not self.hits[key]:
-                del self.hits[key]
-
-    async def __call__(self, scope, receive, send):
-        if scope["type"] != "http" or scope["path"] in PUBLIC_PATHS or scope["method"] == "OPTIONS":
-            return await self.app(scope, receive, send)
-        now = time.monotonic()
-        self._sweep(now)
-        voice = scope["path"] == VOICE_PATH
-        ask = scope["path"] == ASK_PATH
-        limit = self.settings.ask_rate_per_min if ask else (self.settings.voice_rate_per_min if voice else self.settings.rate_per_min)
-        window = self.hits.setdefault(("a:" if ask else "v:" if voice else "t:") + self._client(scope), deque())
-        self._prune(window, now)
-        self._prune(self.global_hits, now)
-        if len(window) >= limit or len(self.global_hits) >= self.settings.global_rate_per_min:
-            response = _reject(429, "rate_limited", "Trop de requêtes. Réessayez dans un instant.", {"retry-after": "60"})
-            return await response(scope, receive, send)
-        window.append(now)
-        self.global_hits.append(now)
-        await self.app(scope, receive, send)
+def test_firefox_needs_explicit_setting():
+    origin = "moz-extension://1234"
+    assert not Settings(env="prod", allowed_origins=frozenset({EXT})).origin_allowed(origin)
+    assert Settings(env="prod", allow_firefox=True).origin_allowed(origin)
 
 
-class BodyLimit:
-    """Lit le corps en memoire, jamais sur disque, et coupe au-dela de la limite."""
+def test_rate_limit(make_client):
+    client = make_client(rate_per_min=2)
+    codes = [client.get("/v1/capabilities").status_code for _ in range(3)]
+    assert codes == [200, 200, 429]
 
-    def __init__(self, app, settings: Settings) -> None:
-        self.app, self.settings = app, settings
 
-    async def __call__(self, scope, receive, send):
-        if scope["type"] != "http" or scope["method"] != "POST":
-            return await self.app(scope, receive, send)
-        limit = self.settings.max_audio_bytes if scope["path"] in AUDIO_PATHS else self.settings.max_json_bytes
-        too_large = _reject(413, "payload_too_large", "Requête trop volumineuse.")
-        declared = Headers(scope=scope).get("content-length")
-        if declared and (not (declared.isascii() and declared.isdigit()) or int(declared) > limit):
-            return await too_large(scope, receive, send)
-        chunks: list[bytes] = []
-        total = 0
-        more = True
-        while more:
-            message = await receive()
-            if message["type"] == "http.disconnect":
-                return None
-            chunk = message.get("body", b"")
-            total += len(chunk)
-            if total > limit:
-                return await too_large(scope, receive, send)
-            chunks.append(chunk)
-            more = message.get("more_body", False)
-        body = b"".join(chunks)
-        delivered = False
+def test_rate_limit_stores_no_clear_ip(make_client):
+    client = make_client()
+    client.get("/v1/capabilities")
+    limiter = client.app.middleware_stack
+    while not hasattr(limiter, "hits"):
+        limiter = limiter.app
+    assert all("testclient" not in key for key in limiter.hits)
 
-        async def replay():
-            nonlocal delivered
-            if not delivered:
-                delivered = True
-                return {"type": "http.request", "body": body, "more_body": False}
-            return await receive()
 
-        await self.app(scope, replay, send)
+def test_body_limit(client):
+    r = client.post("/v1/translate", json={**BODY, "text": "a" * 5000})
+    assert r.status_code == 413
+
+
+def test_unknown_field_is_refused_without_echo(client):
+    r = client.post("/v1/translate", json={**BODY, "solde": SENTINEL})
+    assert r.status_code == 422 and SENTINEL not in r.text
+
+
+def test_validation_error_does_not_echo_input(client):
+    r = client.post("/v1/translate", json={**BODY, "text": SENTINEL * 50})
+    assert r.status_code == 422 and SENTINEL not in r.text
+
+
+def test_nothing_sensitive_reaches_the_logs(make_client, caplog):
+    caplog.set_level(logging.DEBUG)
+    logging.getLogger("httpx").setLevel(logging.WARNING)  # journal du client de test, pas du serveur
+
+    def crash(_):
+        raise RuntimeError(SENTINEL)
+
+    client = make_client(engines_with({"fr>bbj": route(crash)}, asr={"bbj": FakeRecognizer(SENTINEL)}))
+    client.post("/v1/translate", json={**BODY, "text": SENTINEL})
+    client.post("/v1/translate", json={**BODY, "text": "Bienvenue chez nous"})
+    client.post("/v1/voice/intent", content=wav_bytes(), headers={"X-Kama-Lang": "bbj", "Content-Type": "audio/wav"})
+    client.post(f"/{SENTINEL}", json=BODY)
+    assert SENTINEL not in caplog.text
+    assert "Bienvenue" not in caplog.text
+
+
+def test_speech_engine_crash_stays_out_of_the_logs(make_client, caplog):
+    caplog.set_level(logging.DEBUG)
+    logging.getLogger("httpx").setLevel(logging.WARNING)
+
+    class Crash:
+        def transcribe(self, pcm16):
+            raise RuntimeError(SENTINEL)
+
+        def synthesize(self, text):
+            raise RuntimeError(SENTINEL)
+
+    client = make_client(engines_with(asr={"bbj": Crash()}, tts={"bbj": Crash()}))
+    voice = client.post("/v1/voice/intent", content=wav_bytes(), headers={"X-Kama-Lang": "bbj", "Content-Type": "audio/wav"})
+    tts = client.post("/v1/tts", json={"text": "ywə", "lang": "bbj"})
+    assert (voice.status_code, tts.status_code) == (503, 503)
+    assert SENTINEL not in caplog.text and SENTINEL not in voice.text + tts.text
+
+
+def test_uvicorn_filter_removes_the_traceback():
+    try:
+        raise RuntimeError(SENTINEL)
+    except RuntimeError:
+        record = logging.LogRecord("uvicorn.error", logging.ERROR, __file__, 1, "Exception", (), sys.exc_info())
+    assert NoTraceback().filter(record) and record.exc_info is None
+    assert SENTINEL not in logging.Formatter().format(record)
+
+
+def test_odd_content_length_is_refused(client):
+    r = client.post("/v1/translate", content=b"{}", headers={"Content-Length": "²".encode("latin-1"), "Content-Type": "application/json"})
+    assert r.status_code == 413
+
+
+def test_prod_requires_origins(monkeypatch):
+    from app.settings import load_settings
+
+    monkeypatch.setenv("KAMA_ENV", "prod")
+    monkeypatch.delenv("KAMA_ALLOWED_ORIGINS", raising=False)
+    with pytest.raises(RuntimeError):
+        load_settings()
+
+
+def test_missing_model_does_not_stop_the_server(tmp_path):
+    routes = Path(__file__).resolve().parents[1] / "config" / "routes.json"
+    engines = load_engines(routes, tmp_path)
+    assert engines.translation == {} and "bbj" in engines.languages
+
+
+MODEL = Settings().models_dir / "flagship-ai__cameroon-int8" / "francais-ghomala"
+
+
+@pytest.mark.skipif(not (MODEL / "model.bin").exists(), reason="poids non telecharges")
+def test_real_ct2_model_produces_text():
+    assert MarianCT2Translator(MODEL).translate("Merci beaucoup.").strip()
