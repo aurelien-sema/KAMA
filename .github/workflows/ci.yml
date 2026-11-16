@@ -70,7 +70,13 @@ jobs:
             set -e
             cd "${{ secrets.VPS_REPO_PATH }}"
             git pull --ff-only
-            docker compose up -d --build
+            cd backend
+            python3 -m venv .venv 2>/dev/null || true
+            .venv/bin/pip install -r requirements.txt -r requirements-mt.txt
+            screen -S kama -X quit 2>/dev/null || true
+            screen -S kama -dm /home/kama/KAMA/start.sh
+            sleep 2
+            curl -s http://127.0.0.1:8123/healthz
       - name: Build extension zips
         working-directory: kama_frontend
         run: |
