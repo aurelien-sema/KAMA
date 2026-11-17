@@ -25,12 +25,16 @@ def test_response_is_never_cached(client):
     assert r.headers["cache-control"] == "no-store" and r.headers["x-content-type-options"] == "nosniff"
 
 
-def test_prod_allows_public_capabilities_but_protects_other_routes(make_client):
+def test_prod_refuses_unknown_origins_and_missing_origin_on_protected_routes(make_client):
     client = make_client(env="prod", allowed_origins=frozenset({EXT}))
+
+    # Capacities are public metadata and the extension service worker may omit Origin for this GET only.
     assert client.get("/v1/capabilities").status_code == 200
     assert client.get("/v1/capabilities", headers={"Origin": "https://evil.example"}).status_code == 403
     r = client.get("/v1/capabilities", headers={"Origin": EXT})
     assert r.status_code == 200 and r.headers["access-control-allow-origin"] == EXT
+
+    # Keep every data-bearing endpoint behind the strict production origin check.
     assert client.post("/v1/translate", json=BODY).status_code == 403
     assert client.get("/v1/tts").status_code == 403
 
