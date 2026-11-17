@@ -84,7 +84,8 @@ jobs:
           script: |
             set -e
             cd "${{ secrets.VPS_REPO_PATH }}"
-            git pull --ff-only
+            git reset --hard origin/main
+            git clean -fd --exclude=.env --exclude=start.sh --exclude=models
             cd backend
             python3 -m venv .venv 2>/dev/null || true
             .venv/bin/pip install -r requirements.txt -r requirements-mt.txt
