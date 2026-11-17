@@ -51,3 +51,15 @@ def test_unvalidated_draft_is_never_served_for_pidgin(make_client, content_dir):
     (content_dir / "kama_interface.json").write_text(json.dumps({"entries": [entree]}), encoding="utf-8")
     r = make_client(_engines()).post("/v1/translate", json={"text": entree["fr"], "source_lang": "fr", "target_lang": "wes"}).json()
     assert r["text"] != "BROUILLON-WES"
+
+
+def test_ghomala_voice_fallback_is_not_pidgin(make_client, content_dir):
+    from conftest import FakeRecognizer, wav_bytes
+
+    entree = {"id": "r", "zone": "assistant", "fr": "Kama n'a pas pu répondre correctement. Demande à ta banque.", "bbj": "REPLI-BBJ"}
+    (content_dir / "kama_interface.json").write_text(json.dumps({"entries": [entree]}), encoding="utf-8")
+    engines = _engines(asr={"bbj": FakeRecognizer("phrase inconnue")})
+    r = make_client(engines).post(
+        "/v1/voice/ask", content=wav_bytes(), headers={"X-Kama-Lang": "bbj", "Content-Type": "audio/wav"}
+    ).json()
+    assert r["answer"] == "REPLI-BBJ" and r["badge"] == "machine"

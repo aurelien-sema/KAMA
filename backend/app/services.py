@@ -267,7 +267,28 @@ class SpeechService:
                 raise KamaError(503, "asr_unavailable", "La reconnaissance vocale a échoué.") from None
         return self.intents.match(transcript, lang)
 
+    # Reponses fixes de l'assistant, ecrites en pidgin : pour une autre langue, leur version francaise
+    # passe par la traduction de cette langue (brouillon de content-data ou modele).
+    _REPONSES_FIXES_FR = {
+        FALLBACK: "Kama n'a pas pu répondre correctement. Demande à ta banque.",
+        SENSITIVE_SPEECH: "Ne dis jamais ton code ni ton numéro à personne, même pas à Kama.",
+    }
+
     async def voice_ask(self, audio: bytes, lang: str, context: str) -> AskResponse:
+        reponse = await self._voice_ask(audio, lang, context)
+        francais = self._REPONSES_FIXES_FR.get(reponse.answer or "")
+        if lang == "wes" or francais is None:
+            return reponse
+        texte = None
+        if self.translation is not None:
+            traduite = await self.translation.translate(
+                TranslateRequest(text=francais, source_lang="fr", target_lang=lang, element="text")
+            )
+            texte = traduite.text
+        # Jamais de pidgin pour une personne qui a choisi une autre langue : a defaut, le francais.
+        return reponse.model_copy(update={"answer": texte or francais, "badge": "machine" if texte else "untranslated"})
+
+    async def _voice_ask(self, audio: bytes, lang: str, context: str) -> AskResponse:
         """Question posee a voix haute : STT, puis grammaire fermee, puis LLM local sous controle.
 
         Rien n'est stocke ni journalise du contenu : seules les durees et le statut sortent de cette

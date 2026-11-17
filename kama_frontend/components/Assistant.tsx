@@ -31,7 +31,7 @@ import { jouerParoles } from '@/lib/audio';
 import { contextePage } from '@/lib/contexte-page';
 import { demasquer } from '@/lib/masquage';
 import type { Parole } from '@/lib/traduction';
-import { LectureAuto, useLectureAuto } from '@/lib/langue-courante';
+import { LectureAuto, useLangueCourante, useLectureAuto } from '@/lib/langue-courante';
 import { lirePage } from '@/lib/lecture-page';
 import type { ErreurMicro, EvenementMicro, Intention, ResultatIntention } from '@/lib/messages';
 import { demanderAutorisationMicro, ouvrirMicro, type Micro } from '@/lib/micro';
@@ -421,18 +421,22 @@ function ReponseMachine({
 }) {
   const lectureAuto = useLectureAuto();
   const lu = useRef(false);
+  // La réponse est dans la langue choisie (le serveur traduit ses réponses fixes) ; l'annonce pidgin ne vaut que pour le pidgin.
+  const langue = useLangueCourante()?.code ?? 'wes';
+  const annonce = langue === 'wes' && badge === 'untranslated';
   const paroles = useMemo<Parole[]>(
-    () => [{ texte: badge === 'untranslated' ? ANNONCE_NON_TRADUIT : texte, valeurs, langue: 'wes' }],
-    [badge, texte, valeurs],
+    () => (badge === 'untranslated' && !annonce ? [] : [{ texte: annonce ? ANNONCE_NON_TRADUIT : texte, valeurs, langue }]),
+    [badge, texte, valeurs, langue, annonce],
   );
   const morceaux = demasquer(texte, valeurs) ?? [texte];
   const dit = morceaux.map((m) => (typeof m === 'string' ? m : m.montant)).join('');
-  const speech = badge === 'untranslated' ? ANNONCE_NON_TRADUIT : dit;
+  const speech = annonce ? ANNONCE_NON_TRADUIT : dit;
 
   useEffect(() => {
     if (!lectureAuto || lu.current) return;
     lu.current = true;
-    jouerParoles(paroles).catch(() => lireTexte(speech));
+    if (paroles.length) jouerParoles(paroles).catch(() => lireTexte(speech));
+    else lireTexte(speech); // texte resté en français : voix du navigateur
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lectureAuto]);
 

@@ -112,10 +112,12 @@ def _load_page(path: Path) -> tuple[list[Template], list[Pattern]]:
             if not text:
                 continue
             masked = _mask_translation(values or {}, text)
+            valide = bool(_validator(entry, lang))
             if masked is None:
-                log.warning("entree %s ignoree pour %s : valeurs differentes de la source", entry.get("id"), lang)
+                if valide:  # un brouillon mal masque est simplement ignore, sans bruit dans le journal
+                    log.warning("entree %s ignoree pour %s : valeurs differentes de la source", entry.get("id"), lang)
                 continue
-            (translations if _validator(entry, lang) else drafts)[lang] = masked
+            (translations if valide else drafts)[lang] = masked
         templates.append(Template(entry["id"], masked_sources, translations, drafts))
     patterns = []
     for raw in data.get("patterns", []):
