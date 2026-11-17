@@ -5,10 +5,18 @@
 # Ne modifie pas le déploiement existant tant que cette commande n'est pas lancée (accord de
 # l'équipe requis). Le conteneur reste non-root (voir backend/Dockerfile), n'a plus aucun accès
 # réseau sortant, tourne en lecture seule et ne peut pas dépasser 7 Go.
+#
+# Le proxy HTTPS n'est pas défini ici : il écoute sur le port publié par docker-compose.yml
+# (127.0.0.1:8124) et joint le conteneur par ce port, sans avoir besoin d'être sur le réseau
+# `assistant`. Le backend, lui, n'est plus que sur ce réseau interne : aucun accès Internet.
 services:
   backend:
     environment:
       PYTHONDONTWRITEBYTECODE: "1"  # pas d'écriture de __pycache__ dans un système de fichiers en lecture seule
+      # Profil de démonstration : seul endroit où l'assistant LFM3 (lecture seule) est actif.
+      KAMA_ROUTES_FILE: /srv/kama/backend/config/routes.demo.json
+    ports:
+      - "127.0.0.1:8124:8000"
     read_only: true
     tmpfs:
       - /tmp:size=256m
@@ -20,11 +28,6 @@ services:
     cap_drop:
       - ALL
     networks:
-      - assistant
-
-  caddy:
-    networks:
-      - default
       - assistant
 
 networks:

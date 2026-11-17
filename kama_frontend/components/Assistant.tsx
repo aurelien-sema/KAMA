@@ -289,12 +289,14 @@ function reponsePour(r: ResultatIntention, bulles: Bulle[]): Reponse {
 function messageErreur(code: string): Message {
   switch (code) {
     case 'network':
-    case 'timeout':
-    case 'busy':
-      return { titre: PHRASES.voix.horsLigne[0], texte: PHRASES.voix.horsLigne[1], reessayer: 'envoi' };
+      return { titre: PHRASES.voix.serveurAbsent[0], texte: PHRASES.voix.serveurAbsent[1], reessayer: 'envoi' };
     case 'serveur_absent':
       // Rien n'a été envoyé : « Réessayer » réécoute.
-      return { titre: PHRASES.voix.horsLigne[0], texte: PHRASES.voix.horsLigne[1], reessayer: 'ecoute' };
+      return { titre: PHRASES.voix.serveurAbsent[0], texte: PHRASES.voix.serveurAbsent[1], reessayer: 'ecoute' };
+    case 'timeout':
+      return { titre: PHRASES.voix.delaiDepasse[0], texte: PHRASES.voix.delaiDepasse[1], reessayer: 'envoi' };
+    case 'busy':
+      return { titre: PHRASES.voix.occupe[0], texte: PHRASES.voix.occupe[1], reessayer: 'envoi' };
     case 'rate_limited':
       return { titre: 'Trop de questions en peu de temps.', texte: 'Attends un peu, puis appuie sur « Réessayer ».', reessayer: 'envoi' };
     case 'invalid_audio':

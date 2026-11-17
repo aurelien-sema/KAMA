@@ -17,6 +17,9 @@ export const PHRASES = {
     microRefuse: ["Kama n'a pas accès au micro.", "Autorise le micro dans le navigateur, puis réessaie. Tu peux aussi utiliser le menu de l'onglet.", 'Réessayer'],
     microAbsent: ['Aucun micro trouvé.', "Branche un micro, ou utilise le menu de l'onglet.", 'Réessayer'],
     horsLigne: ['Pas de connexion internet.', 'Kama ne peut pas comprendre ta voix pour le moment.', 'Réessayer'],
+    serveurAbsent: ['Le serveur Kama ne répond pas.', 'Vérifie que le serveur Kama est démarré, puis réessaie.'],
+    delaiDepasse: ['Kama met trop de temps à répondre.', 'Réessaie dans un instant.'],
+    occupe: ['Kama traite déjà une question.', 'Attends un instant, puis réessaie.'],
   },
 } as const;
 

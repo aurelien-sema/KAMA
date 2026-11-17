@@ -1,5 +1,5 @@
 {
-  "_note": "Pidgin : un texte du catalogue valide est traduit par le dictionnaire (memoire de traduction), sinon le modele ajuste v2 prend le relais sous controle ; un texte critique (argent, alerte, confirmation) ne passe jamais par le modele. Pour changer de modele : scripts/convertir_modele.py puis modifier le chemin de en>wes_modele. Chemins relatifs a KAMA_MODELS_DIR. Voix : asr et tts suivent le meme principe (enabled false tant que le modele n'est pas teste). Les enregistrements humains valides (KAMA_CLIPS_DIR, par defaut poids/audio) passent avant le modele de synthese.",
+  "_note": "Pidgin : les routes de traduction restent actives. La synthese Ghomala est activee pour la demonstration non commerciale seulement; traduction et ASR Ghomala restent desactives. Le LLM LFM3 reste desactive jusqu'a validation du contrat, des tests de securite et de son empreinte SHA-256. Chemins relatifs a KAMA_MODELS_DIR. Les enregistrements humains valides passent avant la synthese.",
   "languages": {
     "bbj": {
       "name": "Ghomálá'"
@@ -110,15 +110,17 @@
     }
   },
   "llm": {
-    "enabled": true,
+    "enabled": false,
     "engine": "llama_cpp",
-    "path": "poids/llm/LFM2-700M-Q4_K_M.gguf",
-    "sha256": "684e8406dc13321452b3f6aeca432776e2a6a7e1ad6c23f7887b8fe3efbe2efa",
+    "path": "poids/llm/LFM3-1.7B-Q4_K_M.gguf",
+    "sha256": "3793e1e6e2266919d6e015287221b41100175a98eddaba92e111aed3b05c93c4",
     "options": {
       "threads": 4,
       "n_ctx": 1024,
       "max_tokens": 120,
-      "temperature": 0.2,
+      "temperature": 0.1,
+      "top_k": 50,
+      "repeat_penalty": 1.1,
       "timeout_s": 20.0
     }
   }

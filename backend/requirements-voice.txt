@@ -1,10 +1,8 @@
-# Moteurs vocaux (STT et TTS). Facultatif : sans ce fichier, le serveur demarre et la voix est indisponible.
+# Moteurs vocaux (STT et TTS) et LLM local. Facultatif : sans ce fichier, le serveur demarre sans voix.
 # Installer avec : pip install -r requirements.txt -r requirements-mt.txt -r requirements-voice.txt
-# Non verifie sous Docker a ce jour : valide sur le poste de developpement (Windows, Python 3.10).
+# llama-cpp-python est epingle au commit qui embarque llama.cpp avec le support LFM3.
 --extra-index-url https://download.pytorch.org/whl/cpu
 onnxruntime==1.22.0
 torch==2.8.0
 transformers==4.57.6
-# LLM local de l'assistant vocal. Windows : roue CPU officielle
-# https://github.com/abetlen/llama-cpp-python/releases/download/v0.3.36/llama_cpp_python-0.3.36-py3-none-win_amd64.whl
-llama-cpp-python==0.3.36
+llama-cpp-python @ git+https://github.com/abetlen/llama-cpp-python.git@05c124e33f7f33b7e66ef887274ad9ee6775099f

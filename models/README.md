@@ -28,6 +28,15 @@ Poids hors Git (plus de 100 Mo) : ils sont sur le serveur, dans `models/poids/gh
 
 Le moteur `m2m100_ct2` applique les substitutions réversibles de `kama_config.json` (ʉ, caron), remet en casse normale une source en majuscules et décode avec une pénalité de répétition (1,2) sans 3-gramme répété. Les textes critiques restent refusés par les garde-fous. Aucun locuteur n'a encore validé ces sorties.
 
+### Candidats locaux reçus le 14 novembre 2026
+
+| Dossier dans `models/poids/` | Rôle | État |
+|---|---|---|
+| `ghomala/fr-bbj-m2m100-v1` | français → Ghomala, checkpoint M2M100 FP16 | Branché au moteur `m2m100`, route désactivée : smoke test « Bonjour » et « Salut » identique ; aucune route inverse fournie |
+| `ghomala/tts-vits-v2-final-20261114` | synthèse Ghomala VITS, 16 kHz, checkpoint final | Branché et activé pour la démonstration non commerciale ; empreinte `model.safetensors` : `50fb9ad152add98a4ed8489e6aa281016cd34132b89c6ee8fee6dcb4009c223d` |
+
+Le checkpoint final vient de `facebook/mms-tts-ybb`, ajuste sur `flagship-ai/ghomala-spoken-bible`, sous licence CC BY-NC 4.0 (attribution requise, usage commercial interdit). Son fichier de configuration rapporte un CER texte de 48,78 % sur le test. Le smoke test local de « Pú cyanyə́ ŋkâp » a produit un WAV mono 16 kHz de 1,17 s en 4,28 s, après 37,44 s de chargement dans le processus. La route TTS Ghomala est active pour la démonstration non commerciale; les routes de traduction et d'ASR Ghomala restent désactivées.
+
 ## Pidgin
 
 | Modèle | Sens | Note SOREVA (sur 100) | Licence | À savoir |
