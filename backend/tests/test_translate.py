@@ -120,37 +120,38 @@ def test_policy_never_allows_alert_elements(make_client):
     assert r["reason"] == "critical_content" and engine.translator.calls == []
 
 
+# La table des termes critiques est pidgin : ces gardes portent sur la route vers le pidgin.
 def test_allowed_critical_text_still_passes_the_output_guard(make_client):
     engine = route(lambda t: "Di money dey ready.")
     client = make_client(
-        engines_with({"fr>bbj": engine}, critical_model_elements={"text"}),
+        engines_with({"fr>wes": engine}, critical_model_elements={"text"}),
         mt_allow_critical=True,
     )
-    r = post(client, "Votre solde est disponible.").json()
+    r = post(client, "Votre solde est disponible.", target="wes").json()
     assert r["reason"] == "guard_failed" and engine.translator.calls
 
 
 def test_critical_term_must_be_rendered(make_client):
     client = make_client(
         engines_with(
-            {"fr>bbj": route(lambda t: "Close di money if you no know this person.")},
+            {"fr>wes": route(lambda t: "Close di money if you no know this person.")},
             critical_model_elements={"text"},
         ),
         mt_allow_critical=True,
     )
-    r = post(client, "Annulez ce transfert si vous ne connaissez pas cette personne.").json()
+    r = post(client, "Annulez ce transfert si vous ne connaissez pas cette personne.", target="wes").json()
     assert r["text"] is None and r["reason"] == "guard_failed"
 
 
 def test_suspended_is_not_rendered_as_wait(make_client):
     client = make_client(
         engines_with(
-            {"fr>bbj": route(lambda t: "Your account don di wait for some time.")},
+            {"fr>wes": route(lambda t: "Your account don di wait for some time.")},
             critical_model_elements={"text"},
         ),
         mt_allow_critical=True,
     )
-    r = post(client, "Votre compte a été suspendu temporairement.").json()
+    r = post(client, "Votre compte a été suspendu temporairement.", target="wes").json()
     assert r["text"] is None and r["reason"] == "guard_failed"
 
 

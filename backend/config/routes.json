@@ -12,6 +12,9 @@
     "critical_model_elements": [
       "text"
     ],
+    "critical_model_languages": [
+      "bbj"
+    ],
     "fr>en": {
       "enabled": true,
       "internal": true,

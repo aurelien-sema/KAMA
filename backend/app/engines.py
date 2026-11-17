@@ -278,6 +278,9 @@ class EngineSet:
     tts: dict[str, Synthesizer] = field(default_factory=dict)
     clips: dict[str, ClipLibrary] = field(default_factory=dict)  # voix humaine validee, prioritaire sur le modele
     critical_model_elements: frozenset[str] = field(default_factory=frozenset)
+    # Langues dont les textes critiques passent quand meme par le modele (decision de l'equipe, 2026-11-17 : ghomala),
+    # les montants restant masques. Leurs brouillons pre-calcules (content-data) sont aussi servis, badge « machine ».
+    critical_model_languages: frozenset[str] = field(default_factory=frozenset)
     llm: Chatter | None = None  # modele de langue local, facultatif
 
 
@@ -310,6 +313,7 @@ def load_engines(
     built: dict[str, Translator] = {}
     translation_config = config.get("translation", {})
     engines.critical_model_elements = frozenset(translation_config.get("critical_model_elements", []))
+    engines.critical_model_languages = frozenset(translation_config.get("critical_model_languages", []))
     specs = {
         k: v
         for k, v in translation_config.items()

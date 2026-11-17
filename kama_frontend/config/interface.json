@@ -1419,11 +1419,6 @@
    }
   },
   "bbj": {
-   "(fait)": {
-    "texte": "kà'",
-    "statut": "brouillon",
-    "zone": "bienvenue"
-   },
    "appuie sur le micro et parle près de l'ordinateur": {
     "texte": "Kà'nyə nə́ mikro bíŋ gɔmnwə bə́ŋ mə̂lɛ̌.",
     "statut": "brouillon",
@@ -1435,17 +1430,82 @@
     "zone": "assistant"
    },
    "appuie sur le micro et repose ta question": {
-    "texte": "Kà'nyə nə́ mikro bíŋ há ywə́ yə o hə́ŋtə áá",
+    "texte": "Kà'nyə nə́ mikro bíŋ hə́ŋtə o.",
     "statut": "brouillon",
     "zone": "assistant"
    },
+   "appuie sur « {q1} »": {
+    "texte": "Pú ŋghə̌ « {q1} ».",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
+   "appuie sur « {q1} » : une page de kama s'ouvre. reviens ensuite ici et appuie encore sur le micro": {
+    "texte": "Nə́ tʉ̂m nə́ « {q1} »: Pú ŋghə̌ pà' Kama. Po fɛnyə tsɔ'ɔ biŋ ŋkwi' ntʉ́m mikro.",
+    "statut": "brouillon",
+    "zone": "micro"
+   },
+   "appuie toi-même sur confirmer": {
+    "texte": "Kà'tə na o nə ŋkwitə.",
+    "statut": "brouillon",
+    "zone": "expliquer"
+   },
+   "appuie toi-même sur « confirmer le transfert »": {
+    "texte": "Kàknyə thə́ na o nə « Confirmer le transfert ».",
+    "statut": "brouillon",
+    "zone": "expliquer"
+   },
+   "appuie toi-même sur « continuer »": {
+    "texte": "Kàknyə thə́ na o nə « Continuer ».",
+    "statut": "brouillon",
+    "zone": "expliquer"
+   },
+   "appuie toi-même sur « {q1} »": {
+    "texte": "Kàknyə thə́ na o nə « {q1} ».",
+    "statut": "brouillon",
+    "zone": "fenetre"
+   },
+   "attends un instant, puis réessaie": {
+    "texte": "Cwə mu' mûywə, biŋ nthe.",
+    "statut": "brouillon",
+    "zone": "voix"
+   },
+   "attends un peu, puis appuie sur « {q1} »": {
+    "texte": "Cwə muywə nə byap, biŋ shʉ́ m nə « {q1} ».",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
+   "attention : tu n'as jamais envoyé d'argent à cette personne": {
+    "texte": "Kaktʉɔ: O la m nté ŋkáp bǐ mo yə̌ŋ.",
+    "statut": "brouillon",
+    "zone": "erreur"
+   },
+   "attention : vérifie le numéro de la personne": {
+    "texte": "Nə́ tʉ̌m: diŋtə̀ mə̂núbà mo.",
+    "statut": "brouillon",
+    "zone": "erreur"
+   },
+   "au total, {x1} vont sortir de ton compte": {
+    "texte": "Guŋ mcwə awɛ, {x1} gɔ tə́m nə ŋkáp o.",
+    "statut": "brouillon",
+    "zone": "explication"
+   },
+   "aucun micro trouvé": {
+    "texte": "Pú ka yɔ́ ta' ŋkáp.",
+    "statut": "brouillon",
+    "zone": "voix"
+   },
+   "aucun micro trouvé. branche un micro ou un casque, puis réessaie": {
+    "texte": "Pú ka yɔ́ ta' ŋkáp. Kà'tə ta' ŋkwyə́ kə nɔm lə, biŋ jɛ́.",
+    "statut": "brouillon",
+    "zone": "micro"
+   },
    "autorise le micro dans le navigateur, puis réessaie. tu peux aussi utiliser le menu de l'onglet": {
-    "texte": "Kà'nyə mikro ntʉ́m mə́lɔ̌mgəgɛ, biŋ jáp. Pú fíŋ nə́ lə mɛ̌nyə mə̂séŋ.",
+    "texte": "Kaktʉɔ mikro ntʉ́m mə́lɔ̌mgəgɛ, biŋ jáp. Pú fíŋ nə́ lə mɛ̌nyə mə̂séŋ.",
     "statut": "brouillon",
     "zone": "voix"
    },
    "avant d'appuyer, vérifie le nom et le numéro de la personne": {
-    "texte": "Pú lə́ nə nùŋ ŋkwɔp, fo'tə tso mo ba mnúbà.",
+    "texte": "Pó' nə nùŋ ŋkwɔp, fo'tə tso ba numɛ́ mo.",
     "statut": "brouillon",
     "zone": "explication"
    },
@@ -1454,78 +1514,383 @@
     "statut": "brouillon",
     "zone": "popup"
    },
+   "bienvenue dans kama": {
+    "texte": "pəpúŋ",
+    "statut": "brouillon",
+    "zone": "bienvenue"
+   },
+   "branche un micro, ou utilise le menu de l'onglet": {
+    "texte": "ŋwa'nyə ta' ŋkho'tə̀ kə́ ntʉ̌ mnwə myə́",
+    "statut": "brouillon",
+    "zone": "voix"
+   },
+   "c'est ce que la banque prend pour faire le transfert": {
+    "texte": "A ywə́ yə ŋkáp gɔ cyanyə áá",
+    "statut": "brouillon",
+    "zone": "explication"
+   },
+   "c'est l'argent que la personne va recevoir": {
+    "texte": "ǎ bə́ ŋkáp yə̌ mo gɔ kwítə áá",
+    "statut": "brouillon",
+    "zone": "explication"
+   },
+   "c'est l'argent que tu as maintenant sur ton compte": {
+    "texte": "ǎ bə́ ŋkáp yə̌ o ghə nə́ sɛ̂tʉɔ ó cwəlɔ áá",
+    "statut": "brouillon",
+    "zone": "explication"
+   },
+   "c'est toi qui appuies. kama n'appuie jamais à ta place": {
+    "texte": "Ywə yə o ŋkwitə a. Kasa la m ŋkwa tsʉ' o.",
+    "statut": "brouillon",
+    "zone": "explication"
+   },
    "c'est toi qui décides d'appuyer": {
-    "texte": "Yʉ́ yə o shəŋ nə kwítə á.",
+    "texte": "Yʉ́ yə o gɔ kwítə nə́ ŋkwyátə á.",
     "statut": "brouillon",
     "zone": "fenetre"
    },
+   "c'est tout l'argent qui va sortir de ton compte : le montant plus les frais": {
+    "texte": "Guŋ ŋkáp awɛ́ yə á gɔ tə́m nə́ sɛ̂tʉ̌m ó á: Kà'nyə sháŋ.",
+    "statut": "brouillon",
+    "zone": "explication"
+   },
+   "c'est un message d'information générale de ta banque. lis-le, mais aucune opération urgente n'est demandée, c'est toi qui décides": {
+    "texte": "A pə́ ta' ŋkhʉɔ mcuŋtə̀ ntʉ́m ŋkáp o. Ŋkhe é, da' gá pu tə́ wə shəŋ nə ghə sɔm ywə yə a gɔ cyətə ghə á pǎ wə yù'.",
+    "statut": "brouillon",
+    "zone": "explication"
+   },
+   "case de confirmation": {
+    "texte": "kètà",
+    "statut": "brouillon",
+    "zone": "element"
+   },
    "catalogue des états (développement)": {
-    "texte": "Zhəŋguŋtə́ mguŋ",
+    "texte": "Cútə̀ mŋwǎlâ'",
     "statut": "brouillon",
     "zone": "popup"
    },
+   "ce bouton envoie l'argent pour de vrai": {
+    "texte": "Nwə yə̌ŋ cya ŋkáp nə́ nyənyɔ.",
+    "statut": "brouillon",
+    "zone": "explication"
+   },
+   "ce lien te demande de payer ou de mettre à jour tes infos avant d'obtenir quoi que ce soit. ne clique pas et n'envoie rien, c'est toi qui décides": {
+    "texte": "ŋwa'nyə yə̌ŋ wə́ hə́ŋtə́ o gaə́ pǒ kwí ywə́ kə nə̂ cyanyə mcùŋ mǔ lə Ka cwɔ'nyə, ka təm sɔmywə; wə yə o shəŋ a.",
+    "statut": "brouillon",
+    "zone": "explication"
+   },
+   "ce mois-ci : 3 entrées, 5 sorties": {
+    "texte": "Mŋwə́ yə̌ŋ: 3 ko dyə̀, 5 təm.",
+    "statut": "brouillon",
+    "zone": "reponse"
+   },
+   "ce texte n'existe pas encore dans ta langue": {
+    "texte": "ŋwa'nyə yə̌ŋ tə̂ bə́ ntʉ́m ghɔm tsǔ pə́",
+    "statut": "brouillon",
+    "zone": "fenetre"
+   },
+   "cette page n'a pas tes transactions": {
+    "texte": "pà' yə̌ŋ tə̂ bə́ ghə mfa' mǔ pə́",
+    "statut": "brouillon",
+    "zone": "resume"
+   },
+   "cette page n'a pas tes transactions. va sur la page historique": {
+    "texte": "pà' yə̌ŋ tə̂ bə́ ghə mfa' mǔ pə́ Ghɔ nə́ pîŋ mcùŋ.",
+    "statut": "brouillon",
+    "zone": "reponse"
+   },
+   "choisis le type d'envoi": {
+    "texte": "Kà'tə̀ mə̂séŋ.",
+    "statut": "brouillon",
+    "zone": "expliquer"
+   },
    "coche la case quand tu as tout vérifié": {
-    "texte": "Kà'tə dyə̌ cwə yə̌ o jɔ́ guŋ ywə awɛ́",
+    "texte": "Kà'tə kódyə́ cwə yə̌ o jɔ́ guŋ ywə awɛ́ áá",
     "statut": "brouillon",
     "zone": "expliquer"
    },
    "coche la case si tout est juste": {
-    "texte": "Kà'tə kódyə́ bə guŋ ywə awɛ́ pəpúŋ.",
+    "texte": "Kô'tə kódyə́ bə guŋ ywə awɛ́ pəpúŋ.",
     "statut": "brouillon",
     "zone": "expliquer"
    },
-   "dernières opérations": {
-    "texte": "mfa' myə́ jʉ̀m",
+   "d'accord, je ne t'écoute pas": {
+    "texte": "Cùŋ! Ŋ tə́ ju' gi o pa.",
     "statut": "brouillon",
-    "zone": "element"
+    "zone": "assistant"
    },
-   "désactivé": {
-    "texte": "páknyà",
+   "des frais s'appliquent à cette opération. vérifie le montant avant de continuer, c'est toi qui décides": {
+    "texte": "Shû'pú pîŋ nə́ nwə yə̌ŋ. Kaktʉɔ ŋkhap tə́ nə ghɔ dzə̀, wə yə o shəŋ a.",
     "statut": "brouillon",
-    "zone": "popup"
+    "zone": "explication"
    },
    "en haut à droite de ton navigateur": {
-    "texte": "kə́m thə́ bə́ tʉɔdəŋ nə́ mə̂séŋfà' o.",
+    "texte": "zhʉ̀m zhəŋ mə́lɔ̌mgəgʉɔ́ o.",
     "statut": "brouillon",
     "zone": "bienvenue"
    },
+   "envoie un montant plus petit, ou mets de l'argent sur ton compte avant": {
+    "texte": "Po cya ŋkǎp bvʉ̀'nyə kə́ nə nthəm ŋkhap dəm ó.",
+    "statut": "brouillon",
+    "zone": "erreur"
+   },
    "ferme les autres applications qui utilisent le micro, puis réessaie": {
-    "texte": "Kə́m pyəshə́ mfa' myə â də́ mikro ŋkʉɔ á, biŋ jɛ́tə.",
+    "texte": "Kə́m pyəshə́ mə̂lɔ̌mgʉgʉɔ myə â shyə́ mikro a, biŋ jɛtə.",
     "statut": "brouillon",
     "zone": "micro"
+   },
+   "frais : 500 fcfa. au total, 25 500 fcfa vont sortir de ton compte": {
+    "texte": "Pú ŋkáp: 500 FCFA. A lə pǎ po'o, 25 500 FCFA tə́m nə ŋkáp o.",
+    "statut": "brouillon",
+    "zone": "reponse"
+   },
+   "frais : {x1}": {
+    "texte": "Pú ŋkáp: {x1}.",
+    "statut": "brouillon",
+    "zone": "explication"
+   },
+   "garde la référence : elle prouve ton transfert": {
+    "texte": "Pɔ́mtə́ mcuŋtə̀: Ê da'tə o cyànyə.",
+    "statut": "brouillon",
+    "zone": "expliquer"
+   },
+   "garde la référence : elle prouve ton virement": {
+    "texte": "Pɔ́mtə́ mcuŋtə̀: Ê da'tə o cyanyə.",
+    "statut": "brouillon",
+    "zone": "element"
+   },
+   "ici, tu choisis comment envoyer l'argent, et combien": {
+    "texte": "Pǒ tsɔ'ɔ shəŋ pa' o gɔ təm ŋkǎp nə́ a ba dəŋ e lə.",
+    "statut": "brouillon",
+    "zone": "expliquer"
+   },
+   "ici, tu dis à qui tu envoies l'argent": {
+    "texte": "Ywə yə o gɔm ga o təm ŋkáp bǐ wǎ?",
+    "statut": "brouillon",
+    "zone": "expliquer"
+   },
+   "ici, tu envoies de l'argent à quelqu'un": {
+    "texte": "Sɔ' m nə o, o təm ŋkáp bi mu' mo.",
+    "statut": "brouillon",
+    "zone": "expliquer"
+   },
+   "ici, tu vois l'argent de ton compte": {
+    "texte": "O yɔ ŋkhap nə sɛ́ ywə o.",
+    "statut": "brouillon",
+    "zone": "expliquer"
+   },
+   "ici, tu vois l'argent qui est sur ton compte": {
+    "texte": "O yɔ ŋkhap yə a nə́ sɛ̌ o á.",
+    "statut": "brouillon",
+    "zone": "expliquer"
+   },
+   "ici, tu vérifies avant de confirmer": {
+    "texte": "Ywə yə o gɔm a, o cəŋtə jyə́.",
+    "statut": "brouillon",
+    "zone": "expliquer"
+   },
+   "ici, tu vérifies tout avant d'envoyer l'argent": {
+    "texte": "Yɔ tsʉ' yə ǒ tə́ təm ŋkáp á, o té guŋ ywə awɛ.",
+    "statut": "brouillon",
+    "zone": "expliquer"
+   },
+   "ici, tu écris combien d'argent tu veux envoyer": {
+    "texte": "Ywə yə o gɔ cya ŋkhap bǎyálə́ á, o və tsʉ'u.",
+    "statut": "brouillon",
+    "zone": "explication"
    },
    "il manque le nom ou le numéro de la personne": {
     "texte": "Tsó mo ka mnúbà lə pə́.",
     "statut": "brouillon",
     "zone": "erreur"
    },
+   "j'accepte": {
+    "texte": "gaãp",
+    "statut": "brouillon",
+    "zone": "consentement"
+   },
    "je n'ai encore rien dit": {
     "texte": "Ŋ kha piŋ gɔm sɔm ywə́.",
     "statut": "brouillon",
     "zone": "assistant"
+   },
+   "je n'ai pas bien entendu": {
+    "texte": "ŋ tə́ yu' pəpúŋ",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
+   "je n'ai pas compris": {
+    "texte": "ŋ tə́ yu'",
+    "statut": "brouillon",
+    "zone": "voix"
+   },
+   "je n'ai pas compris. redis-le, s'il te plaît": {
+    "texte": "ŋ tə́ yu' Ywə yə ě cwyɛ'nyə a.",
+    "statut": "brouillon",
+    "zone": "voix"
    },
    "je n'ai rien entendu": {
     "texte": "Ŋ kha yu' sɔmywə.",
     "statut": "brouillon",
     "zone": "assistant"
    },
+   "je ne vois pas de frais sur cette page": {
+    "texte": "ǎ tə̌ wə́ jɔ́ ta' cúŋtə̀ ntʉ́m pà' yə̌ŋ áá",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
+   "je ne vois pas de message d'erreur sur cette page": {
+    "texte": "ǎ tə̌ wə́ jɔ́ sɔm cúŋtə̀ ntʉ́m pà' bɔ́ɔ áá",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
+   "je ne vois pas de total sur cette page": {
+    "texte": "Gaə́ tə̌ wə́ jɔ́ pəpúŋ nə́ pà' bɔ́ɔ pə́.",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
+   "je ne vois pas ton solde sur cette page": {
+    "texte": "Ŋ tə̌ wə́ jɔ sɛ̂dyə o nə́ pà' bɔ́ɔ pə̀.",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
+   "je préfère": {
+    "texte": "gaãp",
+    "statut": "brouillon",
+    "zone": "popup"
+   },
    "je t'écoute": {
-    "texte": "gaã yu'tá o.",
+    "texte": "Gaà yu' o.",
     "statut": "brouillon",
     "zone": "voix"
    },
    "je t'écoute. parle maintenant": {
-    "texte": "gaã yu'tá o. Ghɔm cwəlà.",
+    "texte": "Gaà yu' o. Ghɔm cwəlà.",
     "statut": "brouillon",
     "zone": "voix"
+   },
+   "kama : texte sélectionné": {
+    "texte": "Kàmtà",
+    "statut": "brouillon",
+    "zone": "selection"
+   },
+   "kama a compris :": {
+    "texte": "Kasa yú' ga:",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
+   "kama a eu un problème": {
+    "texte": "Kamá kə̂ bə́ ǎ ghə shɛ",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
+   "kama lit la page de ta banque sur ton écran, puis l'oublie. il ne garde rien": {
+    "texte": "Kǎm lə́ŋtə ŋkáp fa' tsǔ dəm o, biŋ jʉ̀jʉ̀. E lə páknyà.",
+    "statut": "brouillon",
+    "zone": "consentement"
+   },
+   "kama met trop de temps à répondre": {
+    "texte": "Kasa yú' te'.",
+    "statut": "brouillon",
+    "zone": "voix"
+   },
+   "kama montre la réponse en français": {
+    "texte": "Kama wə́ dá'tə́ ghɔm frâŋsí",
+    "statut": "brouillon",
+    "zone": "etat"
+   },
+   "kama n'a pas accès au micro": {
+    "texte": "Kákó katə̂ bə́ ŋkó ntʉ́m mikro.",
+    "statut": "brouillon",
+    "zone": "voix"
+   },
+   "kama n'a pas encore le droit d'utiliser le micro": {
+    "texte": "Kama katə̂ bə́ kwîpǔ nə̂ də̀ micro",
+    "statut": "brouillon",
+    "zone": "micro"
+   },
+   "kama n'a pas pu répondre correctement. demande à ta banque": {
+    "texte": "Kama ka píŋ gaə́ ǎ pəpúŋ. Kà'tə bí ŋkáp o.",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
+   "kama n'arrive pas bien à traduire ce texte. lis-le bien ou demande à ta banque": {
+    "texte": "Kǎma katə ghíŋ nə́ tútə̀ ŋwa'nyə yə̌ŋ. Ló ŋwa'nyə bɔ́ptə baŋk o lə.",
+    "statut": "brouillon",
+    "zone": "fenetre"
+   },
+   "kama n'arrive pas à joindre le serveur. réessaie dans un instant": {
+    "texte": "Kama ká ku' nə́ ké gɛfa'. Kàknyà.",
+    "statut": "brouillon",
+    "zone": "fenetre"
+   },
+   "kama ne connaît pas encore cette information. il recopie le montant tel qu'il est écrit sur la page": {
+    "texte": "Kasa tə̂ wə́ jyə́ mcuŋ bɔ́ɔ pə̀. Ê bìŋ ŋkâp dəŋ yə á ba pu və nə́ pà' a.",
+    "statut": "brouillon",
+    "zone": "element"
+   },
+   "kama ne connaît pas encore cette page. voici ce qu'il y voit": {
+    "texte": "Kama ka wúŋ jyə́ mə̂lɔ̌mgʉgʉɔ́ yəŋ Yɔ ywə yə e jɔ nthʉm o a.",
+    "statut": "brouillon",
+    "zone": "fenetre"
+   },
+   "kama ne peut pas comprendre ta voix pour le moment": {
+    "texte": "Kama ká fíŋ nə́ yu' gi o cwəlɔ̌.",
+    "statut": "brouillon",
+    "zone": "voix"
+   },
+   "kama ne peut pas expliquer pour le moment": {
+    "texte": "Kǎm lə nə̂ tútə́ Kama cwəlɔ̌.",
+    "statut": "brouillon",
+    "zone": "etat"
+   },
+   "kama ne reconnaît pas ce message. lis-le bien ou demande à ta banque avant de faire quoi que ce soit, c'est toi qui décides": {
+    "texte": "Kama ká zhyə́ ŋkhʉɔ yə̌ŋ Kə́ lə́ ŋkhe ywə bɔ bi baŋk o lə tə́ gə sɔmywə lə, wə yə o gɔ fyɛ' a.",
+    "statut": "brouillon",
+    "zone": "explication"
+   },
+   "kama ne reconnaît pas cette page. ouvre la page de ta banque": {
+    "texte": "Kama ka píŋ zhyə́ pà' bɔ̂. Kàp.",
+    "statut": "brouillon",
+    "zone": "popup"
+   },
+   "kama ne reconnaît pas encore cette partie de la page": {
+    "texte": "Kama tə̂ bə́ wə́ píŋ zhyə́ yəŋ nwə nə́ pà' áá",
+    "statut": "brouillon",
+    "zone": "expliquer"
+   },
+   "kama ne trouve plus cet élément sur la page": {
+    "texte": "Kama lə̂ piŋ jɔ́ ywə́ yə̌ŋ ntʉ́m pà'",
+    "statut": "brouillon",
+    "zone": "explication"
+   },
+   "kama réfléchit": {
+    "texte": "kámnyà",
+    "statut": "brouillon",
+    "zone": "etat"
+   },
+   "kama réfléchit…": {
+    "texte": "pá' ê wə́ ŋkwɛnyə...",
+    "statut": "brouillon",
+    "zone": "fenetre"
    },
    "kama t'explique ta banque en ligne dans ta langue": {
     "texte": "Kama tútə́ ŋkáp tsǔ ntʉ́m tʉ̂m o.",
     "statut": "brouillon",
     "zone": "bienvenue"
    },
+   "kama te montre :": {
+    "texte": "Kǎmà la'tə o ga:",
+    "statut": "brouillon",
+    "zone": "fenetre"
+   },
+   "kama traite déjà une question": {
+    "texte": "Kasa tsə̂m tó' nə́ ta' ywə́",
+    "statut": "brouillon",
+    "zone": "voix"
+   },
    "kama vient d'être mis à jour": {
-    "texte": "Pú kámtə́ Kama.",
+    "texte": "Pú tíŋnyə́ Kama.",
     "statut": "brouillon",
     "zone": "assistant"
    },
@@ -1535,62 +1900,177 @@
     "zone": "erreur"
    },
    "la banque affiche un message important. lis-le avant de continuer": {
-    "texte": "Tsʉ'bâp wə́ ŋkáp ta' ŋkhʉɔ gwyə́. Ló'nyà.",
+    "texte": "Dyə̂ ŋkáp ghɔm ta' tʉɔdəŋ Ló'nyə é tə ghɔ dzə̀.",
     "statut": "brouillon",
     "zone": "fenetre"
    },
    "la banque demande de réessayer. attends un peu, puis réessaie toi-même": {
-    "texte": "Bâŋkə̂ wə́ dó gaə́ pú piŋ ntɛ́tə̀. Kaktʉɔ na o, da'tə na o.",
+    "texte": "Dyə̂ ŋkáp ghɔm gaə́ pú piŋ ntə́ŋtə. Kaktʉɔ na o, biŋ da'tə thə́ na o.",
     "statut": "brouillon",
     "zone": "erreur"
    },
+   "la banque ne répond pas pour le moment": {
+    "texte": "Bâk dyə̂ bîŋ tə kwítə́ cwəlɔ pə́.",
+    "statut": "brouillon",
+    "zone": "erreur"
+   },
+   "la page s'appelle « {q1} »": {
+    "texte": "Tsʉ' fa' pú ŋkhe é ga « {q1} ».",
+    "statut": "brouillon",
+    "zone": "fenetre"
+   },
+   "la voix ne marche pas encore pour cette langue": {
+    "texte": "gi mo lə piŋ ŋkwyatə nə́ ghɔm yəŋ gaə̂.",
+    "statut": "brouillon",
+    "zone": "voix"
+   },
+   "le micro est ouvert seulement entre deux appuis sur le bouton. kama ne garde aucun enregistrement": {
+    "texte": "Pú ghyɛ' ŋkʉ̌m pə́pʉə́ə́ dəm kwɔ̂k. Kasa tə̂ bə́ siŋ sɔm cú'tə̀ pə́.",
+    "statut": "brouillon",
+    "zone": "consentement"
+   },
+   "le micro ne marche pas pour le moment": {
+    "texte": "Mmikro tə̂ wúŋ cwəlɔ pə́.",
+    "statut": "brouillon",
+    "zone": "micro"
+   },
+   "le montant n'est pas bon": {
+    "texte": "Kà'tá lə pûŋ.",
+    "statut": "brouillon",
+    "zone": "erreur"
+   },
+   "le serveur kama ne répond pas": {
+    "texte": "Gɛfa' Kama ka ghɔm.",
+    "statut": "brouillon",
+    "zone": "voix"
+   },
    "le service bancaire est en maintenance ou en panne pour le moment. réessaie plus tard, c'est toi qui décides quand refaire l'opération": {
-    "texte": "Tsʉ'fa' ŋkáp bə́ wə́ ntʉ́m nə̂pə́mtə̀ kə́ bə́ bâm cwəlɔ̌ Cwə yə o gɔ ghə a, o piŋ nyaptə.",
+    "texte": "Tsʉ'fa' ŋkáp bə́ wə́ kwítə̀ kə́ ntʉ́m ó cwəlɔ̌ lə. Cwə yə o gɔ cyə m nə a, yʉ́ yə ǎ wə shəŋ ga o cyə mnwə bɔ.",
     "statut": "brouillon",
     "zone": "explication"
+   },
+   "le total s'affiche quand tu prépares un transfert": {
+    "texte": "Guŋ ywə́ awɛ́ yɔ́ cwə yə pǒ nyaptə ta' cya áá",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
+   "lecture…": {
+    "texte": "kwé...",
+    "statut": "brouillon",
+    "zone": "fenetre"
+   },
+   "les frais s'affichent quand tu prépares un transfert": {
+    "texte": "Ywə́ yə ǎ wə́ díŋtə á pə́ cwə yə̌ o nyaptə ta' cya áá",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
+   "les frais sont de {x1}": {
+    "texte": "ŋkáp bə́ {x1}.",
+    "statut": "brouillon",
+    "zone": "element"
+   },
+   "les {x1} dernières opérations :": {
+    "texte": "Mnwə myə {x1} jʉm áá",
+    "statut": "brouillon",
+    "zone": "resume"
+   },
+   "lis le message de la banque ci-dessus. kama ne le connaît pas encore": {
+    "texte": "Ló ŋkhʉɔ ŋkáp yə̌ŋ. Kama katə zhyə́ é.",
+    "statut": "brouillon",
+    "zone": "erreur"
    },
    "ma langue": {
     "texte": "ghò",
     "statut": "brouillon",
     "zone": "popup"
    },
+   "mets le montant": {
+    "texte": "Pó'nyà.",
+    "statut": "brouillon",
+    "zone": "expliquer"
+   },
    "mets le nom de la personne": {
     "texte": "Pó'tə tso mo.",
     "statut": "brouillon",
     "zone": "expliquer"
-   },
-   "micro actif": {
-    "texte": "mcyàp",
-    "statut": "brouillon",
-    "zone": "voix"
    },
    "micro autorisé": {
     "texte": "Pú ghə mtiŋ mikro.",
     "statut": "brouillon",
     "zone": "micro"
    },
-   "montre-moi": {
-    "texte": "syàp",
+   "micro indisponible sans internet": {
+    "texte": "Mcyə́ tə bə ǎ yɔ́",
     "statut": "brouillon",
     "zone": "fenetre"
    },
+   "montant : {x1}": {
+    "texte": "Bâp: {x1}",
+    "statut": "brouillon",
+    "zone": "explication"
+   },
+   "ne dis jamais ton code ni ton numéro à personne, même pas à kama": {
+    "texte": "Ká la m gɔm kodyə o ka numə o bi sɔmmo, ba bi Kama lə.",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
+   "ne dis pas ton solde, ton numéro ni un nom : parle seulement de la page": {
+    "texte": "Ka ghɔm tsó tsyə́ lə, ka mnúbà o ka mu' tso. Ghɔmnwə da' nə pà'.",
+    "statut": "brouillon",
+    "zone": "consentement"
+   },
+   "ne rien changer": {
+    "texte": "ka'nyà",
+    "statut": "brouillon",
+    "zone": "popup"
+   },
    "nord, adamaoua, extrême-nord": {
-    "texte": "bîŋ, Adamaoua, tə́m",
+    "texte": "ghə̌ŋlá', Adamaoua, tə́m zhə̀ŋlá'",
     "statut": "brouillon",
     "zone": "langue"
    },
    "nord-ouest, sud-ouest": {
-    "texte": "zhəŋkà' bînàm",
+    "texte": "zhəŋkà' bînàm, sîsǐ bînam",
     "statut": "brouillon",
     "zone": "langue"
    },
    "normale": {
-    "texte": "lŏm",
+    "texte": "dza'",
     "statut": "brouillon",
     "zone": "fenetre"
    },
+   "on te demande de mettre à jour tes informations avant une date limite. fais-le seulement par le site officiel de ta banque, c'est toi qui décides": {
+    "texte": "Pú hə́ŋtə ó gaə̂ o cyanyə mcùŋ mǔ tyə́' tə yɔ̌. Ywə yə o gɔ ghə a cyə da' nə́ tsʉ' fa' baŋk o lə.",
+    "statut": "brouillon",
+    "zone": "explication"
+   },
+   "on te dit qu'on t'a envoyé de l'argent par erreur et te demande de le renvoyer. ne renvoie rien sans vérifier avec ta banque, c'est toi qui décides": {
+    "texte": "Pú gaə́ pú cya ŋkáp bǔ mcʉ̌m myə́ hə́ŋtə o gaê há é nə́ŋ. Ká tak sɔmywə nəŋ tə́ jɛ baŋk o, wə yə ě fyɛ' a.",
+    "statut": "brouillon",
+    "zone": "explication"
+   },
+   "on te dit qu'un proche est en danger et te presse de payer vite. ne paye pas sous la pression : vérifie d'abord, c'est toi qui décides": {
+    "texte": "Pú gaə́ mo bə ě ghɔ bvʉ̀ bíŋ ntáknyə ó nə́ lə fɛ́. Ka po ləŋdzə jɔ, wə yə o shəŋ a.",
+    "statut": "brouillon",
+    "zone": "explication"
+   },
+   "on te dit que tu as gagné un prix et te demande de payer des frais d'abord. c'est une arnaque : n'envoie pas d'argent, c'est toi qui décides": {
+    "texte": "Pú gaə́ o kwì ta' ŋkáp bíŋ hə́ŋtə ó gaê ləŋdzə gɔpna'. A ba fʉ́tə̀: Ka təm ŋkáp, wə yə o shəŋ a.",
+    "statut": "brouillon",
+    "zone": "explication"
+   },
+   "on te promet de gagner beaucoup d'argent vite si tu déposes ou investis. ne dépose pas d'argent, c'est toi qui décides": {
+    "texte": "Pú gaə́ o gɔ cyətə kwitə ŋkáp tə tsʉ' yə pǒ tʉ́ nə ŋkhap kə ntʉ̌ lə. Ka po tʉ́ ŋkhap, wə yə o gɔ fyɛ' a.",
+    "statut": "brouillon",
+    "zone": "explication"
+   },
+   "on te propose un travail et te demande de payer des frais de dossier ou d'admission. ne paye rien, c'est toi qui décides": {
+    "texte": "Pú há fà' bǐ bíŋ hə́ŋtə́ o gaə́ pǒ gɔ kwí ŋkáp. Ka po pa ŋkwi sɔmywə, wə yə o shəŋ a.",
+    "statut": "brouillon",
+    "zone": "explication"
+   },
    "ouest": {
-    "texte": "ŋkàm",
+    "texte": "bînàm",
     "statut": "brouillon",
     "zone": "langue"
    },
@@ -1604,23 +2084,78 @@
     "statut": "brouillon",
     "zone": "popup"
    },
+   "partie « {q1} »": {
+    "texte": "Bîŋ « {q1} ».",
+    "statut": "brouillon",
+    "zone": "fenetre"
+   },
+   "pas d'internet": {
+    "texte": "Kà lə.",
+    "statut": "brouillon",
+    "zone": "etat"
+   },
+   "pas de connexion internet": {
+    "texte": "Bə ǎ tʉ́ mcùŋ Internet.",
+    "statut": "brouillon",
+    "zone": "voix"
+   },
+   "pas encore traduit": {
+    "texte": "lá'tá",
+    "statut": "brouillon",
+    "zone": "badge"
+   },
+   "pas maintenant": {
+    "texte": "kà",
+    "statut": "brouillon",
+    "zone": "consentement"
+   },
+   "patiente un instant…": {
+    "texte": "Pú kaktʉɔ́ mûywə́.",
+    "statut": "brouillon",
+    "zone": "fenetre"
+   },
    "pose ta question": {
     "texte": "Kà'tá o.",
     "statut": "brouillon",
     "zone": "voix"
    },
-   "qu'est-ce que je dois faire ici": {
-    "texte": "Gaà gɔ ghə ka tsɔ'ɔ?",
+   "pour envoyer de l'argent, appuie toi-même sur « effectuer un transfert »": {
+    "texte": "Po'o lə́ nə nthəm ŋkhap, shwɔp thə na o nə « Effectuer un transfert ».",
     "statut": "brouillon",
-    "zone": "assistant"
+    "zone": "expliquer"
    },
-   "ralentie": {
-    "texte": "kàmnyà",
+   "pour envoyer de l'argent, appuie toi-même sur « {q1} »": {
+    "texte": "Po'o lə́ nə nthəm ŋkhap, shwɔp thə na o nə « {q1} ».",
     "statut": "brouillon",
     "zone": "fenetre"
    },
+   "pour traduire, kama envoie seulement des phrases sans chiffres ni noms": {
+    "texte": "Kama tə́m da' mghɔ̀m tə ghə mnúba lə nə ntútə̀.",
+    "statut": "brouillon",
+    "zone": "consentement"
+   },
+   "qu'est-ce que je dois faire ici": {
+    "texte": "Gǎ gɔ ghə ka tsɔ'ɔ?",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
+   "quelqu'un te demande ton code secret ou ton code de retrait. une banque ne demande jamais un code : ne le donne pas, c'est toi qui décides": {
+    "texte": "mu' mo hə́ŋtə o kódyə̂ ê dʉmnyə̀ Ta' ŋkáp tə́ bawə həŋtə ta' kódyə̌ pa: Ká hǎ, wə yə o shəŋ a.",
+    "statut": "brouillon",
+    "zone": "explication"
+   },
+   "quoi faire ici": {
+    "texte": "tsʉ'",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
+   "recharge la page (touche f5), puis repose ta question": {
+    "texte": "Lɔ́m pà' (tʉ̌ F5) biŋ shə́ŋ nə hə́ŋtə o.",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
    "redis-le, s'il te plaît": {
-    "texte": "Kà'nyə e.",
+    "texte": "Ywə yə ě cwyɛ'nyə a.",
     "statut": "brouillon",
     "zone": "voix"
    },
@@ -1629,30 +2164,150 @@
     "statut": "brouillon",
     "zone": "element"
    },
-   "regarde tes dernières opérations": {
-    "texte": "Lə yó' jʉɔjʉ̀m mfa' mǔ.",
+   "regarde le total qui est sorti de ton compte": {
+    "texte": "Yɔ́ ŋkáp yə a tə̌m nə́ sɛ̂ nwə o áá",
     "statut": "brouillon",
     "zone": "expliquer"
    },
+   "regarde le total qui va sortir de ton compte": {
+    "texte": "Yɔ́ ŋkáp yə á gɔ tə́m nə́ sɛ̂ o lə.",
+    "statut": "brouillon",
+    "zone": "expliquer"
+   },
+   "regarde les frais": {
+    "texte": "Pú yɔ́ mŋkâp.",
+    "statut": "brouillon",
+    "zone": "expliquer"
+   },
+   "regarde tes dernières opérations": {
+    "texte": "Pú yɔ́ jʉm mfa' mǔ.",
+    "statut": "brouillon",
+    "zone": "expliquer"
+   },
+   "regarde ton solde : c'est l'argent que tu as": {
+    "texte": "Yɔ ŋkáp o: ǎ bə́ ŋkhap yə ó ghə lə.",
+    "statut": "brouillon",
+    "zone": "expliquer"
+   },
+   "réessaie dans un instant": {
+    "texte": "Kàknyà.",
+    "statut": "brouillon",
+    "zone": "voix"
+   },
    "si elle est déjà ouverte, recharge-la": {
-    "texte": "A pə́ gá e tsə̂m, o ghyɛ' é.",
+    "texte": "A pə́ gá e tsə̂ ghyɛ' a, o ŋkwyatə.",
     "statut": "brouillon",
     "zone": "popup"
    },
-   "tes transactions": {
-    "texte": "mcò'",
+   "si la banque affiche un message, touche la pastille kama à côté": {
+    "texte": "Baŋk pa' ǎ wə́ da'tə̀ ŋkhʉɔ a, ŋkwak msɛ́ Kama bəŋ o.",
     "statut": "brouillon",
     "zone": "assistant"
+   },
+   "si tu n'es pas sûr du numéro, n'envoie pas l'argent. demande d'abord à la personne": {
+    "texte": "O ka zhyə́ ywə yə ǎ wə a, o ka təm ŋkáp. Pú ləŋdzə hə́ŋtə bɛ̂.",
+    "statut": "brouillon",
+    "zone": "erreur"
+   },
+   "solde disponible : {x1}": {
+    "texte": "Bâp yə ǎ bə́ á pə́: {x1}.",
+    "statut": "brouillon",
+    "zone": "explication"
+   },
+   "sur cette page : {x1} entrée, {x2} sortie": {
+    "texte": "nə́ yəŋ ghap: {x1} ko', {x2} təm.",
+    "statut": "brouillon",
+    "zone": "fenetre"
+   },
+   "sur cette page : {x1} entrée, {x2} sorties": {
+    "texte": "nə́ yəŋ ghap : {x1} ko', {x2} tə̌m.",
+    "statut": "brouillon",
+    "zone": "fenetre"
+   },
+   "sur cette page : {x1} entrées, {x2} sortie": {
+    "texte": "nə́ yəŋ ghap : {x1} ko'tə̀, {x2} təm.",
+    "statut": "brouillon",
+    "zone": "fenetre"
+   },
+   "sur cette page : {x1} entrées, {x2} sorties": {
+    "texte": "nə́ ghap yəŋ ga: {x1} ko', {x2} təm.",
+    "statut": "brouillon",
+    "zone": "resume"
+   },
+   "ta voix est envoyée au serveur de kama pour comprendre ta demande, puis oubliée": {
+    "texte": "Pu gɔ cya gi o bǐ gɛfa' Kama ga e yu' ywə yə o hə́ŋtə á, a tʉmnyə.",
+    "statut": "brouillon",
+    "zone": "consentement"
+   },
+   "ta voix sert seulement à comprendre ta question. elle n'est pas gardée": {
+    "texte": "gi o fa' da' nə́ yu' ywə yə o həŋtə áá Pú lə páknyà.",
+    "statut": "brouillon",
+    "zone": "micro"
+   },
+   "tes montants, ton solde et les noms ne sont jamais envoyés": {
+    "texte": "Pu tə́ nthəm ŋkhap mǔ, pu a tsó tsyə o gə a pa.",
+    "statut": "brouillon",
+    "zone": "consentement"
    },
    "texte": {
     "texte": "ŋké",
     "statut": "brouillon",
     "zone": "popup"
    },
+   "texte de la page :": {
+    "texte": "Mkéywà:",
+    "statut": "brouillon",
+    "zone": "fenetre"
+   },
    "toi": {
     "texte": "wú",
     "statut": "brouillon",
     "zone": "fenetre"
+   },
+   "ton compte est bloqué ou suspendu pour le moment. contacte ta banque avant de faire quoi que ce soit, c'est toi qui décides": {
+    "texte": "Kwí'tə ó bə ǎ cwəlɔ bák kə kwípnyə́. Kaktʉɔ nə sɛ baŋk o tə́ ghə ywə lə, wə yə o gɔ fyɛ' a.",
+    "statut": "brouillon",
+    "zone": "explication"
+   },
+   "ton opération a été refusée : aucun argent n'a quitté ton compte. vérifie les informations et réessaie si tu veux, c'est toi qui décides": {
+    "texte": "Pú kəŋnyə́ mfa' tsǔ: Sɔm ŋkáp tə̂ lu nə́ sɛ̌tə ó pə́. Cəŋtə́ jyə́ ywə yə ǎ wə shəŋ a, biŋ jáp mtiŋ bɔ.",
+    "statut": "brouillon",
+    "zone": "explication"
+   },
+   "ton opération est partie. vérifie le total qui a quitté ton compte, c'est toi qui décides de garder le reçu ou non": {
+    "texte": "Mfa' tsǔ lə̂ ghɔ̌. Yɔ dəŋ yə a nthak ŋkǎp o nə́ á, wə yə o shə́ŋ ga o tʉ̌m ywə ka tə kwitə.",
+    "statut": "brouillon",
+    "zone": "explication"
+   },
+   "ton transfert est parti": {
+    "texte": "Fà'nyə ó ghɔ̌.",
+    "statut": "brouillon",
+    "zone": "expliquer"
+   },
+   "ton virement est parti": {
+    "texte": "Fà'nyə ó ghɔ̌.",
+    "statut": "brouillon",
+    "zone": "element"
+   },
+   "total débité : {x1}": {
+    "texte": "Pú pîŋ ŋkáp: {x1}.",
+    "statut": "brouillon",
+    "zone": "explication"
+   },
+   "total à débiter : {x1}": {
+    "texte": "Gùŋ yə pú gɔ ŋkáp á: {x1}.",
+    "statut": "brouillon",
+    "zone": "explication"
+   },
+   "touche une pastille kama ou utilise le menu de l'onglet": {
+    "texte": "Kà'tə̀ pú'shwə̀ kə ntʉ́m mə̂séŋ.",
+    "statut": "brouillon",
+    "zone": "voix"
+   },
+   "touche une pastille kama à côté d'un montant ou d'un bouton": {
+    "texte": "Kàk.",
+    "statut": "brouillon",
+    "zone": "expliquer"
    },
    "traduction automatique": {
     "texte": "tútà",
@@ -1660,39 +2315,129 @@
     "zone": "badge"
    },
    "traduction indisponible. voici le texte original": {
-    "texte": "tútə̀ tə́ ŋkà'. Yə̌ŋ bə́ ŋkéywə́ yə a lə.",
+    "texte": "ŋwa'nyə lə pə́ sí Yɔ́ ŋkéywə yə a lə.",
     "statut": "brouillon",
     "zone": "etat"
    },
+   "traduction à fournir": {
+    "texte": "tútə̀",
+    "statut": "brouillon",
+    "zone": "badge"
+   },
    "trop de questions en peu de temps": {
-    "texte": "Pú lə̂ cʉ́' mûywə́ hə́ŋtə́.",
+    "texte": "Shú'tə yó'.",
     "statut": "brouillon",
     "zone": "assistant"
    },
+   "tu as 22 500 fcfa sur ton compte": {
+    "texte": "Ô ghə 22 500 FCFA nə́ sɛ̂tʉ̌m ó.",
+    "statut": "brouillon",
+    "zone": "reponse"
+   },
+   "tu as atteint un plafond ou une limite sur ton compte. vérifie ton plafond avant d'envoyer, c'est toi qui décides": {
+    "texte": "Pô ŋkwyə́ ta' gʉɔ nə́ sɛ̂ ŋkó ó. Kaktʉɔ thə́ o tə́ nə nthəm, wə yə o shəŋ a.",
+    "statut": "brouillon",
+    "zone": "explication"
+   },
+   "tu n'as pas assez d'argent pour ce transfert": {
+    "texte": "O ka ghə ŋkáp yə á ku'nyə nə́ cya.",
+    "statut": "brouillon",
+    "zone": "erreur"
+   },
+   "tu n'as pas assez d'argent pour ce virement": {
+    "texte": "O ka ghə ŋkáp yə á ku'nyə nə cyanyə.",
+    "statut": "brouillon",
+    "zone": "element"
+   },
+   "tu n'as pas coché la case de confirmation": {
+    "texte": "O ka yó tsʉ' nə píŋtə́.",
+    "statut": "brouillon",
+    "zone": "erreur"
+   },
    "tu peux arrêter kama quand tu veux, dans le menu de l'extension": {
-    "texte": "Pú ghə gaə́ o gɔ cwə yə ǒ kuŋ á, ntʉ́m mə̂lɔ̌m nə nté Kama.",
+    "texte": "O fíŋ nə ghəm Kama cwə yə o kuŋ a, ntʉ́m mə̂lɔ̌mgʉgʉɔ.",
     "statut": "brouillon",
     "zone": "consentement"
    },
    "tu peux l'écouter en français": {
-    "texte": "Pú fíŋ nə́ yu' ghɔm frâŋsí.",
+    "texte": "Pú fíŋ nə́ yu' gi mo frâŋsí.",
     "statut": "brouillon",
     "zone": "etat"
    },
+   "tu peux toujours utiliser « {q1} » ou les pastilles kama": {
+    "texte": "Pú fíŋ nə́ pə̂ gùŋ mcwə awɛ́ də́ « {q1} » kə mka'tə Kama lə.",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
    "un nouveau message est apparu sur la page. lis-le": {
-    "texte": "Ta' ŋkhʉɔ sə́ sɛ̂ ntʉ́m pà'. syàp é.",
+    "texte": "Ta' ŋkhʉɔ sə́ sɔ' ntʉ́m pà'. syàp é.",
     "statut": "brouillon",
     "zone": "fenetre"
    },
+   "va sur la page de ta banque où ton solde est écrit": {
+    "texte": "Ghɔ nə́ jyədyə̌ dyə̂ ŋkáp tsʉ' yə pú və bɛtsə́ o a.",
+    "statut": "brouillon",
+    "zone": "assistant"
+   },
    "va sur la page historique": {
-    "texte": "ghɔ nə́ pîŋ mzhə̀ŋ mcùŋ.",
+    "texte": "Ghɔ nə́ pîŋ mcùŋ.",
     "statut": "brouillon",
     "zone": "fenetre"
+   },
+   "va sur la première page : « solde »": {
+    "texte": "ŋghɔ nə́ dəŋdzə zhə̀ŋ: « Solde ».",
+    "statut": "brouillon",
+    "zone": "resume"
+   },
+   "va sur la première page : « {q1} »": {
+    "texte": "ŋghɔ nə́ dəŋdzə zhə̀ŋ: « {q1} ».",
+    "statut": "brouillon",
+    "zone": "fenetre"
+   },
+   "vitesse de lecture": {
+    "texte": "ŋwa'nyà",
+    "statut": "brouillon",
+    "zone": "fenetre"
+   },
+   "vérifie bien le nom et le numéro. si tu as un doute, n'envoie pas l'argent": {
+    "texte": "Cú'tə̀ tsó pú a mnúbà. O yɔ mkwɛnyə, o ka təm ŋkáp.",
+    "statut": "brouillon",
+    "zone": "erreur"
+   },
+   "vérifie le montant": {
+    "texte": "Pú yɔ́ kwyà.",
+    "statut": "brouillon",
+    "zone": "expliquer"
+   },
+   "vérifie le total qui va sortir de ton compte": {
+    "texte": "Kà'tə ŋkáp yə á gɔ tə́m nə́ sɛ̂ o lə.",
+    "statut": "brouillon",
+    "zone": "expliquer"
+   },
+   "vérifie les frais": {
+    "texte": "Pó'tá mcúŋ.",
+    "statut": "brouillon",
+    "zone": "expliquer"
+   },
+   "vérifie que le serveur kama est démarré, puis réessaie": {
+    "texte": "Kaktʉɔ gaə́ gɛfa' Kama ló', biŋ ntó'.",
+    "statut": "brouillon",
+    "zone": "voix"
+   },
+   "écris le montant à envoyer": {
+    "texte": "Vó ŋkáp yə pú gɔ tə́m áá",
+    "statut": "brouillon",
+    "zone": "expliquer"
    },
    "écris le nom de la personne": {
     "texte": "Vó tsó mo.",
     "statut": "brouillon",
     "zone": "expliquer"
+   },
+   "écris le nom et le numéro de la personne qui reçoit l'argent": {
+    "texte": "Və tso tsyə́ mo yə ě kwi ŋkáp áá",
+    "statut": "brouillon",
+    "zone": "erreur"
    },
    "écris seulement des chiffres. vérifie bien avant de continuer": {
     "texte": "Vó da' mnúba. Kà'tá.",
@@ -1700,14 +2445,29 @@
     "zone": "explication"
    },
    "écris son numéro. vérifie-le bien": {
-    "texte": "Kàp. Kàknyà.",
+    "texte": "cú. Kàknyà.",
     "statut": "brouillon",
     "zone": "expliquer"
    },
-   "épingle": {
-    "texte": "kètà",
+   "écris un montant plus grand que zéro, puis appuie toi-même sur « continuer »": {
+    "texte": "Vó ŋkhap yə a cyə m nə nthɔm a, biŋ shʉ' na o nə « Continuer ».",
     "statut": "brouillon",
-    "zone": "bienvenue"
+    "zone": "erreur"
+   },
+   "écris un montant plus grand que zéro, puis appuie toi-même sur « {q1} »": {
+    "texte": "Vó ŋkhap yə a cyə m nə nthɔm a, biŋ shʉ' na o nə « {q1} ».",
+    "statut": "brouillon",
+    "zone": "fenetre"
+   },
+   "élément choisi :": {
+    "texte": "ŋwa'nyà",
+    "statut": "brouillon",
+    "zone": "fenetre"
+   },
+   "étape {x1} :": {
+    "texte": "Kà' {x1}:",
+    "statut": "brouillon",
+    "zone": "fenetre"
    }
   }
  }

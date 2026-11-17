@@ -71,10 +71,14 @@ async function jouerWav(donnees: Uint8Array, vitesse: number, mon: number) {
   });
 }
 
+/** Langues dont les montants ne sont pas prononcés (décision de l'équipe, 2026-11-17) : aucun nombre n'est encore enregistré
+ * dans la langue, et la voix française au milieu d'une phrase prête à confusion. Le montant reste affiché à l'écran. */
+const MONTANTS_MUETS = new Set(['bbj']);
+
 /** Le montant de la page, lu localement : en mots anglais pour le pidgin, tel qu'écrit en français sinon. */
 function lireMontant(valeur: string, langue: string, vitesse: number, mon: number) {
   return new Promise<void>((fini) => {
-    if (!('speechSynthesis' in window) || mon !== jeton) return fini();
+    if (MONTANTS_MUETS.has(langue) || !('speechSynthesis' in window) || mon !== jeton) return fini();
     const mots = langue === 'wes' ? direMontant(valeur) : null;
     const phrase = new SpeechSynthesisUtterance(mots ? mots.join(' ') : valeur);
     phrase.lang = mots ? 'en-GB' : 'fr-FR';

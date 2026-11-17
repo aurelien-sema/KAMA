@@ -72,6 +72,9 @@ def religious_drift(source: str, output: str) -> bool:
     return bool(found) and not (found & set(_WORD.findall(source.lower()))) and not (RELIGIOUS & set(_WORD.findall(source.lower())))
 
 
+ATTENTE_TRADUCTION_S = 5.0  # attente maximale d'un moteur libre pour une traduction
+
+
 class TranslationService:
     """Ordre impose : memoire validee, memoire proche, modele sous controle, sinon rien."""
 
@@ -97,21 +100,31 @@ class TranslationService:
         near = self.memory.find_near(req.text, req.source_lang, req.target_lang)
         if near is not None:
             return TranslateResponse(text=near, badge="machine", origin="near_memory")
-        if is_critical(req.text, req.element) and (
+        modele_libre = req.target_lang in self.engines.critical_model_languages
+        if modele_libre:
+            draft = self.memory.find_draft(req.text, req.source_lang, req.target_lang)
+            if draft is not None:
+                return TranslateResponse(text=draft, badge="machine", origin="model")
+        if not modele_libre and is_critical(req.text, req.element) and (
             not self.settings.mt_allow_critical or req.element not in self.engines.critical_model_elements
         ):
             return untranslated("critical_content")
         route = self.engines.translation.get(f"{req.source_lang}>{req.target_lang}")
         if route is None:
             return untranslated("engine_unavailable")
-        if self.gate.locked():
+        # Une page envoie beaucoup de phrases d'un coup : on attend un peu son tour (l'extension coupe a 8 s)
+        # plutot que de renvoyer aussitot « busy », qui laissait la phrase en francais.
+        try:
+            await asyncio.wait_for(self.gate.acquire(), timeout=ATTENTE_TRADUCTION_S)
+        except asyncio.TimeoutError:
             return untranslated("busy")
-        async with self.gate:
-            try:
-                return await asyncio.to_thread(self._run_model, req, route)
-            except Exception as exc:
-                log.warning("moteur en echec (%s)", type(exc).__name__)
-                return untranslated("engine_error")
+        try:
+            return await asyncio.to_thread(self._run_model, req, route)
+        except Exception as exc:
+            log.warning("moteur en echec (%s)", type(exc).__name__)
+            return untranslated("engine_error")
+        finally:
+            self.gate.release()
 
     async def translate_between(self, text: str, direction: str) -> str | None:
         """Traduit un texte deja masque dans un sens donne (ex. `wes>en`), avec les controles de la route.
@@ -141,7 +154,8 @@ class TranslationService:
 
     def _run_model(self, req: TranslateRequest, route: TranslationRoute) -> TranslateResponse:
         output = route.translator.translate(req.text)
-        if output_problem(req.text, output, self.critical) or religious_drift(req.text, output):
+        termes = self.critical if req.target_lang == "wes" else None  # table de formes pidgin : sans objet ailleurs
+        if output_problem(req.text, output, termes) or religious_drift(req.text, output):
             return untranslated("guard_failed")
         if route.lexicon is not None and unknown_ratio(output, route.lexicon) > route.max_unknown_ratio:
             return untranslated("guard_failed")  # trop de mots absents des corpus : probablement invente

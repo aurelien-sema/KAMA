@@ -27,6 +27,7 @@ class Template:
     id: str
     sources: dict[str, tuple[str, ...]]
     translations: dict[str, str]  # uniquement les traductions validees
+    drafts: dict[str, str] = field(default_factory=dict)  # traductions automatiques non validees (jamais « Verifie »)
 
 
 @dataclass(frozen=True)
@@ -105,17 +106,17 @@ def _load_page(path: Path) -> tuple[list[Template], list[Pattern]]:
                 texts.append(m.text)
             if texts:
                 masked_sources[lang] = tuple(texts)
-        translations = {}
+        translations, drafts = {}, {}
         for lang in TARGETS:
             text = entry.get(lang)
-            if not text or not _validator(entry, lang):
+            if not text:
                 continue
             masked = _mask_translation(values or {}, text)
             if masked is None:
                 log.warning("entree %s ignoree pour %s : valeurs differentes de la source", entry.get("id"), lang)
                 continue
-            translations[lang] = masked
-        templates.append(Template(entry["id"], masked_sources, translations))
+            (translations if _validator(entry, lang) else drafts)[lang] = masked
+        templates.append(Template(entry["id"], masked_sources, translations, drafts))
     patterns = []
     for raw in data.get("patterns", []):
         regex = {}
@@ -168,6 +169,14 @@ class TranslationMemory:
                 for n, slot in enumerate(m.groups(), 1):
                     out = out.replace("{x%d}" % n, "\x00%s\x00" % slot)
                 return out.replace("\x00", "")
+        return None
+
+    def find_draft(self, text: str, source: str, target: str) -> str | None:
+        """Brouillon automatique pre-calcule pour exactement ce texte (meme balises), ou None."""
+        for template in self.exact.get((source, canonical(text)), []):
+            draft = template.drafts.get(target)
+            if draft is not None and slots_of(draft) == slots_of(text):
+                return draft
         return None
 
     def find_near(self, text: str, source: str, target: str) -> str | None:
