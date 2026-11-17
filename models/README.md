@@ -22,9 +22,9 @@ python models/fetch_models.py pidgin    # pour travailler sur le pidgin
 | Dossier dans `models/poids/` | Rôle | État |
 |---|---|---|
 | `ghomala/fr-bbj-m2m100-v1` | français → Ghomala, checkpoint M2M100 FP16 | Branché au moteur `m2m100`, route désactivée : smoke test « Bonjour » et « Salut » identique ; aucune route inverse fournie |
-| `ghomala/tts-vits-v2` | synthèse Ghomala VITS, 16 kHz | Branché au moteur `ghomala_vits`, route désactivée : WAV produit, mais synthèse plus lente que la durée audio et écoute native à faire |
+| `ghomala/tts-vits-v2-final-20261114` | synthèse Ghomala VITS, 16 kHz, checkpoint final | Branché et activé pour la démonstration non commerciale ; empreinte `model.safetensors` : `50fb9ad152add98a4ed8489e6aa281016cd34132b89c6ee8fee6dcb4009c223d` |
 
-Le smoke test local TTS a chargé le modèle en 27 s et produit 1,58 s de WAV en 12,9 s. Le checkpoint TTS annonce une licence CC BY-NC 4.0 ; ne pas l'utiliser commercialement. Les deux routes restent désactivées tant que la qualité, la latence et les conditions de diffusion ne sont pas validées.
+Le checkpoint final vient de `facebook/mms-tts-ybb`, ajuste sur `flagship-ai/ghomala-spoken-bible`, sous licence CC BY-NC 4.0 (attribution requise, usage commercial interdit). Son fichier de configuration rapporte un CER texte de 48,78 % sur le test. Le smoke test local de « Pú cyanyə́ ŋkâp » a produit un WAV mono 16 kHz de 1,17 s en 4,28 s, après 37,44 s de chargement dans le processus. La route TTS Ghomala est active pour la démonstration non commerciale; les routes de traduction et d'ASR Ghomala restent désactivées.
 
 ## Pidgin
 

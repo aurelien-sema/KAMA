@@ -8,7 +8,7 @@
  *  - le masquage est fait UNE fois sur l'ensemble, pour que {x1}, {x2}… désignent partout la
  *    même valeur ; les valeurs restent dans la page et servent à réafficher la réponse.
  */
-import { lirePage, type LecturePage } from './lecture-page';
+import { lirePage, valeursEntete, type LecturePage } from './lecture-page';
 import { masquer } from './masquage';
 
 const MAX_MORCEAU = 300;
@@ -16,7 +16,12 @@ const MAX_TOTAL = 1500;
 
 export type ContextePage = { texte: string; valeurs: Record<string, string> };
 
-export function contextePage(lecture: LecturePage = lirePage()): ContextePage {
+/**
+ * `connues` : valeurs affichées de l'en-tête (bénéficiaire, téléphone, référence, titulaire).
+ * Sans elles, un prénom seul (« Bonjour, Amina ») échappe au masquage par indices et partirait
+ * en clair : le contexte doit être masqué comme un texte libre (lib/traduction.ts).
+ */
+export function contextePage(lecture: LecturePage = lirePage(), connues: string[] = valeursEntete()): ContextePage {
   const morceaux: string[] = [];
   const vus = new Set<string>();
   const ajouter = (texte?: string) => {
@@ -44,5 +49,5 @@ export function contextePage(lecture: LecturePage = lirePage()): ContextePage {
     if (brut.length + morceau.length + 1 > MAX_TOTAL) break;
     brut += (brut ? '\n' : '') + morceau;
   }
-  return masquer(brut);
+  return masquer(brut, connues);
 }

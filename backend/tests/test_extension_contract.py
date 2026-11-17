@@ -81,14 +81,15 @@ def test_the_embedded_glossary_matches_what_the_server_serves():
     assert embedded["fr"] == generated["fr"] and embedded["en"] == generated["en"], "glossaire embarque perime : python -m app.export_glossary"
 
 
-def test_demo_routes_keep_llm_disabled_and_only_change_demo_settings():
-    """La demo garde le LLM coupe apres evaluation; seule l'ASR pidgin peut sinon differer des routes par defaut."""
+def test_demo_routes_enable_read_only_llm_only_in_demo():
+    """Le LLM est actif dans le profil demo isole, mais reste desactive dans la configuration par defaut."""
     default = json.loads((REPO_DIR / "backend" / "config" / "routes.json").read_text(encoding="utf-8"))
     demo = json.loads((REPO_DIR / "backend" / "config" / "routes.demo.json").read_text(encoding="utf-8"))
     assert demo["asr"]["wes"]["enabled"] is True
     assert default["llm"]["enabled"] is False
-    assert demo["llm"]["enabled"] is False
+    assert demo["llm"]["enabled"] is True
     assert default["llm"]["path"] == demo["llm"]["path"] == "poids/llm/LFM3-1.7B-Q4_K_M.gguf"
+    assert demo["tts"]["bbj"] == default["tts"]["bbj"]
     default.pop("_note", None)
     demo.pop("_note", None)
     demo["asr"]["wes"]["enabled"] = default["asr"]["wes"]["enabled"]

@@ -37,6 +37,11 @@ function expediteurAutorise(expediteur: { id?: string; url?: string; tab?: { url
   return expediteur?.id === browser.runtime.id && motifs.some((m) => m.includes(url));
 }
 
+/** Le document caché du micro appartient à l'extension : même identifiant, page interne uniquement. */
+function documentInterne(expediteur: { id?: string; url?: string } | undefined) {
+  return expediteur?.id === browser.runtime.id && (expediteur.url ?? '').startsWith(browser.runtime.getURL('/'));
+}
+
 export default defineBackground(() => {
   // Installation : la page de bienvenue s'ouvre toute seule (langue, micro, épingler l'icône).
   browser.runtime.onInstalled.addListener(({ reason }) => {
@@ -51,10 +56,12 @@ export default defineBackground(() => {
 
   browser.runtime.onMessage.addListener((message, expediteur, repondre) => {
     if (pourDestinataire<DepuisDocumentMicro>(message, 'service')) {
+      if (!documentInterne(expediteur)) return; // seule notre page interne peut envoyer la voix
       void depuisDocumentMicro(message);
       return;
     }
     if ((message as DemandeAutorisation)?.type === 'kama:autoriser-micro') {
+      if (!expediteurAutorise(expediteur)) return;
       browser.tabs.create({ url: browser.runtime.getURL(`${PAGE_BIENVENUE}#micro`) });
       return;
     }

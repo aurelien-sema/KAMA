@@ -1,5 +1,5 @@
 {
-  "_note": "Pidgin : les routes de traduction restent actives. Les routes Ghomala ajoutees sont experimentales et desactivees en attente de validation de qualite, latence et licence. Le LLM LFM3 reste desactive jusqu'a validation du contrat, des tests de securite et de son empreinte SHA-256. Chemins relatifs a KAMA_MODELS_DIR. Les enregistrements humains valides passent avant la synthese.",
+  "_note": "Pidgin : les routes de traduction restent actives. La synthese Ghomala est activee pour la demonstration non commerciale seulement; traduction et ASR Ghomala restent desactives. Le LLM LFM3 reste desactive jusqu'a validation du contrat, des tests de securite et de son empreinte SHA-256. Chemins relatifs a KAMA_MODELS_DIR. Les enregistrements humains valides passent avant la synthese.",
   "languages": {
     "bbj": {
       "name": "Ghomálá'"
@@ -91,9 +91,9 @@
   },
   "tts": {
     "bbj": {
-      "enabled": false,
+      "enabled": true,
       "engine": "ghomala_vits",
-      "path": "poids/ghomala/tts-vits-v2",
+      "path": "poids/ghomala/tts-vits-v2-final-20261114",
       "options": {
         "threads": 2,
         "seed": 0

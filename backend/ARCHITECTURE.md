@@ -86,7 +86,7 @@ Les erreurs ont la forme `{"error": {"code": "...", "message": "..."}}`. L'exten
 
 - Les balises sont **numérotées** de gauche à droite : `{x1}`, `{x2}`. Le document de sécurité écrit `{x}`, mais une langue cible peut inverser l'ordre des mots, et un `{x}` unique pourrait intervertir un montant et un nom.
 - L'extension garde la correspondance `x1 → 25 500 FCFA` en mémoire et remplace les balises à la réception, sans reformater la valeur.
-- Les gabarits `{montant}`, `{frais}`, `{total}` de `CLARIFICATIONS.md` restent locaux à l'extension. Les balises `{xN}` ne servent qu'aux textes envoyés au réseau.
+- Les gabarits `{montant}`, `{frais}`, `{total}` du cahier des charges UX restent locaux à l'extension. Les balises `{xN}` ne servent qu'aux textes envoyés au réseau.
 
 ### Synthèse vocale et montants
 
@@ -119,7 +119,7 @@ Le serveur ne dépend d'aucun modèle précis. Chaque route est décrite dans `c
 
 | Volet | État | Suite |
 |---|---|---|
-| Texte → texte Ghomala | Marian int8 de Flagship configuré, mais **désactivé** (`"enabled": false`) | Règle d'or n° 4 de `CLARIFICATIONS.md` : aucun texte en langue nationale inventé. À activer seulement pour le P2, avec le modèle retenu dans `evaluation/` |
+| Texte → texte Ghomala | Marian int8 de Flagship configuré, mais **désactivé** (`"enabled": false`) | Règle d'or n° 4 (README) : aucun texte en langue nationale inventé. À activer seulement pour le P2, avec le modèle retenu dans `evaluation/` |
 | Texte → texte Pidgin | Routes `en>wes` et `fr>wes` **activées**. Ordre : dictionnaire du catalogue validé, puis phrase proche, puis modèle ajusté v2 (`poids/ct2/pidgin_en_wes_ajuste_v2`) sous contrôle. Un texte critique ne passe jamais par le modèle | Étendre le dictionnaire avec les messages critiques validés par des locuteurs (voir ci-dessous) |
 | Voix → texte (`/v1/voice/intent`) | Moteur `omnilingual_ctc` (ONNX) prêt, **désactivé** ; grammaire `wes` en brouillon, `bbj` vide | Tester le modèle (`evaluation/stt_eval.py`), puis activer ; faire valider les phrases `wes` |
 | Texte → voix (`/v1/tts`) | Enregistrements humains validés (prioritaires) et moteur `mms_vits`, **désactivé** | Importer les enregistrements ; activer le moteur pour l'inédit (voir « La voix ») |

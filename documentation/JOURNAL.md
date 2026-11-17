@@ -31,6 +31,85 @@ La section « Composants tiers utilisés » est obligatoire : le règlement du S
 
 ## Entrées
 
+## 2026-11-14 — LFM3 en lecture seule pour la démo
+
+**Auteur :** Assistant IA (Copilot SDK dans VS Code)
+
+### En bref
+
+LFM3 est maintenant activé uniquement dans la configuration de démonstration isolée. La configuration par défaut garde le LLM désactivé. Le prompt demande au modèle de décrire la page sans effectuer d'action; ce n'est pas une garantie contre les erreurs factuelles.
+
+### Ce qui a été implémenté, expliqué simplement
+
+- Le message système dit au modèle qu'il n'a aucun outil et ne peut pas modifier un compte, envoyer un formulaire ou prétendre avoir terminé une action.
+- Le texte de la page est présenté comme une donnée non fiable, pas comme une consigne. Les balises `{xN}` sont déclarées opaques et le modèle doit s'en tenir aux faits présents sur la page.
+- `routes.demo.json` active LFM3 et le TTS Ghomala final. `docker-compose.assistant.yml` sélectionne ce profil; `routes.json` de production conserve LLM désactivé.
+- Les contrôles existants restent en place avant l'affichage et avant la traduction vers le pidgin.
+
+### Démarche utilisée
+
+Le code du moteur et le flux `voice_ask` ont été relus avant modification. Les tests vérifient que le prompt est réellement envoyé comme message système et que seul le profil de démonstration active LFM3.
+
+### Résultats et limites connues
+
+- Les tests ciblés passent : 49 réussis, 1 ignoré.
+- LFM3 n'a pas été exécuté dans cette session : son fichier n'est pas présent dans le dossier local et l'accès SSH au VPS demande une authentification interactive. L'équipe a depuis vérifié sur le VPS que son empreinte correspond à la valeur attendue.
+- Un essai connu de LFM3 a calculé à partir de balises et inventé un élément de page. Le prompt réduit le risque, mais ne garantit pas l'absence d'hallucinations; la démo ne doit pas déclencher ni conseiller une transaction.
+- La première commande Compose sur le VPS a échoué avant le redémarrage : la surcouche mentionnait un service `caddy` absent du Compose de base. La surcouche locale a été corrigée pour ne configurer que le backend isolé; le proxy hôte continue d'utiliser le port local 8124.
+
+### Ce que l'équipe doit faire ensuite
+
+1. Copier `llm_engines.py`, `routes.demo.json` et la surcouche Compose corrigée sur le VPS; valider avec `docker compose ... config -q`, puis lancer le service avec cette surcouche.
+2. Vérifier la somme SHA-256 du GGUF et tester les cas d'injection, de balises, d'action financière, de PIN et d'élément de page inventé.
+3. Garder `routes.json` de production désactivé et arrêter le profil démo si un cas de sécurité ou d'invention passe les filtres.
+
+### Composants tiers utilisés
+
+- `LiquidAI/LFM3-1.7B-GGUF`, licence LFM Open License v1.0.
+- llama.cpp via `llama-cpp-python`, exécuté localement sur le VPS sans service distant.
+
+
+## 2026-11-14 — TTS Ghomala final et état du VPS
+
+**Auteur :** Assistant IA (Copilot SDK dans VS Code)
+
+### En bref
+
+Le nouveau modèle de voix Ghomala a été comparé au modèle déjà présent, installé localement sans remplacer l'ancien et relié à la route TTS. Le modèle produit bien un fichier audio lisible, mais il n'a été testé que sur une phrase. Le VPS n'a pas encore été modifié.
+
+### Ce qui a été implémenté, expliqué simplement
+
+- Le nouveau checkpoint est rangé dans `models/poids/ghomala/tts-vits-v2-final-20261114`. L'ancien dossier reste disponible pour revenir en arrière.
+- La configuration permet maintenant à Kama d'utiliser cette voix lorsque le service est relancé.
+- La documentation précise les mesures du test et la limite de licence.
+- Le pipeline « Parler à Kama » a aussi été vérifié : les traductions intermédiaires Pidgin↔anglais sont présentes sur le VPS. Son dernier état live avait le LLM désactivé; le profil démo LFM3 décrit dans l'entrée suivante n'est pas encore déployé.
+
+### Démarche utilisée
+
+L'archive a été vérifiée avant extraction, puis comparée aux fichiers locaux. Les poids sont différents, même si les fichiers de configuration et le vocabulaire correspondent. Un test local a chargé le modèle, synthétisé « Pú cyanyə́ ŋkâp » et vérifié le format WAV. Les tests backend ciblés sur Ghomala, le LLM et la traduction ont ensuite été exécutés.
+
+### Résultats et limites connues
+
+- Empreinte SHA-256 du nouveau `model.safetensors` : `50fb9ad152add98a4ed8489e6aa281016cd34132b89c6ee8fee6dcb4009c223d`.
+- Le test a produit 1,17 seconde d'audio mono 16 kHz en 4,28 secondes, après 37,44 secondes de chargement dans le processus. Cela confirme le fonctionnement, pas encore la qualité générale de la voix.
+- La configuration du modèle rapporte un CER texte de 48,78 % sur son jeu de test : une évaluation humaine plus large reste nécessaire.
+- Le modèle est sous licence CC BY-NC 4.0. L'équipe confirme qu'il est destiné à la démonstration non commerciale du challenge, pas à un pilote commercial.
+- Le VPS répond bien. Son dernier état vérifié est : TTS Pidgin actif, ASR Pidgin inactif, TTS et ASR Ghomala inactifs. Le fichier LFM3 est présent, mais la route LLM est désactivée; son empreinte sur le VPS reste à vérifier. Les changements locaux ne sont pas encore déployés : la connexion SSH sans clé a été refusée.
+- Les trois candidats LFM2 ont déjà échoué aux critères de contrat : 61 erreurs sur 62 pour les 350M et 700M, 62 sur 62 pour le 1,2B (`documentation/SECURITE.md`). LFM3-1.7B a déjà montré un calcul à partir des balises et une invention de fait; aucun LLM n'est retenu. La route pointe vers LFM3-1.7B, présent sur le VPS mais absent du dossier local qui contient les LFM2. Le LLM reste donc désactivé. Le dossier local STT Pidgin complet fait 2,42 Go; le transfert VPS précédemment observé était incomplet.
+- Les tests ciblés passent : 5 tests Ghomala et 46 tests LLM/traduction. Un avertissement de dépréciation Starlette demeure sans rapport avec ce changement.
+
+### Ce que l'équipe doit faire ensuite
+
+1. Transférer le nouveau dossier TTS Ghomala et le dossier STT Pidgin complet vers les chemins correspondants sur le VPS; y copier `backend/config/routes.json`.
+2. Vérifier l'empreinte du poids Ghomala sur le VPS, reconstruire le conteneur backend, puis confirmer `bbj.tts=true` et tester les capacités STT.
+3. Garder le LLM désactivé dans `routes.json` de production. Le profil de démonstration utilise désormais LFM3 en mode expérimental; ne l'exposer qu'après vérification de l'empreinte et des tests de sécurité sur le VPS.
+
+### Composants tiers utilisés
+
+- Modèle `facebook/mms-tts-ybb`, ajusté sur les données `flagship-ai/ghomala-spoken-bible`.
+- PyTorch et Transformers pour charger et exécuter le modèle VITS.
+- Licence du modèle : CC BY-NC 4.0 (attribution requise, utilisation commerciale interdite).
+
 
 ## 2026-11-09 — Cadrage du projet et méthode de travail
 
