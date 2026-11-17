@@ -1,0 +1,7460 @@
+{
+ "fr_1_tableau_de_bord": {
+  "texts": [
+   {
+    "text": "Environnement de test — données fictives, aucune transaction réelle.",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Environnement de test — données fictives, aucune transaction réelle.Protocole de test Retour au hackathon",
+    "mono": false
+   },
+   {
+    "text": "Protocole de test",
+    "tag": "a",
+    "path": "div>div>div>a",
+    "parent": "Environnement de test — données fictives, aucune transaction réelle.Protocole de test Retour au hackathon",
+    "mono": false
+   },
+   {
+    "text": "Retour au hackathon",
+    "tag": "a",
+    "path": "div>div>div>a",
+    "parent": "Environnement de test — données fictives, aucune transaction réelle.Protocole de test Retour au hackathon",
+    "mono": false
+   },
+   {
+    "text": "Safinum Pay",
+    "tag": "p",
+    "path": "header>div>div>p",
+    "parent": "Safinum PayBanque en ligne",
+    "mono": false
+   },
+   {
+    "text": "Banque en ligne",
+    "tag": "p",
+    "path": "header>div>div>p",
+    "parent": "Safinum PayBanque en ligne",
+    "mono": false
+   },
+   {
+    "text": "EN",
+    "tag": "button",
+    "path": "div>header>div>button",
+    "parent": "ENANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "AN",
+    "tag": "div",
+    "path": "header>div>div>div",
+    "parent": "ANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "Amina Ngo Bell",
+    "tag": "span",
+    "path": "header>div>div>span",
+    "parent": "ANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "1",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "1Solde",
+    "mono": false
+   },
+   {
+    "text": "Solde",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "1Solde",
+    "mono": false
+   },
+   {
+    "text": "2",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "2Frais",
+    "mono": false
+   },
+   {
+    "text": "Frais",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "2Frais",
+    "mono": false
+   },
+   {
+    "text": "3",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "3Bénéficiaire",
+    "mono": false
+   },
+   {
+    "text": "Bénéficiaire",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "3Bénéficiaire",
+    "mono": false
+   },
+   {
+    "text": "4",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "4Récapitulatif",
+    "mono": false
+   },
+   {
+    "text": "Récapitulatif",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "4Récapitulatif",
+    "mono": false
+   },
+   {
+    "text": "5",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "5Confirmation",
+    "mono": false
+   },
+   {
+    "text": "Confirmation",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "5Confirmation",
+    "mono": false
+   },
+   {
+    "text": "Votre compte",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Votre compteBonjour, AminaConsultez votre solde et lancez un transfert en toute sécurité.",
+    "mono": false
+   },
+   {
+    "text": "Bonjour, Amina",
+    "tag": "h1",
+    "path": "div>div>div>h1",
+    "parent": "Votre compteBonjour, AminaConsultez votre solde et lancez un transfert en toute sécurité.",
+    "mono": false
+   },
+   {
+    "text": "Consultez votre solde et lancez un transfert en toute sécurité.",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Votre compteBonjour, AminaConsultez votre solde et lancez un transfert en toute sécurité.",
+    "mono": false
+   },
+   {
+    "text": "Solde disponible",
+    "tag": "p",
+    "path": "section>div>div>p",
+    "parent": "Solde disponible250 000 FCFANuméro de compte : CM 001 2345 6789 01Compte courant",
+    "mono": false
+   },
+   {
+    "text": "250 000 FCFA",
+    "tag": "p",
+    "path": "section>div>div>p",
+    "parent": "Solde disponible250 000 FCFANuméro de compte : CM 001 2345 6789 01Compte courant",
+    "mono": false
+   },
+   {
+    "text": "Numéro de compte : CM 001 2345 6789 01",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Numéro de compte : CM 001 2345 6789 01Compte courant",
+    "mono": false
+   },
+   {
+    "text": "Compte courant",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Numéro de compte : CM 001 2345 6789 01Compte courant",
+    "mono": false
+   },
+   {
+    "text": "Effectuer un transfert",
+    "tag": "button",
+    "path": "section>div>div>button",
+    "parent": "Effectuer un transfert Consulter les frais",
+    "mono": false
+   },
+   {
+    "text": "Consulter les frais",
+    "tag": "button",
+    "path": "section>div>div>button",
+    "parent": "Effectuer un transfert Consulter les frais",
+    "mono": false
+   },
+   {
+    "text": "Transactions récentes",
+    "tag": "h2",
+    "path": "section>div>div>h2",
+    "parent": "Transactions récentesPaiement marchand05 nov. 2026-12 500 FCFASalaire reçu04 nov. 2026+180 000 FCFATransfert reçu02 nov. 2026+50 000 FCFAFac",
+    "mono": false
+   },
+   {
+    "text": "Paiement marchand",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Paiement marchand05 nov. 2026",
+    "mono": false
+   },
+   {
+    "text": "05 nov. 2026",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Paiement marchand05 nov. 2026",
+    "mono": false
+   },
+   {
+    "text": "-12 500 FCFA",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Paiement marchand05 nov. 2026-12 500 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Salaire reçu",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Salaire reçu04 nov. 2026",
+    "mono": false
+   },
+   {
+    "text": "04 nov. 2026",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Salaire reçu04 nov. 2026",
+    "mono": false
+   },
+   {
+    "text": "+180 000 FCFA",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Salaire reçu04 nov. 2026+180 000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Transfert reçu",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Transfert reçu02 nov. 2026",
+    "mono": false
+   },
+   {
+    "text": "02 nov. 2026",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Transfert reçu02 nov. 2026",
+    "mono": false
+   },
+   {
+    "text": "+50 000 FCFA",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Transfert reçu02 nov. 2026+50 000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Facture électricité",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Facture électricité31 oct. 2026",
+    "mono": false
+   },
+   {
+    "text": "31 oct. 2026",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Facture électricité31 oct. 2026",
+    "mono": false
+   },
+   {
+    "text": "-7 500 FCFA",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Facture électricité31 oct. 2026-7 500 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Votre compte",
+    "tag": "h2",
+    "path": "div>aside>div>h2",
+    "parent": "Votre compteANAmina Ngo BellCompte courantSolde disponible250 000 FCFACM 001 2345 6789 01",
+    "mono": false
+   },
+   {
+    "text": "AN",
+    "tag": "div",
+    "path": "aside>div>div>div",
+    "parent": "ANAmina Ngo BellCompte courant",
+    "mono": false
+   },
+   {
+    "text": "Amina Ngo Bell",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Amina Ngo BellCompte courant",
+    "mono": false
+   },
+   {
+    "text": "Compte courant",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Amina Ngo BellCompte courant",
+    "mono": false
+   },
+   {
+    "text": "Solde disponible",
+    "tag": "p",
+    "path": "aside>div>div>p",
+    "parent": "Solde disponible250 000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "250 000 FCFA",
+    "tag": "p",
+    "path": "aside>div>div>p",
+    "parent": "Solde disponible250 000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "CM 001 2345 6789 01",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "Votre compteANAmina Ngo BellCompte courantSolde disponible250 000 FCFACM 001 2345 6789 01",
+    "mono": true
+   },
+   {
+    "text": "Sécurité",
+    "tag": "h2",
+    "path": "aside>div>div>h2",
+    "parent": "Sécurité",
+    "mono": false
+   },
+   {
+    "text": "Vérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert.",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "SécuritéVérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert. Connexion sécurisée",
+    "mono": false
+   },
+   {
+    "text": "Connexion sécurisée",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "SécuritéVérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert. Connexion sécurisée",
+    "mono": false
+   },
+   {
+    "text": "Safinum Pay — environnement de démonstration. Ne saisissez aucune donnée personnelle réelle.",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Safinum PayBanque en ligneENANAmina Ngo Bell1Solde2Frais3Bénéficiaire4Récapitulatif5ConfirmationVotre compteBonjour, AminaConsultez votre so",
+    "mono": false
+   }
+  ],
+  "fields": [
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "EN",
+    "value": ""
+   },
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "Effectuer un transfert",
+    "value": ""
+   },
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "Consulter les frais",
+    "value": ""
+   }
+  ]
+ },
+ "fr_2_frais": {
+  "texts": [
+   {
+    "text": "Environnement de test — données fictives, aucune transaction réelle.",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Environnement de test — données fictives, aucune transaction réelle.Protocole de test Retour au hackathon",
+    "mono": false
+   },
+   {
+    "text": "Protocole de test",
+    "tag": "a",
+    "path": "div>div>div>a",
+    "parent": "Environnement de test — données fictives, aucune transaction réelle.Protocole de test Retour au hackathon",
+    "mono": false
+   },
+   {
+    "text": "Retour au hackathon",
+    "tag": "a",
+    "path": "div>div>div>a",
+    "parent": "Environnement de test — données fictives, aucune transaction réelle.Protocole de test Retour au hackathon",
+    "mono": false
+   },
+   {
+    "text": "Safinum Pay",
+    "tag": "p",
+    "path": "header>div>div>p",
+    "parent": "Safinum PayBanque en ligne",
+    "mono": false
+   },
+   {
+    "text": "Banque en ligne",
+    "tag": "p",
+    "path": "header>div>div>p",
+    "parent": "Safinum PayBanque en ligne",
+    "mono": false
+   },
+   {
+    "text": "EN",
+    "tag": "button",
+    "path": "div>header>div>button",
+    "parent": "ENANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "AN",
+    "tag": "div",
+    "path": "header>div>div>div",
+    "parent": "ANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "Amina Ngo Bell",
+    "tag": "span",
+    "path": "header>div>div>span",
+    "parent": "ANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "1",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "1Solde",
+    "mono": false
+   },
+   {
+    "text": "Solde",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "1Solde",
+    "mono": false
+   },
+   {
+    "text": "2",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "2Frais",
+    "mono": false
+   },
+   {
+    "text": "Frais",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "2Frais",
+    "mono": false
+   },
+   {
+    "text": "3",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "3Bénéficiaire",
+    "mono": false
+   },
+   {
+    "text": "Bénéficiaire",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "3Bénéficiaire",
+    "mono": false
+   },
+   {
+    "text": "4",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "4Récapitulatif",
+    "mono": false
+   },
+   {
+    "text": "Récapitulatif",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "4Récapitulatif",
+    "mono": false
+   },
+   {
+    "text": "5",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "5Confirmation",
+    "mono": false
+   },
+   {
+    "text": "Confirmation",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "5Confirmation",
+    "mono": false
+   },
+   {
+    "text": "Frais de transfert",
+    "tag": "p",
+    "path": "div>section>div>p",
+    "parent": "Frais de transfertChoisissez le type de transfert et le montant. Les frais sont calculés automatiquement.Type d'opérationCompte SafinumMobil",
+    "mono": false
+   },
+   {
+    "text": "Choisissez le type de transfert et le montant. Les frais sont calculés automatiquement.",
+    "tag": "h2",
+    "path": "div>section>div>h2",
+    "parent": "Frais de transfertChoisissez le type de transfert et le montant. Les frais sont calculés automatiquement.Type d'opérationCompte SafinumMobil",
+    "mono": false
+   },
+   {
+    "text": "Type d'opération",
+    "tag": "label",
+    "path": "div>div>div>label",
+    "parent": "Type d'opérationCompte SafinumMobile MoneyAutre banqueTransfert instantané et gratuit",
+    "mono": false
+   },
+   {
+    "text": "Transfert instantané et gratuit",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Type d'opérationCompte SafinumMobile MoneyAutre banqueTransfert instantané et gratuit",
+    "mono": false
+   },
+   {
+    "text": "Montant à envoyer",
+    "tag": "label",
+    "path": "div>div>div>label",
+    "parent": "Montant à envoyerFCFA",
+    "mono": false
+   },
+   {
+    "text": "FCFA",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "FCFA",
+    "mono": false
+   },
+   {
+    "text": "Frais",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Frais Gratuit0 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Gratuit",
+    "tag": "span",
+    "path": "div>div>span>span",
+    "parent": "Frais Gratuit",
+    "mono": false
+   },
+   {
+    "text": "0 FCFA",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Frais Gratuit0 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Total à débiter",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Total à débiter25 000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "25 000 FCFA",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Total à débiter25 000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Solde après opération",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Solde après opération225 000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "225 000 FCFA",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Solde après opération225 000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Retour",
+    "tag": "button",
+    "path": "section>div>div>button",
+    "parent": "RetourContinuer",
+    "mono": false
+   },
+   {
+    "text": "Continuer",
+    "tag": "button",
+    "path": "section>div>div>button",
+    "parent": "RetourContinuer",
+    "mono": false
+   },
+   {
+    "text": "Votre compte",
+    "tag": "h2",
+    "path": "div>aside>div>h2",
+    "parent": "Votre compteANAmina Ngo BellCompte courantSolde disponible250 000 FCFACM 001 2345 6789 01",
+    "mono": false
+   },
+   {
+    "text": "AN",
+    "tag": "div",
+    "path": "aside>div>div>div",
+    "parent": "ANAmina Ngo BellCompte courant",
+    "mono": false
+   },
+   {
+    "text": "Amina Ngo Bell",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Amina Ngo BellCompte courant",
+    "mono": false
+   },
+   {
+    "text": "Compte courant",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Amina Ngo BellCompte courant",
+    "mono": false
+   },
+   {
+    "text": "Solde disponible",
+    "tag": "p",
+    "path": "aside>div>div>p",
+    "parent": "Solde disponible250 000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "250 000 FCFA",
+    "tag": "p",
+    "path": "aside>div>div>p",
+    "parent": "Solde disponible250 000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "CM 001 2345 6789 01",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "Votre compteANAmina Ngo BellCompte courantSolde disponible250 000 FCFACM 001 2345 6789 01",
+    "mono": true
+   },
+   {
+    "text": "Sécurité",
+    "tag": "h2",
+    "path": "aside>div>div>h2",
+    "parent": "Sécurité",
+    "mono": false
+   },
+   {
+    "text": "Vérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert.",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "SécuritéVérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert. Connexion sécurisée",
+    "mono": false
+   },
+   {
+    "text": "Connexion sécurisée",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "SécuritéVérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert. Connexion sécurisée",
+    "mono": false
+   },
+   {
+    "text": "Safinum Pay — environnement de démonstration. Ne saisissez aucune donnée personnelle réelle.",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Safinum PayBanque en ligneENANAmina Ngo Bell1Solde2Frais3Bénéficiaire4Récapitulatif5ConfirmationFrais de transfertChoisissez le type de tran",
+    "mono": false
+   }
+  ],
+  "fields": [
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "EN",
+    "value": ""
+   },
+   {
+    "tag": "select",
+    "type": "select-one",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "Compte SafinumMobile MoneyAutre banque",
+    "value": [
+     "Compte Safinum",
+     "Mobile Money",
+     "Autre banque"
+    ]
+   },
+   {
+    "tag": "input",
+    "type": "number",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "",
+    "value": ""
+   },
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "Retour",
+    "value": ""
+   },
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "Continuer",
+    "value": ""
+   }
+  ]
+ },
+ "fr_2_frais_safinum": {
+  "texts": [
+   {
+    "text": "Environnement de test — données fictives, aucune transaction réelle.",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Environnement de test — données fictives, aucune transaction réelle.Protocole de test Retour au hackathon",
+    "mono": false
+   },
+   {
+    "text": "Protocole de test",
+    "tag": "a",
+    "path": "div>div>div>a",
+    "parent": "Environnement de test — données fictives, aucune transaction réelle.Protocole de test Retour au hackathon",
+    "mono": false
+   },
+   {
+    "text": "Retour au hackathon",
+    "tag": "a",
+    "path": "div>div>div>a",
+    "parent": "Environnement de test — données fictives, aucune transaction réelle.Protocole de test Retour au hackathon",
+    "mono": false
+   },
+   {
+    "text": "Safinum Pay",
+    "tag": "p",
+    "path": "header>div>div>p",
+    "parent": "Safinum PayBanque en ligne",
+    "mono": false
+   },
+   {
+    "text": "Banque en ligne",
+    "tag": "p",
+    "path": "header>div>div>p",
+    "parent": "Safinum PayBanque en ligne",
+    "mono": false
+   },
+   {
+    "text": "EN",
+    "tag": "button",
+    "path": "div>header>div>button",
+    "parent": "ENANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "AN",
+    "tag": "div",
+    "path": "header>div>div>div",
+    "parent": "ANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "Amina Ngo Bell",
+    "tag": "span",
+    "path": "header>div>div>span",
+    "parent": "ANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "1",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "1Solde",
+    "mono": false
+   },
+   {
+    "text": "Solde",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "1Solde",
+    "mono": false
+   },
+   {
+    "text": "2",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "2Frais",
+    "mono": false
+   },
+   {
+    "text": "Frais",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "2Frais",
+    "mono": false
+   },
+   {
+    "text": "3",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "3Bénéficiaire",
+    "mono": false
+   },
+   {
+    "text": "Bénéficiaire",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "3Bénéficiaire",
+    "mono": false
+   },
+   {
+    "text": "4",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "4Récapitulatif",
+    "mono": false
+   },
+   {
+    "text": "Récapitulatif",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "4Récapitulatif",
+    "mono": false
+   },
+   {
+    "text": "5",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "5Confirmation",
+    "mono": false
+   },
+   {
+    "text": "Confirmation",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "5Confirmation",
+    "mono": false
+   },
+   {
+    "text": "Frais de transfert",
+    "tag": "p",
+    "path": "div>section>div>p",
+    "parent": "Frais de transfertChoisissez le type de transfert et le montant. Les frais sont calculés automatiquement.Type d'opérationCompte SafinumMobil",
+    "mono": false
+   },
+   {
+    "text": "Choisissez le type de transfert et le montant. Les frais sont calculés automatiquement.",
+    "tag": "h2",
+    "path": "div>section>div>h2",
+    "parent": "Frais de transfertChoisissez le type de transfert et le montant. Les frais sont calculés automatiquement.Type d'opérationCompte SafinumMobil",
+    "mono": false
+   },
+   {
+    "text": "Type d'opération",
+    "tag": "label",
+    "path": "div>div>div>label",
+    "parent": "Type d'opérationCompte SafinumMobile MoneyAutre banqueTransfert instantané et gratuit",
+    "mono": false
+   },
+   {
+    "text": "Transfert instantané et gratuit",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Type d'opérationCompte SafinumMobile MoneyAutre banqueTransfert instantané et gratuit",
+    "mono": false
+   },
+   {
+    "text": "Montant à envoyer",
+    "tag": "label",
+    "path": "div>div>div>label",
+    "parent": "Montant à envoyerFCFA",
+    "mono": false
+   },
+   {
+    "text": "FCFA",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "FCFA",
+    "mono": false
+   },
+   {
+    "text": "Frais",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Frais Gratuit0 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Gratuit",
+    "tag": "span",
+    "path": "div>div>span>span",
+    "parent": "Frais Gratuit",
+    "mono": false
+   },
+   {
+    "text": "0 FCFA",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Frais Gratuit0 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Total à débiter",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Total à débiter25 000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "25 000 FCFA",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Total à débiter25 000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Solde après opération",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Solde après opération225 000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "225 000 FCFA",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Solde après opération225 000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Retour",
+    "tag": "button",
+    "path": "section>div>div>button",
+    "parent": "RetourContinuer",
+    "mono": false
+   },
+   {
+    "text": "Continuer",
+    "tag": "button",
+    "path": "section>div>div>button",
+    "parent": "RetourContinuer",
+    "mono": false
+   },
+   {
+    "text": "Votre compte",
+    "tag": "h2",
+    "path": "div>aside>div>h2",
+    "parent": "Votre compteANAmina Ngo BellCompte courantSolde disponible250 000 FCFACM 001 2345 6789 01",
+    "mono": false
+   },
+   {
+    "text": "AN",
+    "tag": "div",
+    "path": "aside>div>div>div",
+    "parent": "ANAmina Ngo BellCompte courant",
+    "mono": false
+   },
+   {
+    "text": "Amina Ngo Bell",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Amina Ngo BellCompte courant",
+    "mono": false
+   },
+   {
+    "text": "Compte courant",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Amina Ngo BellCompte courant",
+    "mono": false
+   },
+   {
+    "text": "Solde disponible",
+    "tag": "p",
+    "path": "aside>div>div>p",
+    "parent": "Solde disponible250 000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "250 000 FCFA",
+    "tag": "p",
+    "path": "aside>div>div>p",
+    "parent": "Solde disponible250 000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "CM 001 2345 6789 01",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "Votre compteANAmina Ngo BellCompte courantSolde disponible250 000 FCFACM 001 2345 6789 01",
+    "mono": true
+   },
+   {
+    "text": "Sécurité",
+    "tag": "h2",
+    "path": "aside>div>div>h2",
+    "parent": "Sécurité",
+    "mono": false
+   },
+   {
+    "text": "Vérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert.",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "SécuritéVérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert. Connexion sécurisée",
+    "mono": false
+   },
+   {
+    "text": "Connexion sécurisée",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "SécuritéVérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert. Connexion sécurisée",
+    "mono": false
+   },
+   {
+    "text": "Safinum Pay — environnement de démonstration. Ne saisissez aucune donnée personnelle réelle.",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Safinum PayBanque en ligneENANAmina Ngo Bell1Solde2Frais3Bénéficiaire4Récapitulatif5ConfirmationFrais de transfertChoisissez le type de tran",
+    "mono": false
+   }
+  ],
+  "fields": [
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "EN",
+    "value": ""
+   },
+   {
+    "tag": "select",
+    "type": "select-one",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "Compte SafinumMobile MoneyAutre banque",
+    "value": [
+     "Compte Safinum",
+     "Mobile Money",
+     "Autre banque"
+    ]
+   },
+   {
+    "tag": "input",
+    "type": "number",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "",
+    "value": ""
+   },
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "Retour",
+    "value": ""
+   },
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "Continuer",
+    "value": ""
+   }
+  ]
+ },
+ "fr_2_frais_mobile_money": {
+  "texts": [
+   {
+    "text": "Environnement de test — données fictives, aucune transaction réelle.",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Environnement de test — données fictives, aucune transaction réelle.Protocole de test Retour au hackathon",
+    "mono": false
+   },
+   {
+    "text": "Protocole de test",
+    "tag": "a",
+    "path": "div>div>div>a",
+    "parent": "Environnement de test — données fictives, aucune transaction réelle.Protocole de test Retour au hackathon",
+    "mono": false
+   },
+   {
+    "text": "Retour au hackathon",
+    "tag": "a",
+    "path": "div>div>div>a",
+    "parent": "Environnement de test — données fictives, aucune transaction réelle.Protocole de test Retour au hackathon",
+    "mono": false
+   },
+   {
+    "text": "Safinum Pay",
+    "tag": "p",
+    "path": "header>div>div>p",
+    "parent": "Safinum PayBanque en ligne",
+    "mono": false
+   },
+   {
+    "text": "Banque en ligne",
+    "tag": "p",
+    "path": "header>div>div>p",
+    "parent": "Safinum PayBanque en ligne",
+    "mono": false
+   },
+   {
+    "text": "EN",
+    "tag": "button",
+    "path": "div>header>div>button",
+    "parent": "ENANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "AN",
+    "tag": "div",
+    "path": "header>div>div>div",
+    "parent": "ANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "Amina Ngo Bell",
+    "tag": "span",
+    "path": "header>div>div>span",
+    "parent": "ANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "1",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "1Solde",
+    "mono": false
+   },
+   {
+    "text": "Solde",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "1Solde",
+    "mono": false
+   },
+   {
+    "text": "2",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "2Frais",
+    "mono": false
+   },
+   {
+    "text": "Frais",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "2Frais",
+    "mono": false
+   },
+   {
+    "text": "3",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "3Bénéficiaire",
+    "mono": false
+   },
+   {
+    "text": "Bénéficiaire",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "3Bénéficiaire",
+    "mono": false
+   },
+   {
+    "text": "4",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "4Récapitulatif",
+    "mono": false
+   },
+   {
+    "text": "Récapitulatif",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "4Récapitulatif",
+    "mono": false
+   },
+   {
+    "text": "5",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "5Confirmation",
+    "mono": false
+   },
+   {
+    "text": "Confirmation",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "5Confirmation",
+    "mono": false
+   },
+   {
+    "text": "Frais de transfert",
+    "tag": "p",
+    "path": "div>section>div>p",
+    "parent": "Frais de transfertChoisissez le type de transfert et le montant. Les frais sont calculés automatiquement.Type d'opérationCompte SafinumMobil",
+    "mono": false
+   },
+   {
+    "text": "Choisissez le type de transfert et le montant. Les frais sont calculés automatiquement.",
+    "tag": "h2",
+    "path": "div>section>div>h2",
+    "parent": "Frais de transfertChoisissez le type de transfert et le montant. Les frais sont calculés automatiquement.Type d'opérationCompte SafinumMobil",
+    "mono": false
+   },
+   {
+    "text": "Type d'opération",
+    "tag": "label",
+    "path": "div>div>div>label",
+    "parent": "Type d'opérationCompte SafinumMobile MoneyAutre banqueFrais de 1,5 % (min. 100 FCFA, max. 2 500 FCFA)",
+    "mono": false
+   },
+   {
+    "text": "Frais de 1,5 % (min. 100 FCFA, max. 2 500 FCFA)",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Type d'opérationCompte SafinumMobile MoneyAutre banqueFrais de 1,5 % (min. 100 FCFA, max. 2 500 FCFA)",
+    "mono": false
+   },
+   {
+    "text": "Montant à envoyer",
+    "tag": "label",
+    "path": "div>div>div>label",
+    "parent": "Montant à envoyerFCFA",
+    "mono": false
+   },
+   {
+    "text": "FCFA",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "FCFA",
+    "mono": false
+   },
+   {
+    "text": "Frais",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Frais 375 FCFA",
+    "mono": false
+   },
+   {
+    "text": "375 FCFA",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Frais 375 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Total à débiter",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Total à débiter25 375 FCFA",
+    "mono": false
+   },
+   {
+    "text": "25 375 FCFA",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Total à débiter25 375 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Solde après opération",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Solde après opération224 625 FCFA",
+    "mono": false
+   },
+   {
+    "text": "224 625 FCFA",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Solde après opération224 625 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Retour",
+    "tag": "button",
+    "path": "section>div>div>button",
+    "parent": "RetourContinuer",
+    "mono": false
+   },
+   {
+    "text": "Continuer",
+    "tag": "button",
+    "path": "section>div>div>button",
+    "parent": "RetourContinuer",
+    "mono": false
+   },
+   {
+    "text": "Votre compte",
+    "tag": "h2",
+    "path": "div>aside>div>h2",
+    "parent": "Votre compteANAmina Ngo BellCompte courantSolde disponible250 000 FCFACM 001 2345 6789 01",
+    "mono": false
+   },
+   {
+    "text": "AN",
+    "tag": "div",
+    "path": "aside>div>div>div",
+    "parent": "ANAmina Ngo BellCompte courant",
+    "mono": false
+   },
+   {
+    "text": "Amina Ngo Bell",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Amina Ngo BellCompte courant",
+    "mono": false
+   },
+   {
+    "text": "Compte courant",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Amina Ngo BellCompte courant",
+    "mono": false
+   },
+   {
+    "text": "Solde disponible",
+    "tag": "p",
+    "path": "aside>div>div>p",
+    "parent": "Solde disponible250 000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "250 000 FCFA",
+    "tag": "p",
+    "path": "aside>div>div>p",
+    "parent": "Solde disponible250 000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "CM 001 2345 6789 01",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "Votre compteANAmina Ngo BellCompte courantSolde disponible250 000 FCFACM 001 2345 6789 01",
+    "mono": true
+   },
+   {
+    "text": "Sécurité",
+    "tag": "h2",
+    "path": "aside>div>div>h2",
+    "parent": "Sécurité",
+    "mono": false
+   },
+   {
+    "text": "Vérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert.",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "SécuritéVérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert. Connexion sécurisée",
+    "mono": false
+   },
+   {
+    "text": "Connexion sécurisée",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "SécuritéVérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert. Connexion sécurisée",
+    "mono": false
+   },
+   {
+    "text": "Safinum Pay — environnement de démonstration. Ne saisissez aucune donnée personnelle réelle.",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Safinum PayBanque en ligneENANAmina Ngo Bell1Solde2Frais3Bénéficiaire4Récapitulatif5ConfirmationFrais de transfertChoisissez le type de tran",
+    "mono": false
+   }
+  ],
+  "fields": [
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "EN",
+    "value": ""
+   },
+   {
+    "tag": "select",
+    "type": "select-one",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "Compte SafinumMobile MoneyAutre banque",
+    "value": [
+     "Compte Safinum",
+     "Mobile Money",
+     "Autre banque"
+    ]
+   },
+   {
+    "tag": "input",
+    "type": "number",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "",
+    "value": ""
+   },
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "Retour",
+    "value": ""
+   },
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "Continuer",
+    "value": ""
+   }
+  ]
+ },
+ "fr_2_frais_other_bank": {
+  "texts": [
+   {
+    "text": "Environnement de test — données fictives, aucune transaction réelle.",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Environnement de test — données fictives, aucune transaction réelle.Protocole de test Retour au hackathon",
+    "mono": false
+   },
+   {
+    "text": "Protocole de test",
+    "tag": "a",
+    "path": "div>div>div>a",
+    "parent": "Environnement de test — données fictives, aucune transaction réelle.Protocole de test Retour au hackathon",
+    "mono": false
+   },
+   {
+    "text": "Retour au hackathon",
+    "tag": "a",
+    "path": "div>div>div>a",
+    "parent": "Environnement de test — données fictives, aucune transaction réelle.Protocole de test Retour au hackathon",
+    "mono": false
+   },
+   {
+    "text": "Safinum Pay",
+    "tag": "p",
+    "path": "header>div>div>p",
+    "parent": "Safinum PayBanque en ligne",
+    "mono": false
+   },
+   {
+    "text": "Banque en ligne",
+    "tag": "p",
+    "path": "header>div>div>p",
+    "parent": "Safinum PayBanque en ligne",
+    "mono": false
+   },
+   {
+    "text": "EN",
+    "tag": "button",
+    "path": "div>header>div>button",
+    "parent": "ENANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "AN",
+    "tag": "div",
+    "path": "header>div>div>div",
+    "parent": "ANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "Amina Ngo Bell",
+    "tag": "span",
+    "path": "header>div>div>span",
+    "parent": "ANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "1",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "1Solde",
+    "mono": false
+   },
+   {
+    "text": "Solde",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "1Solde",
+    "mono": false
+   },
+   {
+    "text": "2",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "2Frais",
+    "mono": false
+   },
+   {
+    "text": "Frais",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "2Frais",
+    "mono": false
+   },
+   {
+    "text": "3",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "3Bénéficiaire",
+    "mono": false
+   },
+   {
+    "text": "Bénéficiaire",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "3Bénéficiaire",
+    "mono": false
+   },
+   {
+    "text": "4",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "4Récapitulatif",
+    "mono": false
+   },
+   {
+    "text": "Récapitulatif",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "4Récapitulatif",
+    "mono": false
+   },
+   {
+    "text": "5",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "5Confirmation",
+    "mono": false
+   },
+   {
+    "text": "Confirmation",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "5Confirmation",
+    "mono": false
+   },
+   {
+    "text": "Frais de transfert",
+    "tag": "p",
+    "path": "div>section>div>p",
+    "parent": "Frais de transfertChoisissez le type de transfert et le montant. Les frais sont calculés automatiquement.Type d'opérationCompte SafinumMobil",
+    "mono": false
+   },
+   {
+    "text": "Choisissez le type de transfert et le montant. Les frais sont calculés automatiquement.",
+    "tag": "h2",
+    "path": "div>section>div>h2",
+    "parent": "Frais de transfertChoisissez le type de transfert et le montant. Les frais sont calculés automatiquement.Type d'opérationCompte SafinumMobil",
+    "mono": false
+   },
+   {
+    "text": "Type d'opération",
+    "tag": "label",
+    "path": "div>div>div>label",
+    "parent": "Type d'opérationCompte SafinumMobile MoneyAutre banqueFrais de 2 % (min. 200 FCFA, max. 5 000 FCFA)",
+    "mono": false
+   },
+   {
+    "text": "Frais de 2 % (min. 200 FCFA, max. 5 000 FCFA)",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Type d'opérationCompte SafinumMobile MoneyAutre banqueFrais de 2 % (min. 200 FCFA, max. 5 000 FCFA)",
+    "mono": false
+   },
+   {
+    "text": "Montant à envoyer",
+    "tag": "label",
+    "path": "div>div>div>label",
+    "parent": "Montant à envoyerFCFA",
+    "mono": false
+   },
+   {
+    "text": "FCFA",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "FCFA",
+    "mono": false
+   },
+   {
+    "text": "Frais",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Frais 500 FCFA",
+    "mono": false
+   },
+   {
+    "text": "500 FCFA",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Frais 500 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Total à débiter",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Total à débiter25 500 FCFA",
+    "mono": false
+   },
+   {
+    "text": "25 500 FCFA",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Total à débiter25 500 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Solde après opération",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Solde après opération224 500 FCFA",
+    "mono": false
+   },
+   {
+    "text": "224 500 FCFA",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Solde après opération224 500 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Retour",
+    "tag": "button",
+    "path": "section>div>div>button",
+    "parent": "RetourContinuer",
+    "mono": false
+   },
+   {
+    "text": "Continuer",
+    "tag": "button",
+    "path": "section>div>div>button",
+    "parent": "RetourContinuer",
+    "mono": false
+   },
+   {
+    "text": "Votre compte",
+    "tag": "h2",
+    "path": "div>aside>div>h2",
+    "parent": "Votre compteANAmina Ngo BellCompte courantSolde disponible250 000 FCFACM 001 2345 6789 01",
+    "mono": false
+   },
+   {
+    "text": "AN",
+    "tag": "div",
+    "path": "aside>div>div>div",
+    "parent": "ANAmina Ngo BellCompte courant",
+    "mono": false
+   },
+   {
+    "text": "Amina Ngo Bell",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Amina Ngo BellCompte courant",
+    "mono": false
+   },
+   {
+    "text": "Compte courant",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Amina Ngo BellCompte courant",
+    "mono": false
+   },
+   {
+    "text": "Solde disponible",
+    "tag": "p",
+    "path": "aside>div>div>p",
+    "parent": "Solde disponible250 000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "250 000 FCFA",
+    "tag": "p",
+    "path": "aside>div>div>p",
+    "parent": "Solde disponible250 000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "CM 001 2345 6789 01",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "Votre compteANAmina Ngo BellCompte courantSolde disponible250 000 FCFACM 001 2345 6789 01",
+    "mono": true
+   },
+   {
+    "text": "Sécurité",
+    "tag": "h2",
+    "path": "aside>div>div>h2",
+    "parent": "Sécurité",
+    "mono": false
+   },
+   {
+    "text": "Vérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert.",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "SécuritéVérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert. Connexion sécurisée",
+    "mono": false
+   },
+   {
+    "text": "Connexion sécurisée",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "SécuritéVérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert. Connexion sécurisée",
+    "mono": false
+   },
+   {
+    "text": "Safinum Pay — environnement de démonstration. Ne saisissez aucune donnée personnelle réelle.",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Safinum PayBanque en ligneENANAmina Ngo Bell1Solde2Frais3Bénéficiaire4Récapitulatif5ConfirmationFrais de transfertChoisissez le type de tran",
+    "mono": false
+   }
+  ],
+  "fields": [
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "EN",
+    "value": ""
+   },
+   {
+    "tag": "select",
+    "type": "select-one",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "Compte SafinumMobile MoneyAutre banque",
+    "value": [
+     "Compte Safinum",
+     "Mobile Money",
+     "Autre banque"
+    ]
+   },
+   {
+    "tag": "input",
+    "type": "number",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "",
+    "value": ""
+   },
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "Retour",
+    "value": ""
+   },
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "Continuer",
+    "value": ""
+   }
+  ]
+ },
+ "fr_3_beneficiaire": {
+  "texts": [
+   {
+    "text": "Environnement de test — données fictives, aucune transaction réelle.",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Environnement de test — données fictives, aucune transaction réelle.Protocole de test Retour au hackathon",
+    "mono": false
+   },
+   {
+    "text": "Protocole de test",
+    "tag": "a",
+    "path": "div>div>div>a",
+    "parent": "Environnement de test — données fictives, aucune transaction réelle.Protocole de test Retour au hackathon",
+    "mono": false
+   },
+   {
+    "text": "Retour au hackathon",
+    "tag": "a",
+    "path": "div>div>div>a",
+    "parent": "Environnement de test — données fictives, aucune transaction réelle.Protocole de test Retour au hackathon",
+    "mono": false
+   },
+   {
+    "text": "Safinum Pay",
+    "tag": "p",
+    "path": "header>div>div>p",
+    "parent": "Safinum PayBanque en ligne",
+    "mono": false
+   },
+   {
+    "text": "Banque en ligne",
+    "tag": "p",
+    "path": "header>div>div>p",
+    "parent": "Safinum PayBanque en ligne",
+    "mono": false
+   },
+   {
+    "text": "EN",
+    "tag": "button",
+    "path": "div>header>div>button",
+    "parent": "ENANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "AN",
+    "tag": "div",
+    "path": "header>div>div>div",
+    "parent": "ANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "Amina Ngo Bell",
+    "tag": "span",
+    "path": "header>div>div>span",
+    "parent": "ANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "1",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "1Solde",
+    "mono": false
+   },
+   {
+    "text": "Solde",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "1Solde",
+    "mono": false
+   },
+   {
+    "text": "2",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "2Frais",
+    "mono": false
+   },
+   {
+    "text": "Frais",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "2Frais",
+    "mono": false
+   },
+   {
+    "text": "3",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "3Bénéficiaire",
+    "mono": false
+   },
+   {
+    "text": "Bénéficiaire",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "3Bénéficiaire",
+    "mono": false
+   },
+   {
+    "text": "4",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "4Récapitulatif",
+    "mono": false
+   },
+   {
+    "text": "Récapitulatif",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "4Récapitulatif",
+    "mono": false
+   },
+   {
+    "text": "5",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "5Confirmation",
+    "mono": false
+   },
+   {
+    "text": "Confirmation",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "5Confirmation",
+    "mono": false
+   },
+   {
+    "text": "Bénéficiaire",
+    "tag": "p",
+    "path": "div>section>div>p",
+    "parent": "BénéficiaireRenseignez les informations du destinataire. Vérifiez toujours le numéro avant de valider.Ce bénéficiaire n'a jamais été utilisé",
+    "mono": false
+   },
+   {
+    "text": "Renseignez les informations du destinataire. Vérifiez toujours le numéro avant de valider.",
+    "tag": "h2",
+    "path": "div>section>div>h2",
+    "parent": "BénéficiaireRenseignez les informations du destinataire. Vérifiez toujours le numéro avant de valider.Ce bénéficiaire n'a jamais été utilisé",
+    "mono": false
+   },
+   {
+    "text": "Ce bénéficiaire n'a jamais été utilisé sur ce compte. Vérifiez le numéro avant de continuer.",
+    "tag": "p",
+    "path": "section>div>div>p",
+    "parent": "Ce bénéficiaire n'a jamais été utilisé sur ce compte. Vérifiez le numéro avant de continuer.",
+    "mono": false
+   },
+   {
+    "text": "Nom du bénéficiaire",
+    "tag": "label",
+    "path": "div>div>div>label",
+    "parent": "Nom du bénéficiaire",
+    "mono": false
+   },
+   {
+    "text": "Numéro de téléphone",
+    "tag": "label",
+    "path": "div>div>div>label",
+    "parent": "Numéro de téléphone",
+    "mono": false
+   },
+   {
+    "text": "Motif du transfert",
+    "tag": "label",
+    "path": "div>div>div>label",
+    "parent": "Motif du transfert",
+    "mono": false
+   },
+   {
+    "text": "Note (optionnel)",
+    "tag": "label",
+    "path": "div>div>div>label",
+    "parent": "Note (optionnel)",
+    "mono": false
+   },
+   {
+    "text": "J'ai vérifié le nom et le numéro du bénéficiaire.",
+    "tag": "span",
+    "path": "div>div>label>span",
+    "parent": "J'ai vérifié le nom et le numéro du bénéficiaire.",
+    "mono": false
+   },
+   {
+    "text": "Retour",
+    "tag": "button",
+    "path": "section>div>div>button",
+    "parent": "RetourContinuer",
+    "mono": false
+   },
+   {
+    "text": "Continuer",
+    "tag": "button",
+    "path": "section>div>div>button",
+    "parent": "RetourContinuer",
+    "mono": false
+   },
+   {
+    "text": "Votre compte",
+    "tag": "h2",
+    "path": "div>aside>div>h2",
+    "parent": "Votre compteANAmina Ngo BellCompte courantSolde disponible250 000 FCFACM 001 2345 6789 01",
+    "mono": false
+   },
+   {
+    "text": "AN",
+    "tag": "div",
+    "path": "aside>div>div>div",
+    "parent": "ANAmina Ngo BellCompte courant",
+    "mono": false
+   },
+   {
+    "text": "Amina Ngo Bell",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Amina Ngo BellCompte courant",
+    "mono": false
+   },
+   {
+    "text": "Compte courant",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Amina Ngo BellCompte courant",
+    "mono": false
+   },
+   {
+    "text": "Solde disponible",
+    "tag": "p",
+    "path": "aside>div>div>p",
+    "parent": "Solde disponible250 000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "250 000 FCFA",
+    "tag": "p",
+    "path": "aside>div>div>p",
+    "parent": "Solde disponible250 000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "CM 001 2345 6789 01",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "Votre compteANAmina Ngo BellCompte courantSolde disponible250 000 FCFACM 001 2345 6789 01",
+    "mono": true
+   },
+   {
+    "text": "Sécurité",
+    "tag": "h2",
+    "path": "aside>div>div>h2",
+    "parent": "Sécurité",
+    "mono": false
+   },
+   {
+    "text": "Vérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert.",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "SécuritéVérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert. Connexion sécurisée",
+    "mono": false
+   },
+   {
+    "text": "Connexion sécurisée",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "SécuritéVérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert. Connexion sécurisée",
+    "mono": false
+   },
+   {
+    "text": "Safinum Pay — environnement de démonstration. Ne saisissez aucune donnée personnelle réelle.",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Safinum PayBanque en ligneENANAmina Ngo Bell1Solde2Frais3Bénéficiaire4Récapitulatif5ConfirmationBénéficiaireRenseignez les informations du d",
+    "mono": false
+   }
+  ],
+  "fields": [
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "EN",
+    "value": ""
+   },
+   {
+    "tag": "input",
+    "type": "text",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "",
+    "value": ""
+   },
+   {
+    "tag": "input",
+    "type": "tel",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "",
+    "value": ""
+   },
+   {
+    "tag": "input",
+    "type": "text",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "",
+    "value": ""
+   },
+   {
+    "tag": "textarea",
+    "type": "textarea",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "",
+    "value": ""
+   },
+   {
+    "tag": "input",
+    "type": "checkbox",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "",
+    "value": ""
+   },
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "Retour",
+    "value": ""
+   },
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "Continuer",
+    "value": ""
+   }
+  ]
+ },
+ "fr_3_erreur_champs_vides": {
+  "texts": [
+   {
+    "text": "Environnement de test — données fictives, aucune transaction réelle.",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Environnement de test — données fictives, aucune transaction réelle.Protocole de test Retour au hackathon",
+    "mono": false
+   },
+   {
+    "text": "Protocole de test",
+    "tag": "a",
+    "path": "div>div>div>a",
+    "parent": "Environnement de test — données fictives, aucune transaction réelle.Protocole de test Retour au hackathon",
+    "mono": false
+   },
+   {
+    "text": "Retour au hackathon",
+    "tag": "a",
+    "path": "div>div>div>a",
+    "parent": "Environnement de test — données fictives, aucune transaction réelle.Protocole de test Retour au hackathon",
+    "mono": false
+   },
+   {
+    "text": "Safinum Pay",
+    "tag": "p",
+    "path": "header>div>div>p",
+    "parent": "Safinum PayBanque en ligne",
+    "mono": false
+   },
+   {
+    "text": "Banque en ligne",
+    "tag": "p",
+    "path": "header>div>div>p",
+    "parent": "Safinum PayBanque en ligne",
+    "mono": false
+   },
+   {
+    "text": "EN",
+    "tag": "button",
+    "path": "div>header>div>button",
+    "parent": "ENANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "AN",
+    "tag": "div",
+    "path": "header>div>div>div",
+    "parent": "ANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "Amina Ngo Bell",
+    "tag": "span",
+    "path": "header>div>div>span",
+    "parent": "ANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "1",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "1Solde",
+    "mono": false
+   },
+   {
+    "text": "Solde",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "1Solde",
+    "mono": false
+   },
+   {
+    "text": "2",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "2Frais",
+    "mono": false
+   },
+   {
+    "text": "Frais",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "2Frais",
+    "mono": false
+   },
+   {
+    "text": "3",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "3Bénéficiaire",
+    "mono": false
+   },
+   {
+    "text": "Bénéficiaire",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "3Bénéficiaire",
+    "mono": false
+   },
+   {
+    "text": "4",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "4Récapitulatif",
+    "mono": false
+   },
+   {
+    "text": "Récapitulatif",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "4Récapitulatif",
+    "mono": false
+   },
+   {
+    "text": "5",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "5Confirmation",
+    "mono": false
+   },
+   {
+    "text": "Confirmation",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "5Confirmation",
+    "mono": false
+   },
+   {
+    "text": "Alerte de sécurité",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Alerte de sécuritéAlerte de sécurité : vérifiez le numéro du bénéficiaire avant de continuer.SECURITY_001",
+    "mono": false
+   },
+   {
+    "text": "Alerte de sécurité : vérifiez le numéro du bénéficiaire avant de continuer.",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Alerte de sécuritéAlerte de sécurité : vérifiez le numéro du bénéficiaire avant de continuer.SECURITY_001",
+    "mono": false
+   },
+   {
+    "text": "SECURITY_001",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Alerte de sécuritéAlerte de sécurité : vérifiez le numéro du bénéficiaire avant de continuer.SECURITY_001",
+    "mono": true
+   },
+   {
+    "text": "Bénéficiaire",
+    "tag": "p",
+    "path": "div>section>div>p",
+    "parent": "BénéficiaireRenseignez les informations du destinataire. Vérifiez toujours le numéro avant de valider.Ce bénéficiaire n'a jamais été utilisé",
+    "mono": false
+   },
+   {
+    "text": "Renseignez les informations du destinataire. Vérifiez toujours le numéro avant de valider.",
+    "tag": "h2",
+    "path": "div>section>div>h2",
+    "parent": "BénéficiaireRenseignez les informations du destinataire. Vérifiez toujours le numéro avant de valider.Ce bénéficiaire n'a jamais été utilisé",
+    "mono": false
+   },
+   {
+    "text": "Ce bénéficiaire n'a jamais été utilisé sur ce compte. Vérifiez le numéro avant de continuer.",
+    "tag": "p",
+    "path": "section>div>div>p",
+    "parent": "Ce bénéficiaire n'a jamais été utilisé sur ce compte. Vérifiez le numéro avant de continuer.",
+    "mono": false
+   },
+   {
+    "text": "Nom du bénéficiaire",
+    "tag": "label",
+    "path": "div>div>div>label",
+    "parent": "Nom du bénéficiaire",
+    "mono": false
+   },
+   {
+    "text": "Numéro de téléphone",
+    "tag": "label",
+    "path": "div>div>div>label",
+    "parent": "Numéro de téléphone",
+    "mono": false
+   },
+   {
+    "text": "Motif du transfert",
+    "tag": "label",
+    "path": "div>div>div>label",
+    "parent": "Motif du transfert",
+    "mono": false
+   },
+   {
+    "text": "Note (optionnel)",
+    "tag": "label",
+    "path": "div>div>div>label",
+    "parent": "Note (optionnel)",
+    "mono": false
+   },
+   {
+    "text": "J'ai vérifié le nom et le numéro du bénéficiaire.",
+    "tag": "span",
+    "path": "div>div>label>span",
+    "parent": "J'ai vérifié le nom et le numéro du bénéficiaire.",
+    "mono": false
+   },
+   {
+    "text": "Retour",
+    "tag": "button",
+    "path": "section>div>div>button",
+    "parent": "RetourContinuer",
+    "mono": false
+   },
+   {
+    "text": "Continuer",
+    "tag": "button",
+    "path": "section>div>div>button",
+    "parent": "RetourContinuer",
+    "mono": false
+   },
+   {
+    "text": "Votre compte",
+    "tag": "h2",
+    "path": "div>aside>div>h2",
+    "parent": "Votre compteANAmina Ngo BellCompte courantSolde disponible250 000 FCFACM 001 2345 6789 01",
+    "mono": false
+   },
+   {
+    "text": "AN",
+    "tag": "div",
+    "path": "aside>div>div>div",
+    "parent": "ANAmina Ngo BellCompte courant",
+    "mono": false
+   },
+   {
+    "text": "Amina Ngo Bell",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Amina Ngo BellCompte courant",
+    "mono": false
+   },
+   {
+    "text": "Compte courant",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Amina Ngo BellCompte courant",
+    "mono": false
+   },
+   {
+    "text": "Solde disponible",
+    "tag": "p",
+    "path": "aside>div>div>p",
+    "parent": "Solde disponible250 000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "250 000 FCFA",
+    "tag": "p",
+    "path": "aside>div>div>p",
+    "parent": "Solde disponible250 000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "CM 001 2345 6789 01",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "Votre compteANAmina Ngo BellCompte courantSolde disponible250 000 FCFACM 001 2345 6789 01",
+    "mono": true
+   },
+   {
+    "text": "Sécurité",
+    "tag": "h2",
+    "path": "aside>div>div>h2",
+    "parent": "Sécurité",
+    "mono": false
+   },
+   {
+    "text": "Vérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert.",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "SécuritéVérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert. Connexion sécurisée",
+    "mono": false
+   },
+   {
+    "text": "Connexion sécurisée",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "SécuritéVérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert. Connexion sécurisée",
+    "mono": false
+   },
+   {
+    "text": "Safinum Pay — environnement de démonstration. Ne saisissez aucune donnée personnelle réelle.",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Safinum PayBanque en ligneENANAmina Ngo Bell1Solde2Frais3Bénéficiaire4Récapitulatif5ConfirmationAlerte de sécuritéAlerte de sécurité : vérif",
+    "mono": false
+   }
+  ],
+  "fields": [
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "EN",
+    "value": ""
+   },
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "Fermer",
+    "name": "",
+    "id": "",
+    "text": "",
+    "value": ""
+   },
+   {
+    "tag": "input",
+    "type": "text",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "",
+    "value": ""
+   },
+   {
+    "tag": "input",
+    "type": "tel",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "",
+    "value": ""
+   },
+   {
+    "tag": "input",
+    "type": "text",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "",
+    "value": ""
+   },
+   {
+    "tag": "textarea",
+    "type": "textarea",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "",
+    "value": ""
+   },
+   {
+    "tag": "input",
+    "type": "checkbox",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "",
+    "value": ""
+   },
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "Retour",
+    "value": ""
+   },
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "Continuer",
+    "value": ""
+   }
+  ]
+ },
+ "fr_4_recapitulatif": {
+  "texts": [
+   {
+    "text": "Environnement de test — données fictives, aucune transaction réelle.",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Environnement de test — données fictives, aucune transaction réelle.Protocole de test Retour au hackathon",
+    "mono": false
+   },
+   {
+    "text": "Protocole de test",
+    "tag": "a",
+    "path": "div>div>div>a",
+    "parent": "Environnement de test — données fictives, aucune transaction réelle.Protocole de test Retour au hackathon",
+    "mono": false
+   },
+   {
+    "text": "Retour au hackathon",
+    "tag": "a",
+    "path": "div>div>div>a",
+    "parent": "Environnement de test — données fictives, aucune transaction réelle.Protocole de test Retour au hackathon",
+    "mono": false
+   },
+   {
+    "text": "Safinum Pay",
+    "tag": "p",
+    "path": "header>div>div>p",
+    "parent": "Safinum PayBanque en ligne",
+    "mono": false
+   },
+   {
+    "text": "Banque en ligne",
+    "tag": "p",
+    "path": "header>div>div>p",
+    "parent": "Safinum PayBanque en ligne",
+    "mono": false
+   },
+   {
+    "text": "EN",
+    "tag": "button",
+    "path": "div>header>div>button",
+    "parent": "ENANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "AN",
+    "tag": "div",
+    "path": "header>div>div>div",
+    "parent": "ANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "Amina Ngo Bell",
+    "tag": "span",
+    "path": "header>div>div>span",
+    "parent": "ANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "1",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "1Solde",
+    "mono": false
+   },
+   {
+    "text": "Solde",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "1Solde",
+    "mono": false
+   },
+   {
+    "text": "2",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "2Frais",
+    "mono": false
+   },
+   {
+    "text": "Frais",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "2Frais",
+    "mono": false
+   },
+   {
+    "text": "3",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "3Bénéficiaire",
+    "mono": false
+   },
+   {
+    "text": "Bénéficiaire",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "3Bénéficiaire",
+    "mono": false
+   },
+   {
+    "text": "4",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "4Récapitulatif",
+    "mono": false
+   },
+   {
+    "text": "Récapitulatif",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "4Récapitulatif",
+    "mono": false
+   },
+   {
+    "text": "5",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "5Confirmation",
+    "mono": false
+   },
+   {
+    "text": "Confirmation",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "5Confirmation",
+    "mono": false
+   },
+   {
+    "text": "Récapitulatif",
+    "tag": "p",
+    "path": "div>section>div>p",
+    "parent": "RécapitulatifVérifiez les informations avant de confirmer le transfert.Montant25 000 FCFAFrais0 FCFATotal débité25 000 FCFABénéficiaireClien",
+    "mono": false
+   },
+   {
+    "text": "Vérifiez les informations avant de confirmer le transfert.",
+    "tag": "h2",
+    "path": "div>section>div>h2",
+    "parent": "RécapitulatifVérifiez les informations avant de confirmer le transfert.Montant25 000 FCFAFrais0 FCFATotal débité25 000 FCFABénéficiaireClien",
+    "mono": false
+   },
+   {
+    "text": "Montant",
+    "tag": "dt",
+    "path": "div>dl>div>dt",
+    "parent": "Montant25 000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "25 000 FCFA",
+    "tag": "dd",
+    "path": "div>dl>div>dd",
+    "parent": "Montant25 000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Frais",
+    "tag": "dt",
+    "path": "div>dl>div>dt",
+    "parent": "Frais0 FCFA",
+    "mono": false
+   },
+   {
+    "text": "0 FCFA",
+    "tag": "dd",
+    "path": "div>dl>div>dd",
+    "parent": "Frais0 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Total débité",
+    "tag": "dt",
+    "path": "div>dl>div>dt",
+    "parent": "Total débité25 000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "25 000 FCFA",
+    "tag": "dd",
+    "path": "div>dl>div>dd",
+    "parent": "Total débité25 000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Bénéficiaire",
+    "tag": "dt",
+    "path": "div>dl>div>dt",
+    "parent": "BénéficiaireClient Fictif",
+    "mono": false
+   },
+   {
+    "text": "Client Fictif",
+    "tag": "dd",
+    "path": "div>dl>div>dd",
+    "parent": "BénéficiaireClient Fictif",
+    "mono": false
+   },
+   {
+    "text": "Téléphone",
+    "tag": "dt",
+    "path": "div>dl>div>dt",
+    "parent": "Téléphone600000000",
+    "mono": false
+   },
+   {
+    "text": "600000000",
+    "tag": "dd",
+    "path": "div>dl>div>dd",
+    "parent": "Téléphone600000000",
+    "mono": false
+   },
+   {
+    "text": "Référence",
+    "tag": "dt",
+    "path": "div>dl>div>dt",
+    "parent": "RéférenceSAF-2026-G9HFMS",
+    "mono": false
+   },
+   {
+    "text": "SAF-2026-G9HFMS",
+    "tag": "dd",
+    "path": "div>dl>div>dd",
+    "parent": "RéférenceSAF-2026-G9HFMS",
+    "mono": true
+   },
+   {
+    "text": "Opération",
+    "tag": "dt",
+    "path": "div>dl>div>dt",
+    "parent": "OpérationCompte Safinum",
+    "mono": false
+   },
+   {
+    "text": "Compte Safinum",
+    "tag": "dd",
+    "path": "div>dl>div>dd",
+    "parent": "OpérationCompte Safinum",
+    "mono": false
+   },
+   {
+    "text": "Je confirme que les informations ci-dessus sont correctes.",
+    "tag": "span",
+    "path": "section>div>label>span",
+    "parent": "Je confirme que les informations ci-dessus sont correctes.",
+    "mono": false
+   },
+   {
+    "text": "Modifier",
+    "tag": "button",
+    "path": "section>div>div>button",
+    "parent": "Modifier Confirmer le transfert",
+    "mono": false
+   },
+   {
+    "text": "Confirmer le transfert",
+    "tag": "button",
+    "path": "section>div>div>button",
+    "parent": "Modifier Confirmer le transfert",
+    "mono": false
+   },
+   {
+    "text": "Votre compte",
+    "tag": "h2",
+    "path": "div>aside>div>h2",
+    "parent": "Votre compteANAmina Ngo BellCompte courantSolde disponible250 000 FCFACM 001 2345 6789 01",
+    "mono": false
+   },
+   {
+    "text": "AN",
+    "tag": "div",
+    "path": "aside>div>div>div",
+    "parent": "ANAmina Ngo BellCompte courant",
+    "mono": false
+   },
+   {
+    "text": "Amina Ngo Bell",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Amina Ngo BellCompte courant",
+    "mono": false
+   },
+   {
+    "text": "Compte courant",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Amina Ngo BellCompte courant",
+    "mono": false
+   },
+   {
+    "text": "Solde disponible",
+    "tag": "p",
+    "path": "aside>div>div>p",
+    "parent": "Solde disponible250 000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "250 000 FCFA",
+    "tag": "p",
+    "path": "aside>div>div>p",
+    "parent": "Solde disponible250 000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "CM 001 2345 6789 01",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "Votre compteANAmina Ngo BellCompte courantSolde disponible250 000 FCFACM 001 2345 6789 01",
+    "mono": true
+   },
+   {
+    "text": "Sécurité",
+    "tag": "h2",
+    "path": "aside>div>div>h2",
+    "parent": "Sécurité",
+    "mono": false
+   },
+   {
+    "text": "Vérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert.",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "SécuritéVérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert. Connexion sécurisée",
+    "mono": false
+   },
+   {
+    "text": "Connexion sécurisée",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "SécuritéVérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert. Connexion sécurisée",
+    "mono": false
+   },
+   {
+    "text": "Safinum Pay — environnement de démonstration. Ne saisissez aucune donnée personnelle réelle.",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Safinum PayBanque en ligneENANAmina Ngo Bell1Solde2Frais3Bénéficiaire4Récapitulatif5ConfirmationRécapitulatifVérifiez les informations avant",
+    "mono": false
+   }
+  ],
+  "fields": [
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "EN",
+    "value": ""
+   },
+   {
+    "tag": "input",
+    "type": "checkbox",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "",
+    "value": ""
+   },
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "Modifier",
+    "value": ""
+   },
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "Confirmer le transfert",
+    "value": ""
+   }
+  ]
+ },
+ "fr_4_erreur_confirmation": {
+  "texts": [
+   {
+    "text": "Environnement de test — données fictives, aucune transaction réelle.",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Environnement de test — données fictives, aucune transaction réelle.Protocole de test Retour au hackathon",
+    "mono": false
+   },
+   {
+    "text": "Protocole de test",
+    "tag": "a",
+    "path": "div>div>div>a",
+    "parent": "Environnement de test — données fictives, aucune transaction réelle.Protocole de test Retour au hackathon",
+    "mono": false
+   },
+   {
+    "text": "Retour au hackathon",
+    "tag": "a",
+    "path": "div>div>div>a",
+    "parent": "Environnement de test — données fictives, aucune transaction réelle.Protocole de test Retour au hackathon",
+    "mono": false
+   },
+   {
+    "text": "Safinum Pay",
+    "tag": "p",
+    "path": "header>div>div>p",
+    "parent": "Safinum PayBanque en ligne",
+    "mono": false
+   },
+   {
+    "text": "Banque en ligne",
+    "tag": "p",
+    "path": "header>div>div>p",
+    "parent": "Safinum PayBanque en ligne",
+    "mono": false
+   },
+   {
+    "text": "EN",
+    "tag": "button",
+    "path": "div>header>div>button",
+    "parent": "ENANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "AN",
+    "tag": "div",
+    "path": "header>div>div>div",
+    "parent": "ANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "Amina Ngo Bell",
+    "tag": "span",
+    "path": "header>div>div>span",
+    "parent": "ANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "1",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "1Solde",
+    "mono": false
+   },
+   {
+    "text": "Solde",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "1Solde",
+    "mono": false
+   },
+   {
+    "text": "2",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "2Frais",
+    "mono": false
+   },
+   {
+    "text": "Frais",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "2Frais",
+    "mono": false
+   },
+   {
+    "text": "3",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "3Bénéficiaire",
+    "mono": false
+   },
+   {
+    "text": "Bénéficiaire",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "3Bénéficiaire",
+    "mono": false
+   },
+   {
+    "text": "4",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "4Récapitulatif",
+    "mono": false
+   },
+   {
+    "text": "Récapitulatif",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "4Récapitulatif",
+    "mono": false
+   },
+   {
+    "text": "5",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "5Confirmation",
+    "mono": false
+   },
+   {
+    "text": "Confirmation",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "5Confirmation",
+    "mono": false
+   },
+   {
+    "text": "Une erreur est survenue",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Une erreur est survenueVous devez confirmer les informations avant de valider le transfert.CONFIRM_001",
+    "mono": false
+   },
+   {
+    "text": "Vous devez confirmer les informations avant de valider le transfert.",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Une erreur est survenueVous devez confirmer les informations avant de valider le transfert.CONFIRM_001",
+    "mono": false
+   },
+   {
+    "text": "CONFIRM_001",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Une erreur est survenueVous devez confirmer les informations avant de valider le transfert.CONFIRM_001",
+    "mono": true
+   },
+   {
+    "text": "Récapitulatif",
+    "tag": "p",
+    "path": "div>section>div>p",
+    "parent": "RécapitulatifVérifiez les informations avant de confirmer le transfert.Montant25 000 FCFAFrais0 FCFATotal débité25 000 FCFABénéficiaireClien",
+    "mono": false
+   },
+   {
+    "text": "Vérifiez les informations avant de confirmer le transfert.",
+    "tag": "h2",
+    "path": "div>section>div>h2",
+    "parent": "RécapitulatifVérifiez les informations avant de confirmer le transfert.Montant25 000 FCFAFrais0 FCFATotal débité25 000 FCFABénéficiaireClien",
+    "mono": false
+   },
+   {
+    "text": "Montant",
+    "tag": "dt",
+    "path": "div>dl>div>dt",
+    "parent": "Montant25 000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "25 000 FCFA",
+    "tag": "dd",
+    "path": "div>dl>div>dd",
+    "parent": "Montant25 000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Frais",
+    "tag": "dt",
+    "path": "div>dl>div>dt",
+    "parent": "Frais0 FCFA",
+    "mono": false
+   },
+   {
+    "text": "0 FCFA",
+    "tag": "dd",
+    "path": "div>dl>div>dd",
+    "parent": "Frais0 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Total débité",
+    "tag": "dt",
+    "path": "div>dl>div>dt",
+    "parent": "Total débité25 000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "25 000 FCFA",
+    "tag": "dd",
+    "path": "div>dl>div>dd",
+    "parent": "Total débité25 000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Bénéficiaire",
+    "tag": "dt",
+    "path": "div>dl>div>dt",
+    "parent": "BénéficiaireClient Fictif",
+    "mono": false
+   },
+   {
+    "text": "Client Fictif",
+    "tag": "dd",
+    "path": "div>dl>div>dd",
+    "parent": "BénéficiaireClient Fictif",
+    "mono": false
+   },
+   {
+    "text": "Téléphone",
+    "tag": "dt",
+    "path": "div>dl>div>dt",
+    "parent": "Téléphone600000000",
+    "mono": false
+   },
+   {
+    "text": "600000000",
+    "tag": "dd",
+    "path": "div>dl>div>dd",
+    "parent": "Téléphone600000000",
+    "mono": false
+   },
+   {
+    "text": "Référence",
+    "tag": "dt",
+    "path": "div>dl>div>dt",
+    "parent": "RéférenceSAF-2026-G9HFMS",
+    "mono": false
+   },
+   {
+    "text": "SAF-2026-G9HFMS",
+    "tag": "dd",
+    "path": "div>dl>div>dd",
+    "parent": "RéférenceSAF-2026-G9HFMS",
+    "mono": true
+   },
+   {
+    "text": "Opération",
+    "tag": "dt",
+    "path": "div>dl>div>dt",
+    "parent": "OpérationCompte Safinum",
+    "mono": false
+   },
+   {
+    "text": "Compte Safinum",
+    "tag": "dd",
+    "path": "div>dl>div>dd",
+    "parent": "OpérationCompte Safinum",
+    "mono": false
+   },
+   {
+    "text": "Je confirme que les informations ci-dessus sont correctes.",
+    "tag": "span",
+    "path": "section>div>label>span",
+    "parent": "Je confirme que les informations ci-dessus sont correctes.",
+    "mono": false
+   },
+   {
+    "text": "Modifier",
+    "tag": "button",
+    "path": "section>div>div>button",
+    "parent": "Modifier Confirmer le transfert",
+    "mono": false
+   },
+   {
+    "text": "Confirmer le transfert",
+    "tag": "button",
+    "path": "section>div>div>button",
+    "parent": "Modifier Confirmer le transfert",
+    "mono": false
+   },
+   {
+    "text": "Votre compte",
+    "tag": "h2",
+    "path": "div>aside>div>h2",
+    "parent": "Votre compteANAmina Ngo BellCompte courantSolde disponible250 000 FCFACM 001 2345 6789 01",
+    "mono": false
+   },
+   {
+    "text": "AN",
+    "tag": "div",
+    "path": "aside>div>div>div",
+    "parent": "ANAmina Ngo BellCompte courant",
+    "mono": false
+   },
+   {
+    "text": "Amina Ngo Bell",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Amina Ngo BellCompte courant",
+    "mono": false
+   },
+   {
+    "text": "Compte courant",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Amina Ngo BellCompte courant",
+    "mono": false
+   },
+   {
+    "text": "Solde disponible",
+    "tag": "p",
+    "path": "aside>div>div>p",
+    "parent": "Solde disponible250 000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "250 000 FCFA",
+    "tag": "p",
+    "path": "aside>div>div>p",
+    "parent": "Solde disponible250 000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "CM 001 2345 6789 01",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "Votre compteANAmina Ngo BellCompte courantSolde disponible250 000 FCFACM 001 2345 6789 01",
+    "mono": true
+   },
+   {
+    "text": "Sécurité",
+    "tag": "h2",
+    "path": "aside>div>div>h2",
+    "parent": "Sécurité",
+    "mono": false
+   },
+   {
+    "text": "Vérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert.",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "SécuritéVérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert. Connexion sécurisée",
+    "mono": false
+   },
+   {
+    "text": "Connexion sécurisée",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "SécuritéVérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert. Connexion sécurisée",
+    "mono": false
+   },
+   {
+    "text": "Safinum Pay — environnement de démonstration. Ne saisissez aucune donnée personnelle réelle.",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Safinum PayBanque en ligneENANAmina Ngo Bell1Solde2Frais3Bénéficiaire4Récapitulatif5ConfirmationUne erreur est survenueVous devez confirmer ",
+    "mono": false
+   }
+  ],
+  "fields": [
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "EN",
+    "value": ""
+   },
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "Fermer",
+    "name": "",
+    "id": "",
+    "text": "",
+    "value": ""
+   },
+   {
+    "tag": "input",
+    "type": "checkbox",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "",
+    "value": ""
+   },
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "Modifier",
+    "value": ""
+   },
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "Confirmer le transfert",
+    "value": ""
+   }
+  ]
+ },
+ "fr_5_recu": {
+  "texts": [
+   {
+    "text": "Environnement de test — données fictives, aucune transaction réelle.",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Environnement de test — données fictives, aucune transaction réelle.Protocole de test Retour au hackathon",
+    "mono": false
+   },
+   {
+    "text": "Protocole de test",
+    "tag": "a",
+    "path": "div>div>div>a",
+    "parent": "Environnement de test — données fictives, aucune transaction réelle.Protocole de test Retour au hackathon",
+    "mono": false
+   },
+   {
+    "text": "Retour au hackathon",
+    "tag": "a",
+    "path": "div>div>div>a",
+    "parent": "Environnement de test — données fictives, aucune transaction réelle.Protocole de test Retour au hackathon",
+    "mono": false
+   },
+   {
+    "text": "Safinum Pay",
+    "tag": "p",
+    "path": "header>div>div>p",
+    "parent": "Safinum PayBanque en ligne",
+    "mono": false
+   },
+   {
+    "text": "Banque en ligne",
+    "tag": "p",
+    "path": "header>div>div>p",
+    "parent": "Safinum PayBanque en ligne",
+    "mono": false
+   },
+   {
+    "text": "EN",
+    "tag": "button",
+    "path": "div>header>div>button",
+    "parent": "ENANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "AN",
+    "tag": "div",
+    "path": "header>div>div>div",
+    "parent": "ANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "Amina Ngo Bell",
+    "tag": "span",
+    "path": "header>div>div>span",
+    "parent": "ANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "1",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "1Solde",
+    "mono": false
+   },
+   {
+    "text": "Solde",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "1Solde",
+    "mono": false
+   },
+   {
+    "text": "2",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "2Frais",
+    "mono": false
+   },
+   {
+    "text": "Frais",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "2Frais",
+    "mono": false
+   },
+   {
+    "text": "3",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "3Bénéficiaire",
+    "mono": false
+   },
+   {
+    "text": "Bénéficiaire",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "3Bénéficiaire",
+    "mono": false
+   },
+   {
+    "text": "4",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "4Récapitulatif",
+    "mono": false
+   },
+   {
+    "text": "Récapitulatif",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "4Récapitulatif",
+    "mono": false
+   },
+   {
+    "text": "5",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "5Confirmation",
+    "mono": false
+   },
+   {
+    "text": "Confirmation",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "5Confirmation",
+    "mono": false
+   },
+   {
+    "text": "Transfert effectué",
+    "tag": "h2",
+    "path": "section>div>div>h2",
+    "parent": "Transfert effectuéVotre transfert a été envoyé avec succès.",
+    "mono": false
+   },
+   {
+    "text": "Votre transfert a été envoyé avec succès.",
+    "tag": "p",
+    "path": "section>div>div>p",
+    "parent": "Transfert effectuéVotre transfert a été envoyé avec succès.",
+    "mono": false
+   },
+   {
+    "text": "Référence",
+    "tag": "dt",
+    "path": "div>dl>div>dt",
+    "parent": "RéférenceSAF-2026-G9HFMS",
+    "mono": false
+   },
+   {
+    "text": "SAF-2026-G9HFMS",
+    "tag": "dd",
+    "path": "div>dl>div>dd",
+    "parent": "RéférenceSAF-2026-G9HFMS",
+    "mono": true
+   },
+   {
+    "text": "Montant",
+    "tag": "dt",
+    "path": "div>dl>div>dt",
+    "parent": "Montant25 000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "25 000 FCFA",
+    "tag": "dd",
+    "path": "div>dl>div>dd",
+    "parent": "Montant25 000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Frais",
+    "tag": "dt",
+    "path": "div>dl>div>dt",
+    "parent": "Frais0 FCFA",
+    "mono": false
+   },
+   {
+    "text": "0 FCFA",
+    "tag": "dd",
+    "path": "div>dl>div>dd",
+    "parent": "Frais0 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Total débité",
+    "tag": "dt",
+    "path": "div>dl>div>dt",
+    "parent": "Total débité25 000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "25 000 FCFA",
+    "tag": "dd",
+    "path": "div>dl>div>dd",
+    "parent": "Total débité25 000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Bénéficiaire",
+    "tag": "dt",
+    "path": "div>dl>div>dt",
+    "parent": "BénéficiaireClient Fictif",
+    "mono": false
+   },
+   {
+    "text": "Client Fictif",
+    "tag": "dd",
+    "path": "div>dl>div>dd",
+    "parent": "BénéficiaireClient Fictif",
+    "mono": false
+   },
+   {
+    "text": "Statut",
+    "tag": "dt",
+    "path": "div>dl>div>dt",
+    "parent": "Statut Succès",
+    "mono": false
+   },
+   {
+    "text": "Succès",
+    "tag": "dd",
+    "path": "div>dl>div>dd",
+    "parent": "Statut Succès",
+    "mono": false
+   },
+   {
+    "text": "Nouveau transfert",
+    "tag": "button",
+    "path": "section>div>div>button",
+    "parent": "Nouveau transfert",
+    "mono": false
+   },
+   {
+    "text": "Votre compte",
+    "tag": "h2",
+    "path": "div>aside>div>h2",
+    "parent": "Votre compteANAmina Ngo BellCompte courantSolde disponible250 000 FCFACM 001 2345 6789 01",
+    "mono": false
+   },
+   {
+    "text": "AN",
+    "tag": "div",
+    "path": "aside>div>div>div",
+    "parent": "ANAmina Ngo BellCompte courant",
+    "mono": false
+   },
+   {
+    "text": "Amina Ngo Bell",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Amina Ngo BellCompte courant",
+    "mono": false
+   },
+   {
+    "text": "Compte courant",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Amina Ngo BellCompte courant",
+    "mono": false
+   },
+   {
+    "text": "Solde disponible",
+    "tag": "p",
+    "path": "aside>div>div>p",
+    "parent": "Solde disponible250 000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "250 000 FCFA",
+    "tag": "p",
+    "path": "aside>div>div>p",
+    "parent": "Solde disponible250 000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "CM 001 2345 6789 01",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "Votre compteANAmina Ngo BellCompte courantSolde disponible250 000 FCFACM 001 2345 6789 01",
+    "mono": true
+   },
+   {
+    "text": "Sécurité",
+    "tag": "h2",
+    "path": "aside>div>div>h2",
+    "parent": "Sécurité",
+    "mono": false
+   },
+   {
+    "text": "Vérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert.",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "SécuritéVérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert. Connexion sécurisée",
+    "mono": false
+   },
+   {
+    "text": "Connexion sécurisée",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "SécuritéVérifiez toujours le nom et le numéro du bénéficiaire avant de confirmer un transfert. Connexion sécurisée",
+    "mono": false
+   },
+   {
+    "text": "Safinum Pay — environnement de démonstration. Ne saisissez aucune donnée personnelle réelle.",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Safinum PayBanque en ligneENANAmina Ngo Bell1Solde2Frais3Bénéficiaire4Récapitulatif5ConfirmationTransfert effectuéVotre transfert a été envo",
+    "mono": false
+   }
+  ],
+  "fields": [
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "EN",
+    "value": ""
+   },
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "Nouveau transfert",
+    "value": ""
+   }
+  ]
+ },
+ "en_1_tableau_de_bord": {
+  "texts": [
+   {
+    "text": "Test environment — fictional data, no real transaction.",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Test environment — fictional data, no real transaction.Test protocol Back to hackathon",
+    "mono": false
+   },
+   {
+    "text": "Test protocol",
+    "tag": "a",
+    "path": "div>div>div>a",
+    "parent": "Test environment — fictional data, no real transaction.Test protocol Back to hackathon",
+    "mono": false
+   },
+   {
+    "text": "Back to hackathon",
+    "tag": "a",
+    "path": "div>div>div>a",
+    "parent": "Test environment — fictional data, no real transaction.Test protocol Back to hackathon",
+    "mono": false
+   },
+   {
+    "text": "Safinum Pay",
+    "tag": "p",
+    "path": "header>div>div>p",
+    "parent": "Safinum PayOnline banking",
+    "mono": false
+   },
+   {
+    "text": "Online banking",
+    "tag": "p",
+    "path": "header>div>div>p",
+    "parent": "Safinum PayOnline banking",
+    "mono": false
+   },
+   {
+    "text": "FR",
+    "tag": "button",
+    "path": "div>header>div>button",
+    "parent": "FRANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "AN",
+    "tag": "div",
+    "path": "header>div>div>div",
+    "parent": "ANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "Amina Ngo Bell",
+    "tag": "span",
+    "path": "header>div>div>span",
+    "parent": "ANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "1",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "1Balance",
+    "mono": false
+   },
+   {
+    "text": "Balance",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "1Balance",
+    "mono": false
+   },
+   {
+    "text": "2",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "2Fees",
+    "mono": false
+   },
+   {
+    "text": "Fees",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "2Fees",
+    "mono": false
+   },
+   {
+    "text": "3",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "3Beneficiary",
+    "mono": false
+   },
+   {
+    "text": "Beneficiary",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "3Beneficiary",
+    "mono": false
+   },
+   {
+    "text": "4",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "4Summary",
+    "mono": false
+   },
+   {
+    "text": "Summary",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "4Summary",
+    "mono": false
+   },
+   {
+    "text": "5",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "5Confirmation",
+    "mono": false
+   },
+   {
+    "text": "Confirmation",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "5Confirmation",
+    "mono": false
+   },
+   {
+    "text": "Your account",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Your accountHello, AminaCheck your balance and start a secure transfer.",
+    "mono": false
+   },
+   {
+    "text": "Hello, Amina",
+    "tag": "h1",
+    "path": "div>div>div>h1",
+    "parent": "Your accountHello, AminaCheck your balance and start a secure transfer.",
+    "mono": false
+   },
+   {
+    "text": "Check your balance and start a secure transfer.",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Your accountHello, AminaCheck your balance and start a secure transfer.",
+    "mono": false
+   },
+   {
+    "text": "Available balance",
+    "tag": "p",
+    "path": "section>div>div>p",
+    "parent": "Available balance250,000 FCFAAccount number : CM 001 2345 6789 01Current account",
+    "mono": false
+   },
+   {
+    "text": "250,000 FCFA",
+    "tag": "p",
+    "path": "section>div>div>p",
+    "parent": "Available balance250,000 FCFAAccount number : CM 001 2345 6789 01Current account",
+    "mono": false
+   },
+   {
+    "text": "Account number : CM 001 2345 6789 01",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Account number : CM 001 2345 6789 01Current account",
+    "mono": false
+   },
+   {
+    "text": "Current account",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Account number : CM 001 2345 6789 01Current account",
+    "mono": false
+   },
+   {
+    "text": "Make a transfer",
+    "tag": "button",
+    "path": "section>div>div>button",
+    "parent": "Make a transfer View fees",
+    "mono": false
+   },
+   {
+    "text": "View fees",
+    "tag": "button",
+    "path": "section>div>div>button",
+    "parent": "Make a transfer View fees",
+    "mono": false
+   },
+   {
+    "text": "Recent transactions",
+    "tag": "h2",
+    "path": "section>div>div>h2",
+    "parent": "Recent transactionsMerchant paymentNov 5, 2026-12,500 FCFASalary receivedNov 4, 2026+180,000 FCFATransfer receivedNov 2, 2026+50,000 FCFAEle",
+    "mono": false
+   },
+   {
+    "text": "Merchant payment",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Merchant paymentNov 5, 2026",
+    "mono": false
+   },
+   {
+    "text": "Nov 5, 2026",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Merchant paymentNov 5, 2026",
+    "mono": false
+   },
+   {
+    "text": "-12,500 FCFA",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Merchant paymentNov 5, 2026-12,500 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Salary received",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Salary receivedNov 4, 2026",
+    "mono": false
+   },
+   {
+    "text": "Nov 4, 2026",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Salary receivedNov 4, 2026",
+    "mono": false
+   },
+   {
+    "text": "+180,000 FCFA",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Salary receivedNov 4, 2026+180,000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Transfer received",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Transfer receivedNov 2, 2026",
+    "mono": false
+   },
+   {
+    "text": "Nov 2, 2026",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Transfer receivedNov 2, 2026",
+    "mono": false
+   },
+   {
+    "text": "+50,000 FCFA",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Transfer receivedNov 2, 2026+50,000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Electricity bill",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Electricity billOct 31, 2026",
+    "mono": false
+   },
+   {
+    "text": "Oct 31, 2026",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Electricity billOct 31, 2026",
+    "mono": false
+   },
+   {
+    "text": "-7,500 FCFA",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Electricity billOct 31, 2026-7,500 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Your account",
+    "tag": "h2",
+    "path": "div>aside>div>h2",
+    "parent": "Your accountANAmina Ngo BellCurrent accountAvailable balance250,000 FCFACM 001 2345 6789 01",
+    "mono": false
+   },
+   {
+    "text": "AN",
+    "tag": "div",
+    "path": "aside>div>div>div",
+    "parent": "ANAmina Ngo BellCurrent account",
+    "mono": false
+   },
+   {
+    "text": "Amina Ngo Bell",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Amina Ngo BellCurrent account",
+    "mono": false
+   },
+   {
+    "text": "Current account",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Amina Ngo BellCurrent account",
+    "mono": false
+   },
+   {
+    "text": "Available balance",
+    "tag": "p",
+    "path": "aside>div>div>p",
+    "parent": "Available balance250,000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "250,000 FCFA",
+    "tag": "p",
+    "path": "aside>div>div>p",
+    "parent": "Available balance250,000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "CM 001 2345 6789 01",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "Your accountANAmina Ngo BellCurrent accountAvailable balance250,000 FCFACM 001 2345 6789 01",
+    "mono": true
+   },
+   {
+    "text": "Security",
+    "tag": "h2",
+    "path": "aside>div>div>h2",
+    "parent": "Security",
+    "mono": false
+   },
+   {
+    "text": "Always verify the beneficiary name and number before confirming a transfer.",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "SecurityAlways verify the beneficiary name and number before confirming a transfer. Secure connection",
+    "mono": false
+   },
+   {
+    "text": "Secure connection",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "SecurityAlways verify the beneficiary name and number before confirming a transfer. Secure connection",
+    "mono": false
+   },
+   {
+    "text": "Safinum Pay — demonstration environment. Do not enter real personal data.",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Safinum PayOnline bankingFRANAmina Ngo Bell1Balance2Fees3Beneficiary4Summary5ConfirmationYour accountHello, AminaCheck your balance and star",
+    "mono": false
+   }
+  ],
+  "fields": [
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "FR",
+    "value": ""
+   },
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "Make a transfer",
+    "value": ""
+   },
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "View fees",
+    "value": ""
+   }
+  ]
+ },
+ "en_2_frais": {
+  "texts": [
+   {
+    "text": "Test environment — fictional data, no real transaction.",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Test environment — fictional data, no real transaction.Test protocol Back to hackathon",
+    "mono": false
+   },
+   {
+    "text": "Test protocol",
+    "tag": "a",
+    "path": "div>div>div>a",
+    "parent": "Test environment — fictional data, no real transaction.Test protocol Back to hackathon",
+    "mono": false
+   },
+   {
+    "text": "Back to hackathon",
+    "tag": "a",
+    "path": "div>div>div>a",
+    "parent": "Test environment — fictional data, no real transaction.Test protocol Back to hackathon",
+    "mono": false
+   },
+   {
+    "text": "Safinum Pay",
+    "tag": "p",
+    "path": "header>div>div>p",
+    "parent": "Safinum PayOnline banking",
+    "mono": false
+   },
+   {
+    "text": "Online banking",
+    "tag": "p",
+    "path": "header>div>div>p",
+    "parent": "Safinum PayOnline banking",
+    "mono": false
+   },
+   {
+    "text": "FR",
+    "tag": "button",
+    "path": "div>header>div>button",
+    "parent": "FRANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "AN",
+    "tag": "div",
+    "path": "header>div>div>div",
+    "parent": "ANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "Amina Ngo Bell",
+    "tag": "span",
+    "path": "header>div>div>span",
+    "parent": "ANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "1",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "1Balance",
+    "mono": false
+   },
+   {
+    "text": "Balance",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "1Balance",
+    "mono": false
+   },
+   {
+    "text": "2",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "2Fees",
+    "mono": false
+   },
+   {
+    "text": "Fees",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "2Fees",
+    "mono": false
+   },
+   {
+    "text": "3",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "3Beneficiary",
+    "mono": false
+   },
+   {
+    "text": "Beneficiary",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "3Beneficiary",
+    "mono": false
+   },
+   {
+    "text": "4",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "4Summary",
+    "mono": false
+   },
+   {
+    "text": "Summary",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "4Summary",
+    "mono": false
+   },
+   {
+    "text": "5",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "5Confirmation",
+    "mono": false
+   },
+   {
+    "text": "Confirmation",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "5Confirmation",
+    "mono": false
+   },
+   {
+    "text": "Transfer fees",
+    "tag": "p",
+    "path": "div>section>div>p",
+    "parent": "Transfer feesChoose the transfer type and amount. Fees are calculated automatically.Operation typeSafinum accountMobile MoneyOther bankInsta",
+    "mono": false
+   },
+   {
+    "text": "Choose the transfer type and amount. Fees are calculated automatically.",
+    "tag": "h2",
+    "path": "div>section>div>h2",
+    "parent": "Transfer feesChoose the transfer type and amount. Fees are calculated automatically.Operation typeSafinum accountMobile MoneyOther bankInsta",
+    "mono": false
+   },
+   {
+    "text": "Operation type",
+    "tag": "label",
+    "path": "div>div>div>label",
+    "parent": "Operation typeSafinum accountMobile MoneyOther bankInstant, free transfer",
+    "mono": false
+   },
+   {
+    "text": "Instant, free transfer",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Operation typeSafinum accountMobile MoneyOther bankInstant, free transfer",
+    "mono": false
+   },
+   {
+    "text": "Amount to send",
+    "tag": "label",
+    "path": "div>div>div>label",
+    "parent": "Amount to sendFCFA",
+    "mono": false
+   },
+   {
+    "text": "FCFA",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "FCFA",
+    "mono": false
+   },
+   {
+    "text": "Fee",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Fee Free0 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Free",
+    "tag": "span",
+    "path": "div>div>span>span",
+    "parent": "Fee Free",
+    "mono": false
+   },
+   {
+    "text": "0 FCFA",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Fee Free0 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Total to debit",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Total to debit25,000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "25,000 FCFA",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Total to debit25,000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Balance after transfer",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Balance after transfer225,000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "225,000 FCFA",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Balance after transfer225,000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Back",
+    "tag": "button",
+    "path": "section>div>div>button",
+    "parent": "BackContinue",
+    "mono": false
+   },
+   {
+    "text": "Continue",
+    "tag": "button",
+    "path": "section>div>div>button",
+    "parent": "BackContinue",
+    "mono": false
+   },
+   {
+    "text": "Your account",
+    "tag": "h2",
+    "path": "div>aside>div>h2",
+    "parent": "Your accountANAmina Ngo BellCurrent accountAvailable balance250,000 FCFACM 001 2345 6789 01",
+    "mono": false
+   },
+   {
+    "text": "AN",
+    "tag": "div",
+    "path": "aside>div>div>div",
+    "parent": "ANAmina Ngo BellCurrent account",
+    "mono": false
+   },
+   {
+    "text": "Amina Ngo Bell",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Amina Ngo BellCurrent account",
+    "mono": false
+   },
+   {
+    "text": "Current account",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Amina Ngo BellCurrent account",
+    "mono": false
+   },
+   {
+    "text": "Available balance",
+    "tag": "p",
+    "path": "aside>div>div>p",
+    "parent": "Available balance250,000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "250,000 FCFA",
+    "tag": "p",
+    "path": "aside>div>div>p",
+    "parent": "Available balance250,000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "CM 001 2345 6789 01",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "Your accountANAmina Ngo BellCurrent accountAvailable balance250,000 FCFACM 001 2345 6789 01",
+    "mono": true
+   },
+   {
+    "text": "Security",
+    "tag": "h2",
+    "path": "aside>div>div>h2",
+    "parent": "Security",
+    "mono": false
+   },
+   {
+    "text": "Always verify the beneficiary name and number before confirming a transfer.",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "SecurityAlways verify the beneficiary name and number before confirming a transfer. Secure connection",
+    "mono": false
+   },
+   {
+    "text": "Secure connection",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "SecurityAlways verify the beneficiary name and number before confirming a transfer. Secure connection",
+    "mono": false
+   },
+   {
+    "text": "Safinum Pay — demonstration environment. Do not enter real personal data.",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Safinum PayOnline bankingFRANAmina Ngo Bell1Balance2Fees3Beneficiary4Summary5ConfirmationTransfer feesChoose the transfer type and amount. F",
+    "mono": false
+   }
+  ],
+  "fields": [
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "FR",
+    "value": ""
+   },
+   {
+    "tag": "select",
+    "type": "select-one",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "Safinum accountMobile MoneyOther bank",
+    "value": [
+     "Safinum account",
+     "Mobile Money",
+     "Other bank"
+    ]
+   },
+   {
+    "tag": "input",
+    "type": "number",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "",
+    "value": ""
+   },
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "Back",
+    "value": ""
+   },
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "Continue",
+    "value": ""
+   }
+  ]
+ },
+ "en_2_frais_safinum": {
+  "texts": [
+   {
+    "text": "Test environment — fictional data, no real transaction.",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Test environment — fictional data, no real transaction.Test protocol Back to hackathon",
+    "mono": false
+   },
+   {
+    "text": "Test protocol",
+    "tag": "a",
+    "path": "div>div>div>a",
+    "parent": "Test environment — fictional data, no real transaction.Test protocol Back to hackathon",
+    "mono": false
+   },
+   {
+    "text": "Back to hackathon",
+    "tag": "a",
+    "path": "div>div>div>a",
+    "parent": "Test environment — fictional data, no real transaction.Test protocol Back to hackathon",
+    "mono": false
+   },
+   {
+    "text": "Safinum Pay",
+    "tag": "p",
+    "path": "header>div>div>p",
+    "parent": "Safinum PayOnline banking",
+    "mono": false
+   },
+   {
+    "text": "Online banking",
+    "tag": "p",
+    "path": "header>div>div>p",
+    "parent": "Safinum PayOnline banking",
+    "mono": false
+   },
+   {
+    "text": "FR",
+    "tag": "button",
+    "path": "div>header>div>button",
+    "parent": "FRANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "AN",
+    "tag": "div",
+    "path": "header>div>div>div",
+    "parent": "ANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "Amina Ngo Bell",
+    "tag": "span",
+    "path": "header>div>div>span",
+    "parent": "ANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "1",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "1Balance",
+    "mono": false
+   },
+   {
+    "text": "Balance",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "1Balance",
+    "mono": false
+   },
+   {
+    "text": "2",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "2Fees",
+    "mono": false
+   },
+   {
+    "text": "Fees",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "2Fees",
+    "mono": false
+   },
+   {
+    "text": "3",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "3Beneficiary",
+    "mono": false
+   },
+   {
+    "text": "Beneficiary",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "3Beneficiary",
+    "mono": false
+   },
+   {
+    "text": "4",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "4Summary",
+    "mono": false
+   },
+   {
+    "text": "Summary",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "4Summary",
+    "mono": false
+   },
+   {
+    "text": "5",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "5Confirmation",
+    "mono": false
+   },
+   {
+    "text": "Confirmation",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "5Confirmation",
+    "mono": false
+   },
+   {
+    "text": "Transfer fees",
+    "tag": "p",
+    "path": "div>section>div>p",
+    "parent": "Transfer feesChoose the transfer type and amount. Fees are calculated automatically.Operation typeSafinum accountMobile MoneyOther bankInsta",
+    "mono": false
+   },
+   {
+    "text": "Choose the transfer type and amount. Fees are calculated automatically.",
+    "tag": "h2",
+    "path": "div>section>div>h2",
+    "parent": "Transfer feesChoose the transfer type and amount. Fees are calculated automatically.Operation typeSafinum accountMobile MoneyOther bankInsta",
+    "mono": false
+   },
+   {
+    "text": "Operation type",
+    "tag": "label",
+    "path": "div>div>div>label",
+    "parent": "Operation typeSafinum accountMobile MoneyOther bankInstant, free transfer",
+    "mono": false
+   },
+   {
+    "text": "Instant, free transfer",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Operation typeSafinum accountMobile MoneyOther bankInstant, free transfer",
+    "mono": false
+   },
+   {
+    "text": "Amount to send",
+    "tag": "label",
+    "path": "div>div>div>label",
+    "parent": "Amount to sendFCFA",
+    "mono": false
+   },
+   {
+    "text": "FCFA",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "FCFA",
+    "mono": false
+   },
+   {
+    "text": "Fee",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Fee Free0 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Free",
+    "tag": "span",
+    "path": "div>div>span>span",
+    "parent": "Fee Free",
+    "mono": false
+   },
+   {
+    "text": "0 FCFA",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Fee Free0 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Total to debit",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Total to debit25,000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "25,000 FCFA",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Total to debit25,000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Balance after transfer",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Balance after transfer225,000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "225,000 FCFA",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Balance after transfer225,000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Back",
+    "tag": "button",
+    "path": "section>div>div>button",
+    "parent": "BackContinue",
+    "mono": false
+   },
+   {
+    "text": "Continue",
+    "tag": "button",
+    "path": "section>div>div>button",
+    "parent": "BackContinue",
+    "mono": false
+   },
+   {
+    "text": "Your account",
+    "tag": "h2",
+    "path": "div>aside>div>h2",
+    "parent": "Your accountANAmina Ngo BellCurrent accountAvailable balance250,000 FCFACM 001 2345 6789 01",
+    "mono": false
+   },
+   {
+    "text": "AN",
+    "tag": "div",
+    "path": "aside>div>div>div",
+    "parent": "ANAmina Ngo BellCurrent account",
+    "mono": false
+   },
+   {
+    "text": "Amina Ngo Bell",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Amina Ngo BellCurrent account",
+    "mono": false
+   },
+   {
+    "text": "Current account",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Amina Ngo BellCurrent account",
+    "mono": false
+   },
+   {
+    "text": "Available balance",
+    "tag": "p",
+    "path": "aside>div>div>p",
+    "parent": "Available balance250,000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "250,000 FCFA",
+    "tag": "p",
+    "path": "aside>div>div>p",
+    "parent": "Available balance250,000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "CM 001 2345 6789 01",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "Your accountANAmina Ngo BellCurrent accountAvailable balance250,000 FCFACM 001 2345 6789 01",
+    "mono": true
+   },
+   {
+    "text": "Security",
+    "tag": "h2",
+    "path": "aside>div>div>h2",
+    "parent": "Security",
+    "mono": false
+   },
+   {
+    "text": "Always verify the beneficiary name and number before confirming a transfer.",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "SecurityAlways verify the beneficiary name and number before confirming a transfer. Secure connection",
+    "mono": false
+   },
+   {
+    "text": "Secure connection",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "SecurityAlways verify the beneficiary name and number before confirming a transfer. Secure connection",
+    "mono": false
+   },
+   {
+    "text": "Safinum Pay — demonstration environment. Do not enter real personal data.",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Safinum PayOnline bankingFRANAmina Ngo Bell1Balance2Fees3Beneficiary4Summary5ConfirmationTransfer feesChoose the transfer type and amount. F",
+    "mono": false
+   }
+  ],
+  "fields": [
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "FR",
+    "value": ""
+   },
+   {
+    "tag": "select",
+    "type": "select-one",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "Safinum accountMobile MoneyOther bank",
+    "value": [
+     "Safinum account",
+     "Mobile Money",
+     "Other bank"
+    ]
+   },
+   {
+    "tag": "input",
+    "type": "number",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "",
+    "value": ""
+   },
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "Back",
+    "value": ""
+   },
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "Continue",
+    "value": ""
+   }
+  ]
+ },
+ "en_2_frais_mobile_money": {
+  "texts": [
+   {
+    "text": "Test environment — fictional data, no real transaction.",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Test environment — fictional data, no real transaction.Test protocol Back to hackathon",
+    "mono": false
+   },
+   {
+    "text": "Test protocol",
+    "tag": "a",
+    "path": "div>div>div>a",
+    "parent": "Test environment — fictional data, no real transaction.Test protocol Back to hackathon",
+    "mono": false
+   },
+   {
+    "text": "Back to hackathon",
+    "tag": "a",
+    "path": "div>div>div>a",
+    "parent": "Test environment — fictional data, no real transaction.Test protocol Back to hackathon",
+    "mono": false
+   },
+   {
+    "text": "Safinum Pay",
+    "tag": "p",
+    "path": "header>div>div>p",
+    "parent": "Safinum PayOnline banking",
+    "mono": false
+   },
+   {
+    "text": "Online banking",
+    "tag": "p",
+    "path": "header>div>div>p",
+    "parent": "Safinum PayOnline banking",
+    "mono": false
+   },
+   {
+    "text": "FR",
+    "tag": "button",
+    "path": "div>header>div>button",
+    "parent": "FRANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "AN",
+    "tag": "div",
+    "path": "header>div>div>div",
+    "parent": "ANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "Amina Ngo Bell",
+    "tag": "span",
+    "path": "header>div>div>span",
+    "parent": "ANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "1",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "1Balance",
+    "mono": false
+   },
+   {
+    "text": "Balance",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "1Balance",
+    "mono": false
+   },
+   {
+    "text": "2",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "2Fees",
+    "mono": false
+   },
+   {
+    "text": "Fees",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "2Fees",
+    "mono": false
+   },
+   {
+    "text": "3",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "3Beneficiary",
+    "mono": false
+   },
+   {
+    "text": "Beneficiary",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "3Beneficiary",
+    "mono": false
+   },
+   {
+    "text": "4",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "4Summary",
+    "mono": false
+   },
+   {
+    "text": "Summary",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "4Summary",
+    "mono": false
+   },
+   {
+    "text": "5",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "5Confirmation",
+    "mono": false
+   },
+   {
+    "text": "Confirmation",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "5Confirmation",
+    "mono": false
+   },
+   {
+    "text": "Transfer fees",
+    "tag": "p",
+    "path": "div>section>div>p",
+    "parent": "Transfer feesChoose the transfer type and amount. Fees are calculated automatically.Operation typeSafinum accountMobile MoneyOther bank1.5% ",
+    "mono": false
+   },
+   {
+    "text": "Choose the transfer type and amount. Fees are calculated automatically.",
+    "tag": "h2",
+    "path": "div>section>div>h2",
+    "parent": "Transfer feesChoose the transfer type and amount. Fees are calculated automatically.Operation typeSafinum accountMobile MoneyOther bank1.5% ",
+    "mono": false
+   },
+   {
+    "text": "Operation type",
+    "tag": "label",
+    "path": "div>div>div>label",
+    "parent": "Operation typeSafinum accountMobile MoneyOther bank1.5% fee (min. 100 FCFA, max. 2,500 FCFA)",
+    "mono": false
+   },
+   {
+    "text": "1.5% fee (min. 100 FCFA, max. 2,500 FCFA)",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Operation typeSafinum accountMobile MoneyOther bank1.5% fee (min. 100 FCFA, max. 2,500 FCFA)",
+    "mono": false
+   },
+   {
+    "text": "Amount to send",
+    "tag": "label",
+    "path": "div>div>div>label",
+    "parent": "Amount to sendFCFA",
+    "mono": false
+   },
+   {
+    "text": "FCFA",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "FCFA",
+    "mono": false
+   },
+   {
+    "text": "Fee",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Fee 375 FCFA",
+    "mono": false
+   },
+   {
+    "text": "375 FCFA",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Fee 375 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Total to debit",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Total to debit25,375 FCFA",
+    "mono": false
+   },
+   {
+    "text": "25,375 FCFA",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Total to debit25,375 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Balance after transfer",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Balance after transfer224,625 FCFA",
+    "mono": false
+   },
+   {
+    "text": "224,625 FCFA",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Balance after transfer224,625 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Back",
+    "tag": "button",
+    "path": "section>div>div>button",
+    "parent": "BackContinue",
+    "mono": false
+   },
+   {
+    "text": "Continue",
+    "tag": "button",
+    "path": "section>div>div>button",
+    "parent": "BackContinue",
+    "mono": false
+   },
+   {
+    "text": "Your account",
+    "tag": "h2",
+    "path": "div>aside>div>h2",
+    "parent": "Your accountANAmina Ngo BellCurrent accountAvailable balance250,000 FCFACM 001 2345 6789 01",
+    "mono": false
+   },
+   {
+    "text": "AN",
+    "tag": "div",
+    "path": "aside>div>div>div",
+    "parent": "ANAmina Ngo BellCurrent account",
+    "mono": false
+   },
+   {
+    "text": "Amina Ngo Bell",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Amina Ngo BellCurrent account",
+    "mono": false
+   },
+   {
+    "text": "Current account",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Amina Ngo BellCurrent account",
+    "mono": false
+   },
+   {
+    "text": "Available balance",
+    "tag": "p",
+    "path": "aside>div>div>p",
+    "parent": "Available balance250,000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "250,000 FCFA",
+    "tag": "p",
+    "path": "aside>div>div>p",
+    "parent": "Available balance250,000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "CM 001 2345 6789 01",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "Your accountANAmina Ngo BellCurrent accountAvailable balance250,000 FCFACM 001 2345 6789 01",
+    "mono": true
+   },
+   {
+    "text": "Security",
+    "tag": "h2",
+    "path": "aside>div>div>h2",
+    "parent": "Security",
+    "mono": false
+   },
+   {
+    "text": "Always verify the beneficiary name and number before confirming a transfer.",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "SecurityAlways verify the beneficiary name and number before confirming a transfer. Secure connection",
+    "mono": false
+   },
+   {
+    "text": "Secure connection",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "SecurityAlways verify the beneficiary name and number before confirming a transfer. Secure connection",
+    "mono": false
+   },
+   {
+    "text": "Safinum Pay — demonstration environment. Do not enter real personal data.",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Safinum PayOnline bankingFRANAmina Ngo Bell1Balance2Fees3Beneficiary4Summary5ConfirmationTransfer feesChoose the transfer type and amount. F",
+    "mono": false
+   }
+  ],
+  "fields": [
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "FR",
+    "value": ""
+   },
+   {
+    "tag": "select",
+    "type": "select-one",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "Safinum accountMobile MoneyOther bank",
+    "value": [
+     "Safinum account",
+     "Mobile Money",
+     "Other bank"
+    ]
+   },
+   {
+    "tag": "input",
+    "type": "number",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "",
+    "value": ""
+   },
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "Back",
+    "value": ""
+   },
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "Continue",
+    "value": ""
+   }
+  ]
+ },
+ "en_2_frais_other_bank": {
+  "texts": [
+   {
+    "text": "Test environment — fictional data, no real transaction.",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Test environment — fictional data, no real transaction.Test protocol Back to hackathon",
+    "mono": false
+   },
+   {
+    "text": "Test protocol",
+    "tag": "a",
+    "path": "div>div>div>a",
+    "parent": "Test environment — fictional data, no real transaction.Test protocol Back to hackathon",
+    "mono": false
+   },
+   {
+    "text": "Back to hackathon",
+    "tag": "a",
+    "path": "div>div>div>a",
+    "parent": "Test environment — fictional data, no real transaction.Test protocol Back to hackathon",
+    "mono": false
+   },
+   {
+    "text": "Safinum Pay",
+    "tag": "p",
+    "path": "header>div>div>p",
+    "parent": "Safinum PayOnline banking",
+    "mono": false
+   },
+   {
+    "text": "Online banking",
+    "tag": "p",
+    "path": "header>div>div>p",
+    "parent": "Safinum PayOnline banking",
+    "mono": false
+   },
+   {
+    "text": "FR",
+    "tag": "button",
+    "path": "div>header>div>button",
+    "parent": "FRANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "AN",
+    "tag": "div",
+    "path": "header>div>div>div",
+    "parent": "ANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "Amina Ngo Bell",
+    "tag": "span",
+    "path": "header>div>div>span",
+    "parent": "ANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "1",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "1Balance",
+    "mono": false
+   },
+   {
+    "text": "Balance",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "1Balance",
+    "mono": false
+   },
+   {
+    "text": "2",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "2Fees",
+    "mono": false
+   },
+   {
+    "text": "Fees",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "2Fees",
+    "mono": false
+   },
+   {
+    "text": "3",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "3Beneficiary",
+    "mono": false
+   },
+   {
+    "text": "Beneficiary",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "3Beneficiary",
+    "mono": false
+   },
+   {
+    "text": "4",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "4Summary",
+    "mono": false
+   },
+   {
+    "text": "Summary",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "4Summary",
+    "mono": false
+   },
+   {
+    "text": "5",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "5Confirmation",
+    "mono": false
+   },
+   {
+    "text": "Confirmation",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "5Confirmation",
+    "mono": false
+   },
+   {
+    "text": "Transfer fees",
+    "tag": "p",
+    "path": "div>section>div>p",
+    "parent": "Transfer feesChoose the transfer type and amount. Fees are calculated automatically.Operation typeSafinum accountMobile MoneyOther bank2% fe",
+    "mono": false
+   },
+   {
+    "text": "Choose the transfer type and amount. Fees are calculated automatically.",
+    "tag": "h2",
+    "path": "div>section>div>h2",
+    "parent": "Transfer feesChoose the transfer type and amount. Fees are calculated automatically.Operation typeSafinum accountMobile MoneyOther bank2% fe",
+    "mono": false
+   },
+   {
+    "text": "Operation type",
+    "tag": "label",
+    "path": "div>div>div>label",
+    "parent": "Operation typeSafinum accountMobile MoneyOther bank2% fee (min. 200 FCFA, max. 5,000 FCFA)",
+    "mono": false
+   },
+   {
+    "text": "2% fee (min. 200 FCFA, max. 5,000 FCFA)",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Operation typeSafinum accountMobile MoneyOther bank2% fee (min. 200 FCFA, max. 5,000 FCFA)",
+    "mono": false
+   },
+   {
+    "text": "Amount to send",
+    "tag": "label",
+    "path": "div>div>div>label",
+    "parent": "Amount to sendFCFA",
+    "mono": false
+   },
+   {
+    "text": "FCFA",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "FCFA",
+    "mono": false
+   },
+   {
+    "text": "Fee",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Fee 500 FCFA",
+    "mono": false
+   },
+   {
+    "text": "500 FCFA",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Fee 500 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Total to debit",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Total to debit25,500 FCFA",
+    "mono": false
+   },
+   {
+    "text": "25,500 FCFA",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Total to debit25,500 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Balance after transfer",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Balance after transfer224,500 FCFA",
+    "mono": false
+   },
+   {
+    "text": "224,500 FCFA",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Balance after transfer224,500 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Back",
+    "tag": "button",
+    "path": "section>div>div>button",
+    "parent": "BackContinue",
+    "mono": false
+   },
+   {
+    "text": "Continue",
+    "tag": "button",
+    "path": "section>div>div>button",
+    "parent": "BackContinue",
+    "mono": false
+   },
+   {
+    "text": "Your account",
+    "tag": "h2",
+    "path": "div>aside>div>h2",
+    "parent": "Your accountANAmina Ngo BellCurrent accountAvailable balance250,000 FCFACM 001 2345 6789 01",
+    "mono": false
+   },
+   {
+    "text": "AN",
+    "tag": "div",
+    "path": "aside>div>div>div",
+    "parent": "ANAmina Ngo BellCurrent account",
+    "mono": false
+   },
+   {
+    "text": "Amina Ngo Bell",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Amina Ngo BellCurrent account",
+    "mono": false
+   },
+   {
+    "text": "Current account",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Amina Ngo BellCurrent account",
+    "mono": false
+   },
+   {
+    "text": "Available balance",
+    "tag": "p",
+    "path": "aside>div>div>p",
+    "parent": "Available balance250,000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "250,000 FCFA",
+    "tag": "p",
+    "path": "aside>div>div>p",
+    "parent": "Available balance250,000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "CM 001 2345 6789 01",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "Your accountANAmina Ngo BellCurrent accountAvailable balance250,000 FCFACM 001 2345 6789 01",
+    "mono": true
+   },
+   {
+    "text": "Security",
+    "tag": "h2",
+    "path": "aside>div>div>h2",
+    "parent": "Security",
+    "mono": false
+   },
+   {
+    "text": "Always verify the beneficiary name and number before confirming a transfer.",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "SecurityAlways verify the beneficiary name and number before confirming a transfer. Secure connection",
+    "mono": false
+   },
+   {
+    "text": "Secure connection",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "SecurityAlways verify the beneficiary name and number before confirming a transfer. Secure connection",
+    "mono": false
+   },
+   {
+    "text": "Safinum Pay — demonstration environment. Do not enter real personal data.",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Safinum PayOnline bankingFRANAmina Ngo Bell1Balance2Fees3Beneficiary4Summary5ConfirmationTransfer feesChoose the transfer type and amount. F",
+    "mono": false
+   }
+  ],
+  "fields": [
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "FR",
+    "value": ""
+   },
+   {
+    "tag": "select",
+    "type": "select-one",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "Safinum accountMobile MoneyOther bank",
+    "value": [
+     "Safinum account",
+     "Mobile Money",
+     "Other bank"
+    ]
+   },
+   {
+    "tag": "input",
+    "type": "number",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "",
+    "value": ""
+   },
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "Back",
+    "value": ""
+   },
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "Continue",
+    "value": ""
+   }
+  ]
+ },
+ "en_3_beneficiaire": {
+  "texts": [
+   {
+    "text": "Test environment — fictional data, no real transaction.",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Test environment — fictional data, no real transaction.Test protocol Back to hackathon",
+    "mono": false
+   },
+   {
+    "text": "Test protocol",
+    "tag": "a",
+    "path": "div>div>div>a",
+    "parent": "Test environment — fictional data, no real transaction.Test protocol Back to hackathon",
+    "mono": false
+   },
+   {
+    "text": "Back to hackathon",
+    "tag": "a",
+    "path": "div>div>div>a",
+    "parent": "Test environment — fictional data, no real transaction.Test protocol Back to hackathon",
+    "mono": false
+   },
+   {
+    "text": "Safinum Pay",
+    "tag": "p",
+    "path": "header>div>div>p",
+    "parent": "Safinum PayOnline banking",
+    "mono": false
+   },
+   {
+    "text": "Online banking",
+    "tag": "p",
+    "path": "header>div>div>p",
+    "parent": "Safinum PayOnline banking",
+    "mono": false
+   },
+   {
+    "text": "FR",
+    "tag": "button",
+    "path": "div>header>div>button",
+    "parent": "FRANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "AN",
+    "tag": "div",
+    "path": "header>div>div>div",
+    "parent": "ANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "Amina Ngo Bell",
+    "tag": "span",
+    "path": "header>div>div>span",
+    "parent": "ANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "1",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "1Balance",
+    "mono": false
+   },
+   {
+    "text": "Balance",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "1Balance",
+    "mono": false
+   },
+   {
+    "text": "2",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "2Fees",
+    "mono": false
+   },
+   {
+    "text": "Fees",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "2Fees",
+    "mono": false
+   },
+   {
+    "text": "3",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "3Beneficiary",
+    "mono": false
+   },
+   {
+    "text": "Beneficiary",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "3Beneficiary",
+    "mono": false
+   },
+   {
+    "text": "4",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "4Summary",
+    "mono": false
+   },
+   {
+    "text": "Summary",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "4Summary",
+    "mono": false
+   },
+   {
+    "text": "5",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "5Confirmation",
+    "mono": false
+   },
+   {
+    "text": "Confirmation",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "5Confirmation",
+    "mono": false
+   },
+   {
+    "text": "Beneficiary",
+    "tag": "p",
+    "path": "div>section>div>p",
+    "parent": "BeneficiaryEnter the recipient details. Always verify the number before confirming.This beneficiary has never been used on this account. Ver",
+    "mono": false
+   },
+   {
+    "text": "Enter the recipient details. Always verify the number before confirming.",
+    "tag": "h2",
+    "path": "div>section>div>h2",
+    "parent": "BeneficiaryEnter the recipient details. Always verify the number before confirming.This beneficiary has never been used on this account. Ver",
+    "mono": false
+   },
+   {
+    "text": "This beneficiary has never been used on this account. Verify the number before continuing.",
+    "tag": "p",
+    "path": "section>div>div>p",
+    "parent": "This beneficiary has never been used on this account. Verify the number before continuing.",
+    "mono": false
+   },
+   {
+    "text": "Beneficiary name",
+    "tag": "label",
+    "path": "div>div>div>label",
+    "parent": "Beneficiary name",
+    "mono": false
+   },
+   {
+    "text": "Phone number",
+    "tag": "label",
+    "path": "div>div>div>label",
+    "parent": "Phone number",
+    "mono": false
+   },
+   {
+    "text": "Transfer reason",
+    "tag": "label",
+    "path": "div>div>div>label",
+    "parent": "Transfer reason",
+    "mono": false
+   },
+   {
+    "text": "Note (optional)",
+    "tag": "label",
+    "path": "div>div>div>label",
+    "parent": "Note (optional)",
+    "mono": false
+   },
+   {
+    "text": "I have verified the beneficiary name and phone number.",
+    "tag": "span",
+    "path": "div>div>label>span",
+    "parent": "I have verified the beneficiary name and phone number.",
+    "mono": false
+   },
+   {
+    "text": "Back",
+    "tag": "button",
+    "path": "section>div>div>button",
+    "parent": "BackContinue",
+    "mono": false
+   },
+   {
+    "text": "Continue",
+    "tag": "button",
+    "path": "section>div>div>button",
+    "parent": "BackContinue",
+    "mono": false
+   },
+   {
+    "text": "Your account",
+    "tag": "h2",
+    "path": "div>aside>div>h2",
+    "parent": "Your accountANAmina Ngo BellCurrent accountAvailable balance250,000 FCFACM 001 2345 6789 01",
+    "mono": false
+   },
+   {
+    "text": "AN",
+    "tag": "div",
+    "path": "aside>div>div>div",
+    "parent": "ANAmina Ngo BellCurrent account",
+    "mono": false
+   },
+   {
+    "text": "Amina Ngo Bell",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Amina Ngo BellCurrent account",
+    "mono": false
+   },
+   {
+    "text": "Current account",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Amina Ngo BellCurrent account",
+    "mono": false
+   },
+   {
+    "text": "Available balance",
+    "tag": "p",
+    "path": "aside>div>div>p",
+    "parent": "Available balance250,000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "250,000 FCFA",
+    "tag": "p",
+    "path": "aside>div>div>p",
+    "parent": "Available balance250,000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "CM 001 2345 6789 01",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "Your accountANAmina Ngo BellCurrent accountAvailable balance250,000 FCFACM 001 2345 6789 01",
+    "mono": true
+   },
+   {
+    "text": "Security",
+    "tag": "h2",
+    "path": "aside>div>div>h2",
+    "parent": "Security",
+    "mono": false
+   },
+   {
+    "text": "Always verify the beneficiary name and number before confirming a transfer.",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "SecurityAlways verify the beneficiary name and number before confirming a transfer. Secure connection",
+    "mono": false
+   },
+   {
+    "text": "Secure connection",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "SecurityAlways verify the beneficiary name and number before confirming a transfer. Secure connection",
+    "mono": false
+   },
+   {
+    "text": "Safinum Pay — demonstration environment. Do not enter real personal data.",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Safinum PayOnline bankingFRANAmina Ngo Bell1Balance2Fees3Beneficiary4Summary5ConfirmationBeneficiaryEnter the recipient details. Always veri",
+    "mono": false
+   }
+  ],
+  "fields": [
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "FR",
+    "value": ""
+   },
+   {
+    "tag": "input",
+    "type": "text",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "",
+    "value": ""
+   },
+   {
+    "tag": "input",
+    "type": "tel",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "",
+    "value": ""
+   },
+   {
+    "tag": "input",
+    "type": "text",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "",
+    "value": ""
+   },
+   {
+    "tag": "textarea",
+    "type": "textarea",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "",
+    "value": ""
+   },
+   {
+    "tag": "input",
+    "type": "checkbox",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "",
+    "value": ""
+   },
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "Back",
+    "value": ""
+   },
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "Continue",
+    "value": ""
+   }
+  ]
+ },
+ "en_3_erreur_champs_vides": {
+  "texts": [
+   {
+    "text": "Test environment — fictional data, no real transaction.",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Test environment — fictional data, no real transaction.Test protocol Back to hackathon",
+    "mono": false
+   },
+   {
+    "text": "Test protocol",
+    "tag": "a",
+    "path": "div>div>div>a",
+    "parent": "Test environment — fictional data, no real transaction.Test protocol Back to hackathon",
+    "mono": false
+   },
+   {
+    "text": "Back to hackathon",
+    "tag": "a",
+    "path": "div>div>div>a",
+    "parent": "Test environment — fictional data, no real transaction.Test protocol Back to hackathon",
+    "mono": false
+   },
+   {
+    "text": "Safinum Pay",
+    "tag": "p",
+    "path": "header>div>div>p",
+    "parent": "Safinum PayOnline banking",
+    "mono": false
+   },
+   {
+    "text": "Online banking",
+    "tag": "p",
+    "path": "header>div>div>p",
+    "parent": "Safinum PayOnline banking",
+    "mono": false
+   },
+   {
+    "text": "FR",
+    "tag": "button",
+    "path": "div>header>div>button",
+    "parent": "FRANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "AN",
+    "tag": "div",
+    "path": "header>div>div>div",
+    "parent": "ANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "Amina Ngo Bell",
+    "tag": "span",
+    "path": "header>div>div>span",
+    "parent": "ANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "1",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "1Balance",
+    "mono": false
+   },
+   {
+    "text": "Balance",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "1Balance",
+    "mono": false
+   },
+   {
+    "text": "2",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "2Fees",
+    "mono": false
+   },
+   {
+    "text": "Fees",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "2Fees",
+    "mono": false
+   },
+   {
+    "text": "3",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "3Beneficiary",
+    "mono": false
+   },
+   {
+    "text": "Beneficiary",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "3Beneficiary",
+    "mono": false
+   },
+   {
+    "text": "4",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "4Summary",
+    "mono": false
+   },
+   {
+    "text": "Summary",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "4Summary",
+    "mono": false
+   },
+   {
+    "text": "5",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "5Confirmation",
+    "mono": false
+   },
+   {
+    "text": "Confirmation",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "5Confirmation",
+    "mono": false
+   },
+   {
+    "text": "Security warning",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Security warningSecurity warning: verify the beneficiary phone number before continuing.SECURITY_001",
+    "mono": false
+   },
+   {
+    "text": "Security warning: verify the beneficiary phone number before continuing.",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Security warningSecurity warning: verify the beneficiary phone number before continuing.SECURITY_001",
+    "mono": false
+   },
+   {
+    "text": "SECURITY_001",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Security warningSecurity warning: verify the beneficiary phone number before continuing.SECURITY_001",
+    "mono": true
+   },
+   {
+    "text": "Beneficiary",
+    "tag": "p",
+    "path": "div>section>div>p",
+    "parent": "BeneficiaryEnter the recipient details. Always verify the number before confirming.This beneficiary has never been used on this account. Ver",
+    "mono": false
+   },
+   {
+    "text": "Enter the recipient details. Always verify the number before confirming.",
+    "tag": "h2",
+    "path": "div>section>div>h2",
+    "parent": "BeneficiaryEnter the recipient details. Always verify the number before confirming.This beneficiary has never been used on this account. Ver",
+    "mono": false
+   },
+   {
+    "text": "This beneficiary has never been used on this account. Verify the number before continuing.",
+    "tag": "p",
+    "path": "section>div>div>p",
+    "parent": "This beneficiary has never been used on this account. Verify the number before continuing.",
+    "mono": false
+   },
+   {
+    "text": "Beneficiary name",
+    "tag": "label",
+    "path": "div>div>div>label",
+    "parent": "Beneficiary name",
+    "mono": false
+   },
+   {
+    "text": "Phone number",
+    "tag": "label",
+    "path": "div>div>div>label",
+    "parent": "Phone number",
+    "mono": false
+   },
+   {
+    "text": "Transfer reason",
+    "tag": "label",
+    "path": "div>div>div>label",
+    "parent": "Transfer reason",
+    "mono": false
+   },
+   {
+    "text": "Note (optional)",
+    "tag": "label",
+    "path": "div>div>div>label",
+    "parent": "Note (optional)",
+    "mono": false
+   },
+   {
+    "text": "I have verified the beneficiary name and phone number.",
+    "tag": "span",
+    "path": "div>div>label>span",
+    "parent": "I have verified the beneficiary name and phone number.",
+    "mono": false
+   },
+   {
+    "text": "Back",
+    "tag": "button",
+    "path": "section>div>div>button",
+    "parent": "BackContinue",
+    "mono": false
+   },
+   {
+    "text": "Continue",
+    "tag": "button",
+    "path": "section>div>div>button",
+    "parent": "BackContinue",
+    "mono": false
+   },
+   {
+    "text": "Your account",
+    "tag": "h2",
+    "path": "div>aside>div>h2",
+    "parent": "Your accountANAmina Ngo BellCurrent accountAvailable balance250,000 FCFACM 001 2345 6789 01",
+    "mono": false
+   },
+   {
+    "text": "AN",
+    "tag": "div",
+    "path": "aside>div>div>div",
+    "parent": "ANAmina Ngo BellCurrent account",
+    "mono": false
+   },
+   {
+    "text": "Amina Ngo Bell",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Amina Ngo BellCurrent account",
+    "mono": false
+   },
+   {
+    "text": "Current account",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Amina Ngo BellCurrent account",
+    "mono": false
+   },
+   {
+    "text": "Available balance",
+    "tag": "p",
+    "path": "aside>div>div>p",
+    "parent": "Available balance250,000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "250,000 FCFA",
+    "tag": "p",
+    "path": "aside>div>div>p",
+    "parent": "Available balance250,000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "CM 001 2345 6789 01",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "Your accountANAmina Ngo BellCurrent accountAvailable balance250,000 FCFACM 001 2345 6789 01",
+    "mono": true
+   },
+   {
+    "text": "Security",
+    "tag": "h2",
+    "path": "aside>div>div>h2",
+    "parent": "Security",
+    "mono": false
+   },
+   {
+    "text": "Always verify the beneficiary name and number before confirming a transfer.",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "SecurityAlways verify the beneficiary name and number before confirming a transfer. Secure connection",
+    "mono": false
+   },
+   {
+    "text": "Secure connection",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "SecurityAlways verify the beneficiary name and number before confirming a transfer. Secure connection",
+    "mono": false
+   },
+   {
+    "text": "Safinum Pay — demonstration environment. Do not enter real personal data.",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Safinum PayOnline bankingFRANAmina Ngo Bell1Balance2Fees3Beneficiary4Summary5ConfirmationSecurity warningSecurity warning: verify the benefi",
+    "mono": false
+   }
+  ],
+  "fields": [
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "FR",
+    "value": ""
+   },
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "Dismiss",
+    "name": "",
+    "id": "",
+    "text": "",
+    "value": ""
+   },
+   {
+    "tag": "input",
+    "type": "text",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "",
+    "value": ""
+   },
+   {
+    "tag": "input",
+    "type": "tel",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "",
+    "value": ""
+   },
+   {
+    "tag": "input",
+    "type": "text",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "",
+    "value": ""
+   },
+   {
+    "tag": "textarea",
+    "type": "textarea",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "",
+    "value": ""
+   },
+   {
+    "tag": "input",
+    "type": "checkbox",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "",
+    "value": ""
+   },
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "Back",
+    "value": ""
+   },
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "Continue",
+    "value": ""
+   }
+  ]
+ },
+ "en_4_recapitulatif": {
+  "texts": [
+   {
+    "text": "Test environment — fictional data, no real transaction.",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Test environment — fictional data, no real transaction.Test protocol Back to hackathon",
+    "mono": false
+   },
+   {
+    "text": "Test protocol",
+    "tag": "a",
+    "path": "div>div>div>a",
+    "parent": "Test environment — fictional data, no real transaction.Test protocol Back to hackathon",
+    "mono": false
+   },
+   {
+    "text": "Back to hackathon",
+    "tag": "a",
+    "path": "div>div>div>a",
+    "parent": "Test environment — fictional data, no real transaction.Test protocol Back to hackathon",
+    "mono": false
+   },
+   {
+    "text": "Safinum Pay",
+    "tag": "p",
+    "path": "header>div>div>p",
+    "parent": "Safinum PayOnline banking",
+    "mono": false
+   },
+   {
+    "text": "Online banking",
+    "tag": "p",
+    "path": "header>div>div>p",
+    "parent": "Safinum PayOnline banking",
+    "mono": false
+   },
+   {
+    "text": "FR",
+    "tag": "button",
+    "path": "div>header>div>button",
+    "parent": "FRANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "AN",
+    "tag": "div",
+    "path": "header>div>div>div",
+    "parent": "ANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "Amina Ngo Bell",
+    "tag": "span",
+    "path": "header>div>div>span",
+    "parent": "ANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "1",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "1Balance",
+    "mono": false
+   },
+   {
+    "text": "Balance",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "1Balance",
+    "mono": false
+   },
+   {
+    "text": "2",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "2Fees",
+    "mono": false
+   },
+   {
+    "text": "Fees",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "2Fees",
+    "mono": false
+   },
+   {
+    "text": "3",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "3Beneficiary",
+    "mono": false
+   },
+   {
+    "text": "Beneficiary",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "3Beneficiary",
+    "mono": false
+   },
+   {
+    "text": "4",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "4Summary",
+    "mono": false
+   },
+   {
+    "text": "Summary",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "4Summary",
+    "mono": false
+   },
+   {
+    "text": "5",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "5Confirmation",
+    "mono": false
+   },
+   {
+    "text": "Confirmation",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "5Confirmation",
+    "mono": false
+   },
+   {
+    "text": "Summary",
+    "tag": "p",
+    "path": "div>section>div>p",
+    "parent": "SummaryCheck the details before confirming the transfer.Amount25,000 FCFAFee0 FCFATotal debited25,000 FCFABeneficiaryClient FictifPhone60000",
+    "mono": false
+   },
+   {
+    "text": "Check the details before confirming the transfer.",
+    "tag": "h2",
+    "path": "div>section>div>h2",
+    "parent": "SummaryCheck the details before confirming the transfer.Amount25,000 FCFAFee0 FCFATotal debited25,000 FCFABeneficiaryClient FictifPhone60000",
+    "mono": false
+   },
+   {
+    "text": "Amount",
+    "tag": "dt",
+    "path": "div>dl>div>dt",
+    "parent": "Amount25,000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "25,000 FCFA",
+    "tag": "dd",
+    "path": "div>dl>div>dd",
+    "parent": "Amount25,000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Fee",
+    "tag": "dt",
+    "path": "div>dl>div>dt",
+    "parent": "Fee0 FCFA",
+    "mono": false
+   },
+   {
+    "text": "0 FCFA",
+    "tag": "dd",
+    "path": "div>dl>div>dd",
+    "parent": "Fee0 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Total debited",
+    "tag": "dt",
+    "path": "div>dl>div>dt",
+    "parent": "Total debited25,000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "25,000 FCFA",
+    "tag": "dd",
+    "path": "div>dl>div>dd",
+    "parent": "Total debited25,000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Beneficiary",
+    "tag": "dt",
+    "path": "div>dl>div>dt",
+    "parent": "BeneficiaryClient Fictif",
+    "mono": false
+   },
+   {
+    "text": "Client Fictif",
+    "tag": "dd",
+    "path": "div>dl>div>dd",
+    "parent": "BeneficiaryClient Fictif",
+    "mono": false
+   },
+   {
+    "text": "Phone",
+    "tag": "dt",
+    "path": "div>dl>div>dt",
+    "parent": "Phone600000000",
+    "mono": false
+   },
+   {
+    "text": "600000000",
+    "tag": "dd",
+    "path": "div>dl>div>dd",
+    "parent": "Phone600000000",
+    "mono": false
+   },
+   {
+    "text": "Reference",
+    "tag": "dt",
+    "path": "div>dl>div>dt",
+    "parent": "ReferenceSAF-2026-TUDHGO",
+    "mono": false
+   },
+   {
+    "text": "SAF-2026-TUDHGO",
+    "tag": "dd",
+    "path": "div>dl>div>dd",
+    "parent": "ReferenceSAF-2026-TUDHGO",
+    "mono": true
+   },
+   {
+    "text": "Operation",
+    "tag": "dt",
+    "path": "div>dl>div>dt",
+    "parent": "OperationSafinum account",
+    "mono": false
+   },
+   {
+    "text": "Safinum account",
+    "tag": "dd",
+    "path": "div>dl>div>dd",
+    "parent": "OperationSafinum account",
+    "mono": false
+   },
+   {
+    "text": "I confirm the information above is correct.",
+    "tag": "span",
+    "path": "section>div>label>span",
+    "parent": "I confirm the information above is correct.",
+    "mono": false
+   },
+   {
+    "text": "Edit",
+    "tag": "button",
+    "path": "section>div>div>button",
+    "parent": "Edit Confirm transfer",
+    "mono": false
+   },
+   {
+    "text": "Confirm transfer",
+    "tag": "button",
+    "path": "section>div>div>button",
+    "parent": "Edit Confirm transfer",
+    "mono": false
+   },
+   {
+    "text": "Your account",
+    "tag": "h2",
+    "path": "div>aside>div>h2",
+    "parent": "Your accountANAmina Ngo BellCurrent accountAvailable balance250,000 FCFACM 001 2345 6789 01",
+    "mono": false
+   },
+   {
+    "text": "AN",
+    "tag": "div",
+    "path": "aside>div>div>div",
+    "parent": "ANAmina Ngo BellCurrent account",
+    "mono": false
+   },
+   {
+    "text": "Amina Ngo Bell",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Amina Ngo BellCurrent account",
+    "mono": false
+   },
+   {
+    "text": "Current account",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Amina Ngo BellCurrent account",
+    "mono": false
+   },
+   {
+    "text": "Available balance",
+    "tag": "p",
+    "path": "aside>div>div>p",
+    "parent": "Available balance250,000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "250,000 FCFA",
+    "tag": "p",
+    "path": "aside>div>div>p",
+    "parent": "Available balance250,000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "CM 001 2345 6789 01",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "Your accountANAmina Ngo BellCurrent accountAvailable balance250,000 FCFACM 001 2345 6789 01",
+    "mono": true
+   },
+   {
+    "text": "Security",
+    "tag": "h2",
+    "path": "aside>div>div>h2",
+    "parent": "Security",
+    "mono": false
+   },
+   {
+    "text": "Always verify the beneficiary name and number before confirming a transfer.",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "SecurityAlways verify the beneficiary name and number before confirming a transfer. Secure connection",
+    "mono": false
+   },
+   {
+    "text": "Secure connection",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "SecurityAlways verify the beneficiary name and number before confirming a transfer. Secure connection",
+    "mono": false
+   },
+   {
+    "text": "Safinum Pay — demonstration environment. Do not enter real personal data.",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Safinum PayOnline bankingFRANAmina Ngo Bell1Balance2Fees3Beneficiary4Summary5ConfirmationSummaryCheck the details before confirming the tran",
+    "mono": false
+   }
+  ],
+  "fields": [
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "FR",
+    "value": ""
+   },
+   {
+    "tag": "input",
+    "type": "checkbox",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "",
+    "value": ""
+   },
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "Edit",
+    "value": ""
+   },
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "Confirm transfer",
+    "value": ""
+   }
+  ]
+ },
+ "en_4_erreur_confirmation": {
+  "texts": [
+   {
+    "text": "Test environment — fictional data, no real transaction.",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Test environment — fictional data, no real transaction.Test protocol Back to hackathon",
+    "mono": false
+   },
+   {
+    "text": "Test protocol",
+    "tag": "a",
+    "path": "div>div>div>a",
+    "parent": "Test environment — fictional data, no real transaction.Test protocol Back to hackathon",
+    "mono": false
+   },
+   {
+    "text": "Back to hackathon",
+    "tag": "a",
+    "path": "div>div>div>a",
+    "parent": "Test environment — fictional data, no real transaction.Test protocol Back to hackathon",
+    "mono": false
+   },
+   {
+    "text": "Safinum Pay",
+    "tag": "p",
+    "path": "header>div>div>p",
+    "parent": "Safinum PayOnline banking",
+    "mono": false
+   },
+   {
+    "text": "Online banking",
+    "tag": "p",
+    "path": "header>div>div>p",
+    "parent": "Safinum PayOnline banking",
+    "mono": false
+   },
+   {
+    "text": "FR",
+    "tag": "button",
+    "path": "div>header>div>button",
+    "parent": "FRANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "AN",
+    "tag": "div",
+    "path": "header>div>div>div",
+    "parent": "ANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "Amina Ngo Bell",
+    "tag": "span",
+    "path": "header>div>div>span",
+    "parent": "ANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "1",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "1Balance",
+    "mono": false
+   },
+   {
+    "text": "Balance",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "1Balance",
+    "mono": false
+   },
+   {
+    "text": "2",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "2Fees",
+    "mono": false
+   },
+   {
+    "text": "Fees",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "2Fees",
+    "mono": false
+   },
+   {
+    "text": "3",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "3Beneficiary",
+    "mono": false
+   },
+   {
+    "text": "Beneficiary",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "3Beneficiary",
+    "mono": false
+   },
+   {
+    "text": "4",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "4Summary",
+    "mono": false
+   },
+   {
+    "text": "Summary",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "4Summary",
+    "mono": false
+   },
+   {
+    "text": "5",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "5Confirmation",
+    "mono": false
+   },
+   {
+    "text": "Confirmation",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "5Confirmation",
+    "mono": false
+   },
+   {
+    "text": "An error occurred",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "An error occurredYou must confirm the details before validating the transfer.CONFIRM_001",
+    "mono": false
+   },
+   {
+    "text": "You must confirm the details before validating the transfer.",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "An error occurredYou must confirm the details before validating the transfer.CONFIRM_001",
+    "mono": false
+   },
+   {
+    "text": "CONFIRM_001",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "An error occurredYou must confirm the details before validating the transfer.CONFIRM_001",
+    "mono": true
+   },
+   {
+    "text": "Summary",
+    "tag": "p",
+    "path": "div>section>div>p",
+    "parent": "SummaryCheck the details before confirming the transfer.Amount25,000 FCFAFee0 FCFATotal debited25,000 FCFABeneficiaryClient FictifPhone60000",
+    "mono": false
+   },
+   {
+    "text": "Check the details before confirming the transfer.",
+    "tag": "h2",
+    "path": "div>section>div>h2",
+    "parent": "SummaryCheck the details before confirming the transfer.Amount25,000 FCFAFee0 FCFATotal debited25,000 FCFABeneficiaryClient FictifPhone60000",
+    "mono": false
+   },
+   {
+    "text": "Amount",
+    "tag": "dt",
+    "path": "div>dl>div>dt",
+    "parent": "Amount25,000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "25,000 FCFA",
+    "tag": "dd",
+    "path": "div>dl>div>dd",
+    "parent": "Amount25,000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Fee",
+    "tag": "dt",
+    "path": "div>dl>div>dt",
+    "parent": "Fee0 FCFA",
+    "mono": false
+   },
+   {
+    "text": "0 FCFA",
+    "tag": "dd",
+    "path": "div>dl>div>dd",
+    "parent": "Fee0 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Total debited",
+    "tag": "dt",
+    "path": "div>dl>div>dt",
+    "parent": "Total debited25,000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "25,000 FCFA",
+    "tag": "dd",
+    "path": "div>dl>div>dd",
+    "parent": "Total debited25,000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Beneficiary",
+    "tag": "dt",
+    "path": "div>dl>div>dt",
+    "parent": "BeneficiaryClient Fictif",
+    "mono": false
+   },
+   {
+    "text": "Client Fictif",
+    "tag": "dd",
+    "path": "div>dl>div>dd",
+    "parent": "BeneficiaryClient Fictif",
+    "mono": false
+   },
+   {
+    "text": "Phone",
+    "tag": "dt",
+    "path": "div>dl>div>dt",
+    "parent": "Phone600000000",
+    "mono": false
+   },
+   {
+    "text": "600000000",
+    "tag": "dd",
+    "path": "div>dl>div>dd",
+    "parent": "Phone600000000",
+    "mono": false
+   },
+   {
+    "text": "Reference",
+    "tag": "dt",
+    "path": "div>dl>div>dt",
+    "parent": "ReferenceSAF-2026-TUDHGO",
+    "mono": false
+   },
+   {
+    "text": "SAF-2026-TUDHGO",
+    "tag": "dd",
+    "path": "div>dl>div>dd",
+    "parent": "ReferenceSAF-2026-TUDHGO",
+    "mono": true
+   },
+   {
+    "text": "Operation",
+    "tag": "dt",
+    "path": "div>dl>div>dt",
+    "parent": "OperationSafinum account",
+    "mono": false
+   },
+   {
+    "text": "Safinum account",
+    "tag": "dd",
+    "path": "div>dl>div>dd",
+    "parent": "OperationSafinum account",
+    "mono": false
+   },
+   {
+    "text": "I confirm the information above is correct.",
+    "tag": "span",
+    "path": "section>div>label>span",
+    "parent": "I confirm the information above is correct.",
+    "mono": false
+   },
+   {
+    "text": "Edit",
+    "tag": "button",
+    "path": "section>div>div>button",
+    "parent": "Edit Confirm transfer",
+    "mono": false
+   },
+   {
+    "text": "Confirm transfer",
+    "tag": "button",
+    "path": "section>div>div>button",
+    "parent": "Edit Confirm transfer",
+    "mono": false
+   },
+   {
+    "text": "Your account",
+    "tag": "h2",
+    "path": "div>aside>div>h2",
+    "parent": "Your accountANAmina Ngo BellCurrent accountAvailable balance250,000 FCFACM 001 2345 6789 01",
+    "mono": false
+   },
+   {
+    "text": "AN",
+    "tag": "div",
+    "path": "aside>div>div>div",
+    "parent": "ANAmina Ngo BellCurrent account",
+    "mono": false
+   },
+   {
+    "text": "Amina Ngo Bell",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Amina Ngo BellCurrent account",
+    "mono": false
+   },
+   {
+    "text": "Current account",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Amina Ngo BellCurrent account",
+    "mono": false
+   },
+   {
+    "text": "Available balance",
+    "tag": "p",
+    "path": "aside>div>div>p",
+    "parent": "Available balance250,000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "250,000 FCFA",
+    "tag": "p",
+    "path": "aside>div>div>p",
+    "parent": "Available balance250,000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "CM 001 2345 6789 01",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "Your accountANAmina Ngo BellCurrent accountAvailable balance250,000 FCFACM 001 2345 6789 01",
+    "mono": true
+   },
+   {
+    "text": "Security",
+    "tag": "h2",
+    "path": "aside>div>div>h2",
+    "parent": "Security",
+    "mono": false
+   },
+   {
+    "text": "Always verify the beneficiary name and number before confirming a transfer.",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "SecurityAlways verify the beneficiary name and number before confirming a transfer. Secure connection",
+    "mono": false
+   },
+   {
+    "text": "Secure connection",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "SecurityAlways verify the beneficiary name and number before confirming a transfer. Secure connection",
+    "mono": false
+   },
+   {
+    "text": "Safinum Pay — demonstration environment. Do not enter real personal data.",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Safinum PayOnline bankingFRANAmina Ngo Bell1Balance2Fees3Beneficiary4Summary5ConfirmationAn error occurredYou must confirm the details befor",
+    "mono": false
+   }
+  ],
+  "fields": [
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "FR",
+    "value": ""
+   },
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "Dismiss",
+    "name": "",
+    "id": "",
+    "text": "",
+    "value": ""
+   },
+   {
+    "tag": "input",
+    "type": "checkbox",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "",
+    "value": ""
+   },
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "Edit",
+    "value": ""
+   },
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "Confirm transfer",
+    "value": ""
+   }
+  ]
+ },
+ "en_5_recu": {
+  "texts": [
+   {
+    "text": "Test environment — fictional data, no real transaction.",
+    "tag": "span",
+    "path": "div>div>div>span",
+    "parent": "Test environment — fictional data, no real transaction.Test protocol Back to hackathon",
+    "mono": false
+   },
+   {
+    "text": "Test protocol",
+    "tag": "a",
+    "path": "div>div>div>a",
+    "parent": "Test environment — fictional data, no real transaction.Test protocol Back to hackathon",
+    "mono": false
+   },
+   {
+    "text": "Back to hackathon",
+    "tag": "a",
+    "path": "div>div>div>a",
+    "parent": "Test environment — fictional data, no real transaction.Test protocol Back to hackathon",
+    "mono": false
+   },
+   {
+    "text": "Safinum Pay",
+    "tag": "p",
+    "path": "header>div>div>p",
+    "parent": "Safinum PayOnline banking",
+    "mono": false
+   },
+   {
+    "text": "Online banking",
+    "tag": "p",
+    "path": "header>div>div>p",
+    "parent": "Safinum PayOnline banking",
+    "mono": false
+   },
+   {
+    "text": "FR",
+    "tag": "button",
+    "path": "div>header>div>button",
+    "parent": "FRANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "AN",
+    "tag": "div",
+    "path": "header>div>div>div",
+    "parent": "ANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "Amina Ngo Bell",
+    "tag": "span",
+    "path": "header>div>div>span",
+    "parent": "ANAmina Ngo Bell",
+    "mono": false
+   },
+   {
+    "text": "1",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "1Balance",
+    "mono": false
+   },
+   {
+    "text": "Balance",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "1Balance",
+    "mono": false
+   },
+   {
+    "text": "2",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "2Fees",
+    "mono": false
+   },
+   {
+    "text": "Fees",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "2Fees",
+    "mono": false
+   },
+   {
+    "text": "3",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "3Beneficiary",
+    "mono": false
+   },
+   {
+    "text": "Beneficiary",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "3Beneficiary",
+    "mono": false
+   },
+   {
+    "text": "4",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "4Summary",
+    "mono": false
+   },
+   {
+    "text": "Summary",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "4Summary",
+    "mono": false
+   },
+   {
+    "text": "5",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "5Confirmation",
+    "mono": false
+   },
+   {
+    "text": "Confirmation",
+    "tag": "span",
+    "path": "div>ol>li>span",
+    "parent": "5Confirmation",
+    "mono": false
+   },
+   {
+    "text": "Transfer completed",
+    "tag": "h2",
+    "path": "section>div>div>h2",
+    "parent": "Transfer completedYour transfer has been sent successfully.",
+    "mono": false
+   },
+   {
+    "text": "Your transfer has been sent successfully.",
+    "tag": "p",
+    "path": "section>div>div>p",
+    "parent": "Transfer completedYour transfer has been sent successfully.",
+    "mono": false
+   },
+   {
+    "text": "Reference",
+    "tag": "dt",
+    "path": "div>dl>div>dt",
+    "parent": "ReferenceSAF-2026-TUDHGO",
+    "mono": false
+   },
+   {
+    "text": "SAF-2026-TUDHGO",
+    "tag": "dd",
+    "path": "div>dl>div>dd",
+    "parent": "ReferenceSAF-2026-TUDHGO",
+    "mono": true
+   },
+   {
+    "text": "Amount",
+    "tag": "dt",
+    "path": "div>dl>div>dt",
+    "parent": "Amount25,000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "25,000 FCFA",
+    "tag": "dd",
+    "path": "div>dl>div>dd",
+    "parent": "Amount25,000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Fee",
+    "tag": "dt",
+    "path": "div>dl>div>dt",
+    "parent": "Fee0 FCFA",
+    "mono": false
+   },
+   {
+    "text": "0 FCFA",
+    "tag": "dd",
+    "path": "div>dl>div>dd",
+    "parent": "Fee0 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Total debited",
+    "tag": "dt",
+    "path": "div>dl>div>dt",
+    "parent": "Total debited25,000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "25,000 FCFA",
+    "tag": "dd",
+    "path": "div>dl>div>dd",
+    "parent": "Total debited25,000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "Beneficiary",
+    "tag": "dt",
+    "path": "div>dl>div>dt",
+    "parent": "BeneficiaryClient Fictif",
+    "mono": false
+   },
+   {
+    "text": "Client Fictif",
+    "tag": "dd",
+    "path": "div>dl>div>dd",
+    "parent": "BeneficiaryClient Fictif",
+    "mono": false
+   },
+   {
+    "text": "Status",
+    "tag": "dt",
+    "path": "div>dl>div>dt",
+    "parent": "Status Success",
+    "mono": false
+   },
+   {
+    "text": "Success",
+    "tag": "dd",
+    "path": "div>dl>div>dd",
+    "parent": "Status Success",
+    "mono": false
+   },
+   {
+    "text": "New transfer",
+    "tag": "button",
+    "path": "section>div>div>button",
+    "parent": "New transfer",
+    "mono": false
+   },
+   {
+    "text": "Your account",
+    "tag": "h2",
+    "path": "div>aside>div>h2",
+    "parent": "Your accountANAmina Ngo BellCurrent accountAvailable balance250,000 FCFACM 001 2345 6789 01",
+    "mono": false
+   },
+   {
+    "text": "AN",
+    "tag": "div",
+    "path": "aside>div>div>div",
+    "parent": "ANAmina Ngo BellCurrent account",
+    "mono": false
+   },
+   {
+    "text": "Amina Ngo Bell",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Amina Ngo BellCurrent account",
+    "mono": false
+   },
+   {
+    "text": "Current account",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Amina Ngo BellCurrent account",
+    "mono": false
+   },
+   {
+    "text": "Available balance",
+    "tag": "p",
+    "path": "aside>div>div>p",
+    "parent": "Available balance250,000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "250,000 FCFA",
+    "tag": "p",
+    "path": "aside>div>div>p",
+    "parent": "Available balance250,000 FCFA",
+    "mono": false
+   },
+   {
+    "text": "CM 001 2345 6789 01",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "Your accountANAmina Ngo BellCurrent accountAvailable balance250,000 FCFACM 001 2345 6789 01",
+    "mono": true
+   },
+   {
+    "text": "Security",
+    "tag": "h2",
+    "path": "aside>div>div>h2",
+    "parent": "Security",
+    "mono": false
+   },
+   {
+    "text": "Always verify the beneficiary name and number before confirming a transfer.",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "SecurityAlways verify the beneficiary name and number before confirming a transfer. Secure connection",
+    "mono": false
+   },
+   {
+    "text": "Secure connection",
+    "tag": "p",
+    "path": "div>aside>div>p",
+    "parent": "SecurityAlways verify the beneficiary name and number before confirming a transfer. Secure connection",
+    "mono": false
+   },
+   {
+    "text": "Safinum Pay — demonstration environment. Do not enter real personal data.",
+    "tag": "p",
+    "path": "div>div>div>p",
+    "parent": "Safinum PayOnline bankingFRANAmina Ngo Bell1Balance2Fees3Beneficiary4Summary5ConfirmationTransfer completedYour transfer has been sent succe",
+    "mono": false
+   }
+  ],
+  "fields": [
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "FR",
+    "value": ""
+   },
+   {
+    "tag": "button",
+    "type": "button",
+    "placeholder": "",
+    "aria": "",
+    "name": "",
+    "id": "",
+    "text": "New transfer",
+    "value": ""
+   }
+  ]
+ }
+}

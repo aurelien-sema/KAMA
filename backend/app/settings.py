@@ -25,15 +25,21 @@ class Settings:
     trust_proxy: bool = False
     rate_per_min: int = 60
     voice_rate_per_min: int = 12
+    ask_rate_per_min: int = 6  # questions au LLM local : plus couteuses
     global_rate_per_min: int = 1200
     max_json_bytes: int = 4096
     max_audio_bytes: int = 960_100  # 30 s en PCM 16 bits, 16 kHz, mono, plus l'en-tete WAV
     max_concurrent_models: int = 2
     near_match_threshold: float = 0.86
     mt_allow_critical: bool = False
-    models_dir: Path = REPO_DIR.parent / "models"
+    models_dir: Path = REPO_DIR / "models"  # monte en lecture seule sur /models par docker-compose
     content_dir: Path = REPO_DIR / "content-data"
     routes_file: Path = BACKEND_DIR / "config" / "routes.json"
+    clips_dir: Path | None = None  # enregistrements valides ; par defaut models_dir/poids/audio
+
+    @property
+    def clips_path(self) -> Path:
+        return self.clips_dir or self.models_dir / "poids" / "audio"
 
     @property
     def is_prod(self) -> bool:
@@ -61,6 +67,7 @@ def load_settings() -> Settings:
         trust_proxy=_bool("KAMA_TRUST_PROXY", d.trust_proxy),
         rate_per_min=_int("KAMA_RATE_PER_MIN", d.rate_per_min),
         voice_rate_per_min=_int("KAMA_VOICE_RATE_PER_MIN", d.voice_rate_per_min),
+        ask_rate_per_min=_int("KAMA_ASK_RATE_PER_MIN", d.ask_rate_per_min),
         global_rate_per_min=_int("KAMA_GLOBAL_RATE_PER_MIN", d.global_rate_per_min),
         max_concurrent_models=_int("KAMA_MAX_CONCURRENT_MODELS", d.max_concurrent_models),
         near_match_threshold=float(os.environ.get("KAMA_NEAR_MATCH_THRESHOLD", d.near_match_threshold)),
@@ -68,6 +75,7 @@ def load_settings() -> Settings:
         models_dir=Path(os.environ.get("KAMA_MODELS_DIR", d.models_dir)),
         content_dir=Path(os.environ.get("KAMA_CONTENT_DIR", d.content_dir)),
         routes_file=Path(os.environ.get("KAMA_ROUTES_FILE", d.routes_file)),
+        clips_dir=Path(os.environ["KAMA_CLIPS_DIR"]) if os.environ.get("KAMA_CLIPS_DIR") else None,
     )
     if settings.is_prod and not settings.allowed_origins and not settings.allow_firefox:
         raise RuntimeError("KAMA_ALLOWED_ORIGINS est obligatoire en production.")

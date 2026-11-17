@@ -1,0 +1,269 @@
+{
+ "_note": "Lecture des montants a voix haute : suite de mots anglais (pidgin). Reference de backend/app/numbers.py ; kama_frontend/lib/nombres.ts doit donner les memes mots. Une chaine illisible ne se lit pas.",
+ "vectors": [
+  {
+   "input": "0 FCFA",
+   "words": [
+    "zero",
+    "franc"
+   ]
+  },
+  {
+   "input": "1 FCFA",
+   "words": [
+    "one",
+    "franc"
+   ]
+  },
+  {
+   "input": "12 FCFA",
+   "words": [
+    "twelve",
+    "franc"
+   ]
+  },
+  {
+   "input": "20 FCFA",
+   "words": [
+    "twenty",
+    "franc"
+   ]
+  },
+  {
+   "input": "21 FCFA",
+   "words": [
+    "twenty",
+    "one",
+    "franc"
+   ]
+  },
+  {
+   "input": "100 FCFA",
+   "words": [
+    "one",
+    "hundred",
+    "franc"
+   ]
+  },
+  {
+   "input": "101 FCFA",
+   "words": [
+    "one",
+    "hundred",
+    "one",
+    "franc"
+   ]
+  },
+  {
+   "input": "500 FCFA",
+   "words": [
+    "five",
+    "hundred",
+    "franc"
+   ]
+  },
+  {
+   "input": "999 FCFA",
+   "words": [
+    "nine",
+    "hundred",
+    "ninety",
+    "nine",
+    "franc"
+   ]
+  },
+  {
+   "input": "1 000 FCFA",
+   "words": [
+    "one",
+    "thousand",
+    "franc"
+   ]
+  },
+  {
+   "input": "1 500 FCFA",
+   "words": [
+    "one",
+    "thousand",
+    "five",
+    "hundred",
+    "franc"
+   ]
+  },
+  {
+   "input": "2 000 FCFA",
+   "words": [
+    "two",
+    "thousand",
+    "franc"
+   ]
+  },
+  {
+   "input": "12 500 FCFA",
+   "words": [
+    "twelve",
+    "thousand",
+    "five",
+    "hundred",
+    "franc"
+   ]
+  },
+  {
+   "input": "22 500 FCFA",
+   "words": [
+    "twenty",
+    "two",
+    "thousand",
+    "five",
+    "hundred",
+    "franc"
+   ]
+  },
+  {
+   "input": "25 000 FCFA",
+   "words": [
+    "twenty",
+    "five",
+    "thousand",
+    "franc"
+   ]
+  },
+  {
+   "input": "25 500 FCFA",
+   "words": [
+    "twenty",
+    "five",
+    "thousand",
+    "five",
+    "hundred",
+    "franc"
+   ]
+  },
+  {
+   "input": "99 999 FCFA",
+   "words": [
+    "ninety",
+    "nine",
+    "thousand",
+    "nine",
+    "hundred",
+    "ninety",
+    "nine",
+    "franc"
+   ]
+  },
+  {
+   "input": "100 000 FCFA",
+   "words": [
+    "one",
+    "hundred",
+    "thousand",
+    "franc"
+   ]
+  },
+  {
+   "input": "250 000 FCFA",
+   "words": [
+    "two",
+    "hundred",
+    "fifty",
+    "thousand",
+    "franc"
+   ]
+  },
+  {
+   "input": "1 000 000 FCFA",
+   "words": [
+    "one",
+    "million",
+    "franc"
+   ]
+  },
+  {
+   "input": "2 345 678 FCFA",
+   "words": [
+    "two",
+    "million",
+    "three",
+    "hundred",
+    "forty",
+    "five",
+    "thousand",
+    "six",
+    "hundred",
+    "seventy",
+    "eight",
+    "franc"
+   ]
+  },
+  {
+   "input": "-3 000 FCFA",
+   "words": [
+    "minus",
+    "three",
+    "thousand",
+    "franc"
+   ]
+  },
+  {
+   "input": "+50 000 FCFA",
+   "words": [
+    "fifty",
+    "thousand",
+    "franc"
+   ]
+  },
+  {
+   "input": "25 500 FCFA",
+   "words": [
+    "twenty",
+    "five",
+    "thousand",
+    "five",
+    "hundred",
+    "franc"
+   ]
+  },
+  {
+   "input": "12,50 FCFA",
+   "words": [
+    "twelve",
+    "point",
+    "five",
+    "zero",
+    "franc"
+   ]
+  },
+  {
+   "input": "500",
+   "words": [
+    "five",
+    "hundred"
+   ]
+  },
+  {
+   "input": "1.500 FCFA",
+   "words": [
+    "one",
+    "thousand",
+    "five",
+    "hundred",
+    "franc"
+   ]
+  },
+  {
+   "input": "3000 XAF",
+   "words": [
+    "three",
+    "thousand",
+    "franc"
+   ]
+  }
+ ],
+ "unreadable": [
+  "abc",
+  "12 EUR",
+  "",
+  "FCFA"
+ ]
+}

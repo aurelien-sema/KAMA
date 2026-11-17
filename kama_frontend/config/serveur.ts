@@ -1,12 +1,23 @@
 /**
- * Adresse du serveur de Kama (dossier `backend/`, contrat dans backend/contracts/openapi.json).
+ * Adresse du serveur intermédiaire de Kama (traduction, voix, reconnaissance des commandes ; dossier `backend/`,
+ * contrat dans backend/contracts/openapi.json).
  *
- * `null` = serveur pas encore en ligne : Kama fonctionne en MODE SIMULATION. La voix est bien
- * enregistrée et transmise au service worker, qui répond « simulation » au lieu d'appeler le
- * serveur. Quand le serveur sera hébergé, écrire ici son adresse HTTPS (sans « / » final) :
- * c'est le seul changement à faire côté extension, l'autorisation réseau en découle.
+ * Aucune clé ni secret ici : n'importe qui peut décompresser l'extension (sécurité). Le serveur garde les modèles.
+ * Par défaut : le serveur hébergé de l'équipe (VPS, déployé par .github/workflows/ci.yml), utilisé par la version jury.
+ * Serveur local (`backend/scripts/lancer_demo.ps1`) : `npm run build:local` (WXT_KAMA_API=http://127.0.0.1:8000).
+ * wxt.config.ts lit la même variable pour l'autorisation réseau (il ne peut pas importer ce fichier).
  */
-export const SERVEUR_KAMA: string | null = "https://kama-project.duckdns.org";
+export const ADRESSE_PAR_DEFAUT = 'https://kama-project.duckdns.org';
+export const URL_SERVEUR: string = (import.meta.env.WXT_KAMA_API as string | undefined) ?? ADRESSE_PAR_DEFAUT;
 
-/** Au-delà, la demande est abandonnée et Kama propose « Réessayer ». */
-export const DELAI_SERVEUR_MS = 15000;
+/** Délais maximaux avant de dire « pas de connexion » (millisecondes). */
+// La voix de synthèse tourne sur processeur : une phrase longue peut prendre plus de 10 s sur une petite machine.
+export const DELAIS = {
+  traduction: 8000,
+  voix: 45000,
+  reconnaissance: 15000,
+  // Question au modèle local : 20 s de génération au serveur + traductions + marge réseau.
+  question: 60000,
+  capacites: 4000,
+} as const;
+

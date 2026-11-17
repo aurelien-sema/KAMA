@@ -22,6 +22,8 @@
     { "input": "SOLDE INSUFFISANT", "expected": "SOLDE INSUFFISANT" },
     { "input": "Mobile Money", "expected": "Mobile Money" },
     { "input": "Ne partagez jamais votre code secret.", "expected": "Ne partagez jamais votre code secret." },
-    { "input": "Vous allez envoyer {x1} à {x2}.", "expected": "Vous allez envoyer {x1} à {x2}." }
+    { "input": "Vous allez envoyer {x1} à {x2}.", "expected": "Vous allez envoyer {x1} à {x2}." },
+    { "input": "Parler à Kama", "expected": "Parler à Kama" },
+    { "input": "Kama ne clique jamais à ta place.", "expected": "Kama ne clique jamais à ta place." }
   ]
 }

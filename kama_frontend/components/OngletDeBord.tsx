@@ -10,6 +10,7 @@
 import { forwardRef, useRef, useState } from 'react';
 import { KamaLogo } from '@/components/kama/primitives';
 import { topBorne } from '@/lib/position-onglet';
+import { useTexte } from '@/lib/use-texte';
 
 const HAUTEUR = 44;
 const SEUIL_GLISSER = 4;
@@ -17,7 +18,8 @@ const SEUIL_GLISSER = 4;
 type Props = {
   position: number;
   menuOuvert: boolean;
-  onClic: () => void;
+  /** `auClavier` : ouvert avec Entrée ou Espace (le focus ira alors dans le menu). */
+  onClic: (auClavier: boolean) => void;
   onDeplace: (position: number) => void;
   onDeplacementFini: (position: number) => void;
 };
@@ -29,6 +31,7 @@ export const OngletDeBord = forwardRef<HTMLButtonElement, Props>(function Onglet
   const [glisse, setGlisse] = useState(false);
   const depart = useRef<{ y: number; position: number } | null>(null);
   const aGlisse = useRef(false);
+  const ouvrir = useTexte('Ouvrir Kama');
 
   function positionDepuis(clientY: number) {
     const marge = 16 + HAUTEUR / 2;
@@ -62,20 +65,20 @@ export const OngletDeBord = forwardRef<HTMLButtonElement, Props>(function Onglet
     }
   }
 
-  function onClick() {
+  function onClick(e: React.MouseEvent) {
     // Un glisser-déposer ne doit pas ouvrir le menu.
     if (aGlisse.current) {
       aGlisse.current = false;
       return;
     }
-    onClic();
+    onClic(e.detail === 0); // detail 0 : clic venu du clavier
   }
 
   return (
     <button
       ref={ref}
       type="button"
-      aria-label="Ouvrir Kama"
+      aria-label={ouvrir}
       aria-haspopup="true"
       aria-expanded={menuOuvert}
       aria-controls="kama-menu"

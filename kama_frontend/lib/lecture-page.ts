@@ -38,6 +38,83 @@ export function estMontant(t: string) {
   return RE_MONTANT.test(t.trim());
 }
 
+/**
+ * Valeurs de l'en-tete que Kama doit masquer dans un texte libre : nom du beneficiaire,
+ * telephone, reference, titulaire du compte. Elles sont lues dans le texte affiche, jamais
+ * dans un champ de saisie.
+ */
+const LIBELLES_ENTETE = new Set(
+  [
+    'Bénéficiaire',
+    'Nom du bénéficiaire',
+    'Beneficiary',
+    'Beneficiary name',
+    'Destinataire',
+    'Recipient',
+    'Téléphone',
+    'Numéro de téléphone',
+    'Phone',
+    'Phone number',
+    'Référence',
+    'Reference',
+    'Référence de transaction',
+    'Transaction reference',
+    'Titulaire du compte',
+    'Nom du titulaire',
+    'Account holder',
+    'Account holder name',
+  ].map(normaliser),
+);
+
+function echapperRegex(t: string) {
+  return t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function valeurPropre(valeur: string): string | null {
+  const t = valeur.replace(/\s+/g, ' ').trim().replace(/^[:\-–—]\s*/, '');
+  if (t.length < 2 || t.length > 80 || LIBELLES_ENTETE.has(normaliser(t))) return null;
+  return t;
+}
+
+/** Valeur ecrite juste apres un libelle, dans un meme texte : « Beneficiaire : Mbarga ». */
+export function valeurApresLibelle(libelle: string, contenu: string): string | null {
+  const motif = new RegExp(`^\\s*${echapperRegex(libelle).replace(/\s+/g, '\\s+')}\\s*[:\\-–—]?\\s*`, 'i');
+  const trouve = contenu.match(motif);
+  return trouve ? valeurPropre(contenu.slice(trouve[0].length)) : null;
+}
+
+function valeurVoisine(libelle: Element): string | null {
+  const suivant = libelle.nextElementSibling;
+  if (suivant && !suivant.closest(IGNORES) && estVisible(suivant)) {
+    const valeur = valeurPropre(texte(suivant));
+    if (valeur) return valeur;
+  }
+  const parent = libelle.parentElement;
+  if (!parent) return null;
+  return valeurApresLibelle(texte(libelle), texte(parent));
+}
+
+/** Valeurs de l'en-tete affichees sur la page, sans jamais lire un champ de saisie. */
+export function valeursEntete(
+  racine: Document | Element | null = typeof document === 'undefined' ? null : document.body,
+): string[] {
+  if (!racine) return [];
+  const valeurs = new Set<string>();
+  const parcours = document.createTreeWalker(racine, NodeFilter.SHOW_TEXT);
+  let n: Node | null;
+  while ((n = parcours.nextNode())) {
+    const t = n.textContent;
+    if (!t || t.length > 140) continue;
+    const cle = normaliser(t);
+    if (!LIBELLES_ENTETE.has(cle)) continue;
+    const el = n.parentElement;
+    if (!el || el.closest(IGNORES) || !estVisible(el)) continue;
+    const valeur = valeurVoisine(el);
+    if (valeur) valeurs.add(valeur);
+  }
+  return [...valeurs];
+}
+
 function estVisible(el: Element) {
   const r = el.getBoundingClientRect();
   if (r.width === 0 && r.height === 0) return false;
@@ -242,9 +319,6 @@ function lireElement(def: DefinitionElement, libelle: Element, index: IndexTexte
 
 /* ---------------------------------------------------------------------------------------- */
 
-export type OperationLue = { date: string; libelle: string; montant: string; sens: 'entree' | 'sortie' };
-
-/** Lit la liste « Transactions récentes » (page Solde). Liste vide si elle n'est pas affichée. */
 /** La section « Transactions récentes » et ses montants (ou rien si elle n'est pas affichée). */
 function trouverTransactions(titre: ElementTrouve | undefined): { section: Element; montants: Element[] } | null {
   if (!titre) return null;
@@ -262,30 +336,6 @@ function trouverTransactions(titre: ElementTrouve | undefined): { section: Eleme
 
 function sectionTransactions(connus: ElementTrouve[]) {
   return trouverTransactions(connus.find((e) => e.def.id === 'transactions'))?.section ?? null;
-}
-
-export function lireTransactions(lecture: LecturePage): OperationLue[] {
-  const montants = trouverTransactions(lecture.elements.get('transactions'))?.montants ?? [];
-  return montants.map((m) => {
-    // Ligne = plus petit ancêtre qui contient au moins 3 textes (libellé, date, montant).
-    let ligne: Element = m;
-    while (ligne.parentElement && feuilles(ligne).length < 3) ligne = ligne.parentElement;
-    const autres = feuilles(ligne).filter((t) => t !== texte(m));
-    const montant = texte(m);
-    return {
-      libelle: autres[0] ?? '',
-      date: autres[1] ?? '',
-      montant,
-      sens: /^[\-−]/.test(montant) ? 'sortie' : 'entree',
-    };
-  });
-}
-
-function feuilles(el: Element) {
-  return [...el.querySelectorAll('*')]
-    .filter((x) => x.children.length === 0)
-    .map(texte)
-    .filter(Boolean);
 }
 
 /* ---------------------------------------------------------------------------------------- */

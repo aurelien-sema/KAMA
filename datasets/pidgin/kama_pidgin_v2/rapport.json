@@ -1,0 +1,24 @@
+{
+ "brut": 28159,
+ "religieux_retire": 7281,
+ "rejet_longueur_copie_ou_nombres": 3391,
+ "rejet_doublon_ou_test": 79,
+ "retire_car_deja_au_controle": 21,
+ "gardees": 17408,
+ "dev": 870,
+ "test_soreva": 77,
+ "train": 18275,
+ "repartition_train": {
+  "mt560": 16517,
+  "balises": 862,
+  "banque": 896
+ },
+ "domaines_train": {
+  "general": 14941,
+  "religieux": 2438,
+  "banque": 896
+ },
+ "paires_banque": 112,
+ "poids_banque": 8,
+ "banque_non_validees": 73
+}

@@ -120,11 +120,62 @@ Le serveur ne dépend d'aucun modèle précis. Chaque route est décrite dans `c
 | Volet | État | Suite |
 |---|---|---|
 | Texte → texte Ghomala | Marian int8 de Flagship configuré, mais **désactivé** (`"enabled": false`) | Règle d'or n° 4 de `CLARIFICATIONS.md` : aucun texte en langue nationale inventé. À activer seulement pour le P2, avec le modèle retenu dans `evaluation/` |
-| Texte → texte Pidgin | Pas encore de route | Ajouter l'adaptateur du modèle retenu |
-| Voix → texte (`/v1/voice/intent`) | Route et grammaire prêtes, aucun moteur | Brancher le modèle retenu, remplir `bbj` et `wes` dans `intents.json` |
-| Texte → voix (`/v1/tts`) | Route prête, aucun moteur | Priorité aux audios enregistrés ; le moteur couvre l'inédit |
+| Texte → texte Pidgin | Routes `en>wes` et `fr>wes` **activées**. Ordre : dictionnaire du catalogue validé, puis phrase proche, puis modèle ajusté v2 (`poids/ct2/pidgin_en_wes_ajuste_v2`) sous contrôle. Un texte critique ne passe jamais par le modèle | Étendre le dictionnaire avec les messages critiques validés par des locuteurs (voir ci-dessous) |
+| Voix → texte (`/v1/voice/intent`) | Moteur `omnilingual_ctc` (ONNX) prêt, **désactivé** ; grammaire `wes` en brouillon, `bbj` vide | Tester le modèle (`evaluation/stt_eval.py`), puis activer ; faire valider les phrases `wes` |
+| Texte → voix (`/v1/tts`) | Enregistrements humains validés (prioritaires) et moteur `mms_vits`, **désactivé** | Importer les enregistrements ; activer le moteur pour l'inédit (voir « La voix ») |
 
 Pour ajouter un modèle : écrire une classe avec `translate(text) -> str` dans `app/engines.py`, l'inscrire dans `FACTORIES`, puis ajouter sa route dans `config/routes.json`.
+
+### Dictionnaire d'abord, modèle ensuite
+
+Pour un texte donné, le serveur essaie dans cet ordre : (1) le dictionnaire, c'est-à-dire le catalogue de la page de test et ses modèles de phrase (`Frais`, `Bonjour, {x1}`), qui rend le texte validé avec le badge « Vérifié » en quelques millisecondes ; (2) une phrase très proche du dictionnaire ; (3) le modèle ajusté, pour un texte non critique, avec le badge « Traduction automatique » ; (4) sinon rien, et l'extension montre l'original. Les messages qui parlent d'argent, d'alerte, d'annulation, de session ou d'horaires sont critiques : seul le dictionnaire peut les traduire. **Pour qu'ils soient traduits, il faut les ajouter au dictionnaire, avec la validation d'un locuteur.**
+
+### Brancher le modèle pidgin ajusté
+
+1. Sur Colab, la dernière cellule du notebook produit `pidgin_en_wes.zip`. Le décompresser dans `models/poids/ct2/`, ce qui remplace le modèle du même nom. Depuis un dossier Hugging Face, on peut aussi lancer `python backend/scripts/convertir_modele.py <dossier> pidgin_en_wes`.
+2. Le passer au test inédit : `python training/pidgin/03_tester_inedit.py --modele <dossier>`.
+3. S'il est accepté, passer `enabled` à `true` pour `fr>en`, `en>wes_modele`, `en>wes` et `fr>wes` dans `config/routes.json`, puis redémarrer le serveur.
+
+Même activé, le modèle n'est jamais appelé sur un texte critique (argent, condition, alerte), sauf si `KAMA_MT_ALLOW_CRITICAL=true`. Sa sortie est rejetée si une balise change, si un chiffre apparaît, s'il se répète, s'il recopie l'anglais, ou si plus de 25 % de ses mots sont absents de `content-data/lexique_pidgin.txt`.
+
+### La voix
+
+**Reconnaissance (`asr` dans `routes.json`).** Le moteur `omnilingual_ctc` charge un modèle Omnilingual ASR exporté en ONNX (`poids/asr/omnilingual-ctc-300m-onnx`, licence Apache 2.0) et décode en glouton. Il couvre le pidgin camerounais et le Ghomala, sans indication de langue. Le texte reconnu ne sort jamais de `voice_intent` : seule l'intention est renvoyée. Une phrase approchante est acceptée (ressemblance d'au moins 0,85, deux mots minimum, écart net avec la deuxième intention), sinon `unknown`. La confiance est alors inférieure à 1.
+
+**Synthèse (`/v1/tts`).** Le texte reçu est découpé en morceaux entre les balises `{xN}`. Pour chaque morceau :
+1. un enregistrement humain validé, s'il existe dans `<KAMA_CLIPS_DIR>/<langue>/manifest.json` (par défaut `models/poids/audio`), est rendu tel quel avec `origin: "recorded"` ;
+2. sinon le moteur de synthèse (`mms_vits`) parle, avec `origin: "synthetic"` : l'extension doit alors signaler une voix automatique ;
+3. sinon, ou si le moteur échoue : `503 tts_unavailable`, et l'extension joue ses audios locaux ou affiche le texte.
+
+Un enregistrement sans `validated_by`, dont le texte contient un chiffre ou une balise, ou dont le fichier n'est pas un WAV 16 bits 16 kHz mono, est ignoré avec un avertissement. Les enregistrements sont hors du dépôt public : c'est la voix d'une personne.
+
+Préparer et importer les enregistrements : `python backend/scripts/audio_catalogue.py script | importer | verifier`. Dépendances : `requirements-voice.txt` ; dans Docker, `--build-arg WITH_VOICE=1`.
+
+Autre moteur de reconnaissance disponible : `hf_ctc` (modèle CTC au format transformers, par exemple celui ajusté sur Common Voice par `training/stt_pidgin`). Il se branche en changeant `engine` et `path` dans `asr.wes`.
+
+### Les intentions vocales : à quoi elles servent
+
+La voix ne sert pas à dicter : elle sert à **choisir un texte déjà validé**. Le chemin est `parole → texte reconnu → intention (liste fermée) → texte validé du dictionnaire → voix`. Le texte reconnu n'est jamais affiché ni servi ; une erreur de reconnaissance donne au pire « je n'ai pas compris » (`unknown`), jamais une information fausse. C'est ce qui contourne les erreurs de lexique et de termes critiques du modèle de traduction.
+
+| Intention | Ce que la personne dit (sens) | Ce que l'extension fait ensuite |
+|---|---|---|
+| `ask_balance` | « mon solde » | lit le solde affiché sur la page (nombre en extraits locaux) avec le gabarit validé « Solde disponible » |
+| `ask_fees` | « les frais » | lit les frais de la page avec le gabarit validé « Frais de {x1} » |
+| `ask_total` | « le total à débiter » | lit le total avec le gabarit validé « Total à débiter » |
+| `what_to_do` | « que dois-je faire » | lit la consigne de l'étape en cours (texte du catalogue pour cette zone) |
+| `explain_error` | « pourquoi ça ne marche pas » | relit le message d'erreur ou d'alerte affiché, depuis le catalogue validé |
+| `summarize_transactions` | « mes transactions » | lit les dernières lignes avec les gabarits « Transfert reçu », « Salaire reçu »… |
+| `repeat` | « répète » | rejoue le dernier audio |
+
+Règles : une intention ne **déclenche jamais d'action** sur la page (pas de « confirme », « envoie », « annule » : ce sont des commandes critiques) ; elle ne fait que **lire**. Les montants viennent de la page, jamais de la parole. Une intention sans texte validé pour l'écran courant répond « non disponible ».
+
+Intentions à ajouter (proposition, il faut modifier le contrat `IntentResponse` côté extension, donc à décider avec le front) : `ask_recipient` (« à qui j'envoie »), `ask_amount` (« combien j'envoie »), `ask_delay` (« quand ça arrive »), `is_it_safe` (lit le conseil de sécurité de la page), `help` (« qu'est-ce que c'est cette page »), `stop` (« arrête »). Chacune n'a de sens que si un texte validé existe pour l'écran.
+
+### Le catalogue de la page de test
+
+`content-data/safinum_test_page.json` est chargé avec `templates.json`. Ses valeurs (montants, taux) sont masquées au chargement. Une traduction qui change ou oublie une valeur est ignorée, avec un avertissement, sans arrêter le serveur. Seules les entrées dont `validated_by` (ou `validated_by_bbj` pour le Ghomala) est rempli sont servies.
+
+Les noms de personnes ne sont pas détectés dans « Bonjour, Amina » : l'extension doit transmettre au masquage les valeurs qu'elle lit sur la page (nom, numéro de compte), sinon la phrase ne correspond à aucun motif.
 
 `content-data/templates.json` est la source unique des phrases validées, partagée avec le glossaire de l'extension. Les traductions y sont vides : elles viendront des locuteurs natifs.
 

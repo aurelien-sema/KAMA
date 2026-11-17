@@ -1,0 +1,189 @@
+{
+ "_note": "Ajouts PROPOSES au dictionnaire, tires des emplois financiers propres du corpus (sans texte religieux, sans faux sens, chiffres identiques). Non charge par le serveur. statut 'atteste' = au moins 5 emplois propres ; 'a_valider' = moins, a faire confirmer par un locuteur natif. 'lacunes' = termes bancaires essentiels sans aucun emploi exploitable dans le corpus : seul un locuteur peut les fournir.",
+ "termes": [
+  {
+   "fr": "impôt, taxe",
+   "en": "tax",
+   "pidgin": "tax",
+   "variantes": [],
+   "statut": "atteste",
+   "preuves": {
+    "MT560 (emplois financiers propres)": 10,
+    "phrases trouvees": 11
+   },
+   "exemple": {
+    "en": "This arrangement may provide certain tax advantages.",
+    "wes": "This one fit make the tax for no over plenty."
+   }
+  },
+  {
+   "fr": "acheter",
+   "en": "buy",
+   "pidgin": "buy",
+   "variantes": [],
+   "statut": "atteste",
+   "preuves": {
+    "MT560 (emplois financiers propres)": 12,
+    "phrases trouvees": 12
+   },
+   "exemple": {
+    "en": "When we keep buying things that we do not need, we complicate our life.",
+    "wes": "When we continue for di buy thing them weh we no need-am, we no go make we life for be simple."
+   }
+  },
+  {
+   "fr": "vendre",
+   "en": "sell",
+   "pidgin": "sell",
+   "variantes": [
+    "sel"
+   ],
+   "statut": "atteste",
+   "preuves": {
+    "MT560 (emplois financiers propres)": 19,
+    "phrases trouvees": 20
+   },
+   "exemple": {
+    "en": "Many stores sell only popular fashions.",
+    "wes": "Plenty store them di sell na only fashion klus them."
+   }
+  },
+  {
+   "fr": "espèces",
+   "en": "cash",
+   "pidgin": "cash",
+   "variantes": [
+    "dash",
+    "money"
+   ],
+   "statut": "a_valider",
+   "preuves": {
+    "MT560 (emplois financiers propres)": 4,
+    "phrases trouvees": 5
+   },
+   "exemple": {
+    "en": "Donations of cash, jewelry, or other valuable personal property.",
+    "wes": "You fit give thing them like money, chain, ring them and some other important thing them."
+   }
+  },
+  {
+   "fr": "assurance",
+   "en": "insurance",
+   "pidgin": "insurance",
+   "variantes": [],
+   "statut": "a_valider",
+   "preuves": {
+    "MT560 (emplois financiers propres)": 2,
+    "phrases trouvees": 3
+   },
+   "exemple": {
+    "en": "He offered to contact Luigi's insurance company to speed up the claim.",
+    "wes": "And ih be talk say ih go go for insurance make they fix Luigi yi motor."
+   }
+  },
+  {
+   "fr": "devoir (une somme)",
+   "en": "owe",
+   "pidgin": "owe",
+   "variantes": [],
+   "statut": "a_valider",
+   "preuves": {
+    "MT560 (emplois financiers propres)": 3,
+    "phrases trouvees": 4
+   },
+   "exemple": {
+    "en": "Pay back any money you owe as soon as you can",
+    "wes": "No waste time for pay any money weh you di owe-am"
+   }
+  },
+  {
+   "fr": "prêt",
+   "en": "loan",
+   "pidgin": "loan",
+   "variantes": [
+    "borrow",
+    "owe"
+   ],
+   "statut": "a_valider",
+   "preuves": {
+    "MT560 (emplois financiers propres)": 2,
+    "phrases trouvees": 2
+   },
+   "exemple": {
+    "en": "Consider the law given to Israel regarding the seizing of a man's garment as security for a loan.",
+    "wes": "Think about the law weh ih be give people for Israel about fashion for di use force for take some person yi klus if the person be di owe you."
+   }
+  },
+  {
+   "fr": "épargne",
+   "en": "savings",
+   "pidgin": "money weh you don keep",
+   "variantes": [
+    "money"
+   ],
+   "statut": "a_valider",
+   "preuves": {
+    "MT560 (emplois financiers propres)": 2,
+    "phrases trouvees": 2
+   },
+   "exemple": {
+    "en": "When their savings ran out, however, the couple's joy turned to sorrow.",
+    "wes": "But time weh their money be finish, they be loss their joy."
+   }
+  },
+  {
+   "fr": "carte bancaire",
+   "en": "card",
+   "pidgin": "card",
+   "variantes": [],
+   "statut": "a_valider",
+   "preuves": {
+    "MT560 (emplois financiers propres)": 2,
+    "phrases trouvees": 3
+   },
+   "exemple": {
+    "en": "Donations via electronic bank transfer, debit card, or credit card.",
+    "wes": "You fit send donation them through bank transfer, debit card or credit card."
+   }
+  },
+  {
+   "fr": "dépenses",
+   "en": "expenses",
+   "pidgin": "money weh you spend",
+   "variantes": [
+    "money"
+   ],
+   "statut": "a_valider",
+   "preuves": {
+    "MT560 (emplois financiers propres)": 1,
+    "phrases trouvees": 5
+   },
+   "exemple": {
+    "en": "Thus, the organization looks for ways to reduce expenses and simplify the work so as to be able to accomplish the most that it can with your generous donations.",
+    "wes": "So the organization di find way them weh they no go over use money. They di find simple way for do the work too so that they go use the money weh wuna don give-am fine."
+   }
+  }
+ ],
+ "lacunes": [
+  {
+   "en": "deposit",
+   "emplois_propres_dans_le_corpus": 0,
+   "phrases": 2
+  },
+  {
+   "en": "withdraw",
+   "emplois_propres_dans_le_corpus": 0,
+   "phrases": 1
+  },
+  {
+   "en": "refund",
+   "emplois_propres_dans_le_corpus": 0,
+   "phrases": 0
+  },
+  {
+   "en": "transfer",
+   "emplois_propres_dans_le_corpus": 1,
+   "phrases": 1
+  }
+ ]
+}

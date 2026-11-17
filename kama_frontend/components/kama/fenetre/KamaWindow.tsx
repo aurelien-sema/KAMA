@@ -7,6 +7,7 @@ import { forwardRef, type ReactNode } from 'react';
 import { Mic, Square, X } from 'lucide-react';
 import { KamaLogo } from '@/components/kama/primitives';
 import { useLangueCourante } from '@/lib/langue-courante';
+import { useTexte } from '@/lib/use-texte';
 
 export const KAMA_WINDOW_WIDTH = 360;
 export const KAMA_WINDOW_HEIGHT = 520;
@@ -37,12 +38,15 @@ export const KamaWindow = forwardRef<HTMLElement, Props>(function KamaWindow(
 ) {
   const langue = useLangueCourante();
   const micDisabled = mic === 'thinking' || mic === 'offline';
+  const micLabel = useTexte(MIC_LABEL[mic]);
+  const fermer = useTexte('Fermer Kama');
+  const fenetre = useTexte('Fenêtre Kama');
 
   return (
     <section
       ref={ref}
       tabIndex={-1}
-      aria-label="Fenêtre Kama"
+      aria-label={fenetre}
       className={`animate-kama-appear flex flex-col overflow-hidden rounded-2xl border border-kama-ink/10 bg-kama-white shadow-kama outline-none ${className}`}
       style={{ width: KAMA_WINDOW_WIDTH, height: KAMA_WINDOW_HEIGHT, ...style }}
     >
@@ -59,7 +63,7 @@ export const KamaWindow = forwardRef<HTMLElement, Props>(function KamaWindow(
         <button
           type="button"
           onClick={onClose}
-          aria-label="Fermer Kama"
+          aria-label={fermer}
           className="hit-44 grid cursor-pointer place-items-center rounded-full border-0 bg-transparent text-kama-ink hover:bg-kama-cream focus-visible:outline-2 focus-visible:outline-kama-ink"
         >
           <X className="size-5" aria-hidden />
@@ -74,7 +78,7 @@ export const KamaWindow = forwardRef<HTMLElement, Props>(function KamaWindow(
           type="button"
           onClick={onMic}
           disabled={micDisabled}
-          aria-label={MIC_LABEL[mic]}
+          aria-label={micLabel}
           aria-pressed={mic === 'listening'}
           className={`grid size-14 cursor-pointer place-items-center rounded-full border-0 transition-transform active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-kama-ink disabled:cursor-not-allowed ${
             mic === 'listening'
@@ -90,7 +94,7 @@ export const KamaWindow = forwardRef<HTMLElement, Props>(function KamaWindow(
             <Mic className="size-7" aria-hidden />
           )}
         </button>
-        <span className="text-sm font-medium text-kama-ink">{MIC_LABEL[mic]}</span>
+        <span className="text-sm font-medium text-kama-ink">{micLabel}</span>
       </footer>
       )}
     </section>

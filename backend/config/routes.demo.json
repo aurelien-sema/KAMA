@@ -1,0 +1,125 @@
+{
+  "_note": "Pour la finale, LLM desactive apres evaluation : les demandes hors grammaire fermee recoivent la reponse fixe. Ne le reactiver qu'apres validation complete du contrat et des cas de securite. Pidgin : les routes de traduction restent actives. Chemins relatifs a KAMA_MODELS_DIR. Voix : asr et tts suivent le meme principe (enabled false tant que le modele n'est pas teste). Les enregistrements humains valides (KAMA_CLIPS_DIR, par defaut poids/audio) passent avant le modele de synthese.",
+  "languages": {
+    "bbj": {
+      "name": "Ghomálá'"
+    },
+    "wes": {
+      "name": "Pidgin camerounais"
+    }
+  },
+  "translation": {
+    "critical_model_elements": [
+      "text"
+    ],
+    "fr>en": {
+      "enabled": true,
+      "internal": true,
+      "engine": "marian_ct2",
+      "path": "poids/ct2/opus-mt-fr-en"
+    },
+    "en>wes_modele": {
+      "enabled": true,
+      "internal": true,
+      "engine": "marian_ct2",
+      "path": "poids/ct2/pidgin_en_wes_ajuste_v2"
+    },
+    "wes>en": {
+      "enabled": true,
+      "engine": "marian_ct2",
+      "path": "poids/ct2/pcm_en"
+    },
+    "en>wes": {
+      "enabled": true,
+      "engine": "pipeline",
+      "steps": [
+        "simplify:en",
+        "en>wes_modele"
+      ],
+      "lexicon": "lexique_pidgin.txt",
+      "max_unknown_ratio": 0.25
+    },
+    "fr>wes": {
+      "enabled": true,
+      "engine": "pipeline",
+      "steps": [
+        "simplify:fr",
+        "fr>en",
+        "simplify:en",
+        "en>wes_modele"
+      ],
+      "lexicon": "lexique_pidgin.txt",
+      "max_unknown_ratio": 0.25
+    },
+    "fr>bbj": {
+      "enabled": true,
+      "engine": "m2m100_ct2",
+      "path": "poids/ghomala/fr-bbj-m2m100-v1-ct2",
+      "options": {
+        "source_lang": "fr",
+        "target_lang": "sw",
+        "beam_size": 2,
+        "threads": 2,
+        "max_new_tokens": 128
+      }
+    },
+    "bbj>fr": {
+      "enabled": false,
+      "engine": "marian_ct2",
+      "path": "flagship-ai__cameroon-int8/ghomala-francais"
+    }
+  },
+  "asr": {
+    "wes": {
+      "enabled": true,
+      "engine": "hf_ctc",
+      "path": "poids/asr/wbert-wes-v1",
+      "options": {
+        "threads": 2,
+        "quantize": "int8"
+      },
+      "_repli": "omnilingual_ctc : poids/asr/omnilingual-ctc-300m-onnx (fallback, desactive)"
+    },
+    "bbj": {
+      "enabled": false,
+      "engine": "omnilingual_ctc",
+      "path": "poids/asr/omnilingual-ctc-300m-onnx",
+      "options": {
+        "threads": 2
+      }
+    }
+  },
+  "tts": {
+    "bbj": {
+      "enabled": true,
+      "engine": "ghomala_vits",
+      "path": "poids/ghomala/tts-vits-v2-final-20261114",
+      "options": {
+        "threads": 2,
+        "seed": 0
+      }
+    },
+    "wes": {
+      "enabled": true,
+      "engine": "mms_vits",
+      "path": "poids/tts/mms-tts-wes-v1",
+      "options": {
+        "threads": 2,
+        "speaker_id": 12
+      }
+    }
+  },
+  "llm": {
+    "enabled": false,
+    "engine": "llama_cpp",
+    "path": "poids/llm/LFM2-700M-Q4_K_M.gguf",
+    "sha256": "684e8406dc13321452b3f6aeca432776e2a6a7e1ad6c23f7887b8fe3efbe2efa",
+    "options": {
+      "threads": 4,
+      "n_ctx": 1024,
+      "max_tokens": 120,
+      "temperature": 0.2,
+      "timeout_s": 20.0
+    }
+  }
+}

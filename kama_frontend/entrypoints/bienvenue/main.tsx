@@ -6,10 +6,14 @@
 import '@/assets/kama.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { LANGUE_SECOURS, secours } from '@/lib/langue-secours';
 import { chargerPolices } from '@/components/polices';
 import { Bienvenue } from '@/components/bienvenue/Bienvenue';
 
 chargerPolices();
+// Langue de la page pour les lecteurs d'écran : celle du navigateur (français ou anglais).
+document.documentElement.lang = LANGUE_SECOURS;
+document.title = secours('Bienvenue dans Kama');
 ReactDOM.createRoot(document.getElementById('racine')!).render(
   <React.StrictMode>
     <Bienvenue />
