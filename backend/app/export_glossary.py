@@ -9,7 +9,7 @@ Cle = texte source francais masque, ramene a la forme de comparaison `normalize`
 Second fichier, `interface.json` : tout ce que Kama dit lui-meme, dans la langue choisie (decision de l'equipe, 2026-11-12 : quand une langue
 est choisie, toute l'interface de Kama passe dans cette langue).
 Sources : content-data/kama_interface.json (menu, boutons, badges, messages d'etat) et content-data/kama_fenetre.json (explications de la
-fenetre). Chaque entree porte son `statut` : « valide » (champ validated_by) ou « brouillon ». Un brouillon s'affiche avec le badge
+fenetre). Chaque entree porte son `statut` : « valide » (champ validated_by, validated_by_bbj pour le ghomala) ou « brouillon ». Un brouillon s'affiche avec le badge
 « Traduction automatique », jamais « Verifie » ; une validation le fait passer a « valide » sans changer le code.
 """
 from __future__ import annotations
@@ -59,11 +59,13 @@ def build_patterns(page: dict) -> dict[str, list[dict[str, str]]]:
 def build_interface(entries: list[dict]) -> dict[str, dict[str, dict[str, dict[str, str]]]]:
     """Les entrees validees passent avant les brouillons quand un meme texte francais apparait deux fois."""
     out: dict[str, dict[str, dict[str, str]]] = {}
-    for e in sorted(entries, key=lambda e: bool(e.get("validated_by"))):
-        if not e.get("fr") or not e.get("wes"):
-            continue
-        valide = bool(e.get("validated_by"))
-        out.setdefault("wes", {})[normalize(e["fr"])] = {"texte": e["wes"], "statut": "valide" if valide else "brouillon", "zone": e.get("zone", "")}
+    for lang in ("wes", "bbj"):
+        validateur = (lambda e: e.get("validated_by")) if lang == "wes" else (lambda e: e.get("validated_by_bbj"))
+        for e in sorted(entries, key=lambda e: bool(validateur(e))):
+            if not e.get("fr") or not e.get(lang):
+                continue
+            valide = bool(validateur(e))
+            out.setdefault(lang, {})[normalize(e["fr"])] = {"texte": e[lang], "statut": "valide" if valide else "brouillon", "zone": e.get("zone", "")}
     return {"fr": {lang: dict(sorted(items.items())) for lang, items in out.items()}}
 
 
